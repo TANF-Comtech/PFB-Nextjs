@@ -6,15 +6,46 @@ If you haven't run this project before, use `yarn` and Node `v12.x`. This projec
 
 To get started, make sure your running right version of Node and then run `yarn` and install dependencies:
 ```bash
-node -v # should show v12.x.x
+node -v # should show v12.x.x, recommend using nvm 
 yarn install # should output a bunch of install scripts, ignore warnings
 yarn dev # starts the dev server
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result (`create-next-app` will sometimes put your server at port `3001`, `3002` if you have something else running - check your CLI output).
 
-Make sure you have a high-level understanding of the tooling be used:
+## Tooling
+
+Make sure you have a high-level understanding of the tooling being used:
 
 - [`styled-components`](https://styled-components.com/docs)
 - [`Apollo`]((https://www.apollographql.com/docs/react/))
 - [Prismic.io](https://peopleforbikes.prismic.io/)
+
+## Site Structure
+
+Next.js has some key files and folders that contain set up that is important for the functionality of this site:
+
+- [`/pages/_document.js`](https://nextjs.org/docs/advanced-features/custom-document) is a place where we can modify the default behaviors of `<html>` and `<body>` tags on the site. But it also controls how we set up `styled-components` for this project. This code is heavily commented, please read through it if you want to understand how it works.
+
+- [`/pages/_app.js`](https://nextjs.org/docs/advanced-features/custom-app) is a container that controls page rendering across the site. Global CSS goes into the `theme` object and uses styled-components `ThemeProvider` for availability across all components. [`nextjs/head`](https://nextjs.org/docs/api-reference/next/head) plugin is used to define what we need in the head of document, which contains our custom fonts, metadata, etc.
+
+- [`/pages/`](https://nextjs.org/docs/basic-features/pages) will render any function from a `.js` as a page. The folder structure used in the folder will be emulated in the client's browser. So, if you put a page at `/pages/about/`, you'll see a page at `http://localhost:3000/about`. You can also do [dynamic routing](https://nextjs.org/docs/routing/dynamic-routes) by wrapping the file name in brackets (ie, `/pages/about/[uid].js`) and accessing Next's router:
+
+```jsx
+import { useRouter } from 'next/router'
+
+const Post = () => {
+  const router = useRouter()
+  const { pid } = router.query
+
+  return <p>Post: {pid}</p>
+}
+
+export default Post
+```
+
+## Component Structure
+
+*** Subject to change *** <br>
+
+
