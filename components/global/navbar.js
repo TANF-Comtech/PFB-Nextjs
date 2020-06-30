@@ -6,8 +6,11 @@ import Logo from "../global/logo"
 const Bar = styled.section`
   background-color: rgba(255, 255, 255, 0.95);
   box-shadow: 0 2px 5px rgba(0,0,0,.2);
-  
-  padding: 5px 50px;
+  padding: 10px 4vw 5px 4vw;
+
+  @media(min-width: ${props => props.theme.lg}) {
+    
+  }
 `;
 
 const Container = styled.header`
