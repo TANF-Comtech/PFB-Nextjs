@@ -29,6 +29,14 @@ import { createGlobalStyle } from 'styled-components'
     padding: 0;
   }
 
+  h1 {
+    font-family: "Tungsten A", "Tungsten B", Arial, Helvetica, sans-serif;
+    font-size: 4rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 4rem;
+  }
+
   /* Set core body defaults */
   body {
     min-height: 100vh;

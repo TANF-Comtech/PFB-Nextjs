@@ -16,7 +16,7 @@ const MyApp = ({ Component, pageProps }) => {
     <>
       <ThemeProvider theme={ Variables }>
         <Head>
-          <title>People for Bikes - Home</title>
+          <title>People for Bikes</title>
           <link rel="icon" href={ logo } sizes="any" type="image/svg+xml" />
           <link rel="stylesheet" href="https://cloud.typography.com/6938898/7916412/css/fonts.css" />
           <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" />

@@ -44,8 +44,14 @@ const Post = () => {
 export default Post
 ```
 
+- [`/public/`](https://nextjs.org/docs/basic-features/static-file-serving). All static file serving (fonts, images, etc) have to go in the `public` folder. You can then import then like everything else in a React project.
+
 ## Component Structure
 
-*** Subject to change *** <br>
+Some high level rules of the road:
+
+- Use functional components and hooks where you can. Classes are ok but only if you really have to do it that way.
+- Make components as small as possible. Don't go crazy with this but use it as a general guiding principle. 
+- Don't wrap components in `<div>` pairs, use [React Fragment short syntax](https://reactjs.org/docs/fragments.html#short-syntax) instead: `<></>`
 
 

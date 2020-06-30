@@ -4,22 +4,30 @@ import styled from "styled-components"
 import NavBar from '../global/navbar'
 
 // spacer constrains the layout on big screens but keeps it tight on mobile
-const Spacer = styled.section`
-  margin: 2vh auto;
-  padding: 0 4vw;
-
-  @media (min-width: ${props => props.theme.lg}) {
-    margin: 2vh 0;
-    max-width: ${props => props.theme.lg};
-  }
+const MainContent = styled.main`
+  padding: 2vh 4vw 2vh 4vw;
 `
+
+const Container = styled.section`
+  margin: 2vh auto;
+  max-width: ${props => props.theme.lg};
+`
+
+/**
+ * Wrapper serves to wrap all pages in a consistent style
+ * We've got our Header (NavBar), Main (MainContent), Footer (FooterArea)
+ * In the main section, we have the "flow" class gives us some nice automatic padding around sibling elements
+ * 
+ */
 const Wrapper = ({ children }) => {
   return (
     <>
       <NavBar />
-      <Spacer>
-        { children }
-      </Spacer>
+      <MainContent>
+        <Container className="flow">
+          { children }
+        </Container>
+      </MainContent>
     </>
   )
 }
