@@ -41,7 +41,18 @@ import { createGlobalStyle } from 'styled-components'
     padding: 0;
   }
 
-  h1, h2 {
+  /* Natural flow and rhythm in articles by default */
+  /* Read more here: https://24ways.org/2018/managing-flow-and-rhythm-with-css-custom-properties/ */
+  .flow {
+    --flow-space: 1em;
+  }
+
+  .flow > * + * {
+    margin-top: 1em;
+    margin-top: var(--flow-space);
+  }  
+
+  h1, h2, blockquote {
     font-family: "Tungsten A", "Tungsten B", Arial, Helvetica, sans-serif;
     font-style: normal;
   }
@@ -182,6 +193,27 @@ import { createGlobalStyle } from 'styled-components'
     font: inherit;
   }
 
+  /* Set off blockquotes */
+  blockquote {
+    color: #D23823;
+    font-size: 46.66px;
+    font-weight: 400;
+    line-height: 46.66px;
+    margin: calc( var(--flow-space) * 0.75 ) 0 !important; /* overrides .flow */
+  }
+  @media screen and (min-width: 320px) {
+    blockquote {
+      font-size: calc(46.66px + 23.33 * ((100vw - 320px) / 880));
+      line-height: calc(46.66px + 23.33 * ((100vw - 320px) / 880));
+    }
+  }
+  @media screen and (min-width: 1200px) {
+    blockquote {
+      font-size: 70px;
+      line-height: 70px;
+    }
+  } 
+
   /* Remove all animations and transitions for people that prefer not to see them */
   @media (prefers-reduced-motion: reduce) {
     * {
@@ -191,17 +223,6 @@ import { createGlobalStyle } from 'styled-components'
       scroll-behavior: auto !important;
     }
   }
-
-  /* Natural flow and rhythm in articles by default */
-  /* Read more here: https://24ways.org/2018/managing-flow-and-rhythm-with-css-custom-properties/ */
-  .flow {
-    --flow-space: 1em;
-  }
-
-  .flow > * + * {
-    margin-top: 1em;
-    margin-top: var(--flow-space);
-  }  
 `
 
 export default GlobalStyle

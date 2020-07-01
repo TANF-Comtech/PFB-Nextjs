@@ -29,6 +29,12 @@ function Homepage() {
           </ul>
           <p>**EPP Participants collect <em>$20 on every bicycle sold as a pro deal</em>; you can identify an appropriate donation amount for other gear or equipment.</p>
           <p><b>Every dollar we collect through the Employee Pro Purchase Program goes directly to our Community Grant Program</b>. Each year we award more than $100,000 in cash grants to fund new bike paths, trails, and other programs that encourage people to ride. We’ve awarded more than $3.5 million since 1999.</p>
+          <h2>Next Section</h2>
+          <p>This comprehensive advocacy campaign will help Bike Durham develop a complete multimodal network. Their ambitious goal:  A City commitment to and fund and implement 125 miles of slow streets, protected lanes and greenway infrastructure by 2025.</p>
+          <blockquote>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar, metus non convallis mattis, lacus eros pretium diam, ut consectetur lorem lorem sed augue. Duis pharetra odio et lorem finibus consectetur.
+          </blockquote>
+          <p>This PeopleForBikes grant will help the Cacapon Resort State Park foundation build a 2.6 mile beginner-level mountain bike trail to complement their existing advanced trails. This addition will create a trail loop that qualifies for NICA mountain bike team races, supporting their local team, residents and visitors near and far.</p>
         </MainContent>
       </Wrapper>
     </>
