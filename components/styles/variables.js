@@ -33,7 +33,10 @@ const Variables = {
   zIndex06: '60',
   zIndex07: '70',
   zIndex08: '80',
-  zIndex09: '90'
+  zIndex09: '90',
+
+  // Animation
+  basicAnimation: '0.2s ease-in-out'
 }
 
 export default Variables
