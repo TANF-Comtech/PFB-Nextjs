@@ -2,6 +2,7 @@
 const Variables = {
   // Colors
   black: 'rgb(26,26,26)',
+  darkestGray: '#404040',
   darkGray: '#4D4D4F',
   mediumGray: 'rgb(216,216,216)',
   lightGray: '#8A8A8D',

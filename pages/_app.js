@@ -19,7 +19,7 @@ const MyApp = ({ Component, pageProps }) => {
           <title>People for Bikes</title>
           <link rel="icon" href={ logo } sizes="any" type="image/svg+xml" />
           <link rel="stylesheet" href="https://cloud.typography.com/6938898/7916412/css/fonts.css" />
-          <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" />
+          <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&display=swap" />
         </Head>
         <GlobalStyle />
         <Component {...pageProps} />

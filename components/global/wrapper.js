@@ -24,7 +24,7 @@ const Wrapper = ({ children }) => {
     <>
       <NavBar />
       <MainContent>
-        <Container className="flow">
+        <Container>
           { children }
         </Container>
       </MainContent>

@@ -1,13 +1,16 @@
 import Head from 'next/head'
-import Wrapper from '../components/global/wrapper'
 
+import Wrapper from '../components/global/wrapper'
 import Heading1 from '../components/global/h1'
 
 function Homepage() {
   return (
     <>
+      <Head>
+        <title>People for Bikes</title>
+      </Head>
       <Wrapper>
-        <Heading1>t vitam istam multis suppliciis iustis debitisque ereptam fugae munivi atque firmavi, exclusi eos, quos tu ad me </Heading1>
+        <Heading1>Sample Pages</Heading1>
       </Wrapper>
     </>
   )
