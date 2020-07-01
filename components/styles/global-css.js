@@ -123,18 +123,18 @@ import { createGlobalStyle } from 'styled-components'
   }
 
   /* Responsive type - 17.5px-28px with 1.75 line-height (30.5-49px) */
-  p, b, strong, em, i, li {
+  p, b, strong, em, i, span {
     font-size: 17.5px;
     line-height: 32px;
   }
   @media screen and (min-width: 320px) {
-    p, b, strong, em, i, li {
+    p, b, strong, em, i, span {
       font-size: calc(17.5px + 11.5 * ((100vw - 320px) / 880));
       line-height: calc(32px + 21 * ((100vw - 320px) / 880));
     }
   }
   @media screen and (min-width: 1200px) {
-    p, b, strong, em, i, li {
+    p, b, strong, em, i, span {
       font-size: 28px;
       line-height: 53px;
     }

@@ -10,12 +10,17 @@ const Variables = {
   blue: '#3E9FDC',
 
   // Breakpoints
+  bm: '320px',
   ty: '380px',
   xs: '480px',
   sm: '768px',
   md: '980px',
   lg: '1200px',
   xl: '1600px',
+
+  // Fonts
+  tungsten: "'Tungsten A', 'Tungsten B', Arial, Helvetica, sans-serif",
+  montserrat: "'Montserrat', Arial, Helvetica, sans-serif",
 
   // Z-index
   zIndexNegative: '-10',
