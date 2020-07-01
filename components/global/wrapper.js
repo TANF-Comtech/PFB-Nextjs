@@ -5,7 +5,7 @@ import NavBar from '../global/navbar'
 
 // spacer constrains the layout on big screens but keeps it tight on mobile
 const MainContent = styled.main`
-  padding: 2vh 4vw 2vh 4vw;
+  padding: 2vh 4vw 4vh 4vw; /* slightly bigger pad on bottom than top */
 `
 
 const Container = styled.section`
@@ -14,9 +14,13 @@ const Container = styled.section`
 `
 
 /**
+ * <Wrapper>
+ * 
  * Wrapper serves to wrap all pages in a consistent style
  * We've got our Header (NavBar), Main (MainContent), Footer (FooterArea)
  * In the main section, we have the "flow" class gives us some nice automatic padding around sibling elements
+ * 
+ * @param {object} children - inherited nested components, core React idea
  * 
  */
 const Wrapper = ({ children }) => {

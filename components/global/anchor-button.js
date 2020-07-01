@@ -43,6 +43,7 @@ const Anchor = styled.a`
 
 /**
  * <AnchorButton>
+ * 
  * Simple button that optionally takes props to modify it
  * The construction of this wraps a styled-component with a regular React component
  * We did this because you can't pass values directly into styled-components, just booleans
