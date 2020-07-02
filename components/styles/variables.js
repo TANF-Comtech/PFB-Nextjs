@@ -7,6 +7,7 @@ const Variables = {
   mediumGray: 'rgb(216,216,216)',
   lightGray: '#8A8A8D',
   red: '#D23823',
+  redAccent: '#D0021B',
   blue: '#3E9FDC',
 
   // Breakpoints

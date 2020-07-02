@@ -52,6 +52,14 @@ import { createGlobalStyle } from 'styled-components'
     margin-top: var(--flow-space);
   }  
 
+  /* Override so a button link can get top and bottom margin */
+  /* This will only effect direct descendants of .flow */
+  /* Learn more on this selector: https://css-tricks.com/child-and-sibling-selectors/ */
+  .flow > a {
+    display: block;
+    margin-top: 4vh;
+  }
+
   h1, h2, blockquote {
     font-family: "Tungsten A", "Tungsten B", Arial, Helvetica, sans-serif;
     font-style: normal;
@@ -123,7 +131,7 @@ import { createGlobalStyle } from 'styled-components'
   }
 
   /* Responsive type - 17.5px-28px with 1.75 line-height (30.5-49px) */
-  p, b, strong, em, i, span {
+  p, b, strong, em, i, span, a, a::visited, a::focus, a:active, a:hover {
     font-size: 17.5px;
     line-height: 32px;
   }
@@ -179,9 +187,13 @@ import { createGlobalStyle } from 'styled-components'
   } 
 
   /* Make images responsive */
+  /* Note that .flow controls top/bottom margins on img blocks */
   img {
+    box-shadow: ${props => props.theme.basicBoxShadow};
     display: block;
     height: auto;
+    margin-left: auto;
+    margin-right: auto;
     max-width: 100%;
   }
 
@@ -212,7 +224,14 @@ import { createGlobalStyle } from 'styled-components'
       font-size: 70px;
       line-height: 70px;
     }
-  } 
+  }
+  
+  /* Anchor styles */
+  a, a:visited, a:focus, a:active, a:hover {
+    color: ${props => (props.theme.blue)};
+    text-decoration: underline;
+    transition: 0.2s ease-in-out;
+  }
 
   /* Remove all animations and transitions for people that prefer not to see them */
   @media (prefers-reduced-motion: reduce) {
