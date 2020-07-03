@@ -2,6 +2,7 @@ import React from "react"
 import styled from "styled-components"
 
 import NavBar from '../global/navbar'
+import Footer from '../global/footer'
 
 // spacer constrains the layout on big screens but keeps it tight on mobile
 const MainContent = styled.main`
@@ -32,6 +33,7 @@ const Wrapper = ({ children }) => {
           { children }
         </Container>
       </MainContent>
+      <Footer />
     </>
   )
 }
