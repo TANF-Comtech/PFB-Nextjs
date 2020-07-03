@@ -45,11 +45,11 @@ const Button = styled.div`
 `
 
 /**
- * <AnchorButton>
+ * <BasicButton>
  * 
  * Simple button that optionally takes props to modify it
  * The construction wraps two styled-components with a regular React component
- * Then we pass the props from <AnchorButton> down to <Container> and <Anchor> in this file
+ * Then we pass the props from <BasicButton> down to <Container> and <Anchor> in this file
  * <Container> controls button position <Button> controls button look and feel
  * See how it works: https://styled-components.com/docs/basics#passed-props
  * 
