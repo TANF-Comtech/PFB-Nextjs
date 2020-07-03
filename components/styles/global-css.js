@@ -8,6 +8,12 @@ import { createGlobalStyle } from 'styled-components'
     box-sizing: border-box;
   }
 
+  /* Put CSS variables in here if you want to use them */
+  html {
+    --flow-space: 1em;
+  }
+
+  /* Set up body with font basics */
   body {
     font-family: 'Montserrat', Arial, Helvetica, sans-serif;
     font-weight: 300;
@@ -41,12 +47,11 @@ import { createGlobalStyle } from 'styled-components'
     padding: 0;
   }
 
+  /* #################################### */
+  /* ############## Rhythm ############## */
+  /* #################################### */
   /* Natural flow and rhythm in articles by default */
   /* Read more here: https://24ways.org/2018/managing-flow-and-rhythm-with-css-custom-properties/ */
-  .flow {
-    --flow-space: 1em;
-  }
-
   .flow > * + * {
     margin-top: 1em;
     margin-top: var(--flow-space);
@@ -60,16 +65,26 @@ import { createGlobalStyle } from 'styled-components'
     margin-top: 4vh;
   }
 
+  /* If an image falls into the main content area, position it like a block */
+  .flow > img {
+    margin: 5vh auto;
+  }
+
   h1, h2, blockquote {
     font-family: "Tungsten A", "Tungsten B", Arial, Helvetica, sans-serif;
     font-style: normal;
   }
 
-  /* Responsive Typography */
+  /* ###################################### */
+  /* ############## Headings ############## */
+  /* ###################################### */
+
+  /* Responsive type is a bit tricky, read along... */
   /* Take a full viewport (100vw) take away smallest viewport (320px) */
   /* Divide by pixels of largest and smallest media query (1200px - 320px = 880px )*/
   /* Multiply all of that by difference of the largest and smallest font size you want (120px - 80px = 40 pixels) */
-  /* This makes the scaler of the font responsive to the viewport */
+  /* This makes the scale of the font responsive to the viewport */
+
   h1 {
     font-size: 80px;
     font-weight: 600;
@@ -108,43 +123,67 @@ import { createGlobalStyle } from 'styled-components'
   }   
 
   /* Responsive type - 24-36px with 1 line-height */
-  h3, h4 {
+  h3, legend {
     font-size: 24px;
     font-weight: 700;
     line-height: 24px;
+    margin-top: 3vh;
   }
   @media screen and (min-width: 320px) {
-    h3 {
+    h3, legend {
       font-size: calc(24px + 12 * ((100vw - 320px) / 880));
       line-height: calc(24px + 12 * ((100vw - 320px) / 880));
     }
   }
   @media screen and (min-width: 1200px) {
-    h3 {
+    h3, legend {
       font-size: 36px;
       line-height: 36px;
     }
   }  
 
-  h4 {
-    color: '#D23823';
-  }
-
-  /* Responsive type - 17.5px-28px with 1.75 line-height (30.5-49px) */
-  p, b, strong, em, i, span, a, a::visited, a::focus, a:active, a:hover {
-    font-size: 17.5px;
-    line-height: 32px;
+  /* Responsive type - 24-36px with 1 line-height */
+   h4 {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 18px;
+    margin-top: 3vh;
   }
   @media screen and (min-width: 320px) {
-    p, b, strong, em, i, span {
-      font-size: calc(17.5px + 11.5 * ((100vw - 320px) / 880));
-      line-height: calc(32px + 21 * ((100vw - 320px) / 880));
+    h4 {
+      font-size: calc(18px + 8 * ((100vw - 320px) / 880));
+      line-height: calc(18px + 8 * ((100vw - 320px) / 880));
     }
   }
   @media screen and (min-width: 1200px) {
-    p, b, strong, em, i, span {
-      font-size: 28px;
-      line-height: 53px;
+    h4 {
+      font-size: 26px;
+      line-height: 26px;
+    }
+  }  
+
+
+
+  /* ################################## */
+  /* ############## Copy ############## */
+  /* ################################## */
+
+  /* Responsive type - 
+  /* Bigger (if want it): 17.5px-28px with 1.75 line-height (30.5-49px) */
+  p, b, strong, em, i, span, label, a, a::visited, a::focus, a:active, a:hover {
+    font-size: 16px;
+    line-height: 30px;
+  }
+  @media screen and (min-width: 320px) {
+    p, b, strong, em, i, span, label {
+      font-size: calc(16px + 8 * ((100vw - 320px) / 880));
+      line-height: calc(30px + 16 * ((100vw - 320px) / 880));
+    }
+  }
+  @media screen and (min-width: 1200px) {
+    p, b, strong, em, i, span, label {
+      font-size: 24px;
+      line-height: 46px;
     }
   }    
   b, strong {
@@ -186,25 +225,6 @@ import { createGlobalStyle } from 'styled-components'
     }
   } 
 
-  /* Make images responsive */
-  /* Note that .flow controls top/bottom margins on img blocks */
-  img {
-    box-shadow: ${props => props.theme.basicBoxShadow};
-    display: block;
-    height: auto;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 100%;
-  }
-
-  /* Inherit fonts for inputs and buttons */
-  input,
-  button,
-  textarea,
-  select {
-    font: inherit;
-  }
-
   /* Set off blockquotes */
   blockquote {
     color: #D23823;
@@ -225,12 +245,54 @@ import { createGlobalStyle } from 'styled-components'
       line-height: 70px;
     }
   }
-  
-  /* Anchor styles */
+
   a, a:visited, a:focus, a:active, a:hover {
     color: ${props => (props.theme.blue)};
     text-decoration: underline;
     transition: 0.2s ease-in-out;
+  }
+
+
+  /* #################################### */
+  /* ############## IMAGES ############## */
+  /* #################################### */
+
+  /* Make images responsive */
+  /* Note that .flow controls top/bottom margins on img blocks */
+  img {
+    box-shadow: ${props => props.theme.basicBoxShadow};
+    display: block;
+    height: auto;
+    max-width: 100%;
+  }
+  
+
+  /* ################################### */
+  /* ############## FORMS ############## */
+  /* ################################### */
+
+  /* Inherit fonts for inputs and buttons */
+  input,
+  button,
+  textarea,
+  select {
+    font: inherit;
+  }
+
+  fieldset {
+    padding: 3vh 3vw;
+  }
+
+  /* Set of CSS variables scoped to just the input elements */
+  form {
+    --active: ${props => props.theme.blue};
+    --active-inner: #fff;
+    --focus: 2px rgba(62, 159, 220, 0.3);
+    --border: #bccee1;
+    --border-hover: ${props => props.theme.blue};
+    --background: #fff;
+    --disabled: #F6F8FF;
+    --disabled-inner: #E1E6F9;
   }
 
   /* Remove all animations and transitions for people that prefer not to see them */
