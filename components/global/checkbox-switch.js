@@ -1,136 +1,18 @@
 import React, { useState, useEffect } from "react"
 import styled from "styled-components"
 
+import BasicInput from './input'
+
 const Container = styled.div`
   align-items: center;
   display: flex;
   margin: 1.5vh 0;
 `
 
-const CheckboxInput = styled.input.attrs({
+const CheckboxInput = styled(BasicInput).attrs({
   type: 'checkbox'
 })`
-  @supports(-webkit-appearance: none) or (-moz-appearance: none) {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background: var(--b, var(--background));
-    border: 1px solid var(--bc, var(--border));
-    cursor: pointer;
-    height: 21px;
-    display: inline-block;
-    margin: 0;
-    outline: none;
-    position: relative;
-    transition: background .3s, border-color .3s, box-shadow .2s;
-    vertical-align: top;
-
-    &:after {
-      content: '';
-      display: block;
-      left: 0;
-      top: 0;
-      position: absolute;
-      transition: transform var(--d-t, .3s) var(--d-t-e, ease), opacity var(--d-o, .2s);
-      /* transition: transform .3s ease, opacity .2s */
-    }
-
-    &:checked {
-      --b: var(--active);
-      --bc: var(--active);
-      --d-o: .3s;
-      --d-t: .6s;
-      --d-t-e: cubic-bezier(.2, .85, .32, 1.2);
-    }
-
-    &:disabled {
-      --b: var(--disabled);
-      cursor: not-allowed;
-      opacity: .9;
-
-      &:checked {
-        --b: var(--disabled-inner);
-        --bc: var(--border);
-      }
-
-      & + label {
-        cursor: not-allowed;
-      }
-    }
-
-    &:hover {
-      &:not(:checked) {
-        &:not(:disabled) {
-          --bc: var(--border-hover);
-        }
-      }
-    }
-
-    &:focus {
-      box-shadow: 0 0 0 var(--focus);
-    }
-
-    &:not(.switch) {
-      flex-basis: 21px;
-      flex-shrink: 0;
-      width: 21px;
-
-      &:after {
-        opacity: var(--o, 0);
-      }
-
-      &:checked {
-        --o: 1;
-      }
-    }
-
-    &:not(.switch) {
-      border-radius: 7px;
-
-      &:after {
-        border: 2px solid var(--active-inner);
-        border-top: 0;
-        border-left: 0;
-        height: 9px;
-        left: 7px;
-        top: 4px;
-        transform: rotate(var(--r, 20deg));
-        width: 5px;
-      }
-
-      &:checked {
-        --r: 43deg;
-      }
-    }
-
-    &.switch {
-      border-radius: 11px;
-      width: 38px;
-      
-      &:after {
-        background: var(--ab, var(--border));
-        border-radius: 50%;
-        height: 15px;
-        left: 2px;
-        top: 2px;
-        transform: translateX(var(--x, 0));
-        width: 15px;
-      }
-
-      &:checked {
-        --ab: var(--active-inner);
-        --x: 17px;
-      }
-
-      &:disabled {
-        &:not(:checked) {
-          &:after {
-            opacity: .6;
-          }
-        }
-      }
-    }
-  }
+  display: inline;
 `
 
 const CheckboxLabel = styled.label`

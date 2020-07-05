@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react"
 import styled from "styled-components"
 
+import BasicInput from './input'
+
 const RadioWrapper = styled.section`
   display: block;
 `
@@ -11,96 +13,31 @@ const Container = styled.div`
   margin: 1.5vh 0;
 `
 
-const RadioInput = styled.input.attrs({
+/* This is kinda hacky - to abstract <input> into one component, I'm doing the radio overrides */
+/* Lesser of two evils - check input.js so see what we're overriding */
+const RadioInput = styled(BasicInput).attrs({
   type: 'radio'
 })`
-  /* The appearance property allows us to do custom form elements without getting too fancy */
-  /* But we don't want to do all this work if the browser doesn't support it */
-  /* So check appearance: none; support, if browser support - do custom form elements */
-  @supports(-webkit-appearance: none) or (-moz-appearance: none) {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background: var(--b, var(--background));
-    border: 1px solid var(--bc, var(--border));
+  border-radius: 50% !important;
+
+  &:after {
+    background: var(--active-inner);
     border-radius: 50%;
-    cursor: pointer;
-    height: 21px;
-    display: inline-block;
-    margin: 0;
-    outline: none;
-    position: relative;
-    transition: background .3s, border-color .3s, box-shadow .2s;
-    vertical-align: top;
+    content: '';
+    display: block;
+    height: 19px !important;
+    left: 0 !important;
+    top: 0 !important;
+    position: absolute;
+    transition: transform var(--d-t, .3s) var(--d-t-e, ease), opacity var(--d-o, .2s) !important;
+    /* transition: transform .3s ease, opacity .2s */
+    transform: scale(var(--s, .7)) !important;
+    width: 19px !important;
+  }
 
-    &:after {
-      background: var(--active-inner);
-      border-radius: 50%;
-      content: '';
-      display: block;
-      height: 19px;
-      left: 0;
-      opacity: 0;
-      top: 0;
-      position: absolute;
-      transition: transform var(--d-t, .3s) var(--d-t-e, ease), opacity var(--d-o, .2s);
-      /* transition: transform .3s ease, opacity .2s */
-      transform: scale(var(--s, .7));
-      width: 19px;
-    }
-
-    &:checked {
-      --b: var(--active);
-      --bc: var(--active);
-      --d-o: .3s;
-      --d-t: .6s;
-      --d-t-e: cubic-bezier(.2, .85, .32, 1.2);
-    }
-
-    &:disabled {
-      --b: var(--disabled);
-      cursor: not-allowed;
-      opacity: .9;
-
-      &:checked {
-        --b: var(--disabled-inner);
-        --bc: var(--border);
-      }
-
-      & + label {
-        cursor: not-allowed;
-      }
-    }
-
-    &:hover {
-      &:not(:checked) {
-        &:not(:disabled) {
-          --bc: var(--border-hover);
-        }
-      }
-    }
-
-    &:focus {
-      box-shadow: 0 0 0 var(--focus);
-    }
-
-    &:not(.switch) {
-      flex-basis: 21px;
-      flex-shrink: 0;
-      width: 21px;
-
-      &:after {
-        opacity: var(--o, 0);
-      }
-
-      &:checked {
-        --o: 1;
-      }
-    }
-
-    &:checked {
-      --s: .5;
-    }
+  /* :checked css variable change creates the animation effect */
+  &:checked {
+    --s: .5;
   }
 `
 
