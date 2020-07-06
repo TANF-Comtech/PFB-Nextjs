@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import styled from "styled-components"
 
 import BasicInput from './input'
+import BasicLabel from './label'
 
 const Container = styled.div`
   align-items: center;
@@ -13,21 +14,6 @@ const CheckboxInput = styled(BasicInput).attrs({
   type: 'checkbox'
 })`
   display: inline;
-`
-
-const CheckboxLabel = styled.label`
-  cursor: pointer;
-  font-size: 14px;
-  line-height: 21px;
-  margin-left: 8px;
-
-  @media (min-width: ${props => props.theme.bm}) {
-    font-size: calc(14px + 4 * ((100vw - 320px) / 880));
-  }
-
-  @media (min-width: ${props => props.theme.lg}) {
-    font-size: 18px;
-  }
 `
 
 /**
@@ -75,9 +61,9 @@ const CheckboxSwitch = ({
             id={ randomID } 
             type="checkbox" 
           />
-          <CheckboxLabel htmlFor={ randomID }>
+          <BasicLabel htmlFor={ randomID }>
             { checkboxLabel }
-          </CheckboxLabel>
+          </BasicLabel>
         </Container>
       </>
     )

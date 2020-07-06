@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import styled from "styled-components"
 
 import BasicInput from './input'
+import BasicLabel from './label'
 
 const RadioWrapper = styled.section`
   display: block;
@@ -38,21 +39,6 @@ const RadioInput = styled(BasicInput).attrs({
   /* :checked css variable change creates the animation effect */
   &:checked {
     --s: .5;
-  }
-`
-
-const RadioLabel = styled.label`
-  cursor: pointer;
-  font-size: 14px;
-  line-height: 21px;
-  margin-left: 8px;
-
-  @media (min-width: ${props => props.theme.bm}) {
-    font-size: calc(14px + 4 * ((100vw - 320px) / 880));
-  }
-
-  @media (min-width: ${props => props.theme.lg}) {
-    font-size: 18px;
   }
 `
 
@@ -108,9 +94,9 @@ const RadioSet = ({
                   type="radio" 
                   value={ radioValues[i] }
                 />
-                <RadioLabel htmlFor={ randomID }>
+                <BasicLabel htmlFor={ randomID }>
                   { label }
-                </RadioLabel>
+                </BasicLabel>
               </Container>
             )
 
