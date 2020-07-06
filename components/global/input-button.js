@@ -15,7 +15,7 @@ const Button = styled.input`
   cursor: pointer;
   display: inline-block;
   font-family: ${props => props.theme.montserrat};
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 700;
   min-width: 200px;
   margin: 0;
@@ -34,12 +34,12 @@ const Button = styled.input`
   }
 
   @media (min-width: ${props => props.theme.bm}) {
-    font-size: calc(16px + 8 * ((100vw - 320px) / 880));
+    font-size: calc(14px + 4 * ((100vw - 320px) / 880));
     padding: 10px calc(35px + 15 * ((100vw - 320px) / 880));
   }
 
   @media (min-width: ${props => props.theme.lg}) {
-    font-size: 24px;
+    font-size: 18px;
     padding: 10px 60px;
   }
 `
@@ -60,6 +60,8 @@ const Button = styled.input`
  * @param {string} buttonColorHover - override for button text color on hover
  * @param {string} buttonPosition - uses { left | center | right } to move button container
  * @param {string} buttonText - because <input> is a void element, we can't pass in text, must be a prop instead
+ * @param {string} className - helps styled-components extend, and obviously passes a class 
+ * @param {string} name - input name param, just passed down
  */
 function InputButton(
   { buttonBg, 
@@ -68,7 +70,9 @@ function InputButton(
     buttonColor, 
     buttonColorHover,
     buttonPosition,
-    buttonText }) {
+    buttonText,
+    className,
+    name }) {
 
   return (
     <>
@@ -79,6 +83,8 @@ function InputButton(
           buttonBorder={ buttonBorder }
           buttonColor={ buttonColor } 
           buttonColorHover={ buttonColorHover }
+          className={ className }
+          name={ name }
           value={ buttonText }
         />
       </Container>

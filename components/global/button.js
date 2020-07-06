@@ -10,6 +10,7 @@ const Container = styled.div`
 const Button = styled.div`
   background-color: ${props => props.buttonBg || 'rgba(255,255,255,1)'}; 
   border: ${props => props.buttonBorder || `1px solid ${props.theme.black}`};
+  border-radius: 10px;
   box-shadow: ${props => props.theme.buttonBoxShadow};
   color: ${props => props.buttonColor || props.theme.black};
   cursor: pointer;
