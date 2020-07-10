@@ -4,6 +4,13 @@ import Link from "next/link"
 
 import SignUpForm from "./form"
 import BasicTextField from './text'
+import SocialIcon from './social'
+
+import fb from '../../public/socials/fb.svg'
+import insta from '../../public/socials/insta.svg'
+import linkedin from '../../public/socials/linkedin.svg'
+import twitter from '../../public/socials/twitter.svg'
+import yt from '../../public/socials/yt.svg'
 
 const Bar = styled.footer`
   background-color: ${props => props.theme.darkestGray};
@@ -36,7 +43,7 @@ const MenuContainer = styled.ul`
   color: white;
   font-family: ${props => props.theme.tungsten};
   list-style: none;
-  margin: 6vh 4vw;
+  margin: 6vh 4vw 2vh 4vw;
 
   li a, li a:visited, li a:focus, li a:active, li a:hover {
     color: white;
@@ -51,6 +58,13 @@ const MenuContainer = styled.ul`
       font-size: 56px;
     }
   }
+`
+
+const SocialContainer = styled.section`
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 3vw 8vh 3vw;
+  justify-content: flex-start;
 `
 
 const SignUpContainer = styled.div`
@@ -87,6 +101,28 @@ function Footer() {
               <li><Link href="/"><a>Join</a></Link></li>
               <li><Link href="/"><a>Members</a></Link></li>
             </MenuContainer>
+            <SocialContainer>
+              <SocialIcon 
+                url="https://www.facebook.com/PeopleForBikes/" 
+                source={ fb } 
+                alt="Facebook Logo" />
+              <SocialIcon 
+                url="https://www.instagram.com/peopleforbikes/" 
+                source={ insta } 
+                alt="Instagram Logo" />
+              <SocialIcon 
+                url="https://www.linkedin.com/company/peopleforbikes/" 
+                source={ linkedin } 
+                alt="LinkedIn Logo" />
+              <SocialIcon 
+                url="https://twitter.com/peopleforbikes" 
+                source={ twitter } 
+                alt="Twitter Logo" />
+              <SocialIcon 
+                url="https://www.youtube.com/user/peopleforbikes/videos" 
+                source={ yt } 
+                alt="YouTube Logo" />
+            </SocialContainer>
           </StripeMenu>
           <SignUpContainer>
             <h2>Let's stay in touch. Join our newsletter list:</h2>
