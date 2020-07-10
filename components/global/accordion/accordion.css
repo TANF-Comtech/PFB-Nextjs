@@ -1,0 +1,15 @@
+/* Arrow Button to open and close */
+.accordionOpen {
+  transform: rotate(90deg);
+  transition-duration: 0.3s;
+}
+
+/* Text Hide and Reveal when the expansion panel is closed and open */
+.texthide {
+  display: none;
+}
+
+.textReveal {
+  display: flex;
+  transition: 0.3s ease-in-out;
+}
