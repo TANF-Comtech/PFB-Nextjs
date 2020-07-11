@@ -8,9 +8,10 @@ const LogoIcon = styled.svg`
   width: ${props => props.logoWidth || '60px'};
 `;
 
-function Logo({ logoWidth }) {
+function Logo({ className, logoWidth }) {
   return (
     <LogoIcon
+      className={ className }
       logoWidth={ logoWidth }
       viewBox="0 0 89 94"
       version="1.1"

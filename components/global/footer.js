@@ -5,6 +5,8 @@ import Link from "next/link"
 import SignUpForm from "./form"
 import BasicTextField from './text'
 import SocialIcon from './social'
+import Logo from './logo'
+import LogoType from './logotype'
 
 import fb from '../../public/socials/fb.svg'
 import insta from '../../public/socials/insta.svg'
@@ -68,7 +70,10 @@ const SocialContainer = styled.section`
 `
 
 const SignUpContainer = styled.div`
+  display: flex;
   flex-basis: 100%; /* Stretch the signup all the way across the screen */
+  flex-direction: column;
+  justify-content: space-between;
   margin: 5vh 4vw;
 
   h2 {
@@ -86,6 +91,19 @@ const SignUpContainer = styled.div`
     }
   }  
 `
+
+const SignUpFooter = styled.footer`
+  align-self: flex-end;
+`
+
+const WhiteBgLogo = styled(Logo)`
+  background-color: white;
+  border-radius: 5px;
+  height: 60px;
+  padding: 1px;
+  width: 60px;
+`
+
 
 function Footer() {
   return (
@@ -125,8 +143,18 @@ function Footer() {
             </SocialContainer>
           </StripeMenu>
           <SignUpContainer>
-            <h2>Let's stay in touch. Join our newsletter list:</h2>
-            <SignUpForm />
+            <header>
+              <h2>Let's stay in touch. Join our newsletter list:</h2>
+              <SignUpForm />
+            </header>
+            <SignUpFooter>
+              <WhiteBgLogo />
+              <LogoType 
+                fillPeople="#fff"
+                fillFor="#fff"
+                fillBikes="#fff"
+              />              
+            </SignUpFooter>
           </SignUpContainer>
         </Container>
       </Bar>

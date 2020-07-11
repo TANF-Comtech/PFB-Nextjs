@@ -8,11 +8,22 @@ const LogoContainer = styled.div`
   width: 120px;
 `;
 
-function LogoVertical({ logoWidth, logoTypeWidth }) {
+function LogoVertical({ 
+  fillPeople,
+  fillFor,
+  fillBikes,   
+  logoTypeWidth,
+  logoWidth
+ }) {
   return (
     <LogoContainer>
       <Logo logoWidth={ logoWidth } />
-      <LogoType logoTypeWidth={ logoTypeWidth } />
+      <LogoType 
+        fillPeople={ fillPeople }
+        fillFor={ fillFor }
+        fillBikes={ fillBikes }
+        logoTypeWidth={ logoTypeWidth } 
+      />
     </LogoContainer>
   );
 }
