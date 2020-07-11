@@ -9,7 +9,6 @@ const IconContainer = styled.div`
   display: flex;
   height: 38px;
   justify-content: center;
-  margin: 5px;
   width: 38px;
 
   @media screen and (min-width: 320px) {

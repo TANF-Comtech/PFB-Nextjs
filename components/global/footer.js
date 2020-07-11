@@ -3,7 +3,6 @@ import styled from "styled-components";
 import Link from "next/link"
 
 import SignUpForm from "./form"
-import BasicTextField from './text'
 import SocialIcon from './social'
 import Logo from './logo'
 import LogoType from './logotype'
@@ -63,10 +62,18 @@ const MenuContainer = styled.ul`
 `
 
 const SocialContainer = styled.section`
-  display: flex;
-  flex-wrap: wrap;
-  margin: 0 3vw 8vh 3vw;
-  justify-content: flex-start;
+  display: grid;
+  grid-gap: 5px;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin: 0 3.5vw 8vh 3.5vw;
+  max-width: 114px;
+
+  @media screen and (min-width: 320px) {
+    max-width: calc(114px + 66 * ((100vw - 320px) / 880));
+  }
+  @media screen and (min-width: 1200px) {
+    max-width: 180px;
+  }
 `
 
 const SignUpContainer = styled.div`
