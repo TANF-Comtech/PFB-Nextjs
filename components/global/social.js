@@ -9,7 +9,12 @@ const IconContainer = styled.div`
   display: flex;
   height: 38px;
   justify-content: center;
+  transition: ${props => props.theme.basicAnimation};
   width: 38px;
+
+  &:hover {
+    background-color: ${props => props.theme.darkGray};
+  }
 
   @media screen and (min-width: 320px) {
     border-radius: calc(19px + 11 * ((100vw - 320px) / 880));

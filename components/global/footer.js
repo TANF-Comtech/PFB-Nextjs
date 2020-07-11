@@ -16,24 +16,35 @@ import yt from '../../public/socials/yt.svg'
 const Bar = styled.footer`
   background-color: ${props => props.theme.darkestGray};
   color: white;
-  padding: 0 4vw;
+  padding: 2vh 0 6vh 0;
+
+  @media screen and (min-width: 768px) {
+    padding: 0 4vw;
+  }
 `
 
 const Container = styled.section`
   align-items: stretch;
   display: flex;
+  flex-direction: column;
   justify-content: flex-start;
   margin: 0 auto;
   max-width: ${props => props.theme.lg};
+
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+  }
 `;
 
 const StripeMenu = styled.div`
   background-color: ${props => props.theme.redAccent};
-  min-height: 70vh;
   min-width: 250px;
 
   @media screen and (min-width: 320px) {
     min-width: calc(250px + 100 * ((100vw - 320px) / 880));
+  }
+  @media screen and (min-width: 768px) {
+    min-height: 70vh;
   }
   @media screen and (min-width: 1200px) {
     min-width: 350px;
@@ -41,35 +52,61 @@ const StripeMenu = styled.div`
 `
 
 const MenuContainer = styled.ul`
+  align-items: center;
   color: white;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   font-family: ${props => props.theme.tungsten};
+  justify-content: center;
   list-style: none;
   margin: 6vh 4vw 2vh 4vw;
+
+  @media (min-width: 768px) {
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
 
   li a, li a:visited, li a:focus, li a:active, li a:hover {
     color: white;
     font-size: 36px;
+    margin: 0 8px;
     text-decoration: none;
+    transition: ${props => props.theme.basicAnimation};
+    transform: translateY(0);
 
-    @media screen and (min-width: ${props => props.theme.bm}) {
+    @media (min-width: ${props => props.theme.bm}) {
       font-size: calc(36px + 20 * ((100vw - 320px) / 880));
     }
-
-    @media screen and (min-width: ${props => props.theme.lg}) {
+    @media (min-width: 768px) {
+      margin: inherit;
+    }
+    @media (min-width: ${props => props.theme.lg}) {
       font-size: 56px;
     }
   }
+
+  li a:hover {
+    transform: translateY(5px);
+  }
+
 `
 
 const SocialContainer = styled.section`
   display: grid;
   grid-gap: 5px;
-  grid-template-columns: 1fr 1fr 1fr;
-  margin: 0 3.5vw 8vh 3.5vw;
-  max-width: 114px;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  margin: 0 auto 6vh auto;
+  max-width: 210px;
 
   @media screen and (min-width: 320px) {
-    max-width: calc(114px + 66 * ((100vw - 320px) / 880));
+    max-width: calc(230px + 57 * ((100vw - 320px) / 880));
+  }
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr 1fr 1fr;
+    margin: 0 3.5vw 8vh 3.5vw;
+    max-width: calc(150px + 30 * ((100vw - 320px) / 880));
   }
   @media screen and (min-width: 1200px) {
     max-width: 180px;
@@ -100,7 +137,12 @@ const SignUpContainer = styled.div`
 `
 
 const SignUpFooter = styled.footer`
-  align-self: flex-end;
+  align-self: center;
+  margin-top: 5vh;
+
+  @media screen and (min-width: 768px) {
+    align-self: flex-end;
+  }
 `
 
 const WhiteBgLogo = styled(Logo)`
