@@ -2,6 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import Text from "./text";
 
+/****
+ * Container that holds the background image and will be the main div for the rest of the components.
+ ****/
 const ImgContainer = styled.div`
   width: 400px;
   height: 400px;
@@ -10,6 +13,10 @@ const ImgContainer = styled.div`
   background-repeat: no-repeat;
   background-position: center center;
 `;
+
+/****
+ * The container that is black with an a really low opacity. It will hold the text within in.
+ ****/
 const TxtContainer = styled.div`
   width: 300px;
   height: 300px;
@@ -21,10 +28,37 @@ const TxtContainer = styled.div`
   left: 50px;
 `;
 
+/****
+ * This is the actual text, i'm struggling with getting it in the middle of the container. I can get it to be in the center, but not vertically align it to the middle.
+ ****/
+const Text = styled.span`
+  color: white;
+  vertical-align: middle;
+`;
+
+/****
+ * This is the Arrow button that acutallly isn't a button at the moment. The arrow background currently was from material.io. However, I want to use the Noun project
+ * since i can change the color and size that I need, but you need a subscription to use it. Does THOR have one? Can we get one?
+ ****/
+const Arrow = styled.div`
+  background-image: url(${RightArrow});
+  background-position: center center;
+  background-repeat: no-repeat;
+  float: right;
+  vertical-align: middle;
+  color: red;
+  width: 40px;
+  height: 40px;
+  background-color: white;
+  position: relative;
+  top: 45%;
+`;
+
 export default function TwoImg(props) {
   return (
     <>
       <ImgContainer backgroundImage={props.backgroundImage}>
+        <Arrow />
         <TxtContainer>
           <Text>This is a test</Text>
         </TxtContainer>
