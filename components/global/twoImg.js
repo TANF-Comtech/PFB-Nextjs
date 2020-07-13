@@ -17,7 +17,9 @@ const ImgContainer = styled.div`
 /****
  * The container that is black with an a really low opacity. It will hold the text within in.
  ****/
-const TxtContainer = styled.div`
+const InnerContainer = styled.div`
+  display: flex;
+  justify-content: center;
   width: 300px;
   height: 300px;
   background-color: rgba(0, 0, 0, 0.25);
@@ -31,21 +33,22 @@ const TxtContainer = styled.div`
 /****
  * This is the actual text, i'm struggling with getting it in the middle of the container. I can get it to be in the center, but not vertically align it to the middle.
  ****/
-const Text = styled.span`
-  color: white;
-  vertical-align: middle;
+const TxtContainer = styled.span`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 /****
  * This is the Arrow button that acutallly isn't a button at the moment. The arrow background currently was from material.io. However, I want to use the Noun project
  * since i can change the color and size that I need, but you need a subscription to use it. Does THOR have one? Can we get one?
  ****/
-const Arrow = styled.div`
+const Arrow = styled.button`
   background-image: url(${RightArrow});
   background-position: center center;
   background-repeat: no-repeat;
   float: right;
-  vertical-align: middle;
+  border: none;
   color: red;
   width: 40px;
   height: 40px;
@@ -59,9 +62,11 @@ export default function TwoImg(props) {
     <>
       <ImgContainer backgroundImage={props.backgroundImage}>
         <Arrow />
-        <TxtContainer>
-          <Text>This is a test</Text>
-        </TxtContainer>
+        <InnerContainer>
+          <TxtContainer>
+            <Text>This is a test</Text>
+          </TxtContainer>
+        </InnerContainer>
       </ImgContainer>
     </>
   );
