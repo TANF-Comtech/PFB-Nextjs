@@ -2,7 +2,9 @@ import styled from "styled-components";
 
 const LogoLetters = styled.svg`
   cursor: pointer;
-  padding-top: 10px;
+  display: block;
+  margin: 0 auto;
+  padding: 1vh 0 0 0;
   width: ${props => props.logoTypeWidth || '120px'};
 `;
 

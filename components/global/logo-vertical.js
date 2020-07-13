@@ -5,8 +5,14 @@ import Logo from './logo'
 
 const LogoContainer = styled.div`
   display: block;
-  width: 120px;
+  min-width: 120px;
 `;
+
+const LogoTypeDisappear = styled(LogoType)`
+  @media(max-height: 600px) {
+    display: none;
+  }
+`
 
 function LogoVertical({ 
   fillPeople,
@@ -18,7 +24,7 @@ function LogoVertical({
   return (
     <LogoContainer>
       <Logo logoWidth={ logoWidth } />
-      <LogoType 
+      <LogoTypeDisappear
         fillPeople={ fillPeople }
         fillFor={ fillFor }
         fillBikes={ fillBikes }

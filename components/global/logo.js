@@ -5,7 +5,7 @@ const LogoIcon = styled.svg`
   display: block;
   height: ${props => props.logoWidth || '60px'};
   margin: 0 auto;
-  width: ${props => props.logoWidth || '60px'};
+  min-height: 50px; 
 `;
 
 function Logo({ className, logoWidth }) {
