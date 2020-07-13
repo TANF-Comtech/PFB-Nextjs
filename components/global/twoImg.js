@@ -44,6 +44,7 @@ const TxtContainer = styled.span`
  * since i can change the color and size that I need, but you need a subscription to use it. Does THOR have one? Can we get one?
  ****/
 const Arrow = styled.button`
+  /* REPLACE THIS BACKGROUND IMAGE!! */
   background-image: url(${RightArrow});
   background-position: center center;
   background-repeat: no-repeat;
