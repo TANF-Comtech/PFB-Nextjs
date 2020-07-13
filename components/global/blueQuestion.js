@@ -89,9 +89,7 @@ export default function QuestionBar() {
       <Gradient3 />
       <ContentContainer>
         <ButtonContainer>
-          <QuestionBubble>
-            <Graphic />
-          </QuestionBubble>
+          <Graphic>!</Graphic>
         </ButtonContainer>
         <Text>
           <Bold>Questions?</Bold> For assistance in setting up your Employee Pro
