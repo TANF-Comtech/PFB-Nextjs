@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import Bike from "../../public/bike.jpg";
+import Text from "./text";
 
 const ImgContainer = styled.div`
   width: 400px;
   height: 400px;
   background-size: cover;
-  background-image: url(${Bike});
+  background-image: ${(props) => `url(${props.backgroundImage})`};
   background-repeat: no-repeat;
   background-position: center center;
 `;
@@ -24,8 +24,10 @@ const TxtContainer = styled.div`
 export default function TwoImg(props) {
   return (
     <>
-      <ImgContainer>
-        <TxtContainer>This is a test</TxtContainer>
+      <ImgContainer backgroundImage={props.backgroundImage}>
+        <TxtContainer>
+          <Text>This is a test</Text>
+        </TxtContainer>
       </ImgContainer>
     </>
   );
