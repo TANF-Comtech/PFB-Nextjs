@@ -99,7 +99,7 @@ const Graphic = styled.div`
 `;
 
 /****
- * Text stylig.
+ * Text stylnig.
  ****/
 const Text = styled.p`
   color: white;
