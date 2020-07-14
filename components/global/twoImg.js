@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import Text from "./text";
 
 /****
  * Container that holds the background image and will be the main div for the rest of the components.
@@ -58,15 +57,13 @@ const Arrow = styled.button`
   top: 45%;
 `;
 
-export default function TwoImg(props) {
+export default function TwoImg(props, { children }) {
   return (
     <>
       <ImgContainer backgroundImage={props.backgroundImage}>
         <Arrow />
         <InnerContainer>
-          <TxtContainer>
-            <Text>This is a test</Text>
-          </TxtContainer>
+          <TxtContainer>{children}</TxtContainer>
         </InnerContainer>
       </ImgContainer>
     </>
