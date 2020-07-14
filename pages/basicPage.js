@@ -22,6 +22,7 @@ export default function BasicPg() {
     <>
       {/* The navbar that you built */}
       <Navbar />
+      <h4>Guidlines | Funding | Application | Awards</h4>
       <H1>Community Grants</H1>
       {/* Your text styling works btw */}
       <h2>Grant Guidlines</h2>

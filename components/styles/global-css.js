@@ -1,6 +1,6 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from "styled-components";
 
- const GlobalStyle = createGlobalStyle`
+const GlobalStyle = createGlobalStyle`
   /* Box sizing rules */
   *,
   *::before,
@@ -70,7 +70,7 @@ import { createGlobalStyle } from 'styled-components'
     margin: 5vh auto;
   }
 
-  h1, h2, blockquote {
+  h1, h2, h4, blockquote {
     font-family: "Tungsten A", "Tungsten B", Arial, Helvetica, sans-serif;
     font-style: normal;
   }
@@ -247,7 +247,7 @@ import { createGlobalStyle } from 'styled-components'
   }
 
   a, a:visited, a:focus, a:active, a:hover {
-    color: ${props => (props.theme.blue)};
+    color: ${(props) => props.theme.blue};
     text-decoration: underline;
     transition: 0.2s ease-in-out;
   }
@@ -260,7 +260,7 @@ import { createGlobalStyle } from 'styled-components'
   /* Make images responsive */
   /* Note that .flow controls top/bottom margins on img blocks */
   img {
-    box-shadow: ${props => props.theme.basicBoxShadow};
+    box-shadow: ${(props) => props.theme.basicBoxShadow};
     display: block;
     height: auto;
     max-width: 100%;
@@ -285,11 +285,11 @@ import { createGlobalStyle } from 'styled-components'
 
   /* Set of CSS variables scoped to just the input elements */
   form {
-    --active: ${props => props.theme.blue};
+    --active: ${(props) => props.theme.blue};
     --active-inner: #fff;
     --focus: 2px rgba(62, 159, 220, 0.3);
     --border: #bccee1;
-    --border-hover: ${props => props.theme.blue};
+    --border-hover: ${(props) => props.theme.blue};
     --background: #fff;
     --disabled: #F6F8FF;
     --disabled-inner: #E1E6F9;
@@ -304,6 +304,6 @@ import { createGlobalStyle } from 'styled-components'
       scroll-behavior: auto !important;
     }
   }
-`
+`;
 
-export default GlobalStyle
+export default GlobalStyle;
