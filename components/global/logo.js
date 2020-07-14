@@ -4,14 +4,28 @@ const LogoIcon = styled.svg`
   cursor: pointer;
   display: block;
   height: ${props => props.logoWidth || '60px'};
-  margin: 0 auto;
+  margin: ${props => props.logoMargin || '0 auto'};
   min-height: 50px; 
 `;
 
-function Logo({ className, logoWidth }) {
+/**
+ * <Logo>
+ * 
+ * Logo is a versatile component that gives you access to the PFB logo (but not logotype)
+ * It really isn't doing much, just displaying a logo really
+ * In the main section, we have the "flow" class gives us some nice automatic padding around sibling elements
+ * 
+ * @param {text} className - allows us to extend Logo
+ * @param {text} logoMargin - we can adjust the margins (default: `0 auto`)
+ * @param {text} logoWidth - adjustable width, but notice we use the value for height
+ *    that's because the logo is square, so we can control both with on size!
+ * 
+ */
+function Logo({ className, logoMargin, logoWidth }) {
   return (
     <LogoIcon
       className={ className }
+      logoMargin={ logoMargin }
       logoWidth={ logoWidth }
       viewBox="0 0 89 94"
       version="1.1"
