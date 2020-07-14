@@ -45,7 +45,7 @@ const TxtContainer = styled.span`
  ****/
 const Arrow = styled.button`
   /* REPLACE THIS BACKGROUND IMAGE!! */
-  background-image: url(${RightArrow});
+  /* background-image: url(${RightArrow}); */
   background-position: center center;
   background-repeat: no-repeat;
   float: right;

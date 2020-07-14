@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import "./accordion.css";
 
+import Arrow from "./Arrow";
 import useOnClickOutside from "./onClickUseOUtside";
 
 const Accordion = ({ title, children }) => {
@@ -31,7 +32,7 @@ const Accordion = ({ title, children }) => {
     <div className="accordion__section" ref={sensitive}>
       <button className={`accordion ${active}`} onClick={toggleAccordion}>
         <p className="accordion__title">{title}</p>
-        <img src="../../public/arrow.png" className={`${rotation}`} />
+        <Arrow width={10} fill={"#777"} className={`${rotation}`} />
       </button>
       <div
         ref={content}
