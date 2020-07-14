@@ -303,6 +303,27 @@ import { createGlobalStyle } from 'styled-components'
       scroll-behavior: auto !important;
     }
   }
+
+  /* ####################################### */
+  /* ############## ANIMATION ############## */
+  /* ####################################### */
+
+  /* Reusable classes for animating things around the site */
+  .isVisibleY {
+    transform: translateY(0%);
+  }
+
+  .isHiddenY {
+    transform: translateY(-105%);
+  }
+
+  .isVisibleX {
+    transform: translateX(0%);
+  }
+
+  .isHiddenX {
+    transform: translateX(-105%);
+  }
 `
 
 export default GlobalStyle

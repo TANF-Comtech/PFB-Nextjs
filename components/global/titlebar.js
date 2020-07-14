@@ -1,21 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import useScrollPosition from '@react-hook/window-scroll'
 
 import LogoVertical from "../global/logo-vertical"
 
-// Animation position applied from styles/global-css.js - see animation section
 const Bar = styled.section`
-  background-color: rgba(255, 255, 255, 0.98);
+  background-color: rgba(255, 255, 255, 0.95);
   box-shadow: 0 2px 5px rgba(0,0,0,.2);
   padding: 1vh 4vw 1vh 4vw;
-  position: fixed;
-  left: 0;
-  top: 0;
-  right: 0;
-  min-height: 12vh;
-  transition: 0.5s all ${props => props.theme.cubicSmooth};
-  z-index: ${props => props.theme.zIndex01};
 `;
 
 const Container = styled.header`
@@ -38,14 +29,10 @@ const SearchButton = styled.svg`
   width: 32px;
 `;
 
-function NavBar() {
-  // Capture scroll position, so we can know when to fade out navbar
-  const scrollY = useScrollPosition();
-  console.log(scrollY)
-
+function Titlebar() {
   return (
     <>
-      <Bar className={scrollY < 500 ? ('isVisibleY') : ('isHiddenY') } >
+      <Bar>
         <Container>
           <MenuButton
             viewBox="0 0 32 32"
@@ -71,4 +58,4 @@ function NavBar() {
   );
 }
 
-export default NavBar;
+export default Titlebar;

@@ -6,7 +6,7 @@ import Footer from '../global/footer'
 
 // spacer constrains the layout on big screens but keeps it tight on mobile
 const MainContent = styled.main`
-  padding: 2vh 4vw 4vh 4vw; /* slightly bigger pad on bottom than top */
+  padding: 14vh 4vw 4vh 4vw; /* slightly bigger pad on bottom than top */
 `
 
 const Container = styled.section`
