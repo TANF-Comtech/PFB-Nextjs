@@ -31,8 +31,8 @@ const Accordion = ({ title, children }) => {
   return (
     <div className="accordion__section" ref={sensitive}>
       <button className={`accordion ${active}`} onClick={toggleAccordion}>
+        <Arrow width={24} className={`${rotation}`} />
         <p className="accordion__title">{title}</p>
-        <Arrow width={10} fill={"#777"} className={`${rotation}`} />
       </button>
       <div
         ref={content}
