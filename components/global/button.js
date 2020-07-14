@@ -16,14 +16,14 @@ const Button = styled.div`
   cursor: pointer;
   display: inline-block;
   font-family: ${props => props.theme.montserrat};
-  font-size: 16px;
+  font-size: ${props => props.buttonFontSize || '18px'};
   font-weight: 700;
-  min-width: 200px;
+  min-width: 100px;
   margin: 0;
-  padding: 10px 35px;
+  padding: ${props => props.buttonPadding || '10px 35px'};
   text-align: center;
   text-decoration: none;
-  text-transform: uppercase;
+  text-transform: ${props => props.buttonTextTransform || 'uppercase'};
   transform: translateY(0);
   transition: all 0.25s ease;
   
@@ -32,16 +32,6 @@ const Button = styled.div`
     color: ${props => props.buttonColorHover || 'white'};
     text-decoration: none;
     transform: translateY(-2px);
-  }
-
-  @media (min-width: ${props => props.theme.bm}) {
-    font-size: calc(16px + 8 * ((100vw - 320px) / 880));
-    padding: 10px calc(35px + 15 * ((100vw - 320px) / 880));
-  }
-
-  @media (min-width: ${props => props.theme.lg}) {
-    font-size: 24px;
-    padding: 10px 60px;
   }
 `
 
@@ -54,12 +44,15 @@ const Button = styled.div`
  * <Container> controls button position <Button> controls button look and feel
  * See how it works: https://styled-components.com/docs/basics#passed-props
  * 
- * @param {string} buttonBg - override for button background
- * @param {string} buttonBgHover - override for button background on hover
- * @param {string} buttonBorder - override for button border
- * @param {string} buttonColor - override for button color
- * @param {string} buttonColorHover - override for button text color on hover
+ * @param {string} buttonBg - override for button background (default: white)
+ * @param {string} buttonBgHover - override for button background on hover (default: black)
+ * @param {string} buttonBorder - override for button border (default: black)
+ * @param {string} buttonColor - override for button color (default: black)
+ * @param {string} buttonColorHover - override for button text color on hover (default: white)
+ * @param {string} buttonFontSize - override for button text size (default: 16-24px)
+ * @param {string} buttonPadding - override for button text padding settings (default: 10px 35px)
  * @param {string} buttonPosition - uses { left | center | right } to move button container
+ * @param {string} buttonTextTransform - changes casing of button text (default: uppercase)
  */
 function BasicButton(
   { buttonBg, 
@@ -68,7 +61,10 @@ function BasicButton(
     children, 
     buttonColor, 
     buttonColorHover,
-    buttonPosition }) {
+    buttonFontSize,
+    buttonPadding,
+    buttonPosition,
+    buttonTextTransform }) {
 
   return (
     <>
@@ -79,6 +75,9 @@ function BasicButton(
           buttonBorder={ buttonBorder }
           buttonColor={ buttonColor } 
           buttonColorHover={ buttonColorHover }
+          buttonFontSize={ buttonFontSize }
+          buttonPadding={ buttonPadding }
+          buttonTextTransform={ buttonTextTransform }
         >
           { children }
         </Button>
