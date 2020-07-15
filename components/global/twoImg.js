@@ -57,7 +57,7 @@ const Arrow = styled.button`
   top: 45%;
 `;
 
-export default function TwoImg(props, { children }) {
+const TwoImg = ({ children }, props) => {
   return (
     <>
       <ImgContainer backgroundImage={props.backgroundImage}>
@@ -68,4 +68,6 @@ export default function TwoImg(props, { children }) {
       </ImgContainer>
     </>
   );
-}
+};
+
+export default TwoImg;
