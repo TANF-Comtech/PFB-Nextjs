@@ -260,7 +260,6 @@ import { createGlobalStyle } from 'styled-components'
   /* Make images responsive */
   /* Note that .flow controls top/bottom margins on img blocks */
   img {
-    box-shadow: ${props => props.theme.basicBoxShadow};
     display: block;
     height: auto;
     max-width: 100%;
