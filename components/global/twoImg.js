@@ -8,7 +8,7 @@ const ImgContainer = styled.div`
   width: 400px;
   height: 400px;
   background-size: cover;
-  background-image: ${(props) => `url(${props.backgroundImage})`};
+  background-image: ${(props) => `url(${props.overlayImg})`};
   background-repeat: no-repeat;
   background-position: center center;
 `;
@@ -57,10 +57,10 @@ const Arrow = styled.button`
   top: 45%;
 `;
 
-const TwoImg = ({ children }, props) => {
+const TwoImg = ({ children, overlayImg }) => {
   return (
     <>
-      <ImgContainer backgroundImage={props.backgroundImage}>
+      <ImgContainer overlayImg={overlayImg}>
         <Arrow />
         <InnerContainer>
           <TxtContainer>{children}</TxtContainer>

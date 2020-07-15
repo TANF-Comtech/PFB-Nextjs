@@ -68,8 +68,8 @@ export default function BasicPg() {
           community
         </Description>
         <ImageContainer>
-          <TwoImage backgroundImage={`url(${Bike})`}>This works?</TwoImage>
-          <TwoImage backgroundImage={`url(${Bike})`}>This works?</TwoImage>
+          <TwoImage overlayImg={Bike}>This works?</TwoImage>
+          <TwoImage overlayImg={Bike}>This works?</TwoImage>
         </ImageContainer>
       </PageContainer>
       <Footer />
