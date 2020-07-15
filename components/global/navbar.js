@@ -15,7 +15,7 @@ const Bar = styled.section`
   right: 0;
   min-height: 12vh;
   transition: 0.5s all ${props => props.theme.cubicSmooth};
-  z-index: ${props => props.theme.zIndex01};
+  z-index: ${props => props.theme.zIndex02};
 `;
 
 const Container = styled.header`
@@ -41,7 +41,6 @@ const SearchButton = styled.svg`
 function NavBar() {
   // Capture scroll position, so we can know when to fade out navbar
   const scrollY = useScrollPosition();
-  console.log(scrollY)
 
   return (
     <>

@@ -1068,6 +1068,23 @@
   resolved "https://registry.yarnpkg.com/@react-hook/passive-layout-effect/-/passive-layout-effect-1.2.0.tgz#1232f0b08f9bfd9f87a2898a3ae50d5f7731d806"
   integrity sha512-obGcMHoeiG/qp9djzlxwvlsAzL4a+JFaxTLvJv8GykipmS/TEkfvdcpu6orE1ZL4dAT7OpoGwHDc/LGJbkZzXQ==
 
+"@react-hook/resize-observer@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@react-hook/resize-observer/-/resize-observer-1.1.0.tgz#cb433810894c75f4ced87254507dd84808a7f13b"
+  integrity sha512-ERM7omDqG/ZzNQz061XHCfYXxGiX68Y46sVi8/ZHjjz7NbZQSxt+dnGkhfEbfsK+JxIzSqSfiXh2pNUl6aYQWA==
+  dependencies:
+    "@react-hook/latest" "^1.0.2"
+    "@react-hook/passive-layout-effect" "^1.2.0"
+    resize-observer-polyfill "^1.5.1"
+
+"@react-hook/size@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@react-hook/size/-/size-2.1.0.tgz#21ddd4a8b733f2931aeed8428c70b610476ec0a0"
+  integrity sha512-WP9NIFNZ0h31he+XsdAZsk0Zwr/eECmYvb1CaYiMaWXpWtEmudthQLpl3IG50LhTuAxO5fBP1XZ2CQPA136/Yg==
+  dependencies:
+    "@react-hook/passive-layout-effect" "^1.2.0"
+    "@react-hook/resize-observer" "^1.1.0"
+
 "@react-hook/throttle@^2.2.0":
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/@react-hook/throttle/-/throttle-2.2.0.tgz#d0402714a06e1ba0bc1da1fdf5c3c5cd0e08d45a"
@@ -4786,6 +4803,11 @@ repeat-string@^1.6.1:
   version "1.6.1"
   resolved "https://registry.yarnpkg.com/repeat-string/-/repeat-string-1.6.1.tgz#8dcae470e1c88abc2d600fff4a776286da75e637"
   integrity sha1-jcrkcOHIirwtYA//Sndihtp15jc=
+
+resize-observer-polyfill@^1.5.1:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/resize-observer-polyfill/-/resize-observer-polyfill-1.5.1.tgz#0e9020dd3d21024458d4ebd27e23e40269810464"
+  integrity sha512-LwZrotdHOo12nQuZlHEmtuXdqGoOD0OhaxopaNFxWzInpEgaLWoVuAMbTzixuosCx2nEG58ngzW3vxdWoxIgdg==
 
 resolve-from@^3.0.0:
   version "3.0.0"
