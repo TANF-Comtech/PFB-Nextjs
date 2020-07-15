@@ -16,7 +16,7 @@ function Homepage({props}) {
       <Head>
         <title>People for Bikes</title>
       </Head>
-      <Wrapper>
+      <Wrapper postTitle="Sample Title">
         <Heading1>Heading 1: Community Grants</Heading1>
         <MainContent>
           <h2>Heading 2: Grant Guidelines</h2>
@@ -39,31 +39,30 @@ function Homepage({props}) {
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar, metus non convallis mattis, lacus eros pretium diam, ut consectetur lorem lorem sed augue. Duis pharetra odio et lorem finibus consectetur.
           </blockquote>
           <p>This PeopleForBikes grant will help the Cacapon Resort State Park foundation build a 2.6 mile beginner-level mountain bike trail to complement their existing advanced trails. This addition will create a trail loop that qualifies for NICA mountain bike team races, supporting their local team, residents and visitors near and far.</p>
-          <BasicButton>Basic Button - No Props</BasicButton>
-          <a href="https://google.com">
-            <BasicButton
-              buttonBg={ "#D23823" }
-              buttonBgHover={ "#D0021B" }
-              buttonBorder={ "none" }
-              buttonColor={ "white" } 
-              buttonColorHover={ "white" }  
-              buttonPosition={ "center" }
-            >
-              Button center
-            </BasicButton>
-          </a>
-          <a href="https://google.com">
-            <BasicButton
-              buttonBg={ "#3E9FDC" }
-              buttonBgHover={ "#68b4e3" }
-              buttonBorder={ "none" }
-              buttonColor={ "white" } 
-              buttonColorHover={ "white" }  
-              buttonPosition={ "right" }
-            >
-              Blue button right
-            </BasicButton>
-          </a>
+          
+          <BasicButton href="/">Basic Button</BasicButton>
+          <BasicButton
+            buttonBg={ "#D23823" }
+            buttonBgHover={ "#D0021B" }
+            buttonBorder={ "none" }
+            buttonColor={ "white" } 
+            buttonColorHover={ "white" }  
+            buttonPosition={ "center" }
+            href="/"
+          >
+            Red button
+          </BasicButton>
+          <BasicButton
+            buttonBg={ "#3E9FDC" }
+            buttonBgHover={ "#68b4e3" }
+            buttonBorder={ "none" }
+            buttonColor={ "white" } 
+            buttonColorHover={ "white" }  
+            buttonPosition={ "right" }
+            href="/"
+          >
+            Blue button
+          </BasicButton>
           <h3>Section 7</h3>
           <p>This PeopleForBikes grant will help the Cacapon Resort State Park foundation build a 2.6 mile beginner-level mountain bike trail to complement their existing advanced trails. This addition will create a trail loop that qualifies for NICA mountain bike team races, supporting their local team, residents and visitors near and far.</p>
           

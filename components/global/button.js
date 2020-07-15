@@ -2,6 +2,8 @@ import React from "react"
 import styled from "styled-components"
 import Link from "next/link"
 
+/* !important is needed to override when next/link applies global-css.js styles to anchors */
+/* This pattern allows the props we pass into our styled-component to override those styles */
 const Button = styled.a`
   background-color: ${props => props.buttonBg || 'rgba(255,255,255,1)'}; 
   border: ${props => props.buttonBorder || `1px solid ${props.theme.black}`};
@@ -9,7 +11,6 @@ const Button = styled.a`
   box-shadow: ${props => props.theme.buttonBoxShadow};
   color: ${props => props.buttonColor || props.theme.black} !important;
   cursor: pointer;
-  display: block;
   font-family: ${props => props.theme.montserrat};
   font-size: ${props => props.buttonFontSize || '18px'};
   font-weight: 700;

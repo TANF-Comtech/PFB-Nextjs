@@ -62,7 +62,8 @@ import { createGlobalStyle } from 'styled-components'
   /* Learn more on this selector: https://css-tricks.com/child-and-sibling-selectors/ */
   .flow > a {
     display: block;
-    margin-top: 4vh;
+    margin: 4vh auto 0 auto;
+    max-width: 300px;
   }
 
   /* If an image falls into the main content area, position it like a block */
@@ -252,7 +253,6 @@ import { createGlobalStyle } from 'styled-components'
     transition: 0.2s ease-in-out;
   }
 
-
   /* #################################### */
   /* ############## IMAGES ############## */
   /* #################################### */
@@ -294,16 +294,6 @@ import { createGlobalStyle } from 'styled-components'
     --disabled-inner: #E1E6F9;
   }
 
-  /* Remove all animations and transitions for people that prefer not to see them */
-  @media (prefers-reduced-motion: reduce) {
-    * {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-      scroll-behavior: auto !important;
-    }
-  }
-
   /* ####################################### */
   /* ############## ANIMATION ############## */
   /* ####################################### */
@@ -324,6 +314,16 @@ import { createGlobalStyle } from 'styled-components'
   .isHiddenX {
     transform: translateX(-105%);
   }
+
+  /* Remove all animations and transitions for people that prefer not to see them */
+  @media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
 `
 
 export default GlobalStyle
