@@ -6,6 +6,8 @@ import MainContent from '../components/global/main-content'
 import BasicButton from '../components/global/button'
 import CheckboxSwitch from '../components/global/checkbox-switch'
 import RadioSet from '../components/global/radio'
+import Accordion from '../components/global/accordion'
+import BlueQuestion from '../components/global/blueQuestion'
 
 import Img1 from '../public/sample-images/sample-image-1.jpg'
 import Img2 from '../public/sample-images/sample-image-2.jpg'
@@ -35,6 +37,15 @@ function Homepage({props}) {
           <p><b>Every dollar we collect through the Employee Pro Purchase Program goes directly to our Community Grant Program</b>. Each year we award more than $100,000 in cash grants to fund new bike paths, trails, and other programs that encourage people to ride. We’ve awarded more than $3.5 million since 1999.</p>
           <h2>Next Section</h2>
           <p>This comprehensive advocacy campaign will help Bike Durham develop a complete multimodal network. Their ambitious goal:  A City commitment to and fund and implement 125 miles of slow streets, protected lanes and greenway infrastructure by 2025.</p>
+          <BlueQuestion>
+            <strong>Questions?</strong> For assistance in setting up your Employee Pro
+            Purchase Program, please contact Erik Esborg at 303/449-4893 x103,
+            erik@peopleforbikes.org.
+          </BlueQuestion>
+          <Accordion title="What is your return policy?">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+            tempor incididunt ut labore et dolore magna aliqua.
+          </Accordion>
           <blockquote>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar, metus non convallis mattis, lacus eros pretium diam, ut consectetur lorem lorem sed augue. Duis pharetra odio et lorem finibus consectetur.
           </blockquote>

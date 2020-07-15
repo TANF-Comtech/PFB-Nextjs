@@ -13,16 +13,16 @@ const MainContent = styled.main`
 
 const Container = styled.section`
   margin: 2vh auto;
-  max-width: ${props => props.theme.lg};
-`
+  max-width: ${(props) => props.theme.lg};
+`;
 
 /**
  * <Wrapper>
- * 
+ *
  * Wrapper serves to wrap all pages in a consistent style
  * We've got our Header (NavBar), Main (MainContent), Footer (FooterArea)
  * In the main section, we have the "flow" class gives us some nice automatic padding around sibling elements
- * 
+ *
  * @param {object} children - inherited nested components, core React idea
  * @param {text} postTitle - actual title of content of page, feeds into Titlebar component
  * 
@@ -52,7 +52,7 @@ const Wrapper = ({ children, postTitle }) => {
       </MainContent>
       <Footer />
     </>
-  )
-}
+  );
+};
 
-export default Wrapper
+export default Wrapper;
