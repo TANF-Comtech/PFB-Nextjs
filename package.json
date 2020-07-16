@@ -10,6 +10,9 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
+    "@react-hook/size": "^2.1.0",
+    "@react-hook/window-scroll": "^1.3.0",
+    "@react-hook/window-size": "^3.0.6",
     "babel-plugin-styled-components": "^1.10.7",
     "next": "9.4.4",
     "next-images": "^1.4.0",

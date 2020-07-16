@@ -1,5 +1,4 @@
 import React, { useState, useRef } from "react";
-import "./accordion.css";
 
 import Arrow from "./Arrow";
 import useOnClickOutside from "./onClickUseOUtside";
