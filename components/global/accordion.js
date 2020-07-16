@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 
 import Arrow from "./accordion/Arrow";
+import useOnClickOutside from "../hooks/onClickUseOutside";
 
 const Accordion = ({ title, children }) => {
   const [active, setActive] = useState("");

@@ -35,6 +35,10 @@ const ImageContainer = styled.div`
   justify-content: center;
 `;
 
+const Bold = styled.span`
+  font-weight: bold;
+`;
+
 /****
  * The whole page requires styling in terms of margins and spacing. Other than that it's working well.
  ****/
@@ -60,7 +64,11 @@ export default function BasicPg() {
           location.
         </p>
       </PageContainer>
-      <QuestionBanner />
+      <QuestionBanner>
+        <Bold>QUESTIONS? </Bold>For assistance in setting up your Employee Pro
+        Purchase Program, please contact Erik Esborg at 303/449-4893 x103,
+        erik@peopleforbikes.org.
+      </QuestionBanner>
       <PageContainer>
         <Subtitle>View Our Most Recent Grants</Subtitle>
         <Description>

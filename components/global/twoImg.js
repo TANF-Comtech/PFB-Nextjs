@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import RightArrow from "../../public/arrow.png";
 
 /****
  * Container that holds the background image and will be the main div for the rest of the components.
@@ -7,6 +8,7 @@ import styled from "styled-components";
 const ImgContainer = styled.div`
   width: 400px;
   height: 400px;
+  margin: 20px;
   background-size: cover;
   background-image: ${(props) => `url(${props.overlayImg})`};
   background-repeat: no-repeat;
@@ -44,8 +46,9 @@ const TxtContainer = styled.span`
  ****/
 const Arrow = styled.button`
   /* REPLACE THIS BACKGROUND IMAGE!! */
-  /* background-image: url(${RightArrow}); */
+  background-image: url(${RightArrow});
   background-position: center center;
+  background-size: cover;
   background-repeat: no-repeat;
   float: right;
   border: none;
