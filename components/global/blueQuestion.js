@@ -1,3 +1,12 @@
+/****
+ * QUICK START:
+ * 1. Simply pass in this component and insert the text that you want to appear in the banner.
+ *
+ * Ex.
+ *
+ * <BlueQuestion> Irure minim minim amet nulla pariatur ea do veniam duis qui id incididunt eiusmod.</BlueQuestion>
+ ****/
+
 import React from "react";
 import styled from "styled-components";
 
@@ -113,7 +122,7 @@ export default function QuestionBar({ children }) {
         <ButtonContainer>
           <Graphic />
         </ButtonContainer>
-        <Text>{ children }</Text>
+        <Text>{children}</Text>
       </ContentContainer>
     </InfoContainer>
   );

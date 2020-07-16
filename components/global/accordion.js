@@ -1,3 +1,18 @@
+/****
+ * QUICK START:
+ * 1. Import the component, and insert it wherever you may want it.
+ * 
+ * 2. Pass in the prop "title" to insert the text that you want to appear next to the arrow button
+ * 
+ * 3. Within the element, pass in the text that you want to appear after the accordion has been activated.
+ * 
+ * Ex.
+ * 
+ *   <Accordion title="Can John be nice?">
+          Answer: Ask a different question. It'll never happen.
+      </Accordion>
+ ****/
+
 import React, { useState, useRef } from "react";
 import styled from "styled-components";
 import Arrow from "./Arrow";

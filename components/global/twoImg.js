@@ -1,3 +1,14 @@
+/****
+ * QUICK START:
+ *  1. In order to use this component, simply pass it in to the page, and insert the text you want to appear
+ * in the opaque box between the element.
+ *
+ * 2. Pass in the overlayImage prop along with whatever imported image you'd like to use in background.
+ *
+ * Ex.
+ * <TwoImg overlayImg={Bike}>I want this text to appear</TwoImg>.
+ ****/
+
 import React from "react";
 import styled from "styled-components";
 import RightArrow from "../../public/arrow.png";
