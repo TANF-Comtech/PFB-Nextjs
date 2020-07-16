@@ -2,7 +2,7 @@ import React from "react";
 /****
  * Next doesn't allow you to have a css file outside of _app.js file? I'm not really sure how to resolve this to be honest.
  ****/
-// import Accordion from "../components/global/accordion/accordion";
+import Accordion from "../components/global/accordion.js";
 
 /****
  * My two image container isn't passing through the way I wanted it to. The background image isn't showing up and neither is the text. This def has something to do with how i'm passing through the props.
@@ -63,6 +63,12 @@ export default function BasicPg() {
           and click on any state for examples of funded projects in each
           location.
         </p>
+        <Accordion title="Can John be nice?">
+          Answer: Ask a different question. It'll never happen
+        </Accordion>
+        <Accordion title="Can John be nice?">
+          Answer: Ask a different question. It'll never happen
+        </Accordion>
       </PageContainer>
       <QuestionBanner>
         <Bold>QUESTIONS? </Bold>For assistance in setting up your Employee Pro

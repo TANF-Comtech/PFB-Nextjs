@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
-
-import Arrow from "./accordion/Arrow";
+import styled from "styled-components";
+import Arrow from "./Arrow";
 import useOnClickOutside from "../hooks/onClickUseOutside";
 
 const Accordion = ({ title, children }) => {
@@ -10,6 +10,17 @@ const Accordion = ({ title, children }) => {
 
   const content = useRef();
   const sensitive = useRef();
+
+  const AccordionContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    border-top: 1px solid black;
+  `;
+
+  const AccordionButton = styled.button`
+    background-color: white;
+    border: none;
+  `;
 
   const toggleAccordion = () => {
     setActive(active === "" ? "active" : "");
@@ -28,19 +39,25 @@ const Accordion = ({ title, children }) => {
   });
 
   return (
-    <div className="accordion__section" ref={sensitive}>
-      <button className={`accordion ${active}`} onClick={toggleAccordion}>
-        <Arrow width={24} className={`${rotation}`} />
+    <AccordionContainer>
+      <div className="accordion__section" ref={sensitive}>
+        <AccordionButton
+          className={`accordion ${active}`}
+          onClick={toggleAccordion}
+        >
+          <Arrow width={24} className={`${rotation}`} />
+        </AccordionButton>
         <p className="accordion__title">{title}</p>
-      </button>
-      <div
-        ref={content}
-        style={{ maxHeight: `${height}` }}
-        className="accordion__content"
-      >
-        <div className="accordion__text">{children}</div>
+
+        <div
+          ref={content}
+          style={{ maxHeight: `${height}` }}
+          className="accordion__content"
+        >
+          <div className="accordion__text">{children}</div>
+        </div>
       </div>
-    </div>
+    </AccordionContainer>
   );
 };
 
