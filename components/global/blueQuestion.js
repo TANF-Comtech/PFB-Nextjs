@@ -1,3 +1,12 @@
+/****
+ * QUICK START:
+ * 1. Simply pass in this component and insert the text that you want to appear in the banner.
+ *
+ * Ex.
+ *
+ * <BlueQuestion> Irure minim minim amet nulla pariatur ea do veniam duis qui id incididunt eiusmod.</BlueQuestion>
+ ****/
+
 import React from "react";
 import styled from "styled-components";
 
@@ -7,9 +16,9 @@ import QuestionBubble from "../../public/question-bubbles.png";
  * The main container of the whole banner. It holds the graphics and the information.
  ****/
 const InfoContainer = styled.section`
+  display: flex;
   align-items: center;
   background-image: linear-gradient(90deg, #3e9fdc, #001f33);
-  display: flex;
   height: 150px;
   justify-content: center;
   position: relative;
@@ -65,11 +74,17 @@ const Gradient3 = styled.div`
  * This is information's home.
  ****/
 const ContentContainer = styled.div`
-  align-items: center;
   display: flex;
+  flex-direction: column;
+  align-items: center;
   position: relative;
   width: 600px;
+  height: 90%;
   z-index: 10;
+
+  @media (min-width: ${(props) => props.theme.sm}) {
+    flex-direction: row;
+  }
 `;
 
 /****
@@ -97,10 +112,15 @@ const Graphic = styled.div`
 
 const Text = styled.p`
   color: white;
+  width: 90%;
   flex-basis: 510px;
-  font-size: 18px;
+  font-size: 12px;
   line-height: 1.3;
   margin: 0;
+
+  @media (min-width: ${(props) => props.theme.sm}) {
+    font-size: 18px;
+  }
 `;
 
 export default function QuestionBar({ children }) {
@@ -113,7 +133,7 @@ export default function QuestionBar({ children }) {
         <ButtonContainer>
           <Graphic />
         </ButtonContainer>
-        <Text>{ children }</Text>
+        <Text>{children}</Text>
       </ContentContainer>
     </InfoContainer>
   );

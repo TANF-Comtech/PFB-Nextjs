@@ -1,6 +1,17 @@
+/****
+ * QUICK START:
+ *  1. In order to use this component, simply pass it in to the page, and insert the text you want to appear
+ * in the opaque box between the element.
+ *
+ * 2. Pass in the overlayImage prop along with whatever imported image you'd like to use in background.
+ *
+ * Ex.
+ * <TwoImg overlayImg={Bike}>I want this text to appear</TwoImg>.
+ ****/
+
 import React from "react";
 import styled from "styled-components";
-import Text from "./text";
+import RightArrow from "../../public/arrow.png";
 
 /****
  * Container that holds the background image and will be the main div for the rest of the components.
@@ -8,8 +19,9 @@ import Text from "./text";
 const ImgContainer = styled.div`
   width: 400px;
   height: 400px;
+  margin: 20px;
   background-size: cover;
-  background-image: ${(props) => `url(${props.backgroundImage})`};
+  background-image: ${(props) => `url(${props.overlayImg})`};
   background-repeat: no-repeat;
   background-position: center center;
 `;
@@ -47,6 +59,7 @@ const Arrow = styled.button`
   /* REPLACE THIS BACKGROUND IMAGE!! */
   background-image: url(${RightArrow});
   background-position: center center;
+  background-size: cover;
   background-repeat: no-repeat;
   float: right;
   border: none;
@@ -58,17 +71,17 @@ const Arrow = styled.button`
   top: 45%;
 `;
 
-export default function TwoImg(props) {
+const TwoImg = ({ children, overlayImg }) => {
   return (
     <>
-      <ImgContainer backgroundImage={props.backgroundImage}>
+      <ImgContainer overlayImg={overlayImg}>
         <Arrow />
         <InnerContainer>
-          <TxtContainer>
-            <Text>This is a test</Text>
-          </TxtContainer>
+          <TxtContainer>{children}</TxtContainer>
         </InnerContainer>
       </ImgContainer>
     </>
   );
-}
+};
+
+export default TwoImg;
