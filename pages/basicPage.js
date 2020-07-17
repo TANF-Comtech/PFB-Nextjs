@@ -63,6 +63,15 @@ export default function BasicPg() {
           and click on any state for examples of funded projects in each
           location.
         </p>
+        <Accordion title="Who Can Apply">
+          PeopleForBikes accepts grant applications from non-profit
+          organizations with a focus on bicycling, active transportation, or
+          community development, from city or county agencies or departments,
+          and from state or federal agencies working locally. PeopleForBikes
+          only funds projects in the United States. Requests must support a
+          specific project or program; we do not grant funds for general
+          operating costs.
+        </Accordion>
         <Accordion title="Can John be nice?">
           Answer: Ask a different question. It'll never happen
         </Accordion>
@@ -71,7 +80,7 @@ export default function BasicPg() {
         </Accordion>
       </PageContainer>
       <QuestionBanner>
-        <Bold>QUESTIONS? </Bold>For assistance in setting up your Employee Pro
+        <Bold>QUESTIONS?</Bold>For assistance in setting up your Employee Pro
         Purchase Program, please contact Erik Esborg at 303/449-4893 x103,
         erik@peopleforbikes.org.
       </QuestionBanner>

@@ -28,8 +28,10 @@ const AccordionWrapper = styled.div`
 
 const InternalWrapper = styled.div`
   display: flex;
+  margin-bottom: 20px;
+  margin-left: 30px;
   width: 100%;
-  max-height: ${(props) => (props.open ? "100px" : "0")};
+  max-height: ${(props) => (props.open ? "800px" : "0")};
   transition: all 0.3s ease-in-out;
   overflow: hidden;
 `;
@@ -41,12 +43,14 @@ const ArrowButton = styled.div`
   background-color: white;
   height: min-content;
   transition: all 0.3s ease-in-out;
+  /* I could not get this arrow to rotate for the life of me */
   transform: ${(props) => (props.setOpen ? `rotate(90deg)` : "")};
 `;
 
 const Title = styled.div`
   margin: none;
-  font-size: 24px;
+  font-size: 28px;
+  font-weight: bold;
 `;
 
 const Accordion = ({ title, children }) => {
@@ -58,11 +62,13 @@ const Accordion = ({ title, children }) => {
     <>
       <AccordionWrapper>
         <ArrowButton padding="5px" onClick={handleClick} open={open}>
-          <Arrow width={24} open={open} />
+          <Arrow width={40} open={open} />
         </ArrowButton>
         <Title>{title}</Title>
       </AccordionWrapper>
-      <InternalWrapper open={open}>{children}</InternalWrapper>
+      <InternalWrapper open={open}>
+        <p>{children}</p>
+      </InternalWrapper>
     </>
   );
 };
