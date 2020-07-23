@@ -1,45 +1,75 @@
-import React, { useState, useRef } from "react";
+/****
+ * QUICK START:
+ * 1. Import the component, and insert it wherever you may want it.
+ * 
+ * 2. Pass in the prop "title" to insert the text that you want to appear next to the arrow button
+ * 
+ * 3. Within the element, pass in the text that you want to appear after the accordion has been activated.
+ * 
+ * Ex.
+ * 
+ *   <Accordion title="Can John be nice?">
+          Answer: Ask a different question. It'll never happen.
+      </Accordion>
+ ****/
 
-import useOnClickOutside from "../hooks/onClickUseOutside";
+import React, { useState } from "react";
+import styled from "styled-components";
+import Arrow from "./Arrow";
+
+const AccordionWrapper = styled.div`
+  display: flex;
+  background-color: white;
+  border-top: 1px solid black;
+  height: auto;
+  padding: 2%;
+  transition: all 0.3s ease-in-out;
+`;
+
+const InternalWrapper = styled.div`
+  display: flex;
+  margin-bottom: 20px;
+  margin-left: 30px;
+  width: 100%;
+  max-height: ${(props) => (props.open ? "800px" : "0")};
+  transition: all 0.3s ease-in-out;
+  overflow: hidden;
+`;
+
+const ArrowButton = styled.div`
+  border: none;
+  margin: none;
+  display: flex;
+  background-color: white;
+  height: min-content;
+  transition: all 0.3s ease-in-out;
+  /* I could not get this arrow to rotate for the life of me */
+  transform: ${(props) => (props.setOpen ? `rotate(90deg)` : "")};
+`;
+
+const Title = styled.div`
+  margin: none;
+  font-size: 28px;
+  font-weight: bold;
+`;
 
 const Accordion = ({ title, children }) => {
-  const [active, setActive] = useState("");
-  const [height, setHeight] = useState("0px");
-  const [rotation, setRotation] = useState("accordion__icon");
-
-  const content = useRef();
-  const sensitive = useRef();
-
-  const toggleAccordion = () => {
-    setActive(active === "" ? "active" : "");
-    setHeight(
-      active === "active" ? "0px" : `${content.current.scrollHeight}px`
-    );
-    setRotation(
-      active === "active" ? "accordion__icon" : "accordion__icon rotate"
-    );
+  const [open, setOpen] = useState(false);
+  const handleClick = () => {
+    setOpen(!open);
   };
-
-  useOnClickOutside(sensitive, () => {
-    setActive("");
-    setHeight("0px");
-    setRotation("accordion__icon");
-  });
-
   return (
-    <div className="accordion__section" ref={sensitive}>
-      <button className={`accordion ${active}`} onClick={toggleAccordion}>
-        <p className="accordion__title">{title}</p>
-        <img src="../../public/arrow.png" className={`${rotation}`} />
-      </button>
-      <div
-        ref={content}
-        style={{ maxHeight: `${height}` }}
-        className="accordion__content"
-      >
-        <div className="accordion__text">{children}</div>
-      </div>
-    </div>
+    <>
+      <AccordionWrapper>
+        <ArrowButton padding="5px" onClick={handleClick} open={open}>
+          <Arrow width={40} open={open} />
+        </ArrowButton>
+        <Title>{title}</Title>
+      </AccordionWrapper>
+      <InternalWrapper open={open}>
+        <p>{children}</p>
+      </InternalWrapper>
+    </>
   );
 };
 
