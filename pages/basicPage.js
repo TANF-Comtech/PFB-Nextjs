@@ -1,5 +1,12 @@
 import React from "react";
 /****
+ * Imports for Apollo: This might look different from what you've seen of apollo in the past. They've just updated to their 3.0 version.
+ * Kind of good for us and pfb since it means we won't have to worry about updating it for awhile.
+ *****/
+import { useQuery, gql } from "@apollo/client";
+import withApollo from "../lib/withApollo";
+
+/****
  * Next doesn't allow you to have a css file outside of _app.js file? I'm not really sure how to resolve this to be honest.
  ****/
 import Accordion from "../components/global/accordion.js";
@@ -18,6 +25,18 @@ import H1 from "../components/global/h1";
 import Bike from "../public/bikeSample.jpg";
 import styled from "styled-components";
 
+/*******************************************************
+ ***************** APOLLO/PRISMIC *******************
+ *******************************************************/
+const QUERY = gql`
+{
+  
+}
+`;
+
+/*******************************************************
+ ***************** STYLED COMPONENTS *******************
+ *******************************************************/
 const PageContainer = styled.div`
   margin: 50px 100px;
 `;
@@ -38,6 +57,10 @@ const ImageContainer = styled.div`
 const Bold = styled.span`
   font-weight: bold;
 `;
+
+/*******************************************************
+ ***************** EXPORTED PAGE FUNCTION *******************
+ *******************************************************/
 
 /****
  * The whole page requires styling in terms of margins and spacing. Other than that it's working well.
