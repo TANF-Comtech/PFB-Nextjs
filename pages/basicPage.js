@@ -28,10 +28,15 @@ import styled from "styled-components";
 /*******************************************************
  ***************** APOLLO/PRISMIC *******************
  *******************************************************/
+
+/****
+ * I'm not super sure about how to structure the calls here. I know that what I'll essentially be doing is pulling content from Prismic
+ * and then inserting it into our page. Basically how props work I believe. Just need help and guidance with how it works.
+ ****/
 const QUERY = gql`
-{
-  
-}
+  {
+    title
+  }
 `;
 
 /*******************************************************
@@ -65,7 +70,7 @@ const Bold = styled.span`
 /****
  * The whole page requires styling in terms of margins and spacing. Other than that it's working well.
  ****/
-export default function BasicPg() {
+function BasicPg() {
   return (
     <>
       <Navbar />
@@ -73,7 +78,7 @@ export default function BasicPg() {
         {/* The navbar that you built */}
         {/* Typography on H4 needs to be adjusted for this page */}
         <h4>Guidlines | Funding | Application | Awards</h4>
-        <H1>Community Grants</H1>
+        <H1>{data.title}</H1>
         {/* Your text styling works btw */}
         <h2>Grant Guidlines</h2>
         <p>
@@ -122,3 +127,8 @@ export default function BasicPg() {
     </>
   );
 }
+
+/****
+ * According to Next-with-Apollo documentation, this is how you're supposed to export the page.
+ ****/
+export default withApollo(BasicPg);
