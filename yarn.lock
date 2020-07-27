@@ -4519,7 +4519,7 @@ create-react-context@0.3.0, create-react-context@^0.3.0:
     gud "^1.0.0"
     warning "^4.0.3"
 
-cross-fetch@3.0.5:
+cross-fetch@3.0.5, cross-fetch@^3.0.4:
   version "3.0.5"
   resolved "https://registry.yarnpkg.com/cross-fetch/-/cross-fetch-3.0.5.tgz#2739d2981892e7ab488a7ad03b92df2816e03f4c"
   integrity sha512-FFLcLtraisj5eteosnX1gf01qYDCOc4fDy0+euOt8Kn9YBY2NtXL/pCoYPavw24NIQkQqm5ZOLsGD5Zzj0gyew==
@@ -8451,6 +8451,13 @@ prismic-javascript@^1.5.0:
   dependencies:
     cross-fetch "^2.2.0"
     promise-polyfill "8.0.0"
+
+prismic-javascript@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/prismic-javascript/-/prismic-javascript-3.0.1.tgz#5700bf61aa1fc20b1dac931f7f8a6c024588d1d7"
+  integrity sha512-LAXO5h24Txp4BozGYhTRsxxhXP45VvsUZp6Xb0ENaA7aatVjxTNFmn/yEx3d8nNqiyqKjRsAYcGW6vvL3GqC+A==
+  dependencies:
+    cross-fetch "^3.0.4"
 
 prismjs@^1.8.4:
   version "1.20.0"

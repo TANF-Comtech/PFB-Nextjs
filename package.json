@@ -25,6 +25,7 @@
     "next-images": "^1.4.0",
     "next-with-apollo": "^5.1.0",
     "prettier": "^2.0.5",
+    "prismic-javascript": "^3.0.1",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-hook-form": "^6.0.0",
