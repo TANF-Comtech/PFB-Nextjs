@@ -21,6 +21,10 @@ Make sure you have a high-level understanding of the tooling being used:
 - [`Apollo`]((https://www.apollographql.com/docs/react/))
 - [Prismic.io](https://peopleforbikes.prismic.io/)
 
+## Environmental Variables
+
+All environmental variables are supposed to be stored in `.env.local`. By default, they will be made available to the Node.js application powering the static site generation. Read more about [Next.js Environmental Variables](https://nextjs.org/docs/basic-features/environment-variables).
+
 ## Site Structure
 
 Next.js has some key files and folders that contain set up that is important for the functionality of this site:
