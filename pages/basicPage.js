@@ -103,9 +103,7 @@ function BasicPg() {
         <Accordion title="Can John be nice?">
           Answer: Ask a different question. It'll never happen
         </Accordion>
-        <Accordion title="Can John be nice?">
-          Answer: Ask a different question. It'll never happen
-        </Accordion>
+        <Accordion title="Is Khalo salah tired?">Never</Accordion>
       </PageContainer>
       <QuestionBanner>
         <Bold>QUESTIONS?</Bold>For assistance in setting up your Employee Pro
