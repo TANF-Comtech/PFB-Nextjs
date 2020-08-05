@@ -21,7 +21,7 @@
     "babel-plugin-styled-components": "^1.10.7",
     "graphql": "^15.3.0",
     "graphql-tag": "^2.10.4",
-    "next": "9.4.4",
+    "next": "9.5.1",
     "next-images": "^1.4.0",
     "next-with-apollo": "^5.1.0",
     "prettier": "^2.0.5",
