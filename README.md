@@ -50,6 +50,10 @@ export default Post
 
 - [`/public/`](https://nextjs.org/docs/basic-features/static-file-serving). All static file serving (fonts, images, etc) have to go in the `public` folder. You can then import then like everything else in a React project.
 
+## Data Fetching
+
+TBD
+
 ## Data Processing / Rendering
 
 Next can do both static and server-side rendering once data has been fetched. They are competing strategies we can use in different parts of the app. If the content is static (and most of a CMS-driven site usually is), we want to use [`getStaticProps`](https://nextjs.org/docs/basic-features/data-fetching#getstaticprops-static-generation) with [`getStaticPaths`](https://nextjs.org/docs/basic-features/data-fetching#getstaticpaths-static-generation) in our page template files MOST of the time.
