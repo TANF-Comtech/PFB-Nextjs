@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 import Head from 'next/head'
 import ErrorPage from 'next/error'
 
-import { getSingleBasicPage, getAllBasicPagesWithUID } from '../../lib/api'
+import { getSingleBasicPage, getAllBasicPagesWithUID } from '../../lib/repeatable-content-type/basic-page'
 
 import Wrapper from '../../components/global/wrapper'
 import Heading1 from '../../components/global/h1'
