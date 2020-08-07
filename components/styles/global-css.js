@@ -326,7 +326,6 @@ const GlobalStyle = createGlobalStyle`
   /* ####################################### */
   /* ############## ACCORDION ############## */
   /* ####################################### */
-  @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600&display=swap");
 
   /* Style the accordion section */
   .accordion__section {
@@ -355,7 +354,6 @@ const GlobalStyle = createGlobalStyle`
 
   /* Style the accordion content title */
   .accordion__title {
-    font-family: "Open Sans", sans-serif;
     font-weight: 600;
     font-size: 14px;
   }
@@ -363,6 +361,7 @@ const GlobalStyle = createGlobalStyle`
   /* Style the accordion chevron icon */
   .accordion__icon {
     margin-left: auto;
+    transform: rotate(0);
     transition: transform 0.6s ease;
   }
 
@@ -380,12 +379,10 @@ const GlobalStyle = createGlobalStyle`
 
   /* Style the accordion content text */
   .accordion__text {
-    font-family: "Open Sans", sans-serif;
     font-weight: 400;
     font-size: 14px;
     padding: 18px;
   }
-
 }
 `;
 

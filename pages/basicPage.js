@@ -1,5 +1,12 @@
 import React from "react";
 /****
+ * Imports for Apollo: This might look different from what you've seen of apollo in the past. They've just updated to their 3.0 version.
+ * Kind of good for us and pfb since it means we won't have to worry about updating it for awhile.
+ *****/
+import { useQuery, gql } from "@apollo/client";
+import withApollo from "../lib/withApollo";
+
+/****
  * Next doesn't allow you to have a css file outside of _app.js file? I'm not really sure how to resolve this to be honest.
  ****/
 import Accordion from "../components/global/accordion.js";
@@ -18,6 +25,23 @@ import H1 from "../components/global/h1";
 import Bike from "../public/bikeSample.jpg";
 import styled from "styled-components";
 
+/*******************************************************
+ ***************** APOLLO/PRISMIC *******************
+ *******************************************************/
+
+/****
+ * I'm not super sure about how to structure the calls here. I know that what I'll essentially be doing is pulling content from Prismic
+ * and then inserting it into our page. Basically how props work I believe. Just need help and guidance with how it works.
+ ****/
+const QUERY = gql`
+  {
+    title
+  }
+`;
+
+/*******************************************************
+ ***************** STYLED COMPONENTS *******************
+ *******************************************************/
 const PageContainer = styled.div`
   margin: 50px 100px;
 `;
@@ -39,18 +63,22 @@ const Bold = styled.span`
   font-weight: bold;
 `;
 
+/*******************************************************
+ ***************** EXPORTED PAGE FUNCTION *******************
+ *******************************************************/
+
 /****
  * The whole page requires styling in terms of margins and spacing. Other than that it's working well.
  ****/
-export default function BasicPg() {
+function BasicPg() {
   return (
     <>
       <Navbar />
       <PageContainer>
         {/* The navbar that you built */}
         {/* Typography on H4 needs to be adjusted for this page */}
-        <h4>Guidlines | Funding | Application | Awards</h4>
-        <H1>Community Grants</H1>
+        <h4>Guidelines | Funding | Application | Awards</h4>
+        <H1>{data.title}</H1>
         {/* Your text styling works btw */}
         <h2>Grant Guidlines</h2>
         <p>
@@ -75,9 +103,7 @@ export default function BasicPg() {
         <Accordion title="Can John be nice?">
           Answer: Ask a different question. It'll never happen
         </Accordion>
-        <Accordion title="Can John be nice?">
-          Answer: Ask a different question. It'll never happen
-        </Accordion>
+        <Accordion title="Is Khalo salah tired?">Never</Accordion>
       </PageContainer>
       <QuestionBanner>
         <Bold>QUESTIONS?</Bold>For assistance in setting up your Employee Pro
@@ -99,3 +125,8 @@ export default function BasicPg() {
     </>
   );
 }
+
+/****
+ * According to Next-with-Apollo documentation, this is how you're supposed to export the page.
+ ****/
+export default withApollo(BasicPg);
