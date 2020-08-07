@@ -4,24 +4,24 @@ import React from "react";
  * Kind of good for us and pfb since it means we won't have to worry about updating it for awhile.
  *****/
 import { useQuery, gql } from "@apollo/client";
-import withApollo from "../lib/withApollo";
+import withApollo from "../../lib/withApollo";
 
 /****
  * Next doesn't allow you to have a css file outside of _app.js file? I'm not really sure how to resolve this to be honest.
  ****/
-import Accordion from "../components/global/accordion.js";
+import Accordion from "../../components/global/accordion.js";
 
 /****
  * My two image container isn't passing through the way I wanted it to. The background image isn't showing up and neither is the text. This def has something to do with how i'm passing through the props.
  ****/
-import TwoImage from "../components/global/twoImg";
-import Navbar from "../components/global/navbar";
+import TwoImage from "../../components/global/twoImg";
+import Navbar from "../../components/global/navbar";
 /****
  *Blue Question Banner
  ****/
-import QuestionBanner from "../components/global/blueQuestion";
-import Footer from "../components/global/footer";
-import H1 from "../components/global/h1";
+import QuestionBanner from "../../components/global/blueQuestion";
+import Footer from "../../components/global/footer";
+import H1 from "../../components/global/h1";
 import Bike from "../public/bikeSample.jpg";
 import styled from "styled-components";
 
