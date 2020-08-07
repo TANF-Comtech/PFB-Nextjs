@@ -22,7 +22,7 @@ import Navbar from "../../components/global/navbar";
 import QuestionBanner from "../../components/global/blueQuestion";
 import Footer from "../../components/global/footer";
 import H1 from "../../components/global/h1";
-import Bike from "../public/bikeSample.jpg";
+import Bike from "../../public/bikeSample.jpg";
 import styled from "styled-components";
 
 /*******************************************************

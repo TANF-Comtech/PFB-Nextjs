@@ -9,8 +9,8 @@ import RadioSet from '../../components/global/radio'
 import Accordion from '../../components/global/accordion'
 import BlueQuestion from '../../components/global/blueQuestion'
 
-import Img1 from '../public/sample-images/sample-image-1.jpg'
-import Img2 from '../public/sample-images/sample-image-2.jpg'
+import Img1 from '../../public/sample-images/sample-image-1.jpg'
+import Img2 from '../../public/sample-images/sample-image-2.jpg'
 
 function Homepage({props}) {
   return (
