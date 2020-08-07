@@ -19,10 +19,10 @@ Make sure you have a high-level understanding of the tooling being used:
 
 - [`styled-components`](https://styled-components.com/docs), our styling tool
 - [PFB Prismic](https://peopleforbikes.prismic.io/), our Prismic headless CMS instance
-- [PFB Prismic GraphiQL], where to test your queries
-- [prismic-javascript](https://github.com/prismicio/prismic-javascript), data queries / rendering in components
-- [`Apollo`](https://www.apollographql.com/docs/react/), TBD
-- [`Vercel PFB`](https://vercel.com/people-for-bikes/pfb-nextjs), hosting / CI pipeline
+- [PFB Prismic GraphiQL](https://peopleforbikes.prismic.io/graphql), where to test your queries
+- [`prismic-javascript`](https://github.com/prismicio/prismic-javascript), data queries / rendering in components
+- [Apollo](https://www.apollographql.com/docs/react/), GraphQL query manager, TBD how we're using this
+- [Vercel PFB](https://vercel.com/people-for-bikes/pfb-nextjs), hosting / CI pipeline
 
 ## Environmental Variables
 
@@ -46,7 +46,7 @@ All data for this site comes from the [Prismic PFB Repo](https://peopleforbikes.
 
 ## Data Fetching
 
-There is so overhead in setting up the integration between Next and Prismic but that is already handled by `/lib/api.js`. This file exposes `fetchAPI()`, whose first argument is a GraphQL query. At a minimum that's all you need to get data out of Prismic and into Next.
+There is some overhead in setting up the integration between Next and Prismic but that is already handled by `/lib/api.js`. This file exposes `fetchAPI()`, whose first argument is a GraphQL query. At a minimum that's all you need to get data out of Prismic and into Next.
 
 Example to get all nodes from a Prismic Content-type:
 
