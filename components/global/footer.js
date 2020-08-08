@@ -145,15 +145,6 @@ const SignUpFooter = styled.footer`
   }
 `
 
-const WhiteBgLogo = styled(Logo)`
-  background-color: white;
-  border-radius: 5px;
-  height: 60px;
-  padding: 1px;
-  width: 60px;
-`
-
-
 function Footer() {
   return (
     <>
@@ -197,7 +188,7 @@ function Footer() {
               <SignUpForm />
             </header>
             <SignUpFooter>
-              <WhiteBgLogo />
+              <Logo />
               <LogoType 
                 fillPeople="#fff"
                 fillFor="#fff"
