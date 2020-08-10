@@ -1,3 +1,44 @@
+import React, { useState, useRef, useEffect } from "react";
+import styled, { keyframes } from "styled-components";
+
+import Arrow from "../../public/triangle.svg"
+
+const AccordionWrapper = styled.div`
+  align-items: center;
+  background-color: white;
+  border-top: 1px solid black;
+  cursor: pointer;
+  display: flex;
+  height: auto;
+  padding: 2% 0;
+  transition: height 0.5s ${(props) => props.theme.cubicSmooth };
+`;
+
+const InternalWrapper = styled.div`
+  max-height: ${(props) => props.open ? props.accordionHeight : "0"};
+  opacity: ${(props) => props.open ? "1" : "0"};
+  overflow: hidden;
+  transform: ${(props) => props.open ? "scaleY(1)" : "scaleY(0)"};
+  transform-origin: 50% 0;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+`;
+
+const ArrowButton = styled.img`
+  border: none;
+  height: min-content;
+  margin: none;
+  transition: all 0.1s ease-in-out;
+  transform: ${props => props.open ? "rotate(90deg)" : "rotate(0deg)"}; 
+  transform-origin: 40% 40%;
+`;
+
+const Title = styled.div`
+  font-size: 28px;
+  font-weight: bold;
+  margin: none;
+  padding-left: 10px;
+`;
+
 /****
  * QUICK START:
  * 1. Import the component, and insert it wherever you may want it.
@@ -13,60 +54,34 @@
       </Accordion>
  ****/
 
-import React, { useState } from "react";
-import styled from "styled-components";
-import Arrow from "./Arrow";
-
-const AccordionWrapper = styled.div`
-  display: flex;
-  background-color: white;
-  border-top: 1px solid black;
-  height: auto;
-  padding: 2%;
-  transition: all 0.3s ease-in-out;
-`;
-
-const InternalWrapper = styled.div`
-  display: flex;
-  margin-bottom: 20px;
-  margin-left: 30px;
-  width: 100%;
-  max-height: ${(props) => (props.open ? "800px" : "0")};
-  transition: all 0.3s ease-in-out;
-  overflow: hidden;
-`;
-
-const ArrowButton = styled.div`
-  border: none;
-  margin: none;
-  display: flex;
-  background-color: white;
-  height: min-content;
-  transition: all 0.3s ease-in-out;
-  /* I could not get this arrow to rotate for the life of me */
-  transform: ${(props) => (props.setOpen ? `rotate(90deg)` : "")};
-`;
-
-const Title = styled.div`
-  margin: none;
-  font-size: 28px;
-  font-weight: bold;
-`;
-
 const Accordion = ({ title, children }) => {
+  const accordionContent = useRef(null);
+  const [accordionHeight, setAccordionHeight] = useState(0)
+
+  // Get accordion element on load
+  useEffect( () => {
+    setAccordionHeight(accordionContent.current.clientHeight)
+    console.log(accordionHeight)
+  })
+
   const [open, setOpen] = useState(false);
   const handleClick = () => {
     setOpen(!open);
   };
+
   return (
     <>
-      <AccordionWrapper>
-        <ArrowButton padding="5px" onClick={handleClick} open={open}>
-          <Arrow width={40} open={open} />
-        </ArrowButton>
-        <Title>{title}</Title>
+      <AccordionWrapper onClick={handleClick} open={open}>
+        <ArrowButton
+          alt="Accordion Arrow - click to reveal content"
+          open={ open }
+          src={ Arrow }
+        />
+        <Title>
+          {title}
+        </Title>
       </AccordionWrapper>
-      <InternalWrapper open={open}>
+      <InternalWrapper open={open} ref={accordionContent}>
         <p>{children}</p>
       </InternalWrapper>
     </>

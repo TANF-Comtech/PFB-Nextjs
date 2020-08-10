@@ -173,17 +173,20 @@ const GlobalStyle = createGlobalStyle`
   p, b, strong, em, i, span, label, a, a::visited, a::focus, a:active, a:hover {
     font-size: 16px;
     line-height: 30px;
+    margin-bottom: 30px;
   }
   @media screen and (min-width: 320px) {
     p, b, strong, em, i, span, label {
       font-size: calc(16px + 8 * ((100vw - 320px) / 880));
       line-height: calc(30px + 16 * ((100vw - 320px) / 880));
+      margin-bottom: calc(30px + 16 * ((100vw - 320px) / 880));
     }
   }
   @media screen and (min-width: 1200px) {
     p, b, strong, em, i, span, label {
       font-size: 24px;
       line-height: 46px;
+      margin-bottom: 46px;
     }
   }    
   b, strong {

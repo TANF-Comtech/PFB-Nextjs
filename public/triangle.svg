@@ -1,11 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" 
-  xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="shape-rendering:geometricPrecision;text-rendering:geometricPrecision;image-rendering:optimizeQuality;" viewBox="0 0 7.7384 8.377" x="0px" y="0px" fill-rule="evenodd" clip-rule="evenodd">
-  <defs>
-    <style type="text/css">
-      .fil0 {fill:black}
-    </style>
-  </defs>
-  <g>
-    <polygon class="fil0" points="3.8692,0 5.8038,3.3508 7.7384,6.7016 3.8692,6.7016 -0,6.7016 1.9346,3.3508 "/>
-  </g>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="11px" height="14px" viewBox="0 0 11 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Triangle Copy 7</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Grants-Guidelines" transform="translate(-123.000000, -1331.000000)" fill="#000000" fill-rule="nonzero">
+            <polygon id="Triangle-Copy-7" transform="translate(128.500000, 1338.000000) scale(1, -1) rotate(90.000000) translate(-128.500000, -1338.000000) " points="128.5 1333 135 1343 122 1343"></polygon>
+        </g>
+    </g>
 </svg>
