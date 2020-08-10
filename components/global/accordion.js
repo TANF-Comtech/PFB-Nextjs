@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 
 import Arrow from "../../public/triangle.svg"
 
@@ -39,32 +39,27 @@ const Title = styled.div`
   padding-left: 10px;
 `;
 
-/****
- * QUICK START:
- * 1. Import the component, and insert it wherever you may want it.
+/**
+ * <Accordion>
  * 
- * 2. Pass in the prop "title" to insert the text that you want to appear next to the arrow button
+ * Pass in the prop "title" to insert the text that you want to appear next to the arrow button
+ * Within the element, pass in the text that you want to appear after the accordion has been activated.
  * 
- * 3. Within the element, pass in the text that you want to appear after the accordion has been activated.
- * 
- * Ex.
- * 
- *   <Accordion title="Can John be nice?">
-          Answer: Ask a different question. It'll never happen.
-      </Accordion>
- ****/
+ * @param {string} title - pass in the title of the accordion as a prop
+ * @param {obj} children - accordion content should be passed in using the children object
+ */
 
 const Accordion = ({ title, children }) => {
   const accordionContent = useRef(null);
   const [accordionHeight, setAccordionHeight] = useState(0)
+  const [open, setOpen] = useState(false);
 
-  // Get accordion element on load
+  // Get accordion element height on page load
   useEffect( () => {
     setAccordionHeight(accordionContent.current.clientHeight)
-    console.log(accordionHeight)
   })
 
-  const [open, setOpen] = useState(false);
+  // Toggle accordion state when clicked
   const handleClick = () => {
     setOpen(!open);
   };
