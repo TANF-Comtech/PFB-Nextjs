@@ -62,6 +62,10 @@ const Button = styled.input`
  * @param {string} buttonText - because <input> is a void element, we can't pass in text, must be a prop instead
  * @param {string} className - helps styled-components extend, and obviously passes a class 
  * @param {string} name - input name param, just passed down
+ * 
+ * #################!!!!!!!!####################
+ * readOnly flag on component in place because no real data handling has been set up
+ * #################!!!!!!!!####################
  */
 function InputButton(
   { buttonBg, 
@@ -86,6 +90,7 @@ function InputButton(
           className={ className }
           name={ name }
           value={ buttonText }
+          readOnly
         />
       </Container>
     </>
