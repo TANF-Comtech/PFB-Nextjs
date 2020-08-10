@@ -1,24 +1,16 @@
-import { useRouter } from 'next/router'
 import Head from 'next/head'
 import ErrorPage from 'next/error'
 
-import { getSingleBasicPage, getAllBasicPagesWithUID } from '../../lib/repeatable-content-type/basic-page'
+import { getSingleBasicPage, 
+         getAllBasicPagesWithUID } from '../../lib/repeatable-content-type/basic-page'
 
 import Wrapper from '../../components/global/wrapper'
-import Heading1 from '../../components/global/h1'
-import MainContent from '../../components/global/main-content'
-import BasicButton from '../../components/global/button'
-import CheckboxSwitch from '../../components/global/checkbox-switch'
-import RadioSet from '../../components/global/radio'
-import Accordion from '../../components/global/accordion'
-import BlueQuestion from '../../components/global/blueQuestion'
 
-/* You must reference the `pages` prop to get data from `getStaticProps` - check bottom of this file */
 export default function BasicPage({ page, preview }) {
-  // const router = useRouter()
-  // if (!router.isFallback && !page?.node?._meta?.uid) {
-  //   return <ErrorPage statusCode={404} />
-  // }
+  // Check to make sure there is actually a page at this UID path
+  if (!page?.basic_page?._meta?.uid) {
+    return <ErrorPage statusCode={404} />
+  }
 
   return (
     <>
@@ -51,13 +43,6 @@ export async function getStaticProps({ params, preview = false, previewData }) {
 export async function getStaticPaths() {
   const allPages = await getAllBasicPagesWithUID()
   return {
-    // paths: [
-    //   { 
-    //     params: { 
-    //       uid: 'guidelines'
-    //     }
-    //   }
-    // ],
     paths: allPages?.map(({ node }) => `/page/${node._meta.uid}`) || [],
     fallback: true,
   }

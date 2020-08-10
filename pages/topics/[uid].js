@@ -1,5 +1,7 @@
 import Head from 'next/head'
+import ErrorPage from 'next/error'
 import { Title } from 'prismic-dom'
+
 
 import { getTopics, getSingleTopicPage } from '../../lib/taxonomy/topics'
 
@@ -10,10 +12,9 @@ import MainContent from '../../components/global/main-content'
 
 /* You must reference the `topic` prop to get data from `getStaticProps` - check bottom of this file */
 export default function TopicPage({ page, preview }) {
-  // const router = useRouter()
-  // if (!router.isFallback && !page?.node?._meta?.uid) {
-  //   return <ErrorPage statusCode={404} />
-  // }
+  if (!page?.topic?._meta?.uid) {
+    return <ErrorPage statusCode={404} />
+  }
 
   // Destructure topic out of page prop
   const { topic } = page
