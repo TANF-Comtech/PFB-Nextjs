@@ -78,7 +78,6 @@ function BasicPg() {
         {/* The navbar that you built */}
         {/* Typography on H4 needs to be adjusted for this page */}
         <h4>Guidelines | Funding | Application | Awards</h4>
-        <H1>{data.title}</H1>
         {/* Your text styling works btw */}
         <h2>Grant Guidlines</h2>
         <p>
