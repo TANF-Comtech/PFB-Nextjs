@@ -1,10 +1,13 @@
 import Head from 'next/head'
 import ErrorPage from 'next/error'
+import { RichText } from 'prismic-reactjs'
 
 import { getSingleBasicPage, 
          getAllBasicPagesWithUID } from '../../lib/repeatable-content-type/basic-page'
 
 import Wrapper from '../../components/global/wrapper'
+import Heading1 from '../../components/global/h1'
+import Accordion from '../../components/global/accordion'
 
 export default function BasicPage({ page, preview }) {
   // Check to make sure there is actually a page at this UID path
@@ -16,11 +19,36 @@ export default function BasicPage({ page, preview }) {
     <>
       <Head>
         <title>
-          {page.basic_page.title[0].text} | People for Bikes
+          { RichText.asText(page.basic_page.title) } | People for Bikes
         </title>
       </Head>
-      <Wrapper postTitle={page.basic_page.title[0].text}>
-        <h1>{page.basic_page.title[0].text}</h1>
+      <Wrapper postTitle={ RichText.asText(page.basic_page.title) }>
+        <RichText
+          elements={
+            { heading1: Heading1 }
+          }
+          render={ page.basic_page.title }
+        />
+        <RichText
+          render={ page.basic_page.main_content }
+        />
+        {page.basic_page.body && (
+          <>
+            {page.basic_page.body.map( (slice) => {
+              return slice.fields.map( ( accordion ) => {
+                return (
+                  <>
+                    <Accordion 
+                      title={RichText.asText(accordion.accordion_heading)}
+                    >
+                      {RichText.asText(accordion.accordion_content)}
+                    </Accordion>
+                  </>
+                )
+              })
+            })}
+          </>
+        )}
       </Wrapper>
     </>
   )
