@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="50px" height="50px" viewBox="0 0 50 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Group 7 Copy 4</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="City-Landing" transform="translate(-937.000000, -1608.000000)" stroke="#231F20" stroke-width="3">
+            <g id="Group-7-Copy-4" transform="translate(938.000000, 1609.000000)">
+                <path d="M35.05,23.6 L12.05,23.6 C12.022,23.6 12,23.578 12,23.55 C12,23.523 12.022,23.5 12.05,23.5 L35.05,23.5 C35.078,23.5 35.1,23.523 35.1,23.55 C35.1,23.578 35.078,23.6 35.05,23.6 Z" id="Stroke-1"></path>
+                <path d="M23.55,35.1 C23.537,35.1 23.525,35.095 23.515,35.085 C23.495,35.066 23.495,35.035 23.515,35.015 L34.979,23.55 L23.515,12.085 C23.495,12.066 23.495,12.035 23.515,12.015 C23.534,11.996 23.566,11.996 23.585,12.015 L35.085,23.515 C35.105,23.535 35.105,23.566 35.085,23.585 L23.585,35.085 C23.575,35.095 23.563,35.1 23.55,35.1 Z" id="Stroke-3"></path>
+                <path d="M23.55,46.6 C10.84,46.6 0.5,36.26 0.5,23.55 C0.5,10.84 10.84,0.5 23.55,0.5 C36.26,0.5 46.6,10.84 46.6,23.55 C46.6,36.26 36.26,46.6 23.55,46.6 Z" id="Stroke-5"></path>
+            </g>
+        </g>
+    </g>
+</svg>
