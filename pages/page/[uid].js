@@ -6,7 +6,7 @@ import { getSingleBasicPage,
          getAllBasicPagesWithUID } from '../../lib/repeatable-content-type/basic-page'
 
 import Wrapper from '../../components/global/wrapper'
-import Heading1 from '../../components/global/h1'
+import Heading1 from '../../components/primitives/h1'
 import Accordion from '../../components/global/accordion'
 
 export default function BasicPage({ page, preview }) {

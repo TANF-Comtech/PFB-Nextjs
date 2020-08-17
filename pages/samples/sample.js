@@ -1,13 +1,14 @@
 import Head from 'next/head'
 
 import Wrapper from '../../components/global/wrapper'
-import Heading1 from '../../components/global/h1'
 import MainContent from '../../components/global/main-content'
-import BasicButton from '../../components/global/button'
-import CheckboxSwitch from '../../components/global/checkbox-switch'
-import RadioSet from '../../components/global/radio'
 import Accordion from '../../components/global/accordion'
 import BlueQuestion from '../../components/global/blueQuestion'
+
+import Heading1 from '../../components/primitives/h1'
+import BasicButton from '../../components/primitives/button'
+import CheckboxSwitch from '../../components/primitives/checkbox-switch'
+import RadioSet from '../../components/primitives/radio'
 
 import Img1 from '../../public/sample-images/sample-image-1.jpg'
 import Img2 from '../../public/sample-images/sample-image-2.jpg'

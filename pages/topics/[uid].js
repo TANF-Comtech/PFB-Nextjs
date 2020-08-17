@@ -1,12 +1,10 @@
 import Head from 'next/head'
 import ErrorPage from 'next/error'
-import { Title } from 'prismic-dom'
-
 
 import { getTopics, getSingleTopicPage } from '../../lib/taxonomy/topics'
 
 import Wrapper from '../../components/global/wrapper'
-import Heading1 from '../../components/global/h1'
+import Heading1 from '../../components/primitives/h1'
 import MainContent from '../../components/global/main-content'
 
 

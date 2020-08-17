@@ -4,7 +4,7 @@ import Link from "next/link"
 import useScrollPosition from '@react-hook/window-scroll'
 
 import Logo from "../global/logo"
-import Button from "../global/button"
+import Button from "../primitives/button"
 
 const Bar = styled.section`
   background-color: rgba(255, 255, 255, 0.98);

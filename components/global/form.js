@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
 
-import BasicTextField from "./text";
-import InputButton from "./input-button";
+import BasicTextField from "../primitives/text";
+import InputButton from "../primitives/input-button";
 
 const FormContainer = styled.form`
   display: flex;
