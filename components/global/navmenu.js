@@ -33,22 +33,25 @@ const NavOverlay = styled.section`
   z-index: ${props => props.theme.zIndex04};
 `
 
-const iconEntry = keyframes`
-  0%, 50% {
-    transform: scale(0)
-  }
-  90% {
-    transform: scale(1.2);
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
   }
   100% {
-    transform: scale(1);
+    opacity: 1;
   }
-`;
+`
 
 const MenuHeader = styled.header`
   align-items: center;
   display: flex;
   justify-content: space-between;
+`
+
+const MenuTitle = styled.h2`
+  animation: ${fadeIn} 0.75s ease forwards;
+  animation-delay: 0.4s;
+  opacity: 0;
 `
 
 const MenuButtonCont = styled.div`
@@ -74,10 +77,12 @@ const MenuButtonCont = styled.div`
 `
 
 const MenuClose = styled.svg`
-  animation: ${iconEntry} 0.75s ease forwards;
+  animation: ${fadeIn} 0.75s ease forwards;
+  animation-delay: 0.6s;
   cursor: pointer;
   height: 32px;
   margin: 0;
+  opacity: 0;
   width: 32px;
 `
 
@@ -95,9 +100,11 @@ const NavMenu = ({ children, menuState, handleMenu }) => {
     <>
       <NavContainer menuState={ menuState }>
         <MenuHeader>
-          <h2>Explore</h2>
+          { menuState === true && (
+            <MenuTitle>Explore</MenuTitle>
+          )}
           <MenuButtonCont onClick={ handleMenu }>
-          { menuState === true ? (
+          { menuState === true && (
             <MenuClose 
               stroke="currentColor" 
               fill="currentColor" 
@@ -106,7 +113,7 @@ const NavMenu = ({ children, menuState, handleMenu }) => {
             >
               <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
             </MenuClose>
-          ) : (<></>)}
+          )}
           </MenuButtonCont>
         </MenuHeader>
       </NavContainer>
