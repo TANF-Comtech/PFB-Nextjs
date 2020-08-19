@@ -1,10 +1,22 @@
-import React from "react";
-import styled from "styled-components";
+import React, { useState, useEffect } from "react";
+import styled, { keyframes } from "styled-components";
 import useScrollPosition from '@react-hook/window-scroll'
 
 import LogoVertical from "../global/logo-vertical"
+import NavMenu from "../global/navmenu"
 
-// Animation position applied from styles/global-css.js - see animation section
+const iconEntry = keyframes`
+  0%, 50% {
+    transform: scale(0)
+  }
+  90% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+`;
+
 const Bar = styled.section`
   background-color: rgba(255, 255, 255, 0.98);
   box-shadow: 0 2px 5px rgba(0,0,0,.2);
@@ -26,15 +38,17 @@ const Container = styled.header`
   max-width: ${props => props.theme.lg};
 `;
 
-const MenuButton = styled.svg`
+const SearchButton = styled.svg`
   cursor: pointer;
   height: 32px;
   width: 32px;
 `;
 
-const SearchButton = styled.svg`
+const MenuButton = styled.svg`
+  animation: ${iconEntry} 0.75s ease forwards;
   cursor: pointer;
   height: 32px;
+  margin: 0;
   width: 32px;
 `;
 
@@ -42,11 +56,27 @@ function NavBar() {
   // Capture scroll position, so we can know when to fade out navbar
   const scrollY = useScrollPosition();
 
+  // Menu opening state change, send down men
+  const [menu, setMenu] = useState(false);
+  const handleMenu = () => {
+    setMenu(!menu);
+  };
+
+  useEffect( () => {
+    if(menu === true) {
+      document.body.style.overflowY = "hidden";
+    } else {
+      document.body.style.overflowY = "scroll";
+    }
+  })
+
   return (
     <>
       <Bar className={scrollY < 500 ? ('isVisibleY') : ('isHiddenY') } >
         <Container>
           <MenuButton
+            menuState={ menu }
+            onClick={ handleMenu }
             viewBox="0 0 32 32"
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
@@ -66,6 +96,10 @@ function NavBar() {
           </SearchButton>
         </Container>
       </Bar>
+      <NavMenu 
+        menuState={ menu }
+        handleMenu={ handleMenu }
+      />
     </>
   );
 }
