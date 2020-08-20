@@ -33,7 +33,7 @@ export default function BasicPage({ page, preview }) {
         />
         {page.basic_page.body && (
           <>
-            {page.basic_page.body.map( (slice) => {
+            {page.basic_page.body.map( ( slice ) => {
               return slice.fields.map( ( accordion ) => {
                 return (
                   <Accordion 
