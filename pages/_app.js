@@ -1,5 +1,7 @@
 import Head from 'next/head'
 import { ThemeProvider } from 'styled-components'
+import { ApolloProvider } from '@apollo/react-hooks'
+import { useApollo } from '../lib/apollo/apolloClient'
 
 import Variables from '../components/styles/variables'
 import GlobalStyle from '../components/styles/global-css'
@@ -7,13 +9,24 @@ import GlobalStyle from '../components/styles/global-css'
 import logo from '../public/logo.svg'
 
 /**
- * MyApp is just an override of the default _app.js setup Next.js uses
- * We're adding in styled-components theme, using ThemeProvider
- * Everything else is pretty stock
+ * <MyApp>
+ * 
+ * This is an override of the default _app.js setup Next.js uses
+ * 
+ * We're adding in two providers:
+ * <ThemeProvider> is for the styled-components theme, which makes the styles/variables globally available
+ * <ApolloProvider> gives components global access to GraphQL data fetched in the components (like menus)
+ * 
+ * Also:
+ * <Head> provides global defaults to the HTML head of each page, they can easily be modified per page
+ * <GlobalStyle> is styled-components way to provide an CSS doc to entire site
+ * <Component> is a Next.js default that renders all components and provides props to them
  */
 const MyApp = ({ Component, pageProps }) => {
+  const apolloClient = useApollo(pageProps.initialApolloState)
+
   return (
-    <>
+    <ApolloProvider client={ apolloClient }>
       <ThemeProvider theme={ Variables }>
         <Head>
           <title>People for Bikes</title>
@@ -24,7 +37,7 @@ const MyApp = ({ Component, pageProps }) => {
         <GlobalStyle />
         <Component {...pageProps} />
       </ThemeProvider>
-    </>
+    </ApolloProvider>
   )
 }
 
