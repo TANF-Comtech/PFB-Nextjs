@@ -5,6 +5,7 @@ import { RichText } from 'prismic-reactjs'
 import { getSingleBasicPage, 
          getAllBasicPagesWithUID } from '../../lib/repeatable-content-type/basic-page'
 
+import { randomID } from '../../lib/utils'
 import Wrapper from '../../components/global/wrapper'
 import Heading1 from '../../components/primitives/h1'
 import Accordion from '../../components/global/accordion'
@@ -24,9 +25,7 @@ export default function BasicPage({ page, preview }) {
       </Head>
       <Wrapper postTitle={ RichText.asText(page.basic_page.title) }>
         <RichText
-          elements={
-            { heading1: Heading1 }
-          }
+          elements={{ heading1: Heading1 }}
           render={ page.basic_page.title }
         />
         <RichText
@@ -37,13 +36,12 @@ export default function BasicPage({ page, preview }) {
             {page.basic_page.body.map( (slice) => {
               return slice.fields.map( ( accordion ) => {
                 return (
-                  <>
-                    <Accordion 
-                      title={RichText.asText(accordion.accordion_heading)}
-                    >
-                      {RichText.asText(accordion.accordion_content)}
-                    </Accordion>
-                  </>
+                  <Accordion 
+                    key={ randomID() }
+                    title={RichText.asText(accordion.accordion_heading)}
+                  >
+                    {RichText.asText(accordion.accordion_content)}
+                  </Accordion>
                 )
               })
             })}
