@@ -1,7 +1,7 @@
 import Head from 'next/head'
 
-import Wrapper from '../components/global/wrapper'
-import Heading1 from '../components/primitives/h1'
+import WideWrapper from '../components/global/wrapper-wide'
+import HeaderImage from '../components/global/header-image'
 
 function Homepage() {
   return (
@@ -9,9 +9,9 @@ function Homepage() {
       <Head>
         <title>People for Bikes</title>
       </Head>
-      <Wrapper>
-        <Heading1>Sample Pages</Heading1>
-      </Wrapper>
+      <WideWrapper postTitle="People for Bikes Homepage">
+        <HeaderImage />
+      </WideWrapper>
     </>
   )
 }
