@@ -1,5 +1,9 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
+import { useQuery, gql } from '@apollo/client'
+import { RichText } from 'prismic-reactjs'
+
+import { DocLink, randomID } from '../../lib/utils'
 
 const NavContainer = styled.nav`
   background-color: #fff;
@@ -46,6 +50,7 @@ const MenuHeader = styled.header`
   align-items: center;
   display: flex;
   justify-content: space-between;
+  margin-bottom: 3vh;
 `
 
 const MenuTitle = styled.h2`
@@ -78,12 +83,48 @@ const MenuButtonCont = styled.div`
 
 const MenuClose = styled.svg`
   animation: ${fadeIn} 0.75s ease forwards;
-  animation-delay: 0.6s;
+  animation-delay: 0.8s;
   cursor: pointer;
   height: 32px;
   margin: 0;
   opacity: 0;
   width: 32px;
+`
+
+const MainNav = styled.ul`
+  animation: ${fadeIn} 0.75s ease forwards;
+  animation-delay: 0.6s;
+  list-style: none;
+  margin: 0;
+  opacity: 0;
+
+  a, a:visited, a:focus, a:active {
+    color: ${props => props.theme.black };
+    text-decoration: none;
+    transition: 0.2s ease-in-out;
+  }
+  a:hover {
+    color: ${props => props.theme.red };
+    text-decoration: none;
+  }
+`
+
+const MainNavItem = styled.li`
+  cursor: pointer;
+  font-size: 24px;
+  font-family: ${props => props.theme.montserrat };
+  font-weight: 700;
+  line-height: 24px;
+  padding: 0.5vh 0;
+
+  @media screen and (min-width: 320px) {
+    font-size: calc(24px + 12 * ((100vw - 320px) / 880));
+    line-height: calc(24px + 12 * ((100vw - 320px) / 880));
+  }
+  @media screen and (min-width: 1200px) {
+    font-size: 36px;
+    line-height: 36px;
+  } 
 `
 
 /**
@@ -95,8 +136,54 @@ const MenuClose = styled.svg`
  * @param { function } handleMenu - lifted state changer for menuState, handles click event
  */
 
-const NavMenu = ({ children, menuState, handleMenu }) => {
-  return(
+const NAV_MENU_DATA = gql`
+  query NavMenu($uid: String!, $lang: String!) {
+    nav_menu(uid: $uid, lang: $lang) {
+      _meta {
+        uid
+        id
+      }
+      main_menu_items {
+        item {
+          ... on Landing_page {
+            title
+            _linkType
+            _meta {
+              uid
+              id
+            }
+          }
+        }
+      }
+      topic_menu_items {
+        item {
+          _linkType
+          __typename
+        }
+      }
+    }
+  }
+`
+
+const NavMenu = ({ menuState, handleMenu }) => {
+  // Query for nav menu from Apollo
+  const { loading, error, data } = useQuery(NAV_MENU_DATA, {
+    variables: {
+      "uid": "nav-menu",
+      "lang": "en-us"
+    }
+  })
+  
+  if (loading) return `<p>Loading...</p>`;
+  if (error) return `Error! ${error}`;
+
+  // Destructuring the data object - which will always contain two groups:
+  // main_menu_items and topic_menu_items
+  const { nav_menu: { main_menu_items } } = data
+  const { nav_menu: { topic_menu_items } } = data
+  // console.log(main_menu_items, topic_menu_items)
+
+  if (data) return(
     <>
       <NavContainer menuState={ menuState }>
         <MenuHeader>
@@ -116,6 +203,21 @@ const NavMenu = ({ children, menuState, handleMenu }) => {
           )}
           </MenuButtonCont>
         </MenuHeader>
+        { menuState === true && (
+          <MainNav>
+            { main_menu_items.map( (menu_item) => {
+              return (
+                <DocLink link={ menu_item.item }>
+                  <RichText
+                    elements={{ heading1: MainNavItem }}
+                    key={ randomID() }
+                    render={menu_item.item.title} 
+                  />
+                </DocLink>
+              )
+            })}
+          </MainNav>
+        )}
       </NavContainer>
       <NavOverlay 
         menuState={ menuState }
@@ -126,3 +228,4 @@ const NavMenu = ({ children, menuState, handleMenu }) => {
 }
 
 export default NavMenu
+

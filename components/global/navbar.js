@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 import useScrollPosition from '@react-hook/window-scroll'
+import Link from 'next/link'
 
 import LogoVertical from "../global/logo-vertical"
 import NavMenu from "../global/navmenu"
@@ -83,10 +84,14 @@ function NavBar() {
           >
             <path d="M4,10h24c1.104,0,2-0.896,2-2s-0.896-2-2-2H4C2.896,6,2,6.896,2,8S2.896,10,4,10z M28,14H4c-1.104,0-2,0.896-2,2  s0.896,2,2,2h24c1.104,0,2-0.896,2-2S29.104,14,28,14z M28,22H4c-1.104,0-2,0.896-2,2s0.896,2,2,2h24c1.104,0,2-0.896,2-2  S29.104,22,28,22z" />
           </MenuButton>
-          <LogoVertical
-            logoWidth="7vh"
-            logoTypeWidth="14vh"
-          />
+          <Link as='/' href='/'>
+            <a>
+              <LogoVertical
+                logoWidth="7vh"
+                logoTypeWidth="14vh"
+              />
+            </a>
+          </Link>
           <SearchButton
             viewBox="1 -1 100 100"
             version="1.1"
