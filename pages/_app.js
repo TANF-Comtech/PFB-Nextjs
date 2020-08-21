@@ -6,6 +6,9 @@ import { useApollo } from '../lib/apollo/apolloClient'
 import Variables from '../components/styles/variables'
 import GlobalStyle from '../components/styles/global-css'
 
+import NavBar from '../components/global/navbar'
+import Footer from '../components/global/footer'
+
 import logo from '../public/logo.svg'
 
 /**
@@ -23,6 +26,7 @@ import logo from '../public/logo.svg'
  * <Component> is a Next.js default that renders all components and provides props to them
  */
 const MyApp = ({ Component, pageProps }) => {
+  // Instantiates Apollo client
   const apolloClient = useApollo(pageProps.initialApolloState)
 
   return (
@@ -35,7 +39,9 @@ const MyApp = ({ Component, pageProps }) => {
           <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&display=swap" />
         </Head>
         <GlobalStyle />
+        <NavBar />
         <Component {...pageProps} />
+        <Footer />
       </ThemeProvider>
     </ApolloProvider>
   )

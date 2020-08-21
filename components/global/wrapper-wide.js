@@ -2,17 +2,12 @@ import React, { useRef } from "react";
 import styled from "styled-components";
 import useSize from "@react-hook/size";
 
-import Titlebar from "../global/titlebar";
+import Titlebar from "../global/titlebar"
 
 // spacer constrains the layout on big screens but keeps it tight on mobile
 const MainContent = styled.main`
-  padding: 14vh 4vw 4vh 4vw; /* slightly bigger pad on bottom than top */
+  padding: 14vh 0 4vh 0; /* slightly bigger pad on bottom than top */
   min-height: 80vh;
-`;
-
-const Container = styled.section`
-  margin: 2vh auto;
-  max-width: ${(props) => props.theme.lg};
 `;
 
 /**
@@ -26,7 +21,7 @@ const Container = styled.section`
  * @param {text} postTitle - actual title of content of page, feeds into Titlebar component
  *
  */
-const Wrapper = ({ children, postTitle }) => {
+const WideWrapper = ({ children, postTitle }) => {
   /* useSize hook gives us the dimensions of the target element (wherever you apply `ref`) */
   /* See example: https://github.com/jaredLunde/react-hook/tree/master/packages/size */
   const mainTarget = useRef(null);
@@ -39,10 +34,10 @@ const Wrapper = ({ children, postTitle }) => {
     <>
       <Titlebar mainHeight={Math.round(mainHeight)}>{postTitle}</Titlebar>
       <MainContent ref={mainTarget}>
-        <Container>{children}</Container>
+        {children}
       </MainContent>
     </>
   );
 };
 
-export default Wrapper;
+export default WideWrapper;
