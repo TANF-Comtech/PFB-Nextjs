@@ -37,7 +37,7 @@ export default function BasicPage({ page, preview }) {
               return slice.fields.map( ( accordion ) => {
                 return (
                   <Accordion 
-                    key={ randomID() }
+                    key={ randomID(10000000) }
                     title={RichText.asText(accordion.accordion_heading)}
                   >
                     {RichText.asText(accordion.accordion_content)}

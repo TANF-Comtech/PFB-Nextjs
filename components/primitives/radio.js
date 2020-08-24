@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import styled from "styled-components"
+import { randomID } from '../../lib/utils'
 
 import BasicInput from './input'
 import BasicLabel from './label'
@@ -82,19 +83,16 @@ const RadioSet = ({
           {/* Loops through each label, effective counts how many inputs we need */}
           {radioLabels.map( (label, i) => {
 
-            // Establish an ID for each input/label pair
-            const randomID = Math.round(Math.random() * 10000000)
-
             // Sets up container for each input/label pair, outputs data
             return(
-              <Container key={ randomID }>
+              <Container key={ randomID(10000000) }>
                 <RadioInput
                   name={ radioGroupName }
-                  id={ randomID } 
+                  id={ randomID(10000000) } 
                   type="radio" 
                   value={ radioValues[i] }
                 />
-                <BasicLabel htmlFor={ randomID }>
+                <BasicLabel htmlFor={ randomID(10000000) }>
                   { label }
                 </BasicLabel>
               </Container>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import styled from "styled-components"
+import { randomID } from '../../lib/utils'
 
 import BasicInput from './input'
 import BasicLabel from './label'
@@ -36,9 +37,6 @@ const CheckboxSwitch = ({
   disabled 
 }) => {
 
-  // Assigns a random identifier to each input/label pair
-  const randomID = Math.round(Math.random() * 10000000)
-
   // Check to make sure this is rendered
   const [rendered, setRendered] = useState(false);
 
@@ -58,10 +56,10 @@ const CheckboxSwitch = ({
             checked={ checked }
             className={ className } 
             disabled={ disabled } 
-            id={ randomID } 
+            id={ randomID(10000000) } 
             type="checkbox" 
           />
-          <BasicLabel htmlFor={ randomID }>
+          <BasicLabel htmlFor={ randomID(10000000) }>
             { checkboxLabel }
           </BasicLabel>
         </Container>
