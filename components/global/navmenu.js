@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled, { keyframes } from 'styled-components'
 import { useQuery, gql } from '@apollo/client'
 import { RichText } from 'prismic-reactjs'
+import Link from 'next/link'
 
-import { DocLink, randomID } from '../../lib/utils'
+import { DocLink, randomID, linkResolver } from '../../lib/utils'
 
 const NavContainer = styled.nav`
   background-color: #fff;
@@ -166,6 +167,7 @@ const NAV_MENU_DATA = gql`
 `
 
 const NavMenu = ({ menuState, handleMenu }) => {
+
   // Query for nav menu from Apollo
   const { loading, error, data } = useQuery(NAV_MENU_DATA, {
     variables: {
@@ -173,58 +175,60 @@ const NavMenu = ({ menuState, handleMenu }) => {
       "lang": "en-us"
     }
   })
-  
-  if (loading) return `<p>Loading...</p>`;
-  if (error) return `Error! ${error}`;
 
-  // Destructuring the data object - which will always contain two groups:
-  // main_menu_items and topic_menu_items
-  const { nav_menu: { main_menu_items } } = data
-  const { nav_menu: { topic_menu_items } } = data
-  // console.log(main_menu_items, topic_menu_items)
+  console.log(data)
 
-  if (data) return(
-    <>
-      <NavContainer menuState={ menuState }>
-        <MenuHeader>
+  if (data) {
+    const mainMenu = data.nav_menu.main_menu_items
+    const topicMenu = data.nav_menu.topic_menu_items
+
+    return(
+      <>
+        <NavContainer menuState={ menuState }>
+          <MenuHeader>
+            { menuState === true && (
+              <MenuTitle>Explore</MenuTitle>
+            )}
+            <MenuButtonCont onClick={ handleMenu }>
+            { menuState === true && (
+              <MenuClose 
+                stroke="currentColor" 
+                fill="currentColor" 
+                stroke-width="0" 
+                viewBox="0 0 24 24"
+              >
+                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+              </MenuClose>
+            )}
+            </MenuButtonCont>
+          </MenuHeader>
           { menuState === true && (
-            <MenuTitle>Explore</MenuTitle>
+            <MainNav>
+              { mainMenu.map( (menu_item) => {
+                return (
+                  <MainNavItem key={ randomID(10000000)} >
+                    <Link 
+                      href={ '/' + menu_item.item._meta.uid } >
+                      <a>
+                        { RichText.asText(menu_item.item.title) }
+                      </a>
+                    </Link>
+                  </MainNavItem>
+                )
+              })}
+            </MainNav>
           )}
-          <MenuButtonCont onClick={ handleMenu }>
-          { menuState === true && (
-            <MenuClose 
-              stroke="currentColor" 
-              fill="currentColor" 
-              stroke-width="0" 
-              viewBox="0 0 24 24"
-            >
-              <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
-            </MenuClose>
-          )}
-          </MenuButtonCont>
-        </MenuHeader>
-        { menuState === true && (
-          <MainNav>
-            { main_menu_items.map( (menu_item) => {
-              return (
-                <DocLink link={ menu_item.item }>
-                  <RichText
-                    elements={{ heading1: MainNavItem }}
-                    key={ randomID() }
-                    render={menu_item.item.title} 
-                  />
-                </DocLink>
-              )
-            })}
-          </MainNav>
-        )}
-      </NavContainer>
-      <NavOverlay 
-        menuState={ menuState }
-        onClick={ handleMenu }
-      />
-    </>
-  )
+        </NavContainer>
+        <NavOverlay 
+          menuState={ menuState }
+          onClick={ handleMenu }
+        />
+      </>
+    )
+  }
+
+  if (loading) return `<h2>Loading...</h2>`;
+  if (error || undefined) return console.log(`Error! ${error}`);
 }
 
 export default NavMenu
