@@ -28,7 +28,7 @@ function Logo({ className, logoMargin, logoWidth }) {
         className={ className }
         logoMargin={ logoMargin }
         logoWidth={ logoWidth }
-        viewBox="0 0 256 132"
+        viewBox="0 0 270 132"
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"
       >
