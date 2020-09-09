@@ -11,6 +11,7 @@ const Variables = {
   redAccent: '#D0021B',
   blue: '#3E9FDC',
   blueAccent: '#2076ac',
+  midnightBlue: '#002C40',
 
   // Breakpoints
   bm: '320px',
