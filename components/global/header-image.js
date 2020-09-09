@@ -9,9 +9,14 @@ const ImageContainer = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 70vh;
+  height: 50vh;
   margin-bottom: 1vh;
-  padding: 0 2vw;
+  padding: 0 5vw;
+  text-align: center;
+
+  @media screen and (min-width: ${ props => props.theme.sm }) {
+    height: 70vh;
+  }
 
   h1 {
     color: rgba(${props => props.headingRGBA ? props.headingRGBA : "255,255,255,1" });
@@ -21,7 +26,7 @@ const ImageContainer = styled.section`
     color: rgba(${props => props.headingRGBA ? props.headingRGBA : "255,255,255,1" });
     font-size: 18px;
     font-weight: 700;
-    line-height: 18px;
+    line-height: 24px;
     letter-spacing: 1px;
     margin-top: 1vh;
     text-transform: uppercase;
@@ -29,13 +34,13 @@ const ImageContainer = styled.section`
   @media screen and (min-width: 320px) {
     h3 {
       font-size: calc(18px + 8 * ((100vw - 320px) / 880));
-      line-height: calc(18px + 8 * ((100vw - 320px) / 880));
+      line-height: calc(24px + 8 * ((100vw - 320px) / 880));
     }
   }
   @media screen and (min-width: 1200px) {
     h3 {
       font-size: 26px;
-      line-height: 26px;
+      line-height: 36px;
     }
   } 
 
