@@ -1,7 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 
-const ResponsiveImage = styled.section`
+const ImageContainer = styled.section`
   align-items: center;
   background-image: url(${ props => props.source });
   background-position: center center;
@@ -44,7 +44,8 @@ const ResponsiveImage = styled.section`
 /**
  * <HeaderImage>
  * 
- * This produces the ultra-wide banners around the site.
+ * This produces the ultra-wide banners around the site. Probably could be improved but pretty good as is.
+ * srcSet param makes sense but responsive background images still doesn't really work in browsers
  * 
  * @param { string } headingRGBA - color of text, can provide transparency
  * @param { string } headingText - big text that appears in the middle of the image
@@ -61,7 +62,7 @@ const HeaderImage = ({
 }) => {
   return (
     <>
-      <ResponsiveImage
+      <ImageContainer
         headingRGBA={ headingRGBA }
         source={ source }
       >
@@ -71,7 +72,7 @@ const HeaderImage = ({
         { subheadingText && (
           <h3>{ subheadingText }</h3>
         )}
-      </ResponsiveImage>
+      </ImageContainer>
     </>
   )
 }
