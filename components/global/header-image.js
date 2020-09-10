@@ -1,6 +1,18 @@
 import React from "react"
 import styled from "styled-components"
 
+// background-image: url(examples/images/image-384.jpg);
+// background-image: 
+//   -webkit-image-set(
+//     url(examples/images/image-384.jpg) 1x,
+//     url(examples/images/image-768.jpg) 2x,
+//   );
+// background-image: 
+//   image-set(
+//     url(examples/images/image-384.jpg) 1x,
+//     url(examples/images/image-768.jpg) 2x,
+//   );
+
 const ImageContainer = styled.section`
   align-items: center;
   background-image: url(${ props => props.source });
@@ -20,6 +32,7 @@ const ImageContainer = styled.section`
 
   h1 {
     color: rgba(${props => props.headingRGBA ? props.headingRGBA : "255,255,255,1" });
+    text-transform: uppercase;
   }
 
   h3 {
@@ -53,17 +66,14 @@ const ImageContainer = styled.section`
  * srcSet param makes sense but responsive background images still doesn't really work in browsers
  * 
  * @param { string } headingRGBA - color of text, can provide transparency
- * @param { string } headingText - big text that appears in the middle of the image
  * @param { string } source - single image to display as a banner/hero
  * @param { obj } srcSet - set of images to display across responsive viewports
- * @param { string } subheadingText - small text that appears just beneath the big stuff
  */
 const HeaderImage = ({ 
+  children,
   headingRGBA,
-  headingText,
   source,
-  srcSet,
-  subheadingText
+  srcSet
 }) => {
   return (
     <>
@@ -71,12 +81,7 @@ const HeaderImage = ({
         headingRGBA={ headingRGBA }
         source={ source }
       >
-        { headingText && (
-          <h1>{ headingText }</h1>
-        )}
-        { subheadingText && (
-          <h3>{ subheadingText }</h3>
-        )}
+        { children }
       </ImageContainer>
     </>
   )
