@@ -13,11 +13,12 @@ function Homepage() {
       </Head>
       <WideWrapper postTitle="People for Bikes Homepage">
         <HeaderImage 
-          headingText="Biking for Everyone"
-          subheadingText="People for Bikes makes biking better"
           headingRGBA="255,255,255,1"
           source={ HPHero }
-        />
+        >
+          <h1>Biking for Everyone</h1>
+          <h3>People for Bikes makes biking better</h3>
+        </HeaderImage>
       </WideWrapper>
     </>
   )
