@@ -35,8 +35,9 @@ const RSLogoContainer = styled.img`
   max-width: 350px;
 
   @media( min-width: ${ props => props.theme.md}) {
-    margin: 0 auto 8vh auto;
     flex-basis: auto;
+    margin: 0 auto 8vh auto;
+    max-width: none;
   }
 `
 
