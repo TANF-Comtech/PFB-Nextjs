@@ -176,11 +176,11 @@ const NavMenu = ({ menuState, handleMenu }) => {
     }
   })
 
-  console.log(data)
+  // console.log(data)
 
   if (data) {
     const mainMenu = data.nav_menu.main_menu_items
-    const topicMenu = data.nav_menu.topic_menu_items
+    // const topicMenu = data.nav_menu.topic_menu_items
 
     return(
       <>
