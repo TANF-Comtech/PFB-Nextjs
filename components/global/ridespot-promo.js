@@ -1,12 +1,34 @@
 import React from "react";
 import styled from "styled-components";
-import Link from "next/link"
+
+import RideSpotRide from "../../components/global/ridespot-ride"
 
 import RideSpotBg1 from '../../public/ridespot-bg.jpg'
-
 import RideSpotLogo from '../../public/ridespot-logo.svg'
+
 import Arrow from '../../public/arrow.png'
 
+// Faked in the data
+const ridesArr = [
+  {
+    'distance': '51mi',
+    'extLink': 'https://ridespot.org/rides/147840',
+    'owner': 'PeopleForBikes', 
+    'title': 'Selma55 - The 55th Anniversary of the Selma to Montgomery Voters Rights March'
+  },
+  {
+    'distance': '63mi',
+    'extLink': 'https://ridespot.org/rides/107445',
+    'owner': 'Wheel Wranglers', 
+    'title': 'Tetonia to Ashton Rail Trail'
+  },
+  {
+    'distance': '11mi',
+    'extLink': 'https://ridespot.org/rides/55819',
+    'owner': 'Midwest Devo Junior Cycling Team', 
+    'title': 'Yellowwood Lake Loop - Family and kid friendly'
+  },
+]
 
 // BgImage will randomize the backgrounds
 const BgImage = styled.section`
@@ -144,42 +166,17 @@ const RideSpotPromo = () => {
           src={ RideSpotLogo }
         />
         <RSRidesContainer>
-          <Link href="#" passHref>
-            <RSRide>
-              <RSData>
-                <RSTitle>Selma55 - The 55th Anniversary of the Selma to Montgomery Voters Rights March</RSTitle>
-                <RSInfo>Distance: 51mi</RSInfo>
-                <RSInfo>PeopleForBikes</RSInfo>
-              </RSData>
-              <RSArrow 
-                src={ Arrow } 
-              />
-            </RSRide>
-          </Link>
-          <Link href="#" passHref>
-            <RSRide>
-              <RSData>
-                <RSTitle>Tetonia to Ashton Rail Trail</RSTitle>
-                <RSInfo>Distance: 63mi</RSInfo>
-                <RSInfo>Wheel Wranglers</RSInfo>
-              </RSData>
-              <RSArrow 
-                src={ Arrow } 
-              />
-            </RSRide>
-          </Link>
-          <Link href="#" passHref>
-            <RSRide>
-              <RSData>
-                <RSTitle>Yellowwood Lake Loop - Family and kid friendly</RSTitle>
-                <RSInfo>Distance: 11mi</RSInfo>
-                <RSInfo>Midwest Devo Junior Cycling Team</RSInfo>
-              </RSData>
-              <RSArrow 
-                src={ Arrow } 
-              />
-            </RSRide>
-          </Link>                    
+          { ridesArr.map( (ride, i) => {
+            return (
+              <RideSpotRide
+                distance={ ride.distance }
+                extLink={ ride.extLink }
+                key={ i }
+                owner={ ride.owner }
+                title={ ride.title }
+              /> 
+            )
+          }) }                   
         </RSRidesContainer>
       </BgImage>
     </>
