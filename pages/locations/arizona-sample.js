@@ -52,8 +52,8 @@ const Arizona = ({ props }) => {
             text="Pandemic shutdowns may have us staying in but we continue our social effort digitally with our DRAFT happy hours, which bring bikers and beers together for a spirit-ed discussion."
           />
         </MainContent>
-
         <RideSpotPromo />
+        
       </WideWrapper>
     </>
   )
