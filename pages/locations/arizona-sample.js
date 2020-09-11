@@ -6,6 +6,7 @@ import MainContent from '../../components/global/main-content'
 import HeaderImage from '../../components/global/header-image'
 import RideSpotPromo from '../../components/global/ridespot-promo'
 import ActionItem from '../../components/global/action-item'
+import ContentItem from '../../components/global/content-item'
 
 import ArizonaHeader from '../../public/sample-images/arizona-bg.jpg'
 import LinkIcon from '../../public/icons/link.svg'
@@ -53,7 +54,36 @@ const Arizona = ({ props }) => {
           />
         </MainContent>
         <RideSpotPromo />
-        
+        <MainContent>
+          <h2>People for Bikes in Arizona</h2>
+          <h3>News</h3>
+          <ContentItem 
+            date="September 5th, 2020"
+            title="Opening of New Cycletrack in Sedona"
+            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt."
+          />
+          <ContentItem 
+            date="July 12th, 2020"
+            title="DRAFT Digital Happy Hour Success"
+            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt."
+          />
+          <ContentItem 
+            date="October 23rd, 2019"
+            title="Tucson makes huge leap in City Ratings"
+            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt."
+          />
+          <h3>Grants and Policy</h3>
+          <ContentItem 
+            date="September 7th, 2020"
+            title="2020 ebike laws for Arizona released"
+            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt."
+          />
+          <ContentItem 
+            date="April 12th, 2020"
+            title="Opening of New Cycletrack in Sedona"
+            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt."
+          />   
+        </MainContent>
       </WideWrapper>
     </>
   )
