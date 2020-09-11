@@ -42,11 +42,12 @@ const RSRide = styled.a`
 
 const RSData = styled.div`
   flex-basis: calc(100% - 50px);
-  padding: 2vh 4vw;
+  padding: 3vh 4vw;
   max-width: 90%;
+  min-height: 25vh;
 
   @media( min-width: ${ props => props.theme.sm}) {
-    padding: 2vh 2vw;
+    padding: 3vh 2vw;
   }
 `
 
