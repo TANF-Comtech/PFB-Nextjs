@@ -1,20 +1,21 @@
 import React from "react"
 import styled from "styled-components"
 
-const Container = styled.section`
-  margin: 2vh 0;
-  padding: 0;
+const MainContainer = styled.section`
+  padding: 2vh 4vw; 
+`;
 
-  @media (min-width: ${props => props.theme.lg}) {
-    padding: 0;
-  }
-`
+const Sizer = styled.div`
+  margin: 2vh auto;
+  max-width: ${(props) => props.theme.lg};
+`;
+
 const MainContent = ({ children }) => {
   return (
     <>
-      <Container className="flow">
-        { children }
-      </Container>
+      <MainContainer>
+        <Sizer>{children}</Sizer>
+      </MainContainer>
     </>
   )
 }
