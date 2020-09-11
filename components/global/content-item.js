@@ -28,7 +28,7 @@ const Datestamp = styled.p`
  * <ContentItem>
  * 
  * A simple presentation for content items that show up in lists
- 
+ *
  * @param { string } date - when the content item occurred (optional)
  * @param { string } title - title that goes next to the icon
  * @param { string } text - content to be shown
