@@ -5,8 +5,8 @@ import MainContent from '../../components/global/main-content'
 
 import HeaderImage from '../../components/global/header-image'
 import RideSpotPromo from '../../components/global/ridespot-promo'
-import ActionItem from '../../components/global/action-item'
-import ContentItem from '../../components/global/content-item'
+import ActionItem from '../../components/content/action-item'
+import ContentItem from '../../components/content/content-item'
 
 import ArizonaHeader from '../../public/sample-images/arizona-bg.jpg'
 import LinkIcon from '../../public/icons/link.svg'
