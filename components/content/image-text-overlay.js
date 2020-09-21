@@ -23,11 +23,24 @@ const ImageContainer = styled.div`
 }
 `
 
-const Title = styled.h1`
+const Title = styled.h2`
   color: rgba(255,255,255,0.9);
+  font-size: 80px;
   font-weight: 700;
+  line-height: 70px;
+  padding: 25px;
   text-decoration: none !important;
+  text-align: center;
   text-transform: uppercase;
+    
+  @media screen and (min-width: 320px) {
+    font-size: calc(80px + 20 * ((100vw - 320px) / 880));
+    line-height: calc(70px + 20 * ((100vw - 320px) / 880));
+  }
+  @media screen and (min-width: 1200px) {
+    font-size: 100px;
+    line-height: 90px;
+  } 
 `
 
 /**
