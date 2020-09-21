@@ -18,7 +18,6 @@ export default function TopicPage({ page, preview }) {
 
   // Destructure topic out of page prop
   const { topic } = page
-  console.log(topic)
   return (
     <>
       <Head>

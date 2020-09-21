@@ -6,7 +6,7 @@ import GridWide from '../components/layout/grid-wide'
 import ImageTextOverlay from '../components/content/image-text-overlay'
 import Graphic from '../components/global/graphic'
 
-import { getLocationsLandingPage } from '../lib/queries/locations'
+import { getLocations } from '../lib/queries/locations'
 
 const LandingBar = styled.div`
   align-items: center;
@@ -35,7 +35,6 @@ const LandingBar = styled.div`
 `
 
 export default function LocationsLanding({ page }) {
-  console.log(page)
   return (
     <>
       <Head>
@@ -67,7 +66,7 @@ export default function LocationsLanding({ page }) {
 
 /* The return here sends the `page` prop back to the component above for rendering */
 export async function getStaticProps({ params, preview = false, previewData }) {
-  const pageData = await getLocationsLandingPage()
+  const pageData = await getLocations()
 
   return {
     props: {
