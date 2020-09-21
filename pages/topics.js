@@ -35,7 +35,6 @@ const LandingBar = styled.div`
 `
 
 function TopicsLanding({ page }) {
-  console.log(page)
   return (
     <>
       <Head>
