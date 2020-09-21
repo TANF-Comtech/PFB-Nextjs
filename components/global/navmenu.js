@@ -160,7 +160,7 @@ const GridMicro = styled.section`
  */
 
 const NAV_MENU_DATA = gql`
-  query NavMenu($uid: String!, $lang: String!) {
+  query TempNavMenu($uid: String!, $lang: String!) {
     nav_menu(uid: $uid, lang: $lang) {
       _meta {
         uid
@@ -169,6 +169,22 @@ const NAV_MENU_DATA = gql`
       main_menu_items {
         item {
           ... on Landing_page {
+            title
+            _linkType
+            _meta {
+              uid
+              id
+            }
+          }
+          ... on Topics {
+            title
+            _linkType
+            _meta {
+              uid
+              id
+            }
+          }
+          ... on Locations_landing {
             title
             _linkType
             _meta {
