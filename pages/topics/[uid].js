@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import ErrorPage from 'next/error'
 
-import { getTopics, getSingleTopicPage } from '../../lib/taxonomy/topics'
+import { getTopics, getSingleTopicPage } from '../../lib/queries/topics'
 
 import Wrapper from '../../components/global/wrapper'
 import Heading1 from '../../components/primitives/h1'
@@ -16,7 +16,6 @@ export default function TopicPage({ page, preview }) {
 
   // Destructure topic out of page prop
   const { topic } = page
-  console.log(topic)
 
   return (
     <>

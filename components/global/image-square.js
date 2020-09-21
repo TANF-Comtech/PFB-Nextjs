@@ -34,7 +34,7 @@ const Title = styled.h2`
   background-color: rgba(208, 2, 27, 0.9);
   color: #fff;
   font-size: 40px;
-  line-height: 32px;
+  line-height: 36px;
   margin: 0 20px 0 0;
   padding: 10px 20px;
   text-decoration: none !important;

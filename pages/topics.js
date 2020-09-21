@@ -6,7 +6,7 @@ import Grid from '../components/global/grid'
 import ImageSquare from '../components/global/image-square'
 import Graphic from '../components/global/graphic'
 
-import { getTopicsLandingPage } from '../lib/taxonomy/topics'
+import { getTopicsLandingPage } from '../lib/queries/topics'
 
 const LandingBar = styled.div`
   align-items: center;
@@ -34,7 +34,7 @@ const LandingBar = styled.div`
   }
 `
 
-function TopicsLanding({ page }) {
+export default function TopicsLanding({ page }) {
   return (
     <>
       <Head>
@@ -63,8 +63,6 @@ function TopicsLanding({ page }) {
     </>
   )
 }
-
-export default TopicsLanding
 
 /* The return here sends the `page` prop back to the component above for rendering */
 export async function getStaticProps({ params, preview = false, previewData }) {

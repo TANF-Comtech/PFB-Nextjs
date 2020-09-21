@@ -4,6 +4,8 @@ import { useQuery, gql } from '@apollo/client'
 import { RichText } from 'prismic-reactjs'
 import Link from 'next/link'
 
+import ImageSquare from '../../components/global/image-square'
+
 import { DocLink, randomID, linkResolver } from '../../lib/utils'
 
 const NavContainer = styled.nav`
@@ -52,12 +54,19 @@ const MenuHeader = styled.header`
   display: flex;
   justify-content: space-between;
   margin-bottom: 3vh;
+
+  a, a:focus, a:visited, a:hover {
+    color: black;
+    text-decoration: none;
+  }
 `
 
 const MenuTitle = styled.h2`
   animation: ${fadeIn} 0.75s ease forwards;
   animation-delay: 0.4s;
+  color: black;
   opacity: 0;
+  text-decoration: none !important;
 `
 
 const MenuButtonCont = styled.div`
@@ -96,7 +105,7 @@ const MainNav = styled.ul`
   animation: ${fadeIn} 0.75s ease forwards;
   animation-delay: 0.6s;
   list-style: none;
-  margin: 0;
+  margin: 0 0 3vh 0;
   opacity: 0;
 
   a, a:visited, a:focus, a:active {
@@ -128,6 +137,19 @@ const MainNavItem = styled.li`
   } 
 `
 
+const GridMicro = styled.section`
+  animation: ${fadeIn} 0.75s ease forwards;
+  animation-delay: 0.6s;
+  display: grid;
+  grid-gap: 15px;
+  grid-template-columns: 1fr 1fr;
+  opacity: 0;
+
+  a, a:focus, a:visited, a:hover {
+    text-decoration: none;
+  }
+`;
+
 /**
  * <Nav>
  * 
@@ -158,8 +180,14 @@ const NAV_MENU_DATA = gql`
       }
       topic_menu_items {
         item {
-          _linkType
-          __typename
+          ... on Topic {
+            title
+            square_image
+            _meta {
+              uid
+              id
+            }
+          }        
         }
       }
     }
@@ -176,18 +204,16 @@ const NavMenu = ({ menuState, handleMenu }) => {
     }
   })
 
-  // console.log(data)
-
   if (data) {
     const mainMenu = data.nav_menu.main_menu_items
-    // const topicMenu = data.nav_menu.topic_menu_items
+    const topicMenu = data.nav_menu.topic_menu_items
 
     return(
       <>
         <NavContainer menuState={ menuState }>
           <MenuHeader>
             { menuState === true && (
-              <MenuTitle>Explore</MenuTitle>
+              <MenuTitle>Our Work</MenuTitle>
             )}
             <MenuButtonCont onClick={ handleMenu }>
             { menuState === true && (
@@ -203,20 +229,42 @@ const NavMenu = ({ menuState, handleMenu }) => {
             </MenuButtonCont>
           </MenuHeader>
           { menuState === true && (
-            <MainNav>
-              { mainMenu.map( (menu_item) => {
-                return (
-                  <MainNavItem key={ randomID(10000000)} >
-                    <Link 
-                      href={ '/' + menu_item.item._meta.uid } >
-                      <a>
-                        { RichText.asText(menu_item.item.title) }
-                      </a>
-                    </Link>
-                  </MainNavItem>
-                )
-              })}
-            </MainNav>
+            <>
+              <MainNav>
+                { mainMenu.map( (menu_item) => {
+                  return (
+                    <MainNavItem key={ randomID(10000000)} >
+                      <Link 
+                        href={ '/' + menu_item.item._meta.uid } >
+                        <a>
+                          { RichText.asText(menu_item.item.title) }
+                        </a>
+                      </Link>
+                    </MainNavItem>
+                  )
+                })}
+              </MainNav>
+              <MenuHeader>
+                <Link href="/topics">
+                  <a>
+                    <MenuTitle>Explore Topics</MenuTitle>
+                  </a>
+                </Link>
+              </MenuHeader>
+              <GridMicro>
+                { topicMenu.map( (topic) => {
+                  return (
+                    <ImageSquare
+                      imageSquareLink={ `/topics/${topic.item._meta.uid}` }
+                      source1X={ topic.item.square_image?.mobile.url }
+                      source2X={ topic.item.square_image?.url }
+                      title={ topic.item.title[0].text }
+                      key={ topic.item._meta.id }
+                    />                    
+                  )
+                })}                
+              </GridMicro>
+            </>
           )}
         </NavContainer>
         <NavOverlay 
