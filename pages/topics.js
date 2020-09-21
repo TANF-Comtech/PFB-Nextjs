@@ -6,34 +6,49 @@ import Grid from '../components/global/grid'
 import ImageSquare from '../components/global/image-square'
 import Graphic from '../components/global/graphic'
 
-import { getTopics } from '../lib/taxonomy/topics'
+import { getTopicsLandingPage } from '../lib/taxonomy/topics'
 
 const LandingBar = styled.div`
   align-items: center;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: flex-start;
   margin-bottom: 3vh;
 
+  @media (min-width: ${props => props.theme.sm}) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+
   h1 {
-    margin-right: 20px;
-    width: calc(100% - 420px);
+    margin: 0 0 2vh 0;
+    text-align: center;
+    text-transform: uppercase;
+
+    @media (min-width: ${props => props.theme.sm}) {
+      margin: 0 20px 0 0;
+      text-align: left;
+      width: calc(100% - 420px);
+    }
   }
 `
 
 function TopicsLanding({ page }) {
+  console.log(page)
   return (
     <>
       <Head>
-        <title>Biking Topics | People for Bikes</title>
+        <title>{ page.topics.title[0].text } | People for Bikes</title>
       </Head>
       <Wrapper postTitle="Topics">
         <LandingBar>
-          <h1>Biking Topics</h1>
+          <h1>{ page.topics.title[0].text }</h1>
           <Graphic />
         </LandingBar>
-        <p>{}</p>
+        <p>{ page.topics.intro[0].text }</p>
         <Grid>
-          { page.map( (topic) => {
+          { page.allTopics.edges.map( (topic) => {
             return(
               <ImageSquare
                 imageSquareLink={ `/topics/${topic.node._meta.uid}` }
@@ -54,7 +69,7 @@ export default TopicsLanding
 
 /* The return here sends the `page` prop back to the component above for rendering */
 export async function getStaticProps({ params, preview = false, previewData }) {
-  const pageData = await getTopics()
+  const pageData = await getTopicsLandingPage('topics', preview)
 
   return {
     props: {
