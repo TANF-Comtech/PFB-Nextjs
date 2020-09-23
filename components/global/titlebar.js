@@ -106,6 +106,7 @@ function Titlebar({
               <Logo
                 logoMargin="0"
                 logoWidth="5vh"
+                logoViewbox="60 0 150 132"
               />
               <Title>
                 { children }

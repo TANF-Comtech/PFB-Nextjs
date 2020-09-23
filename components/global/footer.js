@@ -188,7 +188,9 @@ function Footer() {
               <SignUpForm />
             </header>
             <SignUpFooter>
-              <Logo />
+              <Logo 
+                logoViewbox={ "0 0 270 132" }
+              />
               <LogoType 
                 fillPeople="#fff"
                 fillFor="#fff"

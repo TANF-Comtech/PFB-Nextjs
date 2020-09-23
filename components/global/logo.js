@@ -19,16 +19,17 @@ const LogoIcon = styled.svg`
  * @param {text} logoMargin - we can adjust the margins (default: `0 auto`)
  * @param {text} logoWidth - adjustable width, but notice we use the value for height
  *    that's because the logo is square, so we can control both with one size!
+ * @param {text} logoViewbox - so we can change the size of the box
  * 
  */
-function Logo({ className, logoMargin, logoWidth }) {
+function Logo({ className, logoMargin, logoWidth, logoViewbox }) {
   return (
     <>
       <LogoIcon
         className={ className }
         logoMargin={ logoMargin }
         logoWidth={ logoWidth }
-        viewBox="0 0 270 132"
+        viewBox={ logoViewbox }
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"
       >

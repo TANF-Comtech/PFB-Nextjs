@@ -88,6 +88,7 @@ function NavBar() {
             <a>
               <LogoVertical
                 logoWidth="7vh"
+                logoViewboxPassdown="0 0 270 132"
                 logoTypeWidth="14vh"
               />
             </a>
