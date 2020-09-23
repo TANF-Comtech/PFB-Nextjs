@@ -1,6 +1,6 @@
 import Head from 'next/head'
 
-import WideWrapper from '../components/global/wrapper-wide'
+import Wrapper from '../components/global/wrapper'
 import HeaderImage from '../components/global/header-image'
 
 import HPHero from '../public/sample-images/PFB_GrantFinder_2300x800.jpg'
@@ -11,7 +11,10 @@ function Homepage() {
       <Head>
         <title>People for Bikes</title>
       </Head>
-      <WideWrapper postTitle="People for Bikes Homepage">
+      <Wrapper 
+        postTitle="People for Bikes Homepage"
+        isWide={ true }
+      >
         <HeaderImage 
           headingRGBA="255,255,255,1"
           source={ HPHero }
@@ -19,7 +22,7 @@ function Homepage() {
           <h1>Biking for Everyone</h1>
           <h3>People for Bikes makes biking better</h3>
         </HeaderImage>
-      </WideWrapper>
+      </Wrapper>
     </>
   )
 }

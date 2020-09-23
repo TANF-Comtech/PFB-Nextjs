@@ -3,7 +3,7 @@ import ErrorPage from 'next/error'
 
 import { getTopics, getSingleTopicPage } from '../../lib/queries/topics'
 
-import WideWrapper from '../../components/global/wrapper-wide'
+import Wrapper from '../../components/global/wrapper'
 import HeaderImage from '../../components/global/header-image'
 
 import MainContent from '../../components/global/main-content'
@@ -25,7 +25,10 @@ export default function TopicPage({ page, preview }) {
           {topic.title[0].text} | People for Bikes
         </title>
       </Head>
-      <WideWrapper postTitle="People for Bikes Homepage">
+      <Wrapper 
+        postTitle="People for Bikes Homepage"
+        isWide={ true }
+      >
         <HeaderImage 
           headingRGBA="255,255,255,1"
           source={ topic.banner_image.url }
@@ -62,7 +65,7 @@ export default function TopicPage({ page, preview }) {
             text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt."
           />   
         </MainContent>        
-      </WideWrapper>
+      </Wrapper>
     </>
   )
 }

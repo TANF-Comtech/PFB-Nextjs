@@ -1,11 +1,11 @@
 import Head from 'next/head'
 
-import WideWrapper from '../../components/global/wrapper-wide'
+import Wrapper from '../../components/global/wrapper'
 import MainContent from '../../components/global/main-content'
 
 import HeaderImage from '../../components/global/header-image'
-import RideSpotPromo from '../../components/global/ridespot-promo'
-import ActionItem from '../../components/content/action-item'
+import RideSpotPromo from '../../components/slices/ridespot-promo'
+import ActionItem from '../../components/slices/action-item'
 import ContentItem from '../../components/content/content-item'
 
 import ArizonaHeader from '../../public/sample-images/arizona-bg.jpg'
@@ -20,7 +20,10 @@ const Arizona = ({ props }) => {
       <Head>
         <title>Arizona - People for Bikes</title>
       </Head>
-      <WideWrapper postTitle="Arizona - People for Bikes">
+      <Wrapper 
+        postTitle="Arizona - People for Bikes"
+        isWide={ true }
+      >
         <HeaderImage
           headingRGBA="255,255,255, 0.8"
           source={ ArizonaHeader }
@@ -84,7 +87,7 @@ const Arizona = ({ props }) => {
             text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt."
           />   
         </MainContent>
-      </WideWrapper>
+      </Wrapper>
     </>
   )
 }
