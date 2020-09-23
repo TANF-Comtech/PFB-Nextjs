@@ -59,8 +59,8 @@ const MyApp = ({ Component, pageProps }) => {
 
           <meta name="description" content="PeopleForBikes is committed to improving biking for everyone. Learn more about our work and join our movement." />
           <meta property="og:image" content={ socialSplashArr[Math.floor(Math.random()*socialSplashArr.length)] } />
-          <meta property="og:image:width" content="1400" />
-          <meta property="og:image:height" content="735" />
+          <meta property="og:image:width" content="1600" />
+          <meta property="og:image:height" content="900" />
           <meta property="og:locale" content="en_US" />
           <meta property="og:type" content="website" />
           <meta property="og:title" content="PeopleForBikes" />
@@ -73,8 +73,8 @@ const MyApp = ({ Component, pageProps }) => {
           <meta name="twitter:title" content="PeopleForBikes | Every ride. Every rider. Join us." />
           <meta name="twitter:description" content="PeopleForBikes is committed to improving biking for everyone. Learn more about our work and join our movement." />
           <meta name="twitter:image" content={ socialSplashArr[Math.floor(Math.random()*socialSplashArr.length)] } />
-          <meta name="twitter:image:width" content="1400" />
-          <meta name="twitter:image:height" content="735" />
+          <meta name="twitter:image:width" content="1600" />
+          <meta name="twitter:image:height" content="900" />
           <link rel="canonical" href="https://www.peopleforbikes.org/" />
           <script type="application/ld+json">{JSON.stringify(ldJSONBasic)}</script>
         </Head>
