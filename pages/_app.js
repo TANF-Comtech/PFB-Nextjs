@@ -33,6 +33,20 @@ const MyApp = ({ Component, pageProps }) => {
   // Instantiates Apollo client
   const apolloClient = useApollo(pageProps.initialApolloState)
   const socialSplashArr = [ splashOne, splashTwo, splashThree, splashFour ]
+  const ldJSONBasic = {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "@id": "#organization",
+    "name": "PeopleForBikes",
+    "url": "https://www.peopleforbikes.org",
+    "logo": { logo },
+    "sameAs": [
+      "https://www.facebook.com/PeopleForBikes", 
+      "https://twitter.com/peopleforbikes",
+      "https://www.linkedin.com/company/peopleforbikes",
+      "https://www.instagram.com/peopleforbikes",
+      "https://www.youtube.com/user/peopleforbikes/videos"]
+  }
 
   return (
     <ApolloProvider client={ apolloClient }>
@@ -62,22 +76,7 @@ const MyApp = ({ Component, pageProps }) => {
           <meta name="twitter:image:width" content="1400" />
           <meta name="twitter:image:height" content="735" />
           <link rel="canonical" href="https://www.peopleforbikes.org/" />
-          <script type="application/ld+json">
-            {/* {
-              "@context": "http://schema.org",
-              "@type": "Organization",
-              "@id": "#organization",
-              "name": "PeopleForBikes",
-              "url": "https://www.peopleforbikes.org",
-              "logo": { logo },
-              "sameAs": [
-                "https://www.facebook.com/PeopleForBikes", 
-                "https://twitter.com/peopleforbikes",
-                "https://www.linkedin.com/company/peopleforbikes",
-                "https://www.instagram.com/peopleforbikes",
-                "https://www.youtube.com/user/peopleforbikes/videos"]
-            } */}
-          </script>
+          <script type="application/ld+json">{JSON.stringify(ldJSONBasic)}</script>
         </Head>
         <GlobalStyle />
         <NavBar />
