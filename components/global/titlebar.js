@@ -58,19 +58,13 @@ const Title = styled.h2`
   }
 `
 
-const ProgressBar = styled.footer`
-  background-color: ${props => props.theme.blue};
-  height: 4px;
-  width: ${props => props.width}%;
-`
-
-const JoinButton = styled.a`
-  
-  
-  @media (min-width: 768px) {
-    display: inherit;  
-  }
-`
+const ProgressBar = styled.footer.attrs(props => ({
+  style: {
+    backgroundColor: props.theme.blue,
+    height: '4px',
+    width: `${props.width}%`
+  },
+}))``
 
 /**
  * <Titlebar>
@@ -85,7 +79,7 @@ const JoinButton = styled.a`
  * 
  * @param {object} children - inherited nested components, core React idea
  * @param {number} mainHeight - height of main content element
- * @param {number} footerHeight - height of footer content element (not active, but hopefully int he future)
+ * @param {number} footerHeight - height of footer content element (not active, but hopefully in the future)
  * 
  */
 function Titlebar({ 
@@ -121,7 +115,7 @@ function Titlebar({
               buttonFontSize="18px"
               buttonPadding="10px 20px"
               buttonTextTransform="inherit"
-              href="/"
+              href="/join"
             >Join Us</Button>
           </Content>
         </Container>
