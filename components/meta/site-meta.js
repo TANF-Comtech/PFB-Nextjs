@@ -48,6 +48,15 @@ const SiteMeta = ( {
       <meta property="og:url" 
             content={ path } 
             key="ogurl" />
+      <meta property="og:site_name" 
+            content="PeopleForBikes"
+            key="ogsite" />
+      <meta property="og:locale" 
+            content="en_US" 
+            key="oglocale" />
+      <meta property="og:type" 
+            content="website" 
+            key="ogtype" />            
       <meta name="twitter:title" 
             content={ title } 
             key="twtrtitle" />
@@ -62,11 +71,16 @@ const SiteMeta = ( {
             key="twtrimgw" />
       <meta name="twitter:image:height" 
             content={ imgHeight }  
-            key="twtrimgh" />
+            key="twtrimgh" /> 
+      <meta name="twitter:card" 
+            content="summary_large_image" 
+            key="twtrcard" />
+      <meta name="twitter:site" 
+            content="@peopleforbikes" 
+            key="twtrsite" />
       <link rel="canonical" 
             href={ path } 
-            key="canonical" />   
-      
+            key="canonical" />  
       { ldJSON &&
         ( <script type="application/ld+json">{JSON.stringify(ldJSON)}</script> ) 
       } 
