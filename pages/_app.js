@@ -39,10 +39,18 @@ const MyApp = ({ Component, pageProps }) => {
   const ldJSONBasic = {
     "@context": "http://schema.org",
     "@type": "Organization",
-    "@id": "#organization",
     "name": "PeopleForBikes",
     "url": "https://www.peopleforbikes.org",
-    "logo": { logo },
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "2580 55th St #200",
+      "addressLocality": "Boulder",
+      "addressRegion": "CO",
+      "postalCode": "80301",
+      "addressCountry": "US"
+    },
+    "telephone": "+13034494893",
+    "logo": `${ logo }`,
     "sameAs": [
       "https://www.facebook.com/PeopleForBikes", 
       "https://twitter.com/peopleforbikes",
