@@ -35,12 +35,16 @@ const LandingBar = styled.div`
 `
 
 export default function LocationsLanding({ page }) {
+  console.log(page)
   return (
     <>
       <Head>
         <title>Locations | People for Bikes</title>
       </Head>
-      <Wrapper postTitle="Locations">
+      <Wrapper 
+        postTitle="Locations"
+        isWide={ false }
+      >
         <LandingBar>
           <h1>Locations</h1>
           <Graphic />
@@ -51,7 +55,7 @@ export default function LocationsLanding({ page }) {
             return(
               <ImageTextOverlay
                 imageLink={ `/locations/${location.node._meta.uid}` }
-                source1X={ location.node.header_image?.['main-1x'].url }
+                source1X={ location.node.header_image?.main1x.url }
                 source2X={ location.node.header_image?.url }
                 title={ location.node.location[0].text }
                 key={ location.node._meta.id }
