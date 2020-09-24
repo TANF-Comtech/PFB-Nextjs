@@ -6,6 +6,8 @@ import { useApollo } from '../lib/apollo/apolloClient'
 import Variables from '../components/styles/variables'
 import GlobalStyle from '../components/styles/global-css'
 
+import MetaContext from '../context/meta-context'
+
 import NavBar from '../components/global/navbar'
 import Footer from '../components/global/footer'
 import SiteMeta from '../components/meta/site-meta'
@@ -35,6 +37,16 @@ const MyApp = ({ Component, pageProps }) => {
   const apolloClient = useApollo(pageProps.initialApolloState) // Instantiates Apollo client
   const socialSplashArr = [ splashOne, splashTwo, splashThree, splashFour ] // social images
 
+  // Set up values for site-wide meta context
+  const placeholderMeta = {
+    "desc" : "PeopleForBikes is committed to improving biking for everyone. Learn more about our work and join our movement.",
+    "title" : "PeopleForBikes | Every ride. Every rider. Join us.",
+    "imgHeight": "900",
+    "imgSrc" : `${ socialSplashArr[Math.floor(Math.random()*socialSplashArr.length)] }`,
+    "imgWidth" : "1600",
+    "path" : "https://www.peopleforbikes.org",
+  }
+
   // Google LD+JSON basic, for <Head>
   const ldJSONBasic = {
     "@context": "http://schema.org",
@@ -62,21 +74,23 @@ const MyApp = ({ Component, pageProps }) => {
   return (
     <ApolloProvider client={ apolloClient }>
       <ThemeProvider theme={ Variables }>
-        <Head>
-          <script type="application/ld+json">{ JSON.stringify(ldJSONBasic) }</script>
-        </Head>
-        <SiteMeta
-          desc="PeopleForBikes is committed to improving biking for everyone. Learn more about our work and join our movement."
-          title="PeopleForBikes | Every ride. Every rider. Join us."
-          imgHeight="900"
-          imgSrc={ socialSplashArr[Math.floor(Math.random()*socialSplashArr.length)] }
-          imgWidth="1600"
-          path="https://www.peopleforbikes.org"
-        />
-        <GlobalStyle />
-        <NavBar />
-        <Component {...pageProps} />
-        <Footer />
+        <MetaContext.Provider value={ placeholderMeta }>
+          <Head>
+            <script type="application/ld+json">{ JSON.stringify(ldJSONBasic) }</script>
+          </Head>
+          <SiteMeta
+            desc={ placeholderMeta.desc }
+            title={ placeholderMeta.title }
+            imgHeight={ placeholderMeta.imgHeight }
+            imgSrc={ placeholderMeta.imgSrc }
+            imgWidth={ placeholderMeta.imgWidth }
+            path={ placeholderMeta.path }
+          />
+          <GlobalStyle />
+          <NavBar />
+          <Component {...pageProps} />
+          <Footer />
+        </MetaContext.Provider>
       </ThemeProvider>
     </ApolloProvider>
   )
