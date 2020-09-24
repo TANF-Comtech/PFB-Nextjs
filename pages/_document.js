@@ -1,5 +1,7 @@
-import Document from 'next/document'
+import Document, { Html, Head, Main, NextScript } from 'next/document'
 import { ServerStyleSheet } from 'styled-components'
+
+import logo from '../public/logo.svg'
 
 export default class MyDocument extends Document {
   /**
@@ -50,5 +52,37 @@ export default class MyDocument extends Document {
     finally {
       sheet.seal()
     }
+  }
+
+  render() {
+    return (
+      <Html lang="en">
+        <Head>
+          <link rel="icon" href={ logo } sizes="any" type="image/svg+xml" />
+          <link rel="stylesheet" href="https://cloud.typography.com/6938898/7916412/css/fonts.css" />
+          <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&display=swap" />
+          <meta property="fb:app_id" content="#" />
+          <meta property="og:site_name" 
+            content="PeopleForBikes"
+            key="ogsite" />
+          <meta property="og:locale" 
+                content="en_US" 
+                key="oglocale" />
+          <meta property="og:type" 
+                content="website" 
+                key="ogtype" />
+          <meta name="twitter:card" 
+                content="summary_large_image" 
+                key="twtrcard" />
+          <meta name="twitter:site" 
+                content="@peopleforbikes" 
+                key="twtrsite" />
+        </Head>
+        <body>
+          <Main />
+          <NextScript />
+        </body>
+      </Html>
+    )
   }
 }

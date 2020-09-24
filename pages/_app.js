@@ -14,8 +14,7 @@ import splashOne from '../public/social-splash/PFB_Social-01.jpg'
 import splashTwo from '../public/social-splash/PFB_Social-02.jpg'
 import splashThree from '../public/social-splash/PFB_Social-03.jpg'
 import splashFour from '../public/social-splash/PFB_Social-04.jpg'
-
-import logo from '../public/logo.svg'
+import logo from '../public/PFB_Stacked_LOGO_512x512.jpg'
 
 /**
  * <MyApp>
@@ -35,7 +34,8 @@ const MyApp = ({ Component, pageProps }) => {
 
   const apolloClient = useApollo(pageProps.initialApolloState) // Instantiates Apollo client
   const socialSplashArr = [ splashOne, splashTwo, splashThree, splashFour ] // social images
-  // Google LD+JSON basic
+
+  // Google LD+JSON basic, for <Head>
   const ldJSONBasic = {
     "@context": "http://schema.org",
     "@type": "Organization",
@@ -55,26 +55,7 @@ const MyApp = ({ Component, pageProps }) => {
     <ApolloProvider client={ apolloClient }>
       <ThemeProvider theme={ Variables }>
         <Head>
-          <link rel="icon" href={ logo } sizes="any" type="image/svg+xml" />
-          <link rel="stylesheet" href="https://cloud.typography.com/6938898/7916412/css/fonts.css" />
-          <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&display=swap" />
-          <meta property="fb:app_id" content="#" />
-          <script type="application/ld+json">{JSON.stringify(ldJSONBasic)}</script>
-          <meta property="og:site_name" 
-            content="PeopleForBikes"
-            key="ogsite" />
-          <meta property="og:locale" 
-                content="en_US" 
-                key="oglocale" />
-          <meta property="og:type" 
-                content="website" 
-                key="ogtype" />
-          <meta name="twitter:card" 
-                content="summary_large_image" 
-                key="twtrcard" />
-          <meta name="twitter:site" 
-                content="@peopleforbikes" 
-                key="twtrsite" />
+          <script type="application/ld+json">{ JSON.stringify(ldJSONBasic) }</script>
         </Head>
         <SiteMeta
           desc="PeopleForBikes is committed to improving biking for everyone. Learn more about our work and join our movement."
