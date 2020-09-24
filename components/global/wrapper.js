@@ -3,7 +3,6 @@ import styled from "styled-components";
 import useSize from "@react-hook/size";
 
 import Titlebar from "../global/titlebar";
-import { typeOf } from "react-is";
 
 // spacer constrains the layout on big screens but keeps it tight on mobile
 const MainContent = styled.main`
@@ -36,8 +35,6 @@ const Wrapper = ({ children, isWide, postTitle }) => {
     initialWidth: 0,
     initialHeight: 0,
   });
-
-  console.log(isWide)
 
   return (
     <>
