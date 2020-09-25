@@ -8,17 +8,12 @@ import { useApollo } from '../lib/apollo/apolloClient'
 import Variables from '../components/styles/variables'
 import GlobalStyle from '../components/styles/global-css'
 
-import MetaContext from '../context/meta-context'
+import DefaultContext from '../context/default-context'
+import { ldJSONBasic, defaultData } from '../context/default-data'
 
 import NavBar from '../components/global/navbar'
 import Footer from '../components/global/footer'
 import SiteMeta from '../components/meta/site-meta'
-
-import splashOne from '../public/social-splash/PFB_Social-01.jpg'
-import splashTwo from '../public/social-splash/PFB_Social-02.jpg'
-import splashThree from '../public/social-splash/PFB_Social-03.jpg'
-import splashFour from '../public/social-splash/PFB_Social-04.jpg'
-import logo from '../public/PFB_Stacked_LOGO_512x512.jpg'
 
 /**
  * <MyApp>
@@ -37,62 +32,28 @@ import logo from '../public/PFB_Stacked_LOGO_512x512.jpg'
 const MyApp = ({ Component, pageProps }) => {
 
   const apolloClient = useApollo(pageProps.initialApolloState) // Instantiates Apollo client
-  const socialSplashArr = [ splashOne, splashTwo, splashThree, splashFour ] // social images
-
-  // Set up values for site-wide meta context
-  const placeholderMeta = {
-    "desc" : "PeopleForBikes is committed to improving biking for everyone. Learn more about our work and join our movement.",
-    "title" : "PeopleForBikes | Every ride. Every rider. Join us.",
-    "imgHeight": "900",
-    "imgSrc" : `${ socialSplashArr[Math.floor(Math.random()*socialSplashArr.length)] }`,
-    "imgWidth" : "1600",
-    "path" : "https://www.peopleforbikes.org",
-  }
-
-  // Google LD+JSON basic, for <Head>
-  const ldJSONBasic = {
-    "@context": "http://schema.org",
-    "@type": "Organization",
-    "name": "PeopleForBikes",
-    "url": "https://www.peopleforbikes.org",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "2580 55th St #200",
-      "addressLocality": "Boulder",
-      "addressRegion": "CO",
-      "postalCode": "80301",
-      "addressCountry": "US"
-    },
-    "telephone": "+13034494893",
-    "logo": `${ logo }`,
-    "sameAs": [
-      "https://www.facebook.com/PeopleForBikes", 
-      "https://twitter.com/peopleforbikes",
-      "https://www.linkedin.com/company/peopleforbikes",
-      "https://www.instagram.com/peopleforbikes",
-      "https://www.youtube.com/user/peopleforbikes/videos"]
-  }
+  
 
   return (
     <ApolloProvider client={ apolloClient }>
       <ThemeProvider theme={ Variables }>
-        <MetaContext.Provider value={ placeholderMeta }>
+        <DefaultContext.Provider value={ defaultData }>
           <Head>
             <script type="application/ld+json">{ JSON.stringify(ldJSONBasic) }</script>
           </Head>
           <SiteMeta
-            desc={ placeholderMeta.desc }
-            title={ placeholderMeta.title }
-            imgHeight={ placeholderMeta.imgHeight }
-            imgSrc={ placeholderMeta.imgSrc }
-            imgWidth={ placeholderMeta.imgWidth }
-            path={ placeholderMeta.path }
+            desc={ defaultData.meta.desc }
+            title={ defaultData.meta.title }
+            imgHeight={ defaultData.meta.imgHeight }
+            imgSrc={ defaultData.meta.imgSrc }
+            imgWidth={ defaultData.meta.imgWidth }
+            path={ defaultData.meta.path }
           />
           <GlobalStyle />
           <NavBar />
           <Component {...pageProps} />
           <Footer />
-        </MetaContext.Provider>
+        </DefaultContext.Provider>
       </ThemeProvider>
     </ApolloProvider>
   )
