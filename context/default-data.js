@@ -87,7 +87,77 @@ export const defaultData = {
       }
     }
   ],
-  'rideSpotRides': {},
+  'rideSpotRides': {
+    "rideone": {
+      "title": [
+        {
+          "type": "heading1",
+          "text": "NW Grand Rapids Tour",
+          "spans": []
+        }
+      ],
+      "distance": "6.5 miles",
+      "organization": {
+        "name": [
+          {
+            "type": "heading1",
+            "text": "GVSU - Recreation and Wellness",
+            "spans": []
+          }
+        ]
+      },
+      "ridespot_link": {
+        "url": "https://ridespot.org/rides/209896",
+        "target": "_blank"
+      }
+    },
+    "ridetwo": {
+      "title": [
+        {
+          "type": "heading1",
+          "text": "Reed's Lake Cyclocross Loop",
+          "spans": []
+        }
+      ],
+      "distance": "10 Miles",
+      "organization": {
+        "name": [
+          {
+            "type": "heading1",
+            "text": "Alger Bikes",
+            "spans": []
+          }
+        ]
+      },
+      "ridespot_link": {
+        "url": "https://ridespot.org/rides/10653",
+        "target": "_blank"
+      }
+    },
+    "ridethree": {
+      "title": [
+        {
+          "type": "heading1",
+          "text": "Waterloo G&G",
+          "spans": []
+        }
+      ],
+      "distance": "10 Miles",
+      "organization": {
+        "name": [
+          {
+            "type": "heading1",
+            "text": "Fraser Bicycle - Ann Arbor",
+            "spans": []
+          }
+        ]
+      },
+      "ridespot_link": {
+        "url": "https://ridespot.org/rides/7561",
+        "target": "_blank"
+      }
+    },
+  },  
   'newsItems': {}
 }
 

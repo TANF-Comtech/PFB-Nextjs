@@ -1,5 +1,12 @@
 import React from "react";
 import styled from "styled-components";
+import Link from "next/link"
+
+import { linkResolver } from '../../lib/utils'
+
+import LinkIcon from '../../public/icons/link.svg'
+import NewsIcon from '../../public/icons/news.svg'
+import EventIcon from '../../public/icons/event.svg'
 
 const Container = styled.section`
   align-items: center;
@@ -33,6 +40,10 @@ const ContentContainer = styled.div`
     margin: 0 0 0 2vw;
     text-align: left;
   }
+
+  a, a:focus, a:hover, a:visited {
+    text-decoration: none;
+  }
 `
 
 const Title = styled.h2`
@@ -50,24 +61,28 @@ const Text = styled.p`
  * This creates an icon with a title and text next to it.
  * 
  * @param { string } icon - img icon source string
- * @param { string } iconAlt - icon alt text
+ * @param { string } path - where the title goes
  * @param { string } title - title that goes next to the icon
  * @param { string } text - content to be shown
  */
 const ActionItem = ({
   icon,
-  iconAlt,
+  path,
   title,
   text
 }) => {
+  
   return (
     <Container>
-      <Icon
-        src={ icon }
-        alt={ iconAlt }
-      />
+      { icon === 'Event (calendar icon)' && <Icon src={ EventIcon } alt="Event Icon" /> }
+      { icon === 'News (newspaper icon)' && <Icon src={ NewsIcon } alt="News Icon" /> }
+      { icon === 'Join (link icon)' && <Icon src={ LinkIcon } alt="Link Icon" /> }
       <ContentContainer>
-        <Title>{ title }</Title>
+        <Link href={ linkResolver(path._meta) } passHref>
+          <a>
+            <Title>{ title }</Title>
+          </a>
+        </Link>
         <Text>{ text }</Text>
       </ContentContainer>
     </Container>
