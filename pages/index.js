@@ -22,6 +22,24 @@ function Homepage() {
           <h1>Biking for Everyone</h1>
           <h3>People for Bikes makes biking better</h3>
         </HeaderImage>
+
+        {/* Slice pattern - will be useful later */}
+        {/* { page.locations.body &&
+          page.locations.body.map( (slice) => {
+          switch(slice.type) {
+            case 'action_item' :
+              return (
+                <ActionItemGroup
+                  payload={ slice.fields }
+                />
+              )
+            case 'ridespot_promo' :
+              return (
+                <RideSpotPromo 
+                  payload={ slice.primary } 
+                />
+              )
+        }})} */}
       </Wrapper>
     </>
   )
