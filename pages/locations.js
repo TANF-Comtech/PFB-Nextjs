@@ -35,7 +35,7 @@ const LandingBar = styled.div`
 `
 
 export default function LocationsLanding({ page }) {
-  console.log(page)
+  
   return (
     <>
       <Head>

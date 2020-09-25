@@ -136,7 +136,7 @@ const RideSpotPromo = ({ payload }) => {
 
   // Transform payload object into an array
   const payloadArr = Object.keys(payload).map((key) => payload[key] )
-  console.log(payloadArr)
+  
   return (
     <>
       <BgImage>
