@@ -16,10 +16,11 @@ const ActionItemGroup = ({
   // console.log(payload)
   return (
     <MainContent>
-      { payload.map( (item) => {
+      { payload.map( (item, i) => {
         return (
           <ActionItem 
             icon={ item.icon }
+            key={ i }
             path={ item.link }
             title={ item.title[0].text }
             text={ item.text }
