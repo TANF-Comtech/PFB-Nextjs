@@ -86,7 +86,7 @@ export default function LocationPage({ page, preview }) {
         }
 
         <MainContent>
-          <h2>PeopleForBikes work in { page?.locations.location[0].text }</h2>
+          <h2>PeopleForBikes Work in { page?.locations.location[0].text }</h2>
           <h3>News</h3>
           <ContentItem 
             date="September 5th, 2020"

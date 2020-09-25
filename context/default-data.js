@@ -157,8 +157,7 @@ export const defaultData = {
         "target": "_blank"
       }
     },
-  },  
-  'newsItems': {}
+  }
 }
 
 /**

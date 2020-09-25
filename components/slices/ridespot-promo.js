@@ -1,34 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
-import RideSpotRide from "../../components/global/ridespot-ride"
+import RideSpotRide from "./ridespot-ride"
 
 import RideSpotBg1 from '../../public/ridespot-bg.jpg'
 import RideSpotLogo from '../../public/ridespot-logo.svg'
-
-import Arrow from '../../public/arrow.png'
-
-// Faked in the data
-const ridesArr = [
-  {
-    'distance': '51mi',
-    'extLink': 'https://ridespot.org/rides/147840',
-    'owner': 'PeopleForBikes', 
-    'title': 'Selma55 - The 55th Anniversary of the Selma to Montgomery Voters Rights March'
-  },
-  {
-    'distance': '63mi',
-    'extLink': 'https://ridespot.org/rides/107445',
-    'owner': 'Wheel Wranglers', 
-    'title': 'Tetonia to Ashton Rail Trail'
-  },
-  {
-    'distance': '11mi',
-    'extLink': 'https://ridespot.org/rides/55819',
-    'owner': 'Midwest Devo Junior Cycling Team', 
-    'title': 'Yellowwood Lake Loop - Family and kid friendly'
-  },
-]
 
 // BgImage will randomize the backgrounds
 const BgImage = styled.section`
@@ -152,12 +128,15 @@ const RSArrow = styled.img`
 /**
  * <RideSpotPromo>
  * 
- * This produces the 2 RideSpot ride promos seen around the site
+ * This produces the 3 RideSpot ride promos seen around the site
  * 
- * @param { boolean } menuState - lifted state true/false toggle for menu opening/closing
- * @param { function } handleMenu - lifted state changer for menuState, handles click event
+ * @param { object } payload - all the ridespot ride info
  */
-const RideSpotPromo = () => {
+const RideSpotPromo = ({ payload }) => {
+
+  // Transform payload object into an array
+  const payloadArr = Object.keys(payload).map((key) => payload[key] )
+  console.log(payloadArr)
   return (
     <>
       <BgImage>
@@ -166,14 +145,14 @@ const RideSpotPromo = () => {
           src={ RideSpotLogo }
         />
         <RSRidesContainer>
-          { ridesArr.map( (ride, i) => {
+          { payloadArr.map( (ride, i) => {
             return (
               <RideSpotRide
                 distance={ ride.distance }
-                extLink={ ride.extLink }
+                extLink={ ride.ridespot_link.url }
                 key={ i }
-                owner={ ride.owner }
-                title={ ride.title }
+                owner={ ride.organization.name[0].text }
+                title={ ride.title[0].text }
               /> 
             )
           }) }                   
