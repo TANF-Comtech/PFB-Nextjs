@@ -248,8 +248,8 @@ const NavMenu = ({ menuState, handleMenu }) => {
             <>
               <MainNav>
                 { mainMenu.map( (menu_item) => {
-                  return (
-                    <MainNavItem key={ randomID(10000000)} >
+                  return menu_item.item !== null ? (
+                    <MainNavItem key={ randomID(10000000) } >
                       <Link 
                         href={ '/' + menu_item.item._meta.uid } >
                         <a>
@@ -257,6 +257,8 @@ const NavMenu = ({ menuState, handleMenu }) => {
                         </a>
                       </Link>
                     </MainNavItem>
+                  ) : (
+                    <div key={ randomID(10000000) }></div>
                   )
                 })}
               </MainNav>
@@ -268,8 +270,8 @@ const NavMenu = ({ menuState, handleMenu }) => {
                 </Link>
               </MenuHeader>
               <GridMicro>
-                { topicMenu.map( (topic) => {
-                  return (
+                { topicMenu && topicMenu.map( (topic) => {
+                  return topic.item !== null ? (
                     <ImageSquare
                       imageSquareLink={ `/topics/${topic.item._meta.uid}` }
                       source1X={ topic.item.square_image?.mobile.url }
@@ -277,6 +279,8 @@ const NavMenu = ({ menuState, handleMenu }) => {
                       title={ topic.item.title[0].text }
                       key={ topic.item._meta.id }
                     />                    
+                  ) : (
+                    <div key={ randomID(10000000) }></div>
                   )
                 })}                
               </GridMicro>
