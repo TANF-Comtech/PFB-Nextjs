@@ -25,9 +25,9 @@ const Container = styled.div`
   max-width: ${props => props.theme.lg};
   padding: 0 4vw;
 
-  @media screen and (min-width: 1200px) {
+  @media screen and (min-width: 1250px) {
     padding: 0;
-  }
+  } 
 `
 
 const Content = styled.header`
@@ -35,6 +35,8 @@ const Content = styled.header`
   display: flex;
   justify-content: space-between;
   padding: 1vh 0;
+  // margin: 0 auto;
+  max-width: 1200px;
 `;
 
 const LeftContent = styled.div`
@@ -54,6 +56,11 @@ const Title = styled.h2`
   @media screen and (min-width: 1200px) {
     font-size: 38px;
     line-height: 38px;
+  }
+
+  a, a:visited, a:focus, a:active, a:hover {
+    color: ${props => props.theme.black};
+    text-decoration: none;
   }
 `
 
@@ -90,7 +97,7 @@ function Titlebar({
   return (
     <>
       <Bar className={
-        scrollY > 800 && scrollY < (mainHeight - 800) ? 
+        scrollY > 600 && scrollY < (mainHeight - 800) ? 
           ('isVisibleY') : ('isHiddenY') 
       }>
         <Container>

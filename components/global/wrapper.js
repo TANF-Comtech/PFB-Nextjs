@@ -1,6 +1,9 @@
 import React, { useRef } from "react";
+import Link from "next/link"
 import styled from "styled-components";
 import useSize from "@react-hook/size";
+
+import { linkResolver } from '../../lib/utils'
 
 import Titlebar from "../global/titlebar";
 
@@ -24,10 +27,11 @@ const Container = styled.section`
  *
  * @param {object} children - inherited nested components, core React idea
  * @param {boolean} isWide - how wide of a container we want (true = full width || false = 1200px)
+ * @param {text} postPath - link to parent category of content, giving user access to last level of info
  * @param {text} postTitle - actual title of content of page, feeds into Titlebar component
  *
  */
-const Wrapper = ({ children, isWide, postTitle }) => {
+const Wrapper = ({ children, isWide, postPath, postTitle }) => {
   /* useSize hook gives us the dimensions of the target element (wherever you apply `ref`) */
   /* See example: https://github.com/jaredLunde/react-hook/tree/master/packages/size */
   const mainTarget = useRef(null);
@@ -38,9 +42,13 @@ const Wrapper = ({ children, isWide, postTitle }) => {
 
   return (
     <>
-      <Titlebar mainHeight={Math.round(mainHeight)}>
-        { postTitle }
-      </Titlebar>
+      { (postPath && postTitle) &&
+        <Titlebar mainHeight={Math.round(mainHeight)}>
+          <Link href={ postPath } passHref>
+            <a>{ postTitle }</a>
+          </Link>        
+        </Titlebar>
+      }
       <MainContent 
         ref={ mainTarget }
         isWidePass={ isWide }
