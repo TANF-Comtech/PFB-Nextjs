@@ -1,9 +1,8 @@
 import ErrorPage from 'next/error'
 import { useContext } from 'react'
-import { RichText } from 'prismic-reactjs'
 
 import { getLocationsNoImages, getSingleLocationsPage } from '../../lib/queries/locations'
-import { linkResolver, randomID } from '../../lib/utils'
+import { randomID } from '../../lib/utils'
 
 import DefaultContext from '../../context/default-context'
 
@@ -31,15 +30,16 @@ export default function LocationPage({ page, preview }) {
   return (
     <>
       <SiteMeta
-        desc={ locations.intro ? ( `${page?.locations.intro[0].text.substring(0,180) }... ` ) : ( meta.desc ) }
-        title={ locations.location ? ( `${ page?.locations.location[0].text } | People for Bikes` ) : ( meta.title ) }
-        imgHeight={ locations.header_image ? ( page?.locations.header_image.mobile2x.dimensions.height ) : ( meta.imgHeight )  }
-        imgSrc={ locations.header_image ? ( page?.locations.header_image.mobile2x.url ) : ( meta.imgSrc ) }
-        imgWidth={ locations.header_image ? ( page?.locations.header_image.mobile2x.dimensions.width ) : ( meta.imgWidth ) }
-        path={ locations ? ( `https://www.peopleforbikes.org/location/${page?.locations._meta.uid}` ) : ( meta.path ) }
+        desc={ locations.intro ? ( `${ locations.intro[0].text.substring(0,180) }... ` ) : ( meta.desc ) }
+        title={ locations.location ? ( `${ locations.location[0].text } | People for Bikes` ) : ( meta.title ) }
+        imgHeight={ locations.header_image ? ( locations.header_image.mobile2x.dimensions.height ) : ( meta.imgHeight )  }
+        imgSrc={ locations.header_image ? ( locations.header_image.mobile2x.url ) : ( meta.imgSrc ) }
+        imgWidth={ locations.header_image ? ( locations.header_image.mobile2x.dimensions.width ) : ( meta.imgWidth ) }
+        path={ locations ? ( `https://www.peopleforbikes.org/locations/${page?.locations._meta.uid}` ) : ( meta.path ) }
       />
       <Wrapper 
-        postTitle="People for Bikes Homepage"
+        postPath="/locations/"
+        postTitle="Locations"
         isWide={ true }
       >
         <HeaderImage 
