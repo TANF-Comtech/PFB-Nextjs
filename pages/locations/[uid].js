@@ -1,8 +1,9 @@
 import ErrorPage from 'next/error'
 import { useContext } from 'react'
+import { Date as ParseDate } from 'prismic-reactjs'
 
 import { getLocationsNoImages, getSingleLocationsPage } from '../../lib/queries/locations'
-import { randomID } from '../../lib/utils'
+import { randomID, setDateSuffix } from '../../lib/utils'
 
 import DefaultContext from '../../context/default-context'
 
@@ -18,13 +19,15 @@ import ActionItemGroup from '../../components/slices/action-item-group'
 
 /* You must reference the `topic` prop to get data from `getStaticProps` - check bottom of this file */
 export default function LocationPage({ page, preview }) {
-  const { locations } = page
-
-  // Check for Location, if not there, load error page 
-  if (!locations?._meta?.uid) {
+  if( !page || page === null ) {
     return <ErrorPage statusCode={404} />
   }
 
+  // Incoming data obj (page) is an array of objects
+  // 0 - location data
+  // 1 - news for this location
+  // more to come...
+  const { locations } = page[0]
   const { meta, actionItems, rideSpotRides } = useContext(DefaultContext)
 
   return (
@@ -35,7 +38,7 @@ export default function LocationPage({ page, preview }) {
         imgHeight={ locations.header_image ? ( locations.header_image.mobile2x.dimensions.height ) : ( meta.imgHeight )  }
         imgSrc={ locations.header_image ? ( locations.header_image.mobile2x.url ) : ( meta.imgSrc ) }
         imgWidth={ locations.header_image ? ( locations.header_image.mobile2x.dimensions.width ) : ( meta.imgWidth ) }
-        path={ locations ? ( `https://www.peopleforbikes.org/locations/${page?.locations._meta.uid}` ) : ( meta.path ) }
+        path={ locations ? ( `https://www.peopleforbikes.org/locations/${locations._meta.uid}` ) : ( meta.path ) }
       />
       <Wrapper 
         postPath="/locations/"
@@ -86,31 +89,38 @@ export default function LocationPage({ page, preview }) {
         }
 
         <MainContent>
-          <h2>PeopleForBikes Work in { page?.locations.location[0].text }</h2>
+          <h2>PeopleForBikes Work in { locations.location[0].text }</h2>
           <h3>News</h3>
-          <ContentItem 
-            date="September 5th, 2020"
-            title="Opening of New Cycletrack in Sedona"
-            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt."
-          />
-          <ContentItem 
-            date="July 12th, 2020"
-            title="DRAFT Digital Happy Hour Success"
-            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt."
-          />
-          <ContentItem 
-            date="October 23rd, 2019"
-            title="Tucson makes huge leap in City Ratings"
-            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt."
-          />
+          
+          { page[1] && page[1].map( (newsItem) => {
+            // Check for publication_date
+            // If present, convert to ISO 8601
+            const newDate = newsItem.data.publication_date ? 
+              ( new Date(ParseDate( newsItem.data.publication_date ))) : 
+              ( newsItem.last_publication_date ) 
+            return (
+              <ContentItem 
+                date={ `${newDate.toLocaleString('en-us', { month: 'long' } )} 
+                        ${setDateSuffix(newDate.getDate())}, 
+                        ${newDate.getFullYear()}` }
+                key={ newsItem.id }
+                path={ `/news/${newsItem.uid}` }
+                text={ newsItem.data.main_content[0].type === "paragraph" ? newsItem.data.main_content[0].text : "" }
+                title={ newsItem.data.title[0].text }
+              />
+            )
+          } ) }
+         
           <h3>Grants and Policy</h3>
           <ContentItem 
             date="September 7th, 2020"
+            path="/news/"
             title="2020 ebike laws for Arizona released"
             text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt."
           />
           <ContentItem 
             date="April 12th, 2020"
+            path="/news/"
             title="Opening of New Cycletrack in Sedona"
             text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt."
           />   
