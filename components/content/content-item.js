@@ -48,13 +48,18 @@ const ContentItem = ({
 }) => {
   return (
     <Container>
-      <Link href={ path } passHref="true">
-        <a>
-          <Title>{ title }</Title>
-        </a>
-      </Link>
-      <Datestamp>{ date }</Datestamp>
-      <Text>{ text }</Text>
+      { !path ? 
+        ( <Title>{ title }</Title> )  :
+        (
+          <Link href={ path }>
+            <a>
+              <Title>{ title }</Title>
+            </a>
+          </Link>
+        )
+      }
+      { date && <Datestamp>{ date }</Datestamp> }
+      { text && <Text>{ text }</Text> }
     </Container>
   )
 }

@@ -20,7 +20,6 @@ const ImageContainer = styled.div`
   min-height: 30vh;
   transition: 0.2s ease;
   transform: translateY(0);
-}
 `
 
 const Title = styled.h2`
