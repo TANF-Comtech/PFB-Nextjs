@@ -21,11 +21,6 @@ const BgImage = styled.section`
   h1 {
     color: #fff;
   }
-
-  @media( min-width: ${ props => props.theme.md}) {
-    height: 65vh;
-    padding: 0;
-  }
 `
 
 const RSLogoContainer = styled.img`

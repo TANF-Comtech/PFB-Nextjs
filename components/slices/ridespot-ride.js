@@ -24,19 +24,15 @@ const RSRide = styled.a`
   }
 
   @media( min-width: ${ props => props.theme.xs}) {
-    width: 70vw;
+    width: 70%;
   }
 
   @media( min-width: ${ props => props.theme.sm}) {
-    width: 46vw;
+    width: 46%;
   }
 
   @media( min-width: ${ props => props.theme.md}) {
-    width: 30vw;
-  }
-
-  @media( min-width: ${ props => props.theme.lg}) {
-    max-width: 25vw;
+    width: 30%;
   }
 `
 
