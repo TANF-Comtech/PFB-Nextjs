@@ -93,11 +93,11 @@ export default function LocationPage({ page, preview }) {
           <h3>News</h3>
           
           { page[1] && page[1].map( (newsItem) => {
-            // Check for publication_date
-            // If present, convert to ISO 8601
+            // Check for publication_date from individual news post
+            // If not present, use publication date from Prismic CMS
             const newDate = newsItem.data.publication_date ? 
               ( new Date(ParseDate( newsItem.data.publication_date ))) : 
-              ( newsItem.last_publication_date ) 
+              ( new Date(ParseDate( newsItem.last_publication_date )))
             return (
               <ContentItem 
                 date={ `${newDate.toLocaleString('en-us', { month: 'long' } )} 
