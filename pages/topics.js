@@ -50,7 +50,6 @@ export default function TopicsLanding({ page }) {
         </LandingBar>
         <p>{ page.topics.intro[0].text }</p>
         <Grid>
-          <img src={ genericSquare1x } />
           { page.allTopics.edges.map( (topic) => {
             return(
               <ImageSquare
