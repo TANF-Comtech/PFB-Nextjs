@@ -8,6 +8,9 @@ import Graphic from '../components/global/graphic'
 
 import { getTopicsLandingPage } from '../lib/queries/topics'
 
+import genericSquare1x from '../public/PFB_Topics_450x450_generic.jpg'
+import genericSquare2x from '../public/PFB_Topics_900x900_generic.jpg'
+
 const LandingBar = styled.div`
   align-items: center;
   display: flex;
@@ -47,12 +50,13 @@ export default function TopicsLanding({ page }) {
         </LandingBar>
         <p>{ page.topics.intro[0].text }</p>
         <Grid>
+          <img src={ genericSquare1x } />
           { page.allTopics.edges.map( (topic) => {
             return(
               <ImageSquare
                 imageSquareLink={ `/topics/${topic.node._meta.uid}` }
-                source1X={ topic.node.square_image?.mobile.url }
-                source2X={ topic.node.square_image?.url }
+                source1X={ topic.node.square_image ? ( topic.node.square_image.mobile.url ) : ( genericSquare1x ) }
+                source2X={ topic.node.square_image ? ( topic.node.square_image.url ) : ( genericSquare2x ) }
                 title={ topic.node.title[0].text }
                 key={ topic.node._meta.id }
               />
