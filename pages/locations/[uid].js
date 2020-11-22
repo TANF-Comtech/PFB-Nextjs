@@ -43,14 +43,19 @@ export default function LocationPage({ page, preview }) {
       <Wrapper 
         postPath="/locations/"
         postTitle="Locations"
-        isWide={ true }
+        isWide={ locations.header_image ? true : false }
       >
-        <HeaderImage 
-          headingRGBA="255,255,255,1"
-          source={ locations.header_image.url }
-        >
-          <h1>{ locations.location[0].text }</h1>
-        </HeaderImage>
+        { locations.header_image ? 
+          ( <HeaderImage 
+              headingRGBA="255,255,255,1"
+              source={ locations.header_image.url }
+            >
+              <h1>{ locations.location[0].text }</h1>
+            </HeaderImage>  
+          ) :
+          ( <h1>{ locations.location[0].text }</h1> )
+        }
+        
         
         {/* Check for slices on `body`, if body is present map over results */}
         {/* If `action_item` or `ridespot_promo` send data down to appropriate component */}
