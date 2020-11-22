@@ -1,40 +1,53 @@
-import Head from 'next/head'
+import { useContext } from 'react'
 import ErrorPage from 'next/error'
 
 import { getTopics, getSingleTopicPage } from '../../lib/queries/topics'
 
-import Wrapper from '../../components/global/wrapper'
-import HeaderImage from '../../components/global/header-image'
+import DefaultContext from '../../context/default-context'
 
+import Wrapper from '../../components/global/wrapper'
+import SiteMeta from '../../components/meta/site-meta'
+import HeaderImage from '../../components/global/header-image'
 import MainContent from '../../components/global/main-content'
 import ContentItem from '../../components/content/content-item'
 
 
 /* You must reference the `topic` prop to get data from `getStaticProps` - check bottom of this file */
 export default function TopicPage({ page, preview }) {
-  if (!page?.topic?._meta?.uid) {
+  if( !page || page === null ) {
     return <ErrorPage statusCode={404} />
   }
 
   // Destructure topic out of page prop
   const { topic } = page
+  const { meta, actionItems } = useContext(DefaultContext)
+
   return (
     <>
-      <Head>
-        <title>
-          {topic.title[0].text} | People for Bikes
-        </title>
-      </Head>
+      <SiteMeta
+        desc={ topic.intro ? ( `${ topic.intro[0].text.substring(0,180) }... ` ) : ( meta.desc ) }
+        title={ topic.title ? ( `${ topic.title[0].text } | People for Bikes` ) : ( meta.title ) }
+        imgHeight={ topic.banner_image ? ( topic.banner_image['1x'].dimensions.height ) : ( meta.imgHeight )  }
+        imgSrc={ topic.banner_image ? ( topic.banner_image['1x'].url ) : ( meta.imgSrc ) }
+        imgWidth={ topic.banner_image ? ( topic.banner_image['1x'].dimensions.width ) : ( meta.imgWidth ) }
+        path={ topic ? ( `https://www.peopleforbikes.org/topics/${topic._meta.uid}` ) : ( meta.path ) }
+      />    
       <Wrapper 
-        postTitle="People for Bikes Homepage"
-        isWide={ true }
+        postPath="/topics/"
+        postTitle="Topics"
+        isWide={ topic.banner_image ? true : false }
       >
-        <HeaderImage 
-          headingRGBA="255,255,255,1"
-          source={ topic.banner_image.url }
-        >
+        { topic.banner_image ? (
+          <HeaderImage 
+            headingRGBA="255,255,255,1"
+            source={ topic.banner_image.url }
+          >
+            <h1>{topic.title[0].text}</h1>
+          </HeaderImage>
+        ) : (
           <h1>{topic.title[0].text}</h1>
-        </HeaderImage>
+        ) }
+        
         <MainContent>
           <h2>People for Bikes work in {topic.title[0].text}</h2>
           <h3>News</h3>
