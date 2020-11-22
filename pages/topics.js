@@ -48,7 +48,7 @@ export default function TopicsLanding({ page }) {
           <h1>{ page.topics.title[0].text }</h1>
           <Graphic />
         </LandingBar>
-        <p>{ page.topics.intro[0].text }</p>
+        { page.topics.intro[0] && <p>{ page.topics.intro[0].text }</p> }
         <Grid>
           { page.allTopics.edges.map( (topic) => {
             return(
