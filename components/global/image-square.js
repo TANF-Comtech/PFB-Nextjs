@@ -6,12 +6,12 @@ import ArrowIcon from '../../public/red-arrow.svg'
 
 const ImageContainer = styled.div`
   align-items: center;
-  background-image: url(${props => props.path1X});
   background-image: 
     image-set(
       url(${props => props.path1X}) 1x,
-      url(${props => props.path2X}) 2x,
+      url(${props => props.path2X}) 2x
     );
+  background-image: url(${props => props.path1X});
   background-position: center center;
   background-size: cover;
   display: flex;
@@ -27,7 +27,6 @@ const ImageContainer = styled.div`
     display: inline-block;
     vertical-align: top;
   }
-}
 `
 
 const Title = styled.h2`
