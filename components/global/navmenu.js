@@ -251,8 +251,9 @@ const NavMenu = ({ menuState, handleMenu }) => {
                   return menu_item.item !== null ? (
                     <MainNavItem key={ randomID(10000000) } >
                       <Link 
-                        href={ '/' + menu_item.item._meta.uid } >
-                        <a>
+                        href={ '/' + menu_item.item._meta.uid } 
+                      >
+                        <a onClick={ handleMenu } >
                           { RichText.asText(menu_item.item.title) }
                         </a>
                       </Link>
