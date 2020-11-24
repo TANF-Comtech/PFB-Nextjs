@@ -19,8 +19,8 @@ function Homepage() {
           headingRGBA="255,255,255,1"
           source={ HPHero }
         >
-          <h1>Biking for Everyone</h1>
-          <h3>People for Bikes makes biking better</h3>
+          <span>Together We Make</span>
+          <h1>Biking Better</h1>
         </HeaderImage>
 
         {/* Slice pattern - will be useful later */}

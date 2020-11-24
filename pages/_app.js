@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import Router from 'next/router'
+import Router, { useRouter } from 'next/router'
 import withFBQ from "next-fbq"
 import { ThemeProvider } from 'styled-components'
 import { ApolloProvider } from '@apollo/react-hooks'
@@ -14,6 +14,7 @@ import { ldJSONBasic, defaultData } from '../context/default-data'
 import NavBar from '../components/global/navbar'
 import Footer from '../components/global/footer'
 import SiteMeta from '../components/meta/site-meta'
+import PageTransition from '../components/global/transition'
 
 /**
  * <MyApp>
@@ -29,10 +30,13 @@ import SiteMeta from '../components/meta/site-meta'
  * <GlobalStyle> is styled-components way to provide an CSS doc to entire site
  * <Component> is a Next.js default that renders all components and provides props to them
  */
-const MyApp = ({ Component, pageProps }) => {
+const MyApp = ({ Component, pageProps, router }) => {
 
-  const apolloClient = useApollo(pageProps.initialApolloState) // Instantiates Apollo client
-  
+  // Instantiates Apollo client
+  const apolloClient = useApollo(pageProps.initialApolloState) 
+
+  // sets up router hook, transitions to be path-aware
+  // const router = useRouter()
 
   return (
     <ApolloProvider client={ apolloClient }>
@@ -51,7 +55,9 @@ const MyApp = ({ Component, pageProps }) => {
           />
           <GlobalStyle />
           <NavBar />
-          <Component {...pageProps} />
+          <PageTransition location={ router.pathname }>
+            <Component {...pageProps} key={ router.route }/>
+          </PageTransition>
           <Footer />
         </DefaultContext.Provider>
       </ThemeProvider>
