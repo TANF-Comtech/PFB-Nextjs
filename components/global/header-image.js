@@ -35,25 +35,26 @@ const ImageContainer = styled.section`
     text-transform: uppercase;
   }
 
-  h3 {
+  span {
     color: rgba(${props => props.headingRGBA ? props.headingRGBA : "255,255,255,1" });
-    font-size: 18px;
-    font-weight: 700;
-    line-height: 24px;
+    font-family: "Tungsten A", "Tungsten B", Arial, Helvetica, sans-serif;
+    font-size: 40px;
+    font-weight: 600;
+    line-height: 30px;
     letter-spacing: 1px;
-    margin-top: 1vh;
+    margin: 0;
     text-transform: uppercase;
   }
   @media screen and (min-width: 320px) {
-    h3 {
-      font-size: calc(18px + 8 * ((100vw - 320px) / 880));
-      line-height: calc(24px + 8 * ((100vw - 320px) / 880));
+    span {
+      font-size: calc(40px + 20 * ((100vw - 320px) / 880));
+      line-height: calc(30px + 20 * ((100vw - 320px) / 880));
     }
   }
   @media screen and (min-width: 1200px) {
-    h3 {
-      font-size: 26px;
-      line-height: 36px;
+    span {
+      font-size: 60px;
+      line-height: 50px;
     }
   } 
 
