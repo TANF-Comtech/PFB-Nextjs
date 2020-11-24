@@ -151,9 +151,10 @@ const GridMicro = styled.section`
 `;
 
 /**
- * <Nav>
+ * <Navmenu>
  * 
- * Desc
+ * This component powers the main navigation structure on the left side of the site.
+ * It's kind of a one-off, so you just plug this in and you should be good
  * 
  * @param { boolean } menuState - lifted state true/false toggle for menu opening/closing
  * @param { function } handleMenu - lifted state changer for menuState, handles click event
@@ -274,12 +275,12 @@ const NavMenu = ({ menuState, handleMenu }) => {
                 { topicMenu && topicMenu.map( (topic) => {
                   return topic.item !== null ? (
                     <ImageSquare
+                      handleMenu={ handleMenu }  
                       imageSquareLink={ `/topics/${topic.item._meta.uid}` }
+                      key={ topic.item._meta.id }
                       source1X={ topic.item.square_image?.mobile.url }
                       source2X={ topic.item.square_image?.url }
                       title={ topic.item.title[0].text }
-                      key={ topic.item._meta.id }
-                      onClick={ handleMenu }
                     />                    
                   ) : (
                     <div key={ randomID(10000000) }></div>
