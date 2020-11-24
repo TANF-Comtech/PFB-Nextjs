@@ -265,7 +265,7 @@ const NavMenu = ({ menuState, handleMenu }) => {
               </MainNav>
               <MenuHeader>
                 <Link href="/topics">
-                  <a>
+                  <a onClick={ handleMenu }>
                     <MenuTitle>Explore Topics</MenuTitle>
                   </a>
                 </Link>
@@ -279,6 +279,7 @@ const NavMenu = ({ menuState, handleMenu }) => {
                       source2X={ topic.item.square_image?.url }
                       title={ topic.item.title[0].text }
                       key={ topic.item._meta.id }
+                      onClick={ handleMenu }
                     />                    
                   ) : (
                     <div key={ randomID(10000000) }></div>
