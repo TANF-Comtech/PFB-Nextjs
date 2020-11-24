@@ -10,6 +10,14 @@ const Sizer = styled.div`
   max-width: ${(props) => props.theme.lg};
 `;
 
+/**
+ * <MainContent>
+ * 
+ * For pages where <Wrapper> is full-width, you probably want some sections tight
+ * This component just brings content sections inline with the max-width around the site
+ * Very useful, very simple.
+ * 
+ */
 const MainContent = ({ children }) => {
   return (
     <>
