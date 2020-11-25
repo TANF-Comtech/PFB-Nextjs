@@ -54,19 +54,21 @@ const Arrow = styled.img`
  * Presents a square image with some text on top of it
  *
  * @param { string } imageSquareLink - Next path for the image square
+ * @param { obj } handleMenu - closes main menu when clicked
  * @param { string } source1X - image source for the bg image
  * @param { string } source2X - image source for the bg image, twice as big
  * @param { string } title - text that goes on top 
  */
 const ImageSquare = ({
   imageSquareLink,
+  handleMenu,
   source1X,
   source2X,
   title
 }) => {
   return (
     <Link href={ imageSquareLink } passHref>
-      <a>
+      <a onClick={ handleMenu }>
         <ImageContainer
           path1X={ source1X }
           path2X={ source2X }
