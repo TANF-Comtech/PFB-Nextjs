@@ -6,7 +6,7 @@ import Link from 'next/link'
 
 import ImageSquare from '../../components/global/image-square'
 
-import { DocLink, randomID, linkResolver } from '../../lib/utils'
+import { randomID } from '../../lib/utils'
 
 const NavContainer = styled.nav`
   background-color: #fff;
@@ -151,7 +151,7 @@ const GridMicro = styled.section`
 `;
 
 /**
- * <Navmenu>
+ * <NavMenu>
  * 
  * This component powers the main navigation structure on the left side of the site.
  * It's kind of a one-off, so you just plug this in and you should be good
