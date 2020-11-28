@@ -71,7 +71,7 @@ const ActionItem = ({
   title,
   text
 }) => {
-  console.log(path)
+
   return (
     <Container>
       { icon === 'Event (calendar icon)' && <Icon src={ EventIcon } alt="Event Icon" /> }
