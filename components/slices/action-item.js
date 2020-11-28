@@ -71,14 +71,14 @@ const ActionItem = ({
   title,
   text
 }) => {
-  
+  console.log(path)
   return (
     <Container>
       { icon === 'Event (calendar icon)' && <Icon src={ EventIcon } alt="Event Icon" /> }
       { icon === 'News (newspaper icon)' && <Icon src={ NewsIcon } alt="News Icon" /> }
       { icon === 'Join (link icon)' && <Icon src={ LinkIcon } alt="Link Icon" /> }
       <ContentContainer>
-        <Link href={ linkResolver(path._meta) } passHref>
+        <Link href={ linkResolver(path) } passHref>
           <a>
             <Title>{ title }</Title>
           </a>
