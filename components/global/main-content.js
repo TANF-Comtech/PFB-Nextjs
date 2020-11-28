@@ -17,6 +17,8 @@ const Sizer = styled.div`
  * This component just brings content sections inline with the max-width around the site
  * Very useful, very simple.
  * 
+ * @param { object } children - nested components beneath this component
+ * 
  */
 const MainContent = ({ children }) => {
   return (

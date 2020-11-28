@@ -49,9 +49,19 @@ const RSData = styled.div`
 
 const RSTitle = styled.h2`
   color: #fff;
+  font-weight: 600;
   font-size: 35px;
   margin: 0 0 1vh 0; /* needed for override */ 
   line-height: 32px;
+`
+
+const RSDistance = styled.h3`
+  color: ${props => props.theme.yellow };
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 24px;
+  margin: 0;
+  text-transform: uppercase;
 `
 
 const RSInfo = styled.h3`
@@ -91,7 +101,7 @@ const RideSpotRide = ({
     <RSRide href={ extLink } target="_blank">
       <RSData>
         <RSTitle>{ title }</RSTitle>
-        <RSInfo>Distance: { distance }</RSInfo>
+        <RSDistance>Distance: { distance }</RSDistance>
         <RSInfo>{ owner }</RSInfo>
       </RSData>
       <RSArrow 

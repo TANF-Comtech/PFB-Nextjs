@@ -12,6 +12,7 @@ const Variables = {
   blue: '#3E9FDC',
   blueAccent: '#2076ac',
   midnightBlue: '#002C40',
+  yellow: '#FFDC00',
 
   // Breakpoints
   bm: '320px',

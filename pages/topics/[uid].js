@@ -22,10 +22,11 @@ export default function TopicPage({ page, preview }) {
   const { topic } = page
   const { meta, actionItems } = useContext(DefaultContext)
 
+  console.log(topic)
   return (
     <>
       <SiteMeta
-        desc={ topic.intro ? ( `${ topic.intro[0].text.substring(0,180) }... ` ) : ( meta.desc ) }
+        desc={ topic.intro ? ( `${ topic.intro.substring(0,180) }... ` ) : ( meta.desc ) }
         title={ topic.title ? ( `${ topic.title[0].text } | People for Bikes` ) : ( meta.title ) }
         imgHeight={ topic.banner_image ? ( topic.banner_image['1x'].dimensions.height ) : ( meta.imgHeight )  }
         imgSrc={ topic.banner_image ? ( topic.banner_image['1x'].url ) : ( meta.imgSrc ) }

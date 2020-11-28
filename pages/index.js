@@ -1,16 +1,181 @@
-import Head from 'next/head'
+import Link from 'next/link'
+import styled from "styled-components"
+import Image from "next/image"
+import Flickity from "react-flickity-component"
+
+import { getHomepage } from '../lib/queries/homepage'
+import { linkResolver } from '../lib/utils'
 
 import Wrapper from '../components/global/wrapper'
 import HeaderImage from '../components/global/header-image'
+import Grid from '../components/global/grid'
+import MainContent from '../components/global/main-content'
+import RideSpotPromo from '../components/slices/ridespot-promo'
+import RideSpotRide from '../components/slices/ridespot-ride'
 
+import WhiteArrow from '../public/white-arrow.svg'
 import HPHero from '../public/sample-images/PFB_GrantFinder_2300x800.jpg'
 
-function Homepage() {
+import CarouselOne from '../public/sample-images/carousel-1.jpg'
+import CarouselTwo from '../public/sample-images/carousel-2.jpg'
+import CarouselThree from '../public/sample-images/carousel-3.jpg'
+
+// Box Component soon...
+const Box = styled.div`
+  background-color: ${props => props.bgColor};
+  min-height: 190px;
+  padding: 25px 50px;
+`
+
+const Number = styled.h3`
+  align-items: center;
+  background-color: white;
+  border-radius: 23px;
+  color: ${props => props.theme.redAccent};
+  display: flex;
+  font-size: 28px;
+  height: 46px;
+  justify-content: center;
+  margin: 0 auto;
+  width: 46px;
+`
+
+const Text = styled.h4`
+  color: white;
+  font-size: 36px;
+  font-weight: 300;
+  line-height: 36px;
+  margin-top: 1vh;
+  text-align: center;
+
+  @media screen and (min-width: 320px) {
+    font-size: calc(36px + 8 * ((100vw - 320px) / 880));
+    line-height: calc(36px + 8 * ((100vw - 320px) / 880));
+  }
+  @media screen and (min-width: 1200px) {
+    font-size: 44px;
+    line-height: 44px;
+  }  
+`
+
+const Arrow = styled.img`
+  display: block;
+  margin: 0 auto;
+  width: 46px;
+`
+
+// BigCarousel Component
+const Container = styled.section`
+  /* height: 75vh; */
+`
+const Slide = styled.section`
+  align-items: center;
+  background-image: url(${ props => props.source });
+  background-position: center center;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  height: 40vh;
+  max-height: 600px;
+  justify-content: center;
+  max-width: 1100px;
+  margin: 0 12.5px;
+  padding: 25px;
+  width: 90vw;
+
+  @media screen and (min-width: 480px) {
+    height: 80vw;
+    width: 80vw;
+  }
+
+  @media screen and (min-width: 768px) {
+    height: 60vw;
+  }
+
+  @media screen and (min-width: 1000px) {
+    height: 40vw;
+  }
+
+  h2 {
+    color: rgba(${props => props.headingRGBA ? props.headingRGBA : "255,255,255,1" });
+    font-size: 60px;
+    font-weight: 600;
+    line-height: 50px;
+    padding-bottom: 10px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  @media screen and (min-width: 320px) {
+    h2 {
+      font-size: calc(60px + 60 * ((100vw - 320px) / 880));
+      line-height: calc(50px + 60 * ((100vw - 320px) / 880));
+    }
+  }
+  @media screen and (min-width: 1200px) {
+    h2 {
+      font-size: 120px;
+      line-height: 110px;
+    }
+  }   
+
+  span {
+    color: rgba(${props => props.headingRGBA ? props.headingRGBA : "255,255,255,1" });
+    font-family: "Tungsten A", "Tungsten B", Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 25px;
+    letter-spacing: 1px;
+    padding-bottom: 3px;
+    margin: 0;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  @media screen and (min-width: 320px) {
+    span {
+      font-size: calc(30px + 30 * ((100vw - 320px) / 880));
+      line-height: calc(25px + 25 * ((100vw - 320px) / 880));
+    }
+  }
+  @media screen and (min-width: 1200px) {
+    span {
+      font-size: 60px;
+      line-height: 50px;
+    }
+  } 
+`
+
+const SlideWrapper = styled.a`
+  text-align: center;
+  text-decoration: none !important;
+
+  &::hover, &::visited, &:focus {
+    text-decoration: none !important;
+  }
+`
+
+const SectionTitle = styled.h3`
+  color: ${props => props.theme.midnightBlue};
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 4vh;
+`
+
+export default function Homepage({ page }) {
+  const { homepage } = page
+
+  // Get number of slides, tell flickity what's up
+  const slideIndex = homepage.campaigns ? Math.floor(homepage.campaigns.length / 2) : 1
+
+  const flickityOptions = {
+    initialIndex: slideIndex,
+    wrapAround: true
+  }
+  
+  
+  console.log(homepage)
+  
   return (
-    <>
-      <Head>
-        <title>People for Bikes</title>
-      </Head>
+    <>  
       <Wrapper 
         postTitle="People for Bikes Homepage"
         isWide={ true }
@@ -22,6 +187,97 @@ function Homepage() {
           <span>Together We Make</span>
           <h1>Biking Better</h1>
         </HeaderImage>
+
+        <MainContent>
+          <SectionTitle>Our Mission</SectionTitle> 
+          <Grid gridGap="1vw">
+            <Box bgColor="#D0021B">
+              <Number>1</Number>
+              <Text>Improving Recreational Access for Bicycles</Text>
+            </Box>
+            <Box bgColor="#D0021B">
+              <Number>2</Number>
+              <Text>Building Safe Mobility Networks</Text>
+            </Box>
+            <Box bgColor="#D0021B">
+              <Number>3</Number>
+              <Text>Fostering Diversity, Equity, and Inclusion</Text>
+            </Box>
+            <Box bgColor="#D0021B">
+              <Number>4</Number>
+              <Text>Promoting Sustainability</Text>
+            </Box>
+            <Box bgColor="#D0021B">
+              <Number>5</Number>
+              <Text>Growing the Bike Industry</Text>
+            </Box>
+            <Link href="/mission" passHref>
+              <a>
+                <Box bgColor="#002C40">
+                  <Arrow src={ WhiteArrow } width="46px" />
+                  <Text>Read More About Our Mission</Text>
+                </Box>
+              </a>
+            </Link>
+          </Grid>
+        </MainContent>        
+        
+        { homepage.campaigns &&
+          <>
+            <SectionTitle>Get Involved</SectionTitle> 
+
+            <Flickity
+              options={flickityOptions}
+              static={true}
+            >
+              { homepage.campaigns.map( (c) => {
+                return(
+                  <Slide 
+                    key={ c.campaign._meta.id }
+                    source={ c.campaign.banner_image.url }
+                  >
+                    <SlideWrapper 
+                      href={ linkResolver(c.campaign.link, true) } 
+                      rel="noopener"
+                      target="_blank">
+                        { c.campaign.small_text && <span>{ c.campaign.small_text }</span> }
+                        { c.campaign.big_text && <h2>{ c.campaign.big_text }</h2> }
+                        <Arrow src={ WhiteArrow } width="46px" />
+                    </SlideWrapper>
+                  </Slide>
+                )
+              } ) }
+            </Flickity>
+          </>
+        }
+        
+        
+          
+          {/* <Slide>
+            <Image 
+              src={ CarouselOne } 
+              alt="Biker 1" 
+              width={1880}
+              height={1164}
+            />
+          </Slide>
+          <Slide>
+            <Image 
+              src={ CarouselTwo } 
+              alt="Biker 2" 
+              width={1880}
+              height={1164}
+            />
+          </Slide>
+          <Slide>
+            <Image 
+              src={ CarouselThree } 
+              alt="Biker 3" 
+              width={1880}
+              height={1164}
+            />
+          </Slide> */}
+        
 
         {/* Slice pattern - will be useful later */}
         {/* { page.locations.body &&
@@ -45,4 +301,15 @@ function Homepage() {
   )
 }
 
-export default Homepage
+/* The return here sends the `page` prop back to the component above for rendering */
+export async function getStaticProps({ params, preview = false, previewData }) {
+  const pageData = await getHomepage()
+
+  return {
+    props: {
+      preview,
+      page: pageData ?? null,
+    },
+    revalidate: 1,
+  }
+}

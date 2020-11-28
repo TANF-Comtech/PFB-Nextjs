@@ -73,6 +73,7 @@ export default function LocationPage({ page, preview }) {
               case 'ridespot_promo' :
                 return (
                   <RideSpotPromo 
+                    isLocal="true"
                     key={ randomID(10000000) }
                     payload={ slice.primary } 
                   />
@@ -86,6 +87,7 @@ export default function LocationPage({ page, preview }) {
                 payload={ actionItems }
               />
               <RideSpotPromo 
+                isLocal="false"
                 key={ randomID(10000000) }
                 payload={ rideSpotRides } 
               />
