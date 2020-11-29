@@ -13,7 +13,6 @@ import ActionItem from '../slices/action-item'
 const ActionItemGroup = ({
   payload
 }) => {
-  
   return (
     <MainContent>
       { payload.map( (item, i) => {
