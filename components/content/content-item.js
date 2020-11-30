@@ -2,7 +2,18 @@ import React from "react";
 import Link from "next/link"
 import styled from "styled-components";
 
-const Container = styled.div`
+const Container = styled.section`
+  align-items: flex-start;
+  flex-direction: column;
+  display: flex;
+
+  @media (min-width: ${props => props.theme.sm}) {
+    flex-direction: row;
+  }
+`
+
+const ContentContainer = styled.div`
+  flex: 1 1 0px;
   margin: 4vh 0;
 
   a, a:visited, a:active, a:focus, a:hover {
@@ -29,37 +40,62 @@ const Datestamp = styled.p`
   margin-bottom: 0;
 `
 
+const Image = styled.img`
+  flex: 1 1 0px;
+  height: auto;
+  margin: 25px 0 0 0;
+  max-width: 100%;
+
+  @media (min-width: ${props => props.theme.sm}) {
+    margin: 25px 25px 25px 0;
+    max-width: 300px;
+  }
+
+  @media (min-width: ${props => props.theme.md}) {
+    max-width: 500px;
+  }
+`
+
 /**
  * <ContentItem>
  * 
  * A simple presentation for content items that show up in lists
  *
  * @param { string } date - when the content item occurred (optional)
+ * @param { object } image - image to go with post (optional)
  * @param { string } path - tells us the URL to the item
  * @param { string } title - title that goes next to the icon
  * @param { string } text - content to be shown
  */
 const ContentItem = ({
-  author,
   date,
+  image,
   path,
   title,
   text
 }) => {
   return (
     <Container>
-      { !path ? 
-        ( <Title>{ title }</Title> )  :
-        (
-          <Link href={ path }>
-            <a>
-              <Title>{ title }</Title>
-            </a>
-          </Link>
-        )
+      { image && 
+        <Image 
+          alt={ image.alt ? image.alt : 'Bike-oriented image' }
+          src={ image['1x'] ? image['1x'].url : image.url } 
+        /> 
       }
-      { date && <Datestamp>{ date }</Datestamp> }
-      { text && <Text>{ text }</Text> }
+      <ContentContainer>
+        { !path ? 
+          ( <Title>{ title }</Title> )  :
+          (
+            <Link href={ path }>
+              <a>
+                <Title>{ title }</Title>
+              </a>
+            </Link>
+          )
+        }
+        { date && <Datestamp>{ date }</Datestamp> }
+        { text && <Text>{ text }</Text> }
+      </ContentContainer>
     </Container>
   )
 }
