@@ -2,23 +2,47 @@ import Link from 'next/link'
 import styled from "styled-components"
 import Image from "next/image"
 import Flickity from "react-flickity-component"
+import { Date as ParseDate } from 'prismic-reactjs'
 
 import { getHomepage } from '../lib/queries/homepage'
-import { linkResolver } from '../lib/utils'
+import { linkResolver, setDateSuffix } from '../lib/utils'
 
 import Wrapper from '../components/global/wrapper'
 import HeaderImage from '../components/global/header-image'
 import Grid from '../components/global/grid'
 import MainContent from '../components/global/main-content'
 import RideSpotPromo from '../components/slices/ridespot-promo'
-import RideSpotRide from '../components/slices/ridespot-ride'
+import ContentItem from '../components/content/content-item'
 
 import WhiteArrow from '../public/white-arrow.svg'
 import HPHero from '../public/sample-images/PFB_GrantFinder_2300x800.jpg'
 
-import CarouselOne from '../public/sample-images/carousel-1.jpg'
-import CarouselTwo from '../public/sample-images/carousel-2.jpg'
-import CarouselThree from '../public/sample-images/carousel-3.jpg'
+const SectionTitle = styled.h3`
+  color: ${props => props.theme.midnightBlue};
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 4vh;
+`
+
+const BigSectionTitle = styled.h2`
+  color: ${props => props.theme.darkestGray};
+  font-weight: 300;
+  text-align: center;
+
+  span {
+    color: ${props => props.theme.redAccent};
+    font-size: 46.66px;
+    font-weight: 600;
+    text-transform: uppercase;
+
+    @media screen and (min-width: 320px) {
+    font-size: calc(46.66px + 23.33 * ((100vw - 320px) / 880));
+    }
+    @media screen and (min-width: 1200px) {
+      font-size: 70px;
+    } 
+  }
+`
 
 // Box Component soon...
 const Box = styled.div`
@@ -64,10 +88,7 @@ const Arrow = styled.img`
   width: 46px;
 `
 
-// BigCarousel Component
-const Container = styled.section`
-  /* height: 75vh; */
-`
+// Slides
 const Slide = styled.section`
   align-items: center;
   background-image: url(${ props => props.source });
@@ -82,20 +103,16 @@ const Slide = styled.section`
   margin: 0 12.5px;
   padding: 25px;
   width: 90vw;
-
   @media screen and (min-width: 480px) {
     height: 80vw;
     width: 80vw;
   }
-
   @media screen and (min-width: 768px) {
     height: 60vw;
   }
-
   @media screen and (min-width: 1000px) {
     height: 40vw;
   }
-
   h2 {
     color: rgba(${props => props.headingRGBA ? props.headingRGBA : "255,255,255,1" });
     font-size: 60px;
@@ -117,7 +134,6 @@ const Slide = styled.section`
       line-height: 110px;
     }
   }   
-
   span {
     color: rgba(${props => props.headingRGBA ? props.headingRGBA : "255,255,255,1" });
     font-family: "Tungsten A", "Tungsten B", Arial, Helvetica, sans-serif;
@@ -147,17 +163,9 @@ const Slide = styled.section`
 const SlideWrapper = styled.a`
   text-align: center;
   text-decoration: none !important;
-
   &::hover, &::visited, &:focus {
     text-decoration: none !important;
   }
-`
-
-const SectionTitle = styled.h3`
-  color: ${props => props.theme.midnightBlue};
-  text-align: center;
-  text-transform: uppercase;
-  margin-bottom: 4vh;
 `
 
 export default function Homepage({ page }) {
@@ -172,7 +180,7 @@ export default function Homepage({ page }) {
   }
   
   
-  console.log(homepage)
+  //console.log(homepage)
   
   return (
     <>  
@@ -251,51 +259,51 @@ export default function Homepage({ page }) {
           </>
         }
         
-        
-          
-          {/* <Slide>
-            <Image 
-              src={ CarouselOne } 
-              alt="Biker 1" 
-              width={1880}
-              height={1164}
-            />
-          </Slide>
-          <Slide>
-            <Image 
-              src={ CarouselTwo } 
-              alt="Biker 2" 
-              width={1880}
-              height={1164}
-            />
-          </Slide>
-          <Slide>
-            <Image 
-              src={ CarouselThree } 
-              alt="Biker 3" 
-              width={1880}
-              height={1164}
-            />
-          </Slide> */}
-        
-
-        {/* Slice pattern - will be useful later */}
-        {/* { page.locations.body &&
-          page.locations.body.map( (slice) => {
+        { homepage.body &&
+          homepage.body.map( (slice) => {
           switch(slice.type) {
-            case 'action_item' :
-              return (
-                <ActionItemGroup
-                  payload={ slice.fields }
-                />
-              )
             case 'ridespot_promo' :
               return (
                 <RideSpotPromo 
                   payload={ slice.primary } 
                 />
               )
-        }})} */}
+        }})}
+
+        { homepage.news &&
+          <>
+            <BigSectionTitle>PeopleForBikes <span>News</span></BigSectionTitle> 
+            <MainContent>
+              { homepage.news.map( (news) => { 
+                
+                // Check for publication_date from individual news post
+                // If not present, use publication date from Prismic CMS
+                const newDate = news.news_item.publication_date ? 
+                  ( new Date(ParseDate( news.news_item.publication_date ))) : 
+                  ( new Date(ParseDate( news.news_item._meta.lastPublicationDate )))
+                return (
+                  <ContentItem 
+                    date={ `${newDate.toLocaleString('en-us', { month: 'long' } )} 
+                            ${setDateSuffix(newDate.getDate())}, 
+                            ${newDate.getFullYear()}` }
+                    key={ news.news_item._meta.id }
+                    image={ news.news_item.header_image && news.news_item.header_image }
+                    path={ `/news/${news.news_item._meta.uid}` }
+                    text={ news.news_item.main_content[0].type === "paragraph" ? news.news_item.main_content[0].text : "" }
+                    title={ news.news_item.title[0].text }
+                  />
+                )
+              })}
+            </MainContent>
+          </>
+        }
+
+        { homepage.events &&
+          <>
+            <BigSectionTitle>PeopleForBikes <span>Events</span></BigSectionTitle> 
+          </>
+        }
+
       </Wrapper>
     </>
   )

@@ -22,7 +22,6 @@ export default function TopicPage({ page, preview }) {
   const { topic } = page
   const { meta, actionItems } = useContext(DefaultContext)
 
-  console.log(topic)
   return (
     <>
       <SiteMeta
