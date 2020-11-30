@@ -393,7 +393,7 @@ https://flickity.metafizzy.co
 ---------------------------------------------- */
 
 .flickity-enabled {
-  margin-bottom: 50px;
+  margin-bottom: 100px;
   position: relative;
 }
 
