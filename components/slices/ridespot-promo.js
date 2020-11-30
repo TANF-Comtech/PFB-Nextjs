@@ -78,7 +78,7 @@ const RSRidesContainer = styled.section`
  * @param { string } isLocal - true if payload is local rides, false is general rides
  * @param { object } payload - all the ridespot ride info
  */
-const RideSpotPromo = ({ isLocal, payload }) => {
+const RideSpotPromo = ({ isLocal = false, payload }) => {
 
   // Transform payload object into an array
   const payloadArr = Object.keys(payload).map((key) => payload[key] )
