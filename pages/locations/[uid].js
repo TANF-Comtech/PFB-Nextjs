@@ -100,6 +100,7 @@ export default function LocationPage({ page, preview }) {
           <h3>News</h3>
           
           { page[1] && page[1].map( (newsItem) => {
+            
             // Check for publication_date from individual news post
             // If not present, use publication date from Prismic CMS
             const newDate = newsItem.data.publication_date ? 
@@ -111,6 +112,7 @@ export default function LocationPage({ page, preview }) {
                         ${setDateSuffix(newDate.getDate())}, 
                         ${newDate.getFullYear()}` }
                 key={ newsItem.id }
+                image={ newsItem.data.header_image && newsItem.data.header_image }
                 path={ `/news/${newsItem.uid}` }
                 text={ newsItem.data.main_content[0].type === "paragraph" ? newsItem.data.main_content[0].text : "" }
                 title={ newsItem.data.title[0].text }
