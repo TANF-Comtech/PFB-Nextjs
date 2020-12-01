@@ -17,7 +17,7 @@ const ImageContainer = styled.section`
   flex-direction: column;
   justify-content: center;
   height: 50vh;
-  margin-bottom: 1vh;
+  margin-bottom: 25px;
   padding: 0 5vw;
   text-align: center;
 
