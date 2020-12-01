@@ -7,7 +7,7 @@ const MainContainer = styled.section`
 
 const Sizer = styled.div`
   margin: 2vh auto;
-  max-width: ${(props) => props.theme.lg};
+  max-width: ${props => props.maxWidth || props.theme.lg};
 `;
 
 /**
@@ -18,12 +18,13 @@ const Sizer = styled.div`
  * Very useful, very simple.
  * 
  * @param { object } children - nested components beneath this component
+ * @param { string } maxWidth - however wide you want the container (default is 1200px)
  * 
  */
-const MainContent = ({ children }) => {
+const MainContent = ({ children, maxWidth }) => {
   return (
     <>
-      <MainContainer>
+      <MainContainer maxWidth={maxWidth} >
         <Sizer>{children}</Sizer>
       </MainContainer>
     </>
