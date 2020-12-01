@@ -4,9 +4,15 @@ import Link from "next/link"
 
 import { linkResolver } from '../../lib/utils'
 
-import LinkIcon from '../../public/icons/link.svg'
-import NewsIcon from '../../public/icons/news.svg'
+import BatteryIcon from '../../public/icons/battery.svg'
+import CartIcon from '../../public/icons/cart.svg'
+import CheckIcon from '../../public/icons/check.svg'
 import EventIcon from '../../public/icons/event.svg'
+import HeartIcon from '../../public/icons/heart.svg'
+import LinkIcon from '../../public/icons/link.svg'
+import MicIcon from '../../public/icons/mic.svg'
+import NewsIcon from '../../public/icons/news.svg'
+import TruckIcon from '../../public/icons/truck.svg'
 
 const Container = styled.section`
   align-items: center;
@@ -73,9 +79,16 @@ const ActionItem = ({
 }) => {
   return (
     <Container>
+      { icon === 'E-bikes (battery icon)' && <Icon src={ BatteryIcon } alt="Battery Icon" /> }
+      { icon === 'Retailers (cart icon)' && <Icon src={ CartIcon } alt="Cart Icon" /> }
       { icon === 'Event (calendar icon)' && <Icon src={ EventIcon } alt="Event Icon" /> }
-      { icon === 'News (newspaper icon)' && <Icon src={ NewsIcon } alt="News Icon" /> }
+      { icon === 'Register (check icon)' && <Icon src={ CheckIcon } alt="Check Icon" /> }
+      { icon === 'Support (heart icon)' && <Icon src={ HeartIcon } alt="Heart Icon" /> }
       { icon === 'Join (link icon)' && <Icon src={ LinkIcon } alt="Link Icon" /> }
+      { icon === 'Podcast (mic icon)' && <Icon src={ MicIcon } alt="Mic Icon" /> }
+      { icon === 'News (newspaper icon)' && <Icon src={ NewsIcon } alt="News Icon" /> }
+      { icon === 'Suppliers (truck icon)' && <Icon src={ TruckIcon } alt="Truck Icon" /> }
+
       <ContentContainer>
         <Link href={ linkResolver(path, false) } passHref>
           <a>

@@ -62,6 +62,7 @@ export default function LocationPage({ page, preview }) {
         {/* If neither conditions catch, send back placeholder data */}
         { locations.body 
           ? ( locations.body.map( (slice) => {
+            console.log(slice.fields)
             switch(slice.type) {
               case 'action_item' :
                 return (
