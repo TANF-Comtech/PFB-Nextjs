@@ -2,13 +2,23 @@ import React from "react";
 import Link from "next/link"
 import styled from "styled-components";
 
+import Button from "../primitives/button"
+
 const Container = styled.section`
   align-items: flex-start;
-  flex-direction: column;
+  border-bottom: 1px solid rgb(216,216,216);
   display: flex;
+  flex-direction: column;
+  margin-bottom: 25px;
+  padding-bottom: 25px;
 
   @media (min-width: ${props => props.theme.sm}) {
     flex-direction: row;
+  }
+
+  &:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
   }
 `
 
@@ -24,14 +34,14 @@ const ContentContainer = styled.div`
 const Title = styled.h4`
   color: ${props => props.theme.red };
   font-size: 40px;
-  line-height: 32px;
+  line-height: 38px;
   margin: 0;
 `
 
 const Text = styled.p`
   font-size: 18px;
   line-height: 24px;
-  margin-bottom: 0;
+  margin-bottom: 25px;
 `
 
 const Datestamp = styled.p`
@@ -74,6 +84,7 @@ const ContentItem = ({
   title,
   text
 }) => {
+  console.log(text)
   return (
     <Container>
       { image && 
@@ -94,7 +105,17 @@ const ContentItem = ({
           )
         }
         { date && <Datestamp>{ date }</Datestamp> }
-        { text && <Text>{ text }</Text> }
+        { text && <Text>{ `${text.substring(0,300)} ...` }</Text> }
+        <Button
+          buttonBg="#404040"
+          buttonBgHover="rgb(216,216,216)"
+          buttonColor="white"
+          buttonPadding="10px 20px"
+          buttonTextTransform="uppercase"
+          href={ path }
+        >
+          Read More
+        </Button>
       </ContentContainer>
     </Container>
   )
