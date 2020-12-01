@@ -10,6 +10,7 @@ const Sizer = styled.div`
   max-width: ${props => props.maxWidth || props.theme.lg};
 `;
 
+
 /**
  * <MainContent>
  * 
@@ -18,14 +19,15 @@ const Sizer = styled.div`
  * Very useful, very simple.
  * 
  * @param { object } children - nested components beneath this component
+ * @param { string } className - should allow styled-components to pass down it's styles
  * @param { string } maxWidth - however wide you want the container (default is 1200px)
  * 
  */
-const MainContent = ({ children, maxWidth }) => {
+const MainContent = ({ children, className, maxWidth }) => {
   return (
     <>
-      <MainContainer maxWidth={maxWidth} >
-        <Sizer>{children}</Sizer>
+      <MainContainer>
+        <Sizer maxWidth={maxWidth} >{children}</Sizer>
       </MainContainer>
     </>
   )
