@@ -5,11 +5,21 @@ import Wrapper from '../components/global/wrapper'
 import Grid from '../components/global/grid'
 import ImageSquare from '../components/global/image-square'
 import Graphic from '../components/global/graphic'
+import MainContent from '../components/global/main-content'
 
 import { getTopicsLandingPage } from '../lib/queries/topics'
 
 import genericSquare1x from '../public/PFB_Topics_450x450_generic.jpg'
 import genericSquare2x from '../public/PFB_Topics_900x900_generic.jpg'
+
+const BigBlueBanner = styled.header`
+  background-color: ${props => props.theme.midnightBlue};
+
+  h1 {
+    color: white;
+    text-transform: uppercase;
+  }
+`
 
 const LandingBar = styled.div`
   align-items: center;
@@ -43,25 +53,31 @@ export default function TopicsLanding({ page }) {
       <Head>
         <title>{ page.topics.title[0].text } | People for Bikes</title>
       </Head>
-      <Wrapper postTitle="Topics">
-        <LandingBar>
+      <Wrapper 
+        postTitle="Topics"
+        isWide={ true }
+      >
+        <BigBlueBanner>
+          <MainContent>
           <h1>{ page.topics.title[0].text }</h1>
-          <Graphic />
-        </LandingBar>
-        { page.topics.intro[0] && <p>{ page.topics.intro[0].text }</p> }
-        <Grid>
-          { page.allTopics.edges.map( (topic) => {
-            return(
-              <ImageSquare
-                imageSquareLink={ `/topics/${topic.node._meta.uid}` }
-                source1X={ topic.node.square_image ? ( topic.node.square_image.mobile.url ) : ( genericSquare1x ) }
-                source2X={ topic.node.square_image ? ( topic.node.square_image.url ) : ( genericSquare2x ) }
-                title={ topic.node.title[0].text }
-                key={ topic.node._meta.id }
-              />
-            )
-          }) }
-        </Grid>
+          </MainContent>
+        </BigBlueBanner>        
+        <MainContent>
+          { page.topics.intro[0] && <p>{ page.topics.intro[0].text }</p> }
+          <Grid>
+            { page.allTopics.edges.map( (topic) => {
+              return(
+                <ImageSquare
+                  imageSquareLink={ `/topics/${topic.node._meta.uid}` }
+                  source1X={ topic.node.square_image ? ( topic.node.square_image.mobile.url ) : ( genericSquare1x ) }
+                  source2X={ topic.node.square_image ? ( topic.node.square_image.url ) : ( genericSquare2x ) }
+                  title={ topic.node.title[0].text }
+                  key={ topic.node._meta.id }
+                />
+              )
+            }) }
+          </Grid>
+        </MainContent>
       </Wrapper>
     </>
   )

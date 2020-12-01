@@ -5,6 +5,7 @@ import Wrapper from '../components/global/wrapper'
 import GridWide from '../components/layout/grid-wide'
 import ImageTextOverlay from '../components/content/image-text-overlay'
 import Graphic from '../components/global/graphic'
+import MainContent from '../components/global/main-content'
 
 import { getLocations } from '../lib/queries/locations'
 
@@ -34,6 +35,15 @@ const LandingBar = styled.div`
   }
 `
 
+const BigBlueBanner = styled.header`
+  background-color: ${props => props.theme.midnightBlue};
+
+  h1 {
+    color: white;
+    text-transform: uppercase;
+  }
+`
+
 export default function LocationsLanding({ page }) {
   
   return (
@@ -43,26 +53,31 @@ export default function LocationsLanding({ page }) {
       </Head>
       <Wrapper 
         postTitle="Locations"
-        isWide={ false }
+        isWide={ true }
       >
-        <LandingBar>
-          <h1>Locations</h1>
-          <Graphic />
-        </LandingBar>
-        <p>Explore the locations where People for Bikes is improving biking for everyone. Faucibus et molestie ac feugiat. Mauris a diam maecenas sed. Mi sit amet mauris commodo quis. Purus in mollis nunc sed id semper risus in. Gravida cum sociis natoque penatibus. Imperdiet proin fermentum leo vel orci porta non. Massa tincidunt dui ut ornare lectus sit amet. Curabitur gravida arcu ac tortor dignissim convallis aenean et. Platea dictumst quisque sagittis purus sit amet volutpat.</p>
-        <GridWide>
-          { page.map( (location) => {
-            return(
-              <ImageTextOverlay
-                imageLink={ `/locations/${location.node._meta.uid}` }
-                source1X={ location.node.header_image?.main1x.url }
-                source2X={ location.node.header_image?.url }
-                title={ location.node.location[0].text }
-                key={ location.node._meta.id }
-              />
-            )
-          }) }
-        </GridWide>
+        <BigBlueBanner>
+          <MainContent>
+            <h1>Discover Locations</h1>
+          </MainContent>
+        </BigBlueBanner>
+        <MainContent>
+          <p>Explore the locations where People for Bikes is improving biking for everyone. Faucibus et molestie ac feugiat. Mauris a diam maecenas sed. Mi sit amet mauris commodo quis. Purus in mollis nunc sed id semper risus in. Gravida cum sociis natoque penatibus. Imperdiet proin fermentum leo vel orci porta non. Massa tincidunt dui ut ornare lectus sit amet. Curabitur gravida arcu ac tortor dignissim convallis aenean et. Platea dictumst quisque sagittis purus sit amet volutpat.</p>
+        </MainContent>
+        <MainContent>
+          <GridWide>
+            { page.map( (location) => {
+              return(
+                <ImageTextOverlay
+                  imageLink={ `/locations/${location.node._meta.uid}` }
+                  source1X={ location.node.header_image?.main1x.url }
+                  source2X={ location.node.header_image?.url }
+                  title={ location.node.location[0].text }
+                  key={ location.node._meta.id }
+                />
+              )
+            }) }
+          </GridWide>
+        </MainContent>
       </Wrapper>
     </>
   )
