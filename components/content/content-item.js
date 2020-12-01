@@ -84,7 +84,6 @@ const ContentItem = ({
   title,
   text
 }) => {
-  console.log(text)
   return (
     <Container>
       { image && 
