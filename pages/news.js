@@ -19,11 +19,8 @@ const BigBlueBanner = styled.header`
   }
 `
 
-export default function Homepage({ page }) {
+export default function NewsLanding({ page }) {
   
-  
-  console.log(page)
-
   return (
     <>  
       <Wrapper 
@@ -35,14 +32,6 @@ export default function Homepage({ page }) {
             <h1>News</h1>
           </MainContent>
         </BigBlueBanner>
-
-        {/* <HeaderImage 
-          headingRGBA="255,255,255,1"
-          source={ HPHero }
-        >
-          <span>Together We Make</span>
-          <h1>Biking Better</h1>
-        </HeaderImage> */}
 
         { page &&
           <>
