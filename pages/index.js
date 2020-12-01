@@ -332,7 +332,7 @@ export default function Homepage({ page }) {
                   day={ newEventDate.toLocaleString('en-us', { day: "2-digit" } ) }
                   month={ newEventDate.toLocaleString('en-us', { month: 'short' } ) }
                   year={ newEventDate.getFullYear() }
-                  key={ `/events/${event.event._meta.id}` }
+                  key={ event.event._meta.id }
                   path={ `/events/${event.event._meta.uid}` }
                   text={ event.event.main_content ? event.event.main_content : "" }
                   title={ event.event.title[0].text }
