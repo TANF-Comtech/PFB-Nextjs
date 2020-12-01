@@ -30,6 +30,10 @@ const ImageContainer = styled.section`
     height: 70vh;
   }
 
+  @media screen and (min-width: ${ props => props.theme.lg }) {
+    height: 80vh;
+  }
+
   h1 {
     color: rgba(${props => props.headingRGBA ? props.headingRGBA : "255,255,255,1" });
     text-transform: uppercase;
