@@ -105,16 +105,19 @@ const ContentItem = ({
         }
         { date && <Datestamp>{ date }</Datestamp> }
         { text && <Text>{ `${text.substring(0,300)} ...` }</Text> }
-        <Button
-          buttonBg="#404040"
-          buttonBgHover="rgb(216,216,216)"
-          buttonColor="white"
-          buttonPadding="10px 20px"
-          buttonTextTransform="uppercase"
-          href={ path }
-        >
-          Read More
-        </Button>
+        { path && 
+          <Button
+            buttonBg="#404040"
+            buttonBgHover="rgb(216,216,216)"
+            buttonColor="white"
+            buttonPadding="10px 20px"
+            buttonTextTransform="uppercase"
+            href={ path }
+          >
+            Read More
+          </Button>
+        }
+        
       </ContentContainer>
     </Container>
   )
