@@ -3,7 +3,7 @@ import styled from "styled-components";
 const LogoLetters = styled.svg`
   cursor: pointer;
   display: block;
-  margin: 0 auto;
+  margin: ${props => props.logoMargin};
   padding: 1vh 0 0 0;
   width: ${props => props.logoTypeWidth || '120px'};
 `;
@@ -27,12 +27,14 @@ const BikesPoly = styled.polyline`
 function LogoType(
   { className, 
     logoTypeWidth, 
+    logoMargin = '0 auto',
     fillPeople, 
     fillFor, 
     fillBikes }) {
   return (
     <LogoLetters
       className={ className }
+      logoMargin={ logoMargin }
       logoTypeWidth={ logoTypeWidth }
       viewBox="0 0 340 50"
       version="1.1"

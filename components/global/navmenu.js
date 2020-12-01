@@ -5,6 +5,8 @@ import { RichText } from 'prismic-reactjs'
 import Link from 'next/link'
 
 import ImageSquare from '../../components/global/image-square'
+import Logo from '../../components/global/logo'
+import LogoType from '../../components/global/logotype'
 
 import { randomID } from '../../lib/utils'
 
@@ -61,12 +63,14 @@ const MenuHeader = styled.header`
   }
 `
 
-const MenuTitle = styled.h2`
+const MenuTitle = styled.h3`
   animation: ${fadeIn} 0.75s ease forwards;
   animation-delay: 0.4s;
-  color: black;
+  color: ${props => props.theme.redAccent };
+  font-size: 24px;
   opacity: 0;
   text-decoration: none !important;
+  text-transform: uppercase;
 `
 
 const MenuButtonCont = styled.div`
@@ -105,7 +109,7 @@ const MainNav = styled.ul`
   animation: ${fadeIn} 0.75s ease forwards;
   animation-delay: 0.6s;
   list-style: none;
-  margin: 0 0 3vh 0;
+  margin: 0;
   opacity: 0;
 
   a, a:visited, a:focus, a:active {
@@ -121,19 +125,19 @@ const MainNav = styled.ul`
 
 const MainNavItem = styled.li`
   cursor: pointer;
-  font-size: 24px;
-  font-family: ${props => props.theme.montserrat };
-  font-weight: 700;
-  line-height: 24px;
+  font-size: 36px;
+  font-family: ${ props => props.theme.tungsten };
+  font-weight: 300;
+  line-height: 30px;
   padding: 0.5vh 0;
 
   @media screen and (min-width: 320px) {
-    font-size: calc(24px + 12 * ((100vw - 320px) / 880));
-    line-height: calc(24px + 12 * ((100vw - 320px) / 880));
+    font-size: calc(36px + 12 * ((100vw - 320px) / 880));
+    line-height: calc(30px + 10 * ((100vw - 320px) / 880));
   }
   @media screen and (min-width: 1200px) {
-    font-size: 36px;
-    line-height: 36px;
+    font-size: 48px;
+    line-height: 40px;
   } 
 `
 
@@ -149,6 +153,14 @@ const GridMicro = styled.section`
     text-decoration: none;
   }
 `;
+
+const LogoContainer = styled.section`
+  align-items: flex-end;
+  animation: ${fadeIn} 0.75s ease forwards;
+  animation-delay: 0.4s;
+  display: flex;
+  opacity: 0;
+`
 
 /**
  * <NavMenu>
@@ -230,7 +242,17 @@ const NavMenu = ({ menuState, handleMenu }) => {
         <NavContainer menuState={ menuState }>
           <MenuHeader>
             { menuState === true && (
-              <MenuTitle>Our Work</MenuTitle>
+              <LogoContainer>
+                <Logo 
+                  logoMargin="0"
+                  logoWidth="60px"
+                  logoViewbox="65 0 160 132"
+                />
+                <LogoType 
+                  logoMargin="0"
+                  logoTypeWidth="180px"
+                />
+              </LogoContainer>
             )}
             <MenuButtonCont onClick={ handleMenu }>
             { menuState === true && (
@@ -248,7 +270,37 @@ const NavMenu = ({ menuState, handleMenu }) => {
           { menuState === true && (
             <>
               <MainNav>
-                { mainMenu.map( (menu_item) => {
+                <MainNavItem key={ randomID(10000000) } >
+                  <Link href="/news">
+                    <a onClick={ handleMenu } >Latest News</a>
+                  </Link>
+                </MainNavItem>
+                <MainNavItem key={ randomID(10000000) } >
+                  <Link href="/local-innovation">
+                    <a onClick={ handleMenu } >Local Innovation</a>
+                  </Link>
+                </MainNavItem>
+                <MainNavItem key={ randomID(10000000) } >
+                  <Link href="/policy">
+                    <a onClick={ handleMenu } >Policy Work</a>
+                  </Link>
+                </MainNavItem>                            
+                <MainNavItem key={ randomID(10000000) } >
+                  <Link href="/take-action">
+                    <a onClick={ handleMenu } >Take Action</a>
+                  </Link>
+                </MainNavItem>                            
+                <MainNavItem key={ randomID(10000000) } >
+                  <Link href="/locations">
+                    <a onClick={ handleMenu } >Find Your Community</a>
+                  </Link>
+                </MainNavItem>                            
+                <MainNavItem key={ randomID(10000000) } >
+                  <Link href="/events">
+                    <a onClick={ handleMenu } >Bike Events</a>
+                  </Link>
+                </MainNavItem>                                                                                
+                {/* { mainMenu.map( (menu_item) => {
                   return menu_item.item !== null ? (
                     <MainNavItem key={ randomID(10000000) } >
                       <Link 
@@ -262,7 +314,7 @@ const NavMenu = ({ menuState, handleMenu }) => {
                   ) : (
                     <div key={ randomID(10000000) }></div>
                   )
-                })}
+                })} */}
               </MainNav>
               <MenuHeader>
                 <Link href="/topics">
