@@ -2,6 +2,12 @@ import React from "react"
 import styled from "styled-components"
 import Link from "next/link"
 
+const Container = styled.div`
+  display: flex;
+  margin: ${props => props.buttonMargin || '0'};
+  justify-content: ${props => props.buttonAlign || 'flex-start'};
+`
+
 /* !important is needed to override when next/link applies global-css.js styles to anchors */
 /* This pattern allows the props we pass into our styled-component to override those styles */
 const Button = styled.a`
@@ -43,25 +49,27 @@ const Button = styled.a`
  * <Container> controls button position <Button> controls button look and feel
  * See how it works: https://styled-components.com/docs/basics#passed-props
  * 
- * When using a button as a 
- * 
+ * @param {string} buttonAlign - move the button's main axis via flexbox justify-content (default: flex-start)
  * @param {string} buttonBg - override for button background (default: white)
  * @param {string} buttonBgHover - override for button background on hover (default: black)
  * @param {string} buttonBorder - override for button border (default: black)
  * @param {string} buttonColor - override for button color (default: black)
  * @param {string} buttonColorHover - override for button text color on hover (default: white)
  * @param {string} buttonFontSize - override for button text size (default: 16-24px)
+ * @param {string} buttonMargin - override for button margins (default: 16-24px)
  * @param {string} buttonPadding - override for button text padding settings (default: 10px 35px)
  * @param {string} buttonTextTransform - changes casing of button text (default: uppercase)
  * @param {string} className - allows styled-components to extend this component
  */
 function BasicButton(
-  { buttonBg, 
+  { buttonAlign,
+    buttonBg, 
     buttonBgHover,
     buttonBorder, 
     buttonColor, 
     buttonColorHover,
     buttonFontSize,
+    buttonMargin,
     buttonPadding,
     buttonTextTransform,
     children, 
@@ -70,21 +78,26 @@ function BasicButton(
   }) {
 
   return (
-    <Link href={ href } passHref>
-      <Button
-        buttonBg={ buttonBg }
-        buttonBgHover={ buttonBgHover }
-        buttonBorder={ buttonBorder }
-        buttonColor={ buttonColor } 
-        buttonColorHover={ buttonColorHover }
-        buttonFontSize={ buttonFontSize }
-        buttonPadding={ buttonPadding }
-        buttonTextTransform={ buttonTextTransform }
-        className={ className }
-      >
-        { children }
-      </Button>
-    </Link>
+    <Container         
+      buttonAlign={ buttonAlign }
+      buttonMargin={ buttonMargin }
+    >
+      <Link href={ href } passHref>
+        <Button
+          buttonBg={ buttonBg }
+          buttonBgHover={ buttonBgHover }
+          buttonBorder={ buttonBorder }
+          buttonColor={ buttonColor } 
+          buttonColorHover={ buttonColorHover }
+          buttonFontSize={ buttonFontSize }
+          buttonPadding={ buttonPadding }
+          buttonTextTransform={ buttonTextTransform }
+          className={ className }
+        >
+          { children }
+        </Button>
+      </Link>
+    </Container>
   )
 }
 

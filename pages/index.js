@@ -13,9 +13,15 @@ import Grid from '../components/global/grid'
 import MainContent from '../components/global/main-content'
 import RideSpotPromo from '../components/slices/ridespot-promo'
 import ContentItem from '../components/content/content-item'
+import Promo from '../components/slices/promo'
+import Donate from '../components/global/donate'
+import Button from '../components/primitives/button'
+import EventItem from '../components/content/event-item'
 
 import WhiteArrow from '../public/white-arrow.svg'
-import HPHero from '../public/sample-images/PFB_GrantFinder_2300x800.jpg'
+import RedArrowWhiteBlock from '../public/red-arrow-white-block.svg'
+import HPHero from '../public/sample-images/08_PFB_1600x800_Overlay_HomeHero.jpg'
+import PromoPicture from '../public/promo/promo-momentum.jpg'
 
 const SectionTitle = styled.h3`
   color: ${props => props.theme.midnightBlue};
@@ -168,6 +174,9 @@ const SlideWrapper = styled.a`
   }
 `
 
+
+
+
 export default function Homepage({ page }) {
   const { homepage } = page
 
@@ -183,129 +192,188 @@ export default function Homepage({ page }) {
   //console.log(homepage)
   
   return (
-    <>  
-      <Wrapper 
-        postTitle="People for Bikes Homepage"
-        isWide={ true }
+    <Wrapper 
+      postTitle="People for Bikes Homepage"
+      isWide={ true }
+    >
+      <HeaderImage 
+        headingRGBA="255,255,255,1"
+        source={ HPHero }
       >
-        <HeaderImage 
-          headingRGBA="255,255,255,1"
-          source={ HPHero }
-        >
-          <span>Together We Make</span>
-          <h1>Biking Better</h1>
-        </HeaderImage>
+        <span>Together We Make</span>
+        <h1>Biking Better</h1>
+      </HeaderImage>
 
-        <MainContent>
-          <SectionTitle>Our Mission</SectionTitle> 
-          <Grid gridGap="1vw">
-            <Box bgColor="#D0021B">
-              <Number>1</Number>
-              <Text>Improving Recreational Access for Bicycles</Text>
-            </Box>
-            <Box bgColor="#D0021B">
-              <Number>2</Number>
-              <Text>Building Safe Mobility Networks</Text>
-            </Box>
-            <Box bgColor="#D0021B">
-              <Number>3</Number>
-              <Text>Fostering Diversity, Equity, and Inclusion</Text>
-            </Box>
-            <Box bgColor="#D0021B">
-              <Number>4</Number>
-              <Text>Promoting Sustainability</Text>
-            </Box>
-            <Box bgColor="#D0021B">
-              <Number>5</Number>
-              <Text>Growing the Bike Industry</Text>
-            </Box>
-            <Link href="/mission" passHref>
-              <a>
-                <Box bgColor="#002C40">
-                  <Arrow src={ WhiteArrow } width="46px" />
-                  <Text>Read More About Our Mission</Text>
-                </Box>
-              </a>
-            </Link>
-          </Grid>
-        </MainContent>        
-        
-        { homepage.campaigns &&
-          <>
-            <SectionTitle>Get Involved</SectionTitle> 
+      <MainContent>
+        <SectionTitle>Our Mission</SectionTitle> 
+        <Grid gridGap="1vw">
+          <Box bgColor="#D0021B">
+            <Number>1</Number>
+            <Text>Improving Recreational Access for Bicycles</Text>
+          </Box>
+          <Box bgColor="#D0021B">
+            <Number>2</Number>
+            <Text>Building Safe Mobility Networks</Text>
+          </Box>
+          <Box bgColor="#D0021B">
+            <Number>3</Number>
+            <Text>Fostering Diversity, Equity, and Inclusion</Text>
+          </Box>
+          <Box bgColor="#D0021B">
+            <Number>4</Number>
+            <Text>Promoting Sustainability</Text>
+          </Box>
+          <Box bgColor="#D0021B">
+            <Number>5</Number>
+            <Text>Growing the Bike Industry</Text>
+          </Box>
+          <Link href="/mission" passHref>
+            <a>
+              <Box bgColor="#002C40">
+                <Arrow src={ WhiteArrow } width="46px" />
+                <Text>Read More About Our Mission</Text>
+              </Box>
+            </a>
+          </Link>
+        </Grid>
+      </MainContent>        
+      
+      { homepage.campaigns &&
+        <>
+          <SectionTitle>Get Involved</SectionTitle> 
 
-            <Flickity
-              options={flickityOptions}
-              static={true}
-            >
-              { homepage.campaigns.map( (c) => {
-                return(
-                  <Slide 
-                    key={ c.campaign._meta.id }
-                    source={ c.campaign.banner_image.url }
-                  >
-                    <SlideWrapper 
-                      href={ linkResolver(c.campaign.link, true) } 
-                      rel="noopener"
-                      target="_blank">
-                        { c.campaign.small_text && <span>{ c.campaign.small_text }</span> }
-                        { c.campaign.big_text && <h2>{ c.campaign.big_text }</h2> }
-                        <Arrow src={ WhiteArrow } width="46px" />
-                    </SlideWrapper>
-                  </Slide>
-                )
-              } ) }
-            </Flickity>
-          </>
-        }
-        
-        { homepage.body &&
-          homepage.body.map( (slice) => {
-          switch(slice.type) {
-            case 'ridespot_promo' :
+          <Flickity
+            options={flickityOptions}
+            static={true}
+          >
+            { homepage.campaigns.map( (c) => {
+              return(
+                <Slide 
+                  key={ c.campaign._meta.id }
+                  source={ c.campaign.banner_image.url }
+                >
+                  <SlideWrapper 
+                    href={ linkResolver(c.campaign.link, true) } 
+                    rel="noopener"
+                    target="_blank">
+                      { c.campaign.small_text && <span>{ c.campaign.small_text }</span> }
+                      { c.campaign.big_text && <h2>{ c.campaign.big_text }</h2> }
+                      <Arrow src={ WhiteArrow } width="46px" />
+                  </SlideWrapper>
+                </Slide>
+              )
+            } ) }
+          </Flickity>
+        </>
+      }
+      
+      { homepage.body &&
+        homepage.body.map( (slice) => {
+        switch(slice.type) {
+          case 'ridespot_promo' :
+            return (
+              <RideSpotPromo 
+                payload={ slice.primary } 
+              />
+            )
+      }})}
+
+      { homepage.news &&
+        <>
+          <BigSectionTitle>PeopleForBikes <span>News</span></BigSectionTitle> 
+          <MainContent>
+            { homepage.news.map( (news) => { 
+              
+              // Check for publication_date from individual news post
+              // If not present, use publication date from Prismic CMS
+              const newDate = news.news_item.publication_date ? 
+                ( new Date(ParseDate( news.news_item.publication_date ))) : 
+                ( new Date(ParseDate( news.news_item._meta.lastPublicationDate )))
               return (
-                <RideSpotPromo 
-                  payload={ slice.primary } 
+                <ContentItem 
+                  date={ `${newDate.toLocaleString('en-us', { month: 'long' } )} 
+                          ${setDateSuffix(newDate.getDate())}, 
+                          ${newDate.getFullYear()}` }
+                  key={ news.news_item._meta.id }
+                  image={ news.news_item.header_image && news.news_item.header_image }
+                  path={ `/news/${news.news_item._meta.uid}` }
+                  text={ news.news_item.main_content[0].type === "paragraph" ? news.news_item.main_content[0].text : "" }
+                  title={ news.news_item.title[0].text }
                 />
               )
-        }})}
+            })}
+            <Button
+              buttonAlign="center"
+              buttonBg="#D0021B"
+              buttonBorder="none"
+              buttonColor="white"
+              buttonFontSize="24px"
+              buttonMargin="0 0 50px 0"
+              buttonPadding="10px 30px"
+              buttonTextTransform="uppercase"
+              href="/news"
+            >
+              See All News
+            </Button>
+          </MainContent>
+        </>
+      }
 
-        { homepage.news &&
-          <>
-            <BigSectionTitle>PeopleForBikes <span>News</span></BigSectionTitle> 
-            <MainContent>
-              { homepage.news.map( (news) => { 
-                
-                // Check for publication_date from individual news post
-                // If not present, use publication date from Prismic CMS
-                const newDate = news.news_item.publication_date ? 
-                  ( new Date(ParseDate( news.news_item.publication_date ))) : 
-                  ( new Date(ParseDate( news.news_item._meta.lastPublicationDate )))
-                return (
-                  <ContentItem 
-                    date={ `${newDate.toLocaleString('en-us', { month: 'long' } )} 
-                            ${setDateSuffix(newDate.getDate())}, 
-                            ${newDate.getFullYear()}` }
-                    key={ news.news_item._meta.id }
-                    image={ news.news_item.header_image && news.news_item.header_image }
-                    path={ `/news/${news.news_item._meta.uid}` }
-                    text={ news.news_item.main_content[0].type === "paragraph" ? news.news_item.main_content[0].text : "" }
-                    title={ news.news_item.title[0].text }
-                  />
-                )
-              })}
-            </MainContent>
-          </>
-        }
+      { homepage.events &&
+        <>
+          <BigSectionTitle>PeopleForBikes <span>Events</span></BigSectionTitle> 
+          <MainContent maxWidth="800px">
+            { homepage.events.map( (event) => { 
+                          
+              // Get date
+              const newEventDate = new Date(ParseDate( event.event.date ))
+              return( 
+                <EventItem
+                  day={ newEventDate.toLocaleString('en-us', { day: "2-digit" } ) }
+                  month={ newEventDate.toLocaleString('en-us', { month: 'short' } ) }
+                  year={ newEventDate.getFullYear() }
+                  key={ `/events/${event.event._meta.id}` }
+                  path={ `/events/${event.event._meta.uid}` }
+                  text={ event.event.main_content ? event.event.main_content : "" }
+                  title={ event.event.title[0].text }
+                />
+              )
+            } )}
 
-        { homepage.events &&
-          <>
-            <BigSectionTitle>PeopleForBikes <span>Events</span></BigSectionTitle> 
-          </>
-        }
+            <Button
+              buttonAlign="center"
+              buttonBg="#D0021B"
+              buttonBorder="none"
+              buttonColor="white"
+              buttonFontSize="24px"
+              buttonMargin="0 0 50px 0"
+              buttonPadding="10px 30px"
+              buttonTextTransform="uppercase"
+              href="/events"
+            >
+              See All Events
+            </Button>            
+          </MainContent>
+        </>
+      }
 
-      </Wrapper>
-    </>
+      <Promo
+        headingRGBA="255,255,255,1"
+        path="/take-action"
+        source={ PromoPicture }
+      >
+        <span>See How Our Work</span>
+        <h1>Creates Momentum</h1>
+        <Arrow src={ WhiteArrow } width="46px" />
+      </Promo>
+
+      <Donate>
+        <h1>Donate Now</h1>
+        <span>Bring Better Biking to Your Community</span>
+        <Arrow src={ RedArrowWhiteBlock } width="46px" />
+      </Donate>
+
+    </Wrapper>
   )
 }
 
