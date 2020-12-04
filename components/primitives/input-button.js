@@ -76,7 +76,9 @@ function InputButton(
     buttonPosition,
     buttonText,
     className,
-    name }) {
+    name,
+    onClick
+    }) {
 
   return (
     <>
@@ -91,6 +93,7 @@ function InputButton(
           name={ name }
           value={ buttonText }
           readOnly
+          onClick={onClick}
         />
       </Container>
     </>

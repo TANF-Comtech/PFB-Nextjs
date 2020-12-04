@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
 
-import BasicTextField from "../primitives/text";
+import {RedTextField} from "../primitives/text";
 import InputButton from "../primitives/input-button";
 
 const FormContainer = styled.form`
@@ -13,25 +13,6 @@ const FormContainer = styled.form`
 
   @media (min-width: ${(props) => props.theme.lg}) {
     padding: 0;
-  }
-`;
-
-const RedInput = styled(BasicTextField)`
-  background-color: ${(props) => props.theme.redAccent};
-  color: white;
-
-  /* Changing placeholder text remain surreal, even in 2020 */
-  ::-webkit-input-placeholder {
-    color: white;
-  }
-  ::-moz-placeholder {
-    color: white;
-  }
-  ::-ms-input-placeholder {
-    color: white;
-  }
-  ::placeholder {
-    color: white;
   }
 `;
 
@@ -47,13 +28,13 @@ function SignUpForm() {
   return (
     <>
       <FormContainer onSubmit={handleSubmit(onSignupSubmit)}>
-        <RedInput
+        <RedTextField
           id="newsletter-name"
           name="name"
           placeholder="Name"
           ref={signup}
         />
-        <RedInput
+        <RedTextField
           id="newsletter-email"
           name="email"
           placeholder="Email"
