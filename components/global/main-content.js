@@ -6,7 +6,7 @@ const MainContainer = styled.section`
 `;
 
 const Sizer = styled.div`
-  margin: 2vh auto;
+  margin: 0 auto;
   max-width: ${props => props.maxWidth || props.theme.lg};
 `;
 
