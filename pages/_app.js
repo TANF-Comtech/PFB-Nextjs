@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Router, { useRouter } from 'next/router'
 import withFBQ from "next-fbq"
 import { ThemeProvider } from 'styled-components'
-import { ApolloProvider } from '@apollo/react-hooks'
+import { ApolloProvider } from '@apollo/client'
 import { useApollo } from '../lib/apollo/apolloClient'
 
 import Variables from '../components/styles/variables'
