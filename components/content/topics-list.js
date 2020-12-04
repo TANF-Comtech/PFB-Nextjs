@@ -2,6 +2,9 @@ import MainContent from '../global/main-content'
 import Grid from '../global/grid'
 import ImageSquare from '../global/image-square'
 
+import genericSquare1x from '../../public/PFB_Topics_450x450_generic.jpg'
+import genericSquare2x from '../../public/PFB_Topics_900x900_generic.jpg'
+
 /**
  * <TopicsList>
  * 
