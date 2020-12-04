@@ -48,6 +48,7 @@ const ContentContainer = styled.div`
   }
 
   a, a:focus, a:hover, a:visited {
+    color: ${ props => props.theme.red};
     text-decoration: none;
   }
 `
@@ -77,6 +78,7 @@ const ActionItem = ({
   title,
   text
 }) => {
+
   return (
     <Container>
       { icon === 'E-bikes (battery icon)' && <Icon src={ BatteryIcon } alt="Battery Icon" /> }
@@ -89,14 +91,22 @@ const ActionItem = ({
       { icon === 'News (newspaper icon)' && <Icon src={ NewsIcon } alt="News Icon" /> }
       { icon === 'Suppliers (truck icon)' && <Icon src={ TruckIcon } alt="Truck Icon" /> }
 
-      <ContentContainer>
-        <Link href={ linkResolver(path, false) } passHref>
-          <a>
-            <Title>{ title }</Title>
-          </a>
-        </Link>
-        <Text>{ text }</Text>
-      </ContentContainer>
+      { path.__typename === '_ExternalLink' ? (
+        <ContentContainer>
+          <Title dangerouslySetInnerHTML={{__html: linkResolver(path, false, title) }} />
+          <Text>{ text }</Text>
+        </ContentContainer>
+      ) : (
+        <ContentContainer>
+          <Link href={ linkResolver(path, false) } passHref>
+            <a>
+              <Title>{ title }</Title>
+            </a>
+          </Link>
+          <Text>{ text }</Text>
+        </ContentContainer>
+      )}
+
     </Container>
   )
 }
