@@ -8,10 +8,10 @@ import ContentItem from './content-item'
 /**
  * <NewsList>
  * 
- * Provides news landing page list content
+ * Provides news list content
  *
+ * @param { string } nodeName - endpoints have variable node names, so you can override here
  * @param { array } payload - list of news posts from Prismic API
- * @param { string } source - 
  */
 const NewsList = ({
   nodeName = 'news_item',
