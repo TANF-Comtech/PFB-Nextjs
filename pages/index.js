@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import styled from "styled-components"
 import Image from "next/image"
-import Flickity from "react-flickity-component"
 import { Date as ParseDate } from 'prismic-reactjs'
 
 import { getHomepage } from '../lib/queries/homepage'
@@ -18,8 +17,10 @@ import Donate from '../components/global/donate'
 import Button from '../components/primitives/button'
 import EventItem from '../components/content/event-item'
 
+import Carousel from '../components/global/carousel'
+import NewsList from '../components/content/news-list'
+
 import WhiteArrow from '../public/white-arrow.svg'
-import RedArrowWhiteBlock from '../public/red-arrow-white-block.svg'
 import HPHero from '../public/sample-images/08_PFB_1600x800_Overlay_HomeHero.jpg'
 import PromoPicture from '../public/promo/promo-momentum.jpg'
 
@@ -94,102 +95,10 @@ const Arrow = styled.img`
   width: 46px;
 `
 
-// Slides
-const Slide = styled.section`
-  align-items: center;
-  background-image: url(${ props => props.source });
-  background-position: center center;
-  background-size: cover;
-  display: flex;
-  flex-direction: column;
-  height: 40vh;
-  max-height: 600px;
-  justify-content: center;
-  max-width: 1100px;
-  margin: 0 12.5px;
-  padding: 25px;
-  width: 90vw;
-  @media screen and (min-width: 480px) {
-    height: 80vw;
-    width: 80vw;
-  }
-  @media screen and (min-width: 768px) {
-    height: 60vw;
-  }
-  @media screen and (min-width: 1000px) {
-    height: 40vw;
-  }
-  h2 {
-    color: rgba(${props => props.headingRGBA ? props.headingRGBA : "255,255,255,1" });
-    font-size: 60px;
-    font-weight: 600;
-    line-height: 50px;
-    padding-bottom: 10px;
-    text-align: center;
-    text-transform: uppercase;
-  }
-  @media screen and (min-width: 320px) {
-    h2 {
-      font-size: calc(60px + 60 * ((100vw - 320px) / 880));
-      line-height: calc(50px + 60 * ((100vw - 320px) / 880));
-    }
-  }
-  @media screen and (min-width: 1200px) {
-    h2 {
-      font-size: 120px;
-      line-height: 110px;
-    }
-  }   
-  span {
-    color: rgba(${props => props.headingRGBA ? props.headingRGBA : "255,255,255,1" });
-    font-family: "Tungsten A", "Tungsten B", Arial, Helvetica, sans-serif;
-    font-size: 30px;
-    font-weight: 600;
-    line-height: 25px;
-    letter-spacing: 1px;
-    padding-bottom: 3px;
-    margin: 0;
-    text-align: center;
-    text-transform: uppercase;
-  }
-  @media screen and (min-width: 320px) {
-    span {
-      font-size: calc(30px + 30 * ((100vw - 320px) / 880));
-      line-height: calc(25px + 25 * ((100vw - 320px) / 880));
-    }
-  }
-  @media screen and (min-width: 1200px) {
-    span {
-      font-size: 60px;
-      line-height: 50px;
-    }
-  } 
-`
-
-const SlideWrapper = styled.a`
-  text-align: center;
-  text-decoration: none !important;
-  &::hover, &::visited, &:focus {
-    text-decoration: none !important;
-  }
-`
-
-
-
-
 export default function Homepage({ page }) {
   const { homepage } = page
 
-  // Get number of slides, tell flickity what's up
-  const slideIndex = homepage.campaigns ? Math.floor(homepage.campaigns.length / 2) : 1
-
-  const flickityOptions = {
-    initialIndex: slideIndex,
-    wrapAround: true
-  }
-  
-  
-  //console.log(homepage)
+  console.log(homepage.news)
   
   return (
     <Wrapper 
@@ -241,29 +150,7 @@ export default function Homepage({ page }) {
       { homepage.campaigns &&
         <>
           <SectionTitle>Get Involved</SectionTitle> 
-
-          <Flickity
-            options={flickityOptions}
-            static={true}
-          >
-            { homepage.campaigns.map( (c) => {
-              return(
-                <Slide 
-                  key={ c.campaign._meta.id }
-                  source={ c.campaign.banner_image.url }
-                >
-                  <SlideWrapper 
-                    href={ linkResolver(c.campaign.link, true) } 
-                    rel="noopener"
-                    target="_blank">
-                      { c.campaign.small_text && <span>{ c.campaign.small_text }</span> }
-                      { c.campaign.big_text && <h2>{ c.campaign.big_text }</h2> }
-                      <Arrow src={ WhiteArrow } width="46px" />
-                  </SlideWrapper>
-                </Slide>
-              )
-            } ) }
-          </Flickity>
+          <Carousel payload={homepage.campaigns} />
         </>
       }
       
@@ -271,51 +158,29 @@ export default function Homepage({ page }) {
         homepage.body.map( (slice) => {
         switch(slice.type) {
           case 'ridespot_promo' :
-            return (
-              <RideSpotPromo 
-                payload={ slice.primary } 
-              />
-            )
+            return ( <RideSpotPromo payload={ slice.primary } /> )
       }})}
 
       { homepage.news &&
         <>
           <BigSectionTitle>PeopleForBikes <span>News</span></BigSectionTitle> 
-          <MainContent>
-            { homepage.news.map( (news) => { 
-              
-              // Check for publication_date from individual news post
-              // If not present, use publication date from Prismic CMS
-              const newDate = news.news_item.publication_date ? 
-                ( new Date(ParseDate( news.news_item.publication_date ))) : 
-                ( new Date(ParseDate( news.news_item._meta.lastPublicationDate )))
-              return (
-                <ContentItem 
-                  date={ `${newDate.toLocaleString('en-us', { month: 'long' } )} 
-                          ${setDateSuffix(newDate.getDate())}, 
-                          ${newDate.getFullYear()}` }
-                  key={ news.news_item._meta.id }
-                  image={ news.news_item.header_image && news.news_item.header_image }
-                  path={ `/news/${news.news_item._meta.uid}` }
-                  text={ news.news_item.main_content[0].type === "paragraph" ? news.news_item.main_content[0].text : "" }
-                  title={ news.news_item.title[0].text }
-                />
-              )
-            })}
-            <Button
-              buttonAlign="center"
-              buttonBg="#D0021B"
-              buttonBorder="none"
-              buttonColor="white"
-              buttonFontSize="24px"
-              buttonMargin="0 0 50px 0"
-              buttonPadding="10px 30px"
-              buttonTextTransform="uppercase"
-              href="/news"
-            >
-              See All News
-            </Button>
-          </MainContent>
+          <NewsList 
+            nodeName='news_item'
+            payload={ homepage.news } 
+          />
+          <Button
+            buttonAlign="center"
+            buttonBg="#D0021B"
+            buttonBorder="none"
+            buttonColor="white"
+            buttonFontSize="24px"
+            buttonMargin="0 0 50px 0"
+            buttonPadding="10px 30px"
+            buttonTextTransform="uppercase"
+            href="/news"
+          >
+            See All News
+          </Button>
         </>
       }
 
@@ -367,11 +232,7 @@ export default function Homepage({ page }) {
         <Arrow src={ WhiteArrow } width="46px" />
       </Promo>
 
-      <Donate>
-        <h1>Donate Now</h1>
-        <span>Bring Better Biking to Your Community</span>
-        <Arrow src={ RedArrowWhiteBlock } width="46px" />
-      </Donate>
+      <Donate />
 
     </Wrapper>
   )

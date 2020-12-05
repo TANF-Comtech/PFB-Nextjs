@@ -11,27 +11,29 @@ import ContentItem from './content-item'
  * Provides news landing page list content
  *
  * @param { array } payload - list of news posts from Prismic API
+ * @param { string } source - 
  */
 const NewsList = ({
+  nodeName = 'news_item',
   payload
 }) => {
+
   return (
     <MainContent>
       { payload.map( (news) => { 
-        
-        const newDate = news.node.publication_date ? 
-          ( new Date(ParseDate( news.node.publication_date ))) : 
-          ( new Date(ParseDate( news.node._meta.lastPublicationDate )))
+        const newDate = news[nodeName].publication_date ? 
+          ( new Date(ParseDate( news[nodeName].publication_date ))) : 
+          ( new Date(ParseDate( news[nodeName]._meta.lastPublicationDate )))
         return (
           <ContentItem 
             date={ `${newDate.toLocaleString('en-us', { month: 'long' } )} 
                     ${setDateSuffix(newDate.getDate())}, 
                     ${newDate.getFullYear()}` }
-            key={ news.node._meta.id }
-            image={ news.node.header_image && news.node.header_image }
-            path={ `/news/${news.node._meta.uid}` }
-            text={ news.node.main_content[0].type === "paragraph" ? news.node.main_content[0].text : "" }
-            title={ news.node.title[0].text }
+            key={ news[nodeName]._meta.id }
+            image={ news[nodeName].header_image && news[nodeName].header_image }
+            path={ `/news/${news[nodeName]._meta.uid}` }
+            text={ news[nodeName].main_content[0].type === "paragraph" ? news[nodeName].main_content[0].text : "" }
+            title={ news[nodeName].title[0].text }
           />
         )
       })}
