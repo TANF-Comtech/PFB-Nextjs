@@ -2,6 +2,7 @@ import React from "react"
 import styled from "styled-components"
 
 import MainContent from "../global/main-content"
+import RedArrowWhiteBlock from '../../public/red-arrow-white-block.svg'
 
 const Container = styled.section`
   a, a:visited, a:focus, a:hover, a:active {
@@ -17,8 +18,7 @@ const ColorContainer = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-bottom: 25px;
-  padding: 0 5vw;
+  padding: 2vh 5vw;
   text-align: center;
 
   h1 {
@@ -49,6 +49,12 @@ const ColorContainer = styled.section`
   } 
 `
 
+const Arrow = styled.img`
+  display: block;
+  margin: 0 auto;
+  width: 46px;
+`
+
 /**
  * <Donate>
  * 
@@ -60,8 +66,7 @@ const ColorContainer = styled.section`
  * 
  */
 const Donate = ({ 
-  bgColor,
-  children,
+  bgColor
 }) => {
   return (
     <Container>
@@ -70,7 +75,9 @@ const Donate = ({
           bgColor={ bgColor }
         >
           <MainContent maxWidth="800px">
-            { children }
+            <h1>Donate Now</h1>
+            <span>Bring Better Biking to Your Community</span>
+            <Arrow src={ RedArrowWhiteBlock } width="46px" />
           </MainContent>
         </ColorContainer>
       </a>
