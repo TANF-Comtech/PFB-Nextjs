@@ -78,7 +78,7 @@ const ActionItem = ({
   title,
   text
 }) => {
-  console.log(path)
+
   return (
     <Container>
       { icon === 'E-bikes (battery icon)' && <Icon src={ BatteryIcon } alt="Battery Icon" /> }
