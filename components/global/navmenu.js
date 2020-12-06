@@ -142,7 +142,7 @@ const MainNavItem = styled.li`
   } 
 `
 
-const GridMicroFade = styled.section`
+const GridMicroFade = styled(GridMicro)`
   animation: ${fadeIn} 0.75s ease forwards;
   animation-delay: 0.6s;
   opacity: 0;
@@ -269,7 +269,7 @@ const NavMenu = ({ menuState, handleMenu }) => {
                   </a>
                 </Link>
               </MenuHeader>
-              <GridMicro>
+              <GridMicroFade>
                 { topicMenu && topicMenu.map( (topic) => {
                   return topic.item !== null ? (
                     <ImageSquare
@@ -284,7 +284,7 @@ const NavMenu = ({ menuState, handleMenu }) => {
                     <div key={ randomID(10000000) }></div>
                   )
                 })}                
-              </GridMicro>
+              </GridMicroFade>
             </>
           )}
         </NavContainer>
