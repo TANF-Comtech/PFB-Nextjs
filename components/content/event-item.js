@@ -10,9 +10,12 @@ const DateBlock = styled.div`
   font-family: ${props => props.theme.tungsten};
   font-weight: 700;
   justify-content: center;
-  margin-right: 25px;
   padding: 15px 40px;
   min-width: 180px;
+
+  @media screen and (min-width: ${props => props.theme.sm}) {
+    margin-right: 25px;
+  }
 `
 
 const Month = styled.span`
@@ -76,6 +79,7 @@ const Title = styled.h4`
 const Text = styled.p`
   font-size: 18px;
   line-height: 28px;
+  margin-bottom: 0;
 `
 
 /**

@@ -1,26 +1,23 @@
 import Link from 'next/link'
 import styled from "styled-components"
-import Image from "next/image"
 import { Date as ParseDate } from 'prismic-reactjs'
 
 import { getHomepage } from '../lib/queries/homepage'
-import { linkResolver, setDateSuffix } from '../lib/utils'
 
 import Wrapper from '../components/global/wrapper'
 import HeaderImage from '../components/global/header-image'
 import Grid from '../components/global/grid'
 import MainContent from '../components/global/main-content'
 import RideSpotPromo from '../components/slices/ridespot-promo'
-import ContentItem from '../components/content/content-item'
 import Promo from '../components/slices/promo'
 import Donate from '../components/global/donate'
 import Button from '../components/primitives/button'
-import EventItem from '../components/content/event-item'
-
+import EventsList from '../components/content/events-list'
 import Carousel from '../components/global/carousel'
 import NewsList from '../components/content/news-list'
 
 import WhiteArrow from '../public/white-arrow.svg'
+
 import HPHero from '../public/sample-images/08_PFB_1600x800_Overlay_HomeHero.jpg'
 import PromoPicture from '../public/promo/promo-momentum.jpg'
 
@@ -34,6 +31,7 @@ const SectionTitle = styled.h3`
 const BigSectionTitle = styled.h2`
   color: ${props => props.theme.darkestGray};
   font-weight: 300;
+  margin-bottom: 25px;
   text-align: center;
 
   span {
@@ -98,7 +96,7 @@ const Arrow = styled.img`
 export default function Homepage({ page }) {
   const { homepage } = page
 
-  console.log(homepage.news)
+  // console.log(homepage.news)
   
   return (
     <Wrapper 
@@ -156,9 +154,9 @@ export default function Homepage({ page }) {
       
       { homepage.body &&
         homepage.body.map( (slice) => {
-        switch(slice.type) {
-          case 'ridespot_promo' :
-            return ( <RideSpotPromo payload={ slice.primary } /> )
+          switch(slice.type) {
+            case 'ridespot_promo' :
+              return ( <RideSpotPromo payload={ slice.primary } /> )
       }})}
 
       { homepage.news &&
@@ -187,38 +185,22 @@ export default function Homepage({ page }) {
       { homepage.events &&
         <>
           <BigSectionTitle>PeopleForBikes <span>Events</span></BigSectionTitle> 
-          <MainContent maxWidth="800px">
-            { homepage.events.map( (event) => { 
-                          
-              // Get date
-              const newEventDate = new Date(ParseDate( event.event.date ))
-              return( 
-                <EventItem
-                  day={ newEventDate.toLocaleString('en-us', { day: "2-digit" } ) }
-                  month={ newEventDate.toLocaleString('en-us', { month: 'short' } ) }
-                  year={ newEventDate.getFullYear() }
-                  key={ event.event._meta.id }
-                  path={ `/events/${event.event._meta.uid}` }
-                  text={ event.event.main_content ? event.event.main_content : "" }
-                  title={ event.event.title[0].text }
-                />
-              )
-            } )}
-
-            <Button
-              buttonAlign="center"
-              buttonBg="#D0021B"
-              buttonBorder="none"
-              buttonColor="white"
-              buttonFontSize="24px"
-              buttonMargin="0 0 50px 0"
-              buttonPadding="10px 30px"
-              buttonTextTransform="uppercase"
-              href="/events"
-            >
-              See All Events
-            </Button>            
-          </MainContent>
+          <EventsList 
+            payload={ homepage.events } 
+          />
+          <Button
+            buttonAlign="center"
+            buttonBg="#D0021B"
+            buttonBorder="none"
+            buttonColor="white"
+            buttonFontSize="24px"
+            buttonMargin="0 0 50px 0"
+            buttonPadding="10px 30px"
+            buttonTextTransform="uppercase"
+            href="/events"
+          >
+            See All Events
+          </Button>            
         </>
       }
 
