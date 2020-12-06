@@ -6,10 +6,10 @@ import Link from 'next/link'
 
 import { randomID, linkResolver } from '../../lib/utils'
 
-import ImageSquare from '../../components/global/image-square'
-import Logo from '../../components/global/logo'
-import LogoType from '../../components/global/logotype'
-
+import GridMicro from '../global/grid-micro'
+import ImageSquare from '../global/image-square'
+import Logo from '../global/logo'
+import LogoType from '../global/logotype'
 
 const NavContainer = styled.nav`
   background-color: #fff;
@@ -129,30 +129,23 @@ const MainNavItem = styled.li`
   font-size: 36px;
   font-family: ${ props => props.theme.tungsten };
   font-weight: 300;
-  line-height: 30px;
-  padding: 0.5vh 0;
+  line-height: 32px;
+  padding: 1vh 0;
 
   @media screen and (min-width: 320px) {
-    font-size: calc(36px + 12 * ((100vw - 320px) / 880));
-    line-height: calc(30px + 10 * ((100vw - 320px) / 880));
+    font-size: calc(36px + 6 * ((100vw - 320px) / 880));
+    line-height: calc(32px + 6 * ((100vw - 320px) / 880));
   }
   @media screen and (min-width: 1200px) {
-    font-size: 48px;
-    line-height: 40px;
+    font-size: 42px;
+    line-height: 38px;
   } 
 `
 
-const GridMicro = styled.section`
+const GridMicroFade = styled.section`
   animation: ${fadeIn} 0.75s ease forwards;
   animation-delay: 0.6s;
-  display: grid;
-  grid-gap: 15px;
-  grid-template-columns: 1fr 1fr;
   opacity: 0;
-
-  a, a:focus, a:visited, a:hover {
-    text-decoration: none;
-  }
 `;
 
 const LogoContainer = styled.section`
@@ -233,11 +226,11 @@ const NavMenu = ({ menuState, handleMenu }) => {
                 <Logo 
                   logoMargin="0"
                   logoWidth="60px"
-                  logoViewbox="65 0 160 132"
+                  logoViewbox="65 -12 160 150"
                 />
                 <LogoType 
                   logoMargin="0"
-                  logoTypeWidth="180px"
+                  logoTypeWidth="150px"
                 />
               </LogoContainer>
             )}
