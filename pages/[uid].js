@@ -20,7 +20,6 @@ import Donate from '../components/global/donate'
 
 export default function LandingPage({ page, preview }) {
   const { landing_page } = page
-  console.log(landing_page.data)
 
   // Check to make sure there is actually a page at this UID path
   if (!landing_page) {

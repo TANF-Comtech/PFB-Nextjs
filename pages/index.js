@@ -94,8 +94,6 @@ const Arrow = styled.img`
 export default function Homepage({ page }) {
   const { homepage } = page
 
-  console.log(homepage)
-  
   return (
     <Wrapper 
       postTitle="People for Bikes Homepage"
