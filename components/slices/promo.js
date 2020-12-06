@@ -61,7 +61,7 @@ const ImageContainer = styled.section`
 
 const Arrow = styled.img`
   display: block;
-  margin: 0 auto;
+  margin: 10px auto;
   width: 46px;
 `
 
