@@ -4,11 +4,12 @@ import { useQuery, gql } from '@apollo/client'
 import { RichText } from 'prismic-reactjs'
 import Link from 'next/link'
 
+import { randomID, linkResolver } from '../../lib/utils'
+
 import ImageSquare from '../../components/global/image-square'
 import Logo from '../../components/global/logo'
 import LogoType from '../../components/global/logotype'
 
-import { randomID } from '../../lib/utils'
 
 const NavContainer = styled.nav`
   background-color: #fff;
@@ -173,42 +174,28 @@ const LogoContainer = styled.section`
  */
 
 const NAV_MENU_DATA = gql`
-  query TempNavMenu($uid: String!, $lang: String!) {
+  query NavMenu($uid: String!, $lang: String!) {
     nav_menu(uid: $uid, lang: $lang) {
       _meta {
         uid
         id
       }
       main_menu_items {
+        menu_text
         item {
+          __typename
           ... on Landing_page {
             title
-            _linkType
             _meta {
-              uid
               id
-            }
-          }
-          ... on Topics {
-            title
-            _linkType
-            _meta {
               uid
-              id
-            }
-          }
-          ... on Locations_landing {
-            title
-            _linkType
-            _meta {
-              uid
-              id
             }
           }
         }
       }
       topic_menu_items {
         item {
+          __typename
           ... on Topic {
             title
             square_image
@@ -220,7 +207,7 @@ const NAV_MENU_DATA = gql`
         }
       }
     }
-  }
+  }  
 `
 
 const NavMenu = ({ menuState, handleMenu }) => {
@@ -269,52 +256,18 @@ const NavMenu = ({ menuState, handleMenu }) => {
           </MenuHeader>
           { menuState === true && (
             <>
-              <MainNav>
-                <MainNavItem key={ randomID(10000000) } >
-                  <Link href="/news">
-                    <a onClick={ handleMenu } >Latest News</a>
-                  </Link>
-                </MainNavItem>
-                <MainNavItem key={ randomID(10000000) } >
-                  <Link href="/local-innovation">
-                    <a onClick={ handleMenu } >Local Innovation</a>
-                  </Link>
-                </MainNavItem>
-                <MainNavItem key={ randomID(10000000) } >
-                  <Link href="/policy">
-                    <a onClick={ handleMenu } >Policy Work</a>
-                  </Link>
-                </MainNavItem>                            
-                <MainNavItem key={ randomID(10000000) } >
-                  <Link href="/take-action">
-                    <a onClick={ handleMenu } >Take Action</a>
-                  </Link>
-                </MainNavItem>                            
-                <MainNavItem key={ randomID(10000000) } >
-                  <Link href="/locations">
-                    <a onClick={ handleMenu } >Find Your Community</a>
-                  </Link>
-                </MainNavItem>                            
-                <MainNavItem key={ randomID(10000000) } >
-                  <Link href="/events">
-                    <a onClick={ handleMenu } >Bike Events</a>
-                  </Link>
-                </MainNavItem>                                                                                
-                {/* { mainMenu.map( (menu_item) => {
-                  return menu_item.item !== null ? (
+              <MainNav>                                                                              
+                { mainMenu.map( (menu_item) => {
+                  return (
                     <MainNavItem key={ randomID(10000000) } >
-                      <Link 
-                        href={ '/' + menu_item.item._meta.uid } 
-                      >
+                      <Link href={ linkResolver(menu_item.item, true) } >
                         <a onClick={ handleMenu } >
-                          { RichText.asText(menu_item.item.title) }
+                          { menu_item.menu_text ? menu_item.menu_text : RichText.asText(menu_item.item.title) }
                         </a>
                       </Link>
                     </MainNavItem>
-                  ) : (
-                    <div key={ randomID(10000000) }></div>
                   )
-                })} */}
+                })}
               </MainNav>
               <MenuHeader>
                 <Link href="/topics">
