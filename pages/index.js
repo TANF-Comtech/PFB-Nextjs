@@ -101,38 +101,39 @@ export default function Homepage({ page }) {
       postTitle="People for Bikes Homepage"
       isWide={ true }
     >
-      <HeaderImage 
-        headingRGBA="255,255,255,1"
-        source={ HPHero }
-      >
-        <span>Together We Make</span>
-        <h1>Biking Better</h1>
-      </HeaderImage>
+      { homepage.banner_image &&
+        <HeaderImage 
+          source={ homepage.banner_image.url }
+        >
+          <span>{ homepage.small_text }</span>
+          <h1>{ homepage.big_text }</h1>
+        </HeaderImage>
+      }
 
       <MainContent>
         <SectionTitle>Our Mission</SectionTitle> 
         <Grid gridGap="1vw">
-          <Box bgColor="#D0021B">
+          <Box bgColor="#D0021B" key="1">
             <Number>1</Number>
             <Text>Improving Recreational Access for Bicycles</Text>
           </Box>
-          <Box bgColor="#D0021B">
+          <Box bgColor="#D0021B" key="2">
             <Number>2</Number>
             <Text>Building Safe Mobility Networks</Text>
           </Box>
-          <Box bgColor="#D0021B">
+          <Box bgColor="#D0021B" key="3">
             <Number>3</Number>
             <Text>Fostering Diversity, Equity, and Inclusion</Text>
           </Box>
-          <Box bgColor="#D0021B">
+          <Box bgColor="#D0021B" key="4">
             <Number>4</Number>
             <Text>Promoting Sustainability</Text>
           </Box>
-          <Box bgColor="#D0021B">
+          <Box bgColor="#D0021B" key="5">
             <Number>5</Number>
             <Text>Growing the Bike Industry</Text>
           </Box>
-          <Link href="/mission" passHref>
+          <Link href="/mission" passHref key="6">
             <a>
               <Box bgColor="#002C40">
                 <Arrow src={ WhiteArrow } width="46px" />
@@ -152,10 +153,11 @@ export default function Homepage({ page }) {
       
       { homepage.body &&
         homepage.body.map( (slice) => {
-          switch(slice.type) {
-            case 'ridespot_promo' :
-              return ( <RideSpotPromo payload={ slice.primary } /> )
-      }})}
+          if( slice.type === "ridespot_promo" ) {
+            return ( <RideSpotPromo payload={ slice.primary } /> )
+          }
+      })}  
+      
 
       { homepage.news &&
         <>
@@ -202,19 +204,19 @@ export default function Homepage({ page }) {
         </>
       }
 
-    { homepage.body &&
+      { homepage.body &&
         homepage.body.map( (slice) => {
-          switch(slice.type) {
-            case 'promo' :
-              return ( 
-                <Promo 
-                  bigWords={ slice.primary.bottom_text }
-                  path={ slice.primary.link }
-                  smallWords={ slice.primary.top_text }
-                  source={ slice.primary.main_image.url }
-                /> 
-              )
-      }})}
+          if( slice.type === "promo" ) {
+            return ( 
+              <Promo 
+                bigWords={ slice.primary.bottom_text }
+                path={ slice.primary.link }
+                smallWords={ slice.primary.top_text }
+                source={ slice.primary.main_image.url }
+              /> 
+            )
+          }
+      })}  
 
       <Donate />
 

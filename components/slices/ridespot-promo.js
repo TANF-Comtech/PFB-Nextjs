@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
+import { randomID } from '../../lib/utils'
+
 import RideSpotRide from "./ridespot-ride"
 
 import RideSpotBg1 from '../../public/ridespot-bg.jpg'
@@ -95,12 +97,12 @@ const RideSpotPromo = ({ isLocal = false, payload }) => {
         </RSTitle>
       </BgImage>
       <RSRidesContainer>
-        { payloadArr.map( (ride, i) => {
+        { payloadArr.map( (ride) => {
           return (
             <RideSpotRide
               distance={ ride.distance }
               extLink={ ride.ridespot_link.url }
-              key={ i }
+              key={ randomID(1000000000) }
               owner={ ride.organization.name[0].text }
               title={ ride.title[0].text }
             /> 
