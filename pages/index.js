@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import styled from "styled-components"
-import { Date as ParseDate } from 'prismic-reactjs'
 
 import { getHomepage } from '../lib/queries/homepage'
 
@@ -19,7 +18,6 @@ import NewsList from '../components/content/news-list'
 import WhiteArrow from '../public/white-arrow.svg'
 
 import HPHero from '../public/sample-images/08_PFB_1600x800_Overlay_HomeHero.jpg'
-import PromoPicture from '../public/promo/promo-momentum.jpg'
 
 const SectionTitle = styled.h3`
   color: ${props => props.theme.midnightBlue};
@@ -96,7 +94,7 @@ const Arrow = styled.img`
 export default function Homepage({ page }) {
   const { homepage } = page
 
-  // console.log(homepage.news)
+  console.log(homepage)
   
   return (
     <Wrapper 
@@ -204,15 +202,19 @@ export default function Homepage({ page }) {
         </>
       }
 
-      <Promo
-        headingRGBA="255,255,255,1"
-        path="/take-action"
-        source={ PromoPicture }
-      >
-        <span>See How Our Work</span>
-        <h1>Creates Momentum</h1>
-        <Arrow src={ WhiteArrow } width="46px" />
-      </Promo>
+    { homepage.body &&
+        homepage.body.map( (slice) => {
+          switch(slice.type) {
+            case 'promo' :
+              return ( 
+                <Promo 
+                  bigWords={ slice.primary.bottom_text }
+                  path={ slice.primary.link }
+                  smallWords={ slice.primary.top_text }
+                  source={ slice.primary.main_image.url }
+                /> 
+              )
+      }})}
 
       <Donate />
 

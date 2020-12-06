@@ -2,6 +2,11 @@ import React from "react"
 import Link from "next/link"
 import styled from "styled-components"
 
+import { linkResolver } from "../../lib/utils"
+
+import WhiteArrow from '../../public/white-arrow.svg'
+import PromoFallback from '../../public/promo/promo-momentum.jpg'
+
 const Container = styled.section`
   a, a:visited, a:focus, a:hover, a:active {
     text-decoration: none;
@@ -54,33 +59,58 @@ const ImageContainer = styled.section`
   } 
 `
 
+const Arrow = styled.img`
+  display: block;
+  margin: 0 auto;
+  width: 46px;
+`
+
 /**
  * <Promo>
  * 
  * Promo is just like a HeaderImage component, except it links to page
- * 
+ *
+ * @param { string } bigWords - large lettering in promo
  * @param { string } headingRGBA - color of text, can provide transparency
- * @param { string } path - where the promo will go around the site
- * @param { string } source - single image to display as a banner/hero
+ * @param { string } path - where the promo will go around the site (default: homepage)
+ * @param { string } smallWords - small lettering in promo
+ * @param { string } source - single image to display as a banner/hero (default: PromoFallback)
  */
 const Promo = ({ 
-  children,
+  bigWords = "See How Our Work Creates",
   headingRGBA,
-  path,
-  source
+  path = 'https://www.peopleforbikes.org',
+  smallWords = 'Creates Momentum',
+  source = PromoFallback
 }) => {
+  
   return (
     <Container>
-      <Link href={ path }>
-        <a>
+      { path.__typename === '_ExternalLink' ? (
+        <a href={ linkResolver(path, true) }>
           <ImageContainer
             headingRGBA={ headingRGBA }
             source={ source }
           >
-            { children }
-          </ImageContainer>
+            <span>{ smallWords }</span>
+            <h1>{ bigWords }</h1>
+            <Arrow src={ WhiteArrow } width="46px" />
+          </ImageContainer>     
         </a>
-      </Link>
+      ) : (
+        <Link href={ linkResolver(path, true) } passHref>
+          <a>
+            <ImageContainer
+              headingRGBA={ headingRGBA }
+              source={ source }
+            >
+              <span>{ smallWords }</span>
+              <h1>{ bigWords }</h1>
+              <Arrow src={ WhiteArrow } width="46px" />
+            </ImageContainer>
+          </a>
+        </Link>
+      )}
     </Container>
   )
 }
