@@ -19,13 +19,14 @@ import ActionItemGroup from '../components/slices/action-item-group'
 import Donate from '../components/global/donate'
 
 export default function LandingPage({ page, preview }) {
+  
+  // If we're missing the page payload, throw error page
+  // Otherwise, destructure landing_page from it
+  if (!page) {
+    return <ErrorPage statusCode={404} />
+  } 
   const { landing_page } = page
 
-  // Check to make sure there is actually a page at this UID path
-  if (!landing_page) {
-    return <ErrorPage statusCode={404} />
-  }
-  
   return (
     <>
       <Wrapper 
