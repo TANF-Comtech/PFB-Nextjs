@@ -10,7 +10,7 @@ import RideSpotLogo from '../../public/ridespot-logo.svg'
 import AppleAppStore from '../../public/app-store-apple.svg'
 import GoogleAppStore from '../../public/app-store-google.svg'
 
-// BgImage will randomize the backgrounds
+// BgImage will check for ride payload, set margins accordingly
 const BgImage = styled.section`
   align-items: center;
   background-image: url(${RideSpotBg1});
@@ -20,7 +20,7 @@ const BgImage = styled.section`
   flex-direction: column;
   justify-content: space-around;
   margin-bottom: 1vh;
-  padding: 3vh 0 18vh 0;
+  padding: ${ props => props.payload ? '3vh 0 18vh 0' : '3vh 0' };
 
   h1 {
     color: #fff;
@@ -119,14 +119,21 @@ const RSRidesContainer = styled.section`
  * @param { string } isLocal - true if payload is local rides, false is general rides
  * @param { object } payload - all the ridespot ride info
  */
-const RideSpotPromo = ({ isLocal = false, payload }) => {
+const RideSpotPromo = ({ 
+  isLocal = false, 
+  payload 
+}) => {
 
   // Transform payload object into an array
-  const payloadArr = Object.keys(payload).map((key) => payload[key] )
+  let payloadArr
+
+  if (payload) {
+    payloadArr = Object.keys(payload).map((key) => payload[key] )
+  }
   
   return (
     <>
-      <BgImage>
+      <BgImage payload={ payload }>
         <RSLogoContainer 
           alt="RideSpot Logo"
           src={ RideSpotLogo }
@@ -150,19 +157,21 @@ const RideSpotPromo = ({ isLocal = false, payload }) => {
           Use the App to Find Great Rides Like These
         </RSDeck>
       </BgImage>
-      <RSRidesContainer>
-        { payloadArr.map( (ride) => {
-          return (
-            <RideSpotRide
-              distance={ ride.distance }
-              extLink={ ride.ridespot_link.url }
-              key={ randomID(1000000000) }
-              owner={ ride.organization.name[0].text }
-              title={ ride.title[0].text }
-            /> 
-          )
-        }) }                   
-      </RSRidesContainer>
+      { payload &&
+         <RSRidesContainer>
+         { payloadArr.map( (ride) => {
+           return (
+             <RideSpotRide
+               distance={ ride.distance }
+               extLink={ ride.ridespot_link.url }
+               key={ randomID(1000000000) }
+               owner={ ride.organization.name[0].text }
+               title={ ride.title[0].text }
+             /> 
+           )
+         }) }                   
+       </RSRidesContainer>   
+      }
     </>
   )
 }
