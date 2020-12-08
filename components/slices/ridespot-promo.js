@@ -88,8 +88,9 @@ const RSDownload = styled.section`
 `
 
 const RSBadge = styled.img`
+  height: 40px;
   margin: 0 8px;
-  opacity: 0.65;
+  opacity: 0.85;
   width: 120px;
 `
 

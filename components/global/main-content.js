@@ -38,7 +38,7 @@ const MainContent = ({
     <>
       <MainContainer 
         bgColor={ bgColor } 
-        class={ className } 
+        className={ className } 
         textColor={ textColor }
       >
         <Sizer maxWidth={maxWidth}>

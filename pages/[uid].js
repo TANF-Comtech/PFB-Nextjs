@@ -6,15 +6,20 @@ import { getSingleLandingPage,
 import { newsTopTwenty  } from '../lib/queries/news'
 import { getLocations } from '../lib/queries/locations'
 import { getTopics } from '../lib/queries/topics'
+import { getRides } from '../lib/queries/rides'
 import { randomID } from '../lib/utils'
 
 import Wrapper from '../components/global/wrapper'
 import BigTitleBanner from '../components/content/big-title-banner'
+import SecondaryTitleBanner from '../components/content/secondary-title-banner'
 import Heading1 from '../components/primitives/h1'
+import HeaderImage from '../components/global/header-image'
 import SummaryBlock from '../components/content/summary-block'
+
 import NewsList from '../components/content/news-list'
 import LocationsList from '../components/content/locations-list'
 import TopicsList from '../components/content/topics-list'
+import RidesList from '../components/content/rides-list'
 import ActionItemGroup from '../components/slices/action-item-group'
 import Donate from '../components/global/donate'
 
@@ -26,6 +31,7 @@ export default function LandingPage({ page, preview }) {
     return <ErrorPage statusCode={404} />
   } 
   const { landing_page } = page
+  // console.log(landing_page)
 
   return (
     <>
@@ -33,35 +39,66 @@ export default function LandingPage({ page, preview }) {
         postTitle={ RichText.asText(landing_page.title) }
         isWide={ true }
       >
-        <BigTitleBanner>
-          <RichText
-            elements={{ heading1: Heading1 }}
-            render={ landing_page.title }
-          />
-        </BigTitleBanner>
+        { // If header_image, load special header
+          landing_page.header_image ? (
+          <>
+            <SecondaryTitleBanner
+              secondaryText={ landing_page.secondary_text }
+              mainText={ landing_page.main_text }
+            />
+            <HeaderImage 
+              srcSet={ landing_page.header_image }
+            />
+            { landing_page.summary &&
+              <SummaryBlock
+                bgColor="#002C40"
+                textColor="#fff"
+              >
+                { landing_page.summary }
+              </SummaryBlock>
+            }            
+          </>
+        ) : (
+          <>
+            <BigTitleBanner>
+              <RichText
+                elements={{ heading1: Heading1 }}
+                render={ landing_page.title }
+              />
+            </BigTitleBanner>
+            { landing_page.summary &&
+              <SummaryBlock>
+                { landing_page.summary }
+              </SummaryBlock>
+            }
+          </>
+        )}
 
-        { landing_page.summary &&
-          <SummaryBlock>
-            { landing_page.summary }
-          </SummaryBlock>
-        }
-
-        { landing_page._meta.uid === 'news' &&  
+        { // NEWS
+          landing_page._meta.uid === 'news' &&  
           <NewsList 
             nodeName="node"  
             payload={ landing_page.data } 
           />
         }
 
-        { landing_page._meta.uid === 'locations' &&  
+        { // LOCATIONS
+          landing_page._meta.uid === 'locations' &&  
           <LocationsList payload={ landing_page.data } />
         }
 
-        { landing_page._meta.uid === 'topics' &&  
+        { // TOPICS
+          landing_page._meta.uid === 'topics' &&  
           <TopicsList payload={ landing_page.data } />
         }
 
-        { landing_page._meta.uid === 'take-action' && landing_page.body
+        { // RIDES
+          landing_page._meta.uid === 'rides' && 
+          <RidesList payload={ landing_page.data } />
+        }        
+
+        { // TAKE ACTION
+          landing_page._meta.uid === 'take-action' && landing_page.body
           ? ( landing_page.body.map( (slice) => {
             switch(slice.__typename) {
               case 'Landing_pageBodyAction_item' :
@@ -94,7 +131,9 @@ export async function getStaticProps({ params, preview = false, previewData }) {
     pageData.landing_page.data = await getLocations(params.uid, previewData)
   } else if(params.uid === 'topics') {
     pageData.landing_page.data = await getTopics(params.uid, previewData)
-  } 
+  } else if(params.uid === 'rides') {
+    pageData.landing_page.data = await getRides(params.uid, previewData)
+  }
 
   return {
     props: {
