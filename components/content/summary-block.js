@@ -22,10 +22,15 @@ const Para = styled.p`
  */
 
 const SummaryBlock = ({
-  children
+  bgColor,
+  children,
+  textColor
 }) => {
   return (
-    <MainContent>
+    <MainContent
+      bgColor={ bgColor }
+      textColor={ textColor }
+    >
       <Para>{ children }</Para>
     </MainContent>
   )
