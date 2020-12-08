@@ -61,19 +61,27 @@ const ImageContainer = styled.section`
       line-height: 50px;
     }
   } 
+`
 
+const ForegroundImg = styled.img`
+  margin-bottom: 2vh;
+  max-height: 70vh;
+  object-fit: cover;
+  width: 100%;
 `
 
 /**
  * <HeaderImage>
  * 
- * This produces the ultra-wide banners around the site. Probably could be improved but pretty good as is.
- * srcSet param makes sense but responsive background images still doesn't really work in browsers
+ * This produces the ultra-wide banners around the site.
+ * It can handle background imagery with text or just foreground images
  * 
+ * @param { object } children - React child components, content for this component
  * @param { string } headingRGBA - color of text, can provide transparency
- * @param { string } source - single image to display as a banner/hero
- * @param { obj } srcSet - set of images to display across responsive viewports
+ * @param { string } source - single image to display as a banner/hero in background
+ * @param { object } srcSet - set of images to display across responsive viewports in foreground
  */
+
 const HeaderImage = ({ 
   children,
   headingRGBA,
@@ -82,12 +90,23 @@ const HeaderImage = ({
 }) => {
   return (
     <>
-      <ImageContainer
-        headingRGBA={ headingRGBA }
-        source={ source }
-      >
-        { children }
-      </ImageContainer>
+      { source &&
+        <ImageContainer
+          headingRGBA={ headingRGBA }
+          source={ source }
+        >
+          { children }
+        </ImageContainer>
+      }
+      { srcSet &&
+        <ForegroundImg
+          alt={ srcSet.alt ? secSet.alt : "Bike-oriented image" }
+          loading="lazy"
+          src={ srcSet.url }
+          srcSet={ `${srcSet.url} 1600w, ${srcSet.mobile.url} 800w`  }
+          sizes="100vw"
+        />
+      }
     </>
   )
 }
