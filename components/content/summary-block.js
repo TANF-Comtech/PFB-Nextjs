@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import MainContent from '../global/main-content'
 
-const Para = styled.p`
+const Para = styled.div`
   margin: 20px 0;
   
   @media screen and (min-width: 320px) {
