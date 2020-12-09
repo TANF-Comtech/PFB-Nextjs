@@ -21,6 +21,7 @@ import LocationsList from '../components/content/locations-list'
 import TopicsList from '../components/content/topics-list'
 import RidesList from '../components/content/rides-list'
 import ActionItemGroup from '../components/slices/action-item-group'
+import MissionPillars from '../components/content/mission-pillars'
 import Donate from '../components/global/donate'
 
 export default function LandingPage({ page, preview }) {
@@ -54,7 +55,7 @@ export default function LandingPage({ page, preview }) {
                 bgColor="#002C40"
                 textColor="#fff"
               >
-                { landing_page.summary }
+                <p>{ landing_page.summary }</p>
               </SummaryBlock>
             }            
           </>
@@ -68,7 +69,7 @@ export default function LandingPage({ page, preview }) {
             </BigTitleBanner>
             { landing_page.summary &&
               <SummaryBlock>
-                { landing_page.summary }
+                <p>{ landing_page.summary }</p>
               </SummaryBlock>
             }
           </>
@@ -97,18 +98,37 @@ export default function LandingPage({ page, preview }) {
           <RidesList payload={ landing_page.data } />
         }        
 
-        { // TAKE ACTION
-          landing_page._meta.uid === 'take-action' && landing_page.body
-          ? ( landing_page.body.map( (slice) => {
-            switch(slice.__typename) {
-              case 'Landing_pageBodyAction_item' :
-                return (
-                  <ActionItemGroup
-                    key={ randomID(10000000) }
-                    payload={ slice.fields }
-                  />
-                )
+        { // SLICE CONTENT (in body)
+          landing_page.body ? 
+          ( landing_page.body.map( (slice) => {
+
+            // TAKE ACTION SLICE
+            if (slice.__typename === 'Landing_pageBodyAction_item' &&
+              landing_page._meta.uid === 'take-action') {
+              return (
+                <ActionItemGroup
+                  key={ randomID(10000000) }
+                  payload={ slice.fields }
+                />
+              )
             } 
+
+            // MISSION SLICES
+            if (slice.__typename === 'Landing_pageBodyContent_block' &&
+              landing_page._meta.uid === 'mission') {
+                console.log(slice)
+              return (
+                <SummaryBlock>
+                  <RichText render={slice.primary.main_content} />
+                </SummaryBlock>
+              )
+            }
+            if (slice.__typename === 'Landing_pageBodyMission_content' &&
+              landing_page._meta.uid === 'mission') {
+              return (
+                <MissionPillars payload={ slice.fields } />
+              )
+            }
           })) : (<></>)
         }
 
