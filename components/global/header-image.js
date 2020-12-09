@@ -100,7 +100,7 @@ const HeaderImage = ({
       }
       { srcSet &&
         <ForegroundImg
-          alt={ srcSet.alt ? secSet.alt : "Bike-oriented image" }
+          alt={ srcSet.alt ? srcSet.alt : "Bike-oriented image" }
           loading="lazy"
           src={ srcSet.url }
           srcSet={ `${srcSet.url} 1600w, ${srcSet.mobile.url} 800w`  }
