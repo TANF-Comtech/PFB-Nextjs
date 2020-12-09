@@ -2,11 +2,7 @@ import styled from 'styled-components'
 import MainContent from '../global/main-content'
 
 const Container = styled.section`
-  padding: 2vh 25px 4vh 25px;
-
-  @media (min-width: ${props => props.theme.lg}) {
-    padding: 2vh 0 4vh 0;
-  }
+  padding: 2vh 0 4vh 0;
 `
 
 const MainText = styled.h1`
