@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import numWords from 'num-words'
 
 import MainContent from '../global/main-content'
-import ActionItem from '../slices/action-item'
+import RedActionItem from '../slices/action-item-red'
 
 const DeepBlue = styled.section`
   background-color: ${props => props.theme.midnightBlue };
@@ -75,27 +75,47 @@ const MissionPillars = ({
   payload
 }) => {
   return (
-    <DeepBlue>
+    <>
+      <DeepBlue>
+        <MainContent>
+          <SectionTitle>Our Mission Pillars</SectionTitle>
+          { payload.map( (item, i) => {
+            return (
+              <Item
+                key={ i }
+              >
+                <Title>
+                  <span>{ numWords(i+1) }</span>
+                  &nbsp;
+                  { item.pillar_title }
+                </Title>
+                <Text>
+                  { item.pillar_content }
+                </Text>
+              </Item>
+            )
+          })}
+        </MainContent>
+      </DeepBlue>
       <MainContent>
-        <SectionTitle>Our Mission Pillars</SectionTitle>
-        { payload.map( (item, i) => {
-          return (
-            <Item
-              key={ i }
-            >
-              <Title>
-                <span>{ numWords(i+1) }</span>
-                &nbsp;
-                { item.pillar_title }
-              </Title>
-              <Text>
-                { item.pillar_content }
-              </Text>
-            </Item>
-          )
-        })}
+        <h2>How To Get Involved</h2>
+        <RedActionItem 
+          path="/team"
+          title="Meet Our Team"
+          text="Learn who is helping to deliver your next ride."
+        /> 
+        <RedActionItem 
+          path="/join"
+          title="Join PeopleForBikes"
+          text="Help us tackle the issues that face the bike community"
+        />
+        <RedActionItem 
+          path="/take-action"
+          title="Take Action"
+          text="Make your voice heard through our campaigns."
+        />            
       </MainContent>
-    </DeepBlue>
+    </>
   )
 }
 
