@@ -116,7 +116,6 @@ export default function LandingPage({ page, preview }) {
             // MISSION SLICES
             if (slice.__typename === 'Landing_pageBodyContent_block' &&
               landing_page._meta.uid === 'mission') {
-                console.log(slice)
               return (
                 <SummaryBlock>
                   <RichText render={slice.primary.main_content} />
