@@ -4,11 +4,15 @@ import sendPasswordlessAuthCode from '../../../../lib/auth0/sendPasswordlessAuth
 export default (req, res) => {
     if (req.method === 'POST') {
         const email = req.body.email
-        checkEmailInSalesforce(email).then(data=>{
+        return checkEmailInSalesforce(email).then(data=>{
+            console.log("Data From CheckEmail", data)
             if(data.inSalesForce){
                 sendPasswordlessAuthCode(email).then(data=>{
                     res.status(200).json({status:true}) //will tweak
                 })
+            }
+            else{
+                return "You don't exist!"
             }
         })
     }

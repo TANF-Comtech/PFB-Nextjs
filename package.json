@@ -21,6 +21,7 @@
     "flickity": "^2.2.1",
     "graphql": "^15.4.0",
     "graphql-tag": "^2.10.4",
+    "jsforce": "^1.10.0",
     "jsonwebtoken": "^8.5.1",
     "next": "10.0.3",
     "next-fbq": "^2.0.0",
