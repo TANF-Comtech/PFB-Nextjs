@@ -12,7 +12,7 @@ export default (req, res) => {
                 })
             }
             else{
-                return "You don't exist!"
+                res.status(401).json({error:"You are not a member"})
             }
         })
     }
