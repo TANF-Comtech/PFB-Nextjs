@@ -7,6 +7,7 @@ import { newsTopTwenty  } from '../lib/queries/news'
 import { getLocations } from '../lib/queries/locations'
 import { getTopics } from '../lib/queries/topics'
 import { getRides } from '../lib/queries/rides'
+import { getTeamMembers } from '../lib/queries/team'
 import { randomID } from '../lib/utils'
 
 import Wrapper from '../components/global/wrapper'
@@ -20,6 +21,8 @@ import NewsList from '../components/content/news-list'
 import LocationsList from '../components/content/locations-list'
 import TopicsList from '../components/content/topics-list'
 import RidesList from '../components/content/rides-list'
+import TeamList from '../components/content/team-list'
+
 import ActionItemGroup from '../components/slices/action-item-group'
 import MissionPillars from '../components/content/mission-pillars'
 import Donate from '../components/global/donate'
@@ -41,15 +44,18 @@ export default function LandingPage({ page, preview }) {
         isWide={ true }
       >
         { // If header_image, load special header
-          landing_page.header_image ? (
+          landing_page.header_image || 
+          landing_page._meta.uid === 'team' ? (
           <>
             <SecondaryTitleBanner
               secondaryText={ landing_page.secondary_text }
               mainText={ landing_page.main_text }
             />
-            <HeaderImage 
-              srcSet={ landing_page.header_image }
-            />
+            { landing_page.header_image &&
+              <HeaderImage 
+                srcSet={ landing_page.header_image }
+              />
+            }
             { landing_page.summary &&
               <SummaryBlock
                 bgColor="#002C40"
@@ -97,6 +103,12 @@ export default function LandingPage({ page, preview }) {
           landing_page._meta.uid === 'rides' && 
           <RidesList payload={ landing_page.data } />
         }        
+
+        { // TEAM
+          landing_page._meta.uid === 'team' && 
+          <TeamList payload={ landing_page.data } />
+        }        
+
 
         { // SLICE CONTENT (in body)
           landing_page.body ? 
@@ -152,6 +164,8 @@ export async function getStaticProps({ params, preview = false, previewData }) {
     pageData.landing_page.data = await getTopics(params.uid, previewData)
   } else if(params.uid === 'rides') {
     pageData.landing_page.data = await getRides(params.uid, previewData)
+  } else if(params.uid === 'team') {
+    pageData.landing_page.data = await getTeamMembers(params.uid, previewData)
   }
 
   return {
