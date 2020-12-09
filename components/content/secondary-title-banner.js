@@ -3,6 +3,10 @@ import MainContent from '../global/main-content'
 
 const Container = styled.section`
   padding: 2vh 0 4vh 0;
+
+  @media (min-width: ${props => props.theme.lg}) {
+    padding: 2vh 0 4vh 0;
+  }
 `
 
 const MainText = styled.h1`
