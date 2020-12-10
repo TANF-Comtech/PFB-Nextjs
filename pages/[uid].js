@@ -35,7 +35,7 @@ export default function LandingPage({ page, preview }) {
     return <ErrorPage statusCode={404} />
   } 
   const { landing_page } = page
-  console.log(landing_page)
+  // console.log(landing_page)
 
   return (
     <>
@@ -127,6 +127,25 @@ export default function LandingPage({ page, preview }) {
                 />
               )
             } 
+
+            // SUBCOMMITTEE SLICES
+            if (slice.__typename === 'Landing_pageBodyContent_block' &&
+              landing_page._meta.uid === 'subcommittees') {
+              return (
+                <SummaryBlock key={ randomID(10000000) }>
+                  <RichText render={slice.primary.main_content} />
+                </SummaryBlock>
+              )
+            }            
+            if (slice.__typename === 'Landing_pageBodyAction_item' &&
+              landing_page._meta.uid === 'subcommittees') {
+              return (
+                <ActionItemGroup
+                  key={ randomID(10000000) }
+                  payload={ slice.fields }
+                />
+              )
+            }             
 
             // MISSION SLICES
             if (slice.__typename === 'Landing_pageBodyContent_block' &&

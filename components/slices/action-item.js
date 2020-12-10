@@ -1,17 +1,23 @@
 import React from "react";
 import styled from "styled-components";
 import Link from "next/link"
+import { RichText } from "prismic-reactjs"
 
 import { linkResolver } from '../../lib/utils'
 
+import ActionIcon from '../../public/icons/action.svg'
 import BatteryIcon from '../../public/icons/battery.svg'
 import CartIcon from '../../public/icons/cart.svg'
+import ChartIcon from '../../public/icons/chart.svg'
 import CheckIcon from '../../public/icons/check.svg'
 import EventIcon from '../../public/icons/event.svg'
+import GovIcon from '../../public/icons/gov.svg'
+import GreenIcon from '../../public/icons/green.svg'
 import HeartIcon from '../../public/icons/heart.svg'
 import LinkIcon from '../../public/icons/link.svg'
 import MicIcon from '../../public/icons/mic.svg'
 import NewsIcon from '../../public/icons/news.svg'
+import PeopleIcon from '../../public/icons/people.svg'
 import TruckIcon from '../../public/icons/truck.svg'
 
 const Container = styled.section`
@@ -19,14 +25,13 @@ const Container = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: 3vh 0;
+  margin: 0 0 4vh 0;
   text-decoration: none;
 
   @media( min-width: ${ props => props.theme.sm}) {
-    align-items: center;
+    align-items: flex-start;
     flex-direction: row;
     justify-content: flex-start;
-    margin: 4vh 0;
   }
 
   &:hover {
@@ -40,11 +45,10 @@ const Icon = styled.img`
 
 const ContentContainer = styled.div`
   margin: 2vh 0 0 0;
-  text-align: center;
+
 
   @media( min-width: ${ props => props.theme.sm}) {
     margin: 0 0 0 2vw;
-    text-align: left;
   }
 
   a, a:focus, a:hover, a:visited {
@@ -56,10 +60,16 @@ const ContentContainer = styled.div`
 const Title = styled.h2`
   color: ${props => props.theme.red };
   font-weight: 700;
+  margin-bottom: 2vh;
 `
 
 const Text = styled.p`
   margin-bottom: 0;
+  text-align: center;
+
+  @media( min-width: ${ props => props.theme.sm}) {
+    text-align: left;
+  }
 `
 
 /**
@@ -67,12 +77,14 @@ const Text = styled.p`
  * 
  * This creates an icon with a title and text next to it.
  * 
+ * @param { array } extendedText - content to be shown
  * @param { string } icon - img icon source string
  * @param { string } path - where the title goes
  * @param { string } title - title that goes next to the icon
  * @param { string } text - content to be shown
  */
 const ActionItem = ({
+  extendedText,
   icon,
   path,
   title,
@@ -81,29 +93,46 @@ const ActionItem = ({
 
   return (
     <Container>
+      { icon === 'Action (exclamation icon)' && <Icon src={ ActionIcon } alt="Exclamation Icon" /> }
+      { icon === 'Chart (research icon)' && <Icon src={ ChartIcon } alt="Research Icon" /> }
       { icon === 'E-bikes (battery icon)' && <Icon src={ BatteryIcon } alt="Battery Icon" /> }
-      { icon === 'Retailers (cart icon)' && <Icon src={ CartIcon } alt="Cart Icon" /> }
       { icon === 'Event (calendar icon)' && <Icon src={ EventIcon } alt="Event Icon" /> }
-      { icon === 'Register (check icon)' && <Icon src={ CheckIcon } alt="Check Icon" /> }
-      { icon === 'Support (heart icon)' && <Icon src={ HeartIcon } alt="Heart Icon" /> }
+      { icon === 'Green (leaves icon)' && <Icon src={ GreenIcon } alt="Leaves Icon" /> }
+      { icon === 'Group (people icon)' && <Icon src={ PeopleIcon } alt="People Icon" /> }
       { icon === 'Join (link icon)' && <Icon src={ LinkIcon } alt="Link Icon" /> }
+      { icon === 'Legal (gov icon)' && <Icon src={ GovIcon } alt="Gov Icon" /> }
       { icon === 'Podcast (mic icon)' && <Icon src={ MicIcon } alt="Mic Icon" /> }
+      { icon === 'Retailers (cart icon)' && <Icon src={ CartIcon } alt="Cart Icon" /> }
+      { icon === 'Register (check icon)' && <Icon src={ CheckIcon } alt="Check Icon" /> }
       { icon === 'News (newspaper icon)' && <Icon src={ NewsIcon } alt="News Icon" /> }
+      { icon === 'Support (heart icon)' && <Icon src={ HeartIcon } alt="Heart Icon" /> }
       { icon === 'Suppliers (truck icon)' && <Icon src={ TruckIcon } alt="Truck Icon" /> }
 
-      { path.__typename === '_ExternalLink' ? (
+      { path && path.__typename === '_ExternalLink' ? (
         <ContentContainer>
           <Title dangerouslySetInnerHTML={{__html: linkResolver(path, false, title) }} />
           <Text>{ text }</Text>
         </ContentContainer>
       ) : (
         <ContentContainer>
-          <Link href={ linkResolver(path, false) } passHref>
-            <a>
-              <Title>{ title }</Title>
-            </a>
-          </Link>
-          <Text>{ text }</Text>
+          { path ? (
+            <Link href={ linkResolver(path, false) } passHref>
+              <a>
+                <Title>{ title }</Title>
+              </a>
+            </Link>
+          ) : (
+            <Title>{ title }</Title>
+          )}
+          { extendedText ? (
+            <RichText 
+              render={ extendedText }
+              linkResolver={ linkResolver }            
+            />
+          ) : (
+            <Text>{ text }</Text>
+          )}
+          
         </ContentContainer>
       )}
 

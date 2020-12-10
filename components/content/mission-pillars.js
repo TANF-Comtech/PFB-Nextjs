@@ -105,14 +105,14 @@ const MissionPillars = ({
           text="Learn who is helping to deliver your next ride."
         /> 
         <RedActionItem 
-          path="/join"
-          title="Join PeopleForBikes"
-          text="Help us tackle the issues that face the bike community"
+          path="/subcommittees"
+          title="Join a PeopleForBikes Subcommittee"
+          text="Help guide the world of bicycling forward."
         />
         <RedActionItem 
-          path="/take-action"
-          title="Take Action"
-          text="Make your voice heard through our campaigns."
+          path="/board"
+          title="Discover our Board"
+          text="Our advisors come from all over the world of biking."
         />            
       </MainContent>
     </>

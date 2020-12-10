@@ -105,15 +105,15 @@ const GlobalStyle = createGlobalStyle`
 
   /* Responsive type - 47-70px with 1 line-height */
   h2, h2 b, h2 strong, h2 em, h2 i {
-    font-size: 46.66px;
+    font-size: 54px;
     font-weight: 400;
-    line-height: 46.66px;
+    line-height: 54px;
     margin-bottom: 2vh;
   }
   @media screen and (min-width: 320px) {
     h2, h2 b, h2 strong, h2 em, h2 i {
-      font-size: calc(46.66px + 23.33 * ((100vw - 320px) / 880));
-      line-height: calc(46.66px + 23.33 * ((100vw - 320px) / 880));
+      font-size: calc(54px + 16 * ((100vw - 320px) / 880));
+      line-height: calc(54px + 16 * ((100vw - 320px) / 880));
     }
   }
   @media screen and (min-width: 1200px) {

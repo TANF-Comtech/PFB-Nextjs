@@ -18,6 +18,7 @@ const ActionItemGroup = ({
       { payload.map( (item, i) => {
         return (
           <ActionItem 
+            extendedText={ item.extended_text }
             icon={ item.icon }
             key={ i }
             path={ item.link }
