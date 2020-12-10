@@ -84,7 +84,7 @@ const Text = styled.p`
  * @param { string } text - content to be shown
  */
 const ActionItem = ({
-  extendedText,
+  extendedText = null,
   icon,
   path,
   title,
@@ -124,7 +124,7 @@ const ActionItem = ({
           ) : (
             <Title>{ title }</Title>
           )}
-          { extendedText ? (
+          { extendedText !== null ? (
             <RichText 
               render={ extendedText }
               linkResolver={ linkResolver }            
