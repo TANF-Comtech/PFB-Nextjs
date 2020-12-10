@@ -104,19 +104,20 @@ const GlobalStyle = createGlobalStyle`
   } 
 
   /* Responsive type - 47-70px with 1 line-height */
-  h2 {
+  h2, h2 b, h2 strong, h2 em, h2 i {
     font-size: 46.66px;
     font-weight: 400;
     line-height: 46.66px;
+    margin-bottom: 2vh;
   }
   @media screen and (min-width: 320px) {
-    h2 {
+    h2, h2 b, h2 strong, h2 em, h2 i {
       font-size: calc(46.66px + 23.33 * ((100vw - 320px) / 880));
       line-height: calc(46.66px + 23.33 * ((100vw - 320px) / 880));
     }
   }
   @media screen and (min-width: 1200px) {
-    h2 {
+    h2, h2 b, h2 strong, h2 em, h2 i {
       font-size: 70px;
       line-height: 70px;
     }
@@ -171,22 +172,20 @@ const GlobalStyle = createGlobalStyle`
   /* Responsive type - 
   /* Bigger (if want it): 17.5px-28px with 1.75 line-height (30.5-49px) */
   p, b, strong, em, i, span, label, a, a::visited, a::focus, a:active, a:hover {
-    font-size: 16px;
-    line-height: 30px;
-    margin-bottom: 30px;
+    font-size: 18px;
+    line-height: 26px;
   }
   @media screen and (min-width: 320px) {
     p, b, strong, em, i, span, label {
-      font-size: calc(16px + 8 * ((100vw - 320px) / 880));
-      line-height: calc(30px + 16 * ((100vw - 320px) / 880));
-      margin-bottom: calc(30px + 16 * ((100vw - 320px) / 880));
+      font-size: calc(18px + 4 * ((100vw - 320px) / 880));
+      line-height: calc(26px + 10 * ((100vw - 320px) / 880));
+      margin-bottom: 3vh;
     }
   }
   @media screen and (min-width: 1200px) {
     p, b, strong, em, i, span, label {
-      font-size: 24px;
-      line-height: 46px;
-      margin-bottom: 46px;
+      font-size: 22px;
+      line-height: 36px;
     }
   }    
   b, strong {
@@ -212,19 +211,19 @@ const GlobalStyle = createGlobalStyle`
   }
 
   li, li > em, li > i, li > b, li > strong {
-    font-size: 16px;
-    line-height: 30px;
+    font-size: 18px;
+    line-height: 26px;
   }
   @media screen and (min-width: 320px) {
     li, li > em, li > i, li > b, li > strong {
-      font-size: calc(16px + 8 * ((100vw - 320px) / 880));
-      line-height: calc(30px + 16 * ((100vw - 320px) / 880));
+      font-size: calc(18px + 4 * ((100vw - 320px) / 880));
+      line-height: calc(26px + 10 * ((100vw - 320px) / 880));
     }
   }
   @media screen and (min-width: 1200px) {
     li, li > em, li > i, li > b, li > strong {
-      font-size: 24px;
-      line-height: 46px;
+      font-size: 22px;
+      line-height: 36px;
     }
   } 
 
