@@ -132,14 +132,14 @@ const GlobalStyle = createGlobalStyle`
   }
   @media screen and (min-width: 320px) {
     h3, legend {
-      font-size: calc(24px + 12 * ((100vw - 320px) / 880));
-      line-height: calc(24px + 12 * ((100vw - 320px) / 880));
+      font-size: calc(24px + 8 * ((100vw - 320px) / 880));
+      line-height: calc(24px + 8 * ((100vw - 320px) / 880));
     }
   }
   @media screen and (min-width: 1200px) {
     h3, legend {
-      font-size: 36px;
-      line-height: 36px;
+      font-size: 32px;
+      line-height: 32px;
     }
   }  
 
