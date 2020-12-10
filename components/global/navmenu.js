@@ -6,7 +6,6 @@ import Link from 'next/link'
 
 import { randomID, linkResolver } from '../../lib/utils'
 
-import GridMicro from '../global/grid-micro'
 import ImageSquare from '../global/image-square'
 import Logo from '../global/logo'
 import LogoType from '../global/logotype'
