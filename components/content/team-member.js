@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { RichText } from 'prismic-reactjs'
 
-import Button from "../primitives/button"
+import { linkResolver } from '../../lib/utils'
 
 const Container = styled.section`
   align-items: flex-start;
@@ -31,8 +31,13 @@ const ContentContainer = styled.div`
   }
 `
 
-const Title = styled.h2`
+const ColorWrap = styled.div`
+  color: ${props => props.textColor };
+  margin: 0;
+`
 
+const Title = styled.h2`
+  color: ${props => props.textColor };
   margin: 0;
 `
 
@@ -62,6 +67,35 @@ const Image = styled.img`
   }
 `
 
+const EmailButton = styled.a`
+  background-color: ${props => props.theme.red };
+  border-radius: 10px;
+  box-shadow: ${props => props.theme.buttonBoxShadow};
+  color: white !important;
+  cursor: pointer;
+  font-family: ${props => props.theme.montserrat};
+  font-size: 18px;
+  font-weight: 700;
+  min-width: 100px;
+  margin: 0;
+  padding: 10px 35px;
+  text-align: center;
+  text-decoration: none !important;
+  text-transform: uppercase;
+  transform: translateY(0);
+  transition: all 0.25s ease;
+  
+  &:hover, &::visited, &::focus, &:active {
+    background-color: ${props => props.theme.red };
+    color: white !important;
+    text-decoration: none;
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+`
+
 /**
  * <TeamMember>
  * 
@@ -69,48 +103,50 @@ const Image = styled.img`
  *
  * @param { string } description - short text block we don't cap (optional)
  * @param { object } image - headshot
+ * @param { string } isCeo - yes/no value for CEO status
  * @param { string } path - tells us the email to the member
  * @param { string } position - what job a PFB person does (for Team Members)
+ * @param { string } textColor - determine text color
  * @param { string } title - title that goes next to the icon
  */
 const TeamMember = ({
   description,
   image,
+  isCeo = "No",
   path,
   position,
+  textColor = "black",
   title
 }) => {
+  
   return (
-    <Container>
-      { image && 
-        <Image 
-          alt={ image.alt ? image.alt : 'Bike-oriented image' }
-          src={ image['1x'] ? image['1x'].url : image.url } 
-        /> 
-      }
-      <ContentContainer>
-        { title && <Title>{ title }</Title> }
-        { position && <Position>{ position }</Position> }
-        { description && 
-          <Description>
-            <RichText render={description} />
-          </Description> 
+    <>
+    { isCeo === "No" && (
+      <Container>
+        { image && 
+          <Image 
+            alt={ image.alt ? image.alt : 'Bike-oriented image' }
+            loading="lazy"
+            src={ image['1x'] ? image['1x'].url : image.url } 
+          /> 
         }
-        { path && 
-          <Button
-            buttonBorder="none"
-            buttonBg="#D23823"
-            buttonBgHover="#D0021B"
-            buttonColor="white"
-            buttonPadding="10px 20px"
-            buttonTextTransform="uppercase"
-            href={ path }
-          >
-            Email Me!
-          </Button>
-        }
-      </ContentContainer>
-    </Container>
+        <ContentContainer>
+          { title && <Title textColor={textColor}>{ title }</Title> }
+          { position && <Position>{ position }</Position> }
+          { description && 
+            <ColorWrap textColor={ textColor }>
+              <RichText render={description} />  
+            </ColorWrap>
+          }
+          { path && 
+            <EmailButton href={ linkResolver(path, true) }>
+              Email Me!
+            </EmailButton>
+          }
+        </ContentContainer>
+      </Container>
+    )}
+    </>
   )
 }
 

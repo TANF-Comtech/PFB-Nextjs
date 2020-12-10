@@ -7,7 +7,7 @@ import { newsTopTwenty  } from '../lib/queries/news'
 import { getLocations } from '../lib/queries/locations'
 import { getTopics } from '../lib/queries/topics'
 import { getRides } from '../lib/queries/rides'
-import { getTeamMembers } from '../lib/queries/team'
+import { getTeamMembers, getCEO } from '../lib/queries/team'
 import { randomID } from '../lib/utils'
 
 import Wrapper from '../components/global/wrapper'
@@ -35,7 +35,7 @@ export default function LandingPage({ page, preview }) {
     return <ErrorPage statusCode={404} />
   } 
   const { landing_page } = page
-  // console.log(landing_page)
+  console.log(landing_page)
 
   return (
     <>
@@ -106,7 +106,10 @@ export default function LandingPage({ page, preview }) {
 
         { // TEAM
           landing_page._meta.uid === 'team' && 
-          <TeamList payload={ landing_page.data } />
+          <TeamList 
+            ceoPayload={ landing_page.dataCEO } 
+            teamPayload={ landing_page.dataTeam } 
+          />
         }        
 
 
@@ -165,7 +168,8 @@ export async function getStaticProps({ params, preview = false, previewData }) {
   } else if(params.uid === 'rides') {
     pageData.landing_page.data = await getRides(params.uid, previewData)
   } else if(params.uid === 'team') {
-    pageData.landing_page.data = await getTeamMembers(params.uid, previewData)
+    pageData.landing_page.dataTeam = await getTeamMembers(params.uid, previewData)
+    pageData.landing_page.dataCEO = await getCEO(params.uid, previewData)
   }
 
   return {
