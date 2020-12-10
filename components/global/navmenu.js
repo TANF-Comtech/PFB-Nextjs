@@ -66,7 +66,7 @@ const MenuHeader = styled.header`
 
 const MenuTitle = styled.h3`
   animation: ${fadeIn} 0.75s ease forwards;
-  animation-delay: 0.4s;
+  animation-delay: 0.6s;
   color: ${props => props.theme.redAccent };
   font-size: 24px;
   opacity: 0;
@@ -142,11 +142,22 @@ const MainNavItem = styled.li`
   } 
 `
 
-const GridMicroFade = styled(GridMicro)`
+const GridMicroFade = styled.section`
   animation: ${fadeIn} 0.75s ease forwards;
   animation-delay: 0.6s;
+  display: grid;
+  grid-gap: ${props => props.gridGap || '15px'}; 
+  grid-template-columns: 1fr;
   opacity: 0;
-`;
+
+  @media( min-width: ${(props) => props.theme.xs} ) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  a, a:focus, a:visited, a:hover {
+    text-decoration: none;
+  }
+`
 
 const LogoContainer = styled.section`
   align-items: flex-end;
