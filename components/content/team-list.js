@@ -25,7 +25,7 @@ const TeamList = ({
   ceoPayload,
   teamPayload
 }) => {
-  console.log(ceoPayload)
+
   return (
     <>
       <div>
