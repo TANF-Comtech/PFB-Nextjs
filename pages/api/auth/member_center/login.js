@@ -7,9 +7,8 @@ export default (req, res) => {
         return checkEmailInSalesforce(email).then(data=>{
             console.log("Data From CheckEmail", data)
             if(data.inSalesForce){
-                sendPasswordlessAuthCode(email).then(data=>{
-                    res.status(200).json({status:true}) //will tweak
-                })
+                sendPasswordlessAuthCode(email)
+                res.status(200).json({status:true})
             }
             else{
                 res.status(401).json({error:"You are not a member"})
