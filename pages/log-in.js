@@ -33,20 +33,23 @@ const WhiteButton = styled(InputButton)`
   margin-top: 2vh;
 `;
 
-const LoginLoading = styled.div`
+const LoginPending = styled.div`
   display: flex;
   flex-basis: 100%; /* Stretch the signup all the way across the screen */
   flex-direction: column;
   justify-content: center;
+  width:50%;
 `
 
 function LoginPage() {
   const [email, updateEmail] = useState("")
+
+  const [code, updateLoginCode] = useState("")
   
-  const [loginLoading, setLoginLoading] = useState(false)
+  const [loginPending, setLoginPending] = useState(false)
 
   const submitEmail = async (email) => {
-    setLoginLoading(true)
+    setLoginPending(true)
     const response = await fetch (`/api/auth/member_center/login`,{
       method:'POST',
       mode:'same-origin',
@@ -59,9 +62,29 @@ function LoginPage() {
     return response.json()
   }
 
-  const onLoginSubmit = (email)=>{
+  const submitLoginCode = async (code,email) => {
+    setLoginPending(true)
+    const response = await fetch (`/api/auth/member_center/login`,{
+      method:'POST',
+      mode:'same-origin',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({code, email})
+
+    })
+    return response.json()
+  }
+
+  const onLoginEmailSubmit = (email)=>{
     submitEmail(email).then(data => {
-      console.log("DATA",data)
+      return
+    })
+  }
+
+  const onLoginCodeSubmit = (code, email)=>{
+    submitLoginCode(code, email).then(data => {
+      return 
     })
   }
 
@@ -71,7 +94,7 @@ function LoginPage() {
         postTitle="People for Bikes Homepage"
         isWide={ false }
       >
-        {!loginLoading && (
+        {!loginPending && (
         <>
         <h1>Login</h1>
         <h2>Access the PeopleForBikes Member Center</h2>
@@ -87,17 +110,27 @@ function LoginPage() {
           buttonColor="black"
           buttonColorHover="#404040"
           buttonText="Submit"
-          onClick={()=>{onLoginSubmit(email)}}
+          onClick={()=>{onLoginEmailSubmit(email)}}
         />
         </LoginForm>
         </>
         )}
-        {loginLoading && (
+        {loginPending && (
         <>
-        <LoginLoading>
+        <LoginPending>
         <h5>Check Your Email For An Access Code And Enter It Below</h5>
         <p>Don't close this tab!</p>
-        </LoginLoading>
+        <RedTextField onChange={(e)=>updateLoginCode(e.target.value)} placeholder="Login Code"/>
+        <WhiteButton
+          buttonBg="rgba(255,255,255,0)"
+          buttonBgHover="rgba(255,255,255,1)"
+          buttonBorder="1px solid black"
+          buttonColor="black"
+          buttonColorHover="#404040"
+          buttonText="Login Now"
+          onClick={()=>{onLoginCodeSubmit(code, email)}}
+        />
+        </LoginPending>
         </>
         )}
         
