@@ -2,7 +2,7 @@ import styled, { keyframes } from 'styled-components'
 
 const skChase = keyframes`
   100% { transform: rotate(360deg); } 
-`;
+`
 
 const skChaseDot = keyframes`
   80%, 100% { transform: rotate(360deg); } 
