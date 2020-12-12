@@ -1,4 +1,6 @@
+import { useRouter } from 'next/router'
 import { RichText } from 'prismic-reactjs'
+import DefaultErrorPage from 'next/error'
 
 import { getSingleLandingPage, 
          getLandingPages } from '../lib/queries/landing-page'
@@ -7,6 +9,7 @@ import { getLocations } from '../lib/queries/locations'
 import { getTopics } from '../lib/queries/topics'
 import { getRides } from '../lib/queries/rides'
 import { getTeamMembers, getCEO } from '../lib/queries/team'
+import { getAllCareers } from '../lib/queries/careers'
 import { linkResolver, randomID } from '../lib/utils'
 
 import Wrapper from '../components/global/wrapper'
@@ -22,21 +25,30 @@ import LocationsList from '../components/content/locations-list'
 import TopicsList from '../components/content/topics-list'
 import RidesList from '../components/content/rides-list'
 import TeamList from '../components/content/team-list'
+import List from '../components/content/list'
 
 import ActionItemGroup from '../components/slices/action-item-group'
 import MissionPillars from '../components/content/mission-pillars'
 import ColorBanner from '../components/global/color-banner'
 
 export default function LandingPage({ page, preview }) {
+  const router = useRouter()
+
+  if(router.isFallback) {
+    return <Spinner />
+  }
+
   // If page hasn't arrived yet, show loader
   if (!page) {
-    return <Spinner />
+    return (<>
+      <DefaultErrorPage statusCode={ 404 } />
+    </>)
   } 
 
   // Then we destructure the main payload once page has arrived
   const { landing_page } = page
   
-  console.log(page)
+  //console.log(page)
 
   return (
     <Wrapper 
@@ -44,7 +56,7 @@ export default function LandingPage({ page, preview }) {
       isWide={ true }
     >
     
-      { // If header_image, load special header
+      { // HEADER - STYLE COMPLEX: (SecondaryTitleBanner + HeaderImage + Summary)
         landing_page.header_image || 
         landing_page._meta.uid === 'team' ? (
         <>
@@ -64,17 +76,10 @@ export default function LandingPage({ page, preview }) {
             >
               <p>{ landing_page.summary }</p>
             </SummaryBlock>
-          }   
-          { landing_page.summary &&
-            <SummaryBlock
-              bgColor="#002C40"
-              textColor="#fff"
-            >
-              <p>{ landing_page.summary }</p>
-            </SummaryBlock>
-          }                     
+          }                       
         </>
       ) : (
+        // HEADER - STYLE SIMPLE: (BigTitleBanner + SummaryBlock)
         <>
           <BigTitleBanner>
             <RichText
@@ -89,6 +94,7 @@ export default function LandingPage({ page, preview }) {
           }
         </>
       )}
+      
 
       { // NEWS
         landing_page._meta.uid === 'news' &&  
@@ -119,7 +125,16 @@ export default function LandingPage({ page, preview }) {
           ceoPayload={ landing_page.dataCEO } 
           teamPayload={ landing_page.dataTeam } 
         />
-      }        
+      }
+
+      { // CAREERS
+        landing_page._meta.uid === 'careers' && 
+        <List
+          payload={ landing_page.data }
+          textColor="#3E9FDC"
+          title="Career Opportunities"
+        />
+      }
 
 
       { // SLICE CONTENT (in body)
@@ -181,6 +196,8 @@ export async function getStaticProps({ params, preview = false, previewData }) {
   } else if(params.uid === 'team') {
     pageData.landing_page.dataTeam = await getTeamMembers(params.uid, previewData)
     pageData.landing_page.dataCEO = await getCEO(params.uid, previewData)
+  } else if(params.uid === 'careers') {
+    pageData.landing_page.data = await getAllCareers(params.uid, previewData)
   }
 
   return {
