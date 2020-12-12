@@ -34,7 +34,7 @@ const List = ({
   return (
     <>
       <MainContent maxWidth="1200px">
-        <h2>Career Opportunities</h2>
+        { title && <h2>{ title }</h2> }
         { payload.map( (job) => {
           return( 
             <>
