@@ -7,8 +7,7 @@ import { getLocations } from '../lib/queries/locations'
 import { getTopics } from '../lib/queries/topics'
 import { getRides } from '../lib/queries/rides'
 import { getTeamMembers, getCEO } from '../lib/queries/team'
-import { randomID } from '../lib/utils'
-import useSmoothMount from '../components/hooks/useSmoothMount'
+import { linkResolver, randomID } from '../lib/utils'
 
 import Wrapper from '../components/global/wrapper'
 import Spinner from '../components/global/spinner'
@@ -26,7 +25,7 @@ import TeamList from '../components/content/team-list'
 
 import ActionItemGroup from '../components/slices/action-item-group'
 import MissionPillars from '../components/content/mission-pillars'
-import Donate from '../components/global/donate'
+import ColorBanner from '../components/global/color-banner'
 
 export default function LandingPage({ page, preview }) {
   // If page hasn't arrived yet, show loader
@@ -37,7 +36,7 @@ export default function LandingPage({ page, preview }) {
   // Then we destructure the main payload once page has arrived
   const { landing_page } = page
   
-  // console.log(page)
+  console.log(page)
 
   return (
     <Wrapper 
@@ -131,7 +130,10 @@ export default function LandingPage({ page, preview }) {
           if (slice.__typename === 'Landing_pageBodyContent_block') {
             return (
               <SummaryBlock key={ randomID(10000000) }>
-                <RichText render={slice.primary.main_content} />
+                <RichText 
+                  render={slice.primary.main_content} 
+                  linkResolver={ linkResolver }
+                />
               </SummaryBlock>
             )
           }    
@@ -156,7 +158,7 @@ export default function LandingPage({ page, preview }) {
         })) : (<></>)
       }
 
-      <Donate />
+      <ColorBanner />
       
     </Wrapper>
   )

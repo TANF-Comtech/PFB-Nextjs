@@ -9,7 +9,7 @@ import Grid from '../components/global/grid'
 import MainContent from '../components/global/main-content'
 import RideSpotPromo from '../components/slices/ridespot-promo'
 import Promo from '../components/slices/promo'
-import Donate from '../components/global/donate'
+import ColorBanner from '../components/global/color-banner'
 import Button from '../components/primitives/button'
 import EventsList from '../components/content/events-list'
 import Carousel from '../components/global/carousel'
@@ -216,7 +216,7 @@ export default function Homepage({ page }) {
           }
       })}  
 
-      <Donate />
+      <ColorBanner />
 
     </Wrapper>
   )
