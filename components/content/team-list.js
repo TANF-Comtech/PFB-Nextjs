@@ -4,13 +4,24 @@ import MainContent from '../global/main-content'
 import TeamMember from './team-member'
 
 const RedBlueBG = styled.section`
-  background: 
-    linear-gradient(
-      90deg, 
-      rgba(210,56,35,1) 0%, 
-      rgba(210,56,35,1) 25%, 
-      rgba(0,44,64,1) 25%,
-      rgba(0,44,64,1) 100%);
+  background-color: ${ props => props.theme.midnightBlue };
+`
+
+const GrayBG = styled.section`
+  background-color: ${ props => props.theme.lightestGray };
+
+  iframe {
+    display: block;
+    height: 300px;
+    margin: 0 auto;
+    max-width: 900px;
+    padding: 25px;
+    width: 100%;
+    
+    @media (min-width: ${props => props.theme.xs}) {
+      height: 500px;
+    }
+  }
 `
 
 /**
@@ -28,7 +39,6 @@ const TeamList = ({
 
   return (
     <>
-      <div>
       <RedBlueBG>
         <MainContent maxWidth="900px">
           <TeamMember
@@ -41,9 +51,15 @@ const TeamList = ({
           />
         </MainContent>       
       </RedBlueBG>
+      <GrayBG>
+        <iframe  
+          src="https://www.youtube.com/embed/txmmOKBgSO4" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen>
+        </iframe>
+      </GrayBG>
 
-
-      </div>
       <MainContent maxWidth="900px">
         { teamPayload.map( (person) => { 
           const { node } = person 
