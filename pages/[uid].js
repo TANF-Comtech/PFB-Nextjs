@@ -1,4 +1,3 @@
-import ErrorPage from 'next/error'
 import { RichText } from 'prismic-reactjs'
 
 import { getSingleLandingPage, 
@@ -9,8 +8,10 @@ import { getTopics } from '../lib/queries/topics'
 import { getRides } from '../lib/queries/rides'
 import { getTeamMembers, getCEO } from '../lib/queries/team'
 import { randomID } from '../lib/utils'
+import useSmoothMount from '../components/hooks/useSmoothMount'
 
 import Wrapper from '../components/global/wrapper'
+import Spinner from '../components/global/spinner'
 import BigTitleBanner from '../components/content/big-title-banner'
 import SecondaryTitleBanner from '../components/content/secondary-title-banner'
 import Heading1 from '../components/primitives/h1'
@@ -28,147 +29,136 @@ import MissionPillars from '../components/content/mission-pillars'
 import Donate from '../components/global/donate'
 
 export default function LandingPage({ page, preview }) {
-  
-  // If we're missing the page payload, throw error page
-  // Otherwise, destructure landing_page from it
+  // If page hasn't arrived yet, show loader
   if (!page) {
-    return <ErrorPage statusCode={404} />
+    return <Spinner />
   } 
+
+  // Then we destructure the main payload once page has arrived
   const { landing_page } = page
-  // console.log(landing_page)
+  
+  // console.log(page)
 
   return (
-    <>
-      <Wrapper 
-        postTitle={ RichText.asText(landing_page.title) }
-        isWide={ true }
-      >
-        { // If header_image, load special header
-          landing_page.header_image || 
-          landing_page._meta.uid === 'team' ? (
-          <>
-            <SecondaryTitleBanner
-              secondaryText={ landing_page.secondary_text }
-              mainText={ landing_page.main_text }
+    <Wrapper 
+      postTitle={ RichText.asText(landing_page.title) }
+      isWide={ true }
+    >
+    
+      { // If header_image, load special header
+        landing_page.header_image || 
+        landing_page._meta.uid === 'team' ? (
+        <>
+          <SecondaryTitleBanner
+            secondaryText={ landing_page.secondary_text }
+            mainText={ landing_page.main_text }
+          />
+          { landing_page.header_image &&
+            <HeaderImage 
+              srcSet={ landing_page.header_image }
             />
-            { landing_page.header_image &&
-              <HeaderImage 
-                srcSet={ landing_page.header_image }
-              />
-            }
-            { landing_page.summary &&
-              <SummaryBlock
-                bgColor="#002C40"
-                textColor="#fff"
-              >
-                <p>{ landing_page.summary }</p>
+          }
+          { landing_page.summary &&
+            <SummaryBlock
+              bgColor="#002C40"
+              textColor="#fff"
+            >
+              <p>{ landing_page.summary }</p>
+            </SummaryBlock>
+          }   
+          { landing_page.summary &&
+            <SummaryBlock
+              bgColor="#002C40"
+              textColor="#fff"
+            >
+              <p>{ landing_page.summary }</p>
+            </SummaryBlock>
+          }                     
+        </>
+      ) : (
+        <>
+          <BigTitleBanner>
+            <RichText
+              elements={{ heading1: Heading1 }}
+              render={ landing_page.title }
+            />
+          </BigTitleBanner>
+          { landing_page.summary &&
+            <SummaryBlock>
+              <p>{ landing_page.summary }</p>
+            </SummaryBlock>
+          }
+        </>
+      )}
+
+      { // NEWS
+        landing_page._meta.uid === 'news' &&  
+        <NewsList 
+          nodeName="node"  
+          payload={ landing_page.data } 
+        />
+      }
+
+      { // LOCATIONS
+        landing_page._meta.uid === 'locations' &&  
+        <LocationsList payload={ landing_page.data } />
+      }
+
+      { // TOPICS
+        landing_page._meta.uid === 'topics' &&  
+        <TopicsList payload={ landing_page.data } />
+      }
+
+      { // RIDES
+        landing_page._meta.uid === 'rides' && 
+        <RidesList payload={ landing_page.data } />
+      }        
+
+      { // TEAM
+        landing_page._meta.uid === 'team' && 
+        <TeamList 
+          ceoPayload={ landing_page.dataCEO } 
+          teamPayload={ landing_page.dataTeam } 
+        />
+      }        
+
+
+      { // SLICE CONTENT (in body)
+        landing_page.body ? 
+        ( landing_page.body.map( (slice) => {
+
+          // CONTENT BLOCK
+          if (slice.__typename === 'Landing_pageBodyContent_block') {
+            return (
+              <SummaryBlock key={ randomID(10000000) }>
+                <RichText render={slice.primary.main_content} />
               </SummaryBlock>
-            }            
-          </>
-        ) : (
-          <>
-            <BigTitleBanner>
-              <RichText
-                elements={{ heading1: Heading1 }}
-                render={ landing_page.title }
+            )
+          }    
+
+          // ACTION ITEM SLICE
+          if (slice.__typename === 'Landing_pageBodyAction_item') {
+            return (
+              <ActionItemGroup
+                key={ randomID(10000000) }
+                payload={ slice.fields }
               />
-            </BigTitleBanner>
-            { landing_page.summary &&
-              <SummaryBlock>
-                <p>{ landing_page.summary }</p>
-              </SummaryBlock>
-            }
-          </>
-        )}
+            )
+          }       
 
-        { // NEWS
-          landing_page._meta.uid === 'news' &&  
-          <NewsList 
-            nodeName="node"  
-            payload={ landing_page.data } 
-          />
-        }
+          // MISSION SLICE
+          if (slice.__typename === 'Landing_pageBodyMission_content' &&
+            landing_page._meta.uid === 'mission') {
+            return (
+              <MissionPillars payload={ slice.fields } />
+            )
+          }
+        })) : (<></>)
+      }
 
-        { // LOCATIONS
-          landing_page._meta.uid === 'locations' &&  
-          <LocationsList payload={ landing_page.data } />
-        }
-
-        { // TOPICS
-          landing_page._meta.uid === 'topics' &&  
-          <TopicsList payload={ landing_page.data } />
-        }
-
-        { // RIDES
-          landing_page._meta.uid === 'rides' && 
-          <RidesList payload={ landing_page.data } />
-        }        
-
-        { // TEAM
-          landing_page._meta.uid === 'team' && 
-          <TeamList 
-            ceoPayload={ landing_page.dataCEO } 
-            teamPayload={ landing_page.dataTeam } 
-          />
-        }        
-
-
-        { // SLICE CONTENT (in body)
-          landing_page.body ? 
-          ( landing_page.body.map( (slice) => {
-
-            // TAKE ACTION SLICE
-            if (slice.__typename === 'Landing_pageBodyAction_item' &&
-              landing_page._meta.uid === 'take-action') {
-              return (
-                <ActionItemGroup
-                  key={ randomID(10000000) }
-                  payload={ slice.fields }
-                />
-              )
-            } 
-
-            // SUBCOMMITTEE SLICES
-            if (slice.__typename === 'Landing_pageBodyContent_block' &&
-              landing_page._meta.uid === 'subcommittees') {
-              return (
-                <SummaryBlock key={ randomID(10000000) }>
-                  <RichText render={slice.primary.main_content} />
-                </SummaryBlock>
-              )
-            }            
-            if (slice.__typename === 'Landing_pageBodyAction_item' &&
-              landing_page._meta.uid === 'subcommittees') {
-              return (
-                <ActionItemGroup
-                  key={ randomID(10000000) }
-                  payload={ slice.fields }
-                />
-              )
-            }             
-
-            // MISSION SLICES
-            if (slice.__typename === 'Landing_pageBodyContent_block' &&
-              landing_page._meta.uid === 'mission') {
-              return (
-                <SummaryBlock>
-                  <RichText render={slice.primary.main_content} />
-                </SummaryBlock>
-              )
-            }
-            if (slice.__typename === 'Landing_pageBodyMission_content' &&
-              landing_page._meta.uid === 'mission') {
-              return (
-                <MissionPillars payload={ slice.fields } />
-              )
-            }
-          })) : (<></>)
-        }
-
-        <Donate />
-        
-      </Wrapper>
-    </>
+      <Donate />
+      
+    </Wrapper>
   )
 }
 
