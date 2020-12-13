@@ -11,7 +11,7 @@ import WhiteArrow from '../../public/white-arrow.svg'
 
 
 const Container = styled.section`
-  padding-bottom: 10vh;
+  padding-bottom: 10vh; 
 
   a, a:visited, a:active, a:focus, a:hover {
     text-decoration: none;
