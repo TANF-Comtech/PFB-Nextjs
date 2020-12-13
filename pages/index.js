@@ -17,8 +17,6 @@ import NewsList from '../components/content/news-list'
 
 import WhiteArrow from '../public/white-arrow.svg'
 
-import HPHero from '../public/sample-images/08_PFB_1600x800_Overlay_HomeHero.jpg'
-
 const SectionTitle = styled.h3`
   color: ${props => props.theme.midnightBlue};
   text-align: center;
