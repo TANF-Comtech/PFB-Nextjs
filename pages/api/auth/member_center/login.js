@@ -1,3 +1,4 @@
+import Cookies from 'cookies'
 import checkEmailInSalesforce from '../../../../lib/salesforce/checkEmailInSalesforce'
 import sendPasswordlessAuthCode from '../../../../lib/auth0/sendPasswordlessAuthCode'
 import loginAuth0 from '../../../../lib/auth0/loginAuth0'
@@ -20,8 +21,14 @@ export default (req, res) => {
         }
       else{
         if(code && email){
-            return loginAuth0(code,email)
-            }
+            const id_token = loginAuth0(code,email)
+            const cookies = new Cookies(req, res)
+            cookies.set('auth-token', id_token, {
+                httpOnly: true,
+                sameSite: 'lax'
+            })        
+            res.status(200).json({status:true})
+        }
         }
       }
 }
