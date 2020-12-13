@@ -119,20 +119,7 @@ export default function LocationPage({ page, preview }) {
               />
             )
           } ) }
-         
-          <h3>Grants and Policy</h3>
-          <ContentItem 
-            date="September 7th, 2020"
-            path="/news/"
-            title="2020 ebike laws for Arizona released"
-            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt."
-          />
-          <ContentItem 
-            date="April 12th, 2020"
-            path="/news/"
-            title="Opening of New Cycletrack in Sedona"
-            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt."
-          />   
+           
         </MainContent>        
       </Wrapper>
     </>
