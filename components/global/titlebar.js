@@ -45,7 +45,7 @@ const LeftContent = styled.div`
 `
 
 const Title = styled.h2`
-  margin-left: 10px;
+  margin: 0 0 0 10px;
   font-size: 30px;
   line-height: 30px;
   

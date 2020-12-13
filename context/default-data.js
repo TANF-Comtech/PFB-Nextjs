@@ -40,6 +40,7 @@ export const defaultData = {
           "spans": []
         }
       ],
+      "extended_text": null,
       "text": "PeopleForBikes is making a difference around the country but we need your help. Becoming a member doesn't cost you a thing and helps us to build a stronger voice for the future of biking.",
       "icon": "Join (link icon)",
       "link": {
@@ -58,6 +59,7 @@ export const defaultData = {
           "spans": []
         }
       ],
+      "extended_text": null,
       "text": "Pandemic shutdowns may have us staying in but we continue our social efforts digitally with our many events, which bring bikers together for spirited discussions.",
       "icon": "Event (calendar icon)",
       "link": {
@@ -76,6 +78,7 @@ export const defaultData = {
           "spans": []
         }
       ],
+      "extended_text": null,
       "text": "Ready to learn about how your next great ride comes into being? Check out the latest work from the whole PeopleForBikes team. We're advancing polices, helping to build infrastructure and need your help.",
       "icon": "News (newspaper icon)",
       "link": {

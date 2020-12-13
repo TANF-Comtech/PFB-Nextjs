@@ -2,13 +2,12 @@ import React from "react";
 import styled from "styled-components";
 
 import Arrow from '../../public/arrow.png'
+import PinImg from '../../public/ridespot-pin.svg'
+import MapImg from '../../public/ridespot-map.jpg'
 
 const RSRide = styled.a`
-  align-items: center;
   background-color: ${props => props.theme.midnightBlue };
-  border-radius: 15px;
-  display: flex;
-  justify-content: space-between;
+  border-radius: 0 0 15px 15px;
   margin: 1vw;
   text-decoration: none;
   transform: translateX(0);
@@ -34,6 +33,28 @@ const RSRide = styled.a`
   @media( min-width: ${ props => props.theme.md}) {
     width: 30%;
   }
+`
+
+// Map 
+const Map = styled.div`
+  align-items: center;
+  background-image: url(${ MapImg });
+  background-position: center center;
+  background-size: cover;
+  display: flex;
+  height: 100px;
+`
+
+const Pin = styled.img`
+  margin-left: 25px;
+  width: 55px;
+`
+
+// Data
+const RSContent = styled.div`
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
 `
 
 const RSData = styled.div`
@@ -99,14 +120,19 @@ const RideSpotRide = ({
 }) => {
   return (
     <RSRide href={ extLink } target="_blank">
-      <RSData>
-        <RSTitle>{ title }</RSTitle>
-        <RSDistance>Distance: { distance }</RSDistance>
-        <RSInfo>{ owner }</RSInfo>
-      </RSData>
-      <RSArrow 
-        src={ Arrow } 
-      />
+      <Map>
+        <Pin src={ PinImg } alt="Ridespot Map Pin" />
+      </Map>
+      <RSContent>
+        <RSData>
+          <RSTitle>{ title }</RSTitle>
+          <RSDistance>Distance: { distance }</RSDistance>
+          <RSInfo>{ owner }</RSInfo>
+        </RSData>
+        <RSArrow 
+          src={ Arrow } 
+        />
+      </RSContent>
     </RSRide>
   )
 }

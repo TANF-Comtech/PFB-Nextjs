@@ -104,19 +104,20 @@ const GlobalStyle = createGlobalStyle`
   } 
 
   /* Responsive type - 47-70px with 1 line-height */
-  h2 {
-    font-size: 46.66px;
+  h2, h2 b, h2 strong, h2 em, h2 i {
+    font-size: 54px;
     font-weight: 400;
-    line-height: 46.66px;
+    line-height: 54px;
+    margin-bottom: 2vh;
   }
   @media screen and (min-width: 320px) {
-    h2 {
-      font-size: calc(46.66px + 23.33 * ((100vw - 320px) / 880));
-      line-height: calc(46.66px + 23.33 * ((100vw - 320px) / 880));
+    h2, h2 b, h2 strong, h2 em, h2 i {
+      font-size: calc(54px + 16 * ((100vw - 320px) / 880));
+      line-height: calc(54px + 16 * ((100vw - 320px) / 880));
     }
   }
   @media screen and (min-width: 1200px) {
-    h2 {
+    h2, h2 b, h2 strong, h2 em, h2 i {
       font-size: 70px;
       line-height: 70px;
     }
@@ -131,14 +132,14 @@ const GlobalStyle = createGlobalStyle`
   }
   @media screen and (min-width: 320px) {
     h3, legend {
-      font-size: calc(24px + 12 * ((100vw - 320px) / 880));
-      line-height: calc(24px + 12 * ((100vw - 320px) / 880));
+      font-size: calc(24px + 8 * ((100vw - 320px) / 880));
+      line-height: calc(24px + 8 * ((100vw - 320px) / 880));
     }
   }
   @media screen and (min-width: 1200px) {
     h3, legend {
-      font-size: 36px;
-      line-height: 36px;
+      font-size: 32px;
+      line-height: 32px;
     }
   }  
 
@@ -171,22 +172,20 @@ const GlobalStyle = createGlobalStyle`
   /* Responsive type - 
   /* Bigger (if want it): 17.5px-28px with 1.75 line-height (30.5-49px) */
   p, b, strong, em, i, span, label, a, a::visited, a::focus, a:active, a:hover {
-    font-size: 16px;
-    line-height: 30px;
-    margin-bottom: 30px;
+    font-size: 18px;
+    line-height: 26px;
   }
   @media screen and (min-width: 320px) {
     p, b, strong, em, i, span, label {
-      font-size: calc(16px + 8 * ((100vw - 320px) / 880));
-      line-height: calc(30px + 16 * ((100vw - 320px) / 880));
-      margin-bottom: calc(30px + 16 * ((100vw - 320px) / 880));
+      font-size: calc(18px + 4 * ((100vw - 320px) / 880));
+      line-height: calc(26px + 10 * ((100vw - 320px) / 880));
+      margin-bottom: 3vh;
     }
   }
   @media screen and (min-width: 1200px) {
     p, b, strong, em, i, span, label {
-      font-size: 24px;
-      line-height: 46px;
-      margin-bottom: 46px;
+      font-size: 22px;
+      line-height: 36px;
     }
   }    
   b, strong {
@@ -212,19 +211,19 @@ const GlobalStyle = createGlobalStyle`
   }
 
   li, li > em, li > i, li > b, li > strong {
-    font-size: 16px;
-    line-height: 30px;
+    font-size: 18px;
+    line-height: 26px;
   }
   @media screen and (min-width: 320px) {
     li, li > em, li > i, li > b, li > strong {
-      font-size: calc(16px + 8 * ((100vw - 320px) / 880));
-      line-height: calc(30px + 16 * ((100vw - 320px) / 880));
+      font-size: calc(18px + 4 * ((100vw - 320px) / 880));
+      line-height: calc(26px + 10 * ((100vw - 320px) / 880));
     }
   }
   @media screen and (min-width: 1200px) {
     li, li > em, li > i, li > b, li > strong {
-      font-size: 24px;
-      line-height: 46px;
+      font-size: 22px;
+      line-height: 36px;
     }
   } 
 
@@ -319,11 +318,30 @@ const GlobalStyle = createGlobalStyle`
 
   /* Remove all animations and transitions for people that prefer not to see them */
   @media (prefers-reduced-motion: reduce) {
-  * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeOut {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
   }
 
   /* ####################################### */
@@ -386,157 +404,157 @@ const GlobalStyle = createGlobalStyle`
     font-size: 14px;
     padding: 18px;
   }
-}
 
-/*! Flickity v2.1.2
-https://flickity.metafizzy.co
----------------------------------------------- */
 
-.flickity-enabled {
-  margin-bottom: 100px;
-  position: relative;
-}
+  /*! Flickity v2.1.2
+  https://flickity.metafizzy.co
+  ---------------------------------------------- */
 
-.flickity-enabled:focus {
-  outline: none;
-}
+  .flickity-enabled {
+    margin-bottom: 100px;
+    position: relative;
+  }
 
-.flickity-viewport {
-  overflow: hidden;
-  position: relative;
-  height: 100%;
-}
+  .flickity-enabled:focus {
+    outline: none;
+  }
 
-.flickity-slider {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-}
+  .flickity-viewport {
+    overflow: hidden;
+    position: relative;
+    height: 100%;
+  }
 
-/* draggable */
+  .flickity-slider {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
 
-.flickity-enabled.is-draggable {
-  -webkit-tap-highlight-color: transparent;
-  tap-highlight-color: transparent;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
+  /* draggable */
 
-.flickity-enabled.is-draggable .flickity-viewport {
-  cursor: move;
-  cursor: -webkit-grab;
-  cursor: grab;
-}
+  .flickity-enabled.is-draggable {
+    -webkit-tap-highlight-color: transparent;
+    tap-highlight-color: transparent;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
 
-.flickity-enabled.is-draggable .flickity-viewport.is-pointer-down {
-  cursor: -webkit-grabbing;
-  cursor: grabbing;
-}
+  .flickity-enabled.is-draggable .flickity-viewport {
+    cursor: move;
+    cursor: -webkit-grab;
+    cursor: grab;
+  }
 
-/* ---- flickity-button ---- */
+  .flickity-enabled.is-draggable .flickity-viewport.is-pointer-down {
+    cursor: -webkit-grabbing;
+    cursor: grabbing;
+  }
 
-.flickity-button {
-  position: absolute;
-  background: hsla(0, 0%, 100%, 0.75);
-  border: none;
-  color: #333;
-}
+  /* ---- flickity-button ---- */
 
-.flickity-button:hover {
-  background: white;
-  cursor: pointer;
-}
+  .flickity-button {
+    position: absolute;
+    background: hsla(0, 0%, 100%, 0.75);
+    border: none;
+    color: #333;
+  }
 
-.flickity-button:focus {
-  outline: none;
-  box-shadow: 0 0 0 5px #19f;
-}
+  .flickity-button:hover {
+    background: white;
+    cursor: pointer;
+  }
 
-.flickity-button:active {
-  opacity: 0.6;
-}
+  .flickity-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 5px #19f;
+  }
 
-.flickity-button:disabled {
-  opacity: 0.3;
-  cursor: auto;
-  /* prevent disabled button from capturing pointer up event. #716 */
-  pointer-events: none;
-}
+  .flickity-button:active {
+    opacity: 0.6;
+  }
 
-.flickity-button-icon {
-  fill: #333;
-}
+  .flickity-button:disabled {
+    opacity: 0.3;
+    cursor: auto;
+    /* prevent disabled button from capturing pointer up event. #716 */
+    pointer-events: none;
+  }
 
-/* ---- previous/next buttons ---- */
+  .flickity-button-icon {
+    fill: #333;
+  }
 
-.flickity-prev-next-button {
-  top: 50%;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  /* vertically center */
-  transform: translateY(-50%);
-}
+  /* ---- previous/next buttons ---- */
 
-.flickity-prev-next-button.previous {
-  left: 10px;
-}
-.flickity-prev-next-button.next {
-  right: 10px;
-}
-/* right to left */
-.flickity-rtl .flickity-prev-next-button.previous {
-  left: auto;
-  right: 10px;
-}
-.flickity-rtl .flickity-prev-next-button.next {
-  right: auto;
-  left: 10px;
-}
+  .flickity-prev-next-button {
+    top: 50%;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    /* vertically center */
+    transform: translateY(-50%);
+  }
 
-.flickity-prev-next-button .flickity-button-icon {
-  position: absolute;
-  left: 20%;
-  top: 20%;
-  width: 60%;
-  height: 60%;
-}
+  .flickity-prev-next-button.previous {
+    left: 10px;
+  }
+  .flickity-prev-next-button.next {
+    right: 10px;
+  }
+  /* right to left */
+  .flickity-rtl .flickity-prev-next-button.previous {
+    left: auto;
+    right: 10px;
+  }
+  .flickity-rtl .flickity-prev-next-button.next {
+    right: auto;
+    left: 10px;
+  }
 
-/* ---- page dots ---- */
+  .flickity-prev-next-button .flickity-button-icon {
+    position: absolute;
+    left: 20%;
+    top: 20%;
+    width: 60%;
+    height: 60%;
+  }
 
-.flickity-page-dots {
-  position: absolute;
-  width: 100%;
-  bottom: -50px;
-  padding: 0;
-  margin: 0;
-  list-style: none;
-  text-align: center;
-  line-height: 1;
-}
+  /* ---- page dots ---- */
 
-.flickity-rtl .flickity-page-dots {
-  direction: rtl;
-}
+  .flickity-page-dots {
+    position: absolute;
+    width: 100%;
+    bottom: -50px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    text-align: center;
+    line-height: 1;
+  }
 
-.flickity-page-dots .dot {
-  display: inline-block;
-  width: 25px;
-  height: 25px;
-  margin: 0 10px;
-  background: #333;
-  border-radius: 50%;
-  opacity: 0.25;
-  cursor: pointer;
-  transition: 0.2s ease-in-out;
-}
+  .flickity-rtl .flickity-page-dots {
+    direction: rtl;
+  }
 
-.flickity-page-dots .dot.is-selected {
-  background: #D0021B;
-  opacity: 1;
-}
+  .flickity-page-dots .dot {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    margin: 0 10px;
+    background: #333;
+    border-radius: 50%;
+    opacity: 0.25;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+  }
+
+  .flickity-page-dots .dot.is-selected {
+    background: #D0021B;
+    opacity: 1;
+  }
 
 `;
 
