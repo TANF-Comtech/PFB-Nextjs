@@ -21,13 +21,14 @@ export default (req, res) => {
         }
       else{
         if(code && email){
-            const id_token = loginAuth0(code,email)
-            const cookies = new Cookies(req, res)
-            cookies.set('auth-token', id_token, {
-                httpOnly: true,
-                sameSite: 'lax'
-            })        
-            res.status(200).json({status:true})
+            return loginAuth0(code,email).then(data=>{
+                const cookies = new Cookies(req, res)
+                cookies.set('auth-token', data.id_token, {
+                    httpOnly: true,
+                    sameSite: 'lax',
+                })        
+                res.status(200).json({status:true})
+            })
         }
         }
       }
