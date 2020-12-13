@@ -1,15 +1,10 @@
-import Link from 'next/link'
 import styled from "styled-components"
 
-import Wrapper from '../global/wrapper'
 import HeaderImage from '../global/header-image'
-import Button from '../primitives/button'
-import MainContent from '../global/main-content'
 
 import IndividualsBG from '../../public/join/individuals.jpg'
 import RetailersBG from '../../public/join/retailers.jpg'
 import SuppliersBG from '../../public/join/suppliers.jpg'
-import JoinHeader from '../../public/join/join-header.jpg'
 import WhiteArrow from '../../public/white-arrow.svg'
 
 const SectionTitle = styled.h2`
@@ -141,7 +136,7 @@ export default function JoinList() {
         </a>
       </BoxContainer>      
 
-      <HeaderImage source={ RetailersBG }>
+      <HeaderImage source={ SuppliersBG }>
         <h1>Suppliers</h1>
         <Subtext>Create a Bright Future for Biking</Subtext>
       </HeaderImage>
