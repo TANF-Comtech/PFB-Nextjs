@@ -29,6 +29,7 @@ import List from '../components/content/list'
 
 import ActionItemGroup from '../components/slices/action-item-group'
 import MissionPillars from '../components/content/mission-pillars'
+import Promo from '../components/slices/promo'
 import ColorBanner from '../components/global/color-banner'
 
 export default function LandingPage({ page, preview }) {
@@ -48,7 +49,7 @@ export default function LandingPage({ page, preview }) {
   // Then we destructure the main payload once page has arrived
   const { landing_page } = page
   
-  //console.log(page)
+  console.log(page)
 
   return (
     <Wrapper 
@@ -170,6 +171,18 @@ export default function LandingPage({ page, preview }) {
               <MissionPillars payload={ slice.fields } />
             )
           }
+
+          // PROMO
+          if( slice.__typename === "Landing_pageBodyPromo" ) {
+            return ( 
+              <Promo 
+                bigWords={ slice.primary.bottom_text }
+                path={ slice.primary.link }
+                smallWords={ slice.primary.top_text }
+                source={ slice.primary.main_image.url }
+              /> 
+            )
+          } 
         })) : (<></>)
       }
 

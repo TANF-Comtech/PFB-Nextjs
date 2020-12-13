@@ -77,7 +77,7 @@ const Arrow = styled.img`
  * @param { string } source - single image to display as a banner/hero (default: PromoFallback)
  */
 const Promo = ({ 
-  bigWords = "See How Our Work Creates",
+  bigWords = "See How Our Work",
   headingRGBA,
   path = 'https://www.peopleforbikes.org',
   smallWords = 'Creates Momentum',
