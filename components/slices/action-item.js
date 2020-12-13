@@ -60,7 +60,7 @@ const ContentContainer = styled.div`
 const Title = styled.h2`
   color: ${props => props.theme.red };
   font-weight: 700;
-  margin-bottom: 2vh;
+  margin-bottom: 1vh;
 `
 
 const Text = styled.p`

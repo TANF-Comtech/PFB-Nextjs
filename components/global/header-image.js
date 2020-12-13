@@ -24,6 +24,7 @@ const ImageContainer = styled.section`
   height: 50vh;
   margin-bottom: 1vh;
   padding: 0 5vw;
+  position: relative;
   text-align: center;
 
   @media screen and (min-width: ${ props => props.theme.sm }) {

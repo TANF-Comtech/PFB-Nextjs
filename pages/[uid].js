@@ -26,6 +26,7 @@ import TopicsList from '../components/content/topics-list'
 import RidesList from '../components/content/rides-list'
 import TeamList from '../components/content/team-list'
 import List from '../components/content/list'
+import JoinList from '../components/content/join-list'
 
 import ActionItemGroup from '../components/slices/action-item-group'
 import MissionPillars from '../components/content/mission-pillars'
@@ -57,7 +58,7 @@ export default function LandingPage({ page, preview }) {
       isWide={ true }
     >
     
-      { // HEADER - STYLE COMPLEX: (SecondaryTitleBanner + HeaderImage + Summary)
+      { // HEADER - STYLE COMPLEX: (SecondaryTitleBanner + HeaderImage + SummaryBlock)
         landing_page.header_image || 
         landing_page._meta.uid === 'team' ? (
         <>
@@ -137,6 +138,10 @@ export default function LandingPage({ page, preview }) {
         />
       }
 
+      { // JOIN
+        landing_page._meta.uid === 'join' && 
+        <JoinList />
+      }
 
       { // SLICE CONTENT (in body)
         landing_page.body ? 
