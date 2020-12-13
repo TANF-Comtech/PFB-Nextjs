@@ -70,8 +70,10 @@ const MenuContainer = styled.ul`
 
   li a, li a:visited, li a:focus, li a:active, li a:hover {
     color: white;
+    display: block;
     font-size: 36px;
     margin: 0 8px;
+    padding: 8px 0;
     text-decoration: none;
     transition: ${props => props.theme.basicAnimation};
     transform: translateY(0);
@@ -88,7 +90,7 @@ const MenuContainer = styled.ul`
   }
 
   li a:hover {
-    transform: translateY(5px);
+    transform: translateY(1px);
   }
 
 `
@@ -152,12 +154,12 @@ function Footer() {
         <Container>
           <StripeMenu>
             <MenuContainer>
-              <li><Link href="/"><a>Mission</a></Link></li>
-              <li><Link href="/"><a>Team</a></Link></li>
-              <li><Link href="/"><a>Careers</a></Link></li>
-              <li><Link href="/"><a>Privacy</a></Link></li>
-              <li><Link href="/"><a>Join</a></Link></li>
-              <li><Link href="/"><a>Members</a></Link></li>
+              <li><Link href="/mission"><a>Mission</a></Link></li>
+              <li><Link href="/team"><a>Team</a></Link></li>
+              <li><Link href="/careers"><a>Careers</a></Link></li>
+              <li><Link href="/privacy"><a>Privacy</a></Link></li>
+              <li><Link href="/join"><a>Join</a></Link></li>
+              <li><Link href="/members"><a>Members</a></Link></li>
             </MenuContainer>
             <SocialContainer>
               <SocialIcon 
