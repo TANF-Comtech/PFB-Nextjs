@@ -18,6 +18,7 @@
     "apollo-link-prismic": "^1.0.7",
     "auth0": "^2.31.0",
     "auth0-js": "^9.14.0",
+    "aws-sdk": "^2.809.0",
     "babel-plugin-styled-components": "^1.11.1",
     "flickity": "^2.2.1",
     "graphql": "^15.4.0",
