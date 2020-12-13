@@ -27,6 +27,7 @@ import RidesList from '../components/content/rides-list'
 import TeamList from '../components/content/team-list'
 import List from '../components/content/list'
 import JoinList from '../components/content/join-list'
+import TakeActionList from '../components/content/takeaction-list'
 
 import ActionItemGroup from '../components/slices/action-item-group'
 import MissionPillars from '../components/content/mission-pillars'
@@ -189,6 +190,11 @@ export default function LandingPage({ page, preview }) {
             )
           } 
         })) : (<></>)
+      }
+
+      { // TAKE ACTION BLOCKS
+        landing_page._meta.uid === 'take-action' && 
+        <TakeActionList />
       }
 
       <ColorBanner />
