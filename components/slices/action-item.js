@@ -61,6 +61,11 @@ const Title = styled.h2`
   color: ${props => props.theme.red };
   font-weight: 700;
   margin-bottom: 1vh;
+  text-align: center;
+
+  @media( min-width: ${ props => props.theme.sm}) {
+    text-align: left;
+  }
 `
 
 const Text = styled.p`
