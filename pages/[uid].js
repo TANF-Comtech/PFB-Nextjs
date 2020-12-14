@@ -28,6 +28,8 @@ import TeamList from '../components/content/team-list'
 import List from '../components/content/list'
 import JoinList from '../components/content/join-list'
 import TakeActionList from '../components/content/takeaction-list'
+import GrantsPillars from '../components/content/grants-pillars'
+import GrantsIconGrid from '../components/content/grants-icon-grid'
 
 import ActionItemGroup from '../components/slices/action-item-group'
 import MissionPillars from '../components/content/mission-pillars'
@@ -142,7 +144,14 @@ export default function LandingPage({ page, preview }) {
       { // JOIN
         landing_page._meta.uid === 'join' && 
         <JoinList />
-      }
+      }    
+
+      { // GRANTS
+        landing_page._meta.uid === 'grants' && 
+        <GrantsPillars />
+      }          
+
+
 
       { // SLICE CONTENT (in body)
         landing_page.body ? 
@@ -196,6 +205,11 @@ export default function LandingPage({ page, preview }) {
         landing_page._meta.uid === 'take-action' && 
         <TakeActionList />
       }
+
+      { // GRANTS LOGO GRID
+        landing_page._meta.uid === 'grants' && 
+        <GrantsIconGrid />
+      }  
 
       <ColorBanner />
       
