@@ -3,7 +3,7 @@ import ErrorPage from 'next/error'
 
 import { getTopics, getSingleTopicPage } from '../../lib/queries/topics'
 
-import DefaultContext from '../../context/default-context'
+import DefaultContext from '../../context/default/default-context'
 
 import Wrapper from '../../components/global/wrapper'
 import SiteMeta from '../../components/meta/site-meta'

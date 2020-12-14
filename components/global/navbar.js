@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import useScrollPosition from '@react-hook/window-scroll'
 import Link from 'next/link'
 
 import LogoVertical from "../global/logo-vertical"
 import NavMenu from "../global/navmenu"
+
+import AuthContext from "../../context/auth/auth-context"
 
 const Bar = styled.section`
   background-color: rgba(255, 255, 255, 0.98);
@@ -85,6 +87,9 @@ const MenuButton = styled.svg`
 `;
 
 function NavBar() {
+
+  const authContext = useContext(AuthContext)
+
   // Capture scroll position, so we can know when to fade out navbar
   const scrollY = useScrollPosition();
 
@@ -138,11 +143,13 @@ function NavBar() {
             >
               <path d="M72.1,64.2c4.8-6,7.4-13.5,7.4-21.3c0-19-15.5-34.4-34.5-34.4C26,8.6,10.5,24,10.5,43S26,77.4,44.9,77.4  c7.6,0,15.1-2.6,21.3-7.4l20.7,20.7l5.9-5.9L72.1,64.2z M44.9,69.2c-14.4,0-26.1-11.7-26.1-26.1C18.8,28.7,30.5,17,44.9,17  C59.3,17,71,28.7,71,43.1C71,57.5,59.3,69.2,44.9,69.2z" />
             </SearchButton>
+            {!authContext.loggedIn && (
             <Link href="/log-in">
               <GhostLink>
                 <BlueButton>Log-in</BlueButton>
               </GhostLink>
             </Link>
+            )}
           </RightContainer>
         </Container>
       </Bar>

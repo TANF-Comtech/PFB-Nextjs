@@ -8,8 +8,10 @@ import { useApollo } from '../lib/apollo/apolloClient'
 import Variables from '../components/styles/variables'
 import GlobalStyle from '../components/styles/global-css'
 
-import DefaultContext from '../context/default-context'
-import { ldJSONBasic, defaultData } from '../context/default-data'
+import DefaultContext from '../context/default/default-context'
+import { ldJSONBasic, defaultData } from '../context/default/default-data'
+
+import {AuthProvider} from '../context/auth/auth-context'
 
 import NavBar from '../components/global/navbar'
 import Footer from '../components/global/footer'
@@ -42,6 +44,7 @@ const MyApp = ({ Component, pageProps, router }) => {
     <ApolloProvider client={ apolloClient }>
       <ThemeProvider theme={ Variables }>
         <DefaultContext.Provider value={ defaultData }>
+          <AuthProvider>
           <Head>
             <script type="application/ld+json">{ JSON.stringify(ldJSONBasic) }</script>
           </Head>
@@ -59,6 +62,7 @@ const MyApp = ({ Component, pageProps, router }) => {
             <Component {...pageProps} key={ router.route }/>
           </PageTransition>
           <Footer />
+          </AuthProvider>
         </DefaultContext.Provider>
       </ThemeProvider>
     </ApolloProvider>

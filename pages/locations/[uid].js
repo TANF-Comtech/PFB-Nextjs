@@ -5,7 +5,7 @@ import { Date as ParseDate } from 'prismic-reactjs'
 import { getLocationsNoImages, getSingleLocationsPage } from '../../lib/queries/locations'
 import { randomID, setDateSuffix } from '../../lib/utils'
 
-import DefaultContext from '../../context/default-context'
+import DefaultContext from '../../context/default/default-context'
 
 import Wrapper from '../../components/global/wrapper'
 import SiteMeta from '../../components/meta/site-meta'
