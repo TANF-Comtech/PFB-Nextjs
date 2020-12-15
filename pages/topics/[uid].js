@@ -1,7 +1,9 @@
 import { useContext } from 'react'
 import ErrorPage from 'next/error'
+import { Date as ParseDate } from 'prismic-reactjs'
 
 import { getTopics, getSingleTopicPage } from '../../lib/queries/topics'
+import { randomID, setDateSuffix } from '../../lib/utils'
 
 import DefaultContext from '../../context/default-context'
 
@@ -18,9 +20,13 @@ export default function TopicPage({ page, preview }) {
     return <ErrorPage statusCode={404} />
   }
 
+  console.log(page)
+
   // Destructure topic out of page prop
-  const { topic } = page
-  const { meta, actionItems } = useContext(DefaultContext)
+  const { topic } = page[0]
+  const { meta } = useContext(DefaultContext)
+
+  
 
   return (
     <>
@@ -49,35 +55,37 @@ export default function TopicPage({ page, preview }) {
         ) }
         
         <MainContent>
-          <h2>People for Bikes work in {topic.title[0].text}</h2>
-          <h3>News</h3>
-          <ContentItem 
-            date="September 5th, 2020"
-            title="Opening of New Cycletrack in Sedona"
-            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt."
-          />
-          <ContentItem 
-            date="July 12th, 2020"
-            title="DRAFT Digital Happy Hour Success"
-            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt."
-          />
-          <ContentItem 
-            date="October 23rd, 2019"
-            title="Tucson makes huge leap in City Ratings"
-            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt."
-          />
-          <h3>Grants and Policy</h3>
-          <ContentItem 
-            date="September 7th, 2020"
-            title="2020 ebike laws for Arizona released"
-            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt."
-          />
-          <ContentItem 
-            date="April 12th, 2020"
-            title="Opening of New Cycletrack in Sedona"
-            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt."
-          />   
-        </MainContent>        
+          { page[1].length !== 0 ? ( 
+            <>
+              <h2>PeopleForBikes at Work on { topic.title[0].text }</h2>
+              <h3>News</h3>
+              { page[1].map( (newsItem) => {
+              
+                // Check for publication_date from individual news post
+                // If not present, use publication date from Prismic CMS
+                const newDate = newsItem.data.publication_date ? 
+                  ( new Date(ParseDate( newsItem.data.publication_date ))) : 
+                  ( new Date(ParseDate( newsItem.last_publication_date )))
+                return (
+                  <ContentItem 
+                    date={ `${newDate.toLocaleString('en-us', { month: 'long' } )} 
+                            ${setDateSuffix(newDate.getDate())}, 
+                            ${newDate.getFullYear()}` }
+                    key={ newsItem.id }
+                    image={ newsItem.data.header_image && newsItem.data.header_image }
+                    path={ `/news/${newsItem.uid}` }
+                    text={ newsItem.data.main_content[0].type === "paragraph" ? newsItem.data.main_content[0].text : "" }
+                    title={ newsItem.data.title[0].text }
+                  />
+                )
+              })} 
+            </>
+          ) : (
+            <>
+            </>
+          )}
+           
+        </MainContent>     
       </Wrapper>
     </>
   )
