@@ -32,6 +32,7 @@ import TakeActionList from '../components/content/takeaction-list'
 import GrantsPillars from '../components/content/grants-pillars'
 import GrantsIconGrid from '../components/content/grants-icon-grid'
 import EventsListTemp from '../components/content/events-list-temp'
+import PolicyPillars from '../components/content/policy-pillars'
 
 import ActionItemGroup from '../components/slices/action-item-group'
 import MissionPillars from '../components/content/mission-pillars'
@@ -41,11 +42,12 @@ import ColorBanner from '../components/global/color-banner'
 export default function LandingPage({ page, preview }) {
   const router = useRouter()
 
+  // If page hasn't arrived yet, show loader
   if(router.isFallback) {
     return <Spinner />
   }
 
-  // If page hasn't arrived yet, show loader
+  // If page never shows, throw 404
   if (!page) {
     return (<>
       <DefaultErrorPage statusCode={ 404 } />
@@ -151,7 +153,12 @@ export default function LandingPage({ page, preview }) {
       { // GRANTS
         landing_page._meta.uid === 'grants' && 
         <GrantsPillars />
-      }      
+      }     
+      
+      { // POLICY PILLARS
+        landing_page._meta.uid === 'policy' && 
+        <PolicyPillars />
+      }    
 
       { // EVENTS
         landing_page._meta.uid === 'events' && 
