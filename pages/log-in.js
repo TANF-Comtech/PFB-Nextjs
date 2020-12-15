@@ -1,8 +1,11 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
+import Router from 'next/router'
 import styled from "styled-components";
 import Wrapper from '../components/global/wrapper'
 import InputButton from "../components/primitives/input-button";
 import {RedTextField} from '../components/primitives/text'
+
+import AuthContext from "../context/auth/auth-context"
 
 
 
@@ -42,6 +45,9 @@ const LoginPending = styled.div`
 `
 
 function LoginPage() {
+
+  const authContext = useContext(AuthContext)
+
   const [email, updateEmail] = useState("")
 
   const [code, updateLoginCode] = useState("")
@@ -84,7 +90,17 @@ function LoginPage() {
 
   const onLoginCodeSubmit = (code, email)=>{
     submitLoginCode(code, email).then(data => {
-      return 
+      
+    if(data.status===true){
+        authContext.updateAuthContext({"user":{
+          "email": data?.email,
+          "name": data?.name,
+          "affiliation":data?.affiliation,
+      },
+      "loggedIn":true
+    });
+    Router.push('/members')
+    }     
     })
   }
 

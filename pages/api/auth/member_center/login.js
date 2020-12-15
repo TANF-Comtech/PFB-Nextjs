@@ -15,19 +15,25 @@ export default (req, res) => {
                     res.status(200).json({status:true})
                 }
                 else{
-                    res.status(401).json({error:"You are not a member"})
+                    res.status(401).json({error:"You are not a member!"})
                 }
             })
         }
       else{
         if(code && email){
             return loginAuth0(code,email).then(data=>{
-                const cookies = new Cookies(req, res)
-                cookies.set('auth-token', data.id_token, {
-                    httpOnly: true,
-                    sameSite: 'lax',
-                })        
-                res.status(200).json({status:true})
+                if(data.id_token){
+                    const cookies = new Cookies(req, res)
+                    cookies.set('auth-token', data.id_token, {
+                        httpOnly: true,
+                        sameSite: 'lax',
+                    })        
+                    res.status(200).json({status:true})
+                }
+                else{
+                    res.status(401).json({error:"Incorrect code!"}) 
+                }
+                
             })
         }
         }
