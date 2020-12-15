@@ -86,31 +86,45 @@ const Promo = ({
   
   return (
     <Container>
-      { path.__typename === '_ExternalLink' ? (
-        <a href={ linkResolver(path, true) }>
-          <ImageContainer
-            headingRGBA={ headingRGBA }
-            source={ source }
-          >
-            <span>{ smallWords }</span>
-            <h1>{ bigWords }</h1>
-            <Arrow src={ WhiteArrow } width="46px" />
-          </ImageContainer>     
-        </a>
+      { path ? (
+        <>
+          { path.__typename === '_ExternalLink' ? (
+            <a href={ linkResolver(path, true) }>
+              <ImageContainer
+                headingRGBA={ headingRGBA }
+                source={ source }
+              >
+                <span>{ smallWords }</span>
+                <h1>{ bigWords }</h1>
+                <Arrow src={ WhiteArrow } width="46px" />
+              </ImageContainer>     
+            </a>
+          ) : (
+            <Link href={ linkResolver(path, true) } passHref>
+              <a>
+                <ImageContainer
+                  headingRGBA={ headingRGBA }
+                  source={ source }
+                >
+                  <span>{ smallWords }</span>
+                  <h1>{ bigWords }</h1>
+                  <Arrow src={ WhiteArrow } width="46px" />
+                </ImageContainer>
+              </a>
+            </Link>
+          )}        
+        </>
       ) : (
-        <Link href={ linkResolver(path, true) } passHref>
-          <a>
-            <ImageContainer
-              headingRGBA={ headingRGBA }
-              source={ source }
-            >
-              <span>{ smallWords }</span>
-              <h1>{ bigWords }</h1>
-              <Arrow src={ WhiteArrow } width="46px" />
-            </ImageContainer>
-          </a>
-        </Link>
+        <ImageContainer
+          headingRGBA={ headingRGBA }
+          source={ source }
+        >
+          <span>{ smallWords }</span>
+          <h1>{ bigWords }</h1>
+          <Arrow src={ WhiteArrow } width="46px" />
+        </ImageContainer> 
       )}
+      
     </Container>
   )
 }
