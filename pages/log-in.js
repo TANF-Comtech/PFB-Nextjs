@@ -52,10 +52,9 @@ function LoginPage() {
 
   const [code, updateLoginCode] = useState("")
   
-  const [loginPending, setLoginPending] = useState(false)
+  const [loginPending, updateLoginPending] = useState(false)
 
   const submitEmail = async (email) => {
-    setLoginPending(true)
     const response = await fetch (`/api/auth/member_center/login`,{
       method:'POST',
       mode:'same-origin',
@@ -84,7 +83,7 @@ function LoginPage() {
 
   const onLoginEmailSubmit = (email)=>{
     submitEmail(email).then(data => {
-      return
+      updateLoginPending(true)
     })
   }
 
@@ -110,7 +109,7 @@ function LoginPage() {
         postTitle="People for Bikes Homepage"
         isWide={ false }
       >
-        {!loginPending && (
+        {!loginPending && ( // ternary 
         <>
         <h1>Login</h1>
         <h2>Access the PeopleForBikes Member Center</h2>

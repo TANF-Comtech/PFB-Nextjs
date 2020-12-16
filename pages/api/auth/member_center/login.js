@@ -10,12 +10,12 @@ export default (req, res) => {
         if(!code && email){
             return checkEmailInSalesforce(email).then(data=>{
                 console.log("Data From CheckEmail", data)
-                if(data.inSalesForce){
+                if(data.status){
                     sendPasswordlessAuthCode(email)
-                    res.status(200).json({status:true})
+                    res.status(200).json(data)
                 }
                 else{
-                    res.status(401).json({error:"You are not a member!"})
+                    res.status(401).json(data)
                 }
             })
         }
@@ -31,7 +31,7 @@ export default (req, res) => {
                     res.status(200).json({status:true})
                 }
                 else{
-                    res.status(401).json({error:"Incorrect code!"}) 
+                    res.status(401).json({status:false, error:"Incorrect code!"}) 
                 }
                 
             })
