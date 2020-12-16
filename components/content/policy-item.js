@@ -89,7 +89,6 @@ const PolicyItem = ({
   title,
   text,
 }) => {
-  console.log(govLevel)
   return (
     <Container>
       <ContentContainer>

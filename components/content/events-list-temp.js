@@ -15,7 +15,6 @@ const EventsListTemp = ({
   eventTitle,
   payload
 }) => {
-  console.log(payload)
   return (
     <MainContent maxWidth="800px">
       { eventTitle && <h2>{ eventTitle }</h2> }
