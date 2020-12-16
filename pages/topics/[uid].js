@@ -87,7 +87,6 @@ export default function TopicPage({ page, preview }) {
         { topic.body ? (
           <MainContent maxWidth="900px">
             { pillars[0].fields.map( pillar => {
-              console.log(pillar)
               return(
                 <Accordion
                   key={ randomID(1234567890) }
