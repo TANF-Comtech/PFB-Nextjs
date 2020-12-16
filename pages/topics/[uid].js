@@ -123,7 +123,19 @@ export default function TopicPage({ page, preview }) {
                 </Accordion>
               )
             } ) }
-
+            <Button
+              buttonAlign="center"
+              buttonBg="#D0021B"
+              buttonBorder="none"
+              buttonColor="white"
+              buttonFontSize="24px"
+              buttonMargin="50px 0"
+              buttonPadding="10px 30px"
+              buttonTextTransform="uppercase"
+              href="/policy"
+            >
+              Explore Other Policy Pillars
+            </Button>
           </MainContent>
         ) : (
           <MainContent>
