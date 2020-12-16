@@ -89,6 +89,7 @@ const ContentItem = ({
       { image && 
         <Image 
           alt={ image.alt ? image.alt : 'Bike-oriented image' }
+          loading="lazy"
           src={ image['1x'] ? image['1x'].url : image.url } 
         /> 
       }
