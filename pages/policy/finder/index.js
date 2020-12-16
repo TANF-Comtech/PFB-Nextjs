@@ -63,6 +63,7 @@ export default function PolicyFinder({ page }) {
               city={ policy.node.city ? policy.node.city : null }
               date={ policy.node.year ? policy.node.year : null }
               govLevel={ policy.node.government_level }
+              key={ policy.node._meta.id }
               location={ policy.node.location ? policy.node.location.location[0].text : null }
               path={ `/policy/${ policy.node._meta.uid }` }
               title={ policy.node.title[0].text }
