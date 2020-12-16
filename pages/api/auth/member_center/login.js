@@ -12,6 +12,7 @@ export default (req, res) => {
                 console.log("Data From CheckEmail", data)
                 if(data.status){
                     sendPasswordlessAuthCode(email)
+                    //do something to the salesforce data - store in a cookie/token?
                     res.status(200).json(data)
                 }
                 else{
