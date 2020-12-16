@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 import { RichText } from 'prismic-reactjs'
-import DefaultErrorPage from 'next/error'
+import CustomErrorPage from '../components/global/404'
 
 import { getSingleLandingPage, 
          getLandingPages } from '../lib/queries/landing-page'
@@ -50,14 +50,12 @@ export default function LandingPage({ page, preview }) {
   // If page never shows, throw 404
   if (!page) {
     return (<>
-      <DefaultErrorPage statusCode={ 404 } />
+      <CustomErrorPage />
     </>)
   } 
 
   // Then we destructure the main payload once page has arrived
   const { landing_page } = page
-  
-  console.log(page)
 
   return (
     <Wrapper 
@@ -217,7 +215,7 @@ export default function LandingPage({ page, preview }) {
             return ( 
               <Promo 
                 bigWords={ slice.primary.bottom_text }
-                path={ slice.primary.link }
+                path={ landing_page._meta.uid === 'policy' ? '/policy/finder' : slice.primary.link }
                 smallWords={ slice.primary.top_text }
                 source={ slice.primary.main_image.url }
               /> 
