@@ -68,7 +68,6 @@ function LoginPage() {
   }
 
   const submitLoginCode = async (code,email) => {
-    setLoginPending(true)
     const response = await fetch (`/api/auth/member_center/login`,{
       method:'POST',
       mode:'same-origin',
@@ -83,7 +82,12 @@ function LoginPage() {
 
   const onLoginEmailSubmit = (email)=>{
     submitEmail(email).then(data => {
-      updateLoginPending(true)
+      if(data.status){
+        updateLoginPending(true)
+      }
+      else{
+        alert(data.error)
+      }
     })
   }
 
