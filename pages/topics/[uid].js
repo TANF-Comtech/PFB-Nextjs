@@ -29,8 +29,6 @@ export default function TopicPage({ page, preview }) {
     return <ErrorPage statusCode={404} />
   }
 
-  // console.log(page)
-
   // Destructure topic from main page payload and meta from global context
   const { topic } = page[0]
   const { meta } = useContext(DefaultContext)
