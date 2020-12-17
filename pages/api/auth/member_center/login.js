@@ -1,6 +1,6 @@
 import Cookies from 'cookies'
 import checkEmailInSalesforce from '../../../../lib/salesforce/checkEmailInSalesforce'
-import sendPasswordlessAuthCode from '../../../../lib/auth0/sendPasswordlessAuthCode'
+import sendAuthCode from '../../../../lib/auth0/sendAuthCode'
 import loginAuth0 from '../../../../lib/auth0/loginAuth0'
 
 export default (req, res) => {
@@ -12,7 +12,7 @@ export default (req, res) => {
             return checkEmailInSalesforce(email).then(data=>{
                 console.log("Data From CheckEmail", data)
                 if(data.status){
-                    sendPasswordlessAuthCode(email)
+                    sendAuthCode(email)
                     //do something to the salesforce data - store in a cookie/token?
                     res.status(200).json(data)
                 }
