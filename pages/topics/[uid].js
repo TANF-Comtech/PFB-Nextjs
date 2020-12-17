@@ -1,7 +1,11 @@
 import { useContext } from 'react'
 import ErrorPage from 'next/error'
+import Link from 'next/link'
+import { Date as ParseDate } from 'prismic-reactjs'
+import styled from 'styled-components'
 
 import { getTopics, getSingleTopicPage } from '../../lib/queries/topics'
+import { randomID, setDateSuffix } from '../../lib/utils'
 
 import DefaultContext from '../../context/default/default-context'
 
@@ -10,7 +14,14 @@ import SiteMeta from '../../components/meta/site-meta'
 import HeaderImage from '../../components/global/header-image'
 import MainContent from '../../components/global/main-content'
 import ContentItem from '../../components/content/content-item'
+import Header1 from '../../components/primitives/h1'
+import SummaryBlock from '../../components/content/summary-block'
+import Accordion from '../../components/global/accordion'
+import Button from '../../components/primitives/button'
 
+const SpacedHeading = styled.h2`
+  margin: 4vh 0;
+`
 
 /* You must reference the `topic` prop to get data from `getStaticProps` - check bottom of this file */
 export default function TopicPage({ page, preview }) {
@@ -18,12 +29,21 @@ export default function TopicPage({ page, preview }) {
     return <ErrorPage statusCode={404} />
   }
 
-  // Destructure topic out of page prop
-  const { topic } = page
-  const { meta, actionItems } = useContext(DefaultContext)
+  // Destructure topic from main page payload and meta from global context
+  const { topic } = page[0]
+  const { meta } = useContext(DefaultContext)
+  const pillars = [] // setup for pillar content
 
   return (
     <>
+      { // Sniff for pillars - set up as array or null
+        topic.body ? ( 
+          topic.body.map( (slice) => {
+            slice.__typename === "TopicBodyPolicy_pillar" ? pillars.push(slice) : pillars.push(null)
+          })
+        ) : 
+        ( pillars.push(null) ) 
+      }
       <SiteMeta
         desc={ topic.intro ? ( `${ topic.intro.substring(0,180) }... ` ) : ( meta.desc ) }
         title={ topic.title ? ( `${ topic.title[0].text } | People for Bikes` ) : ( meta.title ) }
@@ -33,8 +53,8 @@ export default function TopicPage({ page, preview }) {
         path={ topic ? ( `https://www.peopleforbikes.org/topics/${topic._meta.uid}` ) : ( meta.path ) }
       />    
       <Wrapper 
-        postPath="/topics/"
-        postTitle="Topics"
+        postPath={ topic.body ? "/policy" : "/topics/" }
+        postTitle={ topic.body ? "Policy" : "Topics" } 
         isWide={ topic.banner_image ? true : false }
       >
         { topic.banner_image ? (
@@ -42,42 +62,113 @@ export default function TopicPage({ page, preview }) {
             headingRGBA="255,255,255,1"
             source={ topic.banner_image.url }
           >
-            <h1>{topic.title[0].text}</h1>
+            <MainContent maxWidth="900px">
+              <Header1>
+                { topic.body ? pillars[0].primary.long_name : topic.title[0].text } 
+              </Header1>
+            </MainContent>
           </HeaderImage>
         ) : (
-          <h1>{topic.title[0].text}</h1>
+          <Header1>
+          { topic.body ? pillars[0].primary.long_name : topic.title[0].text } 
+          </Header1>
+        ) }
+
+        <SummaryBlock
+          bgColor="#002C40"
+          maxWidth="900px"
+          textColor="#fff"
+        >
+          <p>{ topic.intro }</p>
+        </SummaryBlock>
+
+        { topic.body ? (
+          <MainContent maxWidth="900px">
+            { pillars[0].fields.map( pillar => {
+              return(
+                <Accordion
+                  key={ randomID(1234567890) }
+                  title={ pillar.sub_pillar }
+                >
+                  <p>{ pillar.sub_pillar_summary }</p>
+                  { (pillar.news_item_1 || pillar.news_item_2 || pillar.news_item_3) &&
+                    <strong>Our Work in This Area:</strong>
+                  }
+                  <ul>
+                    { pillar.news_item_1 && <li>
+                      <Link href={ `/news/${ pillar.news_item_1._meta.uid }` } passHref>
+                        <a>
+                          { pillar.news_item_1.title[0].text  }
+                        </a>
+                      </Link>
+                    </li> }
+                    { pillar.news_item_2 && <li>
+                      <Link href={ `/news/${ pillar.news_item_2._meta.uid }` } passHref>
+                        <a>
+                          { pillar.news_item_2.title[0].text  }
+                        </a>
+                    </Link>
+                    </li> }
+                    { pillar.news_item_3 && <li>
+                      <Link href={ `/news/${ pillar.news_item_3._meta.uid }` } passHref>
+                        <a>
+                          { pillar.news_item_3.title[0].text  }
+                        </a>
+                      </Link>
+                    </li> }                                        
+                  </ul>
+                </Accordion>
+              )
+            } ) }
+            <Button
+              buttonAlign="center"
+              buttonBg="#D0021B"
+              buttonBorder="none"
+              buttonColor="white"
+              buttonFontSize="24px"
+              buttonMargin="50px 0"
+              buttonPadding="10px 30px"
+              buttonTextTransform="uppercase"
+              href="/policy"
+            >
+              Explore Other Policy Pillars
+            </Button>
+          </MainContent>
+        ) : (
+          <MainContent>
+            { page[1].length !== 0 ? ( 
+              <>
+                <SpacedHeading>
+                  PeopleForBikes at Work on { topic.title[0].text }
+                </SpacedHeading>
+                <h3>News</h3>
+                { page[1].map( (newsItem) => {
+                
+                  // Check for publication_date from individual news post
+                  // If not present, use publication date from Prismic CMS
+                  const newDate = newsItem.data.publication_date ? 
+                    ( new Date(ParseDate( newsItem.data.publication_date ))) : 
+                    ( new Date(ParseDate( newsItem.last_publication_date )))
+                  return (
+                    <ContentItem 
+                      date={ `${newDate.toLocaleString('en-us', { month: 'long' } )} 
+                              ${setDateSuffix(newDate.getDate())}, 
+                              ${newDate.getFullYear()}` }
+                      key={ newsItem.id }
+                      image={ newsItem.data.header_image && newsItem.data.header_image }
+                      path={ `/news/${newsItem.uid}` }
+                      text={ newsItem.data.main_content[0].type === "paragraph" ? newsItem.data.main_content[0].text : "" }
+                      title={ newsItem.data.title[0].text }
+                    />
+                  )
+                })} 
+              </>
+            ) : (
+              <></>
+            )}
+          </MainContent>          
         ) }
         
-        <MainContent>
-          <h2>People for Bikes work in {topic.title[0].text}</h2>
-          <h3>News</h3>
-          <ContentItem 
-            date="September 5th, 2020"
-            title="Opening of New Cycletrack in Sedona"
-            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt."
-          />
-          <ContentItem 
-            date="July 12th, 2020"
-            title="DRAFT Digital Happy Hour Success"
-            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt."
-          />
-          <ContentItem 
-            date="October 23rd, 2019"
-            title="Tucson makes huge leap in City Ratings"
-            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt."
-          />
-          <h3>Grants and Policy</h3>
-          <ContentItem 
-            date="September 7th, 2020"
-            title="2020 ebike laws for Arizona released"
-            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt."
-          />
-          <ContentItem 
-            date="April 12th, 2020"
-            title="Opening of New Cycletrack in Sedona"
-            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt."
-          />   
-        </MainContent>        
       </Wrapper>
     </>
   )
@@ -86,6 +177,10 @@ export default function TopicPage({ page, preview }) {
 /* The return here sends the `page` prop back to the TopicPage component above for rendering */
 export async function getStaticProps({ params, preview = false, previewData }) {
   const pageData = await getSingleTopicPage(params.uid, previewData)
+  const errorCode = pageData.ok ? false : pageData.statusCode
+  if (errorCode) {
+    res.statusCode = errorCode;
+  }
 
   return {
     props: {

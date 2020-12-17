@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 
-import Arrow from "../../public/triangle.svg"
+import Arrow from "../../public/red-arrow-triangle.svg"
 
 const AccordionWrapper = styled.div`
   align-items: center;
@@ -10,33 +10,44 @@ const AccordionWrapper = styled.div`
   cursor: pointer;
   display: flex;
   height: auto;
-  padding: 2% 0;
-  transition: height 0.5s ${(props) => props.theme.cubicSmooth };
+  padding: 4vh 0;
+  transition: 0.5s ease-in-out;
+
+  &:first-child {
+    border-top: none;
+  }
 `;
 
 const InternalWrapper = styled.div`
-  max-height: ${(props) => props.open ? props.accordionHeight : "0"};
+  max-height: ${(props) => props.open ? "auto" : "0"};
   opacity: ${(props) => props.open ? "1" : "0"};
   overflow: hidden;
-  transform: ${(props) => props.open ? "scaleY(1)" : "scaleY(0)"};
-  transform-origin: 50% 0;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: all 1s cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 `;
 
 const ArrowButton = styled.img`
   border: none;
   height: min-content;
   margin: none;
-  transition: all 0.1s ease-in-out;
+  transition: all 0.25s ease-in-out;
   transform: ${props => props.open ? "rotate(90deg)" : "rotate(0deg)"}; 
   transform-origin: 40% 40%;
 `;
 
-const Title = styled.div`
-  font-size: 28px;
-  font-weight: bold;
-  margin: none;
-  padding-left: 10px;
+const Title = styled.h2`
+  font-size: 40px;
+  line-height: 40px;
+  margin: 0;
+  padding-left: 20px;
+
+  @media screen and (min-width: 320px) {
+    font-size: calc(40px + 15 * ((100vw - 320px) / 880));
+    line-height: calc(40px + 15 * ((100vw - 320px) / 880));
+  }
+  @media screen and (min-width: 1200px) {
+    font-size: 55px;
+    line-height: 55px;
+  }
 `;
 
 /**
@@ -77,7 +88,7 @@ const Accordion = ({ title, children }) => {
         </Title>
       </AccordionWrapper>
       <InternalWrapper open={open} ref={accordionContent}>
-        <p>{children}</p>
+        {children}
       </InternalWrapper>
     </>
   );

@@ -17,7 +17,6 @@ export default function CareerPages({ page, preview }) {
   if( !page || page === null ) {
     return <ErrorPage statusCode={404} />
   }
-  console.log(page)
 
   const { job } = page
   const { meta } = useContext(DefaultContext)

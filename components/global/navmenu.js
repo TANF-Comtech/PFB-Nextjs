@@ -141,6 +141,24 @@ const MainNavItem = styled.li`
   } 
 `
 
+const MainSubNavItem = styled.li`
+  cursor: pointer;
+  font-size: 24px;
+  font-family: ${ props => props.theme.montserrat };
+  font-weight: 300;
+  line-height: 28px;
+  padding: 0.5vh 25px;
+
+  @media screen and (min-width: 320px) {
+    font-size: calc(24px + 4 * ((100vw - 320px) / 880));
+    line-height: calc(28px + 6 * ((100vw - 320px) / 880));
+  }
+  @media screen and (min-width: 1200px) {
+    font-size: 28px;
+    line-height: 34px;
+  } 
+`
+
 const GridMicroFade = styled.section`
   animation: ${fadeIn} 0.75s ease forwards;
   animation-delay: 0.6s;
@@ -271,6 +289,27 @@ const NavMenu = ({ menuState, handleMenu }) => {
                     </MainNavItem>
                   )
                 })}
+                <MainNavItem>
+                  PeopleForBikes at Work
+                </MainNavItem>
+                <MainNavItem>
+                  <MainNav>
+                    <MainSubNavItem>
+                      <Link href="/grants" >
+                        <a onClick={ handleMenu } >
+                          Grants
+                        </a>
+                      </Link>
+                    </MainSubNavItem>                    
+                    <MainSubNavItem>
+                      <Link href="/policy" >
+                        <a onClick={ handleMenu } >
+                          Policy
+                        </a>
+                      </Link>
+                    </MainSubNavItem>                    
+                  </MainNav>
+                </MainNavItem>
               </MainNav>
               <MenuHeader>
                 <Link href="/topics">

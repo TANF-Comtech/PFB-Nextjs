@@ -119,7 +119,7 @@ const SignUpContainer = styled.div`
   display: flex;
   flex-basis: 100%; /* Stretch the signup all the way across the screen */
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   margin: 5vh 4vw;
 
   h2 {
@@ -139,12 +139,9 @@ const SignUpContainer = styled.div`
 `
 
 const SignUpFooter = styled.footer`
-  align-self: center;
-  margin-top: 5vh;
-
-  @media screen and (min-width: 768px) {
-    align-self: flex-end;
-  }
+  align-items: flex-end;
+  display: flex;
+  padding-bottom: 2vh;
 `
 
 function Footer() {
@@ -185,20 +182,24 @@ function Footer() {
             </SocialContainer>
           </StripeMenu>
           <SignUpContainer>
-            <header>
-              <h2>Let's stay in touch. Join our newsletter list:</h2>
-              <SignUpForm />
-            </header>
             <SignUpFooter>
               <Logo 
-                logoViewbox={ "0 0 270 132" }
+                logoMargin="0"
+                logoWidth="80px"
+                logoViewbox="65 -12 160 150"
               />
               <LogoType 
                 fillPeople="#fff"
                 fillFor="#fff"
                 fillBikes="#fff"
-              />              
-            </SignUpFooter>
+                logoMargin="0"
+                logoTypeWidth="200px"
+              />          
+            </SignUpFooter>            
+            <header>
+              <h2>Let's stay in touch. Join our newsletter list:</h2>
+              <SignUpForm />
+            </header>
           </SignUpContainer>
         </Container>
       </Bar>

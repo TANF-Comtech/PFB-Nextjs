@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 import { RichText } from 'prismic-reactjs'
-import DefaultErrorPage from 'next/error'
+import CustomErrorPage from '../components/global/404'
 
 import { getSingleLandingPage, 
          getLandingPages } from '../lib/queries/landing-page'
@@ -10,6 +10,7 @@ import { getTopics } from '../lib/queries/topics'
 import { getRides } from '../lib/queries/rides'
 import { getTeamMembers, getCEO } from '../lib/queries/team'
 import { getAllCareers } from '../lib/queries/careers'
+import { getEventsByCategory } from '../lib/queries/events'
 import { linkResolver, randomID } from '../lib/utils'
 
 import Wrapper from '../components/global/wrapper'
@@ -28,6 +29,10 @@ import TeamList from '../components/content/team-list'
 import List from '../components/content/list'
 import JoinList from '../components/content/join-list'
 import TakeActionList from '../components/content/takeaction-list'
+import GrantsPillars from '../components/content/grants-pillars'
+import GrantsIconGrid from '../components/content/grants-icon-grid'
+import EventsListTemp from '../components/content/events-list-temp'
+import PolicyPillars from '../components/content/policy-pillars'
 
 import ActionItemGroup from '../components/slices/action-item-group'
 import MissionPillars from '../components/content/mission-pillars'
@@ -37,21 +42,20 @@ import ColorBanner from '../components/global/color-banner'
 export default function LandingPage({ page, preview }) {
   const router = useRouter()
 
+  // If page hasn't arrived yet, show loader
   if(router.isFallback) {
     return <Spinner />
   }
 
-  // If page hasn't arrived yet, show loader
+  // If page never shows, throw 404
   if (!page) {
     return (<>
-      <DefaultErrorPage statusCode={ 404 } />
+      <CustomErrorPage />
     </>)
   } 
 
   // Then we destructure the main payload once page has arrived
   const { landing_page } = page
-  
-  console.log(page)
 
   return (
     <Wrapper 
@@ -142,7 +146,35 @@ export default function LandingPage({ page, preview }) {
       { // JOIN
         landing_page._meta.uid === 'join' && 
         <JoinList />
-      }
+      }    
+
+      { // GRANTS
+        landing_page._meta.uid === 'grants' && 
+        <GrantsPillars />
+      }     
+      
+      { // POLICY PILLARS
+        landing_page._meta.uid === 'policy' && 
+        <PolicyPillars />
+      }    
+
+      { // EVENTS
+        landing_page._meta.uid === 'events' && 
+        <>
+          { landing_page.data[2].allEvents.edges && <EventsListTemp 
+            eventTitle="Virtual Events"
+            payload={ landing_page.data[2].allEvents.edges }
+          /> }
+          { landing_page.data[0].allEvents.edges && <EventsListTemp 
+            eventTitle="PeopleForBikes Events"
+            payload={ landing_page.data[0].allEvents.edges }
+          /> }
+          { landing_page.data[1].allEvents.edges && <EventsListTemp 
+            eventTitle="Sponsored Events"
+            payload={ landing_page.data[1].allEvents.edges }
+          /> }
+        </>
+      }      
 
       { // SLICE CONTENT (in body)
         landing_page.body ? 
@@ -183,7 +215,7 @@ export default function LandingPage({ page, preview }) {
             return ( 
               <Promo 
                 bigWords={ slice.primary.bottom_text }
-                path={ slice.primary.link }
+                path={ landing_page._meta.uid === 'policy' ? '/policy/finder' : slice.primary.link }
                 smallWords={ slice.primary.top_text }
                 source={ slice.primary.main_image.url }
               /> 
@@ -196,6 +228,11 @@ export default function LandingPage({ page, preview }) {
         landing_page._meta.uid === 'take-action' && 
         <TakeActionList />
       }
+
+      { // GRANTS LOGO GRID
+        landing_page._meta.uid === 'grants' && 
+        <GrantsIconGrid />
+      }  
 
       <ColorBanner />
       
@@ -222,6 +259,8 @@ export async function getStaticProps({ params, preview = false, previewData }) {
     pageData.landing_page.dataCEO = await getCEO(params.uid, previewData)
   } else if(params.uid === 'careers') {
     pageData.landing_page.data = await getAllCareers(params.uid, previewData)
+  } else if(params.uid === 'events') {
+    pageData.landing_page.data = await getEventsByCategory(params.uid, previewData)
   }
 
   return {

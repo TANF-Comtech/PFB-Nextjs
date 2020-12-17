@@ -97,7 +97,7 @@ function Titlebar({
   return (
     <>
       <Bar className={
-        scrollY > 600 && scrollY < (mainHeight - 800) ? 
+        scrollY > 600 && scrollY < (mainHeight - 300) ? 
           ('isVisibleY') : ('isHiddenY') 
       }>
         <Container>
@@ -126,7 +126,7 @@ function Titlebar({
           </Content>
         </Container>
         {/* detecting where a user is on the page, divide by height of container - dynamic position */}
-        <ProgressBar width={ (scrollY / (mainHeight - 800)) * 100 } />
+        <ProgressBar width={ (scrollY / (mainHeight - 300)) * 100 } />
       </Bar>
     </>
   );

@@ -1,6 +1,9 @@
 import React from "react";
 import Link from "next/link"
 import styled from "styled-components";
+import RichText from "prismic-reactjs"
+
+import { linkResolver } from '../../lib/utils'
 
 import Button from "../primitives/button"
 
@@ -27,15 +30,13 @@ const ContentContainer = styled.div`
   margin: 4vh 0;
 
   a, a:visited, a:active, a:focus, a:hover {
+    color: #333;
     text-decoration: none;
   }
-`
 
-const Title = styled.h4`
-  color: ${props => props.theme.red };
-  font-size: 40px;
-  line-height: 38px;
-  margin: 0;
+  a:hover {
+    color: ${props => props.theme.redAccent};
+  }
 `
 
 const Text = styled.p`
@@ -44,25 +45,25 @@ const Text = styled.p`
   margin-bottom: 25px;
 `
 
-const Datestamp = styled.p`
-  font-size: 18px;
-  font-weight: 700;
-  margin-bottom: 0;
+const Metadata = styled.div`
+  align-items: center;
+  display: flex;
 `
 
-const Image = styled.img`
-  flex: 1 1 0px;
-  height: auto;
-  margin: 25px 0 0 0;
-  max-width: 100%;
+const MetaText = styled.h3`
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0 0 2vh 0 ;
 
-  @media (min-width: ${props => props.theme.sm}) {
-    margin: 25px 25px 25px 0;
-    max-width: 300px;
+  &:after {
+    content: "|";
+    padding: 0 10px;
   }
 
-  @media (min-width: ${props => props.theme.md}) {
-    max-width: 500px;
+  &:last-child:after {
+    content: "";
+    padding: 0;
   }
 `
 
@@ -71,45 +72,48 @@ const Image = styled.img`
  * 
  * A simple presentation for content items that show up in lists
  *
- * @param { string } date - when the content item occurred (optional)
- * @param { object } image - image to go with post (optional)
- * @param { string } path - tells us the URL to the item
- * @param { string } title - title that goes next to the icon
+ * @param { string } city - place (if local)
+ * @param { number } date - year when law took place
+ * @param { string } govLevel - zone of policy (federal || state || local)
+ * @param { string } location - place (if state)
+ * @param { string } path - relative string to policy page
  * @param { string } text - content to be shown
+ * @param { string } title - title that goes next to the icon
  */
-const ContentItem = ({
+const PolicyItem = ({
+  city,
   date,
-  image,
+  govLevel,
+  location,
   path,
   title,
-  text
+  text,
 }) => {
   return (
     <Container>
-      { image && 
-        <Image 
-          alt={ image.alt ? image.alt : 'Bike-oriented image' }
-          loading="lazy"
-          src={ image['1x'] ? image['1x'].url : image.url } 
-        /> 
-      }
       <ContentContainer>
         { !path ? 
-          ( <Title>{ title }</Title> )  :
+          ( <h2>{ title }</h2> )  :
           (
             <Link href={ path }>
               <a>
-                <Title>{ title }</Title>
+                <h2>{ title }</h2>
               </a>
             </Link>
           )
         }
-        { date && <Datestamp>{ date }</Datestamp> }
-        { text && <Text>{ `${text.substring(0,300)} ...` }</Text> }
+        <Metadata>
+          { date && <MetaText>{ date }</MetaText> }
+          { govLevel === 'Federal' && <MetaText>{ govLevel }</MetaText> }
+          { govLevel === 'State' && <MetaText>{ `${govLevel} - ${location}` }</MetaText> }
+          { govLevel === 'Local' && <MetaText>{ `${govLevel} - ${city}` }</MetaText> }
+        </Metadata>
+        { text && <Text>{ text }</Text> }
         { path && 
           <Button
-            buttonBg="#404040"
+            buttonBg="#D23823"
             buttonBgHover="rgb(216,216,216)"
+            buttonBorder="none"
             buttonColor="white"
             buttonPadding="10px 20px"
             buttonTextTransform="uppercase"
@@ -118,10 +122,9 @@ const ContentItem = ({
             Read More
           </Button>
         }
-        
       </ContentContainer>
     </Container>
   )
 }
 
-export default ContentItem
+export default PolicyItem
