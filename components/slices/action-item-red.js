@@ -8,7 +8,7 @@ import RedArrowWhiteBlock from '../../public/red-arrow-white-block.svg'
 
 const Container = styled.section`
   align-items: center;
-  background-color: ${ props => props.theme.redAccent };
+  background-color: ${ props => props.theme.blueAccent };
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -92,8 +92,11 @@ const RedActionItem = ({
         </ContentContainer>
       )}
 
-      <Icon src={ RedArrowWhiteBlock } alt="White Arrow" />
-
+      <Link href={ linkResolver(path, false) } passHref>
+        <a>
+          <Icon src={ RedArrowWhiteBlock } alt="White Arrow" />
+        </a>
+      </Link>
     </Container>
   )
 }
