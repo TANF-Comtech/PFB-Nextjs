@@ -527,12 +527,18 @@ const GlobalStyle = createGlobalStyle`
   .flickity-page-dots {
     position: absolute;
     width: 100%;
-    bottom: -50px;
+    bottom: -65px;
     padding: 0;
     margin: 0;
     list-style: none;
     text-align: center;
     line-height: 1;
+  }
+
+  @media (min-width: 480px) {
+    .flickity-page-dots {
+      bottom: -50px;
+    }
   }
 
   .flickity-rtl .flickity-page-dots {
@@ -543,12 +549,18 @@ const GlobalStyle = createGlobalStyle`
     display: inline-block;
     width: 25px;
     height: 25px;
-    margin: 0 10px;
+    margin: 5px;
     background: #333;
     border-radius: 50%;
     opacity: 0.25;
     cursor: pointer;
     transition: 0.2s ease-in-out;
+  }
+
+  @media (min-width: 480px) {
+    .flickity-page-dots .dot {
+      margin: 0 10px;
+    }
   }
 
   .flickity-page-dots .dot.is-selected {
