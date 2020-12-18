@@ -16,7 +16,7 @@ const PolicyPillars = () => {
         <RedActionItem 
           path="/topics/bike-safety"
           title="Building Safe Mobility Networks"
-          text="Better and safer places for bikes give more people the confidence to get out and ride."
+          text="Safer places for bikes give more people the confidence to get out and ride."
         />
         <RedActionItem 
           path="/topics/bike-business"
@@ -36,7 +36,7 @@ const PolicyPillars = () => {
         <RedActionItem 
           path="/topics/sustainable-transportation"
           title="Promoting Sustainability"
-          text="Providing resources for cities and the bike industry to take action toward a cleaner, more sustainable future."
+          text="Providing resources for the bike industry to create more sustainable products."
         />            
                    
       </MainContent>
