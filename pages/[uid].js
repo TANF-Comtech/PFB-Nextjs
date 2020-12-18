@@ -33,6 +33,7 @@ import GrantsPillars from '../components/content/grants-pillars'
 import GrantsIconGrid from '../components/content/grants-icon-grid'
 import EventsListTemp from '../components/content/events-list-temp'
 import PolicyPillars from '../components/content/policy-pillars'
+import MemberPillars from '../components/content/member-pillars'
 
 import ActionItemGroup from '../components/slices/action-item-group'
 import MissionPillars from '../components/content/mission-pillars'
@@ -158,6 +159,11 @@ export default function LandingPage({ page, preview }) {
         <PolicyPillars />
       }    
 
+      { // MEMBER CENTER
+        landing_page._meta.uid === 'members' && 
+        <MemberPillars />
+      }         
+
       { // EVENTS
         landing_page._meta.uid === 'events' && 
         <>
@@ -215,7 +221,9 @@ export default function LandingPage({ page, preview }) {
             return ( 
               <Promo 
                 bigWords={ slice.primary.bottom_text }
-                path={ landing_page._meta.uid === 'policy' ? '/policy/finder' : slice.primary.link }
+                path={ landing_page._meta.uid === 'policy' && '/policy/finder' || 
+                       landing_page._meta.uid === 'grants' && '/grants/finder' || 
+                       slice.primary.link }
                 smallWords={ slice.primary.top_text }
                 source={ slice.primary.main_image.url }
               /> 
@@ -234,7 +242,10 @@ export default function LandingPage({ page, preview }) {
         <GrantsIconGrid />
       }  
 
-      <ColorBanner />
+      { // COLOR BANNER - not on member page
+        landing_page._meta.uid !== 'members' && 
+        <ColorBanner />
+      }  
       
     </Wrapper>
   )
