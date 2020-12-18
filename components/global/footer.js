@@ -88,11 +88,6 @@ const MenuContainer = styled.ul`
       font-size: 56px;
     }
   }
-
-  li a:hover {
-    transform: translateY(1px);
-  }
-
 `
 
 const SocialContainer = styled.section`
