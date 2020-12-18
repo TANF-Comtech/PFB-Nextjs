@@ -1,22 +1,14 @@
 import { useContext } from 'react'
 import ErrorPage from 'next/error'
-import Link from 'next/link'
-import { Date as ParseDate } from 'prismic-reactjs'
-import styled from 'styled-components'
 
 import { getGrants, getSingleGrantPage } from '../../lib/queries/grants'
-import { randomID, setDateSuffix } from '../../lib/utils'
 
-import DefaultContext from '../../context/default/default-data'
+import DefaultContext from '../../context/default/default-context'
 
 import Wrapper from '../../components/global/wrapper'
 import SiteMeta from '../../components/meta/site-meta'
 import MainContent from '../../components/global/main-content'
 import GrantsItem from '../../components/content/grants-item'
-
-const SpacedHeading = styled.h2`
-  margin: 4vh 0;
-`
 
 /* You must reference the `policy` prop to get data from `getStaticProps` - check bottom of this file */
 export default function policyPage({ page, preview }) {
