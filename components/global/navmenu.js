@@ -307,7 +307,21 @@ const NavMenu = ({ menuState, handleMenu }) => {
                           Policy
                         </a>
                       </Link>
-                    </MainSubNavItem>                    
+                    </MainSubNavItem>     
+                    <MainSubNavItem>
+                      <Link href="/research" >
+                        <a onClick={ handleMenu } >
+                          Research
+                        </a>
+                      </Link>
+                    </MainSubNavItem> 
+                    <MainSubNavItem>
+                      <Link href="/local-innovation" >
+                        <a onClick={ handleMenu } >
+                          Local Innovation
+                        </a>
+                      </Link>
+                    </MainSubNavItem>                                                        
                   </MainNav>
                 </MainNavItem>
               </MainNav>
