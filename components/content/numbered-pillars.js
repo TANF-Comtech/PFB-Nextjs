@@ -65,35 +65,42 @@ const Item = styled.div`
 `
 
 /**
- * <MissionPillars>
+ * <NumberedPillars>
  * 
- * This creates the container for MissionPillars
- * One day this will come from the backend...
+ * This creates the container for NumberedPillars
  * 
+ * @param { array } payload - array of the mission pillars
+ * @param { array } title - what to display over the section
  */
-const MissionPillars = () => {
+const NumberedPillars = ({
+  payload,
+  title
+}) => {
   return (
     <>
-      <MainContent>
-        <h2>How To Get Involved</h2>
-        <RedActionItem 
-          path="/team"
-          title="Meet Our Team"
-          text="Learn who is helping to deliver your next ride."
-        /> 
-        <RedActionItem 
-          path="/subcommittees"
-          title="Join a PeopleForBikes Subcommittee"
-          text="Help guide the world of bicycling forward."
-        />
-        <RedActionItem 
-          path="/board"
-          title="Discover our Board"
-          text="Our advisors come from all over the world of biking."
-        />            
-      </MainContent>
+      <DeepBlue>
+        <MainContent>
+          {title && <SectionTitle>{ title }</SectionTitle> }
+          { payload.map( (item, i) => {
+            return (
+              <Item
+                key={ i }
+              >
+                <Title>
+                  <span>{ numWords(i+1) }</span>
+                  &nbsp;
+                  { item.pillar_title }
+                </Title>
+                <Text>
+                  { item.pillar_content }
+                </Text>
+              </Item>
+            )
+          })}
+        </MainContent>
+      </DeepBlue>
     </>
   )
 }
 
-export default MissionPillars
+export default NumberedPillars

@@ -34,6 +34,7 @@ import GrantsIconGrid from '../components/content/grants-icon-grid'
 import EventsListTemp from '../components/content/events-list-temp'
 import PolicyPillars from '../components/content/policy-pillars'
 import MemberPillars from '../components/content/member-pillars'
+import NumberedPillars from '../components/content/numbered-pillars'
 
 import ActionItemGroup from '../components/slices/action-item-group'
 import MissionPillars from '../components/content/mission-pillars'
@@ -212,9 +213,26 @@ export default function LandingPage({ page, preview }) {
           if (slice.__typename === 'Landing_pageBodyMission_content' &&
             landing_page._meta.uid === 'mission') {
             return (
-              <MissionPillars payload={ slice.fields } />
+              <>
+                <NumberedPillars 
+                  payload={ slice.fields } 
+                  title={ slice.primary.pillar_title }
+                />
+                <MissionPillars />
+              </>
             )
           }
+
+          // MISSION SLICE FOR LOCAL INNOVATION
+          if (slice.__typename === 'Landing_pageBodyMission_content' &&
+            landing_page._meta.uid === 'local-innovation') {
+            return (
+              <NumberedPillars 
+                payload={ slice.fields } 
+                title={ slice.primary.pillar_title }
+              />
+            )
+          }          
 
           // PROMO
           if( slice.__typename === "Landing_pageBodyPromo" ) {
