@@ -37,6 +37,10 @@ const WhiteButton = styled(InputButton)`
   margin-top: 2vh;
 `;
 
+const Error = styled.p`
+  color:red;
+`;
+
 const LoginPending = styled.div`
   display: flex;
   flex-basis: 100%; /* Stretch the signup all the way across the screen */
@@ -50,6 +54,8 @@ function LoginPage() {
   const authContext = useContext(AuthContext)
 
   const [loading, updateLoading] = useState(false)
+
+  const [errorState, updateErrorState] = useState("")
 
   const [email, updateEmail] = useState("")
 
@@ -85,19 +91,21 @@ function LoginPage() {
 
   const onLoginEmailSubmit = (email)=>{
     updateLoading(true)
+    updateErrorState("")
     submitEmail(email).then(data => {
       updateLoading(false)
       if(data.status){
         updateLoginPending(true)
       }
       else{
-        alert(data.error)
+        updateErrorState(data.error)
       }
     })
   }
 
   const onLoginCodeSubmit = (code, email)=>{
     updateLoading(true)
+    updateErrorState("")
     submitLoginCode(code, email).then(data => {
       updateLoading(false)
       if(data.status===true){
@@ -109,6 +117,8 @@ function LoginPage() {
         "loggedIn":true
       });
       Router.push('/members')
+      }else{
+        updateErrorState(data.error)
       }     
       })
   }
@@ -130,6 +140,9 @@ function LoginPage() {
         <h5>Enter Your Email Below.</h5>
         <p>If you are a member you will be emailed an access code to login.</p>
         <RedTextField onChange={(e)=>updateEmail(e.target.value)} placeholder="email"/>
+        {Boolean(errorState.length) && (
+        <Error>{errorState}</Error>
+        )}
         <WhiteButton
           buttonBg="rgba(255,255,255,0)"
           buttonBgHover="rgba(255,255,255,1)"
@@ -147,6 +160,9 @@ function LoginPage() {
         <h5>Check Your Email For An Access Code And Enter It Below</h5>
         <p>Don't close this tab!</p>
         <RedTextField onChange={(e)=>updateLoginCode(e.target.value)} placeholder="Login Code"/>
+        {Boolean(errorState.length) && (
+        <Error>{errorState}</Error>
+        )}
         <WhiteButton
           buttonBg="rgba(255,255,255,0)"
           buttonBgHover="rgba(255,255,255,1)"
