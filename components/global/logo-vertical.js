@@ -5,7 +5,11 @@ import Logo from './logo'
 
 const LogoContainer = styled.div`
   display: block;
-  min-width: 120px;
+  min-width: 100px;
+
+  @media(min-width: ${props => props.theme.xs}) {
+    min-width: 120px;
+  }
 `;
 
 const LogoTypeDisappear = styled(LogoType)`

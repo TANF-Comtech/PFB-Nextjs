@@ -5,13 +5,16 @@ import Link from 'next/link'
 
 import LogoVertical from "../global/logo-vertical"
 import NavMenu from "../global/navmenu"
-
+import SearchButton from '../primitives/search-button'
 import AuthContext from "../../context/auth/auth-context"
 
 const Bar = styled.section`
+  align-items: center;
   background-color: rgba(255, 255, 255, 0.98);
   box-shadow: 0 2px 5px rgba(0,0,0,.2);
-  padding: 1vh 4vw 1vh 4vw;
+  display: flex;
+  justify-content: space-between;
+  padding: 1vh 10px;
   position: fixed;
   left: 0;
   top: 0;
@@ -19,6 +22,10 @@ const Bar = styled.section`
   min-height: 12vh;
   transition: 0.5s all ${props => props.theme.cubicSmooth};
   z-index: ${props => props.theme.zIndex02};
+
+  @media(min-width: ${props => props.theme.xs}) {
+    padding: 1vh 4vw 1vh 4vw;
+  }
 `;
 
 const Container = styled.header`
@@ -27,19 +34,13 @@ const Container = styled.header`
   justify-content: space-between;
   margin: 0 auto;
   max-width: ${props => props.theme.lg};
+  width: 100%;
 `;
 
 const RightContainer = styled.div`
   align-items: center;
   display: flex;
   justify-content: space-between;
-`;
-
-const SearchButton = styled.svg`
-  cursor: pointer;
-  margin-right: 15px;
-  height: 32px;
-  width: 32px;
 `;
 
 const BlueButton = styled.div`
@@ -50,18 +51,24 @@ const BlueButton = styled.div`
   cursor: pointer;
   display: flex;
   font-family: ${props => props.theme.montserrat};
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 700;
   justify-content: space-around;
   min-width: 100px;
   margin: 0;
-  padding: 8px 12px;
+  padding: 8px;
   text-align: center;
   text-transform: uppercase;
 
-  @media screen and (min-width: 768px) {
+  @media(min-width: ${props => props.theme.xs}) {
+    font-size: 16px;
+    padding: 8px 12px;
+  }
+
+  @media(min-width: ${props => props.theme.sm}) {
     font-size: 18px;
     padding: 10px 25px;
+    width: 170px;
   }
 `
 
@@ -130,19 +137,12 @@ function NavBar() {
               <LogoVertical
                 logoWidth="7vh"
                 logoViewboxPassdown="0 0 270 132"
-                logoTypeWidth="14vh"
+                logoTypeWidth="12vh"
               />
             </a>
           </Link>
 
-          <RightContainer>
-            {/* <SearchButton
-              viewBox="1 -1 100 100"
-              version="1.1"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M72.1,64.2c4.8-6,7.4-13.5,7.4-21.3c0-19-15.5-34.4-34.5-34.4C26,8.6,10.5,24,10.5,43S26,77.4,44.9,77.4  c7.6,0,15.1-2.6,21.3-7.4l20.7,20.7l5.9-5.9L72.1,64.2z M44.9,69.2c-14.4,0-26.1-11.7-26.1-26.1C18.8,28.7,30.5,17,44.9,17  C59.3,17,71,28.7,71,43.1C71,57.5,59.3,69.2,44.9,69.2z" />
-            </SearchButton> */}
+          <RightContainer>            
             {!authContext.loggedIn && (
               <Link href="/log-in">
                 <GhostLink>
