@@ -11,9 +11,9 @@ const Container = styled.section`
 
 const MainText = styled.h1`
   color: ${props => props.theme.red };
-  display: inline;
+  display: inline-block;
   font-weight: 700;
-  margin: 0;
+  margin: 0 0 0 0;
   text-transform: none;
 `
 
@@ -21,7 +21,7 @@ const SecondaryText = styled.h1`
   color: ${props => props.theme.darkGray };
   display: inline;
   font-weight: 300;
-  margin: 0;
+  margin: 0 12px 0 0;
   text-transform: none;
 `
 
@@ -45,7 +45,6 @@ const SecondaryTitleBanner = ({
     <MainContent maxWidth="1000px">
       <Container>
         <SecondaryText>{ secondaryText }</SecondaryText>
-        &nbsp;&nbsp;
         <MainText>{ mainText }</MainText>  
       </Container>
     </MainContent>
