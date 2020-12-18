@@ -60,7 +60,6 @@ export default function LandingPage({ page, preview }) {
   // Then we destructure the main payload once page has arrived
   const { landing_page } = page
 
-  console.log(page)
   return (
     <Wrapper 
       postTitle={ RichText.asText(landing_page.title) }

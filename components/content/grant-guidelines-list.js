@@ -15,7 +15,6 @@ import Accordion from '../global/accordion'
 const GrantsList = ({
   payload
 }) => {
-  console.log(payload)
   return (
     <MainContent>
       { payload.map( (grant) => { 
