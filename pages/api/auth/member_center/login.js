@@ -9,15 +9,16 @@ export default (req, res) => {
         const code  = req.body?.code
         // if submitting email (step 1)
     if(code == null && email){
-            return checkEmailInSalesforce(email).then(data=>{
-                console.log("Data From CheckEmail", data)
-                if(data.status){
-                    sendAuthCode(email)
-                    //do something to the salesforce data - store in a cookie/token?
-                    res.status(200).json(data)
+            return checkEmailInSalesforce(email).then(salesforceData=>{
+                if(salesforceData.status){
+                    sendAuthCode(email).then(auth0Data=>{ //dont use auth0Data here
+                    res.status(200).json(salesforceData)
+                    }).catch(auth0Data=>{
+                        res.status(401).json({status:false,error:"Service Error - Service Unavailable! Please Try Again Soon."})  
+                    })
                 }
                 else{
-                    res.status(401).json(data)
+                    res.status(401).json(salesforceData)
                 }
             })
     }
