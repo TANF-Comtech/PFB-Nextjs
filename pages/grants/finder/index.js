@@ -8,7 +8,7 @@ import MainContent from '../../../components/global/main-content'
 import ColorBanner from '../../../components/global/color-banner'
 
 export default function GrantsFinder({ page }) {
-  console.log(page)
+  
   return (
     <Wrapper 
       postPath="/grants/"
@@ -27,7 +27,7 @@ export default function GrantsFinder({ page }) {
               grantType={ grant.node.type ? grant.node.type : null }
               key={ grant.node._meta.id }
               location={ grant.node.location ? grant.node.location.location[0].text : null }
-              path={ `/grant/${ grant.node._meta.uid }` }
+              path={ `/grants/${ grant.node._meta.uid }` }
               title={ grant.node.title[0].text }
               text={ grant.node.main_content }
             />

@@ -25,7 +25,7 @@ const GrantsList = ({
             title={RichText.asText(grant.accordion_heading)}
           >
             <RichText render={grant.accordion_content} />
-          </Accordion>          
+          </Accordion>
         )
       })}
     </MainContent>

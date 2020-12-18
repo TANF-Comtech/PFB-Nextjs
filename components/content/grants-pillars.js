@@ -22,8 +22,8 @@ const GrantsPillars = () => {
           text="Learn how you can get your company involved in funding better biking."
         />
         <RedActionItem 
-          path="/grant-applications"
-          title="Grant Applications"
+          path="/grant-application"
+          title="Grant Application"
           text="Find out when one of our semi-annual grant cycles will be available."
         />            
       </MainContent>

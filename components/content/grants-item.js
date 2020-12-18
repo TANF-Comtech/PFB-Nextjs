@@ -47,8 +47,14 @@ const Text = styled.div`
 `
 
 const Metadata = styled.div`
-  align-items: center;
+  align-items: flex-start;
   display: flex;
+  flex-direction: column;
+
+  @media ( min-width: ${props => props.theme.sm}) {
+    align-items: center;
+    flex-direction: row;
+  }
 `
 
 const MetaText = styled.h3`
@@ -58,13 +64,17 @@ const MetaText = styled.h3`
   margin: 0 0 2vh 0;
 
   &:after {
-    content: "|";
-    padding: 0 10px;
+    @media ( min-width: ${props => props.theme.sm}) {
+      content: "|";
+      padding: 0 10px;
+    }
   }
 
   &:last-child:after {
-    content: "";
-    padding: 0;
+    @media ( min-width: ${props => props.theme.sm}) {
+      content: "";
+      padding: 0;
+    }
   }
 `
 
@@ -150,7 +160,7 @@ const GrantsItem = ({
             <MetaItem>
               <Link href={ linkResolver(supportingDoc) } passHref>
                 <a>
-                  Link to Grantee Organization
+                  Learn More About This Grantee Organization
                 </a>
               </Link>
             </MetaItem>

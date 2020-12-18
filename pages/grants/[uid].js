@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { Date as ParseDate } from 'prismic-reactjs'
 import styled from 'styled-components'
 
-import { getPolicies, getSinglePolicyPage } from '../../lib/queries/policies'
+import { getGrants, getSingleGrantPage } from '../../lib/queries/grants'
 import { randomID, setDateSuffix } from '../../lib/utils'
 
 import DefaultContext from '../../context/default-context'
@@ -12,9 +12,7 @@ import DefaultContext from '../../context/default-context'
 import Wrapper from '../../components/global/wrapper'
 import SiteMeta from '../../components/meta/site-meta'
 import MainContent from '../../components/global/main-content'
-import Header1 from '../../components/primitives/h1'
-import PolicyItem from '../../components/content/policy-item'
-import SummaryBlock from '../../components/content/summary-block'
+import GrantsItem from '../../components/content/grants-item'
 
 const SpacedHeading = styled.h2`
   margin: 4vh 0;
@@ -27,36 +25,35 @@ export default function policyPage({ page, preview }) {
   }
 
   // Destructure page payload and meta from global context
-  const { policy } = page
+  const { grant } = page
   const { meta } = useContext(DefaultContext)
 
   return (
     <>
       <SiteMeta
-        desc={ policy.main_content ? ( `${ policy.main_content[0].text.substring(0,180) } ... ` ) : ( meta.desc ) }
-        title={ policy.title ? ( `${ policy.title[0].text } | People for Bikes` ) : ( meta.title ) }
+        desc={ grant.main_content ? ( `${ grant.main_content[0].text.substring(0,180) } ... ` ) : ( meta.desc ) }
+        title={ grant.title ? ( `${ grant.title[0].text } | People for Bikes` ) : ( meta.title ) }
         imgHeight={ meta.imgHeight }
         imgSrc={ meta.imgSrc }
         imgWidth={ meta.imgWidth }
-        path={ policy ? ( `https://www.peopleforbikes.org/policy/${policy._meta.uid}` ) : ( meta.path ) }
+        path={ grant ? ( `https://www.peopleforbikes.org/grants/${grant._meta.uid}` ) : ( meta.path ) }
       />    
       <Wrapper 
-        postPath="/policy"
-        postTitle="Policy"
+        postPath="/grant"
+        postTitle="Grants"
         isWide="false"
       >
         <MainContent>
-          <PolicyItem 
-            bill={ policy.bill_link ? policy.bill_link : null }
-            city={ policy.city ? policy.city : null }
-            date={ policy.year ? policy.year : null }
-            fullDisplay="true"
-            govLevel={ policy.government_level ? policy.government_level : null }
-            location={ policy.location ? policy.location.location[0].text : null }
-            status={ policy.status ? policy.status : null }
-            supportingDoc={ policy.supporting_document ? policy.supporting_document : null }
-            title={ policy.title[0].text }
-            text={ policy.main_content ? policy.main_content : null }
+          <GrantsItem 
+            amount={ grant.amount ? grant.amount : null }
+            city={ grant.city ? grant.city : null }
+            date={ grant.cycle ? grant.cycle : null }
+            grantType={ grant.type ? grant.type : null }
+            key={ grant._meta.id }
+            location={ grant.location1 ? grant.location1.location[0].text : null }
+            supportingDoc={ grant.link }
+            title={ grant.title[0].text }
+            text={ grant.main_content }
           />
         </MainContent>
 
@@ -67,7 +64,7 @@ export default function policyPage({ page, preview }) {
 
 /* The return here sends the `page` prop back to the policyPage component above for rendering */
 export async function getStaticProps({ params, preview = false, previewData }) {
-  const pageData = await getSinglePolicyPage(params.uid, previewData)
+  const pageData = await getSingleGrantPage(params.uid, previewData)
 
   return {
     props: {
@@ -80,9 +77,9 @@ export async function getStaticProps({ params, preview = false, previewData }) {
 
 // getStaticPaths requires the whole paths argument to be objects of URL it needs to statically render server-side
 export async function getStaticPaths() {
-  const policies = await getPolicies()
+  const grants = await getGrants()
   return {
-    paths: policies?.map(({ node }) => `/policy/${node._meta.uid}`) || [],
+    paths: grants?.map(({ node }) => `/grants/${node._meta.uid}`) || [],
     fallback: true,
   }
 }
