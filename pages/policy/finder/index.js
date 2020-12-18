@@ -67,7 +67,7 @@ export default function PolicyFinder({ page }) {
               location={ policy.node.location ? policy.node.location.location[0].text : null }
               path={ `/policy/${ policy.node._meta.uid }` }
               title={ policy.node.title[0].text }
-              text={ policy.node.main_content[0].text }
+              text={ policy.node.main_content }
             />
           )
         })}
