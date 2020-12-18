@@ -35,6 +35,7 @@ import EventsListTemp from '../components/content/events-list-temp'
 import PolicyPillars from '../components/content/policy-pillars'
 import MemberPillars from '../components/content/member-pillars'
 import NumberedPillars from '../components/content/numbered-pillars'
+import GrantsList from '../components/content/grant-guidelines-list'
 
 import ActionItemGroup from '../components/slices/action-item-group'
 import MissionPillars from '../components/content/mission-pillars'
@@ -59,6 +60,7 @@ export default function LandingPage({ page, preview }) {
   // Then we destructure the main payload once page has arrived
   const { landing_page } = page
 
+  console.log(page)
   return (
     <Wrapper 
       postTitle={ RichText.asText(landing_page.title) }
@@ -207,7 +209,17 @@ export default function LandingPage({ page, preview }) {
                 payload={ slice.fields }
               />
             )
-          }       
+          }      
+          
+          // ACCORDION SLICE
+          if (slice.__typename === 'Landing_pageBodyAccordion_list') {
+            return (
+              <GrantsList
+                payload={ slice.fields }
+              />
+            )
+          }  
+          
 
           // MISSION SLICE
           if (slice.__typename === 'Landing_pageBodyMission_content' &&
@@ -240,7 +252,10 @@ export default function LandingPage({ page, preview }) {
               <Promo 
                 bigWords={ slice.primary.bottom_text }
                 path={ landing_page._meta.uid === 'policy' && '/policy/finder' || 
-                       landing_page._meta.uid === 'grants' && '/grants/finder' || 
+                       landing_page._meta.uid === 'grants' && '/grants/finder' ||
+                       landing_page._meta.uid === 'grant-application' && '/grants/finder' ||
+                       landing_page._meta.uid === 'grant-guidelines' && '/grants/finder' ||
+                       landing_page._meta.uid === 'grant-funding' && '/grants/finder' || 
                        slice.primary.link }
                 smallWords={ slice.primary.top_text }
                 source={ slice.primary.main_image.url }
