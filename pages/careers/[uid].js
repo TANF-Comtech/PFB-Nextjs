@@ -4,7 +4,7 @@ import { RichText } from 'prismic-reactjs'
 
 import { getAllCareers, getSingleCareer } from '../../lib/queries/careers'
 
-import DefaultContext from '../../context/default-context'
+import DefaultContext from '../../context/default/default-context'
 
 import Wrapper from '../../components/global/wrapper'
 import SiteMeta from '../../components/meta/site-meta'

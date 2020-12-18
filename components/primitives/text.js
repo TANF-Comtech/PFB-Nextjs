@@ -24,13 +24,43 @@ const TextField = styled.input.attrs({
   }
 `
 
-const BasicTextField = ({ className, placeholder }) => {
+const BasicTextField = ({ className, placeholder, onChange }) => {
   return(
     <TextField 
       className={ className }
       placeholder={ placeholder }
+      onChange={ onChange }
     />
   )
 }
 
-export default BasicTextField
+const RedInput = styled(BasicTextField)`
+  background-color: ${(props) => props.theme.redAccent};
+  color: white;
+
+  /* Changing placeholder text remain surreal, even in 2020 */
+  ::-webkit-input-placeholder {
+    color: white;
+  }
+  ::-moz-placeholder {
+    color: white;
+  }
+  ::-ms-input-placeholder {
+    color: white;
+  }
+  ::placeholder {
+    color: white;
+  }
+`;  
+
+const RedTextField = ({ className, placeholder, onChange }) => {
+  return(
+    <RedInput 
+      className={ className }
+      placeholder={ placeholder }
+      onChange={ onChange }
+    />
+  )
+}
+
+export {BasicTextField, RedTextField}

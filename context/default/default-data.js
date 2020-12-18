@@ -1,8 +1,8 @@
-import splashOne from '../public/social-splash/PFB_Social-01.jpg'
-import splashTwo from '../public/social-splash/PFB_Social-02.jpg'
-import splashThree from '../public/social-splash/PFB_Social-03.jpg'
-import splashFour from '../public/social-splash/PFB_Social-04.jpg'
-import logo from '../public/PFB_Stacked_LOGO_512x512.jpg'
+import splashOne from '../../public/social-splash/PFB_Social-01.jpg'
+import splashTwo from '../../public/social-splash/PFB_Social-02.jpg'
+import splashThree from '../../public/social-splash/PFB_Social-03.jpg'
+import splashFour from '../../public/social-splash/PFB_Social-04.jpg'
+import logo from '../../public/PFB_Stacked_LOGO_512x512.jpg'
 
 const socialSplashArr = [ splashOne, splashTwo, splashThree, splashFour ] // social images
 
