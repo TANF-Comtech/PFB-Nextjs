@@ -7,7 +7,7 @@ import styled from 'styled-components'
 import { getGrants, getSingleGrantPage } from '../../lib/queries/grants'
 import { randomID, setDateSuffix } from '../../lib/utils'
 
-import DefaultContext from '../../context/default-context'
+import DefaultContext from '../../context/default/default-data'
 
 import Wrapper from '../../components/global/wrapper'
 import SiteMeta from '../../components/meta/site-meta'
