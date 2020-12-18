@@ -1,51 +1,11 @@
-import Link from 'next/link'
-import styled from "styled-components"
-
 import { getPolicies } from '../../../lib/queries/policies'
 
 import Wrapper from '../../../components/global/wrapper'
 import Header1 from '../../../components/primitives/h1'
 import PolicyItem from '../../../components/content/policy-item'
-import MainContent from '../../../components/global/main-content'
 import Button from '../../../components/primitives/button'
+import MainContent from '../../../components/global/main-content'
 import ColorBanner from '../../../components/global/color-banner'
-
-// import HeaderImage from '../components/global/header-image'
-// import Grid from '../components/global/grid'
-// import MainContent from '../components/global/main-content'
-// import RideSpotPromo from '../components/slices/ridespot-promo'
-// import Promo from '../components/slices/promo'
-// import ColorBanner from '../components/global/color-banner'
-// import Button from '../components/primitives/button'
-
-const SectionTitle = styled.h3`
-  color: ${props => props.theme.midnightBlue};
-  text-align: center;
-  text-transform: uppercase;
-  margin-bottom: 4vh;
-`
-
-const BigSectionTitle = styled.h2`
-  color: ${props => props.theme.darkestGray};
-  font-weight: 300;
-  margin-bottom: 25px;
-  text-align: center;
-
-  span {
-    color: ${props => props.theme.redAccent};
-    font-size: 46.66px;
-    font-weight: 600;
-    text-transform: uppercase;
-
-    @media screen and (min-width: 320px) {
-    font-size: calc(46.66px + 23.33 * ((100vw - 320px) / 880));
-    }
-    @media screen and (min-width: 1200px) {
-      font-size: 70px;
-    } 
-  }
-`
-
 
 export default function PolicyFinder({ page }) {
 
@@ -53,9 +13,10 @@ export default function PolicyFinder({ page }) {
     <Wrapper 
       postPath="/policy/"
       postTitle="Policy"
-      isWide={ false }
+      isWide={ true}
     >
-      <Header1>Policy Finder</Header1>
+      <MainContent maxWidth="1200px">
+        <Header1>Policy Finder</Header1>
 
         { page.map( (policy) => {
           return(
@@ -84,26 +45,9 @@ export default function PolicyFinder({ page }) {
         >
           Back to Policy Page
         </Button> 
-     
+      </MainContent>
       
- 
-
-      {/* { homepage.body &&
-        homepage.body.map( (slice) => {
-          if( slice.type === "promo" ) {
-            return ( 
-              <Promo 
-                bigWords={ slice.primary.bottom_text }
-                path={ slice.primary.link }
-                smallWords={ slice.primary.top_text }
-                source={ slice.primary.main_image.url }
-              /> 
-            )
-          }
-      })}   */}
-
-      {/* <ColorBanner /> */}
-
+      <ColorBanner />
     </Wrapper>
   )
 }
