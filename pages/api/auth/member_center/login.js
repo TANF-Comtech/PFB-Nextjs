@@ -8,7 +8,7 @@ export default (req, res) => {
         const email = req.body?.email
         const code  = req.body?.code
         // if submitting email (step 1)
-        if(!code && email){
+    if(code == null && email){
             return checkEmailInSalesforce(email).then(data=>{
                 console.log("Data From CheckEmail", data)
                 if(data.status){
@@ -20,10 +20,9 @@ export default (req, res) => {
                     res.status(401).json(data)
                 }
             })
-        }
-      else{
-        // if submitting code (step 2 - includes email from state)
-        if(code && email){
+    }
+     // if submitting code (step 2)
+    else if (code && email){
             return loginAuth0(code,email).then(data=>{
                 if(data.id_token){
                     const cookies = new Cookies(req, res)
@@ -39,9 +38,13 @@ export default (req, res) => {
                     res.status(401).json({status:false, error:"Incorrect code!"}) 
                 }
                 
+            }).catch(error=>{
+                res.status(401).json({status:false, error:"Incorrect code!"}) 
             })
         }
-        }
-      }
+    else{
+        res.status(401).json({status:false, error:"Unauthorized"}) 
+    }
+    }
 }
   

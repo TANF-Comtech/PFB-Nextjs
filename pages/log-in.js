@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Wrapper from '../components/global/wrapper'
 import InputButton from "../components/primitives/input-button";
 import {RedTextField} from '../components/primitives/text'
+import Spinner from '../components/global/spinner'
 
 import AuthContext from "../context/auth/auth-context"
 
@@ -48,6 +49,8 @@ function LoginPage() {
 
   const authContext = useContext(AuthContext)
 
+  const [loading, updateLoading] = useState(false)
+
   const [email, updateEmail] = useState("")
 
   const [code, updateLoginCode] = useState("")
@@ -81,7 +84,9 @@ function LoginPage() {
   }
 
   const onLoginEmailSubmit = (email)=>{
+    updateLoading(true)
     submitEmail(email).then(data => {
+      updateLoading(false)
       if(data.status){
         updateLoginPending(true)
       }
@@ -92,19 +97,20 @@ function LoginPage() {
   }
 
   const onLoginCodeSubmit = (code, email)=>{
+    updateLoading(true)
     submitLoginCode(code, email).then(data => {
-      
-    if(data.status===true){
+      updateLoading(false)
+      if(data.status===true){
         authContext.updateAuthContext({"user":{
-          "email": data?.email,
-          "name": data?.name,
-          "affiliation":data?.affiliation,
-      },
-      "loggedIn":true
-    });
-    Router.push('/members')
-    }     
-    })
+            "email": data?.email,
+            "name": data?.name,
+            "affiliation":data?.affiliation,
+        },
+        "loggedIn":true
+      });
+      Router.push('/members')
+      }     
+      })
   }
 
   return (
@@ -113,7 +119,9 @@ function LoginPage() {
         postTitle="People for Bikes Homepage"
         isWide={ false }
       >
-        {!loginPending && ( // ternary 
+        {!loading ? (
+        <>
+        {!loginPending ? (
         <>
         <h1>Login</h1>
         <h2>Access the PeopleForBikes Member Center</h2>
@@ -133,8 +141,7 @@ function LoginPage() {
         />
         </LoginForm>
         </>
-        )}
-        {loginPending && (
+        ) : (
         <>
         <LoginPending>
         <h5>Check Your Email For An Access Code And Enter It Below</h5>
@@ -152,7 +159,9 @@ function LoginPage() {
         </LoginPending>
         </>
         )}
-        
+        </>):(
+          <Spinner />
+      )}
       </Wrapper>
     </>
   )
