@@ -65,7 +65,6 @@ export default function MembersPage({ page, preview }) {
   // Destructure page payload and meta from global context
   const { statistic_page } = page
   const { meta } = useContext(DefaultContext)
-  console.log(page)
 
   return (
     <>
