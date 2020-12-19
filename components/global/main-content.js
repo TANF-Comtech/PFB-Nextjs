@@ -4,7 +4,9 @@ import styled from "styled-components"
 const MainContainer = styled.section`
   background-color: ${ props => props.bgColor || 'transparent' };
   color: ${ props => props.textColor || 'black' };
+  overflow-wrap: break-word;
   padding: ${ props => props.contentPadding || '2vh 4vw' }; 
+  word-wrap: break-word;
 `;
 
 const Sizer = styled.div`

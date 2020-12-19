@@ -174,6 +174,8 @@ const GlobalStyle = createGlobalStyle`
   p, b, strong, em, i, span, label, a, a::visited, a::focus, a:active, a:hover {
     font-size: 18px;
     line-height: 26px;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
   }
   @media screen and (min-width: 320px) {
     p, b, strong, em, i, span, label {
