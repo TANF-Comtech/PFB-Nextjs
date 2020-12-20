@@ -143,6 +143,18 @@ export default function ReportPage({ page, preview }) {
               </p>
             </>
           }
+          { report.pdf &&
+            <>
+              <strong>Full Report:</strong>
+              <p>
+                <Link href={ report.pdf.url } passHref >
+                  <a target="_blank" rel="noopener">
+                    <strong>Download PDF</strong>
+                  </a>
+                </Link>
+              </p>
+            </>
+          }          
           { report.body &&
             report.body.map( (slice) => {
               return(
@@ -171,36 +183,40 @@ export default function ReportPage({ page, preview }) {
               )
             })
           }
-          { report.topics[0].topic !== null &&
+          { report.topics &&
             <>
             <strong>Related Topics:</strong>
             <ParagraphOfLinks>
               { report.topics.map( (topic) => {
-                return(
-                  <a 
-                    href={ `/topics/${ topic.topic._meta.uid }` }
-                    key={ topic.topic._meta.id }
-                  >
-                    <strong>{ topic.topic.title[0].text }</strong>
-                  </a>
-                )
+                if(topic.topic !== null) {
+                  return(
+                    <a 
+                      href={ `/topics/${ topic.topic._meta.uid }` }
+                      key={ topic.topic._meta.id }
+                    >
+                      <strong>{ topic.topic.title[0].text }</strong>
+                    </a>
+                  )
+                }
               })}
             </ParagraphOfLinks>
             </>
           }            
-          { report.locations[0].location !== null && 
+          { report.locations !== null && 
             <>
             <strong>Related Locations:</strong>
             <ParagraphOfLinks>
               { report.locations.map( (location) => {
-                return(
-                  <a 
-                    href={ `/locations/${ location.location._meta.uid }` }
-                    key={ location.location._meta.id }
-                  >
-                    <strong>{ location.location.location[0].text }</strong>
-                  </a>
-                )
+                if( location.location !== null ) {
+                  return(
+                    <a 
+                      href={ `/locations/${ location.location._meta.uid }` }
+                      key={ location.location._meta.id }
+                    >
+                      <strong>{ location.location.location[0].text }</strong>
+                    </a>
+                  )
+                }
               })}
             </ParagraphOfLinks>
             </>
