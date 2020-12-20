@@ -17,44 +17,8 @@ import Promo from '../../components/slices/promo'
 
 import ResearchPromo from '../../public/promo/promo-research.jpg'
 
-const IframeWrapper = styled.iframe`
-  margin: 25px 0;
-  min-height: 300vh;
-  width: 100%;
-`
-
 const IntroWrapper = styled.div`
   margin: 3vh 0 1vh 0;
-`
-
-const Box = styled.div`
-  background-color: ${props => props.theme.blueBright};
-  min-height: 190px;
-  padding: 25px;
-`
-
-const Text = styled.h4`
-  color: white;
-  font-size: 36px;
-  font-weight: 300;
-  line-height: 36px;
-  margin: 0 0 10px 0;
-  text-align: center;
-
-  @media screen and (min-width: 320px) {
-    font-size: calc(36px + 8 * ((100vw - 320px) / 880));
-    line-height: calc(36px + 8 * ((100vw - 320px) / 880));
-  }
-  @media screen and (min-width: 1200px) {
-    font-size: 44px;
-    line-height: 44px;
-  }  
-`
-
-const Arrow = styled.img`
-  display: block;
-  margin: 0 auto;
-  width: 46px;
 `
 
 export default function MembersPage({ page, preview }) {
@@ -84,7 +48,7 @@ export default function MembersPage({ page, preview }) {
         <MainContent>
           { statistic_page.title && 
             <Header1>
-              { statistic_page.title[0].text }
+              { statistic_page.title[0].text } Statistics
             </Header1>
           }          
           { statistic_page.main_content && 
