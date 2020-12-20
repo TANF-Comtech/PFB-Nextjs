@@ -78,6 +78,10 @@ const ParagraphOfLinks = styled.p`
   }
 `
 
+const ReportContainer = styled.section`
+  margin: 5vh 0;
+`
+
 export default function ReportPage({ page, preview }) {
   if( !page || page === null ) {
     return <ErrorPage statusCode={404} />
@@ -86,8 +90,6 @@ export default function ReportPage({ page, preview }) {
   // Destructure page payload and meta from global context
   const { report } = page
   const { meta } = useContext(DefaultContext)
-
-  console.log(report)
 
   return (
     <>
@@ -105,10 +107,17 @@ export default function ReportPage({ page, preview }) {
         isWide="true"
       >        
         <MainContent>
+          <Header1>Report</Header1>
+          <hr />
+
+          <ReportContainer>
           { report.title && 
-            <Header1>
-              { report.title[0].text }
-            </Header1>
+            <>
+              <h2>
+                { report.title[0].text }
+              </h2>
+            </>
+            
           }          
           { report.year && 
             <>
@@ -145,7 +154,6 @@ export default function ReportPage({ page, preview }) {
                   <GridWrapper>
                     <Grid>
                       { slice.fields.map( (doc) => {
-                        console.log(doc)
                         return(
                           <Box key={ doc.pdf_doc.size }>
                             <a href={ doc.pdf_doc.url } target="_blank" rel="noopener">
@@ -163,13 +171,16 @@ export default function ReportPage({ page, preview }) {
               )
             })
           }
-          { report.topics && 
+          { report.topics[0].topic !== null &&
             <>
             <strong>Related Topics:</strong>
             <ParagraphOfLinks>
               { report.topics.map( (topic) => {
                 return(
-                  <a href={ `/topics/${ topic.topic._meta.uid }` }>
+                  <a 
+                    href={ `/topics/${ topic.topic._meta.uid }` }
+                    key={ topic.topic._meta.id }
+                  >
                     <strong>{ topic.topic.title[0].text }</strong>
                   </a>
                 )
@@ -177,13 +188,16 @@ export default function ReportPage({ page, preview }) {
             </ParagraphOfLinks>
             </>
           }            
-          { report.locations && 
+          { report.locations[0].location !== null && 
             <>
             <strong>Related Locations:</strong>
             <ParagraphOfLinks>
               { report.locations.map( (location) => {
                 return(
-                  <a href={ `/locations/${ location.location._meta.uid }` }>
+                  <a 
+                    href={ `/locations/${ location.location._meta.uid }` }
+                    key={ location.location._meta.id }
+                  >
                     <strong>{ location.location.location[0].text }</strong>
                   </a>
                 )
@@ -191,6 +205,7 @@ export default function ReportPage({ page, preview }) {
             </ParagraphOfLinks>
             </>
           }          
+          </ReportContainer>
         </MainContent>
 
         <Promo 
