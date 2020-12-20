@@ -8,6 +8,9 @@ import { getMemberPages,
          getSingleMemberPage } from '../../lib/queries/member-center'
 import { linkResolver } from '../../lib/utils'
 
+import auth0ValidateToken from '../../lib/auth0/auth0ValidateToken'
+import Cookies from 'cookies'
+
 import DefaultContext from '../../context/default/default-context'
 
 import Wrapper from '../../components/global/wrapper'
@@ -172,8 +175,43 @@ export default function MembersPage({ page, preview }) {
   )
 }
 
+export async function getServerSideProps({req, res, params, preview = false, previewData}) {
+  
+  const cookies = new Cookies(req, res)
+  const token = cookies.get('auth-token') 
+        
+        if(token){
+        const data = await auth0ValidateToken(token)
+            if(data.loggedIn){
+              const pageData = await getSingleMemberPage(params.uid, previewData)
+              return {
+                props: {
+                  preview,
+                  page: pageData ?? null,
+                  }
+                }
+              }
+              else{
+                return {
+                  redirect: {
+                    destination: '/log-in',
+                    permanent: false,
+                  },
+                }
+              }
+        }  
+        else{
+          return {
+            redirect: {
+              destination: '/log-in',
+              permanent: false,
+            },
+          }
+        }
+}
+
 /* The return here sends the `page` prop back to the member_contentPage component above for rendering */
-export async function getStaticProps({ params, preview = false, previewData }) {
+/* export async function getStaticProps({ params, preview = false, previewData }) {
   const pageData = await getSingleMemberPage(params.uid, previewData)
 
   return {
@@ -192,4 +230,4 @@ export async function getStaticPaths() {
     paths: pages?.map(({ node }) => `/members/${node._meta.uid}`) || [],
     fallback: true,
   }
-}
+} */
