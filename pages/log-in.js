@@ -97,7 +97,6 @@ function LoginPage() {
     updateLoading(true)
     updateErrorState("")
     submitLoginCode(code, email).then(data => {
-      updateLoading(false)
       if(data.status===true){
         authContext.updateAuthContext({"user":{
             "email": data?.email,
@@ -109,6 +108,7 @@ function LoginPage() {
       Router.push('/members')
       }else{
         updateErrorState(data.error)
+        updateLoading(false)
       }     
       })
   }

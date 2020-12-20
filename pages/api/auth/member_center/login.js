@@ -3,6 +3,8 @@ import checkEmailInSalesforce from '../../../../lib/salesforce/checkEmailInSales
 import sendAuthCode from '../../../../lib/auth0/sendAuthCode'
 import loginAuth0 from '../../../../lib/auth0/loginAuth0'
 
+const cookieLifeTimeHours = process.env.AUTH0_TOKEN_LIFETIME_HOURS
+
 export default (req, res) => {
     if (req.method === 'POST') {
         const email = req.body?.email
@@ -30,8 +32,7 @@ export default (req, res) => {
                     cookies.set('auth-token', data.id_token, {
                         httpOnly: true,
                         sameSite: 'lax',
-                        //cookie lasts 24 hours - as long as the token from Auth0 lasts
-                        expires: new Date(new Date().getTime() + 60 * 60 * 24 * 1000)
+                        expires: new Date(new Date().getTime() + 60 * 60 * cookieLifeTimeHours * 1000)
                     })        
                     res.status(200).json({status:true})
                 }
