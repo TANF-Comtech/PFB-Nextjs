@@ -91,6 +91,8 @@ export default function ReportPage({ page, preview }) {
   const { report } = page
   const { meta } = useContext(DefaultContext)
 
+  console.log(report)
+
   return (
     <>
       <SiteMeta
@@ -133,7 +135,7 @@ export default function ReportPage({ page, preview }) {
           }
           { report.pdf &&
             <>
-              <strong>Full Report:</strong>
+              <strong>Full Report (Download):</strong>
               <p>
                 <Link href={ report.pdf.url } passHref >
                   <a target="_blank" rel="noopener">
@@ -143,13 +145,13 @@ export default function ReportPage({ page, preview }) {
               </p>
             </>
           }
-          { report.pdf &&
+          { report.link &&
             <>
-              <strong>Full Report:</strong>
+              <strong>Full Report (Link):</strong>
               <p>
                 <Link href={ report.pdf.url } passHref >
                   <a target="_blank" rel="noopener">
-                    <strong>Download PDF</strong>
+                    <strong>Link to Report</strong>
                   </a>
                 </Link>
               </p>
@@ -185,7 +187,9 @@ export default function ReportPage({ page, preview }) {
           }
           { report.topics &&
             <>
-            <strong>Related Topics:</strong>
+            { report.topics[0].topic !== null &&
+              <strong>Related Topics:</strong>
+            }
             <ParagraphOfLinks>
               { report.topics.map( (topic) => {
                 if(topic.topic !== null) {
@@ -202,9 +206,11 @@ export default function ReportPage({ page, preview }) {
             </ParagraphOfLinks>
             </>
           }            
-          { report.locations !== null && 
+          { report.locations && 
             <>
-            <strong>Related Locations:</strong>
+            { report.locations[0].location !== null &&
+              <strong>Related Locations:</strong>
+            }
             <ParagraphOfLinks>
               { report.locations.map( (location) => {
                 if( location.location !== null ) {

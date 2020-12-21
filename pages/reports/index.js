@@ -5,7 +5,7 @@ import { RichText } from 'prismic-reactjs'
 import Link from 'next/link'
 
 import { getReports } from '../../lib/queries/reports'
-import { linkResolver } from '../../lib/utils'
+import { linkResolver, randomID } from '../../lib/utils'
 
 import DefaultContext from '../../context/default/default-context'
 
@@ -14,11 +14,9 @@ import SiteMeta from '../../components/meta/site-meta'
 import MainContent from '../../components/global/main-content'
 import Header1 from '../../components/primitives/h1'
 import Promo from '../../components/slices/promo'
-import Grid from '../../components/global/grid'
-import Rule from '../../components/primitives/rule'
+import Button from '../../components/primitives/button'
 
 import ResearchPromo from '../../public/promo/promo-research.jpg'
-import WhiteArrow from '../../public/white-arrow.svg'
 
 const ReportSection = styled.section`
   margin: 5vh 0;
@@ -61,29 +59,48 @@ export default function ReportsArchive({ page }) {
       isWide={ true }
     >
       <MainContent maxWidth="1200px">
-        <Header1>Reports Archive</Header1>
+        <Header1 key={ randomID(5687502984) }>Reports Archive</Header1>
 
         { years && years.map( (year) => {
           return(
-            <ReportSection>
-              <ReportSectionHeader>
-                <h2 key={ year }>{ year }</h2>
+            <ReportSection key={ year }>
+              <ReportSectionHeader key={ randomID(12098137841398475) }>
+                <h2>{ year }</h2>
                 <hr />
               </ReportSectionHeader>
               
               { page.map( (report) => {
                 if( report.node.year === year) {
+                  console.log(report)
                   return(
                     <>
                       { report.node.title &&
-                        <ReportListItem>
+                        <ReportListItem
+                          key={report.node._meta.id} 
+                        >
                           <Link 
                             href={`/reports/${report.node._meta.uid}`} 
                             passHref >
                             <a>
                               <strong>{ report.node.title[0].text }</strong>
                             </a>
-                          </Link>    
+                          </Link>
+                          { report.node.summary &&
+                            <p>
+                              { `${report.node.summary[0].text.substring(0,180)} ...` }
+                            </p>    
+                          }
+                          <Button
+                            buttonBg="#404040"
+                            buttonBgHover="rgb(216,216,216)"
+                            buttonColor="white"
+                            buttonMargin="0 0 20px 0"
+                            buttonPadding="10px 20px"
+                            buttonTextTransform="uppercase"
+                            href={ `/reports/${report.node._meta.uid}` }
+                          >
+                            Read More
+                          </Button>
                         </ReportListItem>
                       }
                     </>

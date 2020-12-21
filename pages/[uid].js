@@ -20,6 +20,7 @@ import SecondaryTitleBanner from '../components/content/secondary-title-banner'
 import Heading1 from '../components/primitives/h1'
 import HeaderImage from '../components/global/header-image'
 import SummaryBlock from '../components/content/summary-block'
+import Button from '../components/primitives/button'
 
 import NewsList from '../components/content/news-list'
 import LocationsList from '../components/content/locations-list'
@@ -36,11 +37,16 @@ import PolicyPillars from '../components/content/policy-pillars'
 import MemberPillars from '../components/content/member-pillars'
 import NumberedPillars from '../components/content/numbered-pillars'
 import GrantsList from '../components/content/grant-guidelines-list'
+import ReportsList from '../components/content/reports-list'
+import StatsList from '../components/content/stats-list'
+import ResearchBanners from '../components/content/research-banners'
+import ResearchPillars from '../components/content/reesearch-pillars'
 
 import ActionItemGroup from '../components/slices/action-item-group'
 import MissionPillars from '../components/content/mission-pillars'
 import Promo from '../components/slices/promo'
 import ColorBanner from '../components/global/color-banner'
+import MainContent from '../components/global/main-content'
 
 export default function LandingPage({ page, preview }) {
   const router = useRouter()
@@ -164,7 +170,12 @@ export default function LandingPage({ page, preview }) {
       { // MEMBER CENTER
         landing_page._meta.uid === 'members' && 
         <MemberPillars />
-      }         
+      }    
+
+      { // RESEARCH STATS
+        landing_page._meta.uid === 'research' && 
+        <StatsList />
+      }            
 
       { // EVENTS
         landing_page._meta.uid === 'events' && 
@@ -242,6 +253,38 @@ export default function LandingPage({ page, preview }) {
                 payload={ slice.fields } 
                 title={ slice.primary.pillar_title }
               />
+            )
+          }    
+          
+          // RESEARCH SLICE
+          if (slice.__typename === 'Landing_pageBodyResearch') {
+            return(
+              <ResearchBanners 
+                payload={ slice.fields } 
+              />
+            )
+          }
+          if (slice.__typename === 'Landing_pageBodyResearch__reports') {
+            return(
+              <>
+                <ReportsList 
+                  payload={ slice.fields }
+                />
+                <Button
+                  buttonAlign="center"
+                  buttonBg="#D0021B"
+                  buttonBorder="none"
+                  buttonColor="white"
+                  buttonFontSize="24px"
+                  buttonMargin="0 0 50px 0"
+                  buttonPadding="10px 30px"
+                  buttonTextTransform="uppercase"
+                  href="/reports"
+                >
+                  See Full Report Library
+                </Button>  
+                <ResearchPillars />
+              </>         
             )
           }          
 
