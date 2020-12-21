@@ -115,7 +115,9 @@ const ActionItem = ({
 
       { path && path.__typename === '_ExternalLink' ? (
         <ContentContainer>
-          <Title dangerouslySetInnerHTML={{__html: linkResolver(path, false, title) }} />
+          <a href={ linkResolver(path) }>
+            <Title>{ title }</Title>
+          </a>
           <Text>{ text }</Text>
         </ContentContainer>
       ) : (
