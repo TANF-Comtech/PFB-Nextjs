@@ -198,16 +198,16 @@ const GlobalStyle = createGlobalStyle`
   }
 
   /* set up lists correctly */
-  ul {
+  ul, ol {
     margin: 20px 40px;
   }
   @media screen and (min-width: 320px) {
-    ul {
+    ul, ol {
       margin: calc(20px + 10 * ((100vw - 320px) / 880)) calc(40px + 20 * ((100vw - 320px) / 880));
     }
   }
   @media screen and (min-width: 1200px) {
-    ul {
+    ul, ol {
       margin: 30px 60px;
     }
   }
