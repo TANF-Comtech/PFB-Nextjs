@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import Router from 'next/router'
 import styled from "styled-components";
 import Wrapper from '../components/global/wrapper'
@@ -52,6 +52,10 @@ function LoginPage() {
   const [code, updateLoginCode] = useState("")
   
   const [loginPending, updateLoginPending] = useState(false)
+
+  useEffect(() => {
+    authContext.checkLogin()
+  },[])
 
   const submitEmail = async (email) => {
     const response = await fetch (`/api/auth/member_center/login`,{

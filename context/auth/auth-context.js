@@ -14,29 +14,34 @@ const defaultAuthData = {
 const AuthProvider = (props) =>{
     const [data, setData] = useState(defaultAuthData)
 
+    const fetchLoggedInStateRequest = async () => {
+      const response = await fetch ("/api/auth/member_center/checkLogin",{
+          method:'GET',
+          mode:'cors'
+      })
+      return response.json()
+    }
+
+    const fetchLoggedInState = async () => {
+      const data = await fetchLoggedInStateRequest()
+      if(data.loggedIn){
+        setData(data)
+      }else{
+        setData(defaultAuthData)
+      }
+    }
+
     useEffect(() => {
-        const fetchLoggedInState = async () => {
-            const response = await fetch ("/api/auth/member_center/checkLogin",{
-                method:'GET',
-                mode:'cors'
-            })
-            return response.json()
-        }
-        fetchLoggedInState().then(data=>{
-            if(data.loggedIn){
-                setData(data)
-            }else{
-                setData(defaultAuthData)
-            }
-        })
-      }, [])
+        fetchLoggedInState()  
+    },[])
 
       return (
         <AuthContext.Provider value={{
           ...data,
           updateAuthContext: d => {
             setData(Object.assign({}, data, d))
-          }
+          },
+          checkLogin: () => {fetchLoggedInState()}
         }}>
           {props.children}
         </AuthContext.Provider>
