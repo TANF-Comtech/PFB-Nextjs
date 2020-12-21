@@ -91,8 +91,6 @@ export default function ReportPage({ page, preview }) {
   const { report } = page
   const { meta } = useContext(DefaultContext)
 
-  console.log(report)
-
   return (
     <>
       <SiteMeta
@@ -149,7 +147,7 @@ export default function ReportPage({ page, preview }) {
             <>
               <strong>Full Report (Link):</strong>
               <p>
-                <Link href={ report.pdf.url } passHref >
+                <Link href={ report.link.url } passHref >
                   <a target="_blank" rel="noopener">
                     <strong>Link to Report</strong>
                   </a>

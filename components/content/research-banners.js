@@ -14,7 +14,6 @@ const ResearchBanners = ({
   return (
     <MainContent>
       { payload.map((campaign) => {
-        console.log(campaign)
         return(
           <Promo 
             bigWords={ campaign.campaign.big_text }

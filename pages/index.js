@@ -56,7 +56,7 @@ const Number = styled.h3`
   align-items: center;
   background-color: white;
   border-radius: 23px;
-  color: ${props => props.theme.redAccent};
+  color: ${props => props.theme.midnightBlue};
   display: flex;
   font-size: 28px;
   height: 46px;
@@ -72,6 +72,7 @@ const Text = styled.h4`
   line-height: 36px;
   margin-top: 1vh;
   text-align: center;
+  text-decoration: underline;
 
   @media screen and (min-width: 320px) {
     font-size: calc(36px + 8 * ((100vw - 320px) / 880));
@@ -109,26 +110,46 @@ export default function Homepage({ page }) {
       <MainContent>
         <SectionTitle>Our Mission</SectionTitle> 
         <Grid gridGap="1vw">
-          <Box bgColor="#D0021B" key="1">
-            <Number>1</Number>
-            <Text>Improving Recreational Access for Bicycles</Text>
-          </Box>
-          <Box bgColor="#D0021B" key="2">
-            <Number>2</Number>
-            <Text>Building Safe Mobility Networks</Text>
-          </Box>
-          <Box bgColor="#D0021B" key="3">
-            <Number>3</Number>
-            <Text>Fostering Diversity, Equity, and Inclusion</Text>
-          </Box>
-          <Box bgColor="#D0021B" key="4">
-            <Number>4</Number>
-            <Text>Promoting Sustainability</Text>
-          </Box>
-          <Box bgColor="#D0021B" key="5">
-            <Number>5</Number>
-            <Text>Growing the Bike Industry</Text>
-          </Box>
+          <Link href="/mission" passHref key="6">
+            <a>          
+              <Box bgColor="#00A2DF" key="1">
+                <Number>1</Number>
+                <Text>Improving Recreational Access for Bicycles</Text>
+              </Box>
+            </a>
+          </Link>
+          <Link href="/mission" passHref key="6">
+            <a>
+              <Box bgColor="#00A2DF" key="2">
+                <Number>2</Number>
+                <Text>Building Safe Mobility Networks</Text>
+              </Box>
+            </a>
+          </Link>
+          <Link href="/mission" passHref key="6">
+            <a>          
+              <Box bgColor="#00A2DF" key="3">
+                <Number>3</Number>
+                <Text>Fostering Diversity, Equity, and Inclusion</Text>
+              </Box>
+            </a>
+          </Link>
+          <Link href="/mission" passHref key="6">
+            <a>
+              <Box bgColor="#00A2DF" key="4">
+                <Number>4</Number>
+                <Text>Promoting Sustainability</Text>
+              </Box>
+            </a>
+          </Link>
+          <Link href="/mission" passHref key="6">
+            <a>
+              <Box bgColor="#00A2DF" key="5">
+                <Number>5</Number>
+                <Text>Growing the Bike Industry</Text>
+              </Box>
+            </a>
+          </Link>
           <Link href="/mission" passHref key="6">
             <a>
               <Box bgColor="#002C40">

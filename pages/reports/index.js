@@ -71,7 +71,7 @@ export default function ReportsArchive({ page }) {
               
               { page.map( (report) => {
                 if( report.node.year === year) {
-                  console.log(report)
+
                   return(
                     <>
                       { report.node.title &&
