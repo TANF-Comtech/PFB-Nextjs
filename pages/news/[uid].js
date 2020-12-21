@@ -62,14 +62,12 @@ export default function ReportPage({ page, preview }) {
   const { news } = page
   const { meta } = useContext(DefaultContext)
 
-  console.log(news)
-
   // Set up date
   let newDate
   if (news.publication_date) {
-    newDate = news.publication_date ? 
-    ( new Date(ParseDate( news.publication_date ))) : 
-    ( new Date(ParseDate( news._meta.lastPublicationDate )))
+    newDate = new Date(ParseDate( news.publication_date ))
+  } else {
+    newDate = new Date(ParseDate(news._meta.lastPublicationDate ))
   }
 
   return (
