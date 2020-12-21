@@ -3,6 +3,9 @@ import styled from "styled-components";
 import useScrollPosition from '@react-hook/window-scroll'
 import Link from 'next/link'
 
+import logoutRequest from "../../lib/auth/logoutRequest"
+import Router from 'next/router'
+
 import LogoVertical from "../global/logo-vertical"
 import NavMenu from "../global/navmenu"
 import SearchButton from '../primitives/search-button'
@@ -106,6 +109,22 @@ function NavBar() {
     setMenu(!menu);
   };
 
+  const logout = () =>{
+    logoutRequest().then(data => {
+      if(data.status===true){
+        authContext.updateAuthContext({"user":{
+            "email": data?.email,
+            "name": data?.name,
+            "affiliation":data?.affiliation,
+        },
+        "loggedIn":false
+      });
+      Router.push('/')
+      }   
+      })
+  }
+  
+
   useEffect( () => {
     if(menu === true) {
       document.body.style.overflowY = "hidden";
@@ -143,12 +162,16 @@ function NavBar() {
           </Link>
 
           <RightContainer>            
-            {!authContext.loggedIn && (
+            {!authContext.loggedIn ? (
               <Link href="/log-in">
                 <GhostLink>
                   <BlueButton>Log-in</BlueButton>
                 </GhostLink>
               </Link>
+            ):(
+              <GhostLink>
+                <BlueButton onClick={()=>{logout()}}>Log-out</BlueButton>
+              </GhostLink>
             )}
           </RightContainer>
         </Container>
