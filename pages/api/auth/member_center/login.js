@@ -42,6 +42,7 @@ export default (req, res) => {
                 }
                 
             }).catch(error=>{
+                console.log("Auth0 error", error)
                 res.status(401).json({status:false, error:"Incorrect code!"}) 
             })
         }
