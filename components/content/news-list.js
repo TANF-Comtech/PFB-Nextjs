@@ -21,9 +21,12 @@ const NewsList = ({
   return (
     <MainContent>
       { payload.map( (news) => { 
-        const newDate = news[nodeName].publication_date ? 
-          ( new Date(ParseDate( news[nodeName].publication_date ))) : 
-          ( new Date(ParseDate( news[nodeName]._meta.lastPublicationDate )))
+        let newDate
+        if (news[nodeName].publication_date) {
+          newDate = new Date(ParseDate( news[nodeName].publication_date ))
+        } else {
+          newDate = new Date(ParseDate(news[nodeName]._meta.lastPublicationDate ))
+        }          
         return (
           <ContentItem 
             date={ `${newDate.toLocaleString('en-us', { month: 'long' } )} 
