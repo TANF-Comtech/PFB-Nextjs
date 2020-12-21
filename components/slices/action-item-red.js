@@ -8,7 +8,7 @@ import RedArrowWhiteBlock from '../../public/red-arrow-white-block.svg'
 
 const Container = styled.section`
   align-items: center;
-  background-color: ${ props => props.theme.blueBright };
+  background-color: ${ props => props.bgColor || props.theme.blueBright };
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -35,6 +35,7 @@ const Icon = styled.img`
 const ContentContainer = styled.div`
   margin: 0 0 2vh 0;
   text-align: center;
+  width: calc(100% - 50px);
 
   @media( min-width: ${ props => props.theme.sm}) {
     margin: 0 2vw 0 0;
@@ -48,7 +49,7 @@ const ContentContainer = styled.div`
 `
 
 const Title = styled.h3`
-  color: #fff;
+  color: ${ props => props.textColor || '#fff' };
   font-weight: 700;
   margin: 0;
   text-transform: uppercase;
@@ -63,29 +64,35 @@ const Text = styled.p`
  * <RedActionItem>
  * 
  * This creates an red background with a title and text next to it.
- * 
+ *
+ * @param { string } bgColor - background of the program
  * @param { string } path - where the title goes
  * @param { string } title - title that goes next to the icon
  * @param { string } text - content to be shown
+ * @param { string } textColor - duh
  */
 const RedActionItem = ({
+  bgColor,
   path,
   title,
-  text
+  text,
+  textColor
 }) => {
 
   return (
-    <Container>
+    <Container bgColor={ bgColor }>
       { path.__typename === '_ExternalLink' ? (
         <ContentContainer>
-          <Title dangerouslySetInnerHTML={{__html: linkResolver(path, false, title) }} />
+          <a href={ linkResolver(path) }>
+            <Title textColor={ textColor }>{ title }</Title>
+          </a>
           <Text>{ text }</Text>
-        </ContentContainer>
+        </ContentContainer>        
       ) : (
         <ContentContainer>
           <Link href={ linkResolver(path, false) } passHref>
             <a>
-              <Title>{ title }</Title>
+              <Title textColor={ textColor }>{ title }</Title>
             </a>
           </Link>
           <Text>{ text }</Text>
