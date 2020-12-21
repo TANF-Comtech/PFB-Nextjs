@@ -31,19 +31,17 @@ export default (req, res) => {
                     const cookies = new Cookies(req, res)
                     cookies.set('auth-token', data.id_token, {
                         httpOnly: true,
-                        secure:true,
                         sameSite:true,
                         expires: new Date(new Date().getTime() + 60 * 60 * cookieLifeTimeHours * 1000)
                     })        
                     res.status(200).json({status:true})
                 }
                 else{
-                    res.status(401).json({status:false, error:"Incorrect code!"}) 
+                    res.status(401).json({status:false, error:"Incorrect code or code timed out!"}) 
                 }
                 
             }).catch(error=>{
-                console.log("Auth0 error", error)
-                res.status(401).json({status:false, error:"Incorrect code!"}) 
+                res.status(401).json({status:false, error:"Incorrect code or code timed out!"}) 
             })
         }
     else{
