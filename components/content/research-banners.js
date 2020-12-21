@@ -1,5 +1,14 @@
+import styled from 'styled-components'
+
 import MainContent from '../global/main-content'
 import Promo from '../slices/promo'
+
+const PageHeading = styled.h2`
+  color: ${ props => props.theme.red };
+  font-weight: 700;
+  margin-top: 5vh;
+  text-transform: uppercase;
+`
 
 /**
  * <ResearchBanners>
@@ -13,6 +22,8 @@ const ResearchBanners = ({
 }) => {
   return (
     <MainContent>
+      <PageHeading>Featured</PageHeading>
+      <hr />
       { payload.map((campaign) => {
         return(
           <Promo 

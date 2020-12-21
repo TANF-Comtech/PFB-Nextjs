@@ -32,9 +32,16 @@ const ResearchPillars = () => {
         /> 
         <RedActionItem 
           bgColor="#002C40"
-          path="/grants"
-          title="Community Grants"
-          text="PeopleForBikes has supported bicycle infrastructure projects and advocacy campaigns across the country for more than 20 years through the Community Grants program."
+          path="/"
+          title="Final Mile"
+          text="The Final Mile works to accelerate the installation of complete mobility networks in select U.S. cities. More information coming soon"
+          textColor="#00A2DF"
+        />        
+        <RedActionItem 
+          bgColor="#002C40"
+          path="/"
+          title="PlacesForBikes"
+          text="PlacesForBikes establishes a new standard in defining and measuring great places for biking, and provides the tools and resources that accelerate local change. More information coming soon."
           textColor="#00A2DF"
         />
         <RedActionItem 
@@ -46,11 +53,25 @@ const ResearchPillars = () => {
         />     
         <RedActionItem 
           bgColor="#002C40"
-          path="/members/business-intelligence-hub"
-          title="Business Intelligence Hub"
-          text="PeopleForBikes Business Intelligence Hub is a dashboard for daily and weekly insights into the bicycle industry covering ridership, retail sales and consumer attitudes."
+          path="/grants"
+          title="Community Grants"
+          text="Our Community Grants programs funds bicycle infrastructure projects and advocacy campaigns across the country."
           textColor="#00A2DF"
-        />               
+        />
+        <RedActionItem 
+          bgColor="#002C40"
+          path="/"
+          title="NWA Bike Business Innovation Program"
+          text="The NWA Bike Business Innovation Program implements workplace-based incentive programs that rapidly increase the number of employees who bike for transportation and recreation throughout Benton County, AR. More information coming soon."
+          textColor="#00A2DF"
+        />
+        <RedActionItem 
+          bgColor="#002C40"
+          path="/"
+          title="Youth Cycling Coalition"
+          text="The Youth Cycling Coalition (YCC) is a collaborative effort to get more children and youth on bikes and keep them bicycling throughout their lives. More information coming soon."
+          textColor="#00A2DF"
+        />                               
       </MainContent>
     </>
   )

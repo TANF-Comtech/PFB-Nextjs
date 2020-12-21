@@ -216,8 +216,6 @@ const StatsList = ({
           })}
         </Grid>
       </GridWrapper>
-      <PageHeading>Featured</PageHeading>
-      <hr />
     </MainContent>
   )
 }

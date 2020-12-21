@@ -68,11 +68,13 @@ const Item = styled.div`
  * <NumberedPillars>
  * 
  * This creates the container for NumberedPillars
- * 
+ *
+ * @param { bool } numbersWanted - indication if lettered numbers are printed
  * @param { array } payload - array of the mission pillars
  * @param { array } title - what to display over the section
  */
 const NumberedPillars = ({
+  numbersWanted = true,
   payload,
   title
 }) => {
@@ -87,8 +89,7 @@ const NumberedPillars = ({
                 key={ i }
               >
                 <Title>
-                  <span>{ numWords(i+1) }</span>
-                  &nbsp;
+                  {numbersWanted === true && <span>{ numWords(i+1) }&nbsp;</span> }
                   { item.pillar_title }
                 </Title>
                 <Text>

@@ -48,7 +48,26 @@ import Promo from '../components/slices/promo'
 import ColorBanner from '../components/global/color-banner'
 import MainContent from '../components/global/main-content'
 
-export default function LandingPage({ page, preview }) {
+/**
+ * TheMonster()
+ * 
+ * You know, there comes a time in every man's life
+ * When he looks in the mirror
+ * And realizes that something has grown out of his control
+ * And it was in this moment that I renamed this page TheMonster
+ * 
+ * It was born of a great idea - simply the UX for admins
+ * They can have one spot for all their landing pages
+ * But then, no two landing pages looked alike
+ * And Prismic's Slice system turned out to be half baked
+ * 
+ * So here we find ourselves, with all these imports
+ * And all this conditional logic
+ * It's a wonder this page runs
+ * Where it goes from here is only in the realm of dream or nightmare
+ * 
+ */
+export default function TheMonster({ page, preview }) {
   const router = useRouter()
 
   // If page hasn't arrived yet, show loader
@@ -249,14 +268,17 @@ export default function LandingPage({ page, preview }) {
           if (slice.__typename === 'Landing_pageBodyMission_content' &&
             landing_page._meta.uid === 'local-innovation') {
             return (
-              <NumberedPillars 
-                payload={ slice.fields } 
-                title={ slice.primary.pillar_title }
-              />
+              <>
+                <NumberedPillars 
+                  numbersWanted="false"
+                  payload={ slice.fields } 
+                  title={ slice.primary.pillar_title }
+                />
+              </>
             )
           }    
           
-          // RESEARCH SLICE
+          // RESEARCH CAMPAIGN BANNERS
           if (slice.__typename === 'Landing_pageBodyResearch') {
             return(
               <ResearchBanners 
@@ -264,6 +286,8 @@ export default function LandingPage({ page, preview }) {
               />
             )
           }
+
+          // RESEARCH REPORTS
           if (slice.__typename === 'Landing_pageBodyResearch__reports') {
             return(
               <>
@@ -305,6 +329,12 @@ export default function LandingPage({ page, preview }) {
             )
           } 
         })) : (<></>)
+      }
+
+
+      { // LOCAL INNOVATION RESEARCH PILLARS
+        landing_page._meta.uid === 'local-innovation' &&
+        <ResearchPillars />
       }
 
       { // TAKE ACTION BLOCKS
