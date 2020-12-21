@@ -2,6 +2,7 @@ import Link from 'next/link'
 import styled from "styled-components"
 
 import { getHomepage } from '../lib/queries/homepage'
+import { randomID } from '../lib/utils'
 
 import Wrapper from '../components/global/wrapper'
 import HeaderImage from '../components/global/header-image'
@@ -110,49 +111,61 @@ export default function Homepage({ page }) {
       <MainContent>
         <SectionTitle>Our Mission</SectionTitle> 
         <Grid gridGap="1vw">
-          <Link href="/mission" passHref key="6">
+          <Link 
+            href="/topics/recreational-bike-access" 
+            passHref 
+            key={ randomID(90849875924875) }>
             <a>          
-              <Box bgColor="#00A2DF" key="1">
+              <Box bgColor="#00A2DF" key={ randomID(90849875924875) }>
                 <Number>1</Number>
                 <Text>Improving Recreational Access for Bicycles</Text>
               </Box>
             </a>
           </Link>
-          <Link href="/mission" passHref key="6">
+          <Link 
+            href="/topics/bike-safety" 
+            passHref 
+            key={ randomID(165131321310)}>
             <a>
-              <Box bgColor="#00A2DF" key="2">
+              <Box bgColor="#00A2DF" key={ randomID(9584230958298347510) }>
                 <Number>2</Number>
                 <Text>Building Safe Mobility Networks</Text>
               </Box>
             </a>
           </Link>
-          <Link href="/mission" passHref key="6">
+          <Link 
+            href="/topics/inclusive-biking" 
+            passHref 
+            key={ randomID(85963453564) }>
             <a>          
-              <Box bgColor="#00A2DF" key="3">
+              <Box bgColor="#00A2DF" key={ randomID(8987345834) }>
                 <Number>3</Number>
                 <Text>Fostering Diversity, Equity, and Inclusion</Text>
               </Box>
             </a>
           </Link>
-          <Link href="/mission" passHref key="6">
+          <Link 
+            href="/topics/sustainable-transportation" 
+            passHref 
+            key={ randomID(1861553564) }>
             <a>
-              <Box bgColor="#00A2DF" key="4">
+              <Box bgColor="#00A2DF" key={ randomID(65423321432) }>
                 <Number>4</Number>
                 <Text>Promoting Sustainability</Text>
               </Box>
             </a>
           </Link>
-          <Link href="/mission" passHref key="6">
+          <Link href="/topics/bike-business" passHref key={ randomID(165123341) }>
             <a>
-              <Box bgColor="#00A2DF" key="5">
+              <Box bgColor="#00A2DF" key={ randomID(1239482309) }>
                 <Number>5</Number>
                 <Text>Growing the Bike Industry</Text>
               </Box>
             </a>
           </Link>
-          <Link href="/mission" passHref key="6">
+          <Link href="/mission" passHref key={ randomID(453908904875892) }>
             <a>
-              <Box bgColor="#002C40">
+              <Box bgColor="#002C40" key={ randomID(242349879) }>
                 <Arrow src={ WhiteArrow } width="46px" />
                 <Text>Read More About Our Mission</Text>
               </Box>
@@ -171,7 +184,12 @@ export default function Homepage({ page }) {
       { homepage.body &&
         homepage.body.map( (slice) => {
           if( slice.type === "ridespot_promo" ) {
-            return ( <RideSpotPromo payload={ slice.primary } /> )
+            return ( 
+              <RideSpotPromo 
+                key={ randomID(98692845768957) }
+                payload={ slice.primary } 
+              /> 
+            )
           }
       })}  
       
@@ -227,6 +245,7 @@ export default function Homepage({ page }) {
             return ( 
               <Promo 
                 bigWords={ slice.primary.bottom_text }
+                key={ randomID(4132168613) }
                 path={ slice.primary.link }
                 smallWords={ slice.primary.top_text }
                 source={ slice.primary.main_image.url }
