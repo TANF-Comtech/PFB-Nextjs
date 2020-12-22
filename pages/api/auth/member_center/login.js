@@ -20,7 +20,9 @@ export default (req, res) => {
         }
         else{
             return checkEmailInSalesforce(email).then(salesforceData=>{
-                if(salesforceData.status){
+                console.log("You pass!")
+                res.status(200).json(salesforceData)
+                /* if(salesforceData.status){
                     sendAuthCode(email).then(auth0Data=>{ //dont use auth0Data here
                     res.status(200).json(salesforceData)
                     }).catch(auth0Data=>{
@@ -29,7 +31,7 @@ export default (req, res) => {
                 }
                 else{
                     res.status(401).json(salesforceData)
-                }
+                } */
             })
         }
     }
