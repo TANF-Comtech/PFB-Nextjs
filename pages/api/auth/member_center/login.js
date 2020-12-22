@@ -11,6 +11,14 @@ export default (req, res) => {
         const code  = req.body?.code
         // if submitting email (step 1)
     if(code == null && email){
+        if(email.endsWith("@peopleforbikes.org")){
+            return sendAuthCode(email).then(auth0Data=>{ //dont use auth0Data here
+                    res.status(200).json({status:true})
+                    }).catch(auth0Data=>{
+                        res.status(401).json({status:false,error:"Service Error - Service Unavailable! Please Try Again Soon."})  
+                    })
+        }
+        else{
             return checkEmailInSalesforce(email).then(salesforceData=>{
                 if(salesforceData.status){
                     sendAuthCode(email).then(auth0Data=>{ //dont use auth0Data here
@@ -23,6 +31,7 @@ export default (req, res) => {
                     res.status(401).json(salesforceData)
                 }
             })
+        }
     }
      // if submitting code (step 2)
     else if (code && email){
