@@ -14,6 +14,16 @@ const nextConfig = {
         source: '/blog/:slug*',
         destination: '/news/:slug*',
         permanent: true,
+      },
+      {
+        source: '/apply-now',
+        destination: '/grant-application',
+        permanent: true
+      },
+      {
+        source: '/our-work/e-bikes',
+        destination: 'topics/electric-bikes',
+        permanent: true
       }
     ]
   }
@@ -28,5 +38,5 @@ module.exports = withPlugins([
     [PHASE_DEVELOPMENT_SERVER]: 'http://localhost:3001',
     [PHASE_PRODUCTION_BUILD]: 'https://www.peopleforbikes.org'
   }]
-  
+   
 ], nextConfig)
