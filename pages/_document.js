@@ -61,6 +61,19 @@ export default class MyDocument extends Document {
           <link rel="icon" href={ logo } sizes="any" type="image/svg+xml" />
           <link rel="stylesheet" href="https://cloud.typography.com/6938898/7916412/css/fonts.css" />
           <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&display=swap" />
+          <script
+            async
+            src="https://www.google-analytics.com/analytics.js"
+          />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+                  ga('create', 'UA-13226656-2', 'auto');
+                  ga('send', 'pageview');
+                `,
+            }}
+          />
         </Head>
         <body>
           <Main />
