@@ -24,7 +24,87 @@ const nextConfig = {
         source: '/our-work/e-bikes',
         destination: 'topics/electric-bikes',
         permanent: true
-      }
+      },
+      {
+        source: '/2021-workplan',
+        destination: '/take-action/2021-workplan',
+        permanent: true
+      },
+      {
+        source: '/ask-congress-to-help-provide-a-six-month-extension-for-section-301-exclusions',
+        destination: '/take-action/301-tariff-exclusions',
+        permanent: true
+      },   
+      {
+        source: '/add-my-city',
+        destination: '/take-action/add-my-city',
+        permanent: true
+      },
+      {
+        source: '/update-my-city',
+        destination: '/take-action/update-my-city',
+        permanent: true
+      },
+      {
+        source: '/download-the-report',
+        destination: '/take-action/download-the-report',
+        permanent: true
+      },       
+      {
+        source: '/urge-congress-support-biking',
+        destination: '/take-action/urge-congress-support-biking',
+        permanent: true
+      },       
+      {
+        source: '/urge-congress-support-biking',
+        destination: '/take-action/urge-congress-support-biking',
+        permanent: true
+      },
+      {
+        source: '/why-do-you-ride',
+        destination: '/take-action/why-do-you-ride',
+        permanent: true
+      },   
+      {
+        source: '/fundraising-communications',
+        destination: '/take-action/remove-me-from-fundraising-communcations',
+        permanent: true
+      },      
+      {
+        source: '/apply-draft-speaker',
+        destination: '/take-action/apply-draft-speaker',
+        permanent: true
+      },   
+      {
+        source: '/benandbikes',
+        destination: '/take-action/benandbikes',
+        permanent: true
+      },
+      {
+        source: '/benandbikes',
+        destination: '/take-action/benandbikes',
+        permanent: true
+      },      
+      {
+        source: '/ben',
+        destination: '/take-action/benandbikes',
+        permanent: true
+      }, 
+      {
+        source: '/ben',
+        destination: '/take-action/benandbikes',
+        permanent: true
+      }, 
+      {
+        source: '/lightboxjoin',
+        destination: '/join',
+        permanent: true
+      }, 
+      {
+        source: '/ebikes-list-join',
+        destination: '/take-action/ebikes-list-join',
+        permanent: true
+      },
     ]
   }
 }
