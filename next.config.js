@@ -105,6 +105,36 @@ const nextConfig = {
         destination: '/take-action/ebikes-list-join',
         permanent: true
       },
+      {
+        source: '/nbbjoins',
+        destination: '/take-action/nbbjoins',
+        permanent: true
+      },    
+      {
+        source: '/get-latest-industry-enews',
+        destination: '/take-action/get-latest-industry-enews',
+        permanent: true
+      },
+      {
+        source: '/share-your-event',
+        destination: '/take-action/share-your-event',
+        permanent: true
+      },
+      {
+        source: '/register-your-local-group',
+        destination: '/take-action/register-your-local-group',
+        permanent: true
+      },
+      {
+        source: '/become-peopleforbikes-retailer',
+        destination: 'https://ridespot.org/register',
+        permanent: true
+      }, 
+      {
+        source: '/local-engagement-portal',
+        destination: '/take-action/local-engagement-portal',
+        permanent: true
+      }, 
     ]
   }
 }
