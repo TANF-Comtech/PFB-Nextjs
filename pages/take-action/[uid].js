@@ -47,9 +47,9 @@ export default function MembersPage({ page, preview }) {
       >        
         <MainContent>
           { action.title && 
-            <Header1>
+            <h2>
               { action.title[0].text }
-            </Header1>
+            </h2>
           }
           { action.form_id &&
             <>
