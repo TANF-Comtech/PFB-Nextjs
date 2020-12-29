@@ -41,8 +41,8 @@ export default function MembersPage({ page, preview }) {
         path={ action ? ( `https://www.peopleforbikes.org/take-action/${action._meta.uid}` ) : ( meta.path ) }
       />    
       <Wrapper 
-        postPath="/research"
-        postTitle="Research"
+        postPath="/take-action"
+        postTitle="Take Action"
         isWide="true"
       >        
         <MainContent>
