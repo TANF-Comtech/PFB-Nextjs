@@ -16,13 +16,18 @@ const nextConfig = {
         permanent: true,
       },
       {
-        source: '/apply-now',
-        destination: '/grant-application',
-        permanent: true
+        source: '/our-work/e-bikes/:slug*',
+        destination: '/electric-bikes/:slug*',
+        permanent: true,
       },
       {
         source: '/our-work/e-bikes',
         destination: 'topics/electric-bikes',
+        permanent: true
+      },
+      {
+        source: '/apply-now',
+        destination: '/grant-application',
         permanent: true
       },
       {
