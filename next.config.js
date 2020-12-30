@@ -31,13 +31,28 @@ const nextConfig = {
         permanent: true
       },
       {
+        source: '/federal-e-bike-rulemaking',
+        destination: '/electric-bikes/federal-e-bike-rulemaking',
+        permanent: true
+      },
+      {
         source: '/pages/e-bikes',
+        destination: '/topics/electric-bikes',
+        permanent: true
+      },
+      {
+        source: '/e-bikes',
         destination: '/topics/electric-bikes',
         permanent: true
       },
       {
         source: '/apply-now',
         destination: '/grant-application',
+        permanent: true
+      },
+      {
+        source: '/forestserviceebikepolicy',
+        destination: '/take-action/forestserviceebikepolicy',
         permanent: true
       },
       {
