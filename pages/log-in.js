@@ -132,7 +132,7 @@ function LoginPage() {
 
             <LoginForm>
               <h3>Enter Your Email Below.</h3>
-              <p>If you are a member you will be emailed an access code to login.</p>
+              <p>If you are a corporate member you will be emailed an access code to login.</p>
               <RedTextField onChange={(e)=>updateEmail(e.target.value)} placeholder="email"/>
               {Boolean(errorState.length) && (
                 <Error>{errorState}</Error>
