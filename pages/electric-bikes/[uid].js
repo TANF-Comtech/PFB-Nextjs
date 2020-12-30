@@ -29,7 +29,6 @@ export default function EBikesPage({ page, preview }) {
   // Destructure page payload and meta from global context
   const { electric_bikes } = page
   const { meta } = useContext(DefaultContext)
-  console.log(electric_bikes)
 
   return (
     <>

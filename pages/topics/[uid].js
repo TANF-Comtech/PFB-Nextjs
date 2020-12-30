@@ -194,6 +194,7 @@ export async function getStaticProps({ params, preview = false, previewData }) {
 // getStaticPaths requires the whole paths argument to be objects of URL it needs to statically render server-side
 export async function getStaticPaths() {
   const allTopics = await getTopics()
+
   return {
     paths: allTopics?.map(({ node }) => `/topics/${node._meta.uid}`) || [],
     fallback: true,
