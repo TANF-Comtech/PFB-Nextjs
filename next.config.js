@@ -21,6 +21,11 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: '/emtb',
+        destination: '/rides',
+        permanent: true,
+      },
+      {
         source: '/our-work/e-bikes',
         destination: 'topics/electric-bikes',
         permanent: true
