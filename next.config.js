@@ -22,12 +22,17 @@ const nextConfig = {
       },
       {
         source: '/emtb',
-        destination: '/rides',
+        destination: '/electric-bikes/emtb-map',
         permanent: true,
       },
       {
         source: '/our-work/e-bikes',
-        destination: 'topics/electric-bikes',
+        destination: '/topics/electric-bikes',
+        permanent: true
+      },
+      {
+        source: '/pages/e-bikes',
+        destination: '/topics/electric-bikes',
         permanent: true
       },
       {
