@@ -46,6 +46,11 @@ const nextConfig = {
         permanent: true
       },
       {
+        source: '/business-intelligence-hub-coalition-members',
+        destination: '/members/business-intelligence-hub',
+        permanent: true
+      },
+      {
         source: '/apply-now',
         destination: '/grant-application',
         permanent: true
