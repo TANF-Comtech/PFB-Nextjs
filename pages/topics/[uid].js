@@ -1,11 +1,11 @@
 import { useContext } from 'react'
 import ErrorPage from 'next/error'
 import Link from 'next/link'
-import { Date as ParseDate } from 'prismic-reactjs'
+import { RichText, Date as ParseDate } from 'prismic-reactjs'
 import styled from 'styled-components'
 
 import { getTopics, getSingleTopicPage } from '../../lib/queries/topics'
-import { randomID, setDateSuffix } from '../../lib/utils'
+import { randomID, setDateSuffix, linkResolver } from '../../lib/utils'
 
 import DefaultContext from '../../context/default/default-context'
 
@@ -18,6 +18,8 @@ import Header1 from '../../components/primitives/h1'
 import SummaryBlock from '../../components/content/summary-block'
 import Accordion from '../../components/global/accordion'
 import Button from '../../components/primitives/button'
+import SecondaryTitleBanner from '../../components/content/secondary-title-banner'
+import RedActionItem from '../../components/slices/action-item-red'
 
 const SpacedHeading = styled.h2`
   margin: 4vh 0;
@@ -33,6 +35,8 @@ export default function TopicPage({ page, preview }) {
   const { topic } = page[0]
   const { meta } = useContext(DefaultContext)
   const pillars = [] // setup for pillar content
+
+  console.log(topic)
 
   return (
     <>
@@ -51,12 +55,15 @@ export default function TopicPage({ page, preview }) {
         imgSrc={ topic.banner_image ? ( topic.banner_image['1x'].url ) : ( meta.imgSrc ) }
         imgWidth={ topic.banner_image ? ( topic.banner_image['1x'].dimensions.width ) : ( meta.imgWidth ) }
         path={ topic ? ( `https://www.peopleforbikes.org/topics/${topic._meta.uid}` ) : ( meta.path ) }
-      />    
+      />
+
       <Wrapper 
         postPath={ topic.body ? "/policy" : "/topics/" }
         postTitle={ topic.body ? "Policy" : "Topics" } 
         isWide={ topic.banner_image ? true : false }
       >
+      { // NON E-BIKES TOPICS
+        topic._meta.uid !== 'electric-bikes' ? (<>
         { topic.banner_image ? (
           <HeaderImage 
             headingRGBA="255,255,255,1"
@@ -82,7 +89,9 @@ export default function TopicPage({ page, preview }) {
           <p>{ topic.intro }</p>
         </SummaryBlock>
 
-        { topic.body ? (
+        { 
+          // POLICY PILLARS
+          topic.body ? (
           <MainContent maxWidth="900px">
             { pillars[0].fields.map( pillar => {
               return(
@@ -167,7 +176,51 @@ export default function TopicPage({ page, preview }) {
               <></>
             )}
           </MainContent>          
-        ) }
+        ) }      
+      </>) : (
+      // E_BIKES
+      <>
+        <SecondaryTitleBanner
+          secondaryText="Learn about the world of "
+          mainText="electric bikes"
+        />
+        { topic.banner_image && 
+          <HeaderImage 
+            headingRGBA="255,255,255,1"
+            source={ topic.banner_image.url }
+          />
+        }
+        {
+          topic.body && ( 
+            topic.body.map( (slice) => {
+              return(
+                slice.__typename === "TopicBodyElectric_bikes_content" &&
+                <MainContent maxWidth="1000px" key="2398403982">
+                  { slice.primary && 
+                    <RichText 
+                      render={ slice.primary.main_content } 
+                      linkResolver={ linkResolver } />
+                  }
+                  {
+                    slice.fields && slice.fields.map( (pillar) => {
+                      return(
+                        <RedActionItem 
+                          path={ `/electric-bikes/${pillar.pillars._meta.uid}` }
+                          title={ pillar.pillars.title[0].text }
+                          text={ pillar.pillar_subtext }
+                        />
+                      )
+                    })
+                  }
+                </MainContent>
+              )
+              
+            })
+          ) 
+        }
+
+
+      </>)}
         
       </Wrapper>
     </>

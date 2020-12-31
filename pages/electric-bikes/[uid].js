@@ -15,7 +15,7 @@ import MainContent from '../../components/global/main-content'
 import Header1 from '../../components/primitives/h1'
 import Promo from '../../components/slices/promo'
 
-import ResearchPromo from '../../public/promo/promo-research.jpg'
+import EBikesPromo from '../../public/promo/electric-bikes-shaded.jpg'
 
 const IntroWrapper = styled.div`
   margin: 3vh 0 1vh 0;
@@ -50,6 +50,9 @@ export default function EBikesPage({ page, preview }) {
             <Header1>
               { electric_bikes.title[0].text }
             </Header1>
+          }
+          { electric_bikes._meta.uid === 'emtb-map' &&
+            <iframe width="800" height="533" frameborder="0" scrolling="no" allowfullscreen src="https://arcg.is/1LuLuj"></iframe>
           }          
           { electric_bikes.main_content && 
             <IntroWrapper>
@@ -66,7 +69,7 @@ export default function EBikesPage({ page, preview }) {
           bigWords="Electric Bikes"
           path="/topics/electric-bikes"
           smallWords="Explore More About"
-          source={ ResearchPromo }
+          source={ EBikesPromo }
         /> 
 
       </Wrapper>
