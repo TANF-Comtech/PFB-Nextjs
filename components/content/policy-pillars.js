@@ -1,5 +1,8 @@
 import MainContent from '../global/main-content'
 import RedActionItem from '../slices/action-item-red'
+import Promo from '../slices/promo'
+
+import EBikesPromo from '../../public/promo/electric-bikes-shaded.jpg'
 
 /**
  * <PolicyPillars>
@@ -37,9 +40,15 @@ const PolicyPillars = () => {
           path="/topics/sustainable-transportation"
           title="Promoting Sustainability"
           text="Providing resources for the bike industry to create more sustainable products."
-        />            
-                   
+        />              
       </MainContent>
+      <Promo 
+        bigWords="Electric Bikes"
+        key="90812098312"
+        path="/topics/electric-bikes"
+        smallWords="Explore Our Work"
+        source={ EBikesPromo }
+      /> 
     </>
   )
 }
