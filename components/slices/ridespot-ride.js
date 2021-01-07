@@ -125,9 +125,15 @@ const RideSpotRide = ({
       </Map>
       <RSContent>
         <RSData>
-          <RSTitle>{ title }</RSTitle>
-          <RSDistance>Distance: { distance }</RSDistance>
-          <RSInfo>{ owner }</RSInfo>
+          { title && 
+            <RSTitle>{ title }</RSTitle> 
+          }
+          { distance && 
+            <RSDistance>Distance: { distance }</RSDistance>
+          }
+          { owner && 
+            <RSInfo>{ owner }</RSInfo>
+          }
         </RSData>
         <RSArrow 
           src={ Arrow } 
