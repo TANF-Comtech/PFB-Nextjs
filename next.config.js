@@ -46,6 +46,16 @@ const nextConfig = {
         permanent: true
       },
       {
+        source: '/ebikes',
+        destination: '/topics/electric-bikes',
+        permanent: true
+      },
+      {
+        source: '/tariffs',
+        destination: '/trade-and-tariffs',
+        permanent: true
+      },      
+      {
         source: '/business-intelligence-hub-coalition-members',
         destination: '/members/business-intelligence-hub',
         permanent: true
