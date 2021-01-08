@@ -161,15 +161,17 @@ const RideSpotPromo = ({
       { payload &&
          <RSRidesContainer>
          { payloadArr.map( (ride) => {
-           return (
-             <RideSpotRide
-               distance={ ride.distance }
-               extLink={ ride.ridespot_link.url }
-               key={ randomID(1000000000) }
-               owner={ ride.organization.name[0].text }
-               title={ ride.title[0].text }
-             /> 
-           )
+           if (ride) {
+            return (
+              <RideSpotRide
+                distance={ ride.distance && ride.distance }
+                extLink={ ride.ridespot_link && ride.ridespot_link.url }
+                key={ randomID(1000000000) }
+                owner={ ride.organization && ride.organization.name[0].text }
+                title={ ride.title && ride.title[0].text }
+              /> 
+            )
+           }
          }) }                   
        </RSRidesContainer>   
       }

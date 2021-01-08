@@ -60,44 +60,53 @@ export default function LocationPage({ page, preview }) {
         {/* Check for slices on `body`, if body is present map over results */}
         {/* If `action_item` or `ridespot_promo` send data down to appropriate component */}
         {/* If neither conditions catch, send back placeholder data */}
-        { locations.body 
-          ? ( locations.body.map( (slice) => {
-            switch(slice.type) {
-              case 'action_item' :
-                return (
-                  <ActionItemGroup
-                    key={ randomID(10000000) }
-                    payload={ slice.fields }
-                  />
-                )
-              case 'ridespot_promo' :
-                return (
-                  <RideSpotPromo 
-                    isLocal="true"
-                    key={ randomID(10000000) }
-                    payload={ slice.primary } 
-                  />
-                )
-            }
-          }))
-          : (
-            <>
+        { locations.body && locations.body.map( (slice) => {
+          if(slice.type === 'action_item') {
+            return (
+              <ActionItemGroup
+                key={ randomID(10000000) }
+                payload={ slice.fields }
+              />
+            )
+          } 
+          else {
+            return ( 
               <ActionItemGroup
                 key={ randomID(10000000) }
                 payload={ actionItems }
               />
+            )
+          }
+        })}
+        { locations.body && locations.body.map( (slice) => {
+          if (slice.type === 'ridespot_promo') {
+            return (
+              <RideSpotPromo 
+                isLocal="true"
+                key={ randomID(10000000) }
+                payload={ slice.primary } 
+              />
+            )
+          } else {
+            return ( 
               <RideSpotPromo 
                 isLocal="false"
                 key={ randomID(10000000) }
                 payload={ rideSpotRides } 
               />
-            </>  
-          )
-        }
+            )
+          }
+        })}
 
         <MainContent>
-          <h2>PeopleForBikes Work in { locations.location[0].text }</h2>
-          <h3>News</h3>
+          { 
+            // Only print this title if we've got enough content in News
+            page[1].length > 1 &&
+            <>
+              <h2>PeopleForBikes Work in { locations.location[0].text }</h2>
+              <h3>News</h3>
+            </>
+          }
           
           { page[1] && page[1].map( (newsItem) => {
             
