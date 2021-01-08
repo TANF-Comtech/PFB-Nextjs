@@ -52,7 +52,7 @@ const nextConfig = {
       },
       {
         source: '/tariffs',
-        destination: '/trade-and-tariffs',
+        destination: '/topics/trade-and-tariffs',
         permanent: true
       },      
       {
@@ -178,6 +178,16 @@ const nextConfig = {
       {
         source: '/local-engagement-portal',
         destination: '/take-action/local-engagement-portal',
+        permanent: true
+      }, 
+      {
+        source: '/membercenter',
+        destination: '/log-in',
+        permanent: true
+      }, 
+      {
+        source: '/login',
+        destination: '/log-in',
         permanent: true
       }, 
     ]
