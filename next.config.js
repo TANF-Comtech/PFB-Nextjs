@@ -190,6 +190,11 @@ const nextConfig = {
         destination: '/log-in',
         permanent: true
       }, 
+      {
+        source: '/placesforbikes',
+        destination: '/local-innovation',
+        permanent: true
+      }
     ]
   }
 }
