@@ -194,6 +194,12 @@ const nextConfig = {
         source: '/placesforbikes',
         destination: '/local-innovation',
         permanent: true
+      },
+      {
+        source: '/weekly-survey-opt-out',
+        destination: '/take-action/weekly-survey-opt-out',
+        permanent: true
+        
       }
     ]
   }
