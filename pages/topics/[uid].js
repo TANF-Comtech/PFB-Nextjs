@@ -203,7 +203,7 @@ export default function TopicPage({ page, preview }) {
                     slice.fields && slice.fields.map( (pillar) => {
                       return(
                         <RedActionItem 
-                          path={ `/electric-bikes/${pillar.pillars._meta.uid}` }
+                          path={ pillar.pillars }
                           title={ pillar.pillars.title[0].text }
                           text={ pillar.pillar_subtext }
                         />
