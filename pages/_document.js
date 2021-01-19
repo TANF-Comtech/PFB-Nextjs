@@ -59,7 +59,7 @@ export default class MyDocument extends Document {
       <Html lang="en">
         <Head>
           <link rel="icon" href={ logo } sizes="any" type="image/svg+xml" />
-          <link rel="stylesheet" href="https://cloud.typography.com/6938898/7916412/css/fonts.css" />
+          <link rel="stylesheet" href="https://use.typekit.net/xgf1cpe.css" />
           <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&display=swap" />
           <script
             async

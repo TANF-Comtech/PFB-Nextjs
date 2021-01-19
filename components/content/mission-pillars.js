@@ -18,7 +18,7 @@ const SectionTitle = styled.h2`
 
 const Title = styled.h3`
   color: ${props => props.theme.blueBright };
-  font-family: ${props => props.theme.tungsten };
+  font-family: ${props => props.theme.dharma };
   font-size: 40px;
   font-weight: 300px;
   line-height: 40px;

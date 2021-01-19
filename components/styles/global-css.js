@@ -71,7 +71,7 @@ const GlobalStyle = createGlobalStyle`
     margin: 5vh auto;
   }
   h1, h2, h4, blockquote {
-    font-family: "Tungsten A", "Tungsten B", Arial, Helvetica, sans-serif;
+    font-family: 'dharma-gothic-e', Arial, Helvetica, sans-serif;
     font-style: normal;
   }
 

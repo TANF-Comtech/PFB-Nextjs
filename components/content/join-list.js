@@ -18,7 +18,7 @@ const SectionTitle = styled.h2`
 const Subtext = styled.span`
   color: white;
   display: block;
-  font-family: "Tungsten A", "Tungsten B", Arial, Helvetica, sans-serif;
+  font-family: ${ props => props.theme.dharma };
   font-size: 40px;
   font-weight: 600;
   line-height: 30px;

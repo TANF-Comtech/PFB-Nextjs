@@ -52,7 +52,7 @@ const Slide = styled.section`
   }   
   span {
     color: rgba(${props => props.headingRGBA ? props.headingRGBA : "255,255,255,1" });
-    font-family: "Tungsten A", "Tungsten B", Arial, Helvetica, sans-serif;
+    font-family: ${ props => props.theme.dharma };
     font-size: 30px;
     font-weight: 600;
     line-height: 25px;

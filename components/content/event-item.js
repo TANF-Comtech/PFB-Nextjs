@@ -7,7 +7,7 @@ const DateBlock = styled.div`
   background-color: ${props => props.theme.blueBright};
   display: flex;
   flex-direction: column;
-  font-family: ${props => props.theme.tungsten};
+  font-family: ${props => props.theme.dharma};
   font-weight: 700;
   justify-content: center;
   padding: 15px 40px;

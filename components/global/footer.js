@@ -57,7 +57,7 @@ const MenuContainer = styled.ul`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  font-family: ${props => props.theme.tungsten};
+  font-family: ${props => props.theme.dharma};
   justify-content: center;
   list-style: none;
   margin: 6vh 4vw 2vh 4vw;

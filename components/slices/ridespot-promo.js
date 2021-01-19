@@ -48,7 +48,7 @@ const RSTitle = styled.h2`
 
 const RSDeck = styled.h3`
   color: ${ props => props.theme.yellow };
-  font-family: ${ props => props.theme.tungsten };
+  font-family: ${ props => props.theme.dharma };
   font-size: 40px;
   font-weight: 600;
   line-height: 40px;

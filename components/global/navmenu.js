@@ -126,7 +126,7 @@ const MainNav = styled.ul`
 const MainNavItem = styled.li`
   cursor: pointer;
   font-size: 36px;
-  font-family: ${ props => props.theme.tungsten };
+  font-family: ${ props => props.theme.dharma };
   font-weight: 300;
   line-height: 32px;
   padding: 1vh 0;

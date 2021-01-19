@@ -26,8 +26,8 @@ const Variables = {
   xl: '1600px',
 
   // Fonts
-  tungsten: "'Tungsten A', 'Tungsten B', Arial, Helvetica, sans-serif",
-  montserrat: "'Montserrat', Arial, Helvetica, sans-serif",
+  dharma: "'dharma-gothic-e', Arial, Helvetica, sans-serif",
+  montserrat: "'montserrat', Arial, Helvetica, sans-serif",
 
   // Z-index
   zIndexNegative: '-10',
