@@ -62,8 +62,6 @@ export default function NewsPage({ page, preview }) {
   const { news } = page
   const { meta } = useContext(DefaultContext)
 
-  console.log(news)
-
   // Set up date
   let newDate
   if (news.publication_date) {
