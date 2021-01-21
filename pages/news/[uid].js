@@ -62,6 +62,8 @@ export default function NewsPage({ page, preview }) {
   const { news } = page
   const { meta } = useContext(DefaultContext)
 
+  console.log(news)
+
   // Set up date
   let newDate
   if (news.publication_date) {
@@ -113,7 +115,7 @@ export default function NewsPage({ page, preview }) {
               <RichText render={ news.main_content } linkResolver={ linkResolver } />
             </IntroWrapper>
           }
-          { news.topics &&
+          { news.topics.length > 1 &&
             <>
             { news.topics[0].topic !== null &&
               <strong>Related Topics:</strong>
@@ -134,7 +136,7 @@ export default function NewsPage({ page, preview }) {
             </ParagraphOfLinks>
             </>
           }            
-          { news.locations && 
+          { news.locations.length > 1 && 
             <>
             { news.locations[0].location !== null &&
               <strong>Related Locations:</strong>
