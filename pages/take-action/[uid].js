@@ -14,7 +14,7 @@ import SiteMeta from '../../components/meta/site-meta'
 import MainContent from '../../components/global/main-content'
 import Promo from '../../components/slices/promo'
 
-import ResearchPromo from '../../public/promo/promo-research.jpg'
+import ResearchPromo from '../../public/ridespot-bg.jpg'
 
 import FormImg01 from '../../public/form-images/PFB_Forms_01.jpg'
 import FormImg02 from '../../public/form-images/PFB_Forms_02.jpg'
@@ -85,8 +85,6 @@ export default function MembersPage({ page, preview }) {
   // Destructure page payload and meta from global context
   const { action } = page
   const { meta } = useContext(DefaultContext)
-
-  console.log(action)
 
   let imageSelection
   if(action.image_selection) {
