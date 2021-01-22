@@ -570,6 +570,66 @@ const GlobalStyle = createGlobalStyle`
     opacity: 1;
   }
 
+  /* SPARK FORM STYLING */
+  .spkactionform dd {
+    padding-top: 0.3vh;
+  }
+
+  .spkactionform dd label {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .spkactionform  dt {
+    padding-top: 2vh;
+  }
+
+  .spkactionform input {
+    padding: 5px 10px;
+  }
+
+  .spkactionform input[type="submit"] {
+    background-color: #D23823; 
+    border: none;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    font-family: 'montserrat' sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    min-width: 100px;
+    margin-top: 25px;
+    padding: 10px 35px;
+    text-align: center;
+    text-decoration: none !important;
+    text-transform: uppercase;
+  }
+
+  .spkactionform .select2-arrow b {
+    background-position: 0px 4px !important;  
+  }
+
+  .spkactionform .select2-container .select2-choice {
+    height: 35px;
+  }
+
+  .select2-container .select2-choice >.select2-chosen {
+    font-size: 14px !important;
+    height: 25px !important;
+  }
+
+  .select2-results li,
+  .select2-results .select2-result-label,
+  .select2-results, 
+  .select2-no-results, 
+  .select2-searching, 
+  .select2-ajax-error, 
+  .select2-selection-limit,
+  .select2-result-selectable .select2-match, 
+  .select2-result-unselectable .select2-match {
+    font-size: 14px !important;
+  }
+
 `;
 
 export default GlobalStyle;

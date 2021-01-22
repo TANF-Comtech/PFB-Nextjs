@@ -199,7 +199,11 @@ const nextConfig = {
         source: '/weekly-survey-opt-out',
         destination: '/take-action/weekly-survey-opt-out',
         permanent: true
-        
+      },
+      {
+        source: '/privacy-policy',
+        destination: '/privacy',
+        permanent: true
       }
     ]
   }
