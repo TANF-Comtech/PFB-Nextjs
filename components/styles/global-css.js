@@ -609,6 +609,16 @@ const GlobalStyle = createGlobalStyle`
     background-position: 0px 4px !important;  
   }
 
+  .spkactionform textarea {
+    font-size: 14px !important;
+    margin: 25px 0;
+    padding: 5px 10px;
+  }
+
+  .spkactionform select {
+    padding: 5px 10px;
+  }
+
   .spkactionform .select2-container .select2-choice {
     height: 35px;
   }
