@@ -1,11 +1,9 @@
 import { useContext } from 'react'
 import ErrorPage from 'next/error' 
 import styled from 'styled-components'
-import { RichText, } from 'prismic-reactjs'
 
 import { getActions, 
          getSingleActionPage } from '../../lib/queries/take-action'
-import { linkResolver } from '../../lib/utils'
 
 import DefaultContext from '../../context/default/default-context'
 
@@ -43,14 +41,10 @@ import FormImg24 from '../../public/form-images/PFB_Forms_24.jpg'
 import FormImg25 from '../../public/form-images/PFB_Forms_25.jpg'
 import FormImg26 from '../../public/form-images/PFB_Forms_26.jpg'
 
-const IntroWrapper = styled.div`
-  margin: 3vh 0 1vh 0;
-`
-
 const CenteredTitle = styled.h2`
   text-align: center;
   margin: 0 auto 3vh auto;
-  max-width: 700px;
+  max-width: 800px;
 `
 
 const FlexContainer = styled.section`

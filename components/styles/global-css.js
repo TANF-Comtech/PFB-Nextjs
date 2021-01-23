@@ -572,6 +572,7 @@ const GlobalStyle = createGlobalStyle`
 
   /* SPARK FORM STYLING */
   .spkactionform dd {
+    font-size: 14px;
     padding-top: 0.3vh;
   }
 
