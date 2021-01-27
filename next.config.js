@@ -199,7 +199,11 @@ const nextConfig = {
         source: '/weekly-survey-opt-out',
         destination: '/take-action/weekly-survey-opt-out',
         permanent: true
-        
+      },
+      {
+        source: '/peopleforbikes-board-and-committee-member-orientation/',
+        destination: '/board-orientation',
+        permanent: true
       }
     ]
   }
