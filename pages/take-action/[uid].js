@@ -2,6 +2,8 @@ import { useContext } from 'react'
 import ErrorPage from 'next/error' 
 import styled from 'styled-components'
 
+import { RichText } from 'prismic-reactjs'
+
 import { getActions, 
          getSingleActionPage } from '../../lib/queries/take-action'
 
@@ -45,6 +47,12 @@ const CenteredTitle = styled.h2`
   text-align: center;
   margin: 0 auto 3vh auto;
   max-width: 800px;
+`
+
+const BigPara = styled.p`
+  margin: 3vh auto;
+  max-width: 800px;
+  text-align: center;
 `
 
 const FlexContainer = styled.section`
@@ -132,6 +140,15 @@ export default function MembersPage({ page, preview }) {
             <CenteredTitle>
               { action.title[0].text }
             </CenteredTitle>
+          }
+          { action.main_content && 
+            <BigPara>
+              { action.main_content }
+            </BigPara>
+          }
+          {
+            action.long_content &&
+            <RichText render={ action.long_content } />  
           }
           <FlexContainer>
             { action.image_selection && 
