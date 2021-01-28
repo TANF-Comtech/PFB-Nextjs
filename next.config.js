@@ -221,6 +221,11 @@ const nextConfig = {
         source: '/join-people-bikes-coalition',
         destination: '/join',
         permanent: true
+      },
+      {
+        source: '/subcommitteememberorientation',
+        destination: '/board-orientation',
+        permanent: true
       }
     ]
   }
