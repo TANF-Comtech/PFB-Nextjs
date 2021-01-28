@@ -236,6 +236,16 @@ const nextConfig = {
         source: '/privacy-policy',
         destination: '/privacy',
         permanent: true
+      },
+      {
+        source: '/sell-in-and-sell-through-reports',
+        destination: '/members/monthly-sales-reports',
+        permanent: true
+      },
+      {
+        source: '/business-intelligence-hub',
+        destination: '/members/business-intelligence-hub',
+        permanent: true
       }
     ]
   }
