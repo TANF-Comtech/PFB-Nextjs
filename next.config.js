@@ -216,7 +216,11 @@ const nextConfig = {
         source: '/become-an-ambassador',
         destination: 'https://www.surveygizmo.com/s3/5446206/Ride-Spot-Ambassador-Application',
         permanent: true
-        
+      },
+      {
+        source: '/join-people-bikes-coalition',
+        destination: '/join',
+        permanent: true
       }
     ]
   }

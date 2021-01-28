@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import styled from "styled-components"
 
 import HeaderImage from '../global/header-image'
@@ -137,16 +138,18 @@ export default function JoinList() {
       </BoxContainer>      
 
       <HeaderImage source={ SuppliersBG }>
-        <h1>Suppliers</h1>
+        <h1>Corporate</h1>
         <Subtext>Create a Bright Future for Biking</Subtext>
       </HeaderImage>
       <BoxContainer>
-        <a href="mailto:erik@peopleforbikes.org?subject=Interest%20in%20PeopleForBikes%20Membership">
-          <Box bgColor="#D0021B">
-            <Text>Contact Us For Opportunities</Text>
-            <Arrow src={ WhiteArrow } width="46px" />
-          </Box>
-        </a>
+        <Link href="/members" passHref>
+          <a>
+            <Box bgColor="#D0021B">
+              <Text>Learn More About Membership</Text>
+              <Arrow src={ WhiteArrow } width="46px" />
+            </Box>
+          </a>
+        </Link>
       </BoxContainer>        
     </>
   )
