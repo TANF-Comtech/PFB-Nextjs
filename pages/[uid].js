@@ -187,11 +187,6 @@ export default function TheMonster({ page, preview }) {
         <PolicyPillars />
       }    
 
-      { // MEMBER CENTER
-        landing_page._meta.uid === 'members' && 
-        <MemberPillars />
-      }    
-
       { // RESEARCH STATS
         landing_page._meta.uid === 'research' && 
         <StatsList />
@@ -346,7 +341,11 @@ export default function TheMonster({ page, preview }) {
           } 
         })) : (<></>)
       }
-
+      
+      { // MEMBER CENTER PILLARS
+        landing_page._meta.uid === 'members' && 
+        <MemberPillars />
+      }    
 
       { // LOCAL INNOVATION RESEARCH PILLARS
         landing_page._meta.uid === 'local-innovation' &&
