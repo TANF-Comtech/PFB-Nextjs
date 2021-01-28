@@ -79,7 +79,7 @@ const ImageContainer = styled.div`
   max-width: 450px;
 `
 
-export default function MembersPage({ page, preview }) {
+export default function ActionForms({ page, preview }) {
   if( !page || page === null ) {
     return <ErrorPage statusCode={404} />
   }
@@ -123,7 +123,7 @@ export default function MembersPage({ page, preview }) {
   return (
     <>
       <SiteMeta
-        desc={ action.main_content ? ( `${ action.main_content[0].text.substring(0,180) } ... ` ) : ( meta.desc ) }
+        desc={ action.main_content ? ( `${ action.main_content.substring(0,180) } ... ` ) : ( meta.desc ) }
         title={ action.title ? ( `${ action.title[0].text } | People for Bikes` ) : ( meta.title ) }
         imgHeight={ meta.imgHeight }
         imgSrc={ meta.imgSrc }
