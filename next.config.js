@@ -1,12 +1,14 @@
 // next.config.js
 const withPlugins = require('next-compose-plugins')
 const withImages = require('next-images')
+
 const { 
   PHASE_DEVELOPMENT_SERVER, 
   PHASE_PRODUCTION_BUILD 
 } = require('next/constants')
 
 const nextConfig = {
+
   // Set redirects here, objs in arr as needed
   async redirects() {
     return [
@@ -204,6 +206,17 @@ const nextConfig = {
         source: '/peopleforbikes-board-and-committee-member-orientation/',
         destination: '/board-orientation',
         permanent: true
+      },
+      {
+        source: '/coalition-directory',
+        destination: '/coalition-directory',
+        permanent: true
+      },
+      {
+        source: '/become-an-ambassador',
+        destination: 'https://www.surveygizmo.com/s3/5446206/Ride-Spot-Ambassador-Application',
+        permanent: true
+        
       }
     ]
   }
