@@ -79,7 +79,7 @@ const MissionPillars = () => {
         <RedActionItem 
           path="/team"
           title="Meet Our Team"
-          text="Learn who is helping to deliver your next ride."
+          text="Discover who is helping to deliver your next ride."
         /> 
         <RedActionItem 
           path="/subcommittees"
@@ -87,10 +87,20 @@ const MissionPillars = () => {
           text="Help guide the world of bicycling forward."
         />
         <RedActionItem 
+          path="/board-orientation"
+          title="PeopleForBikes Board Orientation"
+          text="Learn how to effectively contribute to our organization."
+        />        
+        <RedActionItem 
           path="/board"
           title="Discover our Board"
           text="Our advisors come from all over the world of biking."
-        />            
+        />
+        <RedActionItem 
+          path="/coalition-members"
+          title="Meet Our Coalition Members"
+          text="See which companies support our mission directly."
+        />
       </MainContent>
     </>
   )

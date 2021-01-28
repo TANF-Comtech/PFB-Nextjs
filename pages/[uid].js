@@ -41,6 +41,7 @@ import ReportsList from '../components/content/reports-list'
 import StatsList from '../components/content/stats-list'
 import ResearchBanners from '../components/content/research-banners'
 import ResearchPillars from '../components/content/reesearch-pillars'
+import ToolkitPillars from '../components/content/toolkit-pillars'
 
 import ActionItemGroup from '../components/slices/action-item-group'
 import MissionPillars from '../components/content/mission-pillars'
@@ -264,6 +265,20 @@ export default function TheMonster({ page, preview }) {
             )
           }
 
+          // ORIENTATION
+          if (slice.__typename === 'Landing_pageBodyMission_content' &&
+            landing_page._meta.uid === 'board-orientation') {
+            return (
+              <>
+                <NumberedPillars 
+                  payload={ slice.fields } 
+                  title={ slice.primary.pillar_title }
+                />
+                <ToolkitPillars />
+              </>
+            )
+          }          
+
           // MISSION SLICE FOR LOCAL INNOVATION
           if (slice.__typename === 'Landing_pageBodyMission_content' &&
             landing_page._meta.uid === 'local-innovation') {
@@ -313,6 +328,7 @@ export default function TheMonster({ page, preview }) {
           }          
 
           // PROMO
+          // logic to catch policy and grant finder custom promos (with internal links)
           if( slice.__typename === "Landing_pageBodyPromo" ) {
             return ( 
               <Promo 

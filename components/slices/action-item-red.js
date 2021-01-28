@@ -8,7 +8,7 @@ import RedArrowWhiteBlock from '../../public/red-arrow-white-block.svg'
 
 const Container = styled.section`
   align-items: center;
-  background-color: ${ props => props.bgColor || props.theme.blueBright };
+  background-color: ${ props => props.bgColor || props.theme.midnightBlue };
   display: flex;
   flex-direction: column;
   justify-content: center;
