@@ -140,7 +140,7 @@ const TeamMember = ({
           }
           { path && 
             <EmailButton href={ linkResolver(path, true) }>
-              Email Me!
+              Email Me
             </EmailButton>
           }
         </ContentContainer>
