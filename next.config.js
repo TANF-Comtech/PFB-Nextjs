@@ -229,7 +229,8 @@ const nextConfig = {
       },
       {
         source: '/become-peopleforbikes-supplier',
-        destination: '/take-action/join-the-peopleforbikes-coalition'
+        destination: '/take-action/join-the-peopleforbikes-coalition',
+        permanent: true
       }
     ]
   }
