@@ -12,7 +12,7 @@ const PolicyPillars = () => {
       <MainContent
         contentPadding="4vh 4vw"
       >
-        <h2>Explore Member Content</h2>
+        <h2>Explore the Member Center</h2>
         <RedActionItem 
           path="/members/business-intelligence-hub"
           title="Business Intelligence Hub"
