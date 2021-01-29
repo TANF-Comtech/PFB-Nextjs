@@ -206,7 +206,7 @@ const StatsList = ({
                 <Link href={ `/statistics/${stat.node._meta.uid}` }>
                   <a>
                     <Text>
-                      { `${stat.node.title[0].text} Statisics` }
+                      { `${stat.node.title[0].text} Statistics` }
                     </Text>
                     <Arrow src={ WhiteArrow } width="46px" />
                   </a>
