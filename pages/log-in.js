@@ -155,7 +155,7 @@ function LoginPage() {
               <p>Don't close this tab!</p>
               <RedTextField onChange={(e)=>updateLoginCode(e.target.value)} placeholder="Login Code"/>
               {Boolean(errorState.length) && (
-                <Error>{errorState}</Error>
+                <Error dangerouslySetInnerHTML={{ __html: errorState }} />
               )}
               <WhiteButton
                 buttonBg="rgba(255,255,255,0)"
