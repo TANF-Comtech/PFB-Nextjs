@@ -137,7 +137,7 @@ function LoginPage() {
               <p>If you are a corporate member you will be emailed an access code to login.</p>
               <RedTextField onChange={(e)=>updateEmail(e.target.value)} placeholder="email"/>
               {Boolean(errorState.length) && (
-                <Error>{errorState}</Error>
+                <Markup content={ errorState } />
               )}
               <WhiteButton
                 buttonBg="rgba(255,255,255,0)"
