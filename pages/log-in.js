@@ -1,6 +1,8 @@
 import React, {useContext, useEffect, useState} from "react";
 import Router from 'next/router'
 import styled from "styled-components";
+import { Markup } from 'interweave'
+
 import Wrapper from '../components/global/wrapper'
 import InputButton from "../components/primitives/input-button";
 import {RedTextField} from '../components/primitives/text'
@@ -135,7 +137,7 @@ function LoginPage() {
               <p>If you are a corporate member you will be emailed an access code to login.</p>
               <RedTextField onChange={(e)=>updateEmail(e.target.value)} placeholder="email"/>
               {Boolean(errorState.length) && (
-                <Error>{errorState}</Error>
+                <Markup content={ errorState } />
               )}
               <WhiteButton
                 buttonBg="rgba(255,255,255,0)"
@@ -155,7 +157,7 @@ function LoginPage() {
               <p>Don't close this tab!</p>
               <RedTextField onChange={(e)=>updateLoginCode(e.target.value)} placeholder="Login Code"/>
               {Boolean(errorState.length) && (
-                <Error>{errorState}</Error>
+                <Markup content={ errorState } />
               )}
               <WhiteButton
                 buttonBg="rgba(255,255,255,0)"
