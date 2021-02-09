@@ -55,25 +55,6 @@ export const defaultData = {
       "title": [
         {
           "type": "heading2",
-          "text": "Find an Event in Your Area",
-          "spans": []
-        }
-      ],
-      "extended_text": null,
-      "text": "Pandemic shutdowns may have us staying in but we continue our social efforts digitally with our many events, which bring bikers together for spirited discussions.",
-      "icon": "Event (calendar icon)",
-      "link": {
-        "__typename": "Landing_page",
-        "_meta": {
-          "id": "02",
-          "uid": "events",
-        }
-      }
-    },
-    {
-      "title": [
-        {
-          "type": "heading2",
           "text": "Learn What's Happening in the World of Biking",
           "spans": []
         }
