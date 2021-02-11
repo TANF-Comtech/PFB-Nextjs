@@ -325,7 +325,7 @@ const NavMenu = ({ menuState, handleMenu }) => {
                   </MainNav>
                 </MainNavItem>
               </MainNav>
-              <MenuHeader>
+              {/* <MenuHeader>
                 <Link href="/topics">
                   <a onClick={ handleMenu }>
                     <MenuTitle>Explore Topics</MenuTitle>
@@ -347,7 +347,7 @@ const NavMenu = ({ menuState, handleMenu }) => {
                     <div key={ randomID(10000000) }></div>
                   )
                 })}                
-              </GridMicroFade>
+              </GridMicroFade> */}
             </>
           )}
         </NavContainer>
