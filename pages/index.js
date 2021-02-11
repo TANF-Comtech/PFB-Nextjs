@@ -12,7 +12,6 @@ import RideSpotPromo from '../components/slices/ridespot-promo'
 import Promo from '../components/slices/promo'
 import ColorBanner from '../components/global/color-banner'
 import Button from '../components/primitives/button'
-import EventsList from '../components/content/events-list'
 import Carousel from '../components/global/carousel'
 import NewsList from '../components/content/news-list'
 
@@ -93,8 +92,6 @@ const Arrow = styled.img`
 
 export default function Homepage({ page }) {
   const { homepage } = page
-
-  console.log(homepage)
 
   return (
     <Wrapper 

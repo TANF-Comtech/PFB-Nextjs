@@ -32,7 +32,7 @@ import JoinList from '../components/content/join-list'
 import TakeActionList from '../components/content/takeaction-list'
 import GrantsPillars from '../components/content/grants-pillars'
 import GrantsIconGrid from '../components/content/grants-icon-grid'
-import EventsListTemp from '../components/content/events-list-temp'
+import EventsList from '../components/content/events-list'
 import PolicyPillars from '../components/content/policy-pillars'
 import MemberPillars from '../components/content/member-pillars'
 import NumberedPillars from '../components/content/numbered-pillars'
@@ -195,15 +195,15 @@ export default function TheMonster({ page, preview }) {
       { // EVENTS
         landing_page._meta.uid === 'events' && 
         <>
-          { landing_page.data[2].allEvents.edges && <EventsListTemp 
+          { landing_page.data[2].allEvents.edges && <EventsList
             eventTitle="Virtual Events"
             payload={ landing_page.data[2].allEvents.edges }
           /> }
-          { landing_page.data[0].allEvents.edges && <EventsListTemp 
+          { landing_page.data[0].allEvents.edges && <EventsList 
             eventTitle="PeopleForBikes Events"
             payload={ landing_page.data[0].allEvents.edges }
           /> }
-          { landing_page.data[1].allEvents.edges && <EventsListTemp 
+          { landing_page.data[1].allEvents.edges && <EventsList
             eventTitle="Sponsored Events"
             payload={ landing_page.data[1].allEvents.edges }
           /> }

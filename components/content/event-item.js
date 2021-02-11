@@ -102,6 +102,9 @@ const EventItem = ({
   title,
   text
 }) => {
+
+  console.log(text)
+
   return (
     <Container>
       <DateBlock>
@@ -112,16 +115,15 @@ const EventItem = ({
 
       <ContentContainer>
         { !path ? 
-          ( <Title>{ title }</Title> )  :
+          ( title && <Title>{ title }</Title> )  :
           (
             <Link href={ path }>
               <a>
-                <Title>{ title }</Title>
+                { title && <Title>{ title }</Title> }
               </a>
             </Link>
           )
         }
-        { text && <Text>{ `${text.substring(0,300)} ...` }</Text> }
       </ContentContainer>
     </Container>
   )
