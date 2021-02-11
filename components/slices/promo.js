@@ -40,7 +40,7 @@ const ImageContainer = styled.section`
     font-family: ${ props => props.theme.dharma };
     font-size: 40px;
     font-weight: 600;
-    line-height: 30px;
+    line-height: 40px;
     letter-spacing: 1px;
     margin: 0;
     text-transform: uppercase;
@@ -48,13 +48,13 @@ const ImageContainer = styled.section`
   @media screen and (min-width: 320px) {
     span {
       font-size: calc(40px + 20 * ((100vw - 320px) / 880));
-      line-height: calc(30px + 20 * ((100vw - 320px) / 880));
+      line-height: calc(40px + 20 * ((100vw - 320px) / 880));
     }
   }
   @media screen and (min-width: 1200px) {
     span {
       font-size: 60px;
-      line-height: 50px;
+      line-height: 60px;
     }
   } 
 `

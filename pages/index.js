@@ -94,6 +94,8 @@ const Arrow = styled.img`
 export default function Homepage({ page }) {
   const { homepage } = page
 
+  console.log(homepage)
+
   return (
     <Wrapper 
       postTitle="People for Bikes Homepage"
@@ -192,7 +194,6 @@ export default function Homepage({ page }) {
             )
           }
       })}  
-      
 
       { homepage.news &&
         <>
@@ -217,27 +218,20 @@ export default function Homepage({ page }) {
         </>
       }
 
-      { homepage.events &&
-        <>
-          <BigSectionTitle>PeopleForBikes <span>Events</span></BigSectionTitle> 
-          <EventsList 
-            payload={ homepage.events } 
-          />
-          <Button
-            buttonAlign="center"
-            buttonBg="#D0021B"
-            buttonBorder="none"
-            buttonColor="white"
-            buttonFontSize="24px"
-            buttonMargin="0 0 50px 0"
-            buttonPadding="10px 30px"
-            buttonTextTransform="uppercase"
-            href="/events"
-          >
-            See All Events
-          </Button>            
-        </>
-      }
+      { homepage.body &&
+        homepage.body.map( (slice) => {
+          if( slice.type === "event_promo" ) {
+            return ( 
+              <Promo 
+                bigWords={ slice.primary.bottom_text }
+                key={ randomID(4132168613) }
+                path={ slice.primary.link }
+                smallWords={ slice.primary.top_text }
+                source={ slice.primary.main_image.url }
+              /> 
+            )
+          }
+      })}  
 
       { homepage.body &&
         homepage.body.map( (slice) => {
