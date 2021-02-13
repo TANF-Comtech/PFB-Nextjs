@@ -1,4 +1,4 @@
-import Prismic from 'prismic-javascript'
+import Prismic from '@prismicio/client'
 import { REF_API_URL, API_TOKEN } from '../../lib/api'
 import { linkResolver } from '../../lib/utils'
 
@@ -41,6 +41,8 @@ const Client = (req = null) =>
 const Preview = async (req, res) => {
   const { token: ref, documentId } = req.query;
 
+  console.log('The ref: ', ref, ' & the docID: ', documentID)
+
   // Uses getPreviewResolver to figure out where to send user
   const redirectUrl = await Client(req)
     .getPreviewResolver(ref, documentId)
@@ -57,12 +59,12 @@ const Preview = async (req, res) => {
   // Redirect the user to the share endpoint from same origin. This is
   // necessary due to a Chrome bug:
   // https://bugs.chromium.org/p/chromium/issues/detail?id=696204
-  // res.writeHead(302, { Location: `${redirectUrl}`  })
-  res.write(
-    `<!DOCTYPE html><html><head><meta http-equiv="Refresh" content="0; url=${url}" />
-    <script>window.location.href = '${url}'</script>
-    </head>`
-  )
+  res.writeHead(302, { Location: `${redirectUrl}`  })
+  // res.write(
+  //   `<!DOCTYPE html><html><head><meta http-equiv="Refresh" content="0; url=${url}" />
+  //   <script>window.location.href = '${url}'</script>
+  //   </head>`
+  // )
 
   res.end();
 };
