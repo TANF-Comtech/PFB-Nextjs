@@ -74,6 +74,7 @@ export default class MyDocument extends Document {
                 `,
             }}
           />
+          <script async defer src="https://static.cdn.prismic.io/prismic.js?new=true&repo=peopleforbikes"></script>
         </Head>
         <body>
           <Main />
