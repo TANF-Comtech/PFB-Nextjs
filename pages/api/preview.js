@@ -1,33 +1,5 @@
-import Prismic from '@prismicio/client'
-import { REF_API_URL, API_TOKEN } from '../../lib/api'
+import { PrismicClient } from '../../lib/api'
 import { linkResolver } from '../../lib/utils'
-
-/**
- * createClientOptions()
- * 
- * This function makes sure that prismic receives the request and access token properly
- * 
- * @param {*} req 
- * @param {*} prismicAccessToken 
- */
-const createClientOptions = (req = null, prismicAccessToken = null) => {
-  const reqOption = req ? { req } : {};
-  const accessTokenOption = prismicAccessToken ? { accessToken: prismicAccessToken } : {};
-  return {
-    ...reqOption,
-    ...accessTokenOption,
-  };
-};
-
-/**
- * Client()
- * 
- * This function creates the specific connection to Prismic
- * 
- * @param {*} req 
- */
-const Client = (req = null) =>
-  Prismic.client(REF_API_URL, createClientOptions(req, API_TOKEN));
 
 /**
  * Preview()
@@ -41,10 +13,8 @@ const Client = (req = null) =>
 const Preview = async (req, res) => {
   const { token: ref, documentId } = req.query;
 
-  console.log('The ref: ', ref, ' & the docID: ', documentID)
-
   // Uses getPreviewResolver to figure out where to send user
-  const redirectUrl = await Client(req)
+  const redirectUrl = await PrismicClient(req)
     .getPreviewResolver(ref, documentId)
     .resolve(linkResolver, "/");
 
@@ -59,12 +29,15 @@ const Preview = async (req, res) => {
   // Redirect the user to the share endpoint from same origin. This is
   // necessary due to a Chrome bug:
   // https://bugs.chromium.org/p/chromium/issues/detail?id=696204
-  res.writeHead(302, { Location: `${redirectUrl}`  })
-  // res.write(
-  //   `<!DOCTYPE html><html><head><meta http-equiv="Refresh" content="0; url=${url}" />
-  //   <script>window.location.href = '${url}'</script>
-  //   </head>`
-  // )
+  // res.writeHead(302, { Location: `${redirectUrl}`  })
+  res.write(
+    `<!DOCTYPE html>
+     <html>
+      <head>
+        <meta http-equiv="Refresh" content="0; url=${redirectUrl}" />
+        <script>window.location.href = '${redirectUrl}'</script>
+      </head>`
+  )
 
   res.end();
 };
