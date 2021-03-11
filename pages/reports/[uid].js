@@ -147,8 +147,8 @@ export default function ReportPage({ page, preview }) {
             <>
               <strong>Full Report (Link):</strong>
               <p>
-                <Link href={ report.link.url } passHref >
-                  <a target="_blank" rel="noopener">
+                <Link href={ linkResolver(report.link) } passHref>
+                  <a>
                     <strong>Link to Report</strong>
                   </a>
                 </Link>
