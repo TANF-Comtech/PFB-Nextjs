@@ -55,15 +55,15 @@ export const defaultData = {
       "title": [
         {
           "type": "heading2",
-          "text": "Learn What's Happening in the World of Biking",
+          "text": "Discover an Electric Bike Ride Near You",
           "spans": []
         }
       ],
       "extended_text": null,
-      "text": "Find great electric bike rides around the United States.",
+      "text": "Find great electric bike rides around the United States with our lists and helpful mapping tools.",
       "icon": "E-bikes (battery icon)",
       "link": {
-        "__typename": "electric_bikes",
+        "__typename": "Electric Bikes",
         "_meta": {
           "id": "02",
           "uid": "rides-and-routes",
@@ -74,7 +74,7 @@ export const defaultData = {
       "title": [
         {
           "type": "heading2",
-          "text": "Discover a new electric bike ride near you",
+          "text": "Learn What's Happening in the World of Biking",
           "spans": []
         }
       ],
