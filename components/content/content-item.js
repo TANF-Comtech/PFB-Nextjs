@@ -4,6 +4,8 @@ import styled from "styled-components";
 
 import Button from "../primitives/button"
 
+import StandinImage from '../../public/pfb-news-standin.jpg'
+
 const Container = styled.section`
   align-items: flex-start;
   border-bottom: 1px solid rgb(216,216,216);
@@ -84,14 +86,22 @@ const ContentItem = ({
   title,
   text
 }) => {
+  console.log(image)
   return (
     <Container>
-      { image && 
+      { image.url ? (
         <Image 
           alt={ image.alt ? image.alt : 'Bike-oriented image' }
           loading="lazy"
           src={ image['1x'] ? image['1x'].url : image.url } 
         /> 
+        ) : (
+        <Image 
+          alt={ 'Two women riding their road bikes in spandex' }
+          loading="lazy"
+          src={ StandinImage } 
+        /> 
+        )
       }
       <ContentContainer>
         { !path ? 
