@@ -10,6 +10,8 @@ import ImageSquare from '../global/image-square'
 import Logo from '../global/logo'
 import LogoType from '../global/logotype'
 
+import ShareIcon from '../../public/icons/share.svg'
+
 const NavContainer = styled.nav`
   background-color: #fff;
   bottom: 0;
@@ -184,6 +186,22 @@ const LogoContainer = styled.section`
   opacity: 0;
 `
 
+const AnchorAlign = styled.a`
+  align-items: center;
+  display: flex;
+
+  svg {
+    fill: ${props => props.theme.black };
+    margin-left: 12px;
+    width: 15px;
+    transition: 0.2s ease-in-out;
+
+    &:hover {
+      fill: ${props => props.theme.red };
+    }
+  }
+`
+
 /**
  * <NavMenu>
  * 
@@ -323,6 +341,15 @@ const NavMenu = ({ menuState, handleMenu }) => {
                       </Link>
                     </MainSubNavItem>                                                        
                   </MainNav>
+                </MainNavItem>
+                <MainNavItem>
+                  <AnchorAlign href="https://store.peopleforbikes.org/" rel="nofollow" target="_blank">
+                    Shop Merch at Our Store 
+                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" viewBox="0 0 32 32" enable-background="new 0 0 32 32" >
+                      <path d="M2 30V2h17c0.553 0 1-0.447 1-1s-0.447-1-1-1H2C0.896 0 0 0.896 0 2v28c0 1.104 0.896 2 2 2h28c1.104 0 2-0.896 2-2V13c0-0.553-0.447-1-1-1s-1 0.447-1 1v17H2z"/>
+                      <path d="M32 7c0 0.553-0.447 1-1 1s-1-0.447-1-1V3.414L16.707 16.707C16.526 16.888 16.276 17 16 17c-0.553 0-1-0.447-1-1 0-0.276 0.112-0.526 0.293-0.707L28.586 2H25c-0.553 0-1-0.447-1-1s0.447-1 1-1h6c0.553 0 1 0.447 1 1V7z"/>
+                    </svg>
+                  </AnchorAlign>
                 </MainNavItem>
               </MainNav>
               {/* <MenuHeader>
