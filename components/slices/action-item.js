@@ -95,7 +95,7 @@ const ActionItem = ({
   title,
   text
 }) => {
-  console.log(path)
+  
   return (
     <Container>
       { icon === 'Action (exclamation icon)' && <Icon src={ ActionIcon } alt="Exclamation Icon" /> }
