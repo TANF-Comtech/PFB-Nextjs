@@ -60,6 +60,25 @@ export const defaultData = {
         }
       ],
       "extended_text": null,
+      "text": "Find great electric bike rides around the United States.",
+      "icon": "E-bikes (battery icon)",
+      "link": {
+        "__typename": "electric_bikes",
+        "_meta": {
+          "id": "02",
+          "uid": "rides-and-routes",
+        }
+      }
+    },
+    {
+      "title": [
+        {
+          "type": "heading2",
+          "text": "Discover a new electric bike ride near you",
+          "spans": []
+        }
+      ],
+      "extended_text": null,
       "text": "Ready to learn about how your next great ride comes into being? Check out the latest work from the whole PeopleForBikes team. We're advancing polices, helping to build infrastructure and need your help.",
       "icon": "News (newspaper icon)",
       "link": {
