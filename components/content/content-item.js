@@ -86,7 +86,6 @@ const ContentItem = ({
   title,
   text
 }) => {
-  console.log(image)
   return (
     <Container>
       { image.url ? (
