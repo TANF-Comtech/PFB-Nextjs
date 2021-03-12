@@ -44,6 +44,7 @@ import ResearchPillars from '../components/content/reesearch-pillars'
 import ToolkitPillars from '../components/content/toolkit-pillars'
 
 import ActionItemGroup from '../components/slices/action-item-group'
+import RedActionItem from '../components/slices/action-item-red'
 import MissionPillars from '../components/content/mission-pillars'
 import Promo from '../components/slices/promo'
 import ColorBanner from '../components/global/color-banner'
@@ -130,7 +131,20 @@ export default function TheMonster({ page, preview }) {
           }
         </>
       )}
-      
+
+      { // MEMBER CENTER PILLAR - Up Front
+        landing_page._meta.uid === 'members' && 
+        <MainContent
+          contentPadding="4vh 4vw 0 4vw"
+        >
+          
+          <RedActionItem 
+            path="/members/business-intelligence-hub"
+            title="Business Intelligence Hub"
+            text="Explore our dashboard for insights into the bicycle industry."
+          />
+        </MainContent>
+      }   
 
       { // NEWS
         landing_page._meta.uid === 'news' &&  
