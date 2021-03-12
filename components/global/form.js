@@ -27,13 +27,11 @@ function SignUpForm() {
           id="newsletter-name"
           name="name"
           placeholder="Name"
-          ref={signup}
         />
         <RedTextField
           id="newsletter-email"
           name="email"
           placeholder="Email"
-          ref={signup}
         />
         <WhiteButton
           buttonBg="rgba(255,255,255,0)"
