@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { useForm } from "react-hook-form";
 
-import {RedTextField} from "../primitives/text";
+import { RedTextField } from "../primitives/text";
 import InputButton from "../primitives/input-button";
 
 const FormContainer = styled.form`
@@ -21,13 +20,9 @@ const WhiteButton = styled(InputButton)`
 `;
 
 function SignUpForm() {
-  const { signup, handleSubmit } = useForm();
-
-  const onSignupSubmit = (data) => console.log(data); // no real processing yet
-
   return (
     <>
-      <FormContainer onSubmit={handleSubmit(onSignupSubmit)}>
+      <FormContainer>
         <RedTextField
           id="newsletter-name"
           name="name"
