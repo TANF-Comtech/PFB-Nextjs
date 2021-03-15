@@ -6,6 +6,7 @@ import SignUpForm from "./form"
 import SocialIcon from './social'
 import Logo from './logo'
 import LogoType from './logotype'
+import Rule from '../primitives/rule'
 
 import fb from '../../public/socials/fb.svg'
 import insta from '../../public/socials/insta.svg'
@@ -39,6 +40,7 @@ const Container = styled.section`
 const StripeMenu = styled.div`
   background-color: ${props => props.theme.redAccent};
   min-width: 250px;
+  padding: 6vh 0;
 
   @media screen and (min-width: 320px) {
     min-width: calc(250px + 100 * ((100vw - 320px) / 880));
@@ -60,7 +62,7 @@ const MenuContainer = styled.ul`
   font-family: ${props => props.theme.dharma};
   justify-content: center;
   list-style: none;
-  margin: 6vh 4vw 2vh 4vw;
+  margin: 0vh 4vw 2vh 4vw;
 
   @media (min-width: 768px) {
     align-items: flex-start;
@@ -94,7 +96,7 @@ const SocialContainer = styled.section`
   display: grid;
   grid-gap: 5px;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  margin: 0 auto 6vh auto;
+  margin: 2vh auto;
   max-width: 210px;
 
   @media screen and (min-width: 320px) {
@@ -102,7 +104,7 @@ const SocialContainer = styled.section`
   }
   @media (min-width: 768px) {
     grid-template-columns: 1fr 1fr 1fr;
-    margin: 0 3.5vw 8vh 3.5vw;
+    margin: 2vh 3.5vw 2vh 3.5vw;
     max-width: calc(150px + 30 * ((100vw - 320px) / 880));
   }
   @media screen and (min-width: 1200px) {
@@ -139,6 +141,27 @@ const SignUpFooter = styled.footer`
   padding-bottom: 2vh;
 `
 
+const ContactBox = styled.p`
+  color: white;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.5;
+  margin: 2vh 4vw;
+  text-align: center;
+
+  @media (min-width: 768px) {
+    margin: 2vh 4vw;
+    text-align: left;
+  }
+
+  a, a:visited, a:focus, a:active, a:hover {
+    color: white;
+    font-family: ${props => props.theme.montserrat};
+    font-size: 18px;
+    text-decoration: none;
+  }
+`
+
 function Footer() {
   return (
     <>
@@ -153,6 +176,12 @@ function Footer() {
               <li><Link href="/join"><a>Join</a></Link></li>
               <li><Link href="/members"><a>Members</a></Link></li>
             </MenuContainer>
+            <Rule 
+              bgColor="#fff" 
+              maxWidth="250px"
+              maxWidthMobile="700px"
+              padding="5px 4vw"
+            />
             <SocialContainer>
               <SocialIcon 
                 url="https://www.facebook.com/PeopleForBikes/" 
@@ -175,6 +204,28 @@ function Footer() {
                 source={ yt } 
                 alt="YouTube Logo" />
             </SocialContainer>
+            <Rule 
+              bgColor="#fff" 
+              maxWidth="250px"
+              maxWidthMobile="700px"
+              padding="5px 4vw"
+            />
+            <ContactBox>
+              <a href="mailto:info@peopleforbikes.org?subject=Website%20Inquiry">info@peopleforbikes.org</a>
+              <br />
+              <a title="PeopleForBikes Phone Number" href="tel:303-449-4893">(303) 449-4893</a>
+            </ContactBox>
+            <Rule 
+              bgColor="#fff" 
+              maxWidth="250px"
+              maxWidthMobile="700px"
+              padding="5px 4vw"
+            />
+            <ContactBox>
+              P.O. Box 2359
+              <br />
+              Boulder, CO 80306
+            </ContactBox>
           </StripeMenu>
           <SignUpContainer>
             <SignUpFooter>
