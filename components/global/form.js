@@ -119,8 +119,7 @@ function SignUpForm() {
           integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
           crossOrigin="anonymous"></script>
         <script src="https://action.peopleforbikes.org/assets/js/widget.js/?id=111276" async="" type="text/javascript"></script>
-      </FormContainer>
-      
+      </FormContainer> 
     </>
   );
 }

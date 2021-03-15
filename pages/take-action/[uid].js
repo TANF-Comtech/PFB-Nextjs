@@ -91,15 +91,15 @@ export default function ActionForms({ page, preview }) {
   let imageSelection
   if(action.image_selection) {
     switch (action.image_selection) {
-      case '01' : imageSelection = FormImg01; break;
-      case '02' : imageSelection = FormImg02; break;
-      case '03' : imageSelection = FormImg03; break;
-      case '04' : imageSelection = FormImg04; break;
-      case '05' : imageSelection = FormImg05; break;
-      case '06' : imageSelection = FormImg06; break;
-      case '07' : imageSelection = FormImg07; break;
-      case '08' : imageSelection = FormImg08; break;
-      case '09' : imageSelection = FormImg09; break;
+      case '1' : imageSelection = FormImg01; break;
+      case '2' : imageSelection = FormImg02; break;
+      case '3' : imageSelection = FormImg03; break;
+      case '4' : imageSelection = FormImg04; break;
+      case '5' : imageSelection = FormImg05; break;
+      case '6' : imageSelection = FormImg06; break;
+      case '7' : imageSelection = FormImg07; break;
+      case '8' : imageSelection = FormImg08; break;
+      case '9' : imageSelection = FormImg09; break;
       case '10' : imageSelection = FormImg10; break;
       case '11' : imageSelection = FormImg11; break;
       case '12' : imageSelection = FormImg12; break;
@@ -119,7 +119,7 @@ export default function ActionForms({ page, preview }) {
       case '26' : imageSelection = FormImg26; break;
     }
   }
-  
+
   return (
     <>
       <SiteMeta
@@ -151,10 +151,12 @@ export default function ActionForms({ page, preview }) {
             <RichText render={ action.long_content } />  
           }
           <FlexContainer>
-            { action.image_selection && 
+            { action.image_selection && <>
+              {console.log(action.image_selection)}
               <ImageContainer>
                 <img src={ imageSelection } alt="Bike centric image with people present" />
               </ImageContainer>
+              </>
             }
             <FormContainer>
               { action.form_id &&

@@ -581,7 +581,7 @@ const GlobalStyle = createGlobalStyle`
     line-height: 1.5;
   }
 
-  .spkactionform  dt {
+  .spkactionform dt {
     padding-top: 2vh;
   }
 
@@ -612,8 +612,10 @@ const GlobalStyle = createGlobalStyle`
 
   .spkactionform textarea {
     font-size: 14px !important;
-    margin: 25px 0;
+    margin: 5px 0;
     padding: 5px 10px;
+    width: 100%;
+    min-height: 20vh;
   }
 
   .spkactionform select {
