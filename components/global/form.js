@@ -113,7 +113,7 @@ function SignUpForm() {
   return (
     <>
       <FormContainer>
-        <div id="wsd-root" class="spkactionform"></div>
+        <div id="wsd-root" className="spkactionform"></div>
         <script
           src="https://code.jquery.com/jquery-3.5.1.min.js"
           integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
