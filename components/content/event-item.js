@@ -103,8 +103,6 @@ const EventItem = ({
   text
 }) => {
 
-  console.log(text)
-
   return (
     <Container>
       <DateBlock>
