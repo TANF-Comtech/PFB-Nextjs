@@ -1,6 +1,7 @@
 import { Date as ParseDate } from 'prismic-reactjs'
 
-import { setDateSuffix } from '../../lib/utils'
+import { setDateSuffix } from '../../lib/utils/setDateSuffix'
+import { dataFormatter } from '../../lib/algolia/dataFormatter'
 
 import MainContent from '../global/main-content'
 import ContentItem from './content-item'
@@ -27,13 +28,13 @@ const NewsList = ({
         } else {
           newDate = new Date(ParseDate(news[nodeName]._meta.lastPublicationDate ))
         }          
-        return (
+        return ( 
           <ContentItem 
             date={ `${newDate.toLocaleString('en-us', { month: 'long' } )} 
                     ${setDateSuffix(newDate.getDate())}, 
                     ${newDate.getFullYear()}` }
             key={ news[nodeName]._meta.id }
-            image={ news[nodeName].header_image && news[nodeName].header_image }
+            image={ news[nodeName].header_image ? news[nodeName].header_image : null }
             path={ `/news/${news[nodeName]._meta.uid}` }
             text={ news[nodeName].main_content[0].type === "paragraph" ? news[nodeName].main_content[0].text : "" }
             title={ news[nodeName].title[0].text }

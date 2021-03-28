@@ -5,7 +5,8 @@ import { RichText, Date as ParseDate } from 'prismic-reactjs'
 import styled from 'styled-components'
 
 import { getTopics, getSingleTopicPage } from '../../lib/queries/topics'
-import { randomID, setDateSuffix, linkResolver } from '../../lib/utils'
+import { randomID, linkResolver } from '../../lib/utils'
+import { setDateSuffix } from '../../lib/utils/setDateSuffix'
 
 import DefaultContext from '../../context/default/default-context'
 

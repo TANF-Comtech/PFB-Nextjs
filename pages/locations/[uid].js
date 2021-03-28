@@ -3,7 +3,8 @@ import { useContext } from 'react'
 import { Date as ParseDate } from 'prismic-reactjs'
 
 import { getLocationsNoImages, getSingleLocationsPage } from '../../lib/queries/locations'
-import { randomID, setDateSuffix } from '../../lib/utils'
+import { randomID } from '../../lib/utils'
+import { setDateSuffix } from '../../lib/utils/setDateSuffix'
 
 import DefaultContext from '../../context/default/default-context'
 

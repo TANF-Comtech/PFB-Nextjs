@@ -6,7 +6,8 @@ import Link from 'next/link'
 
 import { getAllNews, 
          getSingleNewsPage } from '../../lib/queries/news'
-import { linkResolver, setDateSuffix } from '../../lib/utils'
+import { linkResolver } from '../../lib/utils'
+import { setDateSuffix } from '../../lib/utils/setDateSuffix'
 
 import DefaultContext from '../../context/default/default-context'
 
