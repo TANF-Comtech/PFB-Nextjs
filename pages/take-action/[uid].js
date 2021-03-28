@@ -152,7 +152,6 @@ export default function ActionForms({ page, preview }) {
           }
           <FlexContainer>
             { action.image_selection && <>
-              {console.log(action.image_selection)}
               <ImageContainer>
                 <img src={ imageSelection } alt="Bike centric image with people present" />
               </ImageContainer>
