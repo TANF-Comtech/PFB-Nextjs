@@ -4,7 +4,7 @@ import CustomErrorPage from '../components/global/404'
 
 import { getSingleLandingPage, 
          getLandingPages } from '../lib/queries/landing-page'
-import { newsTopTwenty  } from '../lib/queries/news'
+import { getAllNewsForLandingPage } from '../lib/queries/news'
 import { getLocations } from '../lib/queries/locations'
 import { getTopics } from '../lib/queries/topics'
 import { getRides } from '../lib/queries/rides'
@@ -49,6 +49,9 @@ import MissionPillars from '../components/content/mission-pillars'
 import Promo from '../components/slices/promo'
 import ColorBanner from '../components/global/color-banner'
 import MainContent from '../components/global/main-content'
+
+import { AlgoliaIndex } from '../lib/algolia/algoliaClient'
+import { dataFormatter } from '../lib/algolia/dataFormatter'
 
 /**
  * TheMonster()
@@ -392,7 +395,13 @@ export async function getStaticProps({ params, preview = false, previewData }) {
 
   // Certain pages need extra custom queries, add them on
   if(params.uid === 'news') {
-    pageData.landing_page.data = await newsTopTwenty(params.uid, previewData)
+    
+    pageData.landing_page.data = await getAllNewsForLandingPage(params.uid, previewData)
+
+    // Format and send results to Algolia
+    const algoliaFormattedData = dataFormatter(pageData.landing_page.data)
+    await AlgoliaIndex.saveObjects(algoliaFormattedData)
+
   } else if(params.uid === 'locations') {
     pageData.landing_page.data = await getLocations(params.uid, previewData)
   } else if(params.uid === 'topics') {

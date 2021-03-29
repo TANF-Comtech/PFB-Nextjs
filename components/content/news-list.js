@@ -1,7 +1,6 @@
 import { Date as ParseDate } from 'prismic-reactjs'
 
 import { setDateSuffix } from '../../lib/utils/setDateSuffix'
-import { dataFormatter } from '../../lib/algolia/dataFormatter'
 
 import MainContent from '../global/main-content'
 import ContentItem from './content-item'
@@ -18,7 +17,7 @@ const NewsList = ({
   nodeName = 'news_item',
   payload
 }) => {
-
+  
   return (
     <MainContent>
       { payload.map( (news) => { 

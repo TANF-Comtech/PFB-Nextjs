@@ -88,19 +88,18 @@ const ContentItem = ({
 }) => {
   return (
     <Container>
-      { image.url ? (
-        <Image 
+      { image !== null && <Image 
           alt={ image.alt ? image.alt : 'Bike-oriented image' }
           loading="lazy"
           src={ image['1x'] ? image['1x'].url : image.url } 
         /> 
-        ) : (
+      }
+      { image === null && 
         <Image 
           alt={ 'Two women riding their road bikes in spandex' }
           loading="lazy"
           src={ StandinImage } 
         /> 
-        )
       }
       <ContentContainer>
         { !path ? 
