@@ -2,14 +2,14 @@ import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import useScrollPosition from '@react-hook/window-scroll'
 import Link from 'next/link'
-
-import logoutRequest from "../../lib/auth/logoutRequest"
 import Router from 'next/router'
+
+import AuthContext from "../../context/auth/auth-context"
+import logoutRequest from "../../lib/auth/logoutRequest"
 
 import LogoVertical from "../global/logo-vertical"
 import NavMenu from "../global/navmenu"
 import GlobalBar from './globalbar'
-import AuthContext from "../../context/auth/auth-context"
 
 const Bar = styled.section`
   box-shadow: 0 2px 5px rgba(0,0,0,.2);
@@ -106,30 +106,32 @@ function NavBar() {
   // Capture scroll position, so we can know when to fade out navbar
   const scrollY = useScrollPosition();
 
-  // Menu opening state change, send down men
+  // Menu opening state change, send state down to <Navmenu>
   const [menu, setMenu] = useState(false);
   const handleMenu = () => {
     setMenu(!menu);
   };
 
+  // Logout for authenticated users
   const logout = () =>{
     logoutRequest().then(data => {
-      if(data.status===true){
-        authContext.updateAuthContext({"user":{
+      if(data.status===true) {
+        authContext.updateAuthContext( { 
+          "user": {
             "email": data?.email,
             "name": data?.name,
             "affiliation":data?.affiliation,
-        },
-        "loggedIn":false
-      });
-      Router.push('/')
+          },
+          "loggedIn":false
+        });
+        Router.push('/')
       }   
-      })
+    })
   }
   
-
+  // Locks the body while menu is open
   useEffect( () => {
-    if(menu === true) {
+    if( menu === true ) {
       document.body.style.overflowY = "hidden";
     } else {
       document.body.style.overflowY = "scroll";

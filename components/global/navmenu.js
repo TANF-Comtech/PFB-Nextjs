@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import styled, { keyframes } from 'styled-components'
 import { useQuery, gql } from '@apollo/client'
 import { RichText } from 'prismic-reactjs'
