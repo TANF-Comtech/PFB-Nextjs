@@ -32,6 +32,14 @@ const SearchControl = styled.div`
   }
 `
 
+const MobileHide = styled.span`
+  display: none;
+
+  @media (min-width: ${props => props.theme.sm}) {
+    display: inline;
+  }
+`
+
 /**
  * <GlobalBar>
  *
@@ -42,11 +50,12 @@ const SearchControl = styled.div`
   return (
     <MainContent 
       bgColor="#002C40"
+      contentPadding="1vh 4vw"
       textColor="#fff"
     >
       <Bar>
         <NetworkControl>
-          <span>Explore Our Network of Sites</span>
+          <span><MobileHide>Explore Our</MobileHide> Network of Sites</span>
         </NetworkControl>
         <SearchControl>
           <span>Search</span>

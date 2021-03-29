@@ -3,7 +3,6 @@ import styled from "styled-components"
 
 const Watchglass = styled.svg`
   cursor: pointer;
-  margin-right: 15px;
   height: ${ props => props.size };
   fill: ${ props => props.color };
   width: ${ props => props.size };
