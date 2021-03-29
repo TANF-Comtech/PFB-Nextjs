@@ -1,5 +1,8 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import styled, { keyframes } from 'styled-components'
+import { InstantSearch, SearchBox, Hits } from 'react-instantsearch-dom';
+
+import { AlgoliaReactClient, ALGOLIA_INDEX_NAME } from '../../lib/algolia/algoliaClient'
 
 const SearchContainer = styled.nav`
   background-color: ${ props => props.theme.lightestGray };
@@ -73,7 +76,12 @@ const MenuHeader = styled.header`
   return (
     <>
       <SearchContainer searchState={ searchState }>
-        Hello world
+        <InstantSearch 
+          searchClient={ AlgoliaReactClient } 
+          indexName={ ALGOLIA_INDEX_NAME } >
+          <SearchBox />
+          <Hits />
+        </InstantSearch>
       </SearchContainer>
       <SearchOverlay 
         searchState={ searchState }
