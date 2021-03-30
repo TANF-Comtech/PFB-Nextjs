@@ -63,35 +63,22 @@ const MenuHeader = styled.header`
   }
 `
 
-const MenuButtonCont = styled.div`
-  align-items: center;
-  border: none;
-  border-radius: 0;
-  display: flex;
-  height: 32px;
-  justify-content: center;
-  left: 0;
-  padding: 0;
-  position: relative;
-  top: 0;
-  transform: ${props => props.menuState ? "translateX(-100%)" : "translateX(0%)" };
-  transition: all 0.5s ease;
-  width: 32px;
-  z-index: ${props => props.theme.zIndex06 };
-
-  :focus {
-    box-shadow: 0 0 0 1px ${props => props.theme.blue } inset;
-  }
+const MenuButtonCont = styled.section`
+  margin: 0 auto;
+  width: 250px;
 `
 
-const MenuClose = styled.svg`
-  animation: ${fadeIn} 0.75s ease forwards;
-  animation-delay: 0.5s;
+const MenuClose = styled.div`
+  background-color: ${props => props.theme.red};
+  border-radius: 15px;
+  color: white;
   cursor: pointer;
-  height: 32px;
-  margin: 0;
-  opacity: 0;
-  width: 32px;
+  font-size: 18px;
+  font-weight: 700;
+  padding: 10px 0;
+  text-align: center;
+  text-transform: uppercase;
+  
 `
 
 const CustomSearchBox = styled(SearchBox)`
@@ -107,7 +94,7 @@ const CustomSearchBox = styled(SearchBox)`
     font-weight: 400;
     line-height: 50px;
     margin-bottom: 2vh;
-    padding: 1vh 1vw;
+    padding: 1vh 60px 1vh 15px;
     width: 100%;
   }
 
@@ -117,15 +104,41 @@ const CustomSearchBox = styled(SearchBox)`
 
   button[type=reset] {
     position: absolute;
-    right: 10px;
+    right: 25px;
     top: 25px;
   }
 
   svg[class=ais-SearchBox-resetIcon] {
-    height: 30px;
-    width: 30px;
+    height: 20px;
+    transform: scale(0.75);
+    width: 20px;
   }
-  
+`
+
+const AllHits = styled(Hits)`
+  padding: 3vh 0;
+`
+
+const HitContainer = styled.div`
+  span {
+    color: ${props => props.theme.red};
+    display: block;
+    font-family: ${ props => props.theme.montserrat };
+    font-weight: bold;
+    margin-bottom: 0;
+    text-transform: uppercase;
+  }
+  h2 {
+    line-height: 42px;
+  }
+  a, a:focus, a:visited, a:hover {
+    color: ${props => props.theme.black};
+    font-size: 42px;
+  }
+  p {
+    font-size: 18px;
+    line-height: 24px;
+  }
 `
 
 /**
@@ -143,6 +156,17 @@ const CustomSearchBox = styled(SearchBox)`
    handleSearch 
 }) => {
 
+  const Hit = ({ hit }) => {
+    return (
+      <HitContainer>
+        <span>{hit.type}</span>
+        <h2><a href={hit.path}>{hit.title}</a></h2>
+        <p>{ `${hit.content.substring(0,150)} ...` }</p>
+        <hr />
+      </HitContainer>
+    )
+  }
+
   return (
     <>
       <SearchContainer searchState={ searchState }>
@@ -156,22 +180,17 @@ const CustomSearchBox = styled(SearchBox)`
               placeholder: 'What are you looking for?',
             }}
           />
-          <Hits />
+          <AllHits 
+            hitComponent={Hit}
+          />
         </InstantSearch>
-        <MenuHeader>
-          <MenuButtonCont onClick={ handleSearch }>
-            { searchState === true && (
-              <MenuClose 
-                stroke="currentColor" 
-                fill="currentColor" 
-                stroke-width="0" 
-                viewBox="0 0 24 24"
-              >
-                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
-              </MenuClose>
-            )}
-          </MenuButtonCont>          
-        </MenuHeader>
+        <MenuButtonCont onClick={ handleSearch }>
+          { searchState === true && (
+            <MenuClose>
+              Close Search 
+            </MenuClose>
+          )}
+        </MenuButtonCont>          
       </SearchContainer>
       <SearchOverlay 
         searchState={ searchState }
