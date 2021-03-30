@@ -38,31 +38,6 @@ const SearchOverlay = styled.section`
   z-index: ${props => props.theme.zIndex04};
 `
 
-const fadeIn = keyframes`
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-`
-
-const MenuHeader = styled.header`
-  align-items: flex-start;
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 3vh;
-
-  a, a:focus, a:visited, a:hover {
-    color: black;
-    text-decoration: none;
-  }
-
-  h2 {
-    margin: 0;
-  }
-`
-
 const MenuButtonCont = styled.section`
   margin: 0 auto;
   width: 250px;
@@ -78,9 +53,9 @@ const MenuClose = styled.div`
   padding: 10px 0;
   text-align: center;
   text-transform: uppercase;
-  
 `
 
+// Search Components
 const CustomSearchBox = styled(SearchBox)`
   form {
     position: relative;
@@ -116,7 +91,7 @@ const CustomSearchBox = styled(SearchBox)`
 `
 
 const AllHits = styled(Hits)`
-  padding: 3vh 0;
+  padding: 0;
 `
 
 const HitContainer = styled.div`
@@ -173,6 +148,7 @@ const HitContainer = styled.div`
         <InstantSearch 
           searchClient={ AlgoliaReactClient } 
           indexName={ ALGOLIA_INDEX_NAME } >
+          
           <CustomSearchBox 
             translations={{
               submitTitle: 'Submit your search query.',
