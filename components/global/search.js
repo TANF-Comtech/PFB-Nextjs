@@ -48,15 +48,84 @@ const fadeIn = keyframes`
 `
 
 const MenuHeader = styled.header`
-  align-items: center;
+  align-items: flex-start;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   margin-bottom: 3vh;
 
   a, a:focus, a:visited, a:hover {
     color: black;
     text-decoration: none;
   }
+
+  h2 {
+    margin: 0;
+  }
+`
+
+const MenuButtonCont = styled.div`
+  align-items: center;
+  border: none;
+  border-radius: 0;
+  display: flex;
+  height: 32px;
+  justify-content: center;
+  left: 0;
+  padding: 0;
+  position: relative;
+  top: 0;
+  transform: ${props => props.menuState ? "translateX(-100%)" : "translateX(0%)" };
+  transition: all 0.5s ease;
+  width: 32px;
+  z-index: ${props => props.theme.zIndex06 };
+
+  :focus {
+    box-shadow: 0 0 0 1px ${props => props.theme.blue } inset;
+  }
+`
+
+const MenuClose = styled.svg`
+  animation: ${fadeIn} 0.75s ease forwards;
+  animation-delay: 0.5s;
+  cursor: pointer;
+  height: 32px;
+  margin: 0;
+  opacity: 0;
+  width: 32px;
+`
+
+const CustomSearchBox = styled(SearchBox)`
+  form {
+    position: relative;
+  }
+
+  input[type=search] {
+    border: 1px solid ${ props => props.theme.lightGray };
+    border-radius: 0;
+    font-family: ${ props => props.theme.dharma };
+    font-size: 48px;
+    font-weight: 400;
+    line-height: 50px;
+    margin-bottom: 2vh;
+    padding: 1vh 1vw;
+    width: 100%;
+  }
+
+  button[type=submit] {
+    display: none;
+  }
+
+  button[type=reset] {
+    position: absolute;
+    right: 10px;
+    top: 25px;
+  }
+
+  svg[class=ais-SearchBox-resetIcon] {
+    height: 30px;
+    width: 30px;
+  }
+  
 `
 
 /**
@@ -73,15 +142,36 @@ const MenuHeader = styled.header`
    searchState, 
    handleSearch 
 }) => {
+
   return (
     <>
       <SearchContainer searchState={ searchState }>
         <InstantSearch 
           searchClient={ AlgoliaReactClient } 
           indexName={ ALGOLIA_INDEX_NAME } >
-          <SearchBox />
+          <CustomSearchBox 
+            translations={{
+              submitTitle: 'Submit your search query.',
+              resetTitle: 'Clear your search query.',
+              placeholder: 'What are you looking for?',
+            }}
+          />
           <Hits />
         </InstantSearch>
+        <MenuHeader>
+          <MenuButtonCont onClick={ handleSearch }>
+            { searchState === true && (
+              <MenuClose 
+                stroke="currentColor" 
+                fill="currentColor" 
+                stroke-width="0" 
+                viewBox="0 0 24 24"
+              >
+                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+              </MenuClose>
+            )}
+          </MenuButtonCont>          
+        </MenuHeader>
       </SearchContainer>
       <SearchOverlay 
         searchState={ searchState }
