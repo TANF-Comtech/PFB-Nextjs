@@ -5,7 +5,6 @@ import { RichText } from "prismic-reactjs"
 
 import { linkResolver } from "../../lib/utils"
 
-import Header1 from "../primitives/h1"
 import Button from "../primitives/button"
 
 const Container = styled.section`
@@ -130,7 +129,7 @@ const GrantsItem = ({
     <Container>
       <ContentContainer>
         { !path ? 
-          ( <Header1>{ title }</Header1> )  :
+          ( <h2>{ title }</h2> )  :
           (
             <Link href={ path }>
               <a>
