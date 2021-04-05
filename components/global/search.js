@@ -1,14 +1,17 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
-import { InstantSearch, SearchBox, Hits } from 'react-instantsearch-dom';
+import { InstantSearch, 
+         SearchBox, 
+         Hits, 
+         RefinementList } from 'react-instantsearch-dom';
 
 import { AlgoliaReactClient, ALGOLIA_INDEX_NAME } from '../../lib/algolia/algoliaClient'
 
 const SearchContainer = styled.nav`
   background-color: ${ props => props.theme.lightestGray };
-  bottom: 10vh;
+  bottom: calc(10vh + 50px);
   box-shadow: 0 2px 5px rgba(0,0,0,.2);
-  height: 80vh;
+  height: calc(80vh - 50px);
   left: 8vw;
   margin: 0 auto;
   max-width: ${ props => props.theme.lg };
@@ -39,13 +42,25 @@ const SearchOverlay = styled.section`
 `
 
 const MenuButtonCont = styled.section`
+  bottom: 10vh;
+  height: 50px;
+  left: 8vw;
   margin: 0 auto;
-  width: 250px;
+  max-width: ${ props => props.theme.lg };
+  opacity: ${props => props.searchState ? "1" : "0" };
+  overflow: auto;
+  position: fixed;
+  right: 8vw;
+  top: calc(90vh - 50px);
+  transition: 0.4s ease-in-out;
+  transform: ${props => props.searchState ? "translateY(0)" : "translateY(180%)" };
+  width: 84vw;
+  will-change: transform;
+  z-index: ${props => props.theme.zIndex05};
 `
 
 const MenuClose = styled.div`
   background-color: ${props => props.theme.red};
-  border-radius: 15px;
   color: white;
   cursor: pointer;
   font-size: 18px;
@@ -90,8 +105,61 @@ const CustomSearchBox = styled(SearchBox)`
   }
 `
 
+const HitsAndFilters = styled.section`
+  align-items: flex-start;
+  display: flex;  
+`
+
+const AllFilters = styled.div`
+  flex-basis: 200px;
+
+  h3 {
+    color: ${props => props.theme.red};
+    display: block;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0 0 8px 0;
+    text-transform: uppercase;
+  }
+`
+
+const FilterMenu = styled(RefinementList)`
+  color: ${props=> props.theme.darkGray};
+
+  label {
+    align-items: center;
+    display: flex;
+    margin: 0 0 10px 0;
+  }
+  span {
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 1;
+    margin: 0 5px;
+    text-transform: uppercase;
+  }
+  span[class="ais-RefinementList-count"] {
+    color: ${props=> props.theme.gray};
+  }
+  span[class="ais-RefinementList-count"]:before {
+    content: '(';
+  }
+  span[class="ais-RefinementList-count"]:after {
+    content: ')';
+  }
+  .ais-RefinementList-showMore {
+    color: ${props=> props.theme.blue};
+    font-family: ${ props => props.theme.montserrat };
+    font-weight: bold;
+    margin-bottom: 30px;
+    text-transform: uppercase;    
+  }
+`
+
 const AllHits = styled(Hits)`
-  padding: 0;
+  flex-basis: calc(100% - 225px);
+  margin-left: 25px;
 `
 
 const HitContainer = styled.div`
@@ -145,7 +213,7 @@ const HitContainer = styled.div`
   return (
     <>
       <SearchContainer searchState={ searchState }>
-        <InstantSearch 
+        <InstantSearch
           searchClient={ AlgoliaReactClient } 
           indexName={ ALGOLIA_INDEX_NAME } >
           
@@ -156,21 +224,38 @@ const HitContainer = styled.div`
               placeholder: 'What are you looking for?',
             }}
           />
-          <AllHits 
-            hitComponent={Hit}
-          />
+          <HitsAndFilters>
+            <AllFilters>
+              <h3>Topics</h3>
+              <FilterMenu
+                attribute="topics" 
+                limit={5}
+                showMore
+              />
+              <h3>Locations</h3>
+              <FilterMenu
+                attribute="locations" 
+                limit={5}
+                showMore
+              />
+            </AllFilters>
+            <AllHits hitComponent={Hit} />
+          </HitsAndFilters>
         </InstantSearch>
-        <MenuButtonCont onClick={ handleSearch }>
-          { searchState === true && (
-            <MenuClose>
-              Close Search 
-            </MenuClose>
-          )}
-        </MenuButtonCont>          
       </SearchContainer>
-      <SearchOverlay 
-        searchState={ searchState }
+      <MenuButtonCont 
         onClick={ handleSearch }
+        searchState={ searchState }
+      >
+        { searchState === true && (
+          <MenuClose>
+            Close Search 
+          </MenuClose>
+        )}
+      </MenuButtonCont>       
+      <SearchOverlay 
+        onClick={ handleSearch }
+        searchState={ searchState }
       />
     </>
   )
