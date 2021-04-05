@@ -15,6 +15,15 @@ import styled from "styled-components"
  * https://css-tricks.com/custom-styling-form-inputs-with-modern-css-features/ 
  */
 const BasicInput = styled.input`
+  --active: ${(props) => props.theme.blue};
+  --active-inner: #fff;
+  --focus: 2px rgba(62, 159, 220, 0.3);
+  --border: #bccee1;
+  --border-hover: ${(props) => props.theme.blue};
+  --background: #fff;
+  --disabled: #F6F8FF;
+  --disabled-inner: #E1E6F9;
+
   @supports(-webkit-appearance: none) or (-moz-appearance: none) {
 
     /* Universal styles between checkboxes and radio buttons */
