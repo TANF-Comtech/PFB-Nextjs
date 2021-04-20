@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router'
 import { RichText } from 'prismic-reactjs'
-import CustomErrorPage from '../components/global/404'
 
 import { getSingleLandingPage, 
          getLandingPages } from '../lib/queries/landing-page'
@@ -76,13 +75,6 @@ export default function TheMonster({ page, preview }) {
   if(router.isFallback) {
     return <Spinner />
   }
-
-  // If page never shows, throw 404
-  if (!page) {
-    return (<>
-      <CustomErrorPage />
-    </>)
-  } 
 
   // Then we destructure the main payload once page has arrived
   const { landing_page } = page
@@ -423,6 +415,6 @@ export async function getStaticPaths() {
 
   return {
     paths: allPages?.map(({ node }) => `/${node._meta.uid}`) || [],
-    fallback: true,
+    fallback: false,
   }
 }
