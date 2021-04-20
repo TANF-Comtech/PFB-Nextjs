@@ -469,15 +469,7 @@ export async function getStaticProps({ params, preview = false, previewData }) {
 
   }
 
-  // DATA RETURN
-  // If pageData comes back empty, we send the notFound prop back true
-  // if (!pageData) {
-  //   return {
-  //     notFound: true
-  //   }
-  // }
-
-  // Otherwise we return the data payload and preview boolean to the page
+  // Return the data payload and preview boolean to the page
   return {
     props: {
       preview,
