@@ -89,6 +89,6 @@ export async function getStaticPaths() {
   const pages = await getStats()
   return {
     paths: pages?.map(({ node }) => `/statistics/${node._meta.uid}`) || [],
-    fallback: true,
+    fallback: false,
   }
 }

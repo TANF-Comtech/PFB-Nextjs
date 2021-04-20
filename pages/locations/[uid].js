@@ -153,6 +153,6 @@ export async function getStaticPaths() {
   const allLocations = await getLocationsNoImages()
   return {
     paths: allLocations?.map(({ node }) => `/locations/${node._meta.uid}`) || [],
-    fallback: true,
+    fallback: false,
   }
 }

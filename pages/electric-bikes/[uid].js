@@ -95,6 +95,6 @@ export async function getStaticPaths() {
   const pages = await getEBikesPages()
   return {
     paths: pages?.map(({ node }) => `/electric-bikes/${node._meta.uid}`) || [],
-    fallback: true,
+    fallback: false,
   }
 }

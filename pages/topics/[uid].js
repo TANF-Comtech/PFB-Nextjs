@@ -248,6 +248,6 @@ export async function getStaticPaths() {
 
   return {
     paths: allTopics?.map(({ node }) => `/topics/${node._meta.uid}`) || [],
-    fallback: true,
+    fallback: false,
   }
 }

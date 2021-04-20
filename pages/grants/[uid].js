@@ -72,6 +72,6 @@ export async function getStaticPaths() {
   const grants = await getGrants()
   return {
     paths: grants?.map(({ node }) => `/grants/${node._meta.uid}`) || [],
-    fallback: true,
+    fallback: false,
   }
 }

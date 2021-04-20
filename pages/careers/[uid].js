@@ -85,6 +85,6 @@ export async function getStaticPaths() {
   const allCareers = await getAllCareers()
   return {
     paths: allCareers?.map(({ node }) => `/careers/${node._meta.uid}`) || [],
-    fallback: true,
+    fallback: false,
   }
 }
