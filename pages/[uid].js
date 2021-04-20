@@ -71,11 +71,6 @@ import MainContent from '../components/global/main-content'
 export default function TheMonster({ page, preview }) {
   const router = useRouter()
 
-  // If page hasn't arrived yet, show loader
-  if(router.isFallback) {
-    return <Spinner />
-  }
-
   // Then we destructure the main payload once page has arrived
   const { landing_page } = page
 

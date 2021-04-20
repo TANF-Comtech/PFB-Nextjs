@@ -73,6 +73,6 @@ export async function getStaticPaths() {
   const policies = await getPolicies()
   return {
     paths: policies?.map(({ node }) => `/policy/${node._meta.uid}`) || [],
-    fallback: true,
+    fallback: false,
   }
 }

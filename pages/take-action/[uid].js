@@ -204,6 +204,6 @@ export async function getStaticPaths() {
   const pages = await getActions()
   return {
     paths: pages?.map(({ node }) => `/take-action/${node._meta.uid}`) || [],
-    fallback: true,
+    fallback: false,
   }
 }

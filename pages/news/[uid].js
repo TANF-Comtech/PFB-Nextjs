@@ -189,6 +189,6 @@ export async function getStaticPaths() {
   const pages = await getAllNews()
   return {
     paths: pages?.map(({ node }) => `/news/${node._meta.uid}`) || [],
-    fallback: true,
+    fallback: false,
   }
 }

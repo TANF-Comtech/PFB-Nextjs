@@ -228,6 +228,6 @@ export async function getStaticPaths() {
   const pages = await getMemberPages()
   return {
     paths: pages?.map(({ node }) => `/members/${node._meta.uid}`) || [],
-    fallback: true,
+    fallback: false,
   }
 } */
