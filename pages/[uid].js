@@ -388,35 +388,96 @@ export default function TheMonster({ page, preview }) {
   )
 }
 
+/**
+ * The Monster - server side processing
+ * 
+ * Next wants to render from the server side via getServerSideProps or getStaticProps
+ * This function serves that purpose for the entire Monster page
+ * Because this page is crazy, there is a lot of logic to send in as props
+ * Read about this here: https://nextjs.org/docs/basic-features/data-fetching#getstaticprops-static-generation
+ * 
+ * We're essentially making our queries to Prismic here (see /lib/queries)
+ * Then we send the data into the page via the `pageData` variable to the `page` prop
+ * Every landing page gets at least that much data
+ * 
+ * Some pages have an additional payload that gets a second query
+ * We figure this out by looking at the `uid` key of the `pageData.landing_page` payload
+ * If there is a second payload, we add it to the `data` key of `pageData.landing_page`
+ * We then return those two payloads together, and send it back to the `TheMonster` page above
+ * 
+ * For certain routes, we're also formatting and sending the query payload to Algolia for indexing
+ * More here: https://www.algolia.com/doc/api-client/methods/indexing/
+ * 
+ * @param { obj } params - Nextjs rout params for dynamic routes
+ * @param { boolean } preview - boolean that tells us if we're looking at a preview page or the real thing
+ * @param { obj } previewData - data payload for the preview page (not used, yet)
+ * 
+ * @returns 
+ */
 /* The return here sends the `page` prop back to the BasicPage component above for rendering */
 export async function getStaticProps({ params, preview = false, previewData }) {
-  // Get landing page basic data
+  
+  // ALL LANDING PAGES
   let pageData = await getSingleLandingPage(params.uid, previewData)
 
-  // Certain pages need extra custom queries, add them on
+  // PAGE-SPECIFIC PAYLOADS
   if(params.uid === 'news') {
     
+    // Call to prismic, then hands data off to next for page template
     pageData.landing_page.data = await getAllNewsForLandingPage(params.uid, previewData)
 
     // Format and send results to Algolia
     const algoliaFormattedData = dataFormatter(pageData.landing_page.data)
     await AlgoliaIndex.saveObjects(algoliaFormattedData)
 
-  } else if(params.uid === 'locations') {
+  } 
+  
+  else if(params.uid === 'locations') {
+
     pageData.landing_page.data = await getLocations(params.uid, previewData)
-  } else if(params.uid === 'topics') {
+
+  } 
+  
+  else if(params.uid === 'topics') {
+
     pageData.landing_page.data = await getTopics(params.uid, previewData)
-  } else if(params.uid === 'rides') {
+
+  } 
+  
+  else if(params.uid === 'rides') {
+
     pageData.landing_page.data = await getRides(params.uid, previewData)
-  } else if(params.uid === 'team') {
+
+  } 
+  
+  else if(params.uid === 'team') {
+
     pageData.landing_page.dataTeam = await getTeamMembers(params.uid, previewData)
     pageData.landing_page.dataCEO = await getCEO(params.uid, previewData)
-  } else if(params.uid === 'careers') {
+
+  } 
+  
+  else if(params.uid === 'careers') {
+
     pageData.landing_page.data = await getAllCareers(params.uid, previewData)
-  } else if(params.uid === 'events') {
+
+  } 
+  
+  else if(params.uid === 'events') {
+
     pageData.landing_page.data = await getEventsByCategory(params.uid, previewData)
+
   }
 
+  // DATA RETURN
+  // If pageData comes back empty, we send the notFound prop back true
+  // if (!pageData) {
+  //   return {
+  //     notFound: true
+  //   }
+  // }
+
+  // Otherwise we return the data payload and preview boolean to the page
   return {
     props: {
       preview,
@@ -432,6 +493,6 @@ export async function getStaticPaths() {
 
   return {
     paths: allPages?.map(({ node }) => `/${node._meta.uid}`) || [],
-    fallback: true,
+    fallback: false,
   }
 }
