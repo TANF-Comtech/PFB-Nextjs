@@ -51,7 +51,7 @@ import ColorBanner from '../components/global/color-banner'
 import MainContent from '../components/global/main-content'
 
 import { AlgoliaIndex } from '../lib/algolia/algoliaClient'
-import { dataFormatter } from '../lib/algolia/dataFormatter'
+import { newsFormatter } from '../lib/algolia/newsFormatter'
 
 /**
  * TheMonster()
@@ -427,9 +427,8 @@ export async function getStaticProps({ params, preview = false, previewData }) {
     pageData.landing_page.data = await getAllNewsForLandingPage(params.uid, previewData)
 
     // Format and send results to Algolia
-    const algoliaFormattedData = dataFormatter(pageData.landing_page.data)
+    const algoliaFormattedData = newsFormatter(pageData.landing_page.data)
     await AlgoliaIndex.saveObjects(algoliaFormattedData)
-
   } 
   
   else if(params.uid === 'locations') {
