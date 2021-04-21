@@ -111,7 +111,13 @@ const HitsAndFilters = styled.section`
 `
 
 const AllFilters = styled.div`
-  flex-basis: 200px;
+  display: none;
+  flex-basis: 0;
+
+  @media (min-width: ${props => props.theme.sm}) {
+    display: block;
+    flex-basis: 200px;
+  }
 
   h3 {
     color: ${props => props.theme.black};
@@ -158,8 +164,12 @@ const FilterMenu = styled(RefinementList)`
 `
 
 const AllHits = styled(Hits)`
-  flex-basis: calc(100% - 225px);
-  margin-left: 25px;
+  flex-basis: 100%;
+
+  @media (min-width: ${props => props.theme.sm}) {
+    flex-basis: calc(100% - 225px);
+    margin-left: 25px;
+  }
 `
 
 const HitContainer = styled.div`
