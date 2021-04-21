@@ -60,7 +60,7 @@ const MenuButtonCont = styled.section`
 `
 
 const MenuClose = styled.div`
-  background-color: ${props => props.theme.red};
+  background-color: ${props => props.theme.blue};
   color: white;
   cursor: pointer;
   font-size: 18px;
@@ -114,7 +114,7 @@ const AllFilters = styled.div`
   flex-basis: 200px;
 
   h3 {
-    color: ${props => props.theme.red};
+    color: ${props => props.theme.black};
     display: block;
     font-size: 20px;
     font-weight: bold;
@@ -149,7 +149,7 @@ const FilterMenu = styled(RefinementList)`
     content: ')';
   }
   .ais-RefinementList-showMore {
-    color: ${props=> props.theme.blue};
+    color: ${props=> props.theme.gray};
     font-family: ${ props => props.theme.montserrat };
     font-weight: bold;
     margin-bottom: 30px;
