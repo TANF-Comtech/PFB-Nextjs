@@ -12,6 +12,7 @@ import { getTeamMembers, getCEO } from '../lib/queries/team'
 import { getAllCareers } from '../lib/queries/careers'
 import { getEventsByCategory } from '../lib/queries/events'
 import { linkResolver, randomID } from '../lib/utils'
+import { getStats } from '../lib/queries/statistics'
 
 import Wrapper from '../components/global/wrapper'
 import Spinner from '../components/global/spinner'
@@ -207,7 +208,7 @@ export default function TheMonster({ page, preview }) {
 
       { // RESEARCH STATS
         landing_page._meta.uid === 'research' && 
-        <StatsList />
+        <StatsList payload={ landing_page.data } />
       }            
 
       { // EVENTS
@@ -460,10 +461,12 @@ export async function getStaticProps({ params, preview = false, previewData }) {
   } 
   
   else if(params.uid === 'events') {
-
     pageData.landing_page.data = await getEventsByCategory(params.uid, previewData)
-
   }
+
+  else if(params.uid === 'research') {
+    pageData.landing_page.data = await getStats()
+  }  
 
   // Return the data payload and preview boolean to the page
   return {

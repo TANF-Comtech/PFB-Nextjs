@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 import MainContent from '../global/main-content'
 import Grid from '../global/grid'
+import { linkResolver } from '../../lib/utils'
 
 import WhiteArrow from '../../public/white-arrow.svg'
 
@@ -51,139 +52,6 @@ const PageHeading = styled.h2`
   text-transform: uppercase;
 `
 
-/* So...the landing page query is so large, we've overloaded it */
-/* I had to manually pull the payload into this page, ugh */
-const statsList = [
-  {
-    "node": {
-      "title": [
-        {
-          "type": "heading1",
-          "text": "Environmental",
-          "spans": []
-        }
-      ],
-      "_meta": {
-        "id": "X9towREAACQA5Q7G",
-        "uid": "environmental",
-        "type": "statistic_page"
-      }
-    }
-  },
-  {
-    "node": {
-      "title": [
-        {
-          "type": "heading1",
-          "text": "Facilities",
-          "spans": []
-        }
-      ],
-      "_meta": {
-        "id": "X9trThEAACYA5RoJ",
-        "uid": "bicycle-facilities-and-safety",
-        "type": "statistic_page"
-      }
-    }
-  },
-  {
-    "node": {
-      "title": [
-        {
-          "type": "heading1",
-          "text": "Participation",
-          "spans": []
-        }
-      ],
-      "_meta": {
-        "id": "X9twlBEAACQA5TCu",
-        "uid": "participation",
-        "type": "statistic_page"
-      }
-    }
-  },
-  {
-    "node": {
-      "title": [
-        {
-          "type": "heading1",
-          "text": "Protected Bike Lanes",
-          "spans": []
-        }
-      ],
-      "_meta": {
-        "id": "X9txphEAAOPu5TVn",
-        "uid": "economic-benefits",
-        "type": "statistic_page"
-      }
-    }
-  },
-  {
-    "node": {
-      "title": [
-        {
-          "type": "heading1",
-          "text": "Safety",
-          "spans": []
-        }
-      ],
-      "_meta": {
-        "id": "X9tyohEAAOPu5Tm2",
-        "uid": "safety",
-        "type": "statistic_page"
-      }
-    }
-  },
-  {
-    "node": {
-      "title": [
-        {
-          "type": "heading1",
-          "text": "Electric Bikes",
-          "spans": []
-        }
-      ],
-      "_meta": {
-        "id": "X9ty0xEAACQA5TqW",
-        "uid": "e-bikes",
-        "type": "statistic_page"
-      }
-    }
-  },
-  {
-    "node": {
-      "title": [
-        {
-          "type": "heading1",
-          "text": "Health",
-          "spans": []
-        }
-      ],
-      "_meta": {
-        "id": "X9ttFBEAACQA5SFr",
-        "uid": "bicycling-and-lungs",
-        "type": "statistic_page"
-      }
-    }
-  },
-  {
-    "node": {
-      "title": [
-        {
-          "type": "heading1",
-          "text": "Economic",
-          "spans": []
-        }
-      ],
-      "_meta": {
-        "id": "X9tmVBEAACYA5QQW",
-        "uid": "economic",
-        "type": "statistic_page"
-      }
-    }
-  }
-]
-
 /**
  * <StatsList>
  * 
@@ -194,29 +62,34 @@ const statsList = [
 const StatsList = ({
   payload
 }) => {
+  
   return (
-    <MainContent>
-      <PageHeading>Statistics Library</PageHeading>
-      <hr />
-      <GridWrapper>
-        <Grid>
-          { statsList.map( (stat) => {
-            return(
-              <Box key={ stat.node._meta.id }>
-                <Link href={ `/statistics/${stat.node._meta.uid}` }>
-                  <a>
-                    <Text>
-                      { `${stat.node.title[0].text} Statistics` }
-                    </Text>
-                    <Arrow src={ WhiteArrow } width="46px" />
-                  </a>
-                </Link>
-              </Box>
-            )
-          })}
-        </Grid>
-      </GridWrapper>
-    </MainContent>
+    <>
+    { payload.length > 1 && 
+      <MainContent>
+        <PageHeading>Statistics Library</PageHeading>
+        <hr />
+        <GridWrapper>
+          <Grid>
+            { payload.map( (stat) => {
+              return(
+                <Box key={ stat.node._meta.id }>
+                  <Link href={ linkResolver(stat.node._meta)}>
+                    <a>
+                      <Text>
+                        { `${stat.node.title[0].text} Statistics` }
+                      </Text>
+                      <Arrow src={ WhiteArrow } width="46px" />
+                    </a>
+                  </Link>
+                </Box>
+              )
+            })}
+          </Grid>
+        </GridWrapper>
+      </MainContent>
+    }
+    </>
   )
 }
 
