@@ -54,6 +54,7 @@ import MainContent from '../components/global/main-content'
 import { AlgoliaIndex } from '../lib/algolia/algoliaClient'
 import { newsFormatter } from '../lib/algolia/newsFormatter'
 import { topicFormatter } from '../lib/algolia/topicFormatter'
+import { statsFormatter } from '../lib/algolia/statsFormatter'
 
 /**
  * TheMonster()
@@ -466,6 +467,8 @@ export async function getStaticProps({ params, preview = false, previewData }) {
 
   else if(params.uid === 'research') {
     pageData.landing_page.data = await getStats()
+    const algoliaFormattedData = statsFormatter(pageData.landing_page.data)
+    await AlgoliaIndex.saveObjects(algoliaFormattedData)
   }  
 
   // Return the data payload and preview boolean to the page
