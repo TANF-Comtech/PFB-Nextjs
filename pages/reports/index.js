@@ -1,16 +1,10 @@
-import { useContext } from 'react'
-import ErrorPage from 'next/error' 
 import styled from 'styled-components'
-import { RichText } from 'prismic-reactjs'
 import Link from 'next/link'
 
 import { getReports } from '../../lib/queries/reports'
 import { linkResolver, randomID } from '../../lib/utils'
 
-import DefaultContext from '../../context/default/default-context'
-
 import Wrapper from '../../components/global/wrapper'
-import SiteMeta from '../../components/meta/site-meta'
 import MainContent from '../../components/global/main-content'
 import Header1 from '../../components/primitives/h1'
 import Promo from '../../components/slices/promo'
@@ -64,7 +58,7 @@ export default function ReportsArchive({ page }) {
         { years && years.map( (year) => {
           return(
             <ReportSection key={ year }>
-              <ReportSectionHeader key={ randomID(12098137841398475) }>
+              <ReportSectionHeader key={ randomID(120981371398475) }>
                 <h2>{ year }</h2>
                 <hr />
               </ReportSectionHeader>
@@ -79,7 +73,7 @@ export default function ReportsArchive({ page }) {
                           key={report.node._meta.id} 
                         >
                           <Link 
-                            href={`/reports/${report.node._meta.uid}`} 
+                            href={ linkResolver(report.node._meta) } 
                             passHref >
                             <a>
                               <strong>{ report.node.title[0].text }</strong>
@@ -97,7 +91,7 @@ export default function ReportsArchive({ page }) {
                             buttonMargin="0 0 20px 0"
                             buttonPadding="10px 20px"
                             buttonTextTransform="uppercase"
-                            href={ `/reports/${report.node._meta.uid}` }
+                            href={ linkResolver(report.node._meta) }
                           >
                             Read More
                           </Button>
