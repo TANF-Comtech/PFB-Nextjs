@@ -10,6 +10,7 @@ Types:
 - topic (all)
 - statistic_page (all)
 - report (all)
+- grants (all)
 - news (all)
 - member_content (all)
 - locations (all)
