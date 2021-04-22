@@ -52,6 +52,7 @@ import MainContent from '../components/global/main-content'
 
 import { AlgoliaIndex } from '../lib/algolia/algoliaClient'
 import { newsFormatter } from '../lib/algolia/newsFormatter'
+import { topicFormatter } from '../lib/algolia/topicFormatter'
 
 /**
  * TheMonster()
@@ -422,11 +423,7 @@ export async function getStaticProps({ params, preview = false, previewData }) {
 
   // PAGE-SPECIFIC PAYLOADS
   if(params.uid === 'news') {
-    
-    // Call to prismic, then hands data off to next for page template
     pageData.landing_page.data = await getAllNewsForLandingPage(params.uid, previewData)
-
-    // Format and send results to Algolia
     const algoliaFormattedData = newsFormatter(pageData.landing_page.data)
     await AlgoliaIndex.saveObjects(algoliaFormattedData)
   } 
@@ -438,9 +435,9 @@ export async function getStaticProps({ params, preview = false, previewData }) {
   } 
   
   else if(params.uid === 'topics') {
-
     pageData.landing_page.data = await getTopics(params.uid, previewData)
-
+    const algoliaFormattedData = topicFormatter(pageData.landing_page.data)
+    await AlgoliaIndex.saveObjects(algoliaFormattedData)
   } 
   
   else if(params.uid === 'rides') {
