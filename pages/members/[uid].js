@@ -219,7 +219,7 @@ export async function getServerSideProps({req, res, params, preview = false, pre
       preview,
       page: pageData ?? null,
     },
-    revalidate: 1,
+    revalidate: 60,
   }
 }
 

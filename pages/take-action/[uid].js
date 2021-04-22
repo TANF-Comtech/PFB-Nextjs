@@ -152,7 +152,6 @@ export default function ActionForms({ page, preview }) {
           }
           <FlexContainer>
             { action.image_selection && <>
-              {console.log(action.image_selection)}
               <ImageContainer>
                 <img src={ imageSelection } alt="Bike centric image with people present" />
               </ImageContainer>
@@ -195,7 +194,7 @@ export async function getStaticProps({ params, preview = false, previewData }) {
       preview,
       page: pageData ?? null,
     },
-    revalidate: 1,
+    revalidate: 60,
   }
 }
 
