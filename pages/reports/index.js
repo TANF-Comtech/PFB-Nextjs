@@ -12,6 +12,9 @@ import Button from '../../components/primitives/button'
 
 import ResearchPromo from '../../public/promo/promo-research.jpg'
 
+import { AlgoliaIndex } from '../../lib/algolia/algoliaClient'
+import { reportsFormatter } from '../../lib/algolia/reportsFormatter'
+
 const ReportSection = styled.section`
   margin: 5vh 0;
 `
@@ -119,6 +122,9 @@ export default function ReportsArchive({ page }) {
 /* The return here sends the `page` prop back to the component above for rendering */
 export async function getStaticProps({ params, preview = false, previewData }) {
   const pageData = await getReports()
+
+  const algoliaFormattedData = reportsFormatter(pageData)
+  await AlgoliaIndex.saveObjects(algoliaFormattedData)
 
   return {
     props: {
