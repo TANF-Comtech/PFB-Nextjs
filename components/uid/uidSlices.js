@@ -1,15 +1,17 @@
 import React from "react";
-import NumberedPillars from '../../components/content/numbered-pillars'
-import GrantsList from '../../components/content/grant-guidelines-list'
-import ReportsList from '../../components/content/reports-list'
-import ResearchBanners from '../../components/content/research-banners'
-import SummaryBlock from '../../components/content/summary-block'
-import Button from '../../components/primitives/button'
-import { linkResolver, randomID } from '../../lib/utils'
-import ToolkitPillars from '../../components/content/toolkit-pillars'
-import ActionItemGroup from '../../components/slices/action-item-group'
-import MissionPillars from '../../components/content/mission-pillars'
-import Promo from '../../components/slices/promo'
+import NumberedPillars from "../content/numbered-pillars";
+import GrantsList from "../content/grant-guidelines-list";
+import ReportsList from "../content/reports-list";
+import ResearchBanners from "../content/research-banners";
+import SummaryBlock from "../content/summary-block";
+import Button from "../primitives/button";
+import { linkResolver, randomID } from "../../lib/utils";
+import ToolkitPillars from "../content/toolkit-pillars";
+import ActionItemGroup from "../slices/action-item-group";
+import MissionPillars from "../content/mission-pillars";
+import Promo from "../slices/promo";
+import {RichText} from 'prismic-reactjs'
+import ResearchPillars from "../content/reesearch-pillars";
 
 export default function UidSlices({ landing_page }) {
   // SLICE CONTENT (in body)
@@ -143,5 +145,5 @@ export default function UidSlices({ landing_page }) {
     });
   }
 
-  return { Slice };
+  return <>{Slice}</>;
 }

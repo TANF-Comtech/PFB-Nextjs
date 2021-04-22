@@ -1,9 +1,9 @@
 import React from "react";
-import TakeActionList from "../../components/content/takeaction-list";
-import GrantsIconGrid from "../../components/content/grants-icon-grid";
-import MemberPillars from "../../components/content/member-pillars";
-import ResearchPillars from "../../components/content/reesearch-pillars";
-import ColorBanner from "../../components/global/color-banner";
+import TakeActionList from "../content/takeaction-list";
+import GrantsIconGrid from "../content/grants-icon-grid";
+import MemberPillars from "../content/member-pillars";
+import ResearchPillars from "../content/reesearch-pillars";
+import ColorBanner from "../global/color-banner";
 
 export default function UidIndividualComponents({ landing_page }) {
   return (
