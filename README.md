@@ -266,4 +266,7 @@ Some high level rules of the road:
 - Use `styled-components` as much as possible to scope styling to components. 
 - Don't wrap components in `<div>` pairs, use [React Fragment short syntax](https://reactjs.org/docs/fragments.html#short-syntax) instead: `<></>`
 
+## Stuff to document
 
+- [ ] algolia search system, when it lands
+- [ ] how to use FallbackImage
