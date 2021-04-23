@@ -1,4 +1,3 @@
-import ErrorPage from 'next/error'
 import { useContext } from 'react'
 import { Date as ParseDate } from 'prismic-reactjs'
 
@@ -14,14 +13,15 @@ import MainContent from '../../components/global/main-content'
 import ContentItem from '../../components/content/content-item'
 import RideSpotPromo from '../../components/slices/ridespot-promo'
 import ActionItemGroup from '../../components/slices/action-item-group'
-
+import FallbackImage from '../../components/content/fallback-image'
 
 
 /* You must reference the `topic` prop to get data from `getStaticProps` - check bottom of this file */
-export default function LocationPage({ page, preview }) {
-  if( !page || page === null ) {
-    return <ErrorPage statusCode={404} />
-  }
+export default function LocationPage({ 
+  fallback, 
+  page, 
+  preview 
+}) {
 
   // Incoming data obj (page) is an array of objects
   // 0 - location data
@@ -121,7 +121,10 @@ export default function LocationPage({ page, preview }) {
                         ${setDateSuffix(newDate.getDate())}, 
                         ${newDate.getFullYear()}` }
                 key={ newsItem.id }
-                image={ newsItem.data.header_image && newsItem.data.header_image }
+                image={ Object.keys(newsItem.data.header_image).length !== 0 &&
+                        newsItem.data.header_image ? 
+                          newsItem.data.header_image : 
+                          fallback[Math.floor(Math.random()*6)] }                
                 path={ `/news/${newsItem.uid}` }
                 text={ newsItem.data.main_content[0].type === "paragraph" ? newsItem.data.main_content[0].text : "" }
                 title={ newsItem.data.title[0].text }
@@ -141,6 +144,7 @@ export async function getStaticProps({ params, preview = false, previewData }) {
 
   return {
     props: {
+      fallback: FallbackImage(),
       preview,
       page: pageData ?? null,
     },
