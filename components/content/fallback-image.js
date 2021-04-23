@@ -12,7 +12,7 @@ import fallbackSix from '../../public/fallbacks/06_PFB_General.jpg'
 const fallbackArr = [ 
   {
     path: fallbackOne,
-    alt: 'Paved bikeland with rider looking down'
+    alt: 'Paved bike lane with rider looking down'
   }, 
   {
     path: fallbackTwo,
@@ -47,7 +47,7 @@ const fallbackArr = [
 const FallbackImage = () => {
   arrayShuffle(fallbackArr)
   return (
-    fallbackArr[0]
+    fallbackArr
   )
 }
 
