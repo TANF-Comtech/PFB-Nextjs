@@ -4,7 +4,8 @@ import splashThree from '../../public/social-splash/PFB_Social-03.jpg'
 import splashFour from '../../public/social-splash/PFB_Social-04.jpg'
 import logo from '../../public/PFB_Stacked_LOGO_512x512.jpg'
 
-const socialSplashArr = [ splashOne, splashTwo, splashThree, splashFour ] // social images
+// social images
+const socialSplashArr = [ splashOne, splashTwo, splashThree, splashFour ] 
 
 /**
  * defaultData (variable)
