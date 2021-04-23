@@ -1,4 +1,5 @@
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
 import styled from 'styled-components'
 import { RichText, Date as ParseDate } from 'prismic-reactjs'
 
@@ -58,6 +59,9 @@ export default function NewsPage({
   preview
 }) {
 
+  // Set up router
+  const router = useRouter()
+
   // Destructure page payload and meta from global context
   const { news } = page
   const { meta } = useContext(DefaultContext)
@@ -69,6 +73,15 @@ export default function NewsPage({
   } else {
     newDate = new Date(ParseDate(news._meta.lastPublicationDate ))
   }
+
+  // Set fallback index, one of six possible images 
+  const [fi, setFi] = useState(Math.floor(Math.random(5)))
+
+  // Every time a new path comes up we shuffle the images
+  // useEffect 'watch' dependency is where we watch the router's path
+  useEffect(() => {
+    setFi(Math.floor(Math.random(5)))
+  }, [router.pathname])
 
   return (
     <>
@@ -110,8 +123,8 @@ export default function NewsPage({
             ) : (
               <ImgContainer>
                 <img loading="lazy" 
-                    src={ fallback.path }
-                    alt={ fallback.alt } />
+                    src={ fallback[fi].path }
+                    alt={ fallback[fi].alt } />
               </ImgContainer>              
             )
           }     
