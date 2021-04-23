@@ -86,7 +86,7 @@ export default function NewsPage({
   return (
     <>
       <SiteMeta
-        desc={ news.main_content[0].text ? ( `${ news.main_content[0].text.substring(0,180) } ... ` ) : ( meta.desc ) }
+        desc={ news.main_content ? ( `${ news.main_content[0].text.substring(0,180) } ... ` ) : ( meta.desc ) }
         title={ news.title ? ( `${ news.title[0].text } | People for Bikes` ) : ( meta.title ) }
         imgHeight={ meta.imgHeight }
         imgSrc={ meta.imgSrc }
