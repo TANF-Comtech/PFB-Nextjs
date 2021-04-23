@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router'
 import { RichText } from 'prismic-reactjs'
 
 import { getSingleLandingPage, 
@@ -13,7 +12,6 @@ import { getEventsByCategory } from '../lib/queries/events'
 import { linkResolver, randomID } from '../lib/utils'
 
 import Wrapper from '../components/global/wrapper'
-import Spinner from '../components/global/spinner'
 import BigTitleBanner from '../components/content/big-title-banner'
 import SecondaryTitleBanner from '../components/content/secondary-title-banner'
 import Heading1 from '../components/primitives/h1'
@@ -41,6 +39,7 @@ import StatsList from '../components/content/stats-list'
 import ResearchBanners from '../components/content/research-banners'
 import ResearchPillars from '../components/content/reesearch-pillars'
 import ToolkitPillars from '../components/content/toolkit-pillars'
+import FallbackImage from '../components/content/fallback-image'
 
 import ActionItemGroup from '../components/slices/action-item-group'
 import RedActionItem from '../components/slices/action-item-red'
@@ -68,8 +67,11 @@ import MainContent from '../components/global/main-content'
  * Where it goes from here is only in the realm of dream or nightmare
  * 
  */
-export default function TheMonster({ page, preview }) {
-  const router = useRouter()
+export default function TheMonster({ 
+  fallback,
+  page, 
+  preview }
+) {
 
   // Then we destructure the main payload once page has arrived
   const { landing_page } = page
@@ -136,6 +138,7 @@ export default function TheMonster({ page, preview }) {
       { // NEWS
         landing_page._meta.uid === 'news' &&  
         <NewsList 
+          fallback={ fallback }
           nodeName="node"  
           payload={ landing_page.data } 
         />
@@ -399,6 +402,7 @@ export async function getStaticProps({ params, preview = false, previewData }) {
     props: {
       preview,
       page: pageData ?? null,
+      fallback: FallbackImage()
     },
     revalidate: 60,
   }

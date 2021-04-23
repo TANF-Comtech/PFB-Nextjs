@@ -2,9 +2,8 @@ import React from "react";
 import Link from "next/link"
 import styled from "styled-components";
 
+import FallbackImage from "./fallback-image"
 import Button from "../primitives/button"
-
-import StandinImage from '../../public/pfb-news-standin.jpg'
 
 const Container = styled.section`
   align-items: flex-start;
@@ -76,6 +75,7 @@ const Image = styled.img`
  * @param { string } date - when the content item occurred (optional)
  * @param { object } image - image to go with post (optional)
  * @param { string } path - tells us the URL to the item
+ * @param { number } randomId - generated to give us a randomized ID for fallback images
  * @param { string } title - title that goes next to the icon
  * @param { string } text - content to be shown
  */
@@ -86,6 +86,7 @@ const ContentItem = ({
   title,
   text
 }) => {
+
   return (
     <Container>
       { image.url ? (
@@ -95,10 +96,11 @@ const ContentItem = ({
           src={ image['1x'] ? image['1x'].url : image.url } 
         /> 
         ) : (
+        // Utilizes fallback image functionality
         <Image 
-          alt={ 'Two women riding their road bikes in spandex' }
+          alt={ image.alt }
           loading="lazy"
-          src={ StandinImage } 
+          src={ image.path } 
         /> 
         )
       }
@@ -132,5 +134,4 @@ const ContentItem = ({
     </Container>
   )
 }
-
 export default ContentItem

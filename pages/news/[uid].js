@@ -1,8 +1,6 @@
 import { useContext } from 'react'
-import ErrorPage from 'next/error' 
 import styled from 'styled-components'
 import { RichText, Date as ParseDate } from 'prismic-reactjs'
-import Link from 'next/link'
 
 import { getAllNews, 
          getSingleNewsPage } from '../../lib/queries/news'
@@ -15,6 +13,7 @@ import SiteMeta from '../../components/meta/site-meta'
 import MainContent from '../../components/global/main-content'
 import Promo from '../../components/slices/promo'
 import Donate from '../../components/global/donate'
+import FallbackImage from '../../components/content/fallback-image'
 
 import TakeActionPromo from '../../public/promo/take-action-banner.jpg'
 
@@ -53,10 +52,11 @@ const Caption = styled.div`
   font-size: 14px;
 `
 
-export default function NewsPage({ page, preview }) {
-  if( !page || page === null ) {
-    return <ErrorPage statusCode={404} />
-  }
+export default function NewsPage({ 
+  fallback,
+  page, 
+  preview
+}) {
 
   // Destructure page payload and meta from global context
   const { news } = page
@@ -100,13 +100,20 @@ export default function NewsPage({ page, preview }) {
             <p>By: { news.byline }</p>
           }     
           {
-            news.header_image &&
-            <ImgContainer>
-              <img loading="lazy" 
-                  src={ news.header_image.url }
-                  alt={ news.header_image.alt ? news.header_image.alt : "Biking related image" } />
-              { news.header_image.alt && <Caption>{ news.header_image.alt }</Caption> }
-            </ImgContainer>
+            news.header_image ? (              
+              <ImgContainer>
+                <img loading="lazy" 
+                    src={ news.header_image.url }
+                    alt={ news.header_image.alt ? news.header_image.alt : "Biking related image" } />
+                { news.header_image.alt && <Caption>{ news.header_image.alt }</Caption> }
+              </ImgContainer>
+            ) : (
+              <ImgContainer>
+                <img loading="lazy" 
+                    src={ fallback.path }
+                    alt={ fallback.alt } />
+              </ImgContainer>              
+            )
           }     
           { news.main_content && 
             <IntroWrapper>
@@ -179,6 +186,7 @@ export async function getStaticProps({ params, preview = false, previewData }) {
     props: {
       preview,
       page: pageData ?? null,
+      fallback: FallbackImage()
     },
     revalidate: 60,
   }
