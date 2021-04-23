@@ -6,6 +6,7 @@ import { RichText, Date as ParseDate } from 'prismic-reactjs'
 import { getAllNews, 
          getSingleNewsPage } from '../../lib/queries/news'
 import { linkResolver, setDateSuffix } from '../../lib/utils'
+import { paraFinder } from '../../lib/utils/paraFinder'
 
 import DefaultContext from '../../context/default/default-context'
 
@@ -83,18 +84,16 @@ export default function NewsPage({
     setFi(Math.floor(Math.random(5)))
   }, [router.pathname])
 
-  console.log(news.main_content)
-
   return (
     <>
-      {/* <SiteMeta
-        desc={ news.main_content[0].text !== null ? ( `${ news.main_content[0].text.substring(0,180) } ... ` ) : ( meta.desc ) }
+      <SiteMeta
+        desc={ news.main_content ? ( `${ paraFinder(news.main_content)} ... ` ) : ( meta.desc ) }
         title={ news.title ? ( `${ news.title[0].text } | People for Bikes` ) : ( meta.title ) }
         imgHeight={ meta.imgHeight }
         imgSrc={ meta.imgSrc }
         imgWidth={ meta.imgWidth }
         path={ news ? ( `https://www.peopleforbikes.org/news/${news._meta.uid}` ) : ( meta.path ) }
-      />     */}
+      />    
       <Wrapper 
         postPath="/news"
         postTitle="News"
