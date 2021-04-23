@@ -37,8 +37,6 @@ export default function TopicPage({
   const { meta } = useContext(DefaultContext)
   const pillars = [] // setup for pillar content
 
-  console.log(page)
-
   return (
     <>
       { // Sniff for pillars - set up as array or null
