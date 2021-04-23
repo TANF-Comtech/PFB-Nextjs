@@ -35,7 +35,10 @@ const NewsList = ({
                     ${setDateSuffix(newDate.getDate())}, 
                     ${newDate.getFullYear()}` }
             key={ news[nodeName]._meta.id }
-            image={ news[nodeName].header_image ? news[nodeName].header_image : fallback[Math.floor(Math.random()*6)] }
+            image={ Object.keys(news[nodeName].header_image).length !== 0 &&
+                      news[nodeName].header_image ? 
+                      news[nodeName].header_image : 
+                      fallback[Math.floor(Math.random()*6)] }
             path={ `/news/${news[nodeName]._meta.uid}` }
             text={ news[nodeName].main_content[0].type === "paragraph" ? news[nodeName].main_content[0].text : "" }
             title={ news[nodeName].title[0].text }
