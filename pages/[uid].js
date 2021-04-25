@@ -55,6 +55,7 @@ import { AlgoliaIndex } from '../lib/algolia/algoliaClient'
 import { newsFormatter } from '../lib/algolia/newsFormatter'
 import { topicFormatter } from '../lib/algolia/topicFormatter'
 import { statsFormatter } from '../lib/algolia/statsFormatter'
+import { locationFormatter } from '../lib/algolia/locationFormatter'
 
 /**
  * TheMonster()
@@ -431,9 +432,9 @@ export async function getStaticProps({ params, preview = false, previewData }) {
   } 
   
   else if(params.uid === 'locations') {
-
     pageData.landing_page.data = await getLocations(params.uid, previewData)
-
+    const algoliaFormattedData = locationFormatter(pageData.landing_page.data)
+    await AlgoliaIndex.saveObjects(algoliaFormattedData)
   } 
   
   else if(params.uid === 'topics') {
