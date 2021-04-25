@@ -444,9 +444,7 @@ export async function getStaticProps({ params, preview = false, previewData }) {
   } 
   
   else if(params.uid === 'rides') {
-
     pageData.landing_page.data = await getRides(params.uid, previewData)
-
   } 
   
   else if(params.uid === 'team') {

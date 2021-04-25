@@ -214,7 +214,10 @@ const HitContainer = styled.div`
       <HitContainer>
         <span>{hit.type}</span>
         <h2><a href={hit.path}>{hit.title}</a></h2>
-        <p>{ `${hit.content.substring(0,150)} ...` }</p>
+        {
+          hit.content &&
+            <p>{ `${hit.content.substring(0,150)} ...` }</p>
+        }
         <hr />
       </HitContainer>
     )
