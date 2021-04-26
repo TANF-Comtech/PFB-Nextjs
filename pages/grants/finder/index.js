@@ -21,7 +21,6 @@ export default function GrantsFinder({ page }) {
         { page.map( (grant) => {
           return(
             <GrantsItem 
-              amount={ grant.node.amount ? grant.node.amount : null }
               city={ grant.node.city ? grant.node.city : null }
               date={ grant.node.cycle ? grant.node.cycle : null }
               grantType={ grant.node.type ? grant.node.type : null }
@@ -33,6 +32,7 @@ export default function GrantsFinder({ page }) {
             />
           )
         })}
+        
         <Button
           buttonAlign="center"
           buttonBg="#D0021B"
