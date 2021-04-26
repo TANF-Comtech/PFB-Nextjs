@@ -53,6 +53,11 @@ const nextConfig = {
         permanent: true
       },
       {
+        source: '/electric-bikes',
+        destination: '/topics/electric-bikes',
+        permanent: true
+      },
+      {
         source: '/tariffs',
         destination: '/topics/trade-and-tariffs',
         permanent: true
