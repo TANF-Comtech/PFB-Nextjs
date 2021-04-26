@@ -20,7 +20,7 @@ const NewsList = ({
   
   return (
     <MainContent>
-      { payload.map( (news) => { 
+      { payload !== null && payload.map( (news) => { 
         let newDate
         if (news[nodeName].publication_date) {
           newDate = new Date(ParseDate( news[nodeName].publication_date ))
@@ -35,7 +35,9 @@ const NewsList = ({
             key={ news[nodeName]._meta.id }
             image={ news[nodeName].header_image ? news[nodeName].header_image : null }
             path={ `/news/${news[nodeName]._meta.uid}` }
-            text={ news[nodeName].main_content[0].type === "paragraph" ? news[nodeName].main_content[0].text : "" }
+            text={ news[nodeName].main_content && 
+                   news[nodeName].main_content[0].type === "paragraph" ? 
+                      news[nodeName].main_content[0].text : "" }
             title={ news[nodeName].title[0].text }
           />
         )
