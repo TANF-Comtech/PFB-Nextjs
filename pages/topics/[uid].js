@@ -1,12 +1,15 @@
 import { useContext } from 'react'
-import ErrorPage from 'next/error'
 import Link from 'next/link'
 import { RichText, Date as ParseDate } from 'prismic-reactjs'
 import styled from 'styled-components'
 
 import { getTopics, getSingleTopicPage } from '../../lib/queries/topics'
+import { getEBikesPages } from '../../lib/queries/electric-bikes'
+
 import { randomID, linkResolver } from '../../lib/utils'
 import { setDateSuffix } from '../../lib/utils/setDateSuffix'
+import { ebikeFormatter } from '../../lib/algolia/ebikeFormatter'
+import { AlgoliaIndex } from '../../lib/algolia/algoliaClient'
 
 import DefaultContext from '../../context/default/default-context'
 
@@ -27,10 +30,7 @@ const SpacedHeading = styled.h2`
 `
 
 /* You must reference the `topic` prop to get data from `getStaticProps` - check bottom of this file */
-export default function TopicPage({ page, preview }) {
-  if( !page || page === null ) {
-    return <ErrorPage statusCode={404} />
-  }
+export default function TopicPage({ ebikes, page, preview }) {
 
   // Destructure topic from main page payload and meta from global context
   const { topic } = page[0]
@@ -194,7 +194,7 @@ export default function TopicPage({ page, preview }) {
             topic.body.map( (slice) => {
               return(
                 slice.__typename === "TopicBodyElectric_bikes_content" &&
-                <MainContent maxWidth="1000px" key="2398403982">
+                <MainContent maxWidth="1000px" key={ randomID(123647890) }>
                   { slice.primary && 
                     <RichText 
                       render={ slice.primary.main_content } 
@@ -204,6 +204,7 @@ export default function TopicPage({ page, preview }) {
                     slice.fields && slice.fields.map( (pillar) => {
                       return(
                         <RedActionItem 
+                          key={ randomID(894589778) }
                           path={ pillar.pillars }
                           title={ pillar.pillars.title[0].text }
                           text={ pillar.pillar_subtext }
@@ -213,12 +214,9 @@ export default function TopicPage({ page, preview }) {
                   }
                 </MainContent>
               )
-              
             })
           ) 
         }
-
-
       </>)}
         
       </Wrapper>
@@ -229,15 +227,17 @@ export default function TopicPage({ page, preview }) {
 /* The return here sends the `page` prop back to the TopicPage component above for rendering */
 export async function getStaticProps({ params, preview = false, previewData }) {
   const pageData = await getSingleTopicPage(params.uid, previewData)
-  const errorCode = pageData.ok ? false : pageData.statusCode
-  if (errorCode) {
-    res.statusCode = errorCode;
-  }
+
+  // E-bikes for Algolia
+  const ebikesData = await getEBikesPages()
+  const algoliaFormattedData = ebikeFormatter(ebikesData)
+  await AlgoliaIndex.saveObjects(algoliaFormattedData)
 
   return {
     props: {
       preview,
       page: pageData ?? null,
+      ebikes: ebikesData
     },
     revalidate: 1,
   }
