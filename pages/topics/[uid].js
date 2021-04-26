@@ -30,7 +30,7 @@ const SpacedHeading = styled.h2`
 `
 
 /* You must reference the `topic` prop to get data from `getStaticProps` - check bottom of this file */
-export default function TopicPage({ ebikes, page, preview }) {
+export default function TopicPage({ page, preview }) {
 
   // Destructure topic from main page payload and meta from global context
   const { topic } = page[0]
@@ -228,18 +228,25 @@ export default function TopicPage({ ebikes, page, preview }) {
 export async function getStaticProps({ params, preview = false, previewData }) {
   const pageData = await getSingleTopicPage(params.uid, previewData)
 
-  // E-bikes for Algolia
-  const ebikesData = await getEBikesPages()
-  const algoliaFormattedData = ebikeFormatter(ebikesData)
-  await AlgoliaIndex().saveObjects(algoliaFormattedData)
+  const errorCode = pageData.ok ? false : pageData.statusCode
+  if (errorCode) {
+    res.statusCode = errorCode;
+  }
+
+  // E-bikes for Algolia (only run on /topics/electric-bikes)
+  if(params.uid === 'electric-bikes') {
+    const ebikesData = await getEBikesPages()
+    const algoliaFormattedData = ebikeFormatter(ebikesData)
+    await AlgoliaIndex().saveObjects(algoliaFormattedData)
+  }
 
   return {
     props: {
       preview,
-      page: pageData ?? null,
-      ebikes: ebikesData
+      page: pageData
     },
-    revalidate: 1,
+    notFound: true,
+    revalidate: 60,
   }
 }
 
@@ -249,6 +256,6 @@ export async function getStaticPaths() {
 
   return {
     paths: allTopics?.map(({ node }) => `/topics/${node._meta.uid}`) || [],
-    fallback: true,
+    fallback: false,
   }
 }

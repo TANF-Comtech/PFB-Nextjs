@@ -181,6 +181,7 @@ export async function getStaticProps({ params, preview = false, previewData }) {
       preview,
       page: pageData ?? null,
     },
+    notFound: true,
     revalidate: 1,
   }
 }
