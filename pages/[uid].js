@@ -448,16 +448,13 @@ export async function getStaticProps({ params, preview = false, previewData }) {
   } 
   
   else if(params.uid === 'team') {
-
     pageData.landing_page.dataTeam = await getTeamMembers(params.uid, previewData)
     pageData.landing_page.dataCEO = await getCEO(params.uid, previewData)
 
   } 
   
   else if(params.uid === 'careers') {
-
     pageData.landing_page.data = await getAllCareers(params.uid, previewData)
-
   } 
   
   else if(params.uid === 'events') {
