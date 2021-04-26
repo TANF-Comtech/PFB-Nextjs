@@ -428,19 +428,19 @@ export async function getStaticProps({ params, preview = false, previewData }) {
   if(params.uid === 'news') {
     pageData.landing_page.data = await getAllNewsForLandingPage(params.uid, previewData)
     const algoliaFormattedData = newsFormatter(pageData.landing_page.data)
-    await AlgoliaIndex.saveObjects(algoliaFormattedData)
+    await AlgoliaIndex().saveObjects(algoliaFormattedData)
   } 
   
   else if(params.uid === 'locations') {
     pageData.landing_page.data = await getLocations(params.uid, previewData)
     const algoliaFormattedData = locationFormatter(pageData.landing_page.data)
-    await AlgoliaIndex.saveObjects(algoliaFormattedData)
+    await AlgoliaIndex().saveObjects(algoliaFormattedData)
   } 
   
   else if(params.uid === 'topics') {
     pageData.landing_page.data = await getTopics(params.uid, previewData)
     const algoliaFormattedData = topicFormatter(pageData.landing_page.data)
-    await AlgoliaIndex.saveObjects(algoliaFormattedData)
+    await AlgoliaIndex().saveObjects(algoliaFormattedData)
   } 
   
   else if(params.uid === 'rides') {
@@ -464,7 +464,7 @@ export async function getStaticProps({ params, preview = false, previewData }) {
   else if(params.uid === 'research') {
     pageData.landing_page.data = await getStats()
     const algoliaFormattedData = statsFormatter(pageData.landing_page.data)
-    await AlgoliaIndex.saveObjects(algoliaFormattedData)
+    await AlgoliaIndex().saveObjects(algoliaFormattedData)
   }  
 
   // Return the data payload and preview boolean to the page

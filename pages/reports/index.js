@@ -124,7 +124,7 @@ export async function getStaticProps({ params, preview = false, previewData }) {
   const pageData = await getReports()
 
   const algoliaFormattedData = reportsFormatter(pageData)
-  await AlgoliaIndex.saveObjects(algoliaFormattedData)
+  await AlgoliaIndex().saveObjects(algoliaFormattedData)
 
   return {
     props: {

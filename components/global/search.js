@@ -228,7 +228,7 @@ const HitContainer = styled.div`
       <SearchContainer searchState={ searchState }>
         <InstantSearch
           searchClient={ AlgoliaReactClient } 
-          indexName={ ALGOLIA_INDEX_NAME } >
+          indexName="MAINSITE" >
           
           <CustomSearchBox 
             translations={{

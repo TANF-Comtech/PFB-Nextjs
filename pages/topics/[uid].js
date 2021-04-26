@@ -231,7 +231,7 @@ export async function getStaticProps({ params, preview = false, previewData }) {
   // E-bikes for Algolia
   const ebikesData = await getEBikesPages()
   const algoliaFormattedData = ebikeFormatter(ebikesData)
-  await AlgoliaIndex.saveObjects(algoliaFormattedData)
+  await AlgoliaIndex().saveObjects(algoliaFormattedData)
 
   return {
     props: {
