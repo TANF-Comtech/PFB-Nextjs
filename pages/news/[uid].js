@@ -182,7 +182,7 @@ export async function getStaticProps({ params, preview = false, previewData }) {
       page: pageData ?? null,
     },
     notFound: true,
-    revalidate: 1,
+    revalidate: 60,
   }
 }
 
@@ -191,6 +191,6 @@ export async function getStaticPaths() {
   const pages = await getAllNews()
   return {
     paths: pages?.map(({ node }) => `/news/${node._meta.uid}`) || [],
-    fallback: true,
+    fallback: false,
   }
 }
