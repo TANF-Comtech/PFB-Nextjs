@@ -663,6 +663,23 @@ const GlobalStyle = createGlobalStyle`
     width: 100%;
     height: 100%;
   }
+
+  // PRISMIC HACKS
+  .image-left-align {
+    display: flex;
+    justify-content: flex-start;
+  } 
+  .image-center-align {
+    display: flex;
+    justify-content: center;
+  } 
+  .image-right-align {
+    display: flex;
+    justify-content: flex-end;
+  } 
+  .caption {
+    font-size: 14px;
+  }
 `;
 
 export default GlobalStyle;
