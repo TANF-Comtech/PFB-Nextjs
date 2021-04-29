@@ -139,7 +139,7 @@ export default function MembersPage({ page, preview }) {
                             <Link href={ edition.pdf_item.url } passHref>
                               <a>
                                 <Text>
-                                  Week of { newDate.toLocaleString('en-us', newDateOptions) }
+                                  { newDate.toLocaleString('en-us', newDateOptions) }
                                 </Text>
                                 <Arrow src={ WhiteArrow } width="46px" />
                               </a>
