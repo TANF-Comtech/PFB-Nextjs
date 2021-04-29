@@ -643,6 +643,43 @@ const GlobalStyle = createGlobalStyle`
     font-size: 14px !important;
   }
 
+  // Responsive YouTube embeds
+  .yt-video-container {
+    overflow: hidden;
+    position: relative;
+    width:100%;
+  }
+
+  .yt-video-container::after {
+    padding-top: 56.25%;
+    display: block;
+    content: '';
+  }
+
+  .yt-video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  // PRISMIC HACKS
+  .image-left-align {
+    display: flex;
+    justify-content: flex-start;
+  } 
+  .image-center-align {
+    display: flex;
+    justify-content: center;
+  } 
+  .image-right-align {
+    display: flex;
+    justify-content: flex-end;
+  } 
+  .caption {
+    font-size: 14px;
+  }
 `;
 
 export default GlobalStyle;

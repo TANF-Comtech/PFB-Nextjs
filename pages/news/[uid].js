@@ -6,6 +6,7 @@ import { RichText, Date as ParseDate } from 'prismic-reactjs'
 import { getAllNews, 
          getSingleNewsPage } from '../../lib/queries/news'
 import { linkResolver, setDateSuffix } from '../../lib/utils'
+import { htmlSerializer } from '../../lib/prismic/htmlSerializer'
 import { paraFinder } from '../../lib/utils/paraFinder'
 
 import DefaultContext from '../../context/default/default-context'
@@ -99,7 +100,7 @@ export default function NewsPage({
         postTitle="News"
         isWide="true"
       >        
-        <MainContent>
+        <MainContent maxWidth="700px">
           <DateBox>
           { `${newDate.toLocaleString('en-us', { month: 'long' } )} 
               ${setDateSuffix(newDate.getDate())}, 
@@ -131,7 +132,11 @@ export default function NewsPage({
           }     
           { news.main_content && 
             <IntroWrapper>
-              <RichText render={ news.main_content } linkResolver={ linkResolver } />
+              <RichText 
+                render={ news.main_content } 
+                linkResolver={ linkResolver } 
+                htmlSerializer={ htmlSerializer }
+              />
             </IntroWrapper>
           }
           { news.topics.length > 1 &&
