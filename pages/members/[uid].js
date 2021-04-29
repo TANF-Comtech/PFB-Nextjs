@@ -131,9 +131,9 @@ export default function MembersPage({ page, preview }) {
                   <MainContent maxWidth="800px"> 
                     <h2>{ slice.primary.sectionTitle }</h2>
                     <Grid>
-                      { slice.fields.map( (edition) => {
+                      { slice.fields.reverse().map( (edition) => {
                         const newDate = new Date(ParseDate( edition.date ))
-                        const newDateOptions = { month: 'long', day: 'numeric', year: 'numeric' }
+                        const newDateOptions = { month: 'long', year: 'numeric' }
                         return(
                           <Box key={ edition.date }>
                             <Link href={ edition.pdf_item.url } passHref>
