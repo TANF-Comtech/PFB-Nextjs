@@ -99,7 +99,7 @@ export default function NewsPage({
         postTitle="News"
         isWide="true"
       >        
-        <MainContent>
+        <MainContent maxWidth="700px">
           <DateBox>
           { `${newDate.toLocaleString('en-us', { month: 'long' } )} 
               ${setDateSuffix(newDate.getDate())}, 
