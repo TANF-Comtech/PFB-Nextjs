@@ -12,7 +12,7 @@ import { paraFinder } from '../../lib/utils/paraFinder'
 import DefaultContext from '../../context/default/default-context'
 
 import Wrapper from '../../components/global/wrapper'
-import SiteMeta from '../../components/meta/site-meta'
+import SiteMetaCustom from '../../components/meta/site-meta-custom'
 import MainContent from '../../components/global/main-content'
 import Promo from '../../components/slices/promo'
 import Donate from '../../components/global/donate'
@@ -84,15 +84,59 @@ export default function NewsPage({
   useEffect(() => {
     setFi(Math.floor(Math.random(5)))
   }, [router.pathname])
+ 
+  // Sets up article-specific JSON
+  const newsJSONPayload = {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "description": news.seo_text ?? ( paraFinder(news.main_content).text ?? meta.desc ),
+    "image": {
+      "@context": "http://schema.org",
+      "@type": "ImageObject",
+      "url": news.seo_image ? news.seo_image.url : ( news.header_image.url ?? meta.imgSrc ),
+      "height": news.seo_image ? news.seo_image.dimensions.height : ( news.header_image.dimensions.height ?? meta.imgHeight ),
+      "width": news.seo_image ? news.seo_image.dimensions.width : ( news.header_image.dimensions.width ?? meta.imgWidth )
+    },
+    "mainEntityOfPage": `https://www.peopleforbikes.org/news/${news._meta.uid}`,
+    "url": `https://www.peopleforbikes.org/news/${news._meta.uid}`,
+    "inLanguage": "en",
+    "author": [{
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "url": "https://www.peopleforbikes.org",
+      "name": news.byline ?? 'PeopleForBikes Staff'
+    }],
+    "datePublished": newDate,
+    "headline": news.title[0].text ?? meta.title,
+    "publisher": {
+      "@id": "https://www.peopleforbikes.org/#publisher"
+    },
+    "copyrightHolder": {
+      "@id": "https://www.peopleforbikes.org/#publisher"
+    },
+    "sourceOrganization": {
+      "@id": "https://www.peopleforbikes.org/#publisher"
+    },
+    "isAccessibleForFree": true,
+    "hasPart": {
+      "@type": "WebPageElement",
+      "isAccessibleForFree": true
+    },
+    "isPartOf": {
+      "@type": "CreativeWork",
+      "name": "PeopleForBikes"
+    }
+  }
 
   return (
     <>
-      <SiteMeta
-        desc={ news.main_content ? ( `${ paraFinder(news.main_content)} ... ` ) : ( meta.desc ) }
-        title={ news.title ? ( `${ news.title[0].text } | People for Bikes` ) : ( meta.title ) }
-        imgHeight={ meta.imgHeight }
-        imgSrc={ meta.imgSrc }
-        imgWidth={ meta.imgWidth }
+      <SiteMetaCustom
+        desc={ news.seo_text ?? ( paraFinder(news.main_content).text ?? meta.desc ) }
+        title={ news.title[0].text ?? meta.title }
+        imgHeight={ news.seo_image ? news.seo_image.dimensions.height : ( news.header_image.dimensions.height ?? meta.imgHeight ) }
+        imgSrc={ news.seo_image ? news.seo_image.url : ( news.header_image.url ?? meta.imgSrc ) }
+        imgWidth={ news.seo_image ? news.seo_image.dimensions.width : ( news.header_image.dimensions.width ?? meta.imgWidth ) }
+        ldJSON={ newsJSONPayload }
         path={ news ? ( `https://www.peopleforbikes.org/news/${news._meta.uid}` ) : ( meta.path ) }
       />    
       <Wrapper 
