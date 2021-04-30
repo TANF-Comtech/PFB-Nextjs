@@ -183,7 +183,7 @@ export default function ReportPage({ page, preview }) {
               )
             })
           }
-          { report.topics &&
+          { report.topics.length > 1 && 
             <>
             { report.topics[0].topic !== null &&
               <strong>Related Topics:</strong>
@@ -204,7 +204,7 @@ export default function ReportPage({ page, preview }) {
             </ParagraphOfLinks>
             </>
           }            
-          { report.locations && 
+          { report.locations.length > 1 && 
             <>
             { report.locations[0].location !== null &&
               <strong>Related Locations:</strong>
