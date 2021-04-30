@@ -79,8 +79,8 @@ export async function getStaticProps({ params, preview = false, previewData }) {
       preview,
       page: pageData ?? null,
     },
-    revalidate: 1,
-  };
+    revalidate: 60,
+  }
 }
 
 // getStaticPaths requires the whole paths argument to be objects of URL it needs to statically render server-side
@@ -88,6 +88,6 @@ export async function getStaticPaths() {
   const allCareers = await getAllCareers();
   return {
     paths: allCareers?.map(({ node }) => `/careers/${node._meta.uid}`) || [],
-    fallback: true,
-  };
+    fallback: false,
+  }
 }

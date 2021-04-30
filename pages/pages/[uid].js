@@ -61,7 +61,7 @@ export default function BasicPage({ page, preview }) {
 //       preview,
 //       page: pageData ?? null,
 //     },
-//     revalidate: 1,
+//     revalidate: 60,
 //   }
 // }
 
@@ -70,6 +70,6 @@ export default function BasicPage({ page, preview }) {
 //   const allPages = await getAllBasicPagesWithUID()
 //   return {
 //     paths: allPages?.map(({ node }) => `/pages/${node._meta.uid}`) || [],
-//     fallback: true,
+//     fallback: false,
 //   }
 // }

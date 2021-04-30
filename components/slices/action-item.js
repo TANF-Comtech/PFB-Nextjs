@@ -95,7 +95,7 @@ const ActionItem = ({
   title,
   text
 }) => {
-
+  
   return (
     <Container>
       { icon === 'Action (exclamation icon)' && <Icon src={ ActionIcon } alt="Exclamation Icon" /> }
@@ -123,7 +123,7 @@ const ActionItem = ({
       ) : (
         <ContentContainer>
           { path ? (
-            <Link href={ linkResolver(path, false) } passHref>
+            <Link href={ linkResolver(path) } passHref>
               <a>
                 <Title>{ title }</Title>
               </a>

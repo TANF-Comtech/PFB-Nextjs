@@ -1,11 +1,12 @@
-import { useContext } from "react";
-import ErrorPage from "next/error";
+import { useContext, useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import styled from "styled-components";
 import { RichText, Date as ParseDate } from "prismic-reactjs";
-import Link from "next/link";
 
 import { getAllNews, getSingleNewsPage } from "../../lib/queries/news";
 import { linkResolver, setDateSuffix } from "../../lib/utils";
+import { htmlSerializer } from "../../lib/prismic/htmlSerializer";
+import { paraFinder } from "../../lib/utils/paraFinder";
 
 import DefaultContext from "../../context/default/default-context";
 
@@ -14,6 +15,7 @@ import SiteMeta from "../../components/meta/site-meta";
 import MainContent from "../../components/global/main-content";
 import Promo from "../../components/slices/promo";
 import Donate from "../../components/global/donate";
+import FallbackImage from "../../components/content/fallback-image";
 
 import TakeActionPromo from "../../public/promo/take-action-banner.jpg";
 
@@ -55,10 +57,9 @@ const Caption = styled.div`
   font-size: 14px;
 `;
 
-export default function NewsPage({ page, preview }) {
-  if (!page || page === null) {
-    return <ErrorPage statusCode={404} />;
-  }
+export default function NewsPage({ fallback, page, preview }) {
+  // Set up router
+  const router = useRouter();
 
   // Destructure page payload and meta from global context
   const { news } = page;
@@ -72,6 +73,15 @@ export default function NewsPage({ page, preview }) {
     newDate = new Date(ParseDate(news._meta.lastPublicationDate));
   }
 
+  // Set fallback index, one of six possible images
+  const [fi, setFi] = useState(Math.floor(Math.random(5)));
+
+  // Every time a new path comes up we shuffle the images
+  // useEffect 'watch' dependency is where we watch the router's path
+  useEffect(() => {
+    setFi(Math.floor(Math.random(5)));
+  }, [router.pathname]);
+
   return (
     <>
       <script
@@ -81,8 +91,8 @@ export default function NewsPage({ page, preview }) {
       ></script>
       <SiteMeta
         desc={
-          news.main_content[0].text
-            ? `${news.main_content[0].text.substring(0, 180)} ... `
+          news.main_content
+            ? `${paraFinder(news.main_content)} ... `
             : meta.desc
         }
         title={
@@ -98,7 +108,7 @@ export default function NewsPage({ page, preview }) {
         }
       />
       <Wrapper postPath="/news" postTitle="News" isWide="true">
-        <MainContent>
+        <MainContent maxWidth="700px">
           <DateBox>
             {`${newDate.toLocaleString("en-us", { month: "long" })} 
               ${setDateSuffix(newDate.getDate())}, 
@@ -106,7 +116,7 @@ export default function NewsPage({ page, preview }) {
           </DateBox>
           {news.title && <h2>{news.title[0].text}</h2>}
           {news.byline && <p>By: {news.byline}</p>}
-          {news.header_image && (
+          {news.header_image ? (
             <ImgContainer>
               <img
                 loading="lazy"
@@ -121,15 +131,25 @@ export default function NewsPage({ page, preview }) {
                 <Caption>{news.header_image.alt}</Caption>
               )}
             </ImgContainer>
+          ) : (
+            <ImgContainer>
+              <img
+                loading="lazy"
+                src={fallback[fi].path}
+                alt={fallback[fi].alt}
+              />
+            </ImgContainer>
           )}
           {news.main_content && (
             <IntroWrapper>
               <RichText
                 render={news.main_content}
                 linkResolver={linkResolver}
+                htmlSerializer={htmlSerializer}
               />
             </IntroWrapper>
           )}
+          )
           {news.topics.length > 1 && (
             <>
               {news.topics[0].topic !== null && (
@@ -194,8 +214,9 @@ export async function getStaticProps({ params, preview = false, previewData }) {
     props: {
       preview,
       page: pageData ?? null,
+      fallback: FallbackImage(),
     },
-    revalidate: 1,
+    revalidate: 60,
   };
 }
 
@@ -204,6 +225,6 @@ export async function getStaticPaths() {
   const pages = await getAllNews();
   return {
     paths: pages?.map(({ node }) => `/news/${node._meta.uid}`) || [],
-    fallback: true,
+    fallback: false,
   };
 }

@@ -90,84 +90,32 @@ export default function ActionForms({ page, preview }) {
   let imageSelection;
   if (action.image_selection) {
     switch (action.image_selection) {
-      case "01":
-        imageSelection = FormImg01;
-        break;
-      case "02":
-        imageSelection = FormImg02;
-        break;
-      case "03":
-        imageSelection = FormImg03;
-        break;
-      case "04":
-        imageSelection = FormImg04;
-        break;
-      case "05":
-        imageSelection = FormImg05;
-        break;
-      case "06":
-        imageSelection = FormImg06;
-        break;
-      case "07":
-        imageSelection = FormImg07;
-        break;
-      case "08":
-        imageSelection = FormImg08;
-        break;
-      case "09":
-        imageSelection = FormImg09;
-        break;
-      case "10":
-        imageSelection = FormImg10;
-        break;
-      case "11":
-        imageSelection = FormImg11;
-        break;
-      case "12":
-        imageSelection = FormImg12;
-        break;
-      case "13":
-        imageSelection = FormImg13;
-        break;
-      case "14":
-        imageSelection = FormImg14;
-        break;
-      case "15":
-        imageSelection = FormImg15;
-        break;
-      case "16":
-        imageSelection = FormImg16;
-        break;
-      case "17":
-        imageSelection = FormImg17;
-        break;
-      case "18":
-        imageSelection = FormImg18;
-        break;
-      case "19":
-        imageSelection = FormImg19;
-        break;
-      case "20":
-        imageSelection = FormImg20;
-        break;
-      case "21":
-        imageSelection = FormImg21;
-        break;
-      case "22":
-        imageSelection = FormImg22;
-        break;
-      case "23":
-        imageSelection = FormImg23;
-        break;
-      case "24":
-        imageSelection = FormImg24;
-        break;
-      case "25":
-        imageSelection = FormImg25;
-        break;
-      case "26":
-        imageSelection = FormImg26;
-        break;
+      case '1' : imageSelection = FormImg01; break;
+      case '2' : imageSelection = FormImg02; break;
+      case '3' : imageSelection = FormImg03; break;
+      case '4' : imageSelection = FormImg04; break;
+      case '5' : imageSelection = FormImg05; break;
+      case '6' : imageSelection = FormImg06; break;
+      case '7' : imageSelection = FormImg07; break;
+      case '8' : imageSelection = FormImg08; break;
+      case '9' : imageSelection = FormImg09; break;
+      case '10' : imageSelection = FormImg10; break;
+      case '11' : imageSelection = FormImg11; break;
+      case '12' : imageSelection = FormImg12; break;
+      case '13' : imageSelection = FormImg13; break;
+      case '14' : imageSelection = FormImg14; break;
+      case '15' : imageSelection = FormImg15; break;
+      case '16' : imageSelection = FormImg16; break;
+      case '17' : imageSelection = FormImg17; break;
+      case '18' : imageSelection = FormImg18; break;
+      case '19' : imageSelection = FormImg19; break;
+      case '20' : imageSelection = FormImg20; break;
+      case '21' : imageSelection = FormImg21; break;
+      case '22' : imageSelection = FormImg22; break;
+      case '23' : imageSelection = FormImg23; break;
+      case '24' : imageSelection = FormImg24; break;
+      case '25' : imageSelection = FormImg25; break;
+      case '26' : imageSelection = FormImg26; break;
     }
   }
 
@@ -206,14 +154,15 @@ export default function ActionForms({ page, preview }) {
           {action.main_content && <BigPara>{action.main_content}</BigPara>}
           {action.long_content && <RichText render={action.long_content} />}
           <FlexContainer>
-            {action.image_selection && (
+            { action.image_selection && <>
               <ImageContainer>
                 <img
                   src={imageSelection}
                   alt="Bike centric image with people present"
                 />
               </ImageContainer>
-            )}
+              </>
+            }
             <FormContainer>
               {action.form_id && (
                 <>
@@ -254,8 +203,8 @@ export async function getStaticProps({ params, preview = false, previewData }) {
       preview,
       page: pageData ?? null,
     },
-    revalidate: 1,
-  };
+    revalidate: 60,
+  }
 }
 
 // getStaticPaths requires the whole paths argument to be objects of URL it needs to statically render server-side
@@ -263,6 +212,6 @@ export async function getStaticPaths() {
   const pages = await getActions();
   return {
     paths: pages?.map(({ node }) => `/take-action/${node._meta.uid}`) || [],
-    fallback: true,
-  };
+    fallback: false,
+  }
 }

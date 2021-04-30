@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link"
 import styled from "styled-components";
 
+import FallbackImage from "./fallback-image"
 import Button from "../primitives/button"
 
 const Container = styled.section`
@@ -74,6 +75,7 @@ const Image = styled.img`
  * @param { string } date - when the content item occurred (optional)
  * @param { object } image - image to go with post (optional)
  * @param { string } path - tells us the URL to the item
+ * @param { number } randomId - generated to give us a randomized ID for fallback images
  * @param { string } title - title that goes next to the icon
  * @param { string } text - content to be shown
  */
@@ -84,14 +86,23 @@ const ContentItem = ({
   title,
   text
 }) => {
+
   return (
     <Container>
-      { image && 
+      { image.url ? (
         <Image 
           alt={ image.alt ? image.alt : 'Bike-oriented image' }
           loading="lazy"
           src={ image['1x'] ? image['1x'].url : image.url } 
         /> 
+        ) : (
+        // Utilizes fallback image functionality
+        <Image 
+          alt={ image.alt }
+          loading="lazy"
+          src={ image.path } 
+        /> 
+        )
       }
       <ContentContainer>
         { !path ? 
@@ -123,5 +134,4 @@ const ContentItem = ({
     </Container>
   )
 }
-
 export default ContentItem

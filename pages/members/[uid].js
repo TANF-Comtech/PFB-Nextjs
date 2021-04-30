@@ -148,23 +148,15 @@ export default function MembersPage({ page, preview }) {
                   <MainContent maxWidth="800px">
                     <h2>{slice.primary.sectionTitle}</h2>
                     <Grid>
-                      {slice.fields.map((edition) => {
-                        const newDate = new Date(ParseDate(edition.date));
-                        const newDateOptions = {
-                          month: "long",
-                          day: "numeric",
-                          year: "numeric",
-                        };
-                        return (
-                          <Box key={edition.date}>
-                            <Link href={edition.pdf_item.url} passHref>
+                      { slice.fields.reverse().map( (edition) => {
+                        const newDate = new Date(ParseDate( edition.date ))
+                        const newDateOptions = { month: 'long', year: 'numeric' }
+                        return(
+                          <Box key={ edition.date }>
+                            <Link href={ edition.pdf_item.url } passHref>
                               <a>
                                 <Text>
-                                  Week of{" "}
-                                  {newDate.toLocaleString(
-                                    "en-us",
-                                    newDateOptions
-                                  )}
+                                  { newDate.toLocaleString('en-us', newDateOptions) }
                                 </Text>
                                 <Arrow src={WhiteArrow} width="46px" />
                               </a>
@@ -245,7 +237,7 @@ export async function getServerSideProps({
       preview,
       page: pageData ?? null,
     },
-    revalidate: 1,
+    revalidate: 60,
   }
 }
 
@@ -254,6 +246,6 @@ export async function getStaticPaths() {
   const pages = await getMemberPages()
   return {
     paths: pages?.map(({ node }) => `/members/${node._meta.uid}`) || [],
-    fallback: true,
+    fallback: false,
   }
 } */

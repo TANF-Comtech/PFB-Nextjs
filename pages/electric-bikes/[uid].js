@@ -108,8 +108,8 @@ export async function getStaticProps({ params, preview = false, previewData }) {
       preview,
       page: pageData ?? null,
     },
-    revalidate: 1,
-  };
+    revalidate: 60,
+  }
 }
 
 // getStaticPaths requires the whole paths argument to be objects of URL it needs to statically render server-side
@@ -117,6 +117,6 @@ export async function getStaticPaths() {
   const pages = await getEBikesPages();
   return {
     paths: pages?.map(({ node }) => `/electric-bikes/${node._meta.uid}`) || [],
-    fallback: true,
-  };
+    fallback: false,
+  }
 }

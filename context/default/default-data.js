@@ -4,7 +4,8 @@ import splashThree from '../../public/social-splash/PFB_Social-03.jpg'
 import splashFour from '../../public/social-splash/PFB_Social-04.jpg'
 import logo from '../../public/PFB_Stacked_LOGO_512x512.jpg'
 
-const socialSplashArr = [ splashOne, splashTwo, splashThree, splashFour ] // social images
+// social images
+const socialSplashArr = [ splashOne, splashTwo, splashThree, splashFour ] 
 
 /**
  * defaultData (variable)
@@ -48,6 +49,25 @@ export const defaultData = {
         "_meta": {
           "id": "01",
           "uid": "join",
+        }
+      }
+    },
+    {
+      "title": [
+        {
+          "type": "heading2",
+          "text": "Discover an Electric Bike Ride Near You",
+          "spans": []
+        }
+      ],
+      "extended_text": null,
+      "text": "Find great electric bike rides around the United States with our lists and helpful mapping tools.",
+      "icon": "E-bikes (battery icon)",
+      "link": {
+        "__typename": "Electric Bikes",
+        "_meta": {
+          "id": "02",
+          "uid": "rides-and-routes",
         }
       }
     },

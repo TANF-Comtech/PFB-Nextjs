@@ -246,7 +246,17 @@ const nextConfig = {
         source: '/business-intelligence-hub',
         destination: '/members/business-intelligence-hub',
         permanent: true
-      }
+      },
+      {
+        source: '/logos',
+        destination: 'https://www.dropbox.com/sh/uimaqsac76wawzl/AAAV0E-FkHEimL54I3X0vi-ka?dl=0',
+        permanent: true
+      },
+      {
+        source: '/e-bike-act',
+        destination: '/take-action/e-bike-act',
+        permanent: true
+      },
     ]
   }
 }
