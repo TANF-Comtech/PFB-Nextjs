@@ -68,14 +68,6 @@ export default function NewsPage({
   const { news } = page
   const { meta } = useContext(DefaultContext)
 
-  // Set up date
-  let newDate
-  if (news.publication_date) {
-    newDate = new Date(ParseDate( news.publication_date ))
-  } else {
-    newDate = new Date(ParseDate(news._meta.lastPublicationDate ))
-  }
-
   // Set fallback index, one of six possible images 
   const [fi, setFi] = useState(Math.floor(Math.random(5)))
 
@@ -84,30 +76,85 @@ export default function NewsPage({
   useEffect(() => {
     setFi(Math.floor(Math.random(5)))
   }, [router.pathname])
+
+  // Set SEO data to defaults
+  const [theTitle, setTheTitle] = useState(meta.title)
+  const [theByline, setTheByline] = useState('PeopleForBikes Staff')
+  const [theDesc, setTheDesc] = useState(meta.desc)
+  const [thePath, setThePath] = useState(meta.path)
+  const [theDate, setTheDate] = useState(new Date(ParseDate( news._meta.lastPublicationDate )))
+  const [theImage, setTheImage] = useState(meta.imgSrc)
+  const [theImageWidth, setTheImageWidth] = useState(meta.imgWidth)
+  const [theImageHeight, setTheImageHeight] = useState(meta.imgHeight)
+
+  // Check for SEO-specific overrides, set if they are present (only run once)
+  useEffect(() => {
+    
+    // Title
+    if ( news.title ) {
+      setTheTitle(news.title[0].text)
+    } else {
+      setTheTitle(meta.title)
+    }
+
+    // Byline
+    if ( news.byline ) {
+      setTheByline( news.byline )
+    }
+
+    // Description
+    if ( news.seo_text ) {
+      setTheDesc(news.seo_text)
+    } else if ( news.main_content ) {
+      setTheDesc(paraFinder(news.main_content).text)
+    }
+
+    // Path
+    if ( news ) {
+      setThePath(`https://www.peopleforbikes.org/news/${news._meta.uid}`)
+    }
+
+    // Date  
+    if (news.publication_date) {
+      setTheDate(new Date(ParseDate( news.publication_date )))
+    }
+    
+    // Image
+    if ( news.seo_image ) {
+      setTheImage( news.seo_image.url )
+      setTheImageWidth( news.seo_image.dimensions.width )
+      setTheImageHeight( news.seo_image.dimensions.height )
+    } else if ( news.header_image ) {
+      setTheImage( news.header_image.url )
+      setTheImageWidth( news.header_image.dimensions.width )
+      setTheImageHeight( news.header_image.dimensions.height )
+    }
+
+  }, [])
  
   // Sets up article-specific JSON
   const newsJSONPayload = {
     "@context": "http://schema.org",
     "@type": "NewsArticle",
-    "description": news.seo_text ?? ( paraFinder(news.main_content).text ?? meta.desc ),
+    "description": theDesc,
     "image": {
       "@context": "http://schema.org",
       "@type": "ImageObject",
-      "url": news.seo_image ? news.seo_image.url : ( news.header_image.url ?? meta.imgSrc ),
-      "height": news.seo_image ? news.seo_image.dimensions.height : ( news.header_image.dimensions.height ?? meta.imgHeight ),
-      "width": news.seo_image ? news.seo_image.dimensions.width : ( news.header_image.dimensions.width ?? meta.imgWidth )
+      "url": theImage,
+      "height": theImageHeight,
+      "width": theImageWidth
     },
-    "mainEntityOfPage": `https://www.peopleforbikes.org/news/${news._meta.uid}`,
-    "url": `https://www.peopleforbikes.org/news/${news._meta.uid}`,
+    "mainEntityOfPage": thePath,
+    "url": thePath,
     "inLanguage": "en",
     "author": [{
       "@context": "http://schema.org",
       "@type": "Person",
       "url": "https://www.peopleforbikes.org",
-      "name": news.byline ?? 'PeopleForBikes Staff'
+      "name": theByline
     }],
-    "datePublished": newDate,
-    "headline": news.title[0].text ?? meta.title,
+    "datePublished": theDate,
+    "headline": theTitle,
     "publisher": {
       "@id": "https://www.peopleforbikes.org/#publisher"
     },
@@ -131,13 +178,13 @@ export default function NewsPage({
   return (
     <>
       <SiteMetaCustom
-        desc={ news.seo_text ?? ( paraFinder(news.main_content).text ?? meta.desc ) }
-        title={ news.title[0].text ?? meta.title }
-        imgHeight={ news.seo_image ? news.seo_image.dimensions.height : ( news.header_image.dimensions.height ?? meta.imgHeight ) }
-        imgSrc={ news.seo_image ? news.seo_image.url : ( news.header_image.url ?? meta.imgSrc ) }
-        imgWidth={ news.seo_image ? news.seo_image.dimensions.width : ( news.header_image.dimensions.width ?? meta.imgWidth ) }
+        desc={ theDesc }
+        title={ theTitle }
+        imgHeight={ theImageHeight }
+        imgSrc={ theImage }
+        imgWidth={ theImageWidth }
         ldJSON={ newsJSONPayload }
-        path={ news ? ( `https://www.peopleforbikes.org/news/${news._meta.uid}` ) : ( meta.path ) }
+        path={ thePath }
       />    
       <Wrapper 
         postPath="/news"
@@ -146,18 +193,12 @@ export default function NewsPage({
       >        
         <MainContent maxWidth="700px">
           <DateBox>
-          { `${newDate.toLocaleString('en-us', { month: 'long' } )} 
-              ${setDateSuffix(newDate.getDate())}, 
-              ${newDate.getFullYear()}` }
+          { `${theDate.toLocaleString('en-us', { month: 'long' } )} 
+              ${setDateSuffix(theDate.getDate())}, 
+              ${theDate.getFullYear()}` }
           </DateBox>
-          { news.title && 
-            <h2>
-              { news.title[0].text }
-            </h2>
-          }          
-          { news.byline && 
-            <p>By: { news.byline }</p>
-          }     
+          <h2>{ theTitle }</h2>       
+          <p>By: { theByline }</p>
           {
             news.header_image ? (              
               <ImgContainer>
