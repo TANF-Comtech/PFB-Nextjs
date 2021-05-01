@@ -175,8 +175,11 @@ export const defaultData = {
 export const ldJSONBasic = {
   "@context": "http://schema.org",
   "@type": "Organization",
+  "@id": "https://www.peopleforbikes.org/mission",
   "name": "PeopleForBikes",
   "url": "https://www.peopleforbikes.org",
+  "privacyPolicy": "https://www.peopleforbikes.org/privacy",
+  "alternateName": ["PFB", "BikesBelong", "Bicycle Product Suppliers Association", "BPSA"],
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "2580 55th St #200",
@@ -186,11 +189,12 @@ export const ldJSONBasic = {
     "addressCountry": "US"
   },
   "telephone": "+13034494893",
-  "logo": `${ logo }`,
-  "sameAs": [
-    "https://www.facebook.com/PeopleForBikes", 
-    "https://twitter.com/peopleforbikes",
-    "https://www.linkedin.com/company/peopleforbikes",
-    "https://www.instagram.com/peopleforbikes",
-    "https://www.youtube.com/user/peopleforbikes/videos"]
+  "logo": {
+    "@context": "http://schema.org",
+    "@type": "ImageObject",
+    "url": `${ logo }`,
+    "height": 512,
+    "width": 512
+  },
+  "sameAs": ["https://www.facebook.com/PeopleForBikes", "https://twitter.com/peopleforbikes", "https://www.linkedin.com/company/peopleforbikes", "https://www.instagram.com/peopleforbikes", "https://www.youtube.com/user/peopleforbikes/videos"]
 }
