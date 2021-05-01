@@ -50,7 +50,7 @@ const Text = styled.h4`
 const Arrow = styled.img`
   display: block;
   margin: 0 auto;
-  width: 46px;
+  width: 46px; 
 `
 
 const IntroWrapper = styled.div`
