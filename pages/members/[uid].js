@@ -165,7 +165,7 @@ export default function MembersPage({ page, preview }) {
                         );
                       })}
                     </Grid>
-                  </MainContent>
+                  </MainContent> 
                 );
               }
             })}
