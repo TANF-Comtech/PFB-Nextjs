@@ -74,6 +74,19 @@ export default function MembersPage({ page, preview }) {
   const { member_content } = page;
   const { meta } = useContext(DefaultContext);
 
+  const [theReports, setTheReports] = useState(member_content.body && member_content.body)
+
+  // Monthly sales reports array needs to be flipped around
+  // Check to see if it's here and reverse() it if it is
+  useEffect(() => {
+    // Transform state obj to just be the reports, in reverse order
+    theReports.map( slice => {
+      if ( slice.type === 'biz_intel_hub' && slice.fields.length > 1) {
+        setTheReports(slice.fields.reverse())
+      } 
+    })
+  }, [])  
+
   return (
     <>
       <script
@@ -140,35 +153,42 @@ export default function MembersPage({ page, preview }) {
             </>
           )}
 
-          {/* BIZ INTEL SLICE */}
-          {member_content.body &&
+          {/* Monthly Sales Report Slice */}
+          { member_content.body &&
             member_content.body.map((slice) => {
               if (slice.type === "biz_intel_hub") {
                 return (
                   <MainContent maxWidth="800px">
                     <h2>{slice.primary.sectionTitle}</h2>
                     <Grid>
-                      { slice.fields.reverse().map( (edition) => {
-                        const newDate = new Date(ParseDate( edition.date ))
-                        const newDateOptions = { month: 'long', year: 'numeric' }
+                      { theReports.map( (edition) => {
                         return(
                           <Box key={ edition.date }>
-                            <Link href={ edition.pdf_item.url } passHref>
-                              <a>
-                                <Text>
-                                  { newDate.toLocaleString('en-us', newDateOptions) }
-                                </Text>
-                                <Arrow src={WhiteArrow} width="46px" />
-                              </a>
-                            </Link>
+                            { edition.pdf_item && 
+                              <Link href={ edition.pdf_item.url } passHref>
+                                <a>
+                                  <Text>
+                                    { new Date(ParseDate( edition.date ))
+                                        .toLocaleString('en-us', { 
+                                          month: 'long', 
+                                          year: 'numeric' 
+                                        }
+                                    ) }
+                                  </Text>
+                                  <Arrow src={WhiteArrow} width="46px" />
+                                </a>
+                              </Link>
+                            }
                           </Box>
                         );
                       })}
                     </Grid>
-                  </MainContent> 
+                  </MainContent>
                 );
               }
-            })}
+            })
+          }
+
           {member_content._meta.uid !== "business-intelligence-hub" && (
             <Button
               buttonAlign="center"
@@ -227,25 +247,3 @@ export async function getServerSideProps({
     };
   }
 }
-
-/* The return here sends the `page` prop back to the member_contentPage component above for rendering */
-/* export async function getStaticProps({ params, preview = false, previewData }) {
-  const pageData = await getSingleMemberPage(params.uid, previewData)
-
-  return {
-    props: {
-      preview,
-      page: pageData ?? null,
-    },
-    revalidate: 60,
-  }
-}
-
-// getStaticPaths requires the whole paths argument to be objects of URL it needs to statically render server-side
-export async function getStaticPaths() {
-  const pages = await getMemberPages()
-  return {
-    paths: pages?.map(({ node }) => `/members/${node._meta.uid}`) || [],
-    fallback: false,
-  }
-} */
