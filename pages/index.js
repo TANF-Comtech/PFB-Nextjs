@@ -1,21 +1,23 @@
-import Link from "next/link";
+// import Link from "next/link";
 import styled from "styled-components";
 
-import { getHomepage } from "../lib/queries/homepage";
-import { randomID } from "../lib/utils";
+import { getNewHomepage } from "../lib/queries/new-homepage";
+// import { randomID } from "../lib/utils";
 
 import Wrapper from "../components/global/wrapper";
 import HeaderImage from "../components/global/header-image";
-import Grid from "../components/global/grid";
-import MainContent from "../components/global/main-content";
-import RideSpotPromo from "../components/slices/ridespot-promo";
-import Promo from "../components/slices/promo";
-import ColorBanner from "../components/global/color-banner";
+// import Grid from "../components/global/grid";
+// import MainContent from "../components/global/main-content";
+// import RideSpotPromo from "../components/slices/ridespot-promo";
+// import Promo from "../components/slices/promo";
+// import ColorBanner from "../components/global/color-banner";
 import Button from "../components/primitives/button";
-import Carousel from "../components/global/carousel";
-import NewsList from "../components/content/news-list";
+// import Carousel from "../components/global/carousel";
+// import NewsList from "../components/content/news-list";
 
-import WhiteArrow from "../public/white-arrow.svg";
+// import WhiteArrow from "../public/white-arrow.svg";
+
+import { arrayShuffle } from "../lib/utils";
 
 const SectionTitle = styled.h3`
   color: ${(props) => props.theme.midnightBlue};
@@ -91,21 +93,37 @@ const Arrow = styled.img`
 `;
 
 export default function Homepage({ page }) {
-  const { homepage } = page;
+  const { new_homepage } = page;
+
+console.log(new_homepage)
+
+  
 
   return (
     <Wrapper postTitle="People for Bikes Homepage" isWide={true}>
-      {homepage.banner_image && (
-        <HeaderImage source={homepage.banner_image.url}>
-          <h1>{homepage.small_text}</h1>
-          <h1>{homepage.big_text}</h1>
-          <Button href="/mission" buttonBg="#00A2DF" buttonColor='white' buttonBorder='none'>
-            Our Mission
-          </Button>
-        </HeaderImage>
-      )}
+      {new_homepage.body &&
+        new_homepage.body.map((body) => {
+          if (body.__typename === "New_homepageBodyHero") {
+            return body.fields.map((hero) => {
+              return (
+                <HeaderImage source={hero.hero_image.url}>
+                  <h1>{hero.hero_text}</h1>
 
-      <MainContent>
+                  <Button
+                    href={hero.hero_link}
+                    buttonBg="#00A2DF"
+                    buttonColor="white"
+                    buttonBorder="none"
+                  >
+                    Our Mission
+                  </Button>
+                </HeaderImage>
+              );
+            });
+          }
+        })}
+
+      {/* <MainContent>
         <SectionTitle>Our Mission</SectionTitle>
         <Grid gridGap="1vw">
           <Link
@@ -246,14 +264,14 @@ export default function Homepage({ page }) {
           }
         })}
 
-      <ColorBanner />
+      <ColorBanner /> */}
     </Wrapper>
   );
 }
 
 /* The return here sends the `page` prop back to the component above for rendering */
 export async function getStaticProps({ params, preview = false, previewData }) {
-  const pageData = await getHomepage();
+  const pageData = await getNewHomepage();
 
   return {
     props: {
