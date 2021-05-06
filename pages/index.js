@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 // import Link from "next/link";
 import styled from "styled-components";
 
@@ -17,7 +18,7 @@ import Button from "../components/primitives/button";
 
 // import WhiteArrow from "../public/white-arrow.svg";
 
-import { arrayShuffle } from "../lib/utils";
+import { arrayShuffle, linkResolver } from "../lib/utils";
 
 const SectionTitle = styled.h3`
   color: ${(props) => props.theme.midnightBlue};
@@ -94,34 +95,35 @@ const Arrow = styled.img`
 
 export default function Homepage({ page }) {
   const { new_homepage } = page;
+  const [singleHero, setSingleHero] = useState();
 
-console.log(new_homepage)
-
-  
+  useEffect(() => {
+    new_homepage.body.map((body) => {
+      if (body.__typename === "New_homepageBodyHero") {
+        arrayShuffle(body.fields);
+        body.fields.map((hero) => {
+          setSingleHero(hero);
+        });
+      }
+    });
+  }, [new_homepage]);
 
   return (
     <Wrapper postTitle="People for Bikes Homepage" isWide={true}>
-      {new_homepage.body &&
-        new_homepage.body.map((body) => {
-          if (body.__typename === "New_homepageBodyHero") {
-            return body.fields.map((hero) => {
-              return (
-                <HeaderImage source={hero.hero_image.url}>
-                  <h1>{hero.hero_text}</h1>
+      {singleHero && (
+        <HeaderImage source={singleHero.hero_image.url}>
+          <h1>{singleHero.hero_text}</h1>
 
-                  <Button
-                    href={hero.hero_link}
-                    buttonBg="#00A2DF"
-                    buttonColor="white"
-                    buttonBorder="none"
-                  >
-                    Our Mission
-                  </Button>
-                </HeaderImage>
-              );
-            });
-          }
-        })}
+          <Button
+            href={linkResolver(singleHero.hero_link)}
+            buttonBg="#00A2DF"
+            buttonColor="white"
+            buttonBorder="none"
+          >
+            Our Mission
+          </Button>
+        </HeaderImage>
+      )}
 
       {/* <MainContent>
         <SectionTitle>Our Mission</SectionTitle>
