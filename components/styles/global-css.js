@@ -546,14 +546,16 @@ const GlobalStyle = createGlobalStyle`
   /* ---- page dots ---- */
 
   .flickity-page-dots {
-    position: absolute;
+    /* If we want dots back, remove the display: none and uncomment the commented out code */
+    /* position: absolute;
     width: 100%;
     bottom: -65px;
     padding: 0;
     margin: 0;
     list-style: none;
     text-align: center;
-    line-height: 1;
+    line-height: 1; */
+    display: none;
   }
 
   @media (min-width: 480px) {
