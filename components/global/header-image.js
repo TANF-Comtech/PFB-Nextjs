@@ -68,6 +68,10 @@ const ImageContainer = styled.section`
   }
 `;
 
+
+
+
+
 const ForegroundImg = styled.img`
   margin-bottom: 2vh;
   max-height: 70vh;

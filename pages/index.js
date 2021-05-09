@@ -11,10 +11,10 @@ import HeaderImage from "../components/global/header-image";
 // import MainContent from "../components/global/main-content";
 // import RideSpotPromo from "../components/slices/ridespot-promo";
 // import Promo from "../components/slices/promo";
-// import ColorBanner from "../components/global/color-banner";
+import ColorBanner from "../components/global/color-banner";
 import Button from "../components/primitives/button";
-// import Carousel from "../components/global/carousel";
-// import NewsList from "../components/content/news-list";
+import Carousel from "../components/global/carousel";
+import NewsList from "../components/content/news-list";
 
 // import WhiteArrow from "../public/white-arrow.svg";
 
@@ -93,6 +93,10 @@ const Arrow = styled.img`
   width: 46px;
 `;
 
+const HeroText = styled.h1`
+  width: 50px;
+`;
+
 export default function Homepage({ page }) {
   const { new_homepage } = page;
   const [singleHero, setSingleHero] = useState();
@@ -125,84 +129,13 @@ export default function Homepage({ page }) {
         </HeaderImage>
       )}
 
-      {/* <MainContent>
-        <SectionTitle>Our Mission</SectionTitle>
-        <Grid gridGap="1vw">
-          <Link
-            href="/topics/recreational-bike-access"
-            passHref
-            key={randomID(90849875924875)}
-          >
-            <a>
-              <Box bgColor="#00A2DF" key={randomID(90849875924875)}>
-                <Number>1</Number>
-                <Text>Improving Recreational Access for Bicycles</Text>
-              </Box>
-            </a>
-          </Link>
-          <Link
-            href="/topics/bike-safety"
-            passHref
-            key={randomID(165131321310)}
-          >
-            <a>
-              <Box bgColor="#00A2DF" key={randomID(9584230958298347510)}>
-                <Number>2</Number>
-                <Text>Building Safe Mobility Networks</Text>
-              </Box>
-            </a>
-          </Link>
-          <Link
-            href="/topics/inclusive-biking"
-            passHref
-            key={randomID(85963453564)}
-          >
-            <a>
-              <Box bgColor="#00A2DF" key={randomID(8987345834)}>
-                <Number>3</Number>
-                <Text>Fostering Diversity, Equity, and Inclusion</Text>
-              </Box>
-            </a>
-          </Link>
-          <Link
-            href="/topics/sustainable-transportation"
-            passHref
-            key={randomID(1861553564)}
-          >
-            <a>
-              <Box bgColor="#00A2DF" key={randomID(65423321432)}>
-                <Number>4</Number>
-                <Text>Promoting Sustainability</Text>
-              </Box>
-            </a>
-          </Link>
-          <Link href="/topics/bike-business" passHref key={randomID(165123341)}>
-            <a>
-              <Box bgColor="#00A2DF" key={randomID(1239482309)}>
-                <Number>5</Number>
-                <Text>Growing the Bike Industry</Text>
-              </Box>
-            </a>
-          </Link>
-          <Link href="/mission" passHref key={randomID(453908904875892)}>
-            <a>
-              <Box bgColor="#002C40" key={randomID(242349879)}>
-                <Arrow src={WhiteArrow} width="46px" />
-                <Text>Read More About Our Mission</Text>
-              </Box>
-            </a>
-          </Link>
-        </Grid>
-      </MainContent>
-
-      {homepage.campaigns && (
+      {new_homepage.campaigns && (
         <>
-          <SectionTitle>Get Involved</SectionTitle>
-          <Carousel payload={homepage.campaigns} />
+          <Carousel payload={new_homepage.campaigns} />
         </>
       )}
 
-      {homepage.body &&
+      {/* {homepage.body &&
         homepage.body.map((slice) => {
           if (slice.type === "ridespot_promo") {
             return (
@@ -212,14 +145,14 @@ export default function Homepage({ page }) {
               />
             );
           }
-        })}
+        })} */}
 
-      {homepage.news && (
+      {new_homepage.news && (
         <>
           <BigSectionTitle>
             PeopleForBikes <span>News</span>
           </BigSectionTitle>
-          <NewsList nodeName="news_item" payload={homepage.news} />
+          <NewsList nodeName="news_item" payload={new_homepage.news} />
           <Button
             buttonAlign="center"
             buttonBg="#D0021B"
@@ -235,38 +168,6 @@ export default function Homepage({ page }) {
           </Button>
         </>
       )}
-
-      {homepage.body &&
-        homepage.body.map((slice) => {
-          if (slice.type === "event_promo") {
-            return (
-              <Promo
-                bigWords={slice.primary.bottom_text}
-                key={randomID(4132168613)}
-                path={slice.primary.link}
-                smallWords={slice.primary.top_text}
-                source={slice.primary.main_image.url}
-              />
-            );
-          }
-        })}
-
-      {homepage.body &&
-        homepage.body.map((slice) => {
-          if (slice.type === "promo") {
-            return (
-              <Promo
-                bigWords={slice.primary.bottom_text}
-                key={randomID(4132168613)}
-                path={slice.primary.link}
-                smallWords={slice.primary.top_text}
-                source={slice.primary.main_image.url}
-              />
-            );
-          }
-        })}
-
-      <ColorBanner /> */}
     </Wrapper>
   );
 }

@@ -415,6 +415,7 @@ const GlobalStyle = createGlobalStyle`
   .flickity-enabled {
     margin-bottom: 100px;
     position: relative;
+    margin-top: 46px;
   }
 
   .flickity-enabled:focus {
@@ -465,7 +466,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   .flickity-button:hover {
-    background: white;
+    background: rgba(17, 153, 255, .5);
     cursor: pointer;
   }
 
@@ -495,10 +496,11 @@ const GlobalStyle = createGlobalStyle`
     top: 50%;
     width: 44px;
     height: 44px;
-    border-radius: 50%;
+    border-radius: 1px;
     /* vertically center */
     transform: translateY(-50%);
-  }
+    background-color: #19f;
+  } 
 
   .flickity-prev-next-button.previous {
     left: 10px;
@@ -523,6 +525,11 @@ const GlobalStyle = createGlobalStyle`
     width: 60%;
     height: 60%;
   }
+
+  /* -------arrow color -----*/
+.flickity-prev-next-button .arrow {
+  fill: white;
+}
 
   /* ---- page dots ---- */
 
