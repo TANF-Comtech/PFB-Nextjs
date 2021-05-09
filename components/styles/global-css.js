@@ -426,6 +426,18 @@ const GlobalStyle = createGlobalStyle`
     overflow: hidden;
     position: relative;
     height: 100%;
+    margin-left: 5vw;
+    margin-right: 7vw;
+    @media screen and (min-width: 320px) {
+    margin-left: 2vw;
+  }
+  @media screen and (min-width: 768px) {
+    margin-right: 4vw;
+  }
+  @media screen and (min-width: 1000px) {
+    margin-left: 4vw;
+    margin-right: 6vw;
+  }
   }
 
   .flickity-slider {
