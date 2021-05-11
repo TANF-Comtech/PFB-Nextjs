@@ -10,6 +10,7 @@ import RideSpotLogo from "../../public/RideSpotRidesLogo.svg";
 
 const Bg = styled.div`
   background-color: ${(props) => props.theme.lightestGray};
+  margin-bottom: 2vh;
 `;
 
 // BgImage will check for ride payload, set margins accordingly
@@ -33,10 +34,10 @@ const BgImage = styled.section`
 const RSTitle = styled.h2`
   font-size: 36pt;
   line-height: 70px;
-  margin: 2vh 10px 20vh 10px;
+  margin: 2vh 10px 0vh 10px;
   text-align: center;
   text-transform: uppercase;
-
+  color: black;
   @media screen and (min-width: 320px) {
     font-size: calc(70px + 50 * ((100vw - 320px) / 880));
     line-height: calc(70px + 50 * ((100vw - 320px) / 880));
@@ -99,9 +100,11 @@ const RSBadge = styled.img`
 const RSRidesContainer = styled.section`
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  margin: -120px auto 5vh auto;
-  max-width: 96vw;
+  justify-content: space-evenly;
+  /* margin: -120px auto 5vh auto;
+  max-width: 96vw; */
+  margin: 0 auto;
+  padding-bottom: 5vh;
 
   @media (min-width: ${(props) => props.theme.md}) {
     flex-wrap: nowrap;
@@ -110,6 +113,26 @@ const RSRidesContainer = styled.section`
   @media (min-width: ${(props) => props.theme.lg}) {
     max-width: 81vw;
   }
+`;
+
+const RSLink = styled.a`
+  text-decoration: none;
+  color: black;
+  &:hover,
+  &:focus,
+  &:active,
+  &:visited {
+    text-decoration: none;
+    color: black;
+  }
+`;
+
+const RSCardContainer = styled.div`
+  margin: 1vh 1vw;
+`;
+
+const RSCard = styled.img`
+  height: 60vh;
 `;
 
 /**
@@ -131,14 +154,29 @@ const RideSpotPromo = ({ isLocal = false, payload }) => {
 
   return (
     <Bg>
-      <BgImage payload={payload}>
-        <RSLogoContainer alt="RideSpot Logo" src={RideSpotLogo} />
-      </BgImage>
-      <RSTitle>use the app to access great rides</RSTitle>
+      <RSLink href={"https://ridespot.org/"}>
+        <BgImage payload={payload}>
+          <RSLogoContainer alt="RideSpot Logo" src={RideSpotLogo} />
+        </BgImage>
+      </RSLink>
+      <RSTitle>
+        <RSLink href={"https://ridespot.org/"}>
+          use the app to access great rides
+        </RSLink>
+      </RSTitle>
       {payload && (
         <RSRidesContainer>
           {payloadArr.map((ride) => {
-            if (ride) {
+            console.log(ride);
+            if (ride && ride.ridespot_card) {
+              return (
+                <RSCardContainer>
+                  <RSLink href={ride.ridespot_link.url}>
+                    <RSCard src={ride.ridespot_card.url} />
+                  </RSLink>
+                </RSCardContainer>
+              );
+            } else if (ride) {
               return (
                 <RideSpotRide
                   distance={ride.distance && ride.distance}

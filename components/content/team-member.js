@@ -85,7 +85,7 @@ const EmailButton = styled.a`
   transform: translateY(0);
   transition: all 0.25s ease;
   
-  &:hover, &::visited, &::focus, &:active {
+  &:hover, &:visited, &:focus, &:active {
     background-color: ${props => props.theme.red };
     color: white !important;
     text-decoration: none;

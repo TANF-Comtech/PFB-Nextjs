@@ -82,8 +82,8 @@ const SlideWrapper = styled.a`
   margin: 0 46px;
   text-align: center;
   text-decoration: none !important;
-  &::hover,
-  &::visited,
+  &:hover,
+  &:visited,
   &:focus {
     text-decoration: none !important;
   }

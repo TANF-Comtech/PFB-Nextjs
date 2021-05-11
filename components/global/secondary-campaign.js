@@ -12,19 +12,18 @@ const Tile = styled.div`
   justify-content: flex-end;
   height: 40vh;
   margin: 5px;
+  @media screen and (max-width: 768px) {
+    width: 90%;
+  }
 `;
 
 const SCLink = styled.a`
   text-decoration: none !important;
 `;
 
-const SCcontainer = styled.div`
-  display: flex;
-`;
-
 const SCTitleContainer = styled.div`
-  background-color: rgba(26, 26, 26, 0.3);
-  height: 50px;
+  background-color: rgba(26, 26, 26, 0.5);
+  height: 75px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -38,7 +37,7 @@ const SCTitle = styled.h3`
 `;
 
 const Arrow = styled.img`
-  width: 50px;
+  width: 75px;
 `;
 
 export default function SecondaryCampaign({ payload }) {

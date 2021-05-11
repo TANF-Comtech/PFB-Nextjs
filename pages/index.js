@@ -96,6 +96,12 @@ const Arrow = styled.img`
 
 const HeroText = styled.h1`
   width: 500px;
+  @media screen and (min-width: 320px) {
+    max-width: 200px;
+  }
+  @media screen and (min-width: 550px) {
+    max-width: 500px;
+  }
 `;
 
 const Grid = styled.section`
@@ -103,6 +109,15 @@ const Grid = styled.section`
   grid-template-columns: 50% 50%;
   margin: 0 5vw;
   margin-bottom: 50px;
+  @media screen and (min-width: 320px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  @media screen and (min-width: 768px) {
+    display: grid;
+    grid-template-columns: 50% 50%;
+  }
 `;
 
 export default function Homepage({ page }) {
