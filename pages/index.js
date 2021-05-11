@@ -3,17 +3,18 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 import { getNewHomepage } from "../lib/queries/new-homepage";
-// import { randomID } from "../lib/utils";
+import { randomID } from "../lib/utils";
 
 import Wrapper from "../components/global/wrapper";
 import HeaderImage from "../components/global/header-image";
 // import Grid from "../components/global/grid";
 // import MainContent from "../components/global/main-content";
-// import RideSpotPromo from "../components/slices/ridespot-promo";
+import RideSpotPromo from "../components/slices/ridespot-promo";
 // import Promo from "../components/slices/promo";
 import ColorBanner from "../components/global/color-banner";
 import Button from "../components/primitives/button";
 import Carousel from "../components/global/carousel";
+import SecondaryCampaign from "../components/global/secondary-campaign";
 import NewsList from "../components/content/news-list";
 
 // import WhiteArrow from "../public/white-arrow.svg";
@@ -94,7 +95,14 @@ const Arrow = styled.img`
 `;
 
 const HeroText = styled.h1`
-  width: 50px;
+  width: 500px;
+`;
+
+const Grid = styled.section`
+  display: grid;
+  grid-template-columns: 50% 50%;
+  margin: 0 5vw;
+  margin-bottom: 50px;
 `;
 
 export default function Homepage({ page }) {
@@ -116,7 +124,7 @@ export default function Homepage({ page }) {
     <Wrapper postTitle="People for Bikes Homepage" isWide={true}>
       {singleHero && (
         <HeaderImage source={singleHero.hero_image.url}>
-          <h1>{singleHero.hero_text}</h1>
+          <HeroText>{singleHero.hero_text}</HeroText>
 
           <Button
             href={linkResolver(singleHero.hero_link)}
@@ -135,8 +143,17 @@ export default function Homepage({ page }) {
         </>
       )}
 
-      {/* {homepage.body &&
-        homepage.body.map((slice) => {
+      {new_homepage.secondary_campaigns && (
+        <Grid>
+          <SecondaryCampaign
+            payload={new_homepage.secondary_campaigns}
+            key={randomID(98692845768959)}
+          />
+        </Grid>
+      )}
+
+      {new_homepage.body &&
+        new_homepage.body.map((slice) => {
           if (slice.type === "ridespot_promo") {
             return (
               <RideSpotPromo
@@ -145,7 +162,7 @@ export default function Homepage({ page }) {
               />
             );
           }
-        })} */}
+        })}
 
       {new_homepage.news && (
         <>

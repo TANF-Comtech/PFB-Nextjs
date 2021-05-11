@@ -413,7 +413,7 @@ const GlobalStyle = createGlobalStyle`
   ---------------------------------------------- */
 
   .flickity-enabled {
-    margin-bottom: 100px;
+    margin-bottom: 50px;
     position: relative;
     margin-top: 46px;
   }
