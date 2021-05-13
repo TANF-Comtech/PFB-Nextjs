@@ -87,6 +87,9 @@ const SlideWrapper = styled.a`
   &:focus {
     text-decoration: none !important;
   }
+  @media screen and (max-width: 350px) {
+    margin: 0;
+  }
 `;
 
 const Arrow = styled.img`
