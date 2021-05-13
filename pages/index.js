@@ -16,7 +16,7 @@ import Button from "../components/primitives/button";
 import Carousel from "../components/global/carousel";
 import SecondaryCampaign from "../components/global/secondary-campaign";
 import NewsList from "../components/content/news-list";
-
+import Heading from '../components/primitives/h1'
 // import WhiteArrow from "../public/white-arrow.svg";
 
 import { arrayShuffle, linkResolver } from "../lib/utils";
@@ -139,7 +139,7 @@ export default function Homepage({ page }) {
     <Wrapper postTitle="People for Bikes Homepage" isWide={true}>
       {singleHero && (
         <HeaderImage source={singleHero.hero_image.url}>
-          <HeroText>{singleHero.hero_text}</HeroText>
+          <Heading>{singleHero.hero_text}</Heading>
 
           <Button
             href={linkResolver(singleHero.hero_link)}

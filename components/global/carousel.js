@@ -109,6 +109,7 @@ const Carousel = ({ payload }) => {
   const flickityOptions = {
     initialIndex: slideIndex,
     wrapAround: true,
+    pageDots: false,
   };
 
   return (

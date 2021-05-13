@@ -21,11 +21,12 @@ const ImageContainer = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   height: 50vh;
   margin-bottom: 1vh;
   padding: 0 5vw;
   position: relative;
-  text-align: left;
+  text-align: center;
 
   @media screen and (min-width: ${(props) => props.theme.sm}) {
     height: 70vh;
@@ -67,10 +68,6 @@ const ImageContainer = styled.section`
     }
   }
 `;
-
-
-
-
 
 const ForegroundImg = styled.img`
   margin-bottom: 2vh;
