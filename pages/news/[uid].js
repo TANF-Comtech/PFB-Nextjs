@@ -226,12 +226,11 @@ export default function NewsPage({ fallback, page, preview }) {
               />
             </IntroWrapper>
           }
-          )
-          {news.topics.length > 1 && (
+          {news.topics.length > 1 && 
             <>
-              {news.topics[0].topic !== null && (
+              {news.topics[0].topic !== null && 
                 <strong>Related Topics:</strong>
-              )}
+              }
               <ParagraphOfLinks>
                 {news.topics.map((topic) => {
                   if (topic.topic !== null) {
@@ -247,12 +246,12 @@ export default function NewsPage({ fallback, page, preview }) {
                 })}
               </ParagraphOfLinks>
             </>
-          )}
-          {news.locations.length > 1 && (
+          }
+          {news.locations.length > 1 &&
             <>
-              {news.locations[0].location !== null && (
+              {news.locations[0].location !== null && 
                 <strong>Related Locations:</strong>
-              )}
+              }
               <ParagraphOfLinks>
                 {news.locations.map((location) => {
                   if (location.location !== null) {
@@ -268,7 +267,7 @@ export default function NewsPage({ fallback, page, preview }) {
                 })}
               </ParagraphOfLinks>
             </>
-          )}
+          }
         </MainContent>
 
         <Promo
