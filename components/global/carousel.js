@@ -98,6 +98,11 @@ const Arrow = styled.img`
   width: 46px;
 `;
 
+const Wrapper = styled.div`
+  margin-left: 5.5vw;
+  margin-right: 5.5vw;
+`;
+
 /**
  * <Carousel>
  *
@@ -116,23 +121,28 @@ const Carousel = ({ payload }) => {
   };
 
   return (
-    <Flickity options={flickityOptions} static={true}>
-      {payload.map((c) => {
-        return (
-          <Slide key={c.campaign._meta.id} source={c.campaign.banner_image.url}>
-            <SlideWrapper
-              href={linkResolver(c.campaign.link, true)}
-              rel="noopener"
-              target="_blank"
+    <Wrapper>
+      <Flickity options={flickityOptions} static={true}>
+        {payload.map((c) => {
+          return (
+            <Slide
+              key={c.campaign._meta.id}
+              source={c.campaign.banner_image.url}
             >
-              {c.campaign.small_text && <span>{c.campaign.small_text}</span>}
-              {c.campaign.big_text && <h2>{c.campaign.big_text}</h2>}
-              <Arrow src={WhiteArrow} width="46px" />
-            </SlideWrapper>
-          </Slide>
-        );
-      })}
-    </Flickity>
+              <SlideWrapper
+                href={linkResolver(c.campaign.link, true)}
+                rel="noopener"
+                target="_blank"
+              >
+                {c.campaign.small_text && <span>{c.campaign.small_text}</span>}
+                {c.campaign.big_text && <h2>{c.campaign.big_text}</h2>}
+                <Arrow src={WhiteArrow} width="46px" />
+              </SlideWrapper>
+            </Slide>
+          );
+        })}
+      </Flickity>
+    </Wrapper>
   );
 };
 

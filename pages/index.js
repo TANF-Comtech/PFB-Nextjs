@@ -16,7 +16,6 @@ import Button from "../components/primitives/button";
 import Carousel from "../components/global/carousel";
 import SecondaryCampaign from "../components/global/secondary-campaign";
 import NewsList from "../components/content/news-list";
-import Heading from '../components/primitives/h1'
 // import WhiteArrow from "../public/white-arrow.svg";
 
 import { arrayShuffle, linkResolver } from "../lib/utils";
@@ -94,29 +93,29 @@ const Arrow = styled.img`
   width: 46px;
 `;
 
-const HeroText = styled.h1`
-  width: 500px;
-  @media screen and (min-width: 320px) {
-    max-width: 200px;
-  }
-  @media screen and (min-width: 550px) {
-    max-width: 500px;
-  }
-`;
-
 const Grid = styled.section`
   display: grid;
   grid-template-columns: 50% 50%;
   margin: 0 5vw;
   margin-bottom: 50px;
-  @media screen and (min-width: 320px) {
+  @media screen and (max-width: 768px) {
     display: flex;
     flex-direction: column;
     align-items: center;
   }
-  @media screen and (min-width: 768px) {
-    display: grid;
-    grid-template-columns: 50% 50%;
+`;
+
+const HeroText = styled.h1`
+  margin: 4vh 0;
+  padding: 0;
+  text-transform: uppercase;
+
+  @media (min-width: ${(props) => props.theme.lg}) {
+    padding: 0;
+  }
+
+  @media (max-width: ${(props) => props.theme.xs}) {
+    font-size: 60px;
   }
 `;
 
@@ -139,7 +138,7 @@ export default function Homepage({ page }) {
     <Wrapper postTitle="People for Bikes Homepage" isWide={true}>
       {singleHero && (
         <HeaderImage source={singleHero.hero_image.url}>
-          <Heading>{singleHero.hero_text}</Heading>
+          <HeroText>{singleHero.hero_text}</HeroText>
 
           <Button
             href={linkResolver(singleHero.hero_link)}
