@@ -167,7 +167,6 @@ const RideSpotPromo = ({ isLocal = false, payload }) => {
       {payload && (
         <RSRidesContainer>
           {payloadArr.map((ride) => {
-            console.log(ride);
             if (ride && ride.ridespot_card) {
               return (
                 <RSCardContainer>
