@@ -29,6 +29,12 @@ const BgImage = styled.section`
   h1 {
     color: #fff;
   }
+  @media screen and (max-width: 768px) {
+   height: 20rem;
+  }
+  @media screen and (max-width: 480px) {
+   height: 10rem;
+  }
 `;
 
 const RSTitle = styled.h2`
@@ -38,10 +44,7 @@ const RSTitle = styled.h2`
   text-align: center;
   text-transform: uppercase;
   color: black;
-  @media screen and (min-width: 320px) {
-    font-size: calc(70px + 50 * ((100vw - 320px) / 880));
-    line-height: calc(70px + 50 * ((100vw - 320px) / 880));
-  }
+  line-height: 1;
   @media screen and (min-width: 1200px) {
     font-size: 60px;
     line-height: 120px;

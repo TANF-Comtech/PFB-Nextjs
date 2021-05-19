@@ -5,6 +5,7 @@ import {
   getLandingPages,
 } from "../lib/queries/landing-page";
 import { newsTopTwenty } from "../lib/queries/news";
+import { getAllCampaigns } from "../lib/queries/campaigns";
 import { getLocations } from "../lib/queries/locations";
 import { getTopics } from "../lib/queries/topics";
 import { getRides } from "../lib/queries/rides";
@@ -42,6 +43,7 @@ import ResearchBanners from "../components/content/research-banners";
 import ResearchPillars from "../components/content/reesearch-pillars";
 import ToolkitPillars from "../components/content/toolkit-pillars";
 import FallbackImage from "../components/content/fallback-image";
+import CampaignList from "../components/content/campaign-list";
 
 import ActionItemGroup from "../components/slices/action-item-group";
 import RedActionItem from "../components/slices/action-item-red";
@@ -157,7 +159,9 @@ export default function TheMonster({ fallback, page, preview }) {
 
       {
         // CAMPAIGNS
-        landing_page._meta.uid === "campaigns" && <h1>Hello World</h1>
+        landing_page._meta.uid === "campaigns" && (
+          <CampaignList payload={landing_page.data} />
+        )
       }
 
       {
@@ -417,6 +421,8 @@ export async function getStaticProps({ params, preview = false, previewData }) {
       params.uid,
       previewData
     );
+  } else if (params.uid === "campaigns") {
+    pageData.landing_page.data = await getAllCampaigns(params.uid, previewData);
   }
 
   return {

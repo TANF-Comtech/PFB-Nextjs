@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components";
 import Flickity from "react-flickity-component";
 
@@ -103,6 +104,21 @@ const Wrapper = styled.div`
   margin-right: 5.5vw;
 `;
 
+const BigText = styled.h2`
+ @media screen and (max-width: 768px) {
+    font-size: 80px !important;
+  }
+  @media screen and (max-width: 480px) {
+    font-size: 50px !important;
+  }
+`;
+
+const SmallText = styled.span`
+  @media screen and (max-width: 480px) {
+    font-size: 28px !important;
+  }
+`;
+
 /**
  * <Carousel>
  *
@@ -134,8 +150,12 @@ const Carousel = ({ payload }) => {
                 rel="noopener"
                 target="_blank"
               >
-                {c.campaign.small_text && <span>{c.campaign.small_text}</span>}
-                {c.campaign.big_text && <h2>{c.campaign.big_text}</h2>}
+                {c.campaign.small_text && (
+                  <SmallText>{c.campaign.small_text}</SmallText>
+                )}
+                {c.campaign.big_text && (
+                  <BigText>{c.campaign.big_text}</BigText>
+                )}
                 <Arrow src={WhiteArrow} width="46px" />
               </SlideWrapper>
             </Slide>
