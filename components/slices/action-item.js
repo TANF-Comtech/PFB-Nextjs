@@ -19,6 +19,7 @@ import MicIcon from '../../public/icons/mic.svg'
 import NewsIcon from '../../public/icons/news.svg'
 import PeopleIcon from '../../public/icons/people.svg'
 import TruckIcon from '../../public/icons/truck.svg'
+import DEIIcon from '../../public/icons/circles.svg'
 
 const Container = styled.section`
   align-items: center;
@@ -112,6 +113,7 @@ const ActionItem = ({
       { icon === 'News (newspaper icon)' && <Icon src={ NewsIcon } alt="News Icon" /> }
       { icon === 'Support (heart icon)' && <Icon src={ HeartIcon } alt="Heart Icon" /> }
       { icon === 'Suppliers (truck icon)' && <Icon src={ TruckIcon } alt="Truck Icon" /> }
+      { icon === 'Circles (DEI icon)' && <Icon src={ DEIIcon } alt="DEI Icon" /> }
 
       { path && path.__typename === '_ExternalLink' ? (
         <ContentContainer>

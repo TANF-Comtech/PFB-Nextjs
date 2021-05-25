@@ -14,9 +14,7 @@ const Preview = async (req, res) => {
   const { token: ref, documentId } = req.query;
 
   // Uses getPreviewResolver to figure out where to send user
-  const redirectUrl = await PrismicClient(req)
-    .getPreviewResolver(ref, documentId)
-    .resolve(linkResolver, "/");
+  const redirectUrl = await PrismicClient.getPreviewResolver(ref, documentId).resolve(linkResolver(meta), "/");
 
   if (!redirectUrl) {
     return res.status(401).json({ message: "Invalid token" });

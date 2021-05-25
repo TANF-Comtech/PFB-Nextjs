@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { RichText } from "prismic-reactjs";
-import CustomErrorPage from "../components/global/404";
+import CustomErrorPage from "../pages/404";
 
 import {
   getSingleLandingPage,
@@ -28,6 +28,7 @@ import UidHeader from "../components/uid/uidHeaders";
 import UidSlices from "../components/uid/uidSlices";
 import UidIndividualComponents from "../components/uid/uidIndividualComponents";
 import ConditionalSections from "../components/uid/uidConditionalSections";
+import FallbackImage from "../components/content/fallback-image";
 
 /**
  * TheMonster()
@@ -161,6 +162,7 @@ export async function getStaticProps({ params, preview = false, previewData }) {
     props: {
       preview,
       page: pageData ?? null,
+      fallback: FallbackImage(),
     },
     revalidate: 1,
   };

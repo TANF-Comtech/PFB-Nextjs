@@ -10,10 +10,12 @@ import ContentItem from './content-item'
  * 
  * Provides news list content
  *
+ * @param { arr } fallback - the array of images you need when you dont have an image
  * @param { string } nodeName - endpoints have variable node names, so you can override here
  * @param { array } payload - list of news posts from Prismic API
  */
 const NewsList = ({
+  fallback,
   nodeName = 'news_item',
   payload
 }) => {

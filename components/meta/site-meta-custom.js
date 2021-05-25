@@ -1,10 +1,10 @@
 import Head from "next/head"
 
 /**
- * <SiteMeta>
+ * <SiteMetaCustom>
  * 
- * Displays the dynamic meta information for the whole site 
- * This can be adjusted by passing in a LOT of props
+ * Allows you to override the base site meta stuff
+ * Anything that was variable in <SiteMeta> is present here
  *
  * @param { string } desc - description of the page
  * @param { string } imgHeight - height of the social splash image
@@ -14,7 +14,7 @@ import Head from "next/head"
  * @param { string } path - URL of the page
  * @param { string } title - the title of the page 
  */
-const SiteMeta = ( {
+const SiteMetaCustom = ( {
   desc,
   imgHeight,
   imgSrc,
@@ -27,7 +27,6 @@ const SiteMeta = ( {
   return (
     <Head>
       <title key="title">{ title }</title>
-      <meta property="og:type" content="website" />
       <meta name="description" 
             content={ desc } 
             key="metadesc" />
@@ -40,8 +39,6 @@ const SiteMeta = ( {
       <meta property="og:image:height" 
             content={ imgHeight } 
             key="ogimgh" />
-      <meta property="og:image:alt" 
-            content="Bike oriented image" />
       <meta property="og:title" 
             content={ title }
             key="ogtitle" />
@@ -50,28 +47,13 @@ const SiteMeta = ( {
             key="ogdesc" />
       <meta property="og:url" 
             content={ path } 
-            key="ogurl" />
-      <meta property="og:site_name" 
-            content="PeopleForBikes"
-            key="ogsite" />
-      <meta property="og:locale" 
-            content="en_US" 
-            key="oglocale" />
-      <meta property="og:type" 
-            content="website" 
-            key="ogtype" />            
+            key="ogurl" />          
       <meta name="twitter:title" 
             content={ title } 
             key="twtrtitle" />
       <meta name="twitter:description" 
             content={desc}
             key="twtrdesc" />
-      <meta name="twitter:card" 
-            content="summary_large_image" 
-            key="twtrcard" />
-      <meta name="twitter:site" 
-            content="@peopleforbikes" 
-            key="twtrsite" />
       <link rel="canonical" 
             href={ path } 
             key="canonical" />  
@@ -82,4 +64,4 @@ const SiteMeta = ( {
   )
 }
 
-export default SiteMeta
+export default SiteMetaCustom

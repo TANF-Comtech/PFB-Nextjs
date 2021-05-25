@@ -1,31 +1,30 @@
-import { getGrants } from '../../../lib/queries/grants'
+import { getGrants } from "../../../lib/queries/grants";
 
-import Wrapper from '../../../components/global/wrapper'
-import Header1 from '../../../components/primitives/h1'
-import GrantsItem from '../../../components/content/grants-item'
-import Button from '../../../components/primitives/button'
-import MainContent from '../../../components/global/main-content'
-import ColorBanner from '../../../components/global/color-banner'
+import Wrapper from "../../../components/global/wrapper";
+import Header1 from "../../../components/primitives/h1";
+import GrantsItem from "../../../components/content/grants-item";
+import Button from "../../../components/primitives/button";
+import MainContent from "../../../components/global/main-content";
+import ColorBanner from "../../../components/global/color-banner";
 
 import { AlgoliaIndex } from '../../../lib/algolia/algoliaClient'
 import { grantsFormatter, 
          grantsOnlyFormatter } from '../../../lib/algolia/grantsFormatter'
 
 export default function GrantsFinder({ page }) {
-  
   return (
-    <Wrapper 
-      postPath="/grants/"
-      postTitle="Grants"
-      isWide={ true }
-    >
+    <Wrapper postPath="/grants/" postTitle="Grants" isWide={true}>
+      <script
+        async
+        defer
+        src="https://static.cdn.prismic.io/prismic.js?new=true&repo=peopleforbikes"
+      ></script>
       <MainContent maxWidth="1200px">
         <Header1>Grants Finder</Header1>
 
         { page.map( (grant) => {
           return(
             <GrantsItem 
-              amount={ grant.node.amount ? grant.node.amount : null }
               city={ grant.node.city ? grant.node.city : null }
               date={ grant.node.cycle ? grant.node.cycle : null }
               grantType={ grant.node.type ? grant.node.type : null }
@@ -35,8 +34,9 @@ export default function GrantsFinder({ page }) {
               title={ grant.node.title[0].text }
               text={ grant.node.main_content }
             />
-          )
+          );
         })}
+        
         <Button
           buttonAlign="center"
           buttonBg="#D0021B"
@@ -49,17 +49,17 @@ export default function GrantsFinder({ page }) {
           href="/grants"
         >
           Back to Grants Page
-        </Button> 
+        </Button>
       </MainContent>
-      
+
       <ColorBanner />
     </Wrapper>
-  )
+  );
 }
 
 /* The return here sends the `page` prop back to the component above for rendering */
 export async function getStaticProps({ params, preview = false, previewData }) {
-  const pageData = await getGrants()
+  const pageData = await getGrants();
 
   // Algolia General Search
   const algoliaFormattedData = grantsFormatter(pageData)
@@ -74,6 +74,6 @@ export async function getStaticProps({ params, preview = false, previewData }) {
       preview,
       page: pageData ?? null,
     },
-    revalidate: 1,
+    revalidate: 60,
   }
 }

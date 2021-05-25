@@ -1,8 +1,8 @@
 import Link from 'next/link'
 import styled from "styled-components"
 
-import BMXRider from '../../public/bmx-rider.png'
-import BMXRiderMobile from '../../public/bmx-rider-mobile.png'
+import BMXRider from '../public/bmx-rider.png'
+import BMXRiderMobile from '../public/bmx-rider-mobile.png'
 
 const Container = styled.section`
   align-items: center;

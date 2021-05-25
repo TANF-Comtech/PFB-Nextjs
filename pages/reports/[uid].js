@@ -37,7 +37,6 @@ const Text = styled.h4`
   margin: 0 0 10px 0;
   text-align: center;
   text-transform: uppercase;
-
   @media screen and (min-width: 320px) {
     font-size: calc(36px + 8 * ((100vw - 320px) / 880));
     line-height: calc(36px + 8 * ((100vw - 320px) / 880));
@@ -51,7 +50,7 @@ const Text = styled.h4`
 const Arrow = styled.img`
   display: block;
   margin: 0 auto;
-  width: 46px;
+  width: 46px; 
 `
 
 const IntroWrapper = styled.div`
@@ -70,7 +69,6 @@ const ParagraphOfLinks = styled.p`
       padding: 0 10px;
       text-decoration: none;
     }
-
     &:last-child:after {
       content: "";
       padding: 0;
@@ -93,6 +91,11 @@ export default function ReportPage({ page, preview }) {
 
   return (
     <>
+    <script
+        async
+        defer
+        src="https://static.cdn.prismic.io/prismic.js?new=true&repo=peopleforbikes"
+      ></script>
       <SiteMeta
         desc={ report.main_content ? ( `${ report.main_content[0].text.substring(0,180) } ... ` ) : ( meta.desc ) }
         title={ report.title ? ( `${ report.title[0].text } | People for Bikes` ) : ( meta.title ) }
@@ -183,7 +186,7 @@ export default function ReportPage({ page, preview }) {
               )
             })
           }
-          { report.topics &&
+          { report.topics.length > 1 && 
             <>
             { report.topics[0].topic !== null &&
               <strong>Related Topics:</strong>
@@ -204,7 +207,7 @@ export default function ReportPage({ page, preview }) {
             </ParagraphOfLinks>
             </>
           }            
-          { report.locations && 
+          { report.locations.length > 1 && 
             <>
             { report.locations[0].location !== null &&
               <strong>Related Locations:</strong>
@@ -249,7 +252,7 @@ export async function getStaticProps({ params, preview = false, previewData }) {
       preview,
       page: pageData ?? null,
     },
-    revalidate: 1,
+    revalidate: 60,
   }
 }
 
@@ -258,6 +261,6 @@ export async function getStaticPaths() {
   const pages = await getReports()
   return {
     paths: pages?.map(({ node }) => `/reports/${node._meta.uid}`) || [],
-    fallback: true,
+    fallback: false,
   }
 }

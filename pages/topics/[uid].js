@@ -12,6 +12,7 @@ import { ebikeFormatter } from '../../lib/algolia/ebikeFormatter'
 import { AlgoliaIndex } from '../../lib/algolia/algoliaClient'
 
 import DefaultContext from '../../context/default/default-context'
+import FallbackImage from '../../components/content/fallback-image'
 
 import Wrapper from '../../components/global/wrapper'
 import SiteMeta from '../../components/meta/site-meta'
@@ -30,7 +31,11 @@ const SpacedHeading = styled.h2`
 `
 
 /* You must reference the `topic` prop to get data from `getStaticProps` - check bottom of this file */
-export default function TopicPage({ page, preview }) {
+export default function TopicPage({ 
+  fallback,
+  page, 
+  preview 
+}) {
 
   // Destructure topic from main page payload and meta from global context
   const { topic } = page[0]
@@ -163,7 +168,10 @@ export default function TopicPage({ page, preview }) {
                               ${setDateSuffix(newDate.getDate())}, 
                               ${newDate.getFullYear()}` }
                       key={ newsItem.id }
-                      image={ newsItem.data.header_image && newsItem.data.header_image }
+                      image={ Object.keys(newsItem.data.header_image).length !== 0 &&
+                              newsItem.data.header_image ? 
+                                newsItem.data.header_image : 
+                                fallback[Math.floor(Math.random()*6)] }
                       path={ `/news/${newsItem.uid}` }
                       text={ newsItem.data.main_content[0].type === "paragraph" ? newsItem.data.main_content[0].text : "" }
                       title={ newsItem.data.title[0].text }
@@ -242,10 +250,10 @@ export async function getStaticProps({ params, preview = false, previewData }) {
 
   return {
     props: {
+      fallback: FallbackImage(),
       preview,
       page: pageData
     },
-    notFound: true,
     revalidate: 60,
   }
 }

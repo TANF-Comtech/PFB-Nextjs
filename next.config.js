@@ -219,7 +219,7 @@ const nextConfig = {
       },
       {
         source: '/become-an-ambassador',
-        destination: 'https://www.surveygizmo.com/s3/5446206/Ride-Spot-Ambassador-Application',
+        destination: 'https://forms.gle/4MwJNQnQV8PEoRp17',
         permanent: true
       },
       {

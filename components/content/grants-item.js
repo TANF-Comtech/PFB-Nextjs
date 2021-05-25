@@ -5,7 +5,6 @@ import { RichText } from "prismic-reactjs"
 
 import { linkResolver } from "../../lib/utils"
 
-import Header1 from "../primitives/h1"
 import Button from "../primitives/button"
 
 const Container = styled.section`
@@ -130,7 +129,7 @@ const GrantsItem = ({
     <Container>
       <ContentContainer>
         { !path ? 
-          ( <Header1>{ title }</Header1> )  :
+          ( <h2>{ title }</h2> )  :
           (
             <Link href={ path }>
               <a>
@@ -141,8 +140,8 @@ const GrantsItem = ({
         }
         <Metadata>
           { date && <MetaText>{ date } Cycle</MetaText> }
-          { amount && <MetaText>{ amount } Grant</MetaText> }
-          { grantType && <MetaText>Type: { grantType } </MetaText> }
+          { amount && <MetaText>{ `$${new Intl.NumberFormat('en-us').format(parseInt(amount)) }` } Grant</MetaText> }
+          { grantType && <MetaText>{ grantType } </MetaText> }
         </Metadata>
         { text && 
           <Text>
@@ -152,7 +151,7 @@ const GrantsItem = ({
         {
           location && 
           <Text>
-            <strong>Location:</strong> { city && <MetaText>{ city } { location && ` , ${location}` } </MetaText> }
+            <strong>Location:</strong> { city && <MetaText>{ city }{ location && `, ${location}` } </MetaText> }
           </Text>
         }
         <Metadata>

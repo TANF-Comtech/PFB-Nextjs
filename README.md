@@ -167,7 +167,7 @@ export async function getStaticProps(context) {
     props: {
       pages
     }, // IMPORTANT - these will be passed to the Page component as a prop!
-    revalidate: 1, // in seconds - Next will regenerate the page when a request comes in, at most once a second
+    revalidate: 60, // in seconds - Next will regenerate the page when a request comes in, at most once a second
   }
 }
 ```
@@ -195,7 +195,7 @@ export async function getStaticProps({ params, preview = false, previewData }) {
       preview,
       page: pageData ?? null,
     },
-    revalidate: 1,
+    revalidate: 60,
   }
 }
 
@@ -266,4 +266,7 @@ Some high level rules of the road:
 - Use `styled-components` as much as possible to scope styling to components. 
 - Don't wrap components in `<div>` pairs, use [React Fragment short syntax](https://reactjs.org/docs/fragments.html#short-syntax) instead: `<></>`
 
+## Stuff to document
 
+- [ ] algolia search system, when it lands
+- [ ] how to use FallbackImage

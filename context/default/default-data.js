@@ -4,7 +4,8 @@ import splashThree from '../../public/social-splash/PFB_Social-03.jpg'
 import splashFour from '../../public/social-splash/PFB_Social-04.jpg'
 import logo from '../../public/PFB_Stacked_LOGO_512x512.jpg'
 
-const socialSplashArr = [ splashOne, splashTwo, splashThree, splashFour ] // social images
+// social images
+const socialSplashArr = [ splashOne, splashTwo, splashThree, splashFour ] 
 
 /**
  * defaultData (variable)
@@ -174,8 +175,11 @@ export const defaultData = {
 export const ldJSONBasic = {
   "@context": "http://schema.org",
   "@type": "Organization",
+  "@id": "https://www.peopleforbikes.org/mission",
   "name": "PeopleForBikes",
   "url": "https://www.peopleforbikes.org",
+  "privacyPolicy": "https://www.peopleforbikes.org/privacy",
+  "alternateName": ["PFB", "BikesBelong", "Bicycle Product Suppliers Association", "BPSA"],
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "2580 55th St #200",
@@ -185,11 +189,12 @@ export const ldJSONBasic = {
     "addressCountry": "US"
   },
   "telephone": "+13034494893",
-  "logo": `${ logo }`,
-  "sameAs": [
-    "https://www.facebook.com/PeopleForBikes", 
-    "https://twitter.com/peopleforbikes",
-    "https://www.linkedin.com/company/peopleforbikes",
-    "https://www.instagram.com/peopleforbikes",
-    "https://www.youtube.com/user/peopleforbikes/videos"]
+  "logo": {
+    "@context": "http://schema.org",
+    "@type": "ImageObject",
+    "url": `${ logo }`,
+    "height": 512,
+    "width": 512
+  },
+  "sameAs": ["https://www.facebook.com/PeopleForBikes", "https://twitter.com/peopleforbikes", "https://www.linkedin.com/company/peopleforbikes", "https://www.instagram.com/peopleforbikes", "https://www.youtube.com/user/peopleforbikes/videos"]
 }
