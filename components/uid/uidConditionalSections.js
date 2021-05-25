@@ -12,8 +12,13 @@ import PolicyPillars from "../content/policy-pillars";
 import StatsList from "../content/stats-list";
 import RedActionItem from "../slices/action-item-red";
 import MainContent from "../global/main-content";
+import CampaignList from "../content/campaign-list";
 
-export default function ConditionalSections({ landing_page }) {
+export default function ConditionalSections({
+  landing_page,
+  fallback,
+  preview,
+}) {
   return (
     <>
       {
@@ -32,7 +37,11 @@ export default function ConditionalSections({ landing_page }) {
       {
         // NEWS
         landing_page._meta.uid === "news" && (
-          <NewsList nodeName="node" payload={landing_page.data} />
+          <NewsList
+            fallback={fallback}
+            nodeName="node"
+            payload={landing_page.data}
+          />
         )
       }
 
@@ -68,6 +77,13 @@ export default function ConditionalSections({ landing_page }) {
       }
 
       {
+        // CAMPAIGNS
+        landing_page._meta.uid === "campaigns" && (
+          <CampaignList payload={landing_page.data} />
+        )
+      }
+
+      {
         // CAREERS
         landing_page._meta.uid === "careers" && (
           <List
@@ -95,7 +111,9 @@ export default function ConditionalSections({ landing_page }) {
 
       {
         // RESEARCH STATS
-        landing_page._meta.uid === "research" && <StatsList />
+        landing_page._meta.uid === "research" && (
+          <StatsList payload={landing_page.data} />
+        )
       }
 
       {

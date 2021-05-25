@@ -560,8 +560,9 @@ const GlobalStyle = createGlobalStyle `
   ---------------------------------------------- */
 
   .flickity-enabled {
-    margin-bottom: 100px;
+    margin-bottom: 50px;
     position: relative;
+    margin-top: 46px;
   }
 
   .flickity-enabled:focus {
@@ -572,6 +573,16 @@ const GlobalStyle = createGlobalStyle `
     overflow: hidden;
     position: relative;
     height: 100%;
+    /* @media screen and (min-width: 320px) {
+    margin-left: 2vw;
+  }
+  @media screen and (min-width: 768px) {
+    margin-right: 4vw;
+  }
+  @media screen and (min-width: 1000px) {
+    margin-left: 4vw;
+    margin-right: 6vw;
+  } */
   }
 
   .flickity-slider {
@@ -612,7 +623,7 @@ const GlobalStyle = createGlobalStyle `
   }
 
   .flickity-button:hover {
-    background: white;
+    background: rgba(17, 153, 255, .5);
     cursor: pointer;
   }
 
@@ -642,10 +653,11 @@ const GlobalStyle = createGlobalStyle `
     top: 50%;
     width: 44px;
     height: 44px;
-    border-radius: 50%;
+    border-radius: 1px;
     /* vertically center */
     transform: translateY(-50%);
-  }
+    background-color: #19f;
+  } 
 
   .flickity-prev-next-button.previous {
     left: 10px;
@@ -671,17 +683,23 @@ const GlobalStyle = createGlobalStyle `
     height: 60%;
   }
 
+  /* -------arrow color -----*/
+.flickity-prev-next-button .arrow {
+  fill: white;
+}
+
   /* ---- page dots ---- */
 
   .flickity-page-dots {
-    position: absolute;
+    /* If we want dots back, remove the display: none and uncomment the commented out code */
+    /* position: absolute;
     width: 100%;
     bottom: -65px;
     padding: 0;
     margin: 0;
     list-style: none;
     text-align: center;
-    line-height: 1;
+    line-height: 1; */
   }
 
   @media (min-width: 480px) {
