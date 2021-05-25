@@ -13,14 +13,10 @@ const Wrapper = styled.section`
   border-bottom: solid 1px gray;
   @media screen and (max-width: ${(props) => props.theme.lg}) {
     max-height: 25vh;
-    margin: 5vh 0;
-    padding-bottom: 5vh;
   }
   @media screen and (max-width: ${(props) => props.theme.sm}) {
     flex-direction: column;
-    max-height: 100vh;
-    padding-bottom: 5vh;
-    margin: 5vh 0;
+    max-height: 75vh;
   }
 `;
 
@@ -70,20 +66,8 @@ const SCTitle = styled.h3`
   @media screen and (max-width: ${(props) => props.theme.lg}) {
     font-size: 24px;
   }
-  @media screen and (max-width: ${(props) => props.theme.lg}) {
-    font-size: 28px;
-  }
-  @media screen and (max-width: ${(props) => props.theme.sm}) {
-    font-size: 36px;
-    line-height: 110%;
-  }
-  @media screen and (max-width: ${(props) => props.theme.xs}) {
-    font-size: 24px;
-
-  }
-  @media screen and (max-width: ${(props) => props.theme.bm}) {
-    font-size: 20px;
-
+  @media screen and (min-width: ${(props) => props.theme.sm}) {
+    font-size: 18px;
   }
 `;
 
@@ -95,7 +79,7 @@ const Arrow = styled.img`
   @media screen and (max-width: ${(props) => props.theme.sm}) {
     width: calc(35vh * 0.33);
   }
-  @media screen and (max-width: ${(props) => props.theme.xs}) {
+  @media screen and (max-width: ${(props) => props.theme.sm}) {
     width: calc(25vh * 0.33);
   }
 `;
@@ -108,16 +92,16 @@ const Description = styled.p`
   overflow-y: hidden;
   display: block;
   @media screen and (max-width: ${(props) => props.theme.lg}) {
-    max-height: 15vh;
+    height: 15vh;
   }
   @media screen and (max-width: ${(props) => props.theme.sm}) {
-    max-height: 75vh;
+    max-height: 35vh;
     margin: 0;
 
     margin-top: 10px;
   }
   @media screen and (max-width: ${(props) => props.theme.xs}) {
-    max-height: 75vh;
+    max-height: 25vh;
   }
 `;
 
