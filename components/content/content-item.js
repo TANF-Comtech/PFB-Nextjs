@@ -84,29 +84,18 @@ const Image = styled.img`
  * @param { string } text - content to be shown
  */
 const ContentItem = ({ date, image, path, title, text }) => {
-  // console.log(image);
-  console.log(FallbackImage.alt);
-
   return (
     <Container>
-      {image !== null && (
+      {image.url ? (
         <Image
           alt={image.alt ? image.alt : "Bike-oriented image"}
           loading="lazy"
           src={image["1x"] ? image["1x"].url : image.url}
         />
+      ) : (
+        // Utilizes fallback image functionality
+        <Image alt={image.alt} loading="lazy" src={image.path} />
       )}
-      {image === null &&
-        FallBackImage.map((backupImage) => {
-          console.log(backupImage);
-          return (
-            <Image
-              alt={backupImage.alt}
-              loading="lazy"
-              src={backupImage.path}
-            />
-          );
-        })}
       <ContentContainer>
         {!path ? (
           <Title>{title}</Title>
