@@ -30,7 +30,7 @@ const Tile = styled.div`
   height: 25vh;
   min-width: 30vw;
   @media screen and (max-width: ${(props) => props.theme.lg}) {
-    height: 25vh;
+    height: 15vh;
     min-width: 40vw;
   }
   @media screen and (max-width: ${(props) => props.theme.sm}) {
@@ -74,7 +74,7 @@ const SCTitle = styled.h3`
 const Arrow = styled.img`
   width: calc(25vh * 0.33);
   @media screen and (max-width: ${(props) => props.theme.lg}) {
-    width: calc(25vh * 0.33);
+    width: calc(15vh * 0.33);
   }
   @media screen and (max-width: ${(props) => props.theme.sm}) {
     width: calc(35vh * 0.33);
