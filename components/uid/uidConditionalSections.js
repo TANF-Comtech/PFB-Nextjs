@@ -17,7 +17,6 @@ import CampaignList from "../content/campaign-list";
 export default function ConditionalSections({
   landing_page,
   fallback,
-  preview,
 }) {
   return (
     <>
