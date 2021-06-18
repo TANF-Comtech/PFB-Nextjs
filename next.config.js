@@ -257,6 +257,11 @@ const nextConfig = {
         destination: '/take-action/e-bike-act',
         permanent: true
       },
+      {
+        source: '/industry-webinar-series',
+        destination: '/bike-industry-webinars',
+        permanent: true
+      },
     ]
   }
 }
