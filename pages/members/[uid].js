@@ -74,6 +74,19 @@ export default function MembersPage({ page, preview }) {
   const { member_content } = page;
   const { meta } = useContext(DefaultContext);
 
+  const [theReports, setTheReports] = useState(member_content.body && member_content.body)
+
+  // Monthly sales reports array needs to be flipped around
+  // Check to see if it's here and reverse() it if it is
+  useEffect(() => {
+    // Transform state obj to just be the reports, in reverse order
+    theReports.map( slice => {
+      if ( slice.type === 'biz_intel_hub' && slice.fields.length > 1) {
+        setTheReports(slice.fields.reverse())
+      } 
+    })
+  }, [])  
+
   return (
     <>
       <script
@@ -213,8 +226,7 @@ export async function getServerSideProps({
     if (data.loggedIn) {
       const pageData = await getSingleMemberPage(params.uid, previewData);
 
-      if( pageData.member_content.body !== undefined ||
-          pageData.member_content.body !== null ) {
+      if(pageData.member_content.body !== null ) {
             
         pageData.member_content.body.map( slice => {
           if ( slice.type === 'biz_intel_hub' && slice.fields.length > 1) {
