@@ -39,7 +39,7 @@ const PolicyPillars = () => {
           text="See what activities PeopleForBikes has coming up near you."
         />                         
         <RedActionItem 
-          path="/industry-webinar-series"
+          path="/bike-industry-webinars"
           title="Industry Webinar Series"
           text="Learn more about the bike industry in our webinar series."
         />                   
