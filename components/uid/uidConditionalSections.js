@@ -12,7 +12,7 @@ import PolicyPillars from "../content/policy-pillars";
 import StatsList from "../content/stats-list";
 import RedActionItem from "../slices/action-item-red";
 import MainContent from "../global/main-content";
-import CampaignList from "../content/campaign-list";
+import SecondaryCampaign from "../global/secondary-campaign";
 
 export default function ConditionalSections({
   landing_page,
@@ -79,7 +79,10 @@ export default function ConditionalSections({
       {
         // CAMPAIGNS
         landing_page._meta.uid === "campaigns" && (
-          <CampaignList payload={landing_page.data} />
+          <SecondaryCampaign
+            payload={landing_page.data} 
+            isHomepage={ true }
+          />
         )
       }
 

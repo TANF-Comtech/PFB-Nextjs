@@ -100,12 +100,13 @@ export default function TheMonster({ page, preview }) {
  * For certain routes, we're also formatting and sending the query payload to Algolia for indexing
  * More here: https://www.algolia.com/doc/api-client/methods/indexing/
  *
- * @param { obj } params - Nextjs rout params for dynamic routes
+ * @param { obj } params - Nextjs route params for dynamic routes
  * @param { boolean } preview - boolean that tells us if we're looking at a preview page or the real thing
  * @param { obj } previewData - data payload for the preview page (not used, yet)
  *
- * @returns
+ * @returns { obj } props - data for page to render
  */
+
 /* The return here sends the `page` prop back to the BasicPage component above for rendering */
 export async function getStaticProps({ params, preview = false, previewData }) {
   // ALL LANDING PAGES
