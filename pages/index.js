@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-// import Link from "next/link";
 import styled from "styled-components";
 
 import { getNewHomepage } from "../lib/queries/new-homepage";
@@ -9,13 +8,10 @@ import Wrapper from "../components/global/wrapper";
 import HeaderImage from "../components/global/header-image";
 import MainContent from "../components/global/main-content";
 import RideSpotPromo from "../components/slices/ridespot-promo";
-// import Promo from "../components/slices/promo";
-import ColorBanner from "../components/global/color-banner";
 import Button from "../components/primitives/button";
 import Carousel from "../components/global/carousel";
 import SecondaryCampaign from "../components/global/secondary-campaign";
 import NewsList from "../components/content/news-list";
-// import WhiteArrow from "../public/white-arrow.svg";
 
 import { linkResolver } from "../lib/utils";
 import {arrayShuffle} from '../lib/utils/arrayShuffle'
@@ -50,14 +46,12 @@ const BigSectionTitle = styled.h2`
 
 const Grid = styled.section`
   display: grid;
-  grid-template-columns: 50% 50%;
+  grid-gap: 15px;
+  grid-template-columns: 1fr;
   margin: 0 4vw;
-  margin-bottom: 50px;
 
-  @media screen and (max-width: 768px) {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  @media( min-width: ${ props => props.theme.md } ) {
+    grid-template-columns: 1fr 1fr;
   }
 `;
 
@@ -108,13 +102,19 @@ export default function Homepage({ page }) {
       )}
 
       {new_homepage.campaigns && (
-        <>
+        <MainContent 
+          contentPadding=""
+          maxWidth="1600px"
+        >
           <Carousel payload={new_homepage.campaigns} />
-        </>
+        </MainContent>
       )}
 
       {new_homepage.secondary_campaigns && (
-        <MainContent maxWidth="1200px">
+        <MainContent 
+          contentPadding="0 4vw 8vh 4vw"
+          maxWidth="1200px"
+        >
           <Grid>
             <SecondaryCampaign
               payload={new_homepage.secondary_campaigns}
@@ -135,7 +135,8 @@ export default function Homepage({ page }) {
               />
             );
           }
-        })}
+        })
+      }
 
       {new_homepage.news && (
         <>

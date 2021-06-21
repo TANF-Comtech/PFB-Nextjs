@@ -7,40 +7,23 @@ const Tile = styled.div`
   display: flex;
   background-image: url(${(props) => props.source});
   background-position: center center;
-  background-size: cover;
+  background-repeat: no-repeat;
+  background-size: contain;
   flex-direction: column;
   justify-content: flex-end;
-  height: 40vh;
+  height: 0;
   margin: 5px;
-  @media screen and (max-width: ${(props) => props.theme.lg}) {
-    height: 30vh;
-  }
-  @media screen and (max-width: ${(props) => props.theme.md}) {
-    height: 25vh;
-  }
-  @media screen and (max-width: ${(props) => props.theme.sm}) {
-    height: 35vh;
-    width: 100%;
-  }
-  @media screen and (max-width: ${(props) => props.theme.xs}) {
-    height: 30vh;
-  }
-  @media screen and (max-width: ${(props) => props.theme.ty}) {
-    height: 20vh;
-  }
-  @media screen and (max-width: ${(props) => props.theme.bm}) {
-    height: 15vh;
-  }
+  padding-top: 50%;
+  width: 100%;
 `;
 
 const SCLink = styled.a`
   text-decoration: none !important;
-  height: 33%;
 `;
 
 const SCTitleContainer = styled.div`
   background-color: rgba(26, 26, 26, 0.5);
-  height: 100%;
+  max-height: 75px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -48,43 +31,19 @@ const SCTitleContainer = styled.div`
 
 const SCTitle = styled.h3`
   color: white;
-  font-weight: 400;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.1;
   margin: 0;
   margin-left: 20px;
   text-transform: uppercase;
-  @media screen and (max-width: ${(props) => props.theme.lg}) {
-    font-size: 20px;
-  }
-  @media screen and (max-width: ${(props) => props.theme.md}) {
-    font-size: 24px;
-  }
-  @media screen and (min-width: ${(props) => props.theme.sm}) {
-    font-size: 24px;
-  }
-  @media screen and (max-width: ${(props) => props.theme.ty}) {
-    font-size: 20px;
-  }
 `;
 
 const Arrow = styled.img`
-  width: calc(40vh * 0.33);
-  @media screen and (max-width: ${(props) => props.theme.lg}){
-    width: calc(30vh * 0.33);
-  }
-  @media screen and (max-width: ${(props) => props.theme.md}){
-    width: calc(25vh * 0.33);
-  }
-  @media screen and (max-width: ${(props) => props.theme.sm}){
-    width: calc(35vh * 0.33);
-  }
-  @media screen and (max-width: ${(props) => props.theme.xs}){
-    width: calc(30vh * 0.33);
-  }
-  @media screen and (max-width: ${(props) => props.theme.ty}){
-    width: calc(20vh * 0.33);
-  }
-  @media screen and (max-width: ${(props) => props.theme.bm}){
-    width: calc(15vh * 0.33);
+  width: 50px;
+
+  @media (min-width: ${ props => props.theme.md }) {
+    width: 60px;
   }
 `;
 
