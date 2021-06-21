@@ -7,8 +7,7 @@ import { randomID } from "../lib/utils";
 
 import Wrapper from "../components/global/wrapper";
 import HeaderImage from "../components/global/header-image";
-// import Grid from "../components/global/grid";
-// import MainContent from "../components/global/main-content";
+import MainContent from "../components/global/main-content";
 import RideSpotPromo from "../components/slices/ridespot-promo";
 // import Promo from "../components/slices/promo";
 import ColorBanner from "../components/global/color-banner";
@@ -49,56 +48,12 @@ const BigSectionTitle = styled.h2`
   }
 `;
 
-// Box Component soon...
-const Box = styled.div`
-  background-color: ${(props) => props.bgColor};
-  min-height: 190px;
-  padding: 25px 50px;
-`;
-
-const Number = styled.h3`
-  align-items: center;
-  background-color: white;
-  border-radius: 23px;
-  color: ${(props) => props.theme.midnightBlue};
-  display: flex;
-  font-size: 28px;
-  height: 46px;
-  justify-content: center;
-  margin: 0 auto;
-  width: 46px;
-`;
-
-const Text = styled.h4`
-  color: white;
-  font-size: 36px;
-  font-weight: 300;
-  line-height: 36px;
-  margin-top: 1vh;
-  text-align: center;
-  text-decoration: underline;
-
-  @media screen and (min-width: 320px) {
-    font-size: calc(36px + 8 * ((100vw - 320px) / 880));
-    line-height: calc(36px + 8 * ((100vw - 320px) / 880));
-  }
-  @media screen and (min-width: 1200px) {
-    font-size: 44px;
-    line-height: 44px;
-  }
-`;
-
-const Arrow = styled.img`
-  display: block;
-  margin: 0 auto;
-  width: 46px;
-`;
-
 const Grid = styled.section`
   display: grid;
   grid-template-columns: 50% 50%;
-  margin: 0 5vw;
+  margin: 0 4vw;
   margin-bottom: 50px;
+
   @media screen and (max-width: 768px) {
     display: flex;
     flex-direction: column;
@@ -159,12 +114,15 @@ export default function Homepage({ page }) {
       )}
 
       {new_homepage.secondary_campaigns && (
-        <Grid>
-          <SecondaryCampaign
-            payload={new_homepage.secondary_campaigns}
-            key={randomID(98692845768959)}
-          />
-        </Grid>
+        <MainContent maxWidth="1200px">
+          <Grid>
+            <SecondaryCampaign
+              payload={new_homepage.secondary_campaigns}
+              key={randomID(98692845768959)}
+            />
+          </Grid>
+        </MainContent>
+        
       )}
 
       {new_homepage.body &&
