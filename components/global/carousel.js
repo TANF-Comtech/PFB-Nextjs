@@ -19,6 +19,7 @@ const Slide = styled.section`
   margin: 0 200px;
   padding: 25px;
   width: 100vw;
+
   @media screen and (min-width: 480px) {
     height: 80vw;
   }
@@ -102,22 +103,28 @@ const Arrow = styled.img`
 const Wrapper = styled.div`
   margin-left: 5.5vw;
   margin-right: 5.5vw;
-`;
+`
 
 const BigText = styled.h2`
- @media screen and (max-width: 768px) {
+  padding: 0 4vw;
+  font-size: 50px !important;
+  line-height: 0.9 !important;
+  margin-bottom: 0;
+
+  @media screen and (min-width: ${ props => props.theme.xs }) {
     font-size: 80px !important;
   }
-  @media screen and (max-width: 480px) {
-    font-size: 50px !important;
+
+  @media screen and (min-width: ${ props => props.theme.md }) {
+    font-size: 100px !important;
   }
-`;
+`
 
 const SmallText = styled.span`
   @media screen and (max-width: 480px) {
     font-size: 28px !important;
   }
-`;
+`
 
 /**
  * <Carousel>

@@ -34,8 +34,7 @@ const SCTitle = styled.h3`
   font-size: 18px;
   font-weight: 700;
   line-height: 1.1;
-  margin: 0;
-  margin-left: 20px;
+  margin: 0 20px;
   text-transform: uppercase;
 `;
 

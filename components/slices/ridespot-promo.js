@@ -121,6 +121,9 @@ const RSRidesContainer = styled.section`
 const RSLink = styled.a`
   text-decoration: none;
   color: black;
+  margin: 0;
+  padding: 6vh 2vw 8vh 2vw !important;
+
   &:hover,
   &:focus,
   &:active,
@@ -164,7 +167,7 @@ const RideSpotPromo = ({ isLocal = false, payload }) => {
       </RSLink>
       <RSTitle>
         <RSLink href={"https://ridespot.org/"}>
-          use the app to access great rides
+          use the Ridespot app to access great rides
         </RSLink>
       </RSTitle>
       {payload && (

@@ -560,9 +560,12 @@ const GlobalStyle = createGlobalStyle `
   ---------------------------------------------- */
 
   .flickity-enabled {
-    margin-bottom: 50px;
+    margin: 25px 0;
     position: relative;
-    margin-top: 46px;
+
+    @media (min-width: 480px) {
+      margin: 50px 0;
+    }
   }
 
   .flickity-enabled:focus {
@@ -629,7 +632,7 @@ const GlobalStyle = createGlobalStyle `
 
   .flickity-button:focus {
     outline: none;
-    box-shadow: 0 0 0 5px #19f;
+    box-shadow: 0 0 0 5px #3E9FDC;
   }
 
   .flickity-button:active {
@@ -656,7 +659,7 @@ const GlobalStyle = createGlobalStyle `
     border-radius: 1px;
     /* vertically center */
     transform: translateY(-50%);
-    background-color: #19f;
+    background-color: #3E9FDC;
   } 
 
   .flickity-prev-next-button.previous {

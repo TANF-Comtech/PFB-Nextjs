@@ -14,19 +14,12 @@ import SecondaryCampaign from "../components/global/secondary-campaign";
 import NewsList from "../components/content/news-list";
 
 import { linkResolver } from "../lib/utils";
-import {arrayShuffle} from '../lib/utils/arrayShuffle'
-
-const SectionTitle = styled.h3`
-  color: ${(props) => props.theme.midnightBlue};
-  text-align: center;
-  text-transform: uppercase;
-  margin-bottom: 4vh;
-`;
+import { arrayShuffle } from '../lib/utils/arrayShuffle'
 
 const BigSectionTitle = styled.h2`
   color: ${(props) => props.theme.darkestGray};
   font-weight: 300;
-  margin-bottom: 25px;
+  margin: 4vh 2vw 0 2vw;
   text-align: center;
 
   span {
@@ -113,7 +106,7 @@ export default function Homepage({ page }) {
       {new_homepage.secondary_campaigns && (
         <MainContent 
           contentPadding="0 4vw 8vh 4vw"
-          maxWidth="1200px"
+          maxWidth="1550px"
         >
           <Grid>
             <SecondaryCampaign
