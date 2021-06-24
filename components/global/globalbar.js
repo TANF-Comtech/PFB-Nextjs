@@ -1,9 +1,17 @@
-import React, { useState, useEffect } from 'react'
+import React, { useContext, useEffect, useRef } from 'react'
 import styled from "styled-components"
+
+import { useQuery, gql } from '@apollo/client'
+
+import MenuContext from '../../context/menu/menu-context'
 
 import MainContent from "../global/main-content"
 import SearchButton from "../primitives/search-button"
 import Search from '../global/search'
+import { Dropdown } from '../global/dropdown'
+
+import { linkResolver, randomID } from "../../lib/utils"
+import useOnClickOutside from "../../hooks/useOnClickOutside"
 
 const Bar = styled.section`
   display: flex;
@@ -17,6 +25,7 @@ const Bar = styled.section`
 
 const NetworkControl = styled.div`
   align-items: center;
+  cursor: pointer;
   display: flex;
   font-size: 14px;
   font-weight: 700;
@@ -43,6 +52,38 @@ const MobileHide = styled.span`
   }
 `
 
+// GraphQL query for menu data
+const GLOBAL_MENU_DATA = gql`
+  query NavMenu($uid: String!, $lang: String!) {
+    menu(uid: $uid, lang: $lang) {
+      _linkType
+      _meta {
+        type
+        uid
+        id
+      }
+      menu_items {
+        text
+        link {
+          ... on Landing_page {
+            title
+            _meta {
+              id
+              uid
+              type
+            }
+          }
+          ... on _ExternalLink {
+            url
+            target
+            _linkType
+          }          
+        }
+      }
+    }
+  } 
+`
+
 /**
  * <GlobalBar>
  *
@@ -52,11 +93,22 @@ const MobileHide = styled.span`
  */
  const GlobalBar = () => {
 
-  // Search opening state change, send state down to <Search>
-  const [search, setSearch] = useState(false);
-  const handleSearch = () => {
-    setSearch(!search);
-  };
+  // Query for nav menu from Apollo
+  const { loading, error, data } = useQuery(GLOBAL_MENU_DATA, {
+    variables: {
+      "uid": "global-network-menu",
+      "lang": "en-us"
+    }
+  })
+
+  // Pull in search and global dropdown menu state from context
+  const { search, 
+          handleSearch,
+          globalSites,
+          setGlobalSites,
+          handleGlobalSites,
+          windowSize
+        } = useContext(MenuContext)
 
   // Locks scrolling if you engage the search
   useEffect( () => {
@@ -67,6 +119,11 @@ const MobileHide = styled.span`
     }
   })  
 
+  // Dropdown stuff - use ref to tell click hook when user has engaged with dropdown
+  // This allows us to recognize any non-dropdown click and close menu appropriately 
+  const globalDropdownRef = useRef()
+  useOnClickOutside( globalDropdownRef, () => setGlobalSites(false) )  
+
   return (
     <>
       <MainContent 
@@ -75,11 +132,12 @@ const MobileHide = styled.span`
         textColor="#fff"
       >
         <Bar>
-          <NetworkControl>
+          <NetworkControl
+            onClick={ handleGlobalSites }
+          >
             <span><MobileHide>Explore Our</MobileHide> Network of Sites</span>
           </NetworkControl>
           <SearchControl
-            searchState={ search }
             onClick={ handleSearch }
           >
             <span>Search</span>
@@ -94,6 +152,39 @@ const MobileHide = styled.span`
         searchState={ search }
         handleSearch={ handleSearch }
       />
+      { data !== undefined &&
+        <Dropdown 
+          activeWidth={ windowSize.width }
+          dropdownState={ globalSites }
+          isGlobalMenu={ true }
+          ref={ globalDropdownRef }
+        >
+          <ul>  
+            { data.menu.menu_items && 
+              data.menu.menu_items.map( (menu_item) => {
+                return (
+                  <li key={ randomID(10000000) }>
+                    { menu_item.link._linkType === 'Link.web' ? (
+                      <a 
+                        href={ menu_item.link.url }
+                        onClick={ handleGlobalSites }
+                        target="_blank">
+                          { menu_item.text }
+                      </a>
+                    ) : (
+                      <Link href={ linkResolver(menu_item.link._meta) }>
+                        <a onClick={ handleGlobalSites }>
+                          { menu_item.text }
+                        </a>
+                      </Link>
+                    )}
+                  </li>
+                )
+              }) 
+            }
+          </ul>   
+        </Dropdown> 
+      }        
     </>
   )
 }
