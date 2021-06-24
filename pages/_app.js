@@ -1,5 +1,6 @@
+import { useState } from 'react'
 import Head from 'next/head'
-import Router, { useRouter } from 'next/router'
+import Router from 'next/router'
 import withFBQ from "next-fbq"
 import { ThemeProvider } from 'styled-components'
 import { ApolloProvider } from '@apollo/client'
@@ -8,7 +9,10 @@ import { useApollo } from '../lib/apollo/apolloClient'
 import Variables from '../components/styles/variables'
 import GlobalStyle from '../components/styles/global-css'
 
+import useWindowSize from "../hooks/useWindowSize"
+
 import DefaultContext from '../context/default/default-context'
+import MenuContext from '../context/menu/menu-context'
 import { ldJSONBasic, defaultData } from '../context/default/default-data'
 
 import {AuthProvider} from '../context/auth/auth-context'
@@ -37,32 +41,71 @@ const MyApp = ({ Component, pageProps, router }) => {
   // Instantiates Apollo client
   const apolloClient = useApollo(pageProps.initialApolloState) 
 
-  // sets up router hook, transitions to be path-aware
-  // const router = useRouter()
+  // Advocacy Menu control
+  const [advocacyState, setAdvocacyState] = useState(false);
+  const handleAdvocacy = () => {
+    setAdvocacyState(!advocacyState);
+  };
+
+  // Network of Sites Menu control
+  const [globalSites, setGlobalSites] = useState(false);
+  const handleGlobalSites = () => {
+    setGlobalSites(!globalSites);
+  };
+
+  // Our Work Menu Control
+  const [ourWorkState, setOurWorkState] = useState(false);
+  const handleOurWork = () => {
+    setOurWorkState(!ourWorkState);
+  };  
+
+  // Rides Menu Control
+  const [ridesState, setRidesState] = useState(false);
+  const handleRides = () => {
+    setRidesState(!ridesState);
+  };    
+
+  // Search Menu controls
+  const [search, setSearch] = useState(false);
+  const handleSearch = () => {
+    setSearch(!search);
+  };
+
+  // Global look at height/width of page
+  const windowSize = useWindowSize()
 
   return (
     <ApolloProvider client={ apolloClient }>
       <ThemeProvider theme={ Variables }>
         <DefaultContext.Provider value={ defaultData }>
-          <AuthProvider>
-          <Head>
-            <script type="application/ld+json">{ JSON.stringify(ldJSONBasic) }</script>
-          </Head>
-          <SiteMeta
-            desc={ defaultData.meta.desc }
-            title={ defaultData.meta.title }
-            imgHeight={ defaultData.meta.imgHeight }
-            imgSrc={ defaultData.meta.imgSrc }
-            imgWidth={ defaultData.meta.imgWidth }
-            path={ defaultData.meta.path }
-          />
-          <GlobalStyle />
-          <NavBar />
-          <PageTransition location={ router.pathname }>
-            <Component {...pageProps} key={ router.route }/>
-          </PageTransition>
-          <Footer />
-          </AuthProvider>
+          <MenuContext.Provider value={{ 
+            advocacyState, setAdvocacyState, handleAdvocacy, 
+            globalSites, setGlobalSites, handleGlobalSites,
+            ourWorkState, setOurWorkState, handleOurWork, 
+            ridesState, setRidesState, handleRides, 
+            search, setSearch, handleSearch, 
+            windowSize
+          }}>          
+            <AuthProvider>
+            <Head>
+              <script type="application/ld+json">{ JSON.stringify(ldJSONBasic) }</script>
+            </Head>
+            <SiteMeta
+              desc={ defaultData.meta.desc }
+              title={ defaultData.meta.title }
+              imgHeight={ defaultData.meta.imgHeight }
+              imgSrc={ defaultData.meta.imgSrc }
+              imgWidth={ defaultData.meta.imgWidth }
+              path={ defaultData.meta.path }
+            />
+            <GlobalStyle />
+            <NavBar />
+            <PageTransition location={ router.pathname }>
+              <Component {...pageProps} key={ router.route }/>
+            </PageTransition>
+            <Footer />
+            </AuthProvider>
+          </MenuContext.Provider>
         </DefaultContext.Provider>
       </ThemeProvider>
     </ApolloProvider>
