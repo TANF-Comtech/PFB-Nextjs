@@ -1,9 +1,11 @@
 import React, { useContext, useEffect, useRef } from 'react'
 import Link from 'next/link'
+import Router from 'next/router'
 import styled from "styled-components"
 
 import { useQuery, gql } from '@apollo/client'
 
+import AuthContext from '../../context/auth/auth-context'
 import MenuContext from '../../context/menu/menu-context'
 
 import MainContent from "../global/main-content"
@@ -53,23 +55,23 @@ const MemberLink = styled.div`
       font-weight: 700;
       text-decoration: none;
       text-transform: uppercase;
-
-      span {
-        display: none;
-
-        @media( min-width: ${props => props.theme.sm}) {
-          border: 1px solid #fff;
-          color: ${props => props.theme.yellow} !important;
-          display: inline;
-          margin-left: 5px;
-          padding: 2px 4px;
-          text-decoration: none;
-        }
-      }
     } 
+
+    span {
+      display: none;
+
+      @media( min-width: ${props => props.theme.sm}) {
+        border: 1px solid #fff;
+        color: ${props => props.theme.yellow} !important;
+        display: inline;
+        margin-left: 5px;
+        padding: 2px 4px;
+        text-decoration: none;
+      }
+    }
   }
-  
 `
+
 const SearchControl = styled.div`
   align-items: center;
   cursor: pointer;
@@ -125,12 +127,17 @@ const GLOBAL_MENU_DATA = gql`
 
 /**
  * <GlobalBar>
+ * 
+ * Global bar for all the PFB properties
+ * This handles search, global property list, member center and auth
  *
  * @param { boolean } searchState - passed, lifted state true/false toggle for search opening/closing
  * @param { function } handleSearch - passed, lifted state changer for search state, handles click event
  * 
  */
  const GlobalBar = () => {
+  // Auth context
+  const authContext = useContext(AuthContext)
 
   // Query for nav menu from Apollo
   const { loading, error, data } = useQuery(GLOBAL_MENU_DATA, {
@@ -148,6 +155,23 @@ const GLOBAL_MENU_DATA = gql`
           handleGlobalSites,
           windowSize
         } = useContext(MenuContext)
+
+  // Logout for authenticated users
+  const logout = () =>{
+    logoutRequest().then(data => {
+      if(data.status===true) {
+        authContext.updateAuthContext( { 
+          "user": {
+            "email": data?.email,
+            "name": data?.name,
+            "affiliation": data?.affiliation,
+          },
+          "loggedIn": false
+        });
+        Router.push('/')
+      }   
+    })
+  }
 
   // Locks scrolling if you engage the search
   useEffect( () => {
@@ -173,6 +197,8 @@ const GLOBAL_MENU_DATA = gql`
         <Bar>
           <FlexContainer 
             flexDirectionMobile="row"
+            alignItems="center"
+            alignItemsMobile="center"
           >
             <NetworkControl
               onClick={ handleGlobalSites }
@@ -183,10 +209,20 @@ const GLOBAL_MENU_DATA = gql`
               <Link href="/members">
                 <a>
                   Business Center 
-                  <span>Enter</span>
                 </a>
               </Link>              
             </MemberLink>
+            <MemberLink>
+              {!authContext.loggedIn ? (
+                <Link href="/log-in">
+                  <a><span>Login</span></a>
+                </Link>
+              ) : (
+                <span onClick={ ()=>{ logout() } }>
+                  Logout
+                </span>
+              )}                    
+            </MemberLink>            
           </FlexContainer>
           <SearchControl
             onClick={ handleSearch }
