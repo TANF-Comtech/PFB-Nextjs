@@ -1,13 +1,19 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import styled, { ThemeContext } from "styled-components";
 import useScrollPosition from '@react-hook/window-scroll'
 import Link from 'next/link'
 import Router from 'next/router'
 
+import { useQuery } from '@apollo/client'
+import { MENU_DATA, TOPIC_DATA } from '../../lib/apollo/menu-queries'
+
 import MenuContext from '../../context/menu/menu-context'
 import AuthContext from "../../context/auth/auth-context"
 import logoutRequest from "../../lib/auth/logoutRequest"
 
+import useOnClickOutside from "../../hooks/useOnClickOutside"
+
+import Dropdown from "../global/dropdown"
 import NavMenu from "../global/navmenu"
 import GlobalBar from './globalbar'
 import Logo from "../global/logo"
@@ -169,6 +175,34 @@ function NavBar() {
           ourWorkState, setOurWorkState, handleOurWork, 
           ridesState, setRidesState, handleRides, 
           windowSize } = useContext(MenuContext)  
+  
+  // Refs and click detection for each dropdown
+  const advocacyRef = useRef()
+  useOnClickOutside( advocacyRef, () => setAdvocacyState(false) )  
+  const ourWorkRef = useRef()
+  useOnClickOutside( ourWorkRef, () => setOurWorkState(false) )  
+  const ridesRef = useRef()
+  useOnClickOutside( ridesRef, () => setRidesState(false) )  
+
+  // Query for nav menus from Apollo
+  const { data: advocacyData } = useQuery(MENU_DATA, {
+    variables: {
+      "uid": "advocacy-menu",
+      "lang": "en-us"
+    }
+  })
+  const { data: ourWorkData } = useQuery(MENU_DATA, {
+    variables: {
+      "uid": "our-work-menu",
+      "lang": "en-us"
+    }
+  })
+  const { data: ridesData }= useQuery(MENU_DATA, {
+    variables: {
+      "uid": "rides-menu",
+      "lang": "en-us"
+    }
+  })
 
   // Capture scroll position, so we can know when to fade out navbar
   const scrollY = useScrollPosition();
@@ -195,15 +229,6 @@ function NavBar() {
       }   
     })
   }
-  
-  // Locks the body while menu is open
-  useEffect( () => {
-    if( menu === true ) {
-      document.body.style.overflowY = "hidden";
-    } else {
-      document.body.style.overflowY = "scroll";
-    }
-  })
 
   return (
     <>
@@ -264,6 +289,36 @@ function NavBar() {
           </Container>
         </MainNavContainer>          
       </Bar>
+      { advocacyData !== undefined &&
+        <Dropdown 
+          activeWidth={ windowSize.width }
+          data={ advocacyData }
+          dropdownHandler={ handleAdvocacy }
+          dropdownRef={ advocacyRef }
+          dropdownState={ advocacyState }
+          isGlobalMenu={ false }
+        />
+      }  
+      { ourWorkData !== undefined &&
+        <Dropdown 
+          activeWidth={ windowSize.width }
+          data={ ourWorkData }
+          dropdownHandler={ handleOurWork }
+          dropdownRef={ ourWorkRef }
+          dropdownState={ ourWorkState }
+          isGlobalMenu={ false }
+        />
+      }  
+      { ridesData !== undefined &&
+        <Dropdown 
+          activeWidth={ windowSize.width }
+          data={ ridesData }
+          dropdownHandler={ handleRides }
+          dropdownRef={ ridesRef }
+          dropdownState={ ridesState }
+          isGlobalMenu={ false }
+        />
+      }                    
       <NavMenu 
         menuState={ menu }
         handleMenu={ handleMenu }
