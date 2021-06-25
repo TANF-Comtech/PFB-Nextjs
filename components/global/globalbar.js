@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useRef } from 'react'
+import Link from 'next/link'
 import styled from "styled-components"
 
 import { useQuery, gql } from '@apollo/client'
@@ -9,6 +10,7 @@ import MainContent from "../global/main-content"
 import SearchButton from "../primitives/search-button"
 import Search from '../global/search'
 import { Dropdown } from '../global/dropdown'
+import { FlexContainer } from '../styles/simples'
 
 import { linkResolver, randomID } from "../../lib/utils"
 import useOnClickOutside from "../../hooks/useOnClickOutside"
@@ -30,6 +32,43 @@ const NetworkControl = styled.div`
   font-size: 14px;
   font-weight: 700;
   text-transform: uppercase;
+
+  &:after {
+    @media( min-width: ${props => props.theme.xs} ) {
+      content: "|";
+      padding: 0 10px;
+    }
+  }
+`
+const MemberLink = styled.div`
+  display: none;
+
+  @media( min-width: ${props => props.theme.xs}) {
+    display: inline;
+
+    a, a:hover, a:focus, a:visited {
+      color: white;
+      cursor: pointer;      
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      text-transform: uppercase;
+
+      span {
+        display: none;
+
+        @media( min-width: ${props => props.theme.sm}) {
+          border: 1px solid #fff;
+          color: ${props => props.theme.yellow} !important;
+          display: inline;
+          margin-left: 5px;
+          padding: 2px 4px;
+          text-decoration: none;
+        }
+      }
+    } 
+  }
+  
 `
 const SearchControl = styled.div`
   align-items: center;
@@ -132,11 +171,23 @@ const GLOBAL_MENU_DATA = gql`
         textColor="#fff"
       >
         <Bar>
-          <NetworkControl
-            onClick={ handleGlobalSites }
+          <FlexContainer 
+            flexDirectionMobile="row"
           >
-            <span><MobileHide>Explore Our</MobileHide> Network of Sites</span>
-          </NetworkControl>
+            <NetworkControl
+              onClick={ handleGlobalSites }
+            >
+              <span><MobileHide>Explore Our</MobileHide> Network of Sites</span>
+            </NetworkControl>
+            <MemberLink>
+              <Link href="/members">
+                <a>
+                  Business Center 
+                  <span>Enter</span>
+                </a>
+              </Link>              
+            </MemberLink>
+          </FlexContainer>
           <SearchControl
             onClick={ handleSearch }
           >
