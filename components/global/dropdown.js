@@ -1,15 +1,9 @@
+import Link from 'next/link'
 import styled from "styled-components";
 
-/**
- * Dropdown
- * 
- * This is just a really fancy styled-component that is worthy of it's own file.
- * 
- * @param { number } activeWidth - how wide the window of the site is 
- * @param { boolean } dropdownState - whether the dropdown is open or closed
- * @param { boolean } isGlobalMenu - whether the dropdown is the global menu or not
- */
-export const Dropdown = styled.nav`
+import { randomID } from "../../lib/utils"
+
+const Container = styled.nav`
   background-color: ${ (props) => { 
     return props.isGlobalMenu === true ? ( props.theme.midnightBlue ) : ( props.theme.gray )
   }};
@@ -74,3 +68,63 @@ export const Dropdown = styled.nav`
     text-decoration: underline;
   }
 `
+
+/**
+ * <Dropdown>
+ * 
+ * Global instance of a dropdown menu on the site
+ * This is just a really fancy styled-component that is worthy of it's own file.
+ * 
+ * @param { number } activeWidth - how wide the window of the site is 
+ * @param { array } data - payload for an individual menu
+ * @param { function } dropdownHandler - the handler to control the menu state
+ * @param { object } dropdownRef - react ref for menu
+ * @param { boolean } dropdownState - whether the dropdown is open or closed
+ * @param { boolean } isGlobalMenu - whether the dropdown is the global menu or not
+ */
+const Dropdown = ({
+  activeWidth, 
+  data,
+  dropdownHandler,
+  dropdownRef,
+  dropdownState, 
+  isGlobalMenu
+}) => {
+  return (
+    data !== undefined && 
+      <Container
+        activeWidth={ activeWidth }
+        dropdownState={ dropdownState }
+        isGlobalMenu={ isGlobalMenu }
+        ref={ dropdownRef }
+      >
+        <ul>  
+          { data.menu.menu_items && 
+            data.menu.menu_items.map( (menu_item) => {
+              return (
+                <li key={ randomID(10000000) }>
+                  { menu_item.link._linkType === 'Link.web' ? (
+                    <a 
+                      href={ menu_item.link.url }
+                      onClick={ dropdownHandler }
+                      target="_blank">
+                        { menu_item.text }
+                    </a>
+                  ) : (
+                    <Link href={ linkResolver(menu_item.link._meta) }>
+                      <a onClick={ dropdownHandler }>
+                        { menu_item.text }
+                      </a>
+                    </Link>
+                  )}
+                </li>
+              )
+            }) 
+          }
+        </ul>   
+      </Container>
+  )
+}
+
+export default Dropdown
+
