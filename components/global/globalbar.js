@@ -4,7 +4,7 @@ import Router from 'next/router'
 import styled from "styled-components"
 
 import { useQuery } from '@apollo/client'
-import { GLOBAL_MENU_DATA } from '../../lib/apollo/menu-queries'
+import { MENU_DATA } from '../../lib/apollo/menu-queries'
 
 import AuthContext from '../../context/auth/auth-context'
 import MenuContext from '../../context/menu/menu-context'
@@ -15,7 +15,6 @@ import Search from '../global/search'
 import Dropdown from '../global/dropdown'
 import { FlexContainer } from '../styles/simples'
 
-import { linkResolver, randomID } from "../../lib/utils"
 import useOnClickOutside from "../../hooks/useOnClickOutside"
 
 const Bar = styled.section`
@@ -109,7 +108,7 @@ const MobileHide = styled.span`
   const authContext = useContext(AuthContext)
 
   // Query for nav menu from Apollo
-  const { loading, error, data } = useQuery(GLOBAL_MENU_DATA, {
+  const { loading, error, data } = useQuery(MENU_DATA, {
     variables: {
       "uid": "global-network-menu",
       "lang": "en-us"
@@ -212,9 +211,9 @@ const MobileHide = styled.span`
         <Dropdown 
           activeWidth={ windowSize.width }
           data={ data }
+          dropdownState={ globalSites }
           dropdownHandler={ handleGlobalSites }
           dropdownRef={ globalDropdownRef }
-          dropdownState={ globalSites }
           isGlobalMenu={ true }
         />
       }        
