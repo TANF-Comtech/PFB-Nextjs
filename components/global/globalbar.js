@@ -3,7 +3,8 @@ import Link from 'next/link'
 import Router from 'next/router'
 import styled from "styled-components"
 
-import { useQuery, gql } from '@apollo/client'
+import { useQuery } from '@apollo/client'
+import { GLOBAL_MENU_DATA } from '../../lib/apollo/menu-queries'
 
 import AuthContext from '../../context/auth/auth-context'
 import MenuContext from '../../context/menu/menu-context'
@@ -11,7 +12,7 @@ import MenuContext from '../../context/menu/menu-context'
 import MainContent from "../global/main-content"
 import SearchButton from "../primitives/search-button"
 import Search from '../global/search'
-import { Dropdown } from '../global/dropdown'
+import Dropdown from '../global/dropdown'
 import { FlexContainer } from '../styles/simples'
 
 import { linkResolver, randomID } from "../../lib/utils"
@@ -91,38 +92,6 @@ const MobileHide = styled.span`
   @media (min-width: ${props => props.theme.sm}) {
     display: inline;
   }
-`
-
-// GraphQL query for menu data
-const GLOBAL_MENU_DATA = gql`
-  query NavMenu($uid: String!, $lang: String!) {
-    menu(uid: $uid, lang: $lang) {
-      _linkType
-      _meta {
-        type
-        uid
-        id
-      }
-      menu_items {
-        text
-        link {
-          ... on Landing_page {
-            title
-            _meta {
-              id
-              uid
-              type
-            }
-          }
-          ... on _ExternalLink {
-            url
-            target
-            _linkType
-          }          
-        }
-      }
-    }
-  } 
 `
 
 /**
@@ -242,35 +211,12 @@ const GLOBAL_MENU_DATA = gql`
       { data !== undefined &&
         <Dropdown 
           activeWidth={ windowSize.width }
+          data={ data }
+          dropdownHandler={ handleGlobalSites }
+          dropdownRef={ globalDropdownRef }
           dropdownState={ globalSites }
           isGlobalMenu={ true }
-          ref={ globalDropdownRef }
-        >
-          <ul>  
-            { data.menu.menu_items && 
-              data.menu.menu_items.map( (menu_item) => {
-                return (
-                  <li key={ randomID(10000000) }>
-                    { menu_item.link._linkType === 'Link.web' ? (
-                      <a 
-                        href={ menu_item.link.url }
-                        onClick={ handleGlobalSites }
-                        target="_blank">
-                          { menu_item.text }
-                      </a>
-                    ) : (
-                      <Link href={ linkResolver(menu_item.link._meta) }>
-                        <a onClick={ handleGlobalSites }>
-                          { menu_item.text }
-                        </a>
-                      </Link>
-                    )}
-                  </li>
-                )
-              }) 
-            }
-          </ul>   
-        </Dropdown> 
+        />
       }        
     </>
   )
