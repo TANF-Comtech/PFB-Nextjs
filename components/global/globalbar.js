@@ -65,9 +65,11 @@ const MemberLink = styled.div`
         border: 1px solid #fff;
         color: ${props => props.theme.yellow} !important;
         display: inline;
+        font-weight: 700;
         margin-left: 5px;
         padding: 2px 4px;
         text-decoration: none;
+        text-transform: uppercase;
       }
     }
   }

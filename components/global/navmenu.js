@@ -177,7 +177,11 @@ const MemberLi = styled.li`
       color: ${props => props.theme.yellow} !important;
       display: inline;
       font-size: 14px;
+      font-weight: 700;
+      margin: 0 0 0 5px;
       padding: 2px 4px;
+      text-decoration: none;
+      text-transform: uppercase;
     }
   }
 `
