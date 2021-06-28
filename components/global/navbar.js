@@ -5,7 +5,7 @@ import Link from 'next/link'
 import Router from 'next/router'
 
 import { useQuery } from '@apollo/client'
-import { MENU_DATA, TOPIC_DATA } from '../../lib/apollo/menu-queries'
+import { MENU_DATA } from '../../lib/apollo/menu-queries'
 
 import MenuContext from '../../context/menu/menu-context'
 import AuthContext from "../../context/auth/auth-context"
@@ -203,7 +203,6 @@ function NavBar() {
       "lang": "en-us"
     }
   })
-  const { data: topicData } = useQuery(TOPIC_DATA)
 
   // Capture scroll position, so we can know when to fade out navbar
   const scrollY = useScrollPosition();
@@ -299,7 +298,6 @@ function NavBar() {
           dropdownState={ advocacyState }
           hasTopics={ true }
           isGlobalMenu={ false }
-          topicData={ topicData }
         />
       }  
       { ourWorkData !== undefined &&
@@ -311,7 +309,6 @@ function NavBar() {
           dropdownState={ ourWorkState }
           hasTopics={ true }
           isGlobalMenu={ false }
-          topicData={ topicData }
         />
       }  
       { ridesData !== undefined &&
@@ -323,7 +320,6 @@ function NavBar() {
           dropdownState={ ridesState }
           hasTopics={ true }
           isGlobalMenu={ false }
-          topicData={ topicData }
         />
       }                    
       <NavMenu 

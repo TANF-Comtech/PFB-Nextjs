@@ -116,22 +116,8 @@ const Dropdown = ({
   dropdownState, 
   hasTopics,
   isCityRatingsMenu,
-  isGlobalMenu,
-  topicData
+  isGlobalMenu
 }) => {
-
-  // There isn't a clean way to get three random items from a group in GraphQL on the client side
-  // The work around is analyzing the full array of PFB topics and randomly selecting three for each dropdown
-  // This useEffect does just that - it gets three of the random indices and puts them in a state obj
-  const [ topicIndices, setTopicIndices ] = useState(null)
-  useEffect( () => { 
-    if( topicData !== undefined ) {
-      setTopicIndices([
-        randomID(topicData.allTopics.edges.length - 1),
-        randomID(topicData.allTopics.edges.length - 1)
-      ])
-    }
-  }, [topicData])
   
   // Locks scrolling when dropdown is engaged
   useEffect( () => {
@@ -200,9 +186,7 @@ const Dropdown = ({
                   <a 
                     onClick={ dropdownHandler } 
                     dangerouslySetInnerHTML={{__html: 'More Topics &raquo;' }}
-                  >
-
-                  </a>
+                  />
                 </Link>                
               </li>
             </ItemList>
