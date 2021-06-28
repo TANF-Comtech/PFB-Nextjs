@@ -177,29 +177,32 @@ const Dropdown = ({
             }) 
           }
         </ItemList>   
-        {
-          // This looks ugly but gets us where we want to go 
-          // It works around the fact you can't randomly query from the Prismic GraphQL endpoint
-          topicData !== undefined && topicIndices !== null &&
+        { data.menu.topic_items && 
           <TopicContainer>
-            <ImageSquare
-              handler={ dropdownHandler }
-              isNavItem={ true }
-              imageSquareLink={ `/topics/${topicData.allTopics.edges[topicIndices[0]].node._meta.uid}` }
-              key={ randomID(10000000) }
-              source1X={ topicData.allTopics.edges[topicIndices[0]].node.square_image?.mobile.url }
-              source2X={ topicData.allTopics.edges[topicIndices[0]].node.square_image?.url }
-              title={ topicData.allTopics.edges[topicIndices[0]].node.title[0].text }
-            />
-            <ImageSquare
-              handler={ dropdownHandler }
-              isNavItem={ true }
-              imageSquareLink={ `/topics/${topicData.allTopics.edges[topicIndices[1]].node._meta.uid}` }
-              key={ randomID(10000000) }
-              source1X={ topicData.allTopics.edges[topicIndices[1]].node.square_image?.mobile.url }
-              source2X={ topicData.allTopics.edges[topicIndices[1]].node.square_image?.url }
-              title={ topicData.allTopics.edges[topicIndices[1]].node.title[0].text }
-            />        
+            { data.menu.topic_items.map( (topic_item) => { 
+              console.log(topic_item)
+                return (
+                  <ImageSquare
+                    handler={ dropdownHandler }
+                    isNavItem={ true }
+                    imageSquareLink={ topic_item && `/topics/${topic_item.link._meta.uid}` }
+                    key={ randomID(10000000) }
+                    source1X={ topic_item && topic_item.link.square_image?.mobile.url }
+                    source2X={ topic_item && topic_item.link.square_image?.url }
+                    title={ topic_item && topic_item.link.title[0].text }
+                  />  
+                )
+              })
+            }
+            <ItemList>
+              <li>
+                <Link href="/topics">
+                  <a onClick={ dropdownHandler }>
+                    More Topics >
+                  </a>
+                </Link>                
+              </li>
+            </ItemList>
           </TopicContainer>
         }
         </InnerContainer>
