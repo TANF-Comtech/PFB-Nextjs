@@ -7,6 +7,7 @@ import { useQuery } from '@apollo/client'
 import { MENU_DATA } from '../../lib/apollo/menu-queries'
 
 import AuthContext from '../../context/auth/auth-context'
+import logoutRequest from "../../lib/auth/logoutRequest"
 import MenuContext from '../../context/menu/menu-context'
 
 import MainContent from "../global/main-content"

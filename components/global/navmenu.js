@@ -4,7 +4,9 @@ import Link from "next/link"
 import { useQuery } from '@apollo/client'
 
 import { MENU_DATA } from '../../lib/apollo/menu-queries'
+
 import AuthContext from '../../context/auth/auth-context'
+import logoutRequest from "../../lib/auth/logoutRequest"
 
 import Logo from './logo'
 import LogoType from './logotype'

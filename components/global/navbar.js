@@ -1,15 +1,13 @@
-import React, { useState, useEffect, useContext, useRef } from "react";
+import React, { useState, useContext, useRef } from "react";
 import styled, { ThemeContext } from "styled-components";
 import useScrollPosition from '@react-hook/window-scroll'
 import Link from 'next/link'
-import Router from 'next/router'
 
 import { useQuery } from '@apollo/client'
 import { MENU_DATA } from '../../lib/apollo/menu-queries'
 
 import MenuContext from '../../context/menu/menu-context'
 import AuthContext from "../../context/auth/auth-context"
-import logoutRequest from "../../lib/auth/logoutRequest"
 
 import useOnClickOutside from "../../hooks/useOnClickOutside"
 
@@ -212,23 +210,6 @@ function NavBar() {
   const handleMenu = () => {
     setMenu(!menu);
   };
-
-  // Logout for authenticated users
-  const logout = () =>{
-    logoutRequest().then(data => {
-      if(data.status===true) {
-        authContext.updateAuthContext( { 
-          "user": {
-            "email": data?.email,
-            "name": data?.name,
-            "affiliation": data?.affiliation,
-          },
-          "loggedIn": false
-        });
-        Router.push('/')
-      }   
-    })
-  }
 
   return (
     <>
