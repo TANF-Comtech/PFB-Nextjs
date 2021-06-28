@@ -166,7 +166,6 @@ const Dropdown = ({
         { data.menu.topic_items && 
           <TopicContainer>
             { data.menu.topic_items.map( (topic_item) => { 
-              console.log(topic_item)
                 return (
                   <ImageSquare
                     handler={ dropdownHandler }
