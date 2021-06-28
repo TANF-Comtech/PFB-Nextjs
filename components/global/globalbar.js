@@ -176,7 +176,7 @@ const MobileHide = styled.span`
             <MemberLink>
               <Link href="/members">
                 <a>
-                  Business Center 
+                  Member Center 
                 </a>
               </Link>              
             </MemberLink>
