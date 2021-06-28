@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import styled from "styled-components";
 
-import ImageSquare from '../global/image-square'
+import ImageSquare from './image-square'
+import DropdownList from './dropdown-list'
 
 import { randomID, linkResolver } from "../../lib/utils"
 
@@ -50,18 +51,11 @@ const OuterContainer = styled.nav`
   }
 `
 
-const InnerContainer = styled.div`
-  display: grid;
-  grid-gap: 20px;
-  grid-template-columns: ${ props => props.hasTopics ? '1fr 190px' : '1fr' };
-  padding: 20px;
-`
-
 const ItemList = styled.ul`
   list-style: none;
   padding: 0;
   margin: 0;
-  
+
   li { 
     background-color: ${ props => props.hasTopics ? props.theme.darkGray : 'none' };
   }
@@ -85,6 +79,13 @@ const ItemList = styled.ul`
   li a:hover {
     text-decoration: underline;
   }
+`
+
+const InnerContainer = styled.div`
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: ${ props => props.hasTopics ? '1fr 190px' : '1fr' };
+  padding: 20px;
 `
 
 const TopicContainer = styled.div`
@@ -151,30 +152,14 @@ const Dropdown = ({
         ref={ dropdownRef }
       >
         <InnerContainer hasTopics={ hasTopics }>
-        <ItemList>  
-          { data.menu.menu_items && 
-            data.menu.menu_items.map( (menu_item) => {
-              return (
-                <li key={ randomID(10000000) }>
-                  { menu_item.link._linkType === 'Link.web' ? (
-                    <a 
-                      href={ menu_item.link.url }
-                      onClick={ dropdownHandler }
-                      target="_blank">
-                        { menu_item.text }
-                    </a>
-                  ) : (
-                    <Link href={ linkResolver(menu_item.link._meta) }>
-                      <a onClick={ dropdownHandler }>
-                        { menu_item.text }
-                      </a>
-                    </Link>
-                  )}
-                </li>
-              )
-            }) 
-          }
-        </ItemList>   
+
+        { data.menu.menu_items &&
+          <DropdownList
+            data={ data }
+            handler={ dropdownHandler }
+          />  
+        }  
+
         { data.menu.topic_items && 
           <TopicContainer>
             { data.menu.topic_items.map( (topic_item) => { 
@@ -204,6 +189,7 @@ const Dropdown = ({
           </TopicContainer>
         }
         </InnerContainer>
+
         { hasTopics && 
           <ItemList
             hasTopics={ hasTopics }
@@ -227,7 +213,8 @@ const Dropdown = ({
               </AnchorAlign>
             </li>
           </ItemList>
-        }        
+        }   
+
       </OuterContainer>
       }
     </>
