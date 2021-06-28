@@ -16,10 +16,12 @@ const ImageContainer = styled.div`
   background-size: cover;
   display: flex;
   height: auto;
-  justify-content: space-between;
+  justify-content: ${ props => props.isNavItem === true ? 'center' : 'space-between' };
+  margin: ${ props => props.isNavItem === true ? '0 20px 2vh 20px' : '0' };
   max-width: 100%;
   transition: 0.2s ease;
   transform: translateY(0);
+  width: ${ props => props.isNavItem === true ? '150px' : '100%' };
 
   &::before {
     content: "";
@@ -40,9 +42,20 @@ const Title = styled.h2`
   width: calc(100% - 60px);
 `
 
+
+const NavTitle = styled.h3`
+  color: #fff;
+  font-size: 12px;
+  line-height: 18px;
+  margin: 0;
+  text-align: center;
+  text-decoration: none !important;
+  text-transform: uppercase;
+`
+
 const Arrow = styled.img`
   background-color: #fff;
-  display: block;
+  display: ${ props => props.isNavItem === true ? 'none' : 'block' };
   flex-shrink: 0;
   padding: 10px;
   width: 40px;
@@ -54,27 +67,38 @@ const Arrow = styled.img`
  * Presents a square image with some text on top of it
  *
  * @param { string } imageSquareLink - Next path for the image square
- * @param { obj } handleMenu - closes main menu when clicked
+ * @param { boolean } isNavItem - checks to see if this is being used as a nav item
+ * @param { obj } handleMr - closes main menu when clicked
  * @param { string } source1X - image source for the bg image
  * @param { string } source2X - image source for the bg image, twice as big
  * @param { string } title - text that goes on top 
  */
 const ImageSquare = ({
+  handler,
   imageSquareLink,
-  handleMenu,
+  isNavItem,
   source1X,
   source2X,
   title
 }) => {
   return (
     <Link href={ imageSquareLink } passHref>
-      <a onClick={ handleMenu }>
+      <a onClick={ handler && handler }>
         <ImageContainer
+          isNavItem={ isNavItem }
           path1X={ source1X }
           path2X={ source2X }
         >
-          <Title>{ title }</Title>
-          <Arrow src={ ArrowIcon } />
+          { isNavItem === true ? (
+            <NavTitle>{ title }</NavTitle>
+          ) : (
+            <Title>{ title }</Title>
+          )}
+          
+          <Arrow 
+            isNavItem={ isNavItem }
+            src={ ArrowIcon } 
+          />
         </ImageContainer>
       </a>
     </Link>
