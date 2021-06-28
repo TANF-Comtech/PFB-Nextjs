@@ -1,17 +1,19 @@
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import styled from "styled-components";
 
-import { randomID } from "../../lib/utils"
+import ImageSquare from '../global/image-square'
 
-const Container = styled.nav`
+import { randomID, linkResolver } from "../../lib/utils"
+
+const OuterContainer = styled.nav`
   background-color: ${ (props) => { 
-    return props.isGlobalMenu === true ? ( props.theme.midnightBlue ) : ( props.theme.gray )
+    return props.isCityRatingsMenu === true ? ( props.theme.gray ) : ( props.theme.midnightBlue )
   }};
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
   opacity: ${ props => props.dropdownState === true ? '1' : '0' };
   position: absolute;
   left: 0;
-  margin: 0 auto;
   right: 0;
   top: ${ (props) => { 
       return props.isGlobalMenu === true ? ( '5vh' ) : ( '22vh' )
@@ -19,7 +21,7 @@ const Container = styled.nav`
   transform: ${ props => props.dropdownState === true ? 'translateY(0)' : 'translateY(-20px)' };
   transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
   visibility: ${ props => props.dropdownState === true ? 'visible' : 'hidden' };
-  width: 300px;
+  min-width: 300px;
   z-index: ${ props => props.theme.zIndex01 };
 
   /* This is COMPLEX - heads up */
@@ -39,33 +41,55 @@ const Container = styled.nav`
       return props.isGlobalMenu === true ? (
         'auto'
       ) : (
-        props.activeWidth > 1200 ? ((props.activeWidth - 1200) / 2 + 'px') : ('5vw')
+        props.activeWidth > 1200 ? ((props.activeWidth - 1200) / 2 + 'px') : ('2vw')
       )    
     }};
     top: ${ (props) => { 
       return props.isGlobalMenu === true ? ( '5vh' ) : ( '18vh' )
     }};
   }
+`
 
-  ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+const InnerContainer = styled.div`
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: ${ props => props.hasTopics ? '1fr 190px' : '1fr' };
+  padding: 20px;
+`
+
+const ItemList = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  
+  li { 
+    background-color: ${ props => props.hasTopics ? props.theme.darkGray : 'none' };
+  }
+
+  li:first-child {
+    background-color: ${ props => props.hasTopics ? props.theme.blue : 'none' };
   }
 
   li a, li a:focus, li a:visited {
-    text-decoration: none;
+    background-color: none;
     color: #fff;
     padding: 15px 20px;
     display: block;
     font-size: 16px;
     font-weight: 700;
+    text-decoration: none;
     text-transform: uppercase;
     line-height: 1.2;
   }
 
   li a:hover {
     text-decoration: underline;
+  }
+`
+
+const TopicContainer = styled.div`
+  a, a:visited, a:focus, a:hover {
+    text-decoration: none ;
   }
 `
 
@@ -80,6 +104,8 @@ const Container = styled.nav`
  * @param { function } dropdownHandler - the handler to control the menu state
  * @param { object } dropdownRef - react ref for menu
  * @param { boolean } dropdownState - whether the dropdown is open or closed
+ * @param { boolean } hasTopics - indicates presence of topics sub menu
+ * @param { boolean } isCityRatingsMenu - check to see if it's the gray city ratings menu
  * @param { boolean } isGlobalMenu - whether the dropdown is the global menu or not
  */
 const Dropdown = ({
@@ -88,17 +114,46 @@ const Dropdown = ({
   dropdownHandler,
   dropdownRef,
   dropdownState, 
-  isGlobalMenu
+  hasTopics,
+  isCityRatingsMenu,
+  isGlobalMenu,
+  topicData
 }) => {
+
+  // There isn't a clean way to get three random items from a group in GraphQL on the client side
+  // The work around is analyzing the full array of PFB topics and randomly selecting three for each dropdown
+  // This useEffect does just that - it gets three of the random indices and puts them in a state obj
+  const [ topicIndices, setTopicIndices ] = useState(null)
+  useEffect( () => { 
+    if( topicData !== undefined ) {
+      setTopicIndices([
+        randomID(topicData.allTopics.edges.length - 1),
+        randomID(topicData.allTopics.edges.length - 1)
+      ])
+    }
+  }, [topicData])
+  
+  // Locks scrolling when dropdown is engaged
+  useEffect( () => {
+    if( dropdownState === true ) {
+      document.body.style.overflowY = "hidden";
+    } else {
+      document.body.style.overflowY = "scroll";
+    }
+  }, [dropdownState]) 
+
   return (
-    data !== undefined && 
-      <Container
+    <>
+    { data !== undefined && 
+      <OuterContainer
         activeWidth={ activeWidth }
         dropdownState={ dropdownState }
+        isCityRatingsMenu={ isCityRatingsMenu }
         isGlobalMenu={ isGlobalMenu }
         ref={ dropdownRef }
       >
-        <ul>  
+        <InnerContainer hasTopics={ hasTopics }>
+        <ItemList>  
           { data.menu.menu_items && 
             data.menu.menu_items.map( (menu_item) => {
               return (
@@ -121,10 +176,53 @@ const Dropdown = ({
               )
             }) 
           }
-        </ul>   
-      </Container>
+        </ItemList>   
+        {
+          // This looks ugly but gets us where we want to go 
+          // It works around the fact you can't randomly query from the Prismic GraphQL endpoint
+          topicData !== undefined && topicIndices !== null &&
+          <TopicContainer>
+            <ImageSquare
+              handler={ dropdownHandler }
+              isNavItem={ true }
+              imageSquareLink={ `/topics/${topicData.allTopics.edges[topicIndices[0]].node._meta.uid}` }
+              key={ randomID(10000000) }
+              source1X={ topicData.allTopics.edges[topicIndices[0]].node.square_image?.mobile.url }
+              source2X={ topicData.allTopics.edges[topicIndices[0]].node.square_image?.url }
+              title={ topicData.allTopics.edges[topicIndices[0]].node.title[0].text }
+            />
+            <ImageSquare
+              handler={ dropdownHandler }
+              isNavItem={ true }
+              imageSquareLink={ `/topics/${topicData.allTopics.edges[topicIndices[1]].node._meta.uid}` }
+              key={ randomID(10000000) }
+              source1X={ topicData.allTopics.edges[topicIndices[1]].node.square_image?.mobile.url }
+              source2X={ topicData.allTopics.edges[topicIndices[1]].node.square_image?.url }
+              title={ topicData.allTopics.edges[topicIndices[1]].node.title[0].text }
+            />        
+          </TopicContainer>
+        }
+        </InnerContainer>
+        { hasTopics && 
+          <ItemList
+            hasTopics={ hasTopics }
+          >
+            <li>
+              <a href="https://www.classy.org/give/117371" target="_blank">
+                Donate
+              </a>
+            </li>
+            <li>
+              <a href="https://store.peopleforbikes.org/" target="_blank">
+                Shop
+              </a>
+            </li>
+          </ItemList>
+        }        
+      </OuterContainer>
+      }
+    </>
   )
 }
 
 export default Dropdown
-

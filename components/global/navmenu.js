@@ -1,23 +1,23 @@
-import React from 'react'
-import styled, { keyframes } from 'styled-components'
+import React, { useContext, useEffect } from 'react'
+import styled, { keyframes, ThemeContext } from 'styled-components'
 import { useQuery, gql } from '@apollo/client'
 import { RichText } from 'prismic-reactjs'
 import Link from 'next/link'
 
+import { MENU_DATA } from '../../lib/apollo/menu-queries'
+
 import { randomID, linkResolver } from '../../lib/utils'
 
 import ImageSquare from '../global/image-square'
-import Logo from '../global/logo'
-import LogoType from '../global/logotype'
-
 import ShareIcon from '../../public/icons/share.svg'
 
 const NavContainer = styled.nav`
-  background-color: #fff;
+  background-color: ${ props => props.theme.midnightBlue };
   bottom: 0;
   box-shadow: 0 2px 5px rgba(0,0,0,.2);
-  left: 0;
+  color: #fff;
   max-width: ${props => props.theme.xs};
+  min-width: 320px;
   min-height: 100vh;
   overflow: auto;
   padding: 25px;
@@ -25,7 +25,7 @@ const NavContainer = styled.nav`
   right: 0;
   top: 0;
   transition: 0.4s ease-in-out;
-  transform: ${props => props.menuState ? "translateX(0)" : "translateX(-100%)" };
+  transform: ${props => props.menuState ? "translateX(0)" : "translateX(100%)" };
   will-change: transform;
   z-index: ${props => props.theme.zIndex05};
 `
@@ -56,7 +56,7 @@ const fadeIn = keyframes`
 const MenuHeader = styled.header`
   align-items: center;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   margin-bottom: 3vh;
 
   a, a:focus, a:visited, a:hover {
@@ -77,7 +77,6 @@ const MenuTitle = styled.h3`
 
 const MenuButtonCont = styled.div`
   align-items: center;
-  background: #fff; 
   border: none;
   border-radius: 0;
   display: flex;
@@ -115,12 +114,11 @@ const MainNav = styled.ul`
   opacity: 0;
 
   a, a:visited, a:focus, a:active {
-    color: ${props => props.theme.black };
+    color: #fff;
     text-decoration: none;
     transition: 0.2s ease-in-out;
   }
   a:hover {
-    color: ${props => props.theme.red };
     text-decoration: none;
   }
 `
@@ -178,14 +176,6 @@ const GridMicroFade = styled.section`
   }
 `
 
-const LogoContainer = styled.section`
-  align-items: flex-end;
-  animation: ${fadeIn} 0.75s ease forwards;
-  animation-delay: 0.4s;
-  display: flex;
-  opacity: 0;
-`
-
 const AnchorAlign = styled.a`
   align-items: center;
   display: flex;
@@ -212,79 +202,52 @@ const AnchorAlign = styled.a`
  * @param { function } handleMenu - lifted state changer for menuState, handles click event
  */
 
-const NAV_MENU_DATA = gql`
-  query NavMenu($uid: String!, $lang: String!) {
-    nav_menu(uid: $uid, lang: $lang) {
-      _meta {
-        uid
-        id
-      }
-      main_menu_items {
-        menu_text
-        item {
-          __typename
-          ... on Landing_page {
-            title
-            _meta {
-              id
-              uid
-            }
-          }
-        }
-      }
-      topic_menu_items {
-        item {
-          __typename
-          ... on Topic {
-            title
-            square_image
-            _meta {
-              uid
-              id
-            }
-          }        
-        }
-      }
-    }
-  }  
-`
-
 const NavMenu = ({ menuState, handleMenu }) => {
+  // Theme props
+  const themeProps = useContext(ThemeContext)
 
-  // Query for nav menu from Apollo
-  const { loading, error, data } = useQuery(NAV_MENU_DATA, {
+  // Query for nav menus from Apollo
+  const { data: advocacyData } = useQuery(MENU_DATA, {
     variables: {
-      "uid": "nav-menu",
+      "uid": "advocacy-menu",
+      "lang": "en-us"
+    }
+  })
+  const { data: ourWorkData } = useQuery(MENU_DATA, {
+    variables: {
+      "uid": "our-work-menu",
+      "lang": "en-us"
+    }
+  })
+  const { data: ridesData }= useQuery(MENU_DATA, {
+    variables: {
+      "uid": "rides-menu",
       "lang": "en-us"
     }
   })
 
-  if (data) {
-    const mainMenu = data.nav_menu.main_menu_items
-    const topicMenu = data.nav_menu.topic_menu_items
+  // Locks the body while menu is open
+  useEffect( () => {
+    if( menuState === true ) {
+      document.body.style.overflowY = "hidden";
+    } else {
+      document.body.style.overflowY = "scroll";
+    }
+  })
+
+  //if (data) {
+    // const mainMenu = data.nav_menu.main_menu_items
+    // const topicMenu = data.nav_menu.topic_menu_items
 
     return(
       <>
         <NavContainer menuState={ menuState }>
           <MenuHeader>
-            { menuState === true && (
-              <LogoContainer>
-                <Logo 
-                  logoMargin="0"
-                  logoWidth="60px"
-                  logoViewbox="65 -12 160 150"
-                />
-                <LogoType 
-                  logoMargin="0"
-                  logoTypeWidth="150px"
-                />
-              </LogoContainer>
-            )}
             <MenuButtonCont onClick={ handleMenu }>
             { menuState === true && (
               <MenuClose 
-                stroke="currentColor" 
-                fill="currentColor" 
+                stroke="#fff" 
+                fill="#fff"
                 stroke-width="0" 
                 viewBox="0 0 24 24"
               >
@@ -296,7 +259,7 @@ const NavMenu = ({ menuState, handleMenu }) => {
           { menuState === true && (
             <>
               <MainNav>                                                                              
-                { mainMenu.map( (menu_item) => {
+                {/* { mainMenu.map( (menu_item) => {
                   return (
                     <MainNavItem key={ randomID(10000000) } >
                       <Link href={ linkResolver(menu_item.item, true) } >
@@ -306,11 +269,18 @@ const NavMenu = ({ menuState, handleMenu }) => {
                       </Link>
                     </MainNavItem>
                   )
-                })}
+                })} */}
                 <MainNavItem>
-                  PeopleForBikes at Work
+                  Advocacy
                 </MainNavItem>
                 <MainNavItem>
+                  Our Work
+                </MainNavItem>
+                <MainNavItem>
+                  Rides
+                </MainNavItem>
+
+                {/* <MainNavItem>
                   <MainNav>
                     <MainSubNavItem>
                       <Link href="/grants" >
@@ -350,8 +320,10 @@ const NavMenu = ({ menuState, handleMenu }) => {
                       <path d="M32 7c0 0.553-0.447 1-1 1s-1-0.447-1-1V3.414L16.707 16.707C16.526 16.888 16.276 17 16 17c-0.553 0-1-0.447-1-1 0-0.276 0.112-0.526 0.293-0.707L28.586 2H25c-0.553 0-1-0.447-1-1s0.447-1 1-1h6c0.553 0 1 0.447 1 1V7z"/>
                     </svg>
                   </AnchorAlign>
-                </MainNavItem>
+                </MainNavItem> */}
               </MainNav>
+
+              
               {/* <MenuHeader>
                 <Link href="/topics">
                   <a onClick={ handleMenu }>
@@ -384,10 +356,7 @@ const NavMenu = ({ menuState, handleMenu }) => {
         />
       </>
     )
-  }
-
-  if (loading) return `<h2>Loading...</h2>`;
-  if (error || undefined) return console.log(`Error! ${error}`);
+  // }
 }
 
 export default NavMenu

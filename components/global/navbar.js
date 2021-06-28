@@ -197,12 +197,13 @@ function NavBar() {
       "lang": "en-us"
     }
   })
-  const { data: ridesData }= useQuery(MENU_DATA, {
+  const { data: ridesData } = useQuery(MENU_DATA, {
     variables: {
       "uid": "rides-menu",
       "lang": "en-us"
     }
   })
+  const { data: topicData } = useQuery(TOPIC_DATA)
 
   // Capture scroll position, so we can know when to fade out navbar
   const scrollY = useScrollPosition();
@@ -296,7 +297,9 @@ function NavBar() {
           dropdownHandler={ handleAdvocacy }
           dropdownRef={ advocacyRef }
           dropdownState={ advocacyState }
+          hasTopics={ true }
           isGlobalMenu={ false }
+          topicData={ topicData }
         />
       }  
       { ourWorkData !== undefined &&
@@ -306,7 +309,9 @@ function NavBar() {
           dropdownHandler={ handleOurWork }
           dropdownRef={ ourWorkRef }
           dropdownState={ ourWorkState }
+          hasTopics={ true }
           isGlobalMenu={ false }
+          topicData={ topicData }
         />
       }  
       { ridesData !== undefined &&
@@ -316,7 +321,9 @@ function NavBar() {
           dropdownHandler={ handleRides }
           dropdownRef={ ridesRef }
           dropdownState={ ridesState }
+          hasTopics={ true }
           isGlobalMenu={ false }
+          topicData={ topicData }
         />
       }                    
       <NavMenu 
