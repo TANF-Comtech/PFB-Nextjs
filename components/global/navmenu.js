@@ -1,17 +1,15 @@
 import React, { useContext, useEffect } from 'react'
-import styled, { keyframes, ThemeContext } from 'styled-components'
+import styled, { keyframes } from 'styled-components'
+import Link from "next/link"
 import { useQuery } from '@apollo/client'
-import Link from 'next/link'
 
 import { MENU_DATA } from '../../lib/apollo/menu-queries'
-import { randomID, linkResolver } from '../../lib/utils'
+import AuthContext from '../../context/auth/auth-context'
 
 import Logo from './logo'
 import LogoType from './logotype'
 import NavAccordion from './nav-accordion'
 import DropdownList from './dropdown-list'
-
-import ShareIcon from '../../public/icons/share.svg'
 
 const NavContainer = styled.nav`
   background-color: ${ props => props.theme.midnightBlue };
@@ -22,7 +20,6 @@ const NavContainer = styled.nav`
   min-width: 320px;
   min-height: 100vh;
   overflow: auto;
-  padding: 25px;
   position: fixed;
   right: 0;
   top: 0;
@@ -55,12 +52,11 @@ const fadeIn = keyframes`
   }
 `
 
-const MenuHeader = styled.header`
+const MenuHeader = styled(Link)`
   align-items: center;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 3vh;
-
+  
   a, a:focus, a:visited, a:hover {
     color: black;
     text-decoration: none;
@@ -83,37 +79,7 @@ const LogoContainer = styled.section`
   animation-delay: 0.4s;
   display: flex;
   opacity: 0;
-`
-
-const MenuButtonCont = styled.div`
-  align-items: center;
-  border: none;
-  border-radius: 0;
-  display: flex;
-  height: 32px;
-  justify-content: center;
-  left: 0;
-  padding: 0;
-  position: relative;
-  top: 0;
-  transform: ${props => props.menuState ? "translateX(-100%)" : "translateX(0%)" };
-  transition: all 0.5s ease;
-  width: 32px;
-  z-index: ${props => props.theme.zIndex06 };
-
-  :focus {
-    box-shadow: 0 0 0 1px ${props => props.theme.blue } inset;
-  }
-`
-
-const MenuClose = styled.svg`
-  animation: ${fadeIn} 0.75s ease forwards;
-  animation-delay: 0.8s;
-  cursor: pointer;
-  height: 32px;
-  margin: 0;
-  opacity: 0;
-  width: 32px;
+  padding: 25px 25px 0 25px;
 `
 
 const MainNav = styled.ul`
@@ -122,6 +88,7 @@ const MainNav = styled.ul`
   list-style: none;
   margin: 0;
   opacity: 0;
+  padding: 25px;
 
   a, a:visited, a:focus, a:active {
     color: #fff;
@@ -142,53 +109,73 @@ const MainNavItem = styled.li`
   padding: 1vh 0; 
 `
 
-const MainSubNavItem = styled.li`
-  cursor: pointer;
-  font-size: 24px;
-  font-family: ${ props => props.theme.montserrat };
-  font-weight: 300;
-  line-height: 28px;
-  padding: 0.5vh 25px;
-
-  @media screen and (min-width: 320px) {
-    font-size: calc(24px + 4 * ((100vw - 320px) / 880));
-    line-height: calc(28px + 6 * ((100vw - 320px) / 880));
-  }
-  @media screen and (min-width: 1200px) {
-    font-size: 28px;
-    line-height: 34px;
-  } 
-`
-
-const GridMicroFade = styled.section`
-  animation: ${fadeIn} 0.75s ease forwards;
-  animation-delay: 0.6s;
-  display: grid;
-  grid-gap: ${props => props.gridGap || '15px'}; 
-  grid-template-columns: 1fr;
-  opacity: 0;
-
-  @media( min-width: ${(props) => props.theme.xs} ) {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  a, a:focus, a:visited, a:hover {
-    text-decoration: none;
-  }
-`
-
 const AnchorAlign = styled.a`
   align-items: center;
   display: flex;
 
   svg {
-    fill: ${props => props.theme.black };
+    fill: #fff;
     margin-left: 12px;
-    width: 15px;
+    width: 12px;
     transition: 0.2s ease-in-out;
 
     &:hover {
       fill: ${props => props.theme.red };
+    }
+  }
+`
+
+const ItemList = styled.ul`
+  animation: ${fadeIn} 0.75s ease forwards;
+  animation-delay: 0.8s;
+  list-style: none;
+  margin: 0;
+  opacity: 0;
+  padding: 0;
+
+  li a, li a:focus, li a:visited {
+    background-color: ${ props => props.theme.red };
+    color: #fff;
+    padding: 15px 20px;
+    display: block;
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+    text-transform: uppercase;
+    line-height: 1.2;
+  }
+
+  li a:hover {
+    text-decoration: underline;
+  }
+`
+
+const MemberLi = styled.li`
+  align-items: center;
+  background-color: ${ props => props.theme.darkGray };
+  display: flex;
+  justify-content: flex-start;
+
+  a, a:focus, a:visited {
+    background-color: ${ props => props.theme.darkGray } !important;
+    color: #fff;
+    padding: 15px 20px;
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+    text-transform: uppercase;
+    line-height: 1.2;
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    span {
+      border: 1px solid #fff;
+      color: ${props => props.theme.yellow} !important;
+      display: inline;
+      font-size: 14px;
+      padding: 2px 4px;
     }
   }
 `
@@ -204,12 +191,25 @@ const AnchorAlign = styled.a`
  */
 
 const NavMenu = ({ menuState, handleMenu }) => {
-  // Theme props
-  const themeProps = useContext(ThemeContext)
-  // const { advocacyState, setAdvocacyState, handleAdvocacy, 
-  //   ourWorkState, setOurWorkState, handleOurWork, 
-  //   ridesState, setRidesState, handleRides, 
-  //   windowSize } = useContext(MenuContext)  
+  // Auth context
+  const authContext = useContext(AuthContext)
+
+  // Logout for authenticated users
+  const logout = () =>{
+    logoutRequest().then(data => {
+      if(data.status===true) {
+        authContext.updateAuthContext( { 
+          "user": {
+            "email": data?.email,
+            "name": data?.name,
+            "affiliation": data?.affiliation,
+          },
+          "loggedIn": false
+        });
+        Router.push('/')
+      }   
+    })
+  }  
 
   // Query for nav menus from Apollo
   const { data: advocacyData } = useQuery(MENU_DATA, {
@@ -240,14 +240,11 @@ const NavMenu = ({ menuState, handleMenu }) => {
     }
   })
 
-  //if (data) {
-    // const mainMenu = data.nav_menu.main_menu_items
-    // const topicMenu = data.nav_menu.topic_menu_items
-
-    return(
-      <>
-        <NavContainer menuState={ menuState }>
-          <MenuHeader>
+  return(
+    <>
+      <NavContainer menuState={ menuState }>
+        <MenuHeader href="/">
+          <a onClick={ handleMenu }>
             { menuState === true && (
               <LogoContainer>
                 <Logo 
@@ -263,102 +260,99 @@ const NavMenu = ({ menuState, handleMenu }) => {
                   fillBikes="#fff"
                 />
               </LogoContainer>
-            )}            
-            <MenuButtonCont onClick={ handleMenu }>
-            {/* { menuState === true && (
-              <MenuClose 
-                stroke="#fff" 
-                fill="#fff"
-                stroke-width="0" 
-                viewBox="0 0 24 24"
-              >
-                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
-              </MenuClose>
-            )} */}
-            </MenuButtonCont>
-          </MenuHeader>
-          { menuState === true && (
-            <>
-              <MainNav>                                                                              
-                <MainNavItem>
-                  <NavAccordion
-                    title="Advocacy"
-                  >
-                    <DropdownList 
-                      data={ advocacyData }
-                      handler={ handleMenu }
-                      isMobileMenu={ true }
-                    /> 
-                  </NavAccordion>
-                </MainNavItem>
-                <MainNavItem>
-                  <NavAccordion
-                    title="Our Work"
-                  >
-                    <DropdownList 
-                      data={ ourWorkData }
-                      handler={ handleMenu }
-                      isMobileMenu={ true }
-                    />
-                  </NavAccordion>
-                </MainNavItem>
-                <MainNavItem>
-                  <NavAccordion
-                    title="Rides"
-                  >
-                    <DropdownList 
-                      data={ ridesData }
-                      handler={ handleMenu }
-                      isMobileMenu={ true }
-                    />
-                  </NavAccordion>       
-                </MainNavItem>
-
-                {/* <MainNavItem>
-                  <AnchorAlign href="https://store.peopleforbikes.org/" rel="nofollow" target="_blank">
-                    Shop Our Store + Give Back
-                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" viewBox="0 0 32 32" enableBackground="new 0 0 32 32" >
-                      <path d="M2 30V2h17c0.553 0 1-0.447 1-1s-0.447-1-1-1H2C0.896 0 0 0.896 0 2v28c0 1.104 0.896 2 2 2h28c1.104 0 2-0.896 2-2V13c0-0.553-0.447-1-1-1s-1 0.447-1 1v17H2z"/>
-                      <path d="M32 7c0 0.553-0.447 1-1 1s-1-0.447-1-1V3.414L16.707 16.707C16.526 16.888 16.276 17 16 17c-0.553 0-1-0.447-1-1 0-0.276 0.112-0.526 0.293-0.707L28.586 2H25c-0.553 0-1-0.447-1-1s0.447-1 1-1h6c0.553 0 1 0.447 1 1V7z"/>
-                    </svg>
-                  </AnchorAlign>
-                </MainNavItem> */}
-              </MainNav>
-
-              
-              {/* <MenuHeader>
-                <Link href="/topics">
+            )}
+          </a>
+        </MenuHeader>
+        { menuState === true && (
+          <>
+            <MainNav>                                                                              
+              <MainNavItem>
+                <NavAccordion
+                  title="Advocacy"
+                >
+                  <DropdownList 
+                    data={ advocacyData }
+                    handler={ handleMenu }
+                    isMobileMenu={ true }
+                  /> 
+                </NavAccordion>
+              </MainNavItem>
+              <MainNavItem>
+                <NavAccordion
+                  title="Our Work"
+                >
+                  <DropdownList 
+                    data={ ourWorkData }
+                    handler={ handleMenu }
+                    isMobileMenu={ true }
+                  />
+                </NavAccordion>
+              </MainNavItem>
+              <MainNavItem>
+                <NavAccordion
+                  title="Rides"
+                >
+                  <DropdownList 
+                    data={ ridesData }
+                    handler={ handleMenu }
+                    isMobileMenu={ true }
+                  />
+                </NavAccordion>       
+              </MainNavItem>
+            </MainNav>
+            <ItemList>
+              <li>
+                <AnchorAlign 
+                  href="https://www.classy.org/give/117371" 
+                  onClick={ handleMenu }
+                  target="_blank"
+                >
+                  Donate
+                  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" viewBox="0 0 32 32" enableBackground="new 0 0 32 32" >
+                    <path d="M2 30V2h17c0.553 0 1-0.447 1-1s-0.447-1-1-1H2C0.896 0 0 0.896 0 2v28c0 1.104 0.896 2 2 2h28c1.104 0 2-0.896 2-2V13c0-0.553-0.447-1-1-1s-1 0.447-1 1v17H2z"/>
+                    <path d="M32 7c0 0.553-0.447 1-1 1s-1-0.447-1-1V3.414L16.707 16.707C16.526 16.888 16.276 17 16 17c-0.553 0-1-0.447-1-1 0-0.276 0.112-0.526 0.293-0.707L28.586 2H25c-0.553 0-1-0.447-1-1s0.447-1 1-1h6c0.553 0 1 0.447 1 1V7z"/>
+                  </svg>
+                </AnchorAlign>
+              </li>
+              <li>
+                <AnchorAlign 
+                  href="https://store.peopleforbikes.org/" 
+                  onClick={ handleMenu }
+                  target="_blank"
+                >
+                  Shop
+                  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" viewBox="0 0 32 32" enableBackground="new 0 0 32 32" >
+                    <path d="M2 30V2h17c0.553 0 1-0.447 1-1s-0.447-1-1-1H2C0.896 0 0 0.896 0 2v28c0 1.104 0.896 2 2 2h28c1.104 0 2-0.896 2-2V13c0-0.553-0.447-1-1-1s-1 0.447-1 1v17H2z"/>
+                    <path d="M32 7c0 0.553-0.447 1-1 1s-1-0.447-1-1V3.414L16.707 16.707C16.526 16.888 16.276 17 16 17c-0.553 0-1-0.447-1-1 0-0.276 0.112-0.526 0.293-0.707L28.586 2H25c-0.553 0-1-0.447-1-1s0.447-1 1-1h6c0.553 0 1 0.447 1 1V7z"/>
+                  </svg>
+                </AnchorAlign>
+              </li>
+              <MemberLi>
+                <Link href="/members">
                   <a onClick={ handleMenu }>
-                    <MenuTitle>Explore Topics</MenuTitle>
+                    Member Center 
                   </a>
-                </Link>
-              </MenuHeader>
-              <GridMicroFade>
-                { topicMenu && topicMenu.map( (topic) => {
-                  return topic.item !== null ? (
-                    <ImageSquare
-                      handleMenu={ handleMenu }  
-                      imageSquareLink={ `/topics/${topic.item._meta.uid}` }
-                      key={ topic.item._meta.id }
-                      source1X={ topic.item.square_image?.mobile.url }
-                      source2X={ topic.item.square_image?.url }
-                      title={ topic.item.title[0].text }
-                    />                    
-                  ) : (
-                    <div key={ randomID(10000000) }></div>
-                  )
-                })}                
-              </GridMicroFade> */}
-            </>
-          )}
-        </NavContainer>
-        <NavOverlay 
-          menuState={ menuState }
-          onClick={ handleMenu }
-        />
-      </>
-    )
-  // }
+                </Link> 
+                { !authContext.loggedIn ? (
+                  <Link href="/log-in">
+                    <a onClick={ handleMenu }><span>Login</span></a>
+                  </Link>
+                ) : (
+                  <span onClick={ ()=>{ logout() } }>
+                    Logout
+                  </span>
+                )} 
+              </MemberLi>              
+            </ItemList>
+          </>
+        )}
+      </NavContainer>
+      <NavOverlay 
+        menuState={ menuState }
+        onClick={ handleMenu }
+      />
+    </>
+  )
 }
 
 export default NavMenu
