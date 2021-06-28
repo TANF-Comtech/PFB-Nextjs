@@ -1,14 +1,16 @@
 import React, { useContext, useEffect } from 'react'
 import styled, { keyframes, ThemeContext } from 'styled-components'
-import { useQuery, gql } from '@apollo/client'
-import { RichText } from 'prismic-reactjs'
+import { useQuery } from '@apollo/client'
 import Link from 'next/link'
 
 import { MENU_DATA } from '../../lib/apollo/menu-queries'
-
 import { randomID, linkResolver } from '../../lib/utils'
 
-import ImageSquare from '../global/image-square'
+import Logo from './logo'
+import LogoType from './logotype'
+import NavAccordion from './nav-accordion'
+import DropdownList from './dropdown-list'
+
 import ShareIcon from '../../public/icons/share.svg'
 
 const NavContainer = styled.nav`
@@ -56,7 +58,7 @@ const fadeIn = keyframes`
 const MenuHeader = styled.header`
   align-items: center;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   margin-bottom: 3vh;
 
   a, a:focus, a:visited, a:hover {
@@ -73,6 +75,14 @@ const MenuTitle = styled.h3`
   opacity: 0;
   text-decoration: none !important;
   text-transform: uppercase;
+`
+
+const LogoContainer = styled.section`
+  align-items: flex-end;
+  animation: ${fadeIn} 0.75s ease forwards;
+  animation-delay: 0.4s;
+  display: flex;
+  opacity: 0;
 `
 
 const MenuButtonCont = styled.div`
@@ -125,20 +135,11 @@ const MainNav = styled.ul`
 
 const MainNavItem = styled.li`
   cursor: pointer;
-  font-size: 36px;
+  font-size: 46px;
   font-family: ${ props => props.theme.dharma };
   font-weight: 300;
-  line-height: 32px;
-  padding: 1vh 0;
-
-  @media screen and (min-width: 320px) {
-    font-size: calc(36px + 6 * ((100vw - 320px) / 880));
-    line-height: calc(32px + 6 * ((100vw - 320px) / 880));
-  }
-  @media screen and (min-width: 1200px) {
-    font-size: 42px;
-    line-height: 38px;
-  } 
+  line-height: 42px;
+  padding: 1vh 0; 
 `
 
 const MainSubNavItem = styled.li`
@@ -205,6 +206,10 @@ const AnchorAlign = styled.a`
 const NavMenu = ({ menuState, handleMenu }) => {
   // Theme props
   const themeProps = useContext(ThemeContext)
+  // const { advocacyState, setAdvocacyState, handleAdvocacy, 
+  //   ourWorkState, setOurWorkState, handleOurWork, 
+  //   ridesState, setRidesState, handleRides, 
+  //   windowSize } = useContext(MenuContext)  
 
   // Query for nav menus from Apollo
   const { data: advocacyData } = useQuery(MENU_DATA, {
@@ -243,8 +248,24 @@ const NavMenu = ({ menuState, handleMenu }) => {
       <>
         <NavContainer menuState={ menuState }>
           <MenuHeader>
-            <MenuButtonCont onClick={ handleMenu }>
             { menuState === true && (
+              <LogoContainer>
+                <Logo 
+                  logoMargin="0"
+                  logoWidth="60px"
+                  logoViewbox="65 -12 160 150"
+                />
+                <LogoType 
+                  logoMargin="0"
+                  logoTypeWidth="150px"
+                  fillPeople="#fff"
+                  fillFor="#fff"
+                  fillBikes="#fff"
+                />
+              </LogoContainer>
+            )}            
+            <MenuButtonCont onClick={ handleMenu }>
+            {/* { menuState === true && (
               <MenuClose 
                 stroke="#fff" 
                 fill="#fff"
@@ -253,66 +274,47 @@ const NavMenu = ({ menuState, handleMenu }) => {
               >
                 <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
               </MenuClose>
-            )}
+            )} */}
             </MenuButtonCont>
           </MenuHeader>
           { menuState === true && (
             <>
               <MainNav>                                                                              
-                {/* { mainMenu.map( (menu_item) => {
-                  return (
-                    <MainNavItem key={ randomID(10000000) } >
-                      <Link href={ linkResolver(menu_item.item, true) } >
-                        <a onClick={ handleMenu } >
-                          { menu_item.menu_text ? menu_item.menu_text : RichText.asText(menu_item.item.title) }
-                        </a>
-                      </Link>
-                    </MainNavItem>
-                  )
-                })} */}
                 <MainNavItem>
-                  Advocacy
+                  <NavAccordion
+                    title="Advocacy"
+                  >
+                    <DropdownList 
+                      data={ advocacyData }
+                      handler={ handleMenu }
+                      isMobileMenu={ true }
+                    /> 
+                  </NavAccordion>
                 </MainNavItem>
                 <MainNavItem>
-                  Our Work
+                  <NavAccordion
+                    title="Our Work"
+                  >
+                    <DropdownList 
+                      data={ ourWorkData }
+                      handler={ handleMenu }
+                      isMobileMenu={ true }
+                    />
+                  </NavAccordion>
                 </MainNavItem>
                 <MainNavItem>
-                  Rides
+                  <NavAccordion
+                    title="Rides"
+                  >
+                    <DropdownList 
+                      data={ ridesData }
+                      handler={ handleMenu }
+                      isMobileMenu={ true }
+                    />
+                  </NavAccordion>       
                 </MainNavItem>
 
                 {/* <MainNavItem>
-                  <MainNav>
-                    <MainSubNavItem>
-                      <Link href="/grants" >
-                        <a onClick={ handleMenu } >
-                          Grants
-                        </a>
-                      </Link>
-                    </MainSubNavItem>                    
-                    <MainSubNavItem>
-                      <Link href="/policy" >
-                        <a onClick={ handleMenu } >
-                          Policy
-                        </a>
-                      </Link>
-                    </MainSubNavItem>     
-                    <MainSubNavItem>
-                      <Link href="/research" >
-                        <a onClick={ handleMenu } >
-                          Research
-                        </a>
-                      </Link>
-                    </MainSubNavItem> 
-                    <MainSubNavItem>
-                      <Link href="/local-innovation" >
-                        <a onClick={ handleMenu } >
-                          Local Innovation
-                        </a>
-                      </Link>
-                    </MainSubNavItem>                                                        
-                  </MainNav>
-                </MainNavItem>
-                <MainNavItem>
                   <AnchorAlign href="https://store.peopleforbikes.org/" rel="nofollow" target="_blank">
                     Shop Our Store + Give Back
                     <svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" viewBox="0 0 32 32" enableBackground="new 0 0 32 32" >

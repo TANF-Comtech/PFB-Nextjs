@@ -11,8 +11,9 @@ const ItemList = styled.ul`
   li a, li a:focus, li a:visited {
     background-color: none;
     color: #fff;
-    padding: 15px 20px;
+    padding: ${ props => props.isMobileMenu ? '8px 0' : '15px 20px' };
     display: block;
+    font-family: ${ props => props.theme.montserrat };
     font-size: 16px;
     font-weight: 700;
     text-decoration: none;
@@ -32,15 +33,19 @@ const ItemList = styled.ul`
  * 
  * @param { array } data - array of menu items (coming from prismic)
  * @param { function } handler - handler that closes the menu
+ * @param { boolean } isMobileMenu - T|F for menu status
  */
 
 const DropdownList = ({ 
   data,
-  handler
+  handler, 
+  isMobileMenu
 }) => {
  
   return (
-    <ItemList>  
+    <ItemList
+      isMobileMenu={ isMobileMenu }
+    >  
       { data.menu.menu_items && 
         data.menu.menu_items.map( (menu_item) => {
           return (
