@@ -65,16 +65,6 @@ const MenuHeader = styled(Link)`
   }
 `
 
-const MenuTitle = styled.h3`
-  animation: ${fadeIn} 0.75s ease forwards;
-  animation-delay: 0.6s;
-  color: ${props => props.theme.redAccent };
-  font-size: 24px;
-  opacity: 0;
-  text-decoration: none !important;
-  text-transform: uppercase;
-`
-
 const LogoContainer = styled.section`
   align-items: flex-end;
   animation: ${fadeIn} 0.75s ease forwards;
@@ -136,7 +126,7 @@ const ItemList = styled.ul`
   padding: 0;
 
   li a, li a:focus, li a:visited {
-    background-color: ${ props => props.theme.red };
+    background-color: ${ props => props.theme.blue };
     color: #fff;
     padding: 15px 20px;
     display: block;
@@ -176,6 +166,7 @@ const MemberLi = styled.li`
   span {
     border: 1px solid #fff;
     color: ${props => props.theme.yellow} !important;
+    cursor: pointer;
     display: inline;
     font-size: 14px;
     font-weight: 700;
