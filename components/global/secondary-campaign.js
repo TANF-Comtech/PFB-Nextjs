@@ -68,7 +68,16 @@ const Grid = styled.section`
   }
 `;
 
-
+/**
+ * <SecondaryCampaign>
+ * 
+ * A component that makes a nice image with title overlay and description
+ * 
+ * @param { boolean } isHomepage - true if homepage usage
+ * @param { array } payload - data block full of campaigns
+ * 
+ * @returns { object } - JSX of Campaigns in a CSS grid
+ */
 export default function SecondaryCampaign({ 
   payload,
   isHomepage = false
