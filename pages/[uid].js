@@ -115,8 +115,8 @@ export async function getStaticProps({ params, preview = false, previewData }) {
   let algoliaFormattedData;
 
   // PAGE-SPECIFIC PAYLOADS
-
   switch (params.uid) {
+
     case "news":
       pageData.landing_page.data = await getAllNewsForLandingPage(
         params.uid,
@@ -125,19 +125,23 @@ export async function getStaticProps({ params, preview = false, previewData }) {
       algoliaFormattedData = newsFormatter(pageData.landing_page.data);
       await AlgoliaIndex().saveObjects(algoliaFormattedData);
       break;
+
     case "locations":
       pageData.landing_page.data = await getLocations(params.uid, previewData);
       algoliaFormattedData = locationFormatter(pageData.landing_page.data);
       await AlgoliaIndex().saveObjects(algoliaFormattedData);
       break;
+
     case "topics":
       pageData.landing_page.data = await getTopics(params.uid, previewData);
       algoliaFormattedData = topicFormatter(pageData.landing_page.data);
       await AlgoliaIndex().saveObjects(algoliaFormattedData);
       break;
+
     case "rides":
       pageData.landing_page.data = await getRides(params.uid, previewData);
       break;
+
     case "team":
       pageData.landing_page.dataTeam = await getTeamMembers(
         params.uid,
@@ -145,25 +149,22 @@ export async function getStaticProps({ params, preview = false, previewData }) {
       );
       pageData.landing_page.dataCEO = await getCEO(params.uid, previewData);
       break;
+
     case "careers":
       pageData.landing_page.data = await getAllCareers(params.uid, previewData);
       break;
+
     case "events":
       pageData.landing_page.data = await getEventsByCategory(
         params.uid,
         previewData
       );
       break;
+
     case "research":
       pageData.landing_page.data = await getStats();
       algoliaFormattedData = statsFormatter(pageData.landing_page.data);
       await AlgoliaIndex().saveObjects(algoliaFormattedData);
-      break;
-    case "campaigns":
-      pageData.landing_page.data = await getAllCampaigns(
-        params.uid,
-        previewData
-      );
       break;
   }
 

@@ -79,12 +79,12 @@ const Grid = styled.section`
  * @returns { object } - JSX of Campaigns in a CSS grid
  */
 export default function SecondaryCampaign({ 
-  payload,
+  payload = [],
   isHomepage = false
 }) {
   return (
     <>
-      { isHomepage === false ? (
+      { isHomepage === true ? (
         payload.map((sc) => {
           return (
             <Tile
@@ -104,19 +104,22 @@ export default function SecondaryCampaign({
         })
       ) : (
         <MainContent>
-          {payload.map((cl) => {
+          { payload !== undefined &&
+            payload.map((cl) => {
             return (
               <>
               <Grid>
-                <Tile key={cl.node._meta.id} source={cl.node.banner_image.url}>
-                  <SCLink href={linkResolver(cl.node.link, true)}>
-                    <SCTitleContainer>
-                      <Arrow src={BlueArrow} />
-                      {cl.node.big_text && <SCTitle>{cl.node.big_text}</SCTitle>}
-                    </SCTitleContainer>
-                  </SCLink>
+                <Tile key={ cl.item._meta.id } source={ cl.item.banner_image?.url }>
+                  { cl.item.link && 
+                    <SCLink href={ linkResolver(cl.item.link) }>
+                      <SCTitleContainer>
+                        <Arrow src={ BlueArrow } />
+                        <SCTitle>{ cl.item.title[0].text }</SCTitle>
+                      </SCTitleContainer>
+                    </SCLink>                  
+                  }
                 </Tile>
-                <Description>{cl.node.description}</Description>
+                <Description>{ cl.item.description }</Description>
               </Grid>
               <Rule
                 padding="4vh 4vw"

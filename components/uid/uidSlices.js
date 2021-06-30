@@ -1,21 +1,25 @@
 import React from "react";
-import NumberedPillars from "../content/numbered-pillars";
+import { RichText } from 'prismic-reactjs'
+
+import { linkResolver, randomID } from "../../lib/utils";
+
+import Button from "../primitives/button";
 import GrantsList from "../content/grant-guidelines-list";
+import MissionPillars from "../content/mission-pillars";
+import NumberedPillars from "../content/numbered-pillars";
 import ReportsList from "../content/reports-list";
 import ResearchBanners from "../content/research-banners";
-import SummaryBlock from "../content/summary-block";
-import Button from "../primitives/button";
-import { linkResolver, randomID } from "../../lib/utils";
-import ToolkitPillars from "../content/toolkit-pillars";
-import ActionItemGroup from "../slices/action-item-group";
-import MissionPillars from "../content/mission-pillars";
-import Promo from "../slices/promo";
-import {RichText} from 'prismic-reactjs'
 import ResearchPillars from "../content/reesearch-pillars";
+import SecondaryCampaign from "../global/secondary-campaign"
+import SummaryBlock from "../content/summary-block";
+import ToolkitPillars from "../content/toolkit-pillars";
+
+import ActionItemGroup from "../slices/action-item-group";
+import Promo from "../slices/promo";
 
 export default function UidSlices({ landing_page }) {
+  
   // SLICE CONTENT (in body)
-
   let Slice;
 
   if (landing_page.body) {
@@ -75,6 +79,20 @@ export default function UidSlices({ landing_page }) {
           </>
         );
       }
+
+      // RELATED LINKS (CAMPAIGNS)
+      if (
+        slice.__typename === "Landing_pageBodyRelated_list" &&
+        landing_page._meta.uid === "campaigns"
+      ) {
+        return (
+          // console.log(slice.fields)
+          <SecondaryCampaign
+            payload={ slice.fields }
+          />
+        );
+      }
+      
 
       // MISSION SLICE FOR LOCAL INNOVATION
       if (

@@ -96,10 +96,9 @@ export default function Homepage({ page }) {
 
       {new_homepage.campaigns && (
         <MainContent 
-          contentPadding=""
           maxWidth="1600px"
         >
-          <Carousel payload={new_homepage.campaigns} />
+          <Carousel payload={ new_homepage.campaigns } />
         </MainContent>
       )}
 
@@ -110,8 +109,8 @@ export default function Homepage({ page }) {
         >
           <Grid>
             <SecondaryCampaign
-              payload={new_homepage.secondary_campaigns}
-              key={randomID(98692845768959)}
+              isHomepage={ true }
+              payload={ new_homepage.secondary_campaigns }
             />
           </Grid>
         </MainContent>
