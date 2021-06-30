@@ -64,6 +64,7 @@ const MemberLink = styled.div`
       @media( min-width: ${props => props.theme.sm}) {
         border: 1px solid #fff;
         color: ${props => props.theme.yellow} !important;
+        cursor: pointer;
         display: inline;
         font-weight: 700;
         margin-left: 5px;
