@@ -6,6 +6,7 @@ import { RichText, Date as ParseDate } from "prismic-reactjs";
 import { getAllNews, 
          getSingleNewsPage } from '../../lib/queries/news'
 import { linkResolver } from '../../lib/utils'
+import { paraFinder } from '../../lib/utils/paraFinder'
 import { setDateSuffix } from '../../lib/utils/setDateSuffix'
 
 import DefaultContext from "../../context/default/default-context";
@@ -220,9 +221,8 @@ export default function NewsPage({ fallback, page, preview }) {
           { news.main_content && 
             <IntroWrapper>
               <RichText
-                render={news.main_content}
-                linkResolver={linkResolver}
-                htmlSerializer={htmlSerializer}
+                render={ news.main_content }
+                linkResolver={ linkResolver }
               />
             </IntroWrapper>
           }
@@ -286,13 +286,18 @@ export default function NewsPage({ fallback, page, preview }) {
 export async function getStaticProps({ params, preview = false, previewData }) {
   const pageData = await getSingleNewsPage(params.uid, previewData);
 
+  if( !pageData ) {
+    return {
+      notFound: true
+    }
+  }
+
   return {
     props: {
       preview,
       page: pageData ?? null,
       fallback: FallbackImage(),
     },
-    notFound: true,
     revalidate: 60,
   }
 }
