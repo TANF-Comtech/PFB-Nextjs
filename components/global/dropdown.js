@@ -5,7 +5,7 @@ import styled from "styled-components";
 import ImageSquare from './image-square'
 import DropdownList from './dropdown-list'
 
-import { randomID, linkResolver } from "../../lib/utils"
+import { randomID } from "../../lib/utils"
 
 const OuterContainer = styled.nav`
   background-color: ${ (props) => { 
@@ -23,7 +23,7 @@ const OuterContainer = styled.nav`
   transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
   visibility: ${ props => props.dropdownState === true ? 'visible' : 'hidden' };
   min-width: 300px;
-  z-index: ${ props => props.theme.zIndex01 };
+  z-index: ${ props => props.theme.zIndex03 };
 
   /* This is COMPLEX - heads up */
   /* We're checking for the Global Menu, if present we want the menu left */
