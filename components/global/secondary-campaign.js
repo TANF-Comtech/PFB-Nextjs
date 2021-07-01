@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { linkResolver } from "../../lib/utils";
+import { linkResolver, randomID } from "../../lib/utils";
 
 import MainContent from "../global/main-content";
 import Rule from "../primitives/rule"
@@ -108,8 +108,8 @@ export default function SecondaryCampaign({
             payload.map((cl) => {
             return (
               <>
-              <Grid>
-                <Tile key={ cl.item._meta.id } source={ cl.item.banner_image?.url }>
+              <Grid key={ cl.item._meta.id }>
+                <Tile source={ cl.item.banner_image?.url }>
                   { cl.item.link && 
                     <SCLink href={ linkResolver(cl.item.link) }>
                       <SCTitleContainer>
@@ -122,6 +122,7 @@ export default function SecondaryCampaign({
                 <Description>{ cl.item.description }</Description>
               </Grid>
               <Rule
+                key={ randomID(34093849018) }
                 padding="4vh 4vw"
               />
               </>
