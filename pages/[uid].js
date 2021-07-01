@@ -111,8 +111,14 @@ export default function TheMonster({ page, preview }) {
 export async function getStaticProps({ params, preview = false, previewData }) {
   // ALL LANDING PAGES
   let pageData = await getSingleLandingPage(params.uid, previewData);
-
   let algoliaFormattedData;
+
+  // 404 Handling
+  if( !pageData ) {
+    return {
+      notFound: true
+    }
+  }
 
   // PAGE-SPECIFIC PAYLOADS
   switch (params.uid) {
