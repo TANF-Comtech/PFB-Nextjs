@@ -4,7 +4,7 @@ import Head from "next/head"
  * <SiteMetaCustom>
  * 
  * Allows you to override the base site meta stuff
- * Anything that was variable in <SiteMeta> is present here
+ * Anything that was variable in <SiteMetaCustom> is present here
  *
  * @param { string } desc - description of the page
  * @param { string } keywords - keywords we want on the PFB site

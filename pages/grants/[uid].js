@@ -6,7 +6,7 @@ import { getGrants, getSingleGrantPage } from "../../lib/queries/grants";
 import DefaultContext from "../../context/default/default-context";
 
 import Wrapper from "../../components/global/wrapper";
-import SiteMeta from "../../components/meta/site-meta";
+import SiteMetaCustom from "../../components/meta/site-meta-custom";
 import MainContent from "../../components/global/main-content";
 import GrantsItem from "../../components/content/grants-item";
 
@@ -27,7 +27,7 @@ export default function policyPage({ page, preview }) {
         defer
         src="https://static.cdn.prismic.io/prismic.js?new=true&repo=peopleforbikes"
       ></script>
-      <SiteMeta
+      <SiteMetaCustom
         desc={
           grant.main_content
             ? `${grant.main_content[0].text.substring(0, 180)} ... `

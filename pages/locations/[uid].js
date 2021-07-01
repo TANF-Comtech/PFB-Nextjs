@@ -8,7 +8,7 @@ import { setDateSuffix } from '../../lib/utils/setDateSuffix'
 import DefaultContext from '../../context/default/default-context'
 
 import Wrapper from '../../components/global/wrapper'
-import SiteMeta from '../../components/meta/site-meta'
+import SiteMetaCustom from '../../components/meta/site-meta'
 import HeaderImage from '../../components/global/header-image'
 import MainContent from '../../components/global/main-content'
 import ContentItem from '../../components/content/content-item'
@@ -38,7 +38,7 @@ export default function LocationPage({
         defer
         src="https://static.cdn.prismic.io/prismic.js?new=true&repo=peopleforbikes"
       ></script>
-      <SiteMeta
+      <SiteMetaCustom
         desc={
           locations.intro
             ? `${locations.intro[0].text.substring(0, 180)}... `

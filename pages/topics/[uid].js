@@ -15,7 +15,7 @@ import DefaultContext from '../../context/default/default-context'
 import FallbackImage from '../../components/content/fallback-image'
 
 import Wrapper from '../../components/global/wrapper'
-import SiteMeta from '../../components/meta/site-meta'
+import SiteMetaCustom from '../../components/meta/site-meta'
 import HeaderImage from '../../components/global/header-image'
 import MainContent from '../../components/global/main-content'
 import ContentItem from '../../components/content/content-item'
@@ -52,7 +52,7 @@ export default function TopicPage({
         ) : 
         ( pillars.push(null) ) 
       }
-      <SiteMeta
+      <SiteMetaCustom
         desc={ topic.intro ? ( `${ topic.intro.substring(0,180) }... ` ) : ( meta.desc ) }
         title={ topic.title ? ( `${ topic.title[0].text } | People for Bikes` ) : ( meta.title ) }
         imgHeight={ topic.banner_image ? ( topic.banner_image['1x'].dimensions.height ) : ( meta.imgHeight )  }

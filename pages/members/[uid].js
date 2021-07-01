@@ -16,7 +16,7 @@ import Cookies from "cookies";
 import DefaultContext from "../../context/default/default-context";
 
 import Wrapper from "../../components/global/wrapper";
-import SiteMeta from "../../components/meta/site-meta";
+import SiteMetaCustom from "../../components/meta/site-meta";
 import MainContent from "../../components/global/main-content";
 import Header1 from "../../components/primitives/h1";
 import BigTitleBanner from "../../components/content/big-title-banner";
@@ -81,7 +81,7 @@ export default function MembersPage({ page, preview }) {
         defer
         src="https://static.cdn.prismic.io/prismic.js?new=true&repo=peopleforbikes"
       ></script>
-      <SiteMeta
+      <SiteMetaCustom
         desc={
           member_content.main_content
             ? `${member_content.main_content[0].text.substring(0, 180)} ... `
