@@ -15,11 +15,10 @@ import DefaultContext from '../context/default/default-context'
 import MenuContext from '../context/menu/menu-context'
 import { ldJSONBasic, defaultData } from '../context/default/default-data'
 
-import {AuthProvider} from '../context/auth/auth-context'
+import { AuthProvider } from '../context/auth/auth-context'
 
 import NavBar from '../components/global/navbar'
 import Footer from '../components/global/footer'
-import SiteMeta from '../components/meta/site-meta'
 import PageTransition from '../components/global/transition'
 
 /**
@@ -90,15 +89,6 @@ const MyApp = ({ Component, pageProps, router }) => {
             <Head>
               <script type="application/ld+json">{ JSON.stringify(ldJSONBasic) }</script>
             </Head>
-            <SiteMeta
-              desc={ defaultData.meta.desc }
-              keywords={ defaultData.meta.keywords }
-              title={ defaultData.meta.title }
-              imgHeight={ defaultData.meta.imgHeight }
-              imgSrc={ defaultData.meta.imgSrc }
-              imgWidth={ defaultData.meta.imgWidth }
-              path={ defaultData.meta.path }
-            />
             <GlobalStyle />
             <NavBar />
             <PageTransition location={ router.pathname }>
