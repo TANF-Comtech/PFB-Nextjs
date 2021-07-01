@@ -9,7 +9,7 @@ import { linkResolver } from "../../lib/utils";
 import DefaultContext from "../../context/default/default-context";
 
 import Wrapper from "../../components/global/wrapper";
-import SiteMetaCustom from "../../components/meta/site-meta";
+import SiteMetaCustom from "../../components/meta/site-meta-custom";
 import MainContent from "../../components/global/main-content";
 import Header1 from "../../components/primitives/h1";
 import Promo from "../../components/slices/promo";

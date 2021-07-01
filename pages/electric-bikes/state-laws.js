@@ -7,7 +7,7 @@ import { getEBikeLaws } from "../../lib/queries/electric-bikes";
 import DefaultContext from "../../context/default/default-context";
 
 import Wrapper from "../../components/global/wrapper";
-import SiteMetaCustom from "../../components/meta/site-meta";
+import SiteMetaCustom from "../../components/meta/site-meta-custom";
 import MainContent from "../../components/global/main-content";
 import Promo from "../../components/slices/promo";
 import Grid from "../../components/global/grid";

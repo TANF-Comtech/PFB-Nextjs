@@ -15,7 +15,7 @@ import DefaultContext from '../../context/default/default-context'
 import FallbackImage from '../../components/content/fallback-image'
 
 import Wrapper from '../../components/global/wrapper'
-import SiteMetaCustom from '../../components/meta/site-meta'
+import SiteMetaCustom from '../../components/meta/site-meta-custom'
 import HeaderImage from '../../components/global/header-image'
 import MainContent from '../../components/global/main-content'
 import ContentItem from '../../components/content/content-item'

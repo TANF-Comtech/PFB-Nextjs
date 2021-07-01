@@ -7,7 +7,7 @@ import { getAllCareers, getSingleCareer } from "../../lib/queries/careers";
 import DefaultContext from "../../context/default/default-context";
 
 import Wrapper from "../../components/global/wrapper";
-import SiteMetaCustom from "../../components/meta/site-meta";
+import SiteMetaCustom from "../../components/meta/site-meta-custom";
 import MainContent from "../../components/global/main-content";
 import Heading1 from "../../components/primitives/h1";
 import Rule from "../../components/primitives/rule";
