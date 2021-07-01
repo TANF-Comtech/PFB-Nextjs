@@ -77,14 +77,14 @@ export default function NewsPage({ fallback, page, preview }) {
   }, [router.pathname]);
 
   // Set SEO data to defaults
-  const [theTitle, setTheTitle] = useState(meta.title)
-  const [theByline, setTheByline] = useState('PeopleForBikes Staff')
-  const [theDesc, setTheDesc] = useState(meta.desc)
-  const [theKeywords, setTheKeywords] = useState(meta.keywords)
-  const [thePath, setThePath] = useState(meta.path)
-  const [theDate, setTheDate] = useState(new Date(ParseDate( news._meta.lastPublicationDate )))
-  const [theImage, setTheImage] = useState(meta.imgSrc)
-  const [theImageWidth, setTheImageWidth] = useState(meta.imgWidth)
+  const [theTitle, setTheTitle] = useState()
+  const [theByline, setTheByline] = useState()
+  const [theDesc, setTheDesc] = useState()
+  const [theKeywords, setTheKeywords] = useState()
+  const [thePath, setThePath] = useState()
+  const [theDate, setTheDate] = useState()
+  const [theImage, setTheImage] = useState()
+  const [theImageWidth, setTheImageWidth] = useState()
   const [theImageHeight, setTheImageHeight] = useState(meta.imgHeight)
 
   // Check for SEO-specific overrides, set if they are present (only run once)
@@ -95,33 +95,45 @@ export default function NewsPage({ fallback, page, preview }) {
       setTheTitle(news.seo_title)
     } else if ( news.title ) {
       setTheTitle(news.title[0].text)
-    } 
+    } else {
+      setTheTitle(meta.title)
+    }
 
     // Byline
     if ( news.byline ) {
       setTheByline( news.byline )
+    } else {
+      setTheByline( 'PeopleForBikes Staff' )
     }
 
     // Keywords
     if ( news.seo_keywords ) {
       setTheKeywords( news.seo_keywords )
-    } 
+    } else {
+      setTheKeywords( meta.keywords )
+    }
 
     // Description
     if ( news.seo_text ) {
-      setTheDesc(news.seo_text)
+      setTheDesc( news.seo_text )
     } else if ( news.main_content ) {
       setTheDesc(paraFinder(news.main_content).text)
+    } else {
+      setTheDesc( meta.desc )
     }
 
     // Path
     if ( news ) {
       setThePath(`https://www.peopleforbikes.org/news/${news._meta.uid}`)
+    } else {
+      setThePath( meta.path )
     }
 
     // Date  
     if ( news.publication_date ) {
-      setTheDate(new Date(ParseDate( news.publication_date )))
+      setTheDate( new Date( ParseDate( news.publication_date )))
+    } else {
+      setTheDate( new Date( ParseDate( news._meta.lastPublicationDate )))
     }
     
     // Image
@@ -133,6 +145,10 @@ export default function NewsPage({ fallback, page, preview }) {
       setTheImage( news.header_image.url )
       setTheImageWidth( news.header_image.dimensions.width )
       setTheImageHeight( news.header_image.dimensions.height )
+    } else {
+      setTheImage( meta.imgSrc )
+      setTheImageWidth( meta.imgWidth )
+      setTheImageHeight( meta.imgHeight)
     }
 
   }, [])
