@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import { RichText, Date as ParseDate } from "prismic-reactjs";
+import { htmlSerializer } from "../../lib/prismic/htmlSerializer";
 
 import { getAllNews, 
          getSingleNewsPage } from '../../lib/queries/news'
@@ -79,6 +80,7 @@ export default function NewsPage({ fallback, page, preview }) {
   const [theTitle, setTheTitle] = useState(meta.title)
   const [theByline, setTheByline] = useState('PeopleForBikes Staff')
   const [theDesc, setTheDesc] = useState(meta.desc)
+  const [theKeywords, setTheKeywords] = useState(meta.keywords)
   const [thePath, setThePath] = useState(meta.path)
   const [theDate, setTheDate] = useState(new Date(ParseDate( news._meta.lastPublicationDate )))
   const [theImage, setTheImage] = useState(meta.imgSrc)
@@ -89,16 +91,21 @@ export default function NewsPage({ fallback, page, preview }) {
   useEffect(() => {
     
     // Title
-    if ( news.title ) {
+    if ( news.seo_title !== null ) {
+      setTheTitle(news.seo_title)
+    } else if ( news.title ) {
       setTheTitle(news.title[0].text)
-    } else {
-      setTheTitle(meta.title)
-    }
+    } 
 
     // Byline
     if ( news.byline ) {
       setTheByline( news.byline )
     }
+
+    // Keywords
+    if ( news.seo_keywords ) {
+      setTheKeywords( news.seo_keywords )
+    } 
 
     // Description
     if ( news.seo_text ) {
@@ -113,7 +120,7 @@ export default function NewsPage({ fallback, page, preview }) {
     }
 
     // Date  
-    if (news.publication_date) {
+    if ( news.publication_date ) {
       setTheDate(new Date(ParseDate( news.publication_date )))
     }
     
@@ -142,7 +149,10 @@ export default function NewsPage({ fallback, page, preview }) {
       "height": theImageHeight,
       "width": theImageWidth
     },
-    "mainEntityOfPage": thePath,
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": thePath,
+    },
     "url": thePath,
     "inLanguage": "en",
     "author": [{
@@ -182,6 +192,7 @@ export default function NewsPage({ fallback, page, preview }) {
       ></script>
       <SiteMetaCustom
         desc={ theDesc }
+        keywords={ theKeywords }
         title={ theTitle }
         imgHeight={ theImageHeight }
         imgSrc={ theImage }
@@ -223,6 +234,7 @@ export default function NewsPage({ fallback, page, preview }) {
               <RichText
                 render={ news.main_content }
                 linkResolver={ linkResolver }
+                htmlSerializer={ htmlSerializer }
               />
             </IntroWrapper>
           }
