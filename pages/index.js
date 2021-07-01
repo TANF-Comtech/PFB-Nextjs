@@ -79,7 +79,7 @@ export default function Homepage({ page }) {
 
   return (
     <Wrapper postTitle="People for Bikes Homepage" isWide={true}>
-      {singleHero && (
+      { singleHero && (
         <HeaderImage source={singleHero.hero_image.url}>
           <HeroText>{singleHero.hero_text}</HeroText>
 
@@ -94,7 +94,7 @@ export default function Homepage({ page }) {
         </HeaderImage>
       )}
 
-      {new_homepage.campaigns && (
+      { new_homepage.campaigns && (
         <MainContent 
           maxWidth="1600px"
         >
@@ -102,7 +102,7 @@ export default function Homepage({ page }) {
         </MainContent>
       )}
 
-      {new_homepage.secondary_campaigns && (
+      { new_homepage.secondary_campaigns && (
         <MainContent 
           contentPadding="0 4vw 8vh 4vw"
           maxWidth="1550px"
@@ -117,7 +117,7 @@ export default function Homepage({ page }) {
         
       )}
 
-      {new_homepage.body &&
+      { new_homepage.body &&
         new_homepage.body.map((slice) => {
           if (slice.type === "ridespot_promo") {
             return (
@@ -130,12 +130,12 @@ export default function Homepage({ page }) {
         })
       }
 
-      {new_homepage.news && (
+      { new_homepage.news && (
         <>
           <BigSectionTitle>
             PeopleForBikes <span>News</span>
           </BigSectionTitle>
-          <NewsList nodeName="news_item" payload={new_homepage.news} />
+          <NewsList nodeName="news_item" payload={ new_homepage.news } />
           <Button
             buttonAlign="center"
             buttonBg="#D0021B"
