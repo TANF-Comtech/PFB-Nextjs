@@ -92,6 +92,7 @@ const MyApp = ({ Component, pageProps, router }) => {
             </Head>
             <SiteMeta
               desc={ defaultData.meta.desc }
+              keywords={ defaultData.meta.keywords }
               title={ defaultData.meta.title }
               imgHeight={ defaultData.meta.imgHeight }
               imgSrc={ defaultData.meta.imgSrc }

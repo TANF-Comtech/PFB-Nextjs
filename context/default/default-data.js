@@ -30,6 +30,7 @@ export const defaultData = {
     "imgHeight": "900",
     "imgSrc" : `${ socialSplashArr[Math.floor(Math.random()*socialSplashArr.length)] }`,
     "imgWidth" : "1600",
+    "keywords" : "PeopleForBikes, bikes, cycles, cycling, sustainable transportation, bicycling benefits, bike business, bike commuting, bike networks, bike racing, bike rides, bike safety, electric bikes, first time bikers, city riding, e-bikes, inclusive biking, recreational bike access, senior cycling, trade and tariffs for bicycles, youth bicycling",
     "path" : "https://www.peopleforbikes.org",
   },
   "actionItems": [

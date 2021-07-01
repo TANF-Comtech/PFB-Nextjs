@@ -7,6 +7,7 @@ import Head from "next/head"
  * Anything that was variable in <SiteMeta> is present here
  *
  * @param { string } desc - description of the page
+ * @param { string } keywords - keywords we want on the PFB site
  * @param { string } imgHeight - height of the social splash image
  * @param { string } imgSrc - image source for the social splash image
  * @param { string } imgWidth - width of the social splash image
@@ -19,6 +20,7 @@ const SiteMetaCustom = ( {
   imgHeight,
   imgSrc,
   imgWidth,
+  keywords,
   ldJSON,
   path,
   title
@@ -30,6 +32,9 @@ const SiteMetaCustom = ( {
       <meta name="description" 
             content={ desc } 
             key="metadesc" />
+      <meta name="keywords" 
+            content={ keywords } 
+            key="metakeywords" />            
       <meta property="og:image" 
             content={ imgSrc }  
             key="ogimg" />

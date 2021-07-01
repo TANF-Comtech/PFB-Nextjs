@@ -7,6 +7,7 @@ import Head from "next/head"
  * This can be adjusted by passing in a LOT of props
  *
  * @param { string } desc - description of the page
+ * @param { string } keywords - key words we want for PFB
  * @param { string } imgHeight - height of the social splash image
  * @param { string } imgSrc - image source for the social splash image
  * @param { string } imgWidth - width of the social splash image
@@ -19,6 +20,7 @@ const SiteMeta = ( {
   imgHeight,
   imgSrc,
   imgWidth,
+  keywords,
   ldJSON,
   path,
   title
@@ -28,6 +30,9 @@ const SiteMeta = ( {
     <Head>
       <title key="title">{ title }</title>
       <meta property="og:type" content="website" />
+      <meta name="keywords" 
+            content={ keywords } 
+            key="metakeywords" />
       <meta name="description" 
             content={ desc } 
             key="metadesc" />
