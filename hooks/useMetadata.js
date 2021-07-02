@@ -36,7 +36,7 @@ export default function useMetadata( dataObject ) {
   useEffect(() => {
     
     // Title
-    if ( dataObject.seo_title !== null ) {
+    if ( dataObject.seo_title ) {
       setTheTitle(`${dataObject.seo_title} | PeopleForBikes`)
     } else if ( dataObject.title ) {
       setTheTitle( `${dataObject.title[0].text} | PeopleForBikes`)
