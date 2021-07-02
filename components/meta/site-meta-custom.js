@@ -59,6 +59,9 @@ const SiteMetaCustom = ( {
       <meta name="twitter:description" 
             content={desc}
             key="twtrdesc" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:site" content="@peopleforbikes" />
+      <meta property="twitter:image" content={ imgSrc } key="twitterimg" />      
       <link rel="canonical" 
             href={ path } 
             key="canonical" />  
