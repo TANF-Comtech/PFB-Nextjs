@@ -1,4 +1,5 @@
 import { useEffect, useState, useContext } from 'react'
+import { useRouter } from "next/router";
 import { Date as ParseDate } from "prismic-reactjs";
 
 import { linkResolver } from "../lib/utils"
@@ -18,7 +19,8 @@ import DefaultContext from '../context/default/default-context'
  */
 
 export default function useMetadata( dataObject ) {
-  console.log(dataObject)
+  // Set up router
+  const router = useRouter();
 
   const { meta } = useContext(DefaultContext);
   
@@ -108,7 +110,7 @@ export default function useMetadata( dataObject ) {
       setTheImageWidth( meta.imgWidth )
       setTheImageHeight( meta.imgHeight)
     }
-  }, [])
+  }, [router.query.uid])
 
   return {
     theTitle,
