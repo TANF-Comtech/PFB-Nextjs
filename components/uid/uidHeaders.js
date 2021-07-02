@@ -53,6 +53,15 @@ export default function UidHeader({ landing_page }) {
       ) : (
         // HEADER - STYLE SIMPLE: (BigTitleBanner + SummaryBlock)
         <>
+          <SiteMetaCustom
+            desc={ theDesc }
+            keywords={ theKeywords }
+            title={ theTitle }
+            imgHeight={ theImageHeight }
+            imgSrc={ theImage }
+            imgWidth={ theImageWidth }
+            path={ thePath }
+          />          
           <BigTitleBanner>
             <RichText
               elements={{ heading1: Heading1 }}
