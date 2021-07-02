@@ -4,6 +4,8 @@ import styled from "styled-components";
 import { getNewHomepage } from "../lib/queries/new-homepage";
 import { randomID } from "../lib/utils";
 
+import useMetadata from "../hooks/useMetadata"
+
 import Wrapper from "../components/global/wrapper";
 import HeaderImage from "../components/global/header-image";
 import MainContent from "../components/global/main-content";
@@ -12,6 +14,7 @@ import Button from "../components/primitives/button";
 import Carousel from "../components/global/carousel";
 import SecondaryCampaign from "../components/global/secondary-campaign";
 import NewsList from "../components/content/news-list";
+import SiteMetaCustom from "../components/meta/site-meta-custom"
 
 import { linkResolver } from "../lib/utils";
 import { arrayShuffle } from '../lib/utils/arrayShuffle'
@@ -64,8 +67,9 @@ const HeroText = styled.h1`
 
 export default function Homepage({ page }) {
   const { new_homepage } = page;
-  const [singleHero, setSingleHero] = useState();
 
+  // Controls for random hero
+  const [singleHero, setSingleHero] = useState();
   useEffect(() => {
     new_homepage.body.map((body) => {
       if (body.__typename === "New_homepageBodyHero") {
@@ -77,8 +81,29 @@ export default function Homepage({ page }) {
     });
   }, [new_homepage]);
 
+  // metadata
+  const {
+    theTitle,
+    theDesc,
+    theKeywords,
+    thePath,
+    theImage,
+    theImageWidth,
+    theImageHeight,
+  } = useMetadata( new_homepage )
+
   return (
     <Wrapper postTitle="People for Bikes Homepage" isWide={true}>
+      <SiteMetaCustom
+        desc={ theDesc }
+        keywords={ theKeywords }
+        title={ theTitle }
+        imgHeight={ theImageHeight }
+        imgSrc={ theImage }
+        imgWidth={ theImageWidth }
+        path={ thePath }
+      /> 
+
       { singleHero && (
         <HeaderImage source={singleHero.hero_image.url}>
           <HeroText>{singleHero.hero_text}</HeroText>
