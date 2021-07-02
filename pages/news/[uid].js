@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import { RichText, Date as ParseDate } from "prismic-reactjs";
@@ -7,10 +7,8 @@ import { htmlSerializer } from "../../lib/prismic/htmlSerializer";
 import { getAllNews, 
          getSingleNewsPage } from '../../lib/queries/news'
 import { linkResolver } from '../../lib/utils'
-import { paraFinder } from '../../lib/utils/paraFinder'
 import { setDateSuffix } from '../../lib/utils/setDateSuffix'
 
-import DefaultContext from "../../context/default/default-context";
 import useMetadata from "../../hooks/useMetadata";
 
 import Wrapper from '../../components/global/wrapper'
