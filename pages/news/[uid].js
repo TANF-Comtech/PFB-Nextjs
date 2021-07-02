@@ -85,7 +85,7 @@ export default function NewsPage({ fallback, page, preview }) {
   const [theDate, setTheDate] = useState()
   const [theImage, setTheImage] = useState()
   const [theImageWidth, setTheImageWidth] = useState()
-  const [theImageHeight, setTheImageHeight] = useState(meta.imgHeight)
+  const [theImageHeight, setTheImageHeight] = useState()
 
   // Check for SEO-specific overrides, set if they are present (only run once)
   useEffect(() => {
@@ -222,11 +222,16 @@ export default function NewsPage({ fallback, page, preview }) {
         isWide="true"
       >        
         <MainContent maxWidth="700px">
-          <DateBox>
-          { `${theDate.toLocaleString('en-us', { month: 'long' } )} 
-              ${setDateSuffix(theDate.getDate())}, 
-              ${theDate.getFullYear()}` }
-          </DateBox>
+          { theDate && 
+            <DateBox>
+              {
+                `${theDate.toLocaleString('en-us', { month: 'long' } )} 
+                ${setDateSuffix(theDate.getDate())}, 
+                ${theDate.getFullYear()}` 
+              }
+            </DateBox>          
+          }
+          
           <h2>{ theTitle }</h2>       
           <p>By: { theByline }</p>
           {
