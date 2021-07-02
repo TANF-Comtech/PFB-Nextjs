@@ -20,6 +20,7 @@ import Donate from '../../components/global/donate'
 import FallbackImage from '../../components/content/fallback-image'
 
 import TakeActionPromo from "../../public/promo/take-action-banner.jpg";
+import logo from '../../public/PFB_Stacked_LOGO_512x512.jpg'
 
 const DateBox = styled.div`
   font-size: 20px;
@@ -92,11 +93,11 @@ export default function NewsPage({ fallback, page, preview }) {
     
     // Title
     if ( news.seo_title !== null ) {
-      setTheTitle(news.seo_title)
+      setTheTitle(`${news.seo_title} | PeopleForBikes`)
     } else if ( news.title ) {
-      setTheTitle(news.title[0].text)
+      setTheTitle( `${news.title[0].text} | PeopleForBikes`)
     } else {
-      setTheTitle(meta.title)
+      setTheTitle( meta.title )
     }
 
     // Byline
@@ -117,7 +118,7 @@ export default function NewsPage({ fallback, page, preview }) {
     if ( news.seo_text ) {
       setTheDesc( news.seo_text )
     } else if ( news.main_content ) {
-      setTheDesc(paraFinder(news.main_content).text)
+      setTheDesc( paraFinder(news.main_content).text )
     } else {
       setTheDesc( meta.desc )
     }
@@ -180,12 +181,23 @@ export default function NewsPage({ fallback, page, preview }) {
     "datePublished": theDate,
     "headline": theTitle,
     "publisher": {
-      "@id": "https://www.peopleforbikes.org/#publisher"
+      "@type": "Organization",
+      "name": "PeopleForBikes",
+      "@id": "https://www.peopleforbikes.org/#publisher",
+      "logo": {
+        "@context": "http://schema.org",
+        "@type": "ImageObject",
+        "url": `${ logo }`,
+      }
     },
     "copyrightHolder": {
+      "@type": "Organization",
+      "name": "PeopleForBikes",
       "@id": "https://www.peopleforbikes.org/#publisher"
     },
     "sourceOrganization": {
+      "@type": "Organization",
+      "name": "PeopleForBikes",
       "@id": "https://www.peopleforbikes.org/#publisher"
     },
     "isAccessibleForFree": true,
