@@ -18,6 +18,7 @@ import DefaultContext from '../context/default/default-context'
  */
 
 export default function useMetadata( dataObject ) {
+  console.log(dataObject)
 
   const { meta } = useContext(DefaultContext);
   
@@ -34,11 +35,14 @@ export default function useMetadata( dataObject ) {
 
   // Check for SEO-specific overrides, set if they are present (only run once)
   useEffect(() => {
+
+    console.log(dataObject)
     
     // Title
     if ( dataObject.seo_title ) {
       setTheTitle(`${dataObject.seo_title} | PeopleForBikes`)
-    } else if ( dataObject.title ) {
+    } else if ( dataObject.title && 
+                dataObject._meta.uid !== 'new_homepage' ) {
       setTheTitle( `${dataObject.title[0].text} | PeopleForBikes`)
     } else {
       setTheTitle( meta.title )
@@ -63,6 +67,10 @@ export default function useMetadata( dataObject ) {
       setTheDesc( dataObject.seo_text )
     } else if ( dataObject.main_content ) {
       setTheDesc( paraFinder(dataObject.main_content).text )
+    } else if ( dataObject.secondary_text && dataObject.main_text  ) {
+      setTheDesc( `${dataObject.secondary_text} ${dataObject.main_text}` )
+    } else if ( dataObject.summary  ) {
+      setTheDesc( dataObject.summary )  
     } else {
       setTheDesc( meta.desc )
     }
