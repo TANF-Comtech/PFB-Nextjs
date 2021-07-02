@@ -89,7 +89,7 @@ export default function NewsPage({ fallback, page, preview }) {
   // useEffect 'watch' dependency is where we watch the router's path
   useEffect(() => {
     setFi(Math.floor(Math.random(5)));
-  }, [router.pathname]);
+  }, [router.query.uid]);
  
   // Sets up article-specific JSON
   const newsJSONPayload = {
