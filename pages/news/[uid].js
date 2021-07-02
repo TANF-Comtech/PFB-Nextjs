@@ -84,6 +84,7 @@ export default function NewsPage({ fallback, page, preview }) {
   const [theKeywords, setTheKeywords] = useState()
   const [thePath, setThePath] = useState()
   const [theDate, setTheDate] = useState()
+  const [theDateModified, setTheDateModified] = useState()
   const [theImage, setTheImage] = useState()
   const [theImageWidth, setTheImageWidth] = useState()
   const [theImageHeight, setTheImageHeight] = useState()
@@ -136,6 +137,11 @@ export default function NewsPage({ fallback, page, preview }) {
     } else {
       setTheDate( new Date( ParseDate( news._meta.lastPublicationDate )))
     }
+
+    // Modified Date
+    if ( news._meta.lastPublicationDate ) {
+      setTheDateModified( new Date( ParseDate( news._meta.lastPublicationDate )))
+    }
     
     // Image
     if ( news.seo_image ) {
@@ -179,6 +185,7 @@ export default function NewsPage({ fallback, page, preview }) {
       "name": theByline
     }],
     "datePublished": theDate,
+    "dateModified": theDateModified,
     "headline": theTitle,
     "publisher": {
       "@type": "Organization",
