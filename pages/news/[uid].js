@@ -11,6 +11,7 @@ import { paraFinder } from '../../lib/utils/paraFinder'
 import { setDateSuffix } from '../../lib/utils/setDateSuffix'
 
 import DefaultContext from "../../context/default/default-context";
+import useMetadata from "../../hooks/useMetadata";
 
 import Wrapper from '../../components/global/wrapper'
 import SiteMetaCustom from '../../components/meta/site-meta-custom'
@@ -66,99 +67,29 @@ export default function NewsPage({ fallback, page, preview }) {
 
   // Destructure page payload and meta from global context
   const { news } = page;
-  const { meta } = useContext(DefaultContext);
+  
+  // Implement metadata hook
+  const {
+    theTitle,
+    theByline,
+    theDesc,
+    theKeywords,
+    thePath,
+    theDate,
+    theDateModified,
+    theImage,
+    theImageWidth,
+    theImageHeight,
+  } = useMetadata(news)
 
-  // Set fallback index, one of six possible images 
+  // Set fallback index, one of six possible fallback images 
   const [fi, setFi] = useState(Math.floor(Math.random(5)))
 
-  // Every time a new path comes up we shuffle the images
+  // Every time a new path comes up we shuffle the placeholder images
   // useEffect 'watch' dependency is where we watch the router's path
   useEffect(() => {
     setFi(Math.floor(Math.random(5)));
   }, [router.pathname]);
-
-  // Set SEO data to defaults
-  const [theTitle, setTheTitle] = useState()
-  const [theByline, setTheByline] = useState()
-  const [theDesc, setTheDesc] = useState()
-  const [theKeywords, setTheKeywords] = useState()
-  const [thePath, setThePath] = useState()
-  const [theDate, setTheDate] = useState()
-  const [theDateModified, setTheDateModified] = useState()
-  const [theImage, setTheImage] = useState()
-  const [theImageWidth, setTheImageWidth] = useState()
-  const [theImageHeight, setTheImageHeight] = useState()
-
-  // Check for SEO-specific overrides, set if they are present (only run once)
-  useEffect(() => {
-    
-    // Title
-    if ( news.seo_title !== null ) {
-      setTheTitle(`${news.seo_title} | PeopleForBikes`)
-    } else if ( news.title ) {
-      setTheTitle( `${news.title[0].text} | PeopleForBikes`)
-    } else {
-      setTheTitle( meta.title )
-    }
-
-    // Byline
-    if ( news.byline ) {
-      setTheByline( news.byline )
-    } else {
-      setTheByline( 'PeopleForBikes Staff' )
-    }
-
-    // Keywords
-    if ( news.seo_keywords ) {
-      setTheKeywords( news.seo_keywords )
-    } else {
-      setTheKeywords( meta.keywords )
-    }
-
-    // Description
-    if ( news.seo_text ) {
-      setTheDesc( news.seo_text )
-    } else if ( news.main_content ) {
-      setTheDesc( paraFinder(news.main_content).text )
-    } else {
-      setTheDesc( meta.desc )
-    }
-
-    // Path
-    if ( news ) {
-      setThePath(`https://www.peopleforbikes.org/news/${news._meta.uid}`)
-    } else {
-      setThePath( meta.path )
-    }
-
-    // Date  
-    if ( news.publication_date ) {
-      setTheDate( new Date( ParseDate( news.publication_date )))
-    } else {
-      setTheDate( new Date( ParseDate( news._meta.lastPublicationDate )))
-    }
-
-    // Modified Date
-    if ( news._meta.lastPublicationDate ) {
-      setTheDateModified( new Date( ParseDate( news._meta.lastPublicationDate )))
-    }
-    
-    // Image
-    if ( news.seo_image ) {
-      setTheImage( news.seo_image.url )
-      setTheImageWidth( news.seo_image.dimensions.width )
-      setTheImageHeight( news.seo_image.dimensions.height )
-    } else if ( news.header_image ) {
-      setTheImage( news.header_image.url )
-      setTheImageWidth( news.header_image.dimensions.width )
-      setTheImageHeight( news.header_image.dimensions.height )
-    } else {
-      setTheImage( meta.imgSrc )
-      setTheImageWidth( meta.imgWidth )
-      setTheImageHeight( meta.imgHeight)
-    }
-
-  }, [])
  
   // Sets up article-specific JSON
   const newsJSONPayload = {
@@ -234,7 +165,7 @@ export default function NewsPage({ fallback, page, preview }) {
         imgWidth={ theImageWidth }
         ldJSON={ newsJSONPayload }
         path={ thePath }
-      />    
+      /> 
       <Wrapper 
         postPath="/news"
         postTitle="News"
