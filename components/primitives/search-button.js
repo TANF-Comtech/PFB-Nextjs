@@ -3,9 +3,9 @@ import styled from "styled-components"
 
 const Watchglass = styled.svg`
   cursor: pointer;
-  margin-right: 15px;
-  height: 32px;
-  width: 32px;
+  height: ${ props => props.size };
+  fill: ${ props => props.color };
+  width: ${ props => props.size };
 `;
 
 
@@ -14,11 +14,20 @@ const Watchglass = styled.svg`
  * 
  * Just drops a search button into the mix wherever you need it
  * 
+ * @param { string } color - fill of SVG watchglass
+ * @param { string } size - how big the SVG should appear
+ * 
  */
-const SearchButton = () => {
+const SearchButton = ({ 
+  color = "#111", 
+  size = '32px' 
+}) => {
   return (
     <>
       <Watchglass
+        color={ color }
+        height={ size }
+        width={ size }
         viewBox="1 -1 100 100"
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"

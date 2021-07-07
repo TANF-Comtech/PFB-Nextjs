@@ -12,7 +12,7 @@ import { linkResolver } from "../../lib/utils";
 import DefaultContext from "../../context/default/default-context";
 
 import Wrapper from "../../components/global/wrapper";
-import SiteMeta from "../../components/meta/site-meta";
+import SiteMetaCustom from "../../components/meta/site-meta-custom";
 import MainContent from "../../components/global/main-content";
 import Header1 from "../../components/primitives/h1";
 import Promo from "../../components/slices/promo";
@@ -39,7 +39,7 @@ export default function EBikesPage({ page, preview }) {
         defer
         src="https://static.cdn.prismic.io/prismic.js?new=true&repo=peopleforbikes"
       ></script>
-      <SiteMeta
+      <SiteMetaCustom
         desc={
           electric_bikes.main_content
             ? `${electric_bikes.main_content[0].text.substring(0, 180)} ... `

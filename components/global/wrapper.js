@@ -10,7 +10,7 @@ import Titlebar from "../global/titlebar";
 
 // spacer constrains the layout on big screens but keeps it tight on mobile
 const MainContent = styled.main`
-  padding: ${ props => props.isWidePass ? `14vh 0 4vh 0` : `14vh 4vw 4vh 4vw` };
+  padding: ${ props => props.isWidePass ? `20vh 0 4vh 0` : `20vh 4vw 4vh 4vw` };
   min-height: 80vh;
 `;
 

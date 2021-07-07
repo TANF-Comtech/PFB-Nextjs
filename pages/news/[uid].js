@@ -1,14 +1,15 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import { RichText, Date as ParseDate } from "prismic-reactjs";
-
-import { getAllNews, getSingleNewsPage } from "../../lib/queries/news";
-import { linkResolver, setDateSuffix } from "../../lib/utils";
 import { htmlSerializer } from "../../lib/prismic/htmlSerializer";
-import { paraFinder } from "../../lib/utils/paraFinder";
 
-import DefaultContext from "../../context/default/default-context";
+import { getAllNews, 
+         getSingleNewsPage } from '../../lib/queries/news'
+import { linkResolver } from '../../lib/utils'
+import { setDateSuffix } from '../../lib/utils/setDateSuffix'
+
+import useMetadata from "../../hooks/useMetadata";
 
 import Wrapper from '../../components/global/wrapper'
 import SiteMetaCustom from '../../components/meta/site-meta-custom'
@@ -18,6 +19,7 @@ import Donate from '../../components/global/donate'
 import FallbackImage from '../../components/content/fallback-image'
 
 import TakeActionPromo from "../../public/promo/take-action-banner.jpg";
+import logo from '../../public/PFB_Stacked_LOGO_512x512.jpg'
 
 const DateBox = styled.div`
   font-size: 20px;
@@ -63,71 +65,29 @@ export default function NewsPage({ fallback, page, preview }) {
 
   // Destructure page payload and meta from global context
   const { news } = page;
-  const { meta } = useContext(DefaultContext);
+  
+  // Implement metadata hook
+  const {
+    theTitle,
+    theByline,
+    theDesc,
+    theKeywords,
+    thePath,
+    theDate,
+    theDateModified,
+    theImage,
+    theImageWidth,
+    theImageHeight,
+  } = useMetadata(news)
 
-  // Set fallback index, one of six possible images 
+  // Set fallback index, one of six possible fallback images 
   const [fi, setFi] = useState(Math.floor(Math.random(5)))
 
-  // Every time a new path comes up we shuffle the images
+  // Every time a new path comes up we shuffle the placeholder images
   // useEffect 'watch' dependency is where we watch the router's path
   useEffect(() => {
     setFi(Math.floor(Math.random(5)));
-  }, [router.pathname]);
-
-  // Set SEO data to defaults
-  const [theTitle, setTheTitle] = useState(meta.title)
-  const [theByline, setTheByline] = useState('PeopleForBikes Staff')
-  const [theDesc, setTheDesc] = useState(meta.desc)
-  const [thePath, setThePath] = useState(meta.path)
-  const [theDate, setTheDate] = useState(new Date(ParseDate( news._meta.lastPublicationDate )))
-  const [theImage, setTheImage] = useState(meta.imgSrc)
-  const [theImageWidth, setTheImageWidth] = useState(meta.imgWidth)
-  const [theImageHeight, setTheImageHeight] = useState(meta.imgHeight)
-
-  // Check for SEO-specific overrides, set if they are present (only run once)
-  useEffect(() => {
-    
-    // Title
-    if ( news.title ) {
-      setTheTitle(news.title[0].text)
-    } else {
-      setTheTitle(meta.title)
-    }
-
-    // Byline
-    if ( news.byline ) {
-      setTheByline( news.byline )
-    }
-
-    // Description
-    if ( news.seo_text ) {
-      setTheDesc(news.seo_text)
-    } else if ( news.main_content ) {
-      setTheDesc(paraFinder(news.main_content).text)
-    }
-
-    // Path
-    if ( news ) {
-      setThePath(`https://www.peopleforbikes.org/news/${news._meta.uid}`)
-    }
-
-    // Date  
-    if (news.publication_date) {
-      setTheDate(new Date(ParseDate( news.publication_date )))
-    }
-    
-    // Image
-    if ( news.seo_image ) {
-      setTheImage( news.seo_image.url )
-      setTheImageWidth( news.seo_image.dimensions.width )
-      setTheImageHeight( news.seo_image.dimensions.height )
-    } else if ( news.header_image ) {
-      setTheImage( news.header_image.url )
-      setTheImageWidth( news.header_image.dimensions.width )
-      setTheImageHeight( news.header_image.dimensions.height )
-    }
-
-  }, [])
+  }, [router.query.uid]);
  
   // Sets up article-specific JSON
   const newsJSONPayload = {
@@ -141,7 +101,10 @@ export default function NewsPage({ fallback, page, preview }) {
       "height": theImageHeight,
       "width": theImageWidth
     },
-    "mainEntityOfPage": thePath,
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": thePath,
+    },
     "url": thePath,
     "inLanguage": "en",
     "author": [{
@@ -151,14 +114,26 @@ export default function NewsPage({ fallback, page, preview }) {
       "name": theByline
     }],
     "datePublished": theDate,
+    "dateModified": theDateModified,
     "headline": theTitle,
     "publisher": {
-      "@id": "https://www.peopleforbikes.org/#publisher"
+      "@type": "Organization",
+      "name": "PeopleForBikes",
+      "@id": "https://www.peopleforbikes.org/#publisher",
+      "logo": {
+        "@context": "http://schema.org",
+        "@type": "ImageObject",
+        "url": `${ logo }`,
+      }
     },
     "copyrightHolder": {
+      "@type": "Organization",
+      "name": "PeopleForBikes",
       "@id": "https://www.peopleforbikes.org/#publisher"
     },
     "sourceOrganization": {
+      "@type": "Organization",
+      "name": "PeopleForBikes",
       "@id": "https://www.peopleforbikes.org/#publisher"
     },
     "isAccessibleForFree": true,
@@ -181,24 +156,30 @@ export default function NewsPage({ fallback, page, preview }) {
       ></script>
       <SiteMetaCustom
         desc={ theDesc }
+        keywords={ theKeywords }
         title={ theTitle }
         imgHeight={ theImageHeight }
         imgSrc={ theImage }
         imgWidth={ theImageWidth }
         ldJSON={ newsJSONPayload }
         path={ thePath }
-      />    
+      /> 
       <Wrapper 
         postPath="/news"
         postTitle="News"
         isWide="true"
       >        
         <MainContent maxWidth="700px">
-          <DateBox>
-          { `${theDate.toLocaleString('en-us', { month: 'long' } )} 
-              ${setDateSuffix(theDate.getDate())}, 
-              ${theDate.getFullYear()}` }
-          </DateBox>
+          { theDate && 
+            <DateBox>
+              {
+                `${theDate.toLocaleString('en-us', { month: 'long' } )} 
+                ${setDateSuffix(theDate.getDate())}, 
+                ${theDate.getFullYear()}` 
+              }
+            </DateBox>          
+          }
+          
           <h2>{ theTitle }</h2>       
           <p>By: { theByline }</p>
           {
@@ -220,9 +201,9 @@ export default function NewsPage({ fallback, page, preview }) {
           { news.main_content && 
             <IntroWrapper>
               <RichText
-                render={news.main_content}
-                linkResolver={linkResolver}
-                htmlSerializer={htmlSerializer}
+                render={ news.main_content }
+                linkResolver={ linkResolver }
+                htmlSerializer={ htmlSerializer }
               />
             </IntroWrapper>
           }
@@ -286,6 +267,12 @@ export default function NewsPage({ fallback, page, preview }) {
 export async function getStaticProps({ params, preview = false, previewData }) {
   const pageData = await getSingleNewsPage(params.uid, previewData);
 
+  if( !pageData ) {
+    return {
+      notFound: true
+    }
+  }
+
   return {
     props: {
       preview,
@@ -293,7 +280,7 @@ export async function getStaticProps({ params, preview = false, previewData }) {
       fallback: FallbackImage(),
     },
     revalidate: 60,
-  };
+  }
 }
 
 // getStaticPaths requires the whole paths argument to be objects of URL it needs to statically render server-side
@@ -302,5 +289,5 @@ export async function getStaticPaths() {
   return {
     paths: pages?.map(({ node }) => `/news/${node._meta.uid}`) || [],
     fallback: false,
-  };
+  }
 }

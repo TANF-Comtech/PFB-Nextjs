@@ -27,7 +27,6 @@ const Text = styled.h4`
   margin: 0 0 10px 0;
   text-align: center;
   text-transform: uppercase;
-
   @media screen and (min-width: 320px) {
     font-size: calc(36px + 8 * ((100vw - 320px) / 880));
     line-height: calc(36px + 8 * ((100vw - 320px) / 880));

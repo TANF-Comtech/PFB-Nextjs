@@ -11,7 +11,7 @@ import { linkResolver } from '../../lib/utils'
 import DefaultContext from '../../context/default/default-context'
 
 import Wrapper from '../../components/global/wrapper'
-import SiteMeta from '../../components/meta/site-meta'
+import SiteMetaCustom from '../../components/meta/site-meta-custom'
 import MainContent from '../../components/global/main-content'
 import Header1 from '../../components/primitives/h1'
 import Promo from '../../components/slices/promo'
@@ -96,7 +96,7 @@ export default function ReportPage({ page, preview }) {
         defer
         src="https://static.cdn.prismic.io/prismic.js?new=true&repo=peopleforbikes"
       ></script>
-      <SiteMeta
+      <SiteMetaCustom
         desc={ report.main_content ? ( `${ report.main_content[0].text.substring(0,180) } ... ` ) : ( meta.desc ) }
         title={ report.title ? ( `${ report.title[0].text } | People for Bikes` ) : ( meta.title ) }
         imgHeight={ meta.imgHeight }

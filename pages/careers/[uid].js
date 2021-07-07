@@ -7,7 +7,7 @@ import { getAllCareers, getSingleCareer } from "../../lib/queries/careers";
 import DefaultContext from "../../context/default/default-context";
 
 import Wrapper from "../../components/global/wrapper";
-import SiteMeta from "../../components/meta/site-meta";
+import SiteMetaCustom from "../../components/meta/site-meta-custom";
 import MainContent from "../../components/global/main-content";
 import Heading1 from "../../components/primitives/h1";
 import Rule from "../../components/primitives/rule";
@@ -28,7 +28,7 @@ export default function CareerPages({ page, preview }) {
         defer
         src="https://static.cdn.prismic.io/prismic.js?new=true&repo=peopleforbikes"
       ></script>
-      <SiteMeta
+      <SiteMetaCustom
         desc={meta.desc}
         title={
           job.title ? `${job.title[0].text} | People for Bikes` : meta.title

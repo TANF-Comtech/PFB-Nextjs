@@ -7,6 +7,10 @@ import Button from "../../../components/primitives/button";
 import MainContent from "../../../components/global/main-content";
 import ColorBanner from "../../../components/global/color-banner";
 
+import { AlgoliaIndex } from '../../../lib/algolia/algoliaClient'
+import { grantsFormatter, 
+         grantsOnlyFormatter } from '../../../lib/algolia/grantsFormatter'
+
 export default function GrantsFinder({ page }) {
   return (
     <Wrapper postPath="/grants/" postTitle="Grants" isWide={true}>
@@ -56,6 +60,14 @@ export default function GrantsFinder({ page }) {
 /* The return here sends the `page` prop back to the component above for rendering */
 export async function getStaticProps({ params, preview = false, previewData }) {
   const pageData = await getGrants();
+
+  // Algolia General Search
+  const algoliaFormattedData = grantsFormatter(pageData)
+  await AlgoliaIndex().saveObjects(algoliaFormattedData)
+
+  // Algolia Grants Search
+  const algoliaGrantsData = grantsOnlyFormatter(pageData)
+  await AlgoliaIndex('PFB_GRANTS').saveObjects(algoliaGrantsData)
 
   return {
     props: {
