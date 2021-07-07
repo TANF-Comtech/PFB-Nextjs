@@ -180,7 +180,7 @@ export default function NewsPage({ fallback, page, preview }) {
             </DateBox>          
           }
           
-          <h2>{ theTitle }</h2>       
+          { news.title && <h2>{ news.title[0].text }</h2> }
           <p>By: { theByline }</p>
           {
             news.header_image ? (              
