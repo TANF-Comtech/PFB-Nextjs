@@ -86,7 +86,6 @@ export default function UidSlices({ landing_page }) {
         landing_page._meta.uid === "campaigns"
       ) {
         return (
-          // console.log(slice.fields)
           <SecondaryCampaign
             payload={ slice.fields }
           />
