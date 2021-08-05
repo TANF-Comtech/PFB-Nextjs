@@ -171,6 +171,7 @@ function Footer() {
             <MenuContainer>
               <li><Link href="/mission"><a>Mission</a></Link></li>
               <li><Link href="/team"><a>Team</a></Link></li>
+              <li><Link href="/board"><a>Board</a></Link></li>
               <li><Link href="/careers"><a>Careers</a></Link></li>
               <li><Link href="/privacy"><a>Privacy</a></Link></li>
               <li><Link href="/join"><a>Join</a></Link></li>
