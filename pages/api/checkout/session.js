@@ -16,8 +16,8 @@ export default async(req, res) => {
             name: 'Membership Dues' 
         }],
         mode:'payment',
-        success_url:'https://www.peopleforbikes.org/members',
-        cancel_url: req.headers.origin,
+        success_url:`${req.headers.origin}/members`,
+        cancel_url: `${req.headers.origin}/payments`,
     })
     res.status(200).json({sessionId: session.id})
 }
