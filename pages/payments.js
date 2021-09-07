@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import Wrapper from "../components/global/wrapper";
 import styled from "styled-components";
+import ThreeBikers from "../assets/images/ThreeBikersHighFive.png";
 
 const RevInp = styled.input`
   width: 40vw;
@@ -27,6 +28,12 @@ const InputWrapper = styled.div`
 
 const Checkout = styled.button`
   min-height: fit-content;
+`;
+
+const BlueBlurb = styled.div`
+  background-color: #002c40;
+  padding: 5vh 5vw;
+  margin-bottom: 5vh;
 `;
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY);
@@ -70,63 +77,81 @@ export default function Payments() {
   };
 
   return (
-    <Wrapper postTitle="People for Bikes Homepage" isWide={false}>
-      <h1>Join the Coalition</h1>
-      <p>
-        Dues are calculated on annual sales revenue:
-        <br />
-        $1250 for every $1 million in U.S. bicycle related sales<sup>*</sup>
-      </p>
-      <CalcWrapper>
-        <InputWrapper>
-          <RevInp
-            placeholder="$ Annual U.S. Bicycle-related sales"
-            onChange={handleRevenue}
-          />
-          <p style={{ margin: 0 }}> x 1250</p>
-        </InputWrapper>
-        <button onClick={handleSubCalc}>
-          <h5>CALCULATE</h5>
-        </button>
-      </CalcWrapper>
-      {memberDues && (
-        <h2>${memberDues.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h2>
-      )}
-      {memberDues === 1000 && (
-        <>
-          <p>
-            You qualify for our minimum dues amount. Your dues may be paid by
-            clicking on the checkout button below.
-          </p>
-          <span>
-            <Checkout type="button" role="link" onClick={handleClick}>
-              <h5>CHECKOUT</h5>
-            </Checkout>
-          </span>
-        </>
-      )}
-      {memberDues <= 3000 && memberDues !== 1000 && (
-        <>
-          <p>Your dues may be paid by clicking on the checkout button below.</p>
-          <span>
-            <Checkout type="button" role="link" onClick={handleClick}>
-              <h5>CHECKOUT</h5>
-            </Checkout>
-          </span>
-        </>
-      )}
-      {memberDues > 3000 && (
+    <>
+      <Wrapper postTitle="People for Bikes Homepage" isWide={false}>
+        <h1>Join the Coalition</h1>
         <p>
-          Please email{" "}
-          <a
-            style={{ color: "inherit" }}
-            href="mailto:kerri@peopleforbikes.org?subject=Membership Dues"
-          >
-            Kerri Salazar
-          </a>{" "}
-          to make your payment.
+          Dues are calculated on annual sales revenue:
+          <br />
+          $1250 for every $1 million in U.S. bicycle related sales<sup>*</sup>
         </p>
-      )}
-    </Wrapper>
+        <CalcWrapper>
+          <InputWrapper>
+            <RevInp
+              placeholder="$ Annual U.S. Bicycle-related sales"
+              onChange={handleRevenue}
+            />
+            <p style={{ margin: 0 }}> x 1250</p>
+          </InputWrapper>
+          <button onClick={handleSubCalc}>
+            <h5>CALCULATE</h5>
+          </button>
+        </CalcWrapper>
+        {memberDues && (
+          <h2>
+            ${memberDues.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+          </h2>
+        )}
+        {memberDues === 1000 && (
+          <>
+            <p>
+              You qualify for our minimum dues amount. Your dues may be paid by
+              clicking on the checkout button below.
+            </p>
+            <span>
+              <Checkout type="button" role="link" onClick={handleClick}>
+                <h5>CHECKOUT</h5>
+              </Checkout>
+            </span>
+          </>
+        )}
+        {memberDues <= 3000 && memberDues !== 1000 && (
+          <>
+            <p>
+              Your dues may be paid by clicking on the checkout button below.
+            </p>
+            <span>
+              <Checkout type="button" role="link" onClick={handleClick}>
+                <h5>CHECKOUT</h5>
+              </Checkout>
+            </span>
+          </>
+        )}
+        {memberDues > 3000 && (
+          <p>
+            Please email{" "}
+            <a
+              style={{ color: "inherit" }}
+              href="mailto:kerri@peopleforbikes.org?subject=Membership Dues"
+            >
+              Kerri Salazar
+            </a>{" "}
+            to make your payment.
+          </p>
+        )}
+      </Wrapper>
+      <img src={ThreeBikers} style={{ width: "100vw" }} />
+      <BlueBlurb>
+        <p style={{ color: "white" }}>
+          The PeopleForBikes Coalition is the business voice of bicycling in the
+          U.S., extending the resources, reach and influence of bike companies
+          nationwide. When you join the Coalition, you add your weight to the
+          collective strength of hundreds of other bike businesses. With proven
+          success and leadership in and outside of the industry, you can count
+          on PeopleForBikes to optimize your membership dollars by strategically
+          investing in a bigger, brighter future for bicycling.
+        </p>
+      </BlueBlurb>
+    </>
   );
 }
