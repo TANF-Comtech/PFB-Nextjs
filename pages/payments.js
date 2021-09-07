@@ -5,6 +5,7 @@ import styled from "styled-components";
 
 const RevInp = styled.input`
   width: 40vw;
+  margin-right: 10px;
 `;
 
 const CalcWrapper = styled.span`
@@ -22,7 +23,6 @@ const InputWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 50vw;
 `;
 
 const Checkout = styled.button`
