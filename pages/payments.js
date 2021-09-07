@@ -25,12 +25,16 @@ const InputWrapper = styled.div`
   width: 50vw;
 `;
 
+const Checkout = styled.button`
+  min-height: fit-content;
+`;
+
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY);
 
 export default function Payments() {
   const [price, setPrice] = useState();
   const [revenue, setRevenue] = useState(null);
-  const [memberDues, setMemberDues] = useState("");
+  const [memberDues, setMemberDues] = useState();
 
   const handleRevenue = (e) => {
     e.preventDefault();
@@ -44,7 +48,7 @@ export default function Payments() {
   }, [revenue]);
 
   const handleSubCalc = () => {
-    setMemberDues(`Your Annual dues are $${price}`);
+    setMemberDues(price.toFixed(2));
   };
 
   // handles the call to the Stripe Checkout
@@ -55,7 +59,7 @@ export default function Payments() {
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify({ quantity: 1, amount: price * 100 }),
+      body: JSON.stringify({ quantity: 1, amount: memberDues * 100 }),
     }).then((res) => res.json());
 
     //  When the custome clicks on the button, redirect them to C heckout.
@@ -85,11 +89,44 @@ export default function Payments() {
           <h5>CALCULATE</h5>
         </button>
       </CalcWrapper>
-      {memberDues}
-      <br />
-      <button type="button" role="link" onClick={handleClick}>
-        Checkout
-      </button>
+      {memberDues && (
+        <h2>${memberDues.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h2>
+      )}
+      {memberDues === 1000 && (
+        <>
+          <p>
+            You qualify for our minimum dues amount. Your dues may be paid by
+            clicking on the checkout button below.
+          </p>
+          <span>
+            <Checkout type="button" role="link" onClick={handleClick}>
+              <h5>CHECKOUT</h5>
+            </Checkout>
+          </span>
+        </>
+      )}
+      {memberDues <= 3000 && memberDues !== 1000 && (
+        <>
+          <p>Your dues may be paid by clicking on the checkout button below.</p>
+          <span>
+            <Checkout type="button" role="link" onClick={handleClick}>
+              <h5>CHECKOUT</h5>
+            </Checkout>
+          </span>
+        </>
+      )}
+      {memberDues > 3000 && (
+        <p>
+          Please email{" "}
+          <a
+            style={{ color: "inherit" }}
+            href="mailto:kerri@peopleforbikes.org?subject=Membership Dues"
+          >
+            Kerri Salazar
+          </a>{" "}
+          to make your payment.
+        </p>
+      )}
     </Wrapper>
   );
 }
