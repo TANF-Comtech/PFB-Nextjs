@@ -1,44 +1,65 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import Link from "next/link"
 import { loadStripe } from "@stripe/stripe-js";
 import Wrapper from "../components/global/wrapper";
-import styled from "styled-components";
-import ThreeBikers from "../assets/images/ThreeBikersHighFive.png";
+import styled, { ThemeContext } from "styled-components";
+
+import MainContent from "../components/global/main-content"
 
 const RevInp = styled.input`
-  width: 40vw;
+  min-width: 20vw;
   margin-right: 10px;
 `;
 
 const CalcWrapper = styled.span`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
   align-items: center;
   border-top: 0.5px solid gray;
   border-bottom: 0.5px solid gray;
-  padding-top: 5vh;
-  padding-bottom: 5vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 5vh 0;
+
+  @media(min-width: ${ props => props.theme.sm }){
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+  }
 `;
 
 const InputWrapper = styled.div`
+  align-items: center;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 `;
 
-const Checkout = styled.button`
-  min-height: fit-content;
-`;
+const CalcButton = styled.button`
+  font-family: ${ props => props.theme.montserrat };
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px 20px;
 
-const BlueBlurb = styled.div`
-  background-color: #002c40;
-  padding: 5vh 5vw;
-  margin-bottom: 5vh;
+  @media(max-width: ${ props => props.theme.sm }){
+    margin-top: 15px;
+  }
+`
+
+const Checkout = styled.button`
+  font-family: ${ props => props.theme.montserrat };
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 4vh;
+  min-height: fit-content;
+  padding: 10px 20px;
+  transition: 0.2 ease-in-out;
 `;
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY);
 
 export default function Payments() {
+  const themeProps = useContext(ThemeContext)
+
   const [price, setPrice] = useState();
   const [revenue, setRevenue] = useState(null);
   const [memberDues, setMemberDues] = useState();
@@ -69,7 +90,7 @@ export default function Payments() {
       body: JSON.stringify({ quantity: 1, amount: memberDues * 100 }),
     }).then((res) => res.json());
 
-    //  When the custome clicks on the button, redirect them to C heckout.
+    //  When the customer clicks on the button, redirect them to checkout.
     const stripe = stripePromise;
     const { error } = await (await stripe).redirectToCheckout({
       sessionId,
@@ -78,80 +99,97 @@ export default function Payments() {
 
   return (
     <>
-      <Wrapper postTitle="People for Bikes Homepage" isWide={false}>
-        <h1>Join the Coalition</h1>
+      <Wrapper 
+        postTitle="Corporate Members Dues Payments" 
+        isWide={false}
+      >
+        <h2>Corporate Members Dues Payment</h2>
         <p>
-          Dues are calculated on annual sales revenue:
-          <br />
-          $1250 for every $1 million in U.S. bicycle related sales<sup>*</sup>
+          Annual dues are calculated based on your firm's annual sales revenue.
         </p>
+        <ul>
+          <li>Organizations with less than $1 million in annual sales will owe <strong>$1000 annually</strong>.</li>
+          <li>For every additional $1 million in U.S. bicycle related sales, <strong>$1250 of additional dues</strong> will be charged to your organization annually.</li>
+        </ul>
+        <p>You can determine the dues you owe PeopleForBikes with our handy calculator:</p>
         <CalcWrapper>
           <InputWrapper>
+            <p style={{ margin: 0 }}>$&nbsp;</p>
             <RevInp
-              placeholder="$ Annual U.S. Bicycle-related sales"
+              placeholder="Annual Sales"
               onChange={handleRevenue}
             />
-            <p style={{ margin: 0 }}> x 1250</p>
+            <p style={{ margin: 0 }}>&nbsp;/&nbsp;&nbsp;$1,000,000 x 1250</p>
           </InputWrapper>
-          <button onClick={handleSubCalc}>
-            <h5>CALCULATE</h5>
-          </button>
+          <CalcButton onClick={handleSubCalc}>
+            CALCULATE
+          </CalcButton>
         </CalcWrapper>
-        {memberDues && (
-          <h2>
-            ${memberDues.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-          </h2>
-        )}
-        {memberDues === 1000 && (
+        { memberDues && (
           <>
-            <p>
-              You qualify for our minimum dues amount. Your dues may be paid by
-              clicking on the checkout button below.
-            </p>
-            <span>
-              <Checkout type="button" role="link" onClick={handleClick}>
-                <h5>CHECKOUT</h5>
-              </Checkout>
-            </span>
+            <p>Estimated Dues Based on Your Sales:</p>
+            <h2>
+              ${Math.round(memberDues).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+            </h2>
           </>
         )}
-        {memberDues <= 3000 && memberDues !== 1000 && (
+        { memberDues <= 3000 && (
           <>
             <p>
               Your dues may be paid by clicking on the checkout button below.
             </p>
-            <span>
-              <Checkout type="button" role="link" onClick={handleClick}>
-                <h5>CHECKOUT</h5>
-              </Checkout>
-            </span>
+            <Checkout type="button" role="link" onClick={handleClick}>
+              CHECKOUT
+            </Checkout>
+            <MainContent
+              bgColor={ themeProps.midnightBlue }
+              contentPadding="6vh 4vw"
+            >
+              <h2 style={{ color: "white" }}>Why Your Dues Matter</h2>
+              <p style={{ color: "white" }}>
+                The PeopleForBikes Coalition is the business voice of bicycling in the
+                U.S., extending the resources, reach and influence of bike companies
+                nationwide. When you join the Coalition, you add your weight to the
+                collective strength of hundreds of other bike businesses. With proven
+                success and leadership in and outside of the industry, you can count
+                on PeopleForBikes to optimize your membership dollars by strategically
+                investing in a bigger, brighter future for bicycling.
+              </p>
+              <h3><Link href="/mission"><a>Learn More About Our Mission</a></Link></h3>
+            </MainContent>
           </>
         )}
-        {memberDues > 3000 && (
+        { memberDues > 3000 && (
+          <>
           <p>
             Please email{" "}
             <a
-              style={{ color: "inherit" }}
+              style={{ color: themeProps.blue }}
               href="mailto:kerri@peopleforbikes.org?subject=Membership Dues"
             >
               Kerri Salazar
             </a>{" "}
             to make your payment.
           </p>
+          <MainContent
+            bgColor={ themeProps.midnightBlue }
+            contentPadding="6vh 4vw"
+          >
+            <h2 style={{ color: "white" }}>Why Your Dues Matter</h2>
+            <p style={{ color: "white" }}>
+              The PeopleForBikes Coalition is the business voice of bicycling in the
+              U.S., extending the resources, reach and influence of bike companies
+              nationwide. When you join the Coalition, you add your weight to the
+              collective strength of hundreds of other bike businesses. With proven
+              success and leadership in and outside of the industry, you can count
+              on PeopleForBikes to optimize your membership dollars by strategically
+              investing in a bigger, brighter future for bicycling.
+            </p>
+            <h3><Link href="/mission"><a>Learn More About Our Mission</a></Link></h3>
+          </MainContent>
+          </>
         )}
       </Wrapper>
-      <img src={ThreeBikers} style={{ width: "100vw" }} />
-      <BlueBlurb>
-        <p style={{ color: "white" }}>
-          The PeopleForBikes Coalition is the business voice of bicycling in the
-          U.S., extending the resources, reach and influence of bike companies
-          nationwide. When you join the Coalition, you add your weight to the
-          collective strength of hundreds of other bike businesses. With proven
-          success and leadership in and outside of the industry, you can count
-          on PeopleForBikes to optimize your membership dollars by strategically
-          investing in a bigger, brighter future for bicycling.
-        </p>
-      </BlueBlurb>
     </>
   );
 }
