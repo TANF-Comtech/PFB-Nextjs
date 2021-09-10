@@ -10,6 +10,7 @@ import NinerIcon from '../../public/sponsor-logos/niner-logo.svg'
 import ShimanoIcon from '../../public/sponsor-logos/shimano-logo.svg'
 import TrekIcon from '../../public/sponsor-logos/trek-logo.svg'
 import VaastIcon from '../../public/sponsor-logos/vaast-logo.svg'
+import TernIcon from '../../public/sponsor-logos/tern-logo.png'
 
 const Box = styled.div`
   align-items: center;
@@ -79,7 +80,12 @@ const GrantsIconGrid = () => {
             src={ VaastIcon }
           />
         </Box>
-        <Box />
+        <Box>
+          <Logo 
+            alt="Tern Logo"
+            src={ TernIcon }
+          />
+        </Box>
           
       </GridWide>
     </MainContent>
