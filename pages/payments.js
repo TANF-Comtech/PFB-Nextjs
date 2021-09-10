@@ -108,7 +108,7 @@ export default function Payments() {
           Annual dues are calculated based on your company's annual sales revenue.
         </p>
         <ul>
-        <li>Organizations with $1 million of more in US bike related annual sales will pay $1250 per $1M</li>
+        <li>Organizations with $1 million or more in US bike related annual sales will pay $1250 per $1M</li>
           <li>Organizations with less than $1 million in annual sales will pay <strong>$1000 for an annual membership</strong>.</li>
         </ul>
         <p>You can determine your PeopleForBikes membership dues with our handy calculator:</p>
