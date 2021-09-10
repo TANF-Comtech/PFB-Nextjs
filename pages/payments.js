@@ -105,13 +105,13 @@ export default function Payments() {
       >
         <h2>Corporate Members Dues Payment</h2>
         <p>
-          Annual dues are calculated based on your firm's annual sales revenue.
+          Annual dues are calculated based on your company's annual sales revenue.
         </p>
         <ul>
-          <li>Organizations with less than $1 million in annual sales will owe <strong>$1000 annually</strong>.</li>
-          <li>For every additional $1 million in U.S. bicycle related sales, <strong>$1250 of additional dues</strong> will be charged to your organization annually.</li>
+        <li>Organizations with $1 million of more in US bike related annual sales will pay $1250 per $1M</li>
+          <li>Organizations with less than $1 million in annual sales will pay <strong>$1000 for an annual membership</strong>.</li>
         </ul>
-        <p>You can determine the dues you owe PeopleForBikes with our handy calculator:</p>
+        <p>You can determine your PeopleForBikes membership dues with our handy calculator:</p>
         <CalcWrapper>
           <InputWrapper>
             <p style={{ margin: 0 }}>$&nbsp;</p>
