@@ -4,7 +4,7 @@ import LocationsList from "../content/locations-list";
 import TopicsList from "../content/topics-list";
 import RidesList from "../content/rides-list";
 import TeamList from "../content/team-list";
-import List from "../content/list";
+import BasicList from "../content/basic-list";
 import JoinList from "../content/join-list";
 import GrantsPillars from "../content/grants-pillars";
 import EventsList from "../content/events-list";
@@ -89,7 +89,7 @@ export default function ConditionalSections({
       {
         // CAREERS
         landing_page._meta.uid === "careers" && (
-          <List
+          <BasicList
             payload={landing_page.data}
             textColor="#3E9FDC"
             title="Career Opportunities"
