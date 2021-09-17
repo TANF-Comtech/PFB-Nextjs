@@ -14,7 +14,6 @@ import { getTeamMembers, getCEO } from "../lib/queries/team";
 import { getAllCareers } from "../lib/queries/careers";
 import { getEventsByCategory } from "../lib/queries/events";
 import { getStats } from "../lib/queries/statistics";
-import { getAllCampaigns } from "../lib/queries/campaigns";
 
 import Wrapper from "../components/global/wrapper";
 import Spinner from "../components/global/spinner";
