@@ -1,8 +1,14 @@
-import styled from 'styled-components'
+import { useContext } from 'react';
+import styled, { ThemeContext } from 'styled-components'
+
+import { linkResolver } from '../../lib/utils'
+
 import MainContent from '../global/main-content'
+import Button from '../primitives/button'
 
 const Para = styled.div`
   margin: 20px 0;
+  text-align: center;
   
   @media screen and (min-width: 320px) {
     margin: calc(20px + 26 * ((100vw - 320px) / 880)) 0;
@@ -32,10 +38,14 @@ const Para = styled.div`
 
 const SummaryBlock = ({
   bgColor,
+  buttonLink,
+  buttonText,
   children,
   maxWidth,
   textColor
 }) => {
+  const themeProps = useContext(ThemeContext)
+
   return (
     <MainContent
       bgColor={ bgColor }
@@ -44,6 +54,18 @@ const SummaryBlock = ({
       <Para maxWidth={ maxWidth } >
         { children }
       </Para>
+      { buttonLink && buttonText &&
+        <Button
+          buttonAlign="center"
+          buttonBg={ themeProps.blue }
+          buttonColor="#fff"
+          buttonFontSize="24px"
+          buttonMargin="4vh"
+          href={ linkResolver(buttonLink) }
+        >
+          { buttonText }
+        </Button>
+      }
     </MainContent>
   )
 }
