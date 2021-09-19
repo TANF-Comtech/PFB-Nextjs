@@ -8,7 +8,7 @@ import Button from '../primitives/button'
 
 const Para = styled.div`
   margin: 20px 0;
-  text-align: center;
+  text-align: ${ props => props.buttonLink === undefined ? 'left' : 'center' };
   
   @media screen and (min-width: 320px) {
     margin: calc(20px + 26 * ((100vw - 320px) / 880)) 0;
@@ -29,11 +29,16 @@ const Para = styled.div`
  * 
  * A really simple paragraph, set off with big margins for landing pages. 
  * This could probably be used in a bunch of places.
+ * NOTE - the main text block is left justified unless you have a button
+ *  If button present, text is centered.
  *
  * @param { object } bgColor - background color of element
+ * @param { object } buttonLink - destination for button (optional)
+ * @param { string } buttonText - text for button (optional)
  * @param { object } children - React child elements
- * @param { object } maxWidth - width of paragraph (default 100%;)
- * @param { object } textColor - color of text, duh
+ * @param { string } maxWidth - width of paragraph (default 100%;)
+ * @param { string } textColor - color of text, duh
+ * @param { string } title - text that goes above the summary block (optional)
  */
 
 const SummaryBlock = ({
@@ -42,7 +47,8 @@ const SummaryBlock = ({
   buttonText,
   children,
   maxWidth,
-  textColor
+  textColor,
+  title
 }) => {
   const themeProps = useContext(ThemeContext)
 
@@ -51,7 +57,13 @@ const SummaryBlock = ({
       bgColor={ bgColor }
       textColor={ textColor }
     >
-      <Para maxWidth={ maxWidth } >
+      { title && 
+        <h2>{ title }</h2>
+      }
+      <Para 
+        buttonLink={ buttonLink }
+        maxWidth={ maxWidth } 
+      >
         { children }
       </Para>
       { buttonLink && buttonText &&
