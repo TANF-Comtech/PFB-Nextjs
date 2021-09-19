@@ -22,19 +22,6 @@ export default function ConditionalSections({
   return (
     <>
       {
-        // MEMBER CENTER PILLAR - Up Front
-        landing_page._meta.uid === "members" && (
-          <MainContent contentPadding="4vh 4vw 0 4vw">
-            <RedActionItem
-              path="/members/business-intelligence-hub"
-              title="Business Intelligence Hub"
-              text="Explore our dashboard for insights into the bicycle industry."
-            />
-          </MainContent>
-        )
-      }
-
-      {
         // NEWS
         landing_page._meta.uid === "news" && (
           <NewsList
