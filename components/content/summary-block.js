@@ -8,7 +8,7 @@ import Button from '../primitives/button'
 
 const Para = styled.div`
   margin: 20px 0;
-  text-align: ${ props => props.buttonLink === undefined ? 'left' : 'center' };
+  text-align: ${ props => props.buttons.length > 0 ? 'center' : 'left' };
   
   @media screen and (min-width: 320px) {
     margin: calc(20px + 26 * ((100vw - 320px) / 880)) 0;
@@ -18,6 +18,8 @@ const Para = styled.div`
   }  
 
   p {
+    font-size: ${ props => props.fontSize ? props.fontSize + ' !important' : 'inherit' };
+    line-height: ${ props => props.lineHeight ? props.lineHeight + ' !important' : 'inherit' };
     margin-left: auto;
     margin-right: auto;
     max-width: ${ props => props.maxWidth || '100%' };
@@ -33,9 +35,9 @@ const Para = styled.div`
  *  If button present, text is centered.
  *
  * @param { object } bgColor - background color of element
- * @param { object } buttonLink - destination for button (optional)
- * @param { string } buttonText - text for button (optional)
+ * @param { object } buttons - group of buttons from payload
  * @param { object } children - React child elements
+ * @param { object } fontSize - size of the font you want
  * @param { string } maxWidth - width of paragraph (default 100%;)
  * @param { string } textColor - color of text, duh
  * @param { string } title - text that goes above the summary block (optional)
@@ -43,14 +45,17 @@ const Para = styled.div`
 
 const SummaryBlock = ({
   bgColor,
-  buttonLink,
-  buttonText,
+  buttons,
   children,
+  fontSize,
+  lineHeight,
   maxWidth,
   textColor,
   title
 }) => {
   const themeProps = useContext(ThemeContext)
+
+  console.log(buttons.length)
 
   return (
     <MainContent
@@ -61,22 +66,28 @@ const SummaryBlock = ({
         <h2>{ title }</h2>
       }
       <Para 
-        buttonLink={ buttonLink }
+        buttons={ buttons }
+        fontSize={ fontSize }
+        lineHeight={ lineHeight }
         maxWidth={ maxWidth } 
       >
         { children }
       </Para>
-      { buttonLink && buttonText &&
-        <Button
-          buttonAlign="center"
-          buttonBg={ themeProps.blue }
-          buttonColor="#fff"
-          buttonFontSize="24px"
-          buttonMargin="4vh"
-          href={ linkResolver(buttonLink) }
-        >
-          { buttonText }
-        </Button>
+      { buttons &&
+        buttons.map( button => {
+          return (
+            <Button
+              buttonAlign="center"
+              buttonBg={ themeProps.blue }
+              buttonColor="#fff"
+              buttonFontSize="24px"
+              buttonMargin="4vh"
+              href={ linkResolver(button.button_link) }
+            >
+              { button.button_text }
+            </Button>
+          )
+        })
       }
     </MainContent>
   )
