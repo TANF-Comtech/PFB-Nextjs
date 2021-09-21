@@ -25,7 +25,7 @@ export default function CorporateMembers({ data }) {
   );
 }
 
-// getStaticPaths requires a the whole paths argument to be objects of URL it needs to statically render server-side
+
 export async function getStaticProps() {
   let sfCall;
 
