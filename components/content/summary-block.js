@@ -55,8 +55,6 @@ const SummaryBlock = ({
 }) => {
   const themeProps = useContext(ThemeContext)
 
-  console.log(buttons.length)
-
   return (
     <MainContent
       bgColor={ bgColor }
