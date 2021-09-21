@@ -28,11 +28,14 @@ const Para = styled.div`
 
 const Title = styled.h2`
   color: #fff;
-
   margin: 4vh 0;
   text-align: center;
   text-transform: uppercase;
 `;
+
+const Buffer = styled.div`
+  margin-bottom: ${ props => props.marginBottom ? props.marginBottom : '0' };
+`
 
 /**
  * <SummaryBlock>
@@ -46,6 +49,7 @@ const Title = styled.h2`
  * @param { object } buttons - group of buttons from payload
  * @param { object } children - React child elements
  * @param { object } fontSize - size of the font you want
+ * @param { string } marginBottom - gives a little space if we need it
  * @param { string } maxWidth - width of paragraph (default 100%;)
  * @param { string } textColor - color of text, duh
  * @param { string } title - text that goes above the summary block (optional)
@@ -57,6 +61,7 @@ const SummaryBlock = ({
   children,
   fontSize,
   lineHeight,
+  marginBottom,
   maxWidth,
   textColor,
   title
@@ -64,40 +69,44 @@ const SummaryBlock = ({
   const themeProps = useContext(ThemeContext)
 
   return (
-    <MainContent
-      bgColor={ bgColor }
-      textColor={ textColor }
+    <Buffer
+      marginBottom={ marginBottom }
     >
-      { title && 
-        <Title>
-          { title }
-        </Title>
-      }
-      <Para 
-        buttons={ buttons }
-        fontSize={ fontSize }
-        lineHeight={ lineHeight }
-        maxWidth={ maxWidth } 
+      <MainContent
+        bgColor={ bgColor }
+        textColor={ textColor }
       >
-        { children }
-      </Para>
-      { buttons &&
-        buttons.map( button => {
-          return (
-            <Button
-              buttonAlign="center"
-              buttonBg={ themeProps.blue }
-              buttonColor="#fff"
-              buttonFontSize="24px"
-              buttonMargin="4vh"
-              href={ linkResolver(button.button_link) }
-            >
-              { button.button_text }
-            </Button>
-          )
-        })
-      }
-    </MainContent>
+        { title && 
+          <Title>
+            { title }
+          </Title>
+        }
+        <Para 
+          buttons={ buttons }
+          fontSize={ fontSize }
+          lineHeight={ lineHeight }
+          maxWidth={ maxWidth } 
+        >
+          { children }
+        </Para>
+        { buttons &&
+          buttons.map( button => {
+            return (
+              <Button
+                buttonAlign="center"
+                buttonBg={ themeProps.blue }
+                buttonColor="#fff"
+                buttonFontSize="24px"
+                buttonMargin="4vh"
+                href={ linkResolver(button.button_link) }
+              >
+                { button.button_text }
+              </Button>
+            )
+          })
+        }
+      </MainContent>
+    </Buffer>
   )
 }
 
