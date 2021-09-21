@@ -8,7 +8,7 @@ import Button from '../primitives/button'
 
 const Para = styled.div`
   margin: 20px 0;
-  text-align: ${ props => props.buttons.length > 0 ? 'center' : 'left' };
+  text-align: ${ props => props.buttons ? 'center' : 'left' };
   
   @media screen and (min-width: 320px) {
     margin: calc(20px + 26 * ((100vw - 320px) / 880)) 0;
