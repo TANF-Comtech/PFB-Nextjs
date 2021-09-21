@@ -21,8 +21,8 @@ export async function getStaticProps() {
       version: "49.0",
       accessToken: accessToken,
     });
-    sfConnection.query(`SELECT * FROM Account`).then(function (res) {
-      console.log(res);
+    sfConnection.query(`SELECT * FROM Account`).then(function(res) {
+      sfCall = res;
     });
   });
 
