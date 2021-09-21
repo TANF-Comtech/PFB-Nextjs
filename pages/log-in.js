@@ -65,6 +65,7 @@ const LoginContainer = styled.div`
 `
 
 const Input = styled(BasicTextField)`
+  color: ${ props => props.theme.black };
   width: 100%;
 `
 
@@ -197,7 +198,7 @@ function LoginPage() {
                   onChange={ (e) => updateEmail(e.target.value) } 
                   marginBottom="0"
                   minWidth="200px"
-                  placeholder="email"
+                  placeholder="Email Address"
                 />
                 <Button
                   buttonBg={ themeProps.blue }

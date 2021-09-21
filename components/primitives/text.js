@@ -13,7 +13,6 @@ const TextField = styled.input.attrs({
   margin-bottom: ${ props => props.marginBottom ? props.marginBottom : '1vh' };
   min-width: ${ props => props.minWidth ? props.minWidth : '300px' };
   padding: 10px 16px;
-  text-transform: capitalize;
 
   @media (min-width: ${props => props.theme.bm}) {
     font-size: calc(14px + 4 * ((100vw - 320px) / 880));
