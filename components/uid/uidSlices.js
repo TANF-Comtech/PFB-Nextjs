@@ -18,7 +18,9 @@ import ActionItemGroup from "../slices/action-item-group";
 import Promo from "../slices/promo";
 
 export default function UidSlices({ landing_page }) {
-  
+
+  //console.log(landing_page)
+ 
   // SLICE CONTENT (in body)
   let Slice;
 
@@ -162,5 +164,9 @@ export default function UidSlices({ landing_page }) {
     });
   }
 
-  return <>{Slice}</>;
+  return (
+    <>
+      {/* {Slice} */}
+    </>
+  );
 }

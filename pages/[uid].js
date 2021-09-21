@@ -25,6 +25,7 @@ import { statsFormatter } from "../lib/algolia/statsFormatter";
 import { locationFormatter } from "../lib/algolia/locationFormatter";
 
 import UidHeader from "../components/uid/uidHeaders";
+import UidMemberSlices from "../components/uid/uidMemberSlices";
 import UidSlices from "../components/uid/uidSlices";
 import UidIndividualComponents from "../components/uid/uidIndividualComponents";
 import ConditionalSections from "../components/uid/uidConditionalSections";
@@ -32,22 +33,7 @@ import FallbackImage from "../components/content/fallback-image";
 
 /**
  * TheMonster()
- *
- * You know, there comes a time in every man's life
- * When he looks in the mirror
- * And realizes that something has grown out of his control
- * And it was in this moment that I renamed this page TheMonster
- *
- * It was born of a great idea - simply the UX for admins
- * They can have one spot for all their landing pages
- * But then, no two landing pages looked alike
- * And Prismic's Slice system turned out to be half baked
- *
- * So here we find ourselves, with all these imports
- * And all this conditional logic
- * It's a wonder this page runs
- * Where it goes from here is only in the realm of dream or nightmare
- *
+ * Wrangled in a bit, but still has big teeth to chew on you
  */
 export default function TheMonster({ page, preview }) {
   const router = useRouter();
@@ -73,7 +59,12 @@ export default function TheMonster({ page, preview }) {
     <Wrapper postTitle={RichText.asText(landing_page.title)} isWide={true}>
       <UidHeader landing_page={landing_page} />
       <ConditionalSections landing_page={landing_page} />
-      <UidSlices landing_page={landing_page} />
+      <UidSlices landing_page={landing_page} /> 
+
+      { landing_page._meta.uid === 'members' && 
+        <UidMemberSlices landing_page={landing_page} />  
+      }
+      
       <UidIndividualComponents landing_page={landing_page} />
     </Wrapper>
   );
