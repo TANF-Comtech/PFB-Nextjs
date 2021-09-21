@@ -67,8 +67,6 @@ const Grid = styled.section`
 export default function ImageList({ 
   payload = []
 }) {
-  
-  console.log(payload)
 
   return (
     <>
