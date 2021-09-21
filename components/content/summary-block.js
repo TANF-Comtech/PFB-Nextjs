@@ -26,6 +26,14 @@ const Para = styled.div`
   }
 `
 
+const Title = styled.h2`
+  color: #fff;
+
+  margin: 4vh 0;
+  text-align: center;
+  text-transform: uppercase;
+`;
+
 /**
  * <SummaryBlock>
  * 
@@ -61,7 +69,9 @@ const SummaryBlock = ({
       textColor={ textColor }
     >
       { title && 
-        <h2>{ title }</h2>
+        <Title>
+          { title }
+        </Title>
       }
       <Para 
         buttons={ buttons }
