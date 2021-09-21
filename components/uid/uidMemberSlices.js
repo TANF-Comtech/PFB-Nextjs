@@ -12,8 +12,6 @@ import Promo from "../slices/promo";
 
 export default function UidMemberSlices({ landing_page }) {
   const themeProps = useContext(ThemeContext)
-
-  console.log(landing_page)
  
   // SLICE CONTENT (in body)
   let Slice;
@@ -55,18 +53,40 @@ export default function UidMemberSlices({ landing_page }) {
         )
       }
 
+      // SUMMARY BLOCK 2 - MEMBER RENEW
+      if (slice.__typename === "Landing_pageBodySummary_block" && 
+          slice.primary.summary_id === 2 || slice.primary.summary_id === 3) {
+          return (
+            <SummaryBlock 
+              bgColor={ themeProps.midnightBlue }
+              buttons={ slice.fields }
+              key={ randomID(10000000) }
+              fontSize="28px"
+              lineHeight="42px"
+              marginBottom="2vh"
+              maxWidth="800px"
+              textColor="#fff"
+              title={ slice.primary.summary_title }
+            >
+              <RichText
+                render={slice.primary.summary_area}
+                linkResolver={linkResolver}
+              />
+            </SummaryBlock>
+          );
+      }
+
       // PROMO
-      // logic to catch policy and grant finder custom promos (with internal links)
-      // if (slice.__typename === "Landing_pageBodyPromo") {
-      //   return (
-      //     <Promo
-      //       bigWords={slice.primary.bottom_text}
-      //       path={slice.primary.link}
-      //       smallWords={slice.primary.top_text}
-      //       source={slice.primary.main_image.url}
-      //     />
-      //   );
-      // }
+      if (slice.__typename === "Landing_pageBodyPromo") {
+        return (
+          <Promo
+            bigWords={slice.primary.bottom_text}
+            path={slice.primary.link}
+            smallWords={slice.primary.top_text}
+            source={slice.primary.main_image.url}
+          />
+        );
+      }
     });
   }
 
