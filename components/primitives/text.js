@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React from "react"
 import styled from "styled-components"
 
 const TextField = styled.input.attrs({
@@ -7,11 +7,11 @@ const TextField = styled.input.attrs({
   border: none;
   color: white;
   display: block;
-  font-family: ${props => props.theme.montserrat};
+  font-family: ${ props => props.theme.montserrat };
   font-size: 14px;
   font-weight: 700;
-  margin-bottom: 1vh;
-  min-width: 300px;
+  margin-bottom: ${ props => props.marginBottom ? props.marginBottom : '1vh' };
+  min-width: ${ props => props.minWidth ? props.minWidth : '300px' };
   padding: 10px 16px;
   text-transform: capitalize;
 
@@ -24,10 +24,18 @@ const TextField = styled.input.attrs({
   }
 `
 
-const BasicTextField = ({ className, placeholder, onChange }) => {
+const BasicTextField = ({ 
+  className, 
+  marginBottom,
+  minWidth,
+  placeholder, 
+  onChange 
+}) => {
   return(
     <TextField 
       className={ className }
+      marginBottom={ marginBottom }
+      minWidth={ minWidth }
       placeholder={ placeholder }
       onChange={ onChange }
     />
@@ -53,10 +61,16 @@ const RedInput = styled(BasicTextField)`
   }
 `;  
 
-const RedTextField = ({ className, placeholder, onChange }) => {
+const RedTextField = ({ 
+  className, 
+  marginBottom,
+  placeholder, 
+  onChange 
+}) => {
   return(
     <RedInput 
       className={ className }
+      marginBottom={ marginBottom }
       placeholder={ placeholder }
       onChange={ onChange }
     />
