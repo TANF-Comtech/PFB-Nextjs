@@ -1,52 +1,62 @@
 export const dummyMembers = [
-  {
-    company: "comp1",
-    duesPad: true,
-    url: "https://www.facebook.com",
-  },
-  {
-    company: "comp2",
-    duesPad: true,
-    url: "comp2.com",
-  },
-  {
-    company: "comp3",
-    duesPad: false,
-    url: "comp3.com",
-  },
-  {
-    company: "comp4",
-    duesPad: true,
-    url: "comp4.com",
-  },
-  {
-    company: "comp5",
-    duesPad: true,
-    url: "comp5.com",
-  },
-  {
-    company: "comp6",
-    duesPad: false,
-    url: "comp6.com",
-  },
-  {
-    company: "comp7",
-    duesPad: true,
-    url: "comp7.com",
-  },
-  {
-    company: "comp8",
-    duesPad: true,
-    url: "comp8.com",
-  },
-  {
-    company: "comp9",
-    duesPad: false,
-    url: "comp9.com",
-  },
-  {
-    company: "comp10",
-    duesPad: true,
-    url: "comp10.com",
-  },
-];
+         {
+           objectID: '2341',
+           company: "comp1",
+           duesPaid: true,
+           url: "https://www.facebook.com",
+         },
+         {
+           objectID: '3254',
+           company: "comp2",
+           duesPaid: true,
+           url: "comp2.com",
+         },
+         {
+           objectID: '5632',
+           company: "comp3",
+           duesPaid: false,
+           url: "comp3.com",
+         },
+         {
+           objectID: '2234',
+           company: "comp4",
+           duesPaid: true,
+           url: "comp4.com",
+         },
+         {
+           objectID: '6322',
+           company: "comp5",
+           duesPaid: true,
+           url: "comp5.com",
+         },
+         {
+           objectID: '1352',
+           company: "comp6",
+           duesPaid: false,
+           url: "comp6.com",
+         },
+         {
+           objectID: '90124',
+           company: "comp7",
+           duesPaid: true,
+           url: "comp7.com",
+         },
+         {
+           objectID: '1259',
+           company: "comp8",
+           duesPaid: true,
+           url: "comp8.com",
+         },
+         {
+           objectID: '5694',
+           company: "comp9",
+           duesPaid: false,
+           url: "comp9.com",
+         },
+         {
+           objectID: '5489',
+           company: "comp10",
+           duesPaid: true,
+           url: "comp10.com",
+         },
+       ];

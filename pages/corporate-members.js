@@ -6,20 +6,36 @@ import * as jsforce from "jsforce";
 import Grid from "../components/global/grid";
 import { dummyMembers } from "../components/dummydata";
 import CorporateMember from "../components/global/member-box";
+import BigTitleBanner from '../components/content/big-title-banner'
+import MainContent from '../components/global/main-content'
+import { AlgoliaIndex, AlgoliaReactClient } from '../lib/algolia/algoliaClient'
+import {InstantSearch, Hits, SearchBox, RefinementList, Pagination} from 'react-instantsearch-dom'
 
 export default function CorporateMembers({ data }) {
-  console.log(data);
+
 
   return (
-    <Wrapper>
-      <h1>Coalition</h1>
-      <Grid>
-        {dummyMembers.map((member) => {
-          if (member.duesPad) {
-            return <CorporateMember name={member.company} url={member.url} />;
-          }
-        })}
-      </Grid>
+    <Wrapper isWide={true}>
+      <BigTitleBanner>
+        <h1>Coalition</h1>
+      </BigTitleBanner>
+      <InstantSearch
+        searchClient={AlgoliaReactClient}
+        indexName="MAINSITE"
+      >
+        <SearchBox />
+        <Hits hitComponent={} />
+      </InstantSearch>
+
+      <MainContent>
+        <Grid>
+          {dummyMembers.map((member) => {
+            if (member.duesPaid) {
+              return <CorporateMember name={member.company} url={member.url} />;
+            }
+          })}
+        </Grid>
+      </MainContent>
       {/* {data} */}
     </Wrapper>
   );
@@ -27,7 +43,7 @@ export default function CorporateMembers({ data }) {
 
 
 export async function getStaticProps() {
-  let sfCall;
+  let pageData;
 
   getAccessToken().then((data) => {
     const accessToken = data;
@@ -37,13 +53,16 @@ export async function getStaticProps() {
       accessToken: accessToken,
     });
     sfConnection.query(`SELECT * FROM Account`).then(function (res) {
-      sfCall = res;
+      pageData = res;
     });
   });
 
+  const algoliaMemberData = dummyMembers
+  await AlgoliaIndex("PFB_COALITION_MEMBERS").saveObjects(algoliaMemberData);
+
   return {
     props: {
-      data: sfCall ?? "Not Working",
+      data: pageData ?? null,
     },
   };
 }
