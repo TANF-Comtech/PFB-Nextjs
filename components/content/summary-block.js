@@ -18,8 +18,8 @@ const Para = styled.div`
   }  
 
   p {
-    font-size: ${ props => props.fontSize ? props.fontSize + ' !important' : 'inherit' };
-    line-height: ${ props => props.lineHeight ? props.lineHeight + ' !important' : 'inherit' };
+    font-size: ${ props => props.fontSize && props.fontSize + ' !important' };
+    line-height: ${ props => props.lineHeight && props.lineHeight + ' !important' };
     margin-left: auto;
     margin-right: auto;
     max-width: ${ props => props.maxWidth || '100%' };
