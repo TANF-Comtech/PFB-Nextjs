@@ -59,11 +59,12 @@ export default function TheMonster({ page, preview }) {
     <Wrapper postTitle={RichText.asText(landing_page.title)} isWide={true}>
       <UidHeader landing_page={landing_page} />
       <ConditionalSections landing_page={landing_page} />
-      <UidSlices landing_page={landing_page} /> 
-
-      { landing_page._meta.uid === 'members' && 
-        <UidMemberSlices landing_page={landing_page} />  
-      }
+      
+      { landing_page._meta.uid === 'members' ? (
+        <UidMemberSlices landing_page={landing_page} />
+      ) : (
+        <UidSlices landing_page={landing_page} /> 
+      )}
       
       <UidIndividualComponents landing_page={landing_page} />
     </Wrapper>
