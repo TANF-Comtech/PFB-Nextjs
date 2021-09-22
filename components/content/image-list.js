@@ -62,7 +62,7 @@ const Grid = styled.section`
  * 
  * @param { array } payload - data block image list items
  * 
- * @returns { object } - JSX of Campaigns in a CSS grid
+ * @returns { object } - full list of image/text blocks
  */
 export default function ImageList({ 
   payload = []
