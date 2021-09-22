@@ -339,8 +339,7 @@ export async function getServerSideProps({
         props: {
           preview,
           page: pageData ?? null,
-        },
-        revalidate: 60,
+        }
       };
     } else {
       return {
