@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import numWords from 'num-words'
 
 import MainContent from '../global/main-content'
-import RedActionItem from '../slices/action-item-red'
+import WayfindingItem from '../slices/wayfinding-item'
 
 const DeepBlue = styled.section`
   background-color: ${props => props.theme.midnightBlue };

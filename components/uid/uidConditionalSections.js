@@ -10,7 +10,7 @@ import GrantsPillars from "../content/grants-pillars";
 import EventsList from "../content/events-list";
 import PolicyPillars from "../content/policy-pillars";
 import StatsList from "../content/stats-list";
-import RedActionItem from "../slices/action-item-red";
+import WayfindingItem from "../slices/wayfinding-item";
 import MainContent from "../global/main-content";
 import SecondaryCampaign from "../global/secondary-campaign";
 
