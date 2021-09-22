@@ -27,8 +27,9 @@ const Para = styled.div`
 `
 
 const Title = styled.h2`
-  color: #fff;
-  margin: 4vh 0;
+  color: ${ props => props.textColor ? props.textColor : '#fff' };
+  margin: 4vh auto;
+  max-width: ${ props => props.maxWidth || '100%' };
   text-align: center;
   text-transform: uppercase;
 `;
@@ -77,7 +78,10 @@ const SummaryBlock = ({
         textColor={ textColor }
       >
         { title && 
-          <Title>
+          <Title
+            maxWidth={ maxWidth } 
+            textColor={ textColor }
+          >
             { title }
           </Title>
         }
@@ -95,8 +99,9 @@ const SummaryBlock = ({
               <Button
                 buttonAlign="center"
                 buttonBg={ themeProps.blue }
+                buttonBorder="none"
                 buttonColor="#fff"
-                buttonFontSize="24px"
+                buttonFontSize="28px"
                 buttonMargin="4vh"
                 href={ linkResolver(button.button_link) }
               >

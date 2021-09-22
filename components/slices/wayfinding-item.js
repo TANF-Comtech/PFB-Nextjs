@@ -79,6 +79,7 @@ const WayfindingItem = ({
   textColor
 }) => {
 
+  //console.log(path)
   return (
     <Container bgColor={ bgColor }>
       { path.__typename === '_ExternalLink' ? (
@@ -90,7 +91,7 @@ const WayfindingItem = ({
         </ContentContainer>        
       ) : (
         <ContentContainer>
-          <Link href={ linkResolver(path, false) } passHref>
+          <Link href={ linkResolver(path) } passHref>
             <a>
               <Title textColor={ textColor }>{ title }</Title>
             </a>
@@ -99,7 +100,7 @@ const WayfindingItem = ({
         </ContentContainer>
       )}
 
-      <Link href={ linkResolver(path, false) } passHref>
+      <Link href={ linkResolver(path) } passHref>
         <a>
           <Icon src={ BlueArrowWhiteBlock } alt="Blue Arrow" />
         </a>
