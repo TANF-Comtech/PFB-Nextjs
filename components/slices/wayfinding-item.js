@@ -79,7 +79,7 @@ const WayfindingItem = ({
   textColor
 }) => {
 
-  //console.log(path)
+  
   return (
     <Container bgColor={ bgColor }>
       { path.__typename === '_ExternalLink' ? (

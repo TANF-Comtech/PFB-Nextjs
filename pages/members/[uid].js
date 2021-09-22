@@ -81,15 +81,15 @@ export default function MembersPage({ page, preview }) {
   const { meta } = useContext(DefaultContext);
   const themeProps = useContext(ThemeContext)
 
-  console.log(member_content)
+  //console.log(member_content)
 
   return (
     <>
-      <script
+      {/* <script
         async
         defer
         src="https://static.cdn.prismic.io/prismic.js?new=true&repo=peopleforbikes"
-      ></script>
+      ></script> */}
       <SiteMetaCustom
         desc={
           member_content.main_content
@@ -281,7 +281,6 @@ export default function MembersPage({ page, preview }) {
                 </MainContent>
               )
             }            
-
           })
         }
 
@@ -326,8 +325,7 @@ export async function getServerSideProps({
     if (data.loggedIn) {
       const pageData = await getSingleMemberPage(params.uid, previewData);
 
-      if(pageData.member_content.body !== null ) {
-            
+      if (pageData.member_content.body !== null ) {
         pageData.member_content.body.map( slice => {
           if ( slice.type === 'biz_intel_hub' && slice.fields.length > 1) {
             slice.fields.reverse()
@@ -339,7 +337,7 @@ export async function getServerSideProps({
         props: {
           preview,
           page: pageData ?? null,
-        }
+        },
       };
     } else {
       return {
