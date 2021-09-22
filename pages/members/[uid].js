@@ -25,6 +25,7 @@ import Header1 from "../../components/primitives/h1";
 import BigTitleBanner from "../../components/content/big-title-banner";
 import Button from "../../components/primitives/button";
 import Grid from "../../components/global/grid";
+import ContentItemSimple from "../../components/content/content-item-simple"
 import WayfindingItem from "../../components/slices/wayfinding-item"
 import NumberedPillars from "../../components/content/numbered-pillars";
 
@@ -252,7 +253,7 @@ export default function MembersPage({ page, preview }) {
             }
 
             // NUMBERED PILLARS
-            if( slice.type === "mission_content"){
+            if( slice.type === "mission_content" ){
               return(
                 <NumberedPillars
                   payload={slice.fields}
@@ -260,6 +261,26 @@ export default function MembersPage({ page, preview }) {
                 />
               )
             }
+
+            // CONTENT LIST
+            if( slice.type === "content_list" ){
+              return(
+                <MainContent
+                  maxWidth="800px"
+                >
+                  { slice.fields.map( (item) => {
+                    return(
+                      <ContentItemSimple
+                        key={ randomID(1000000000) }
+                        path={ item.content_link }
+                        text={ item.content_description }
+                        title={ item.content_title }
+                      />                      
+                    )
+                  })}
+                </MainContent>
+              )
+            }            
 
           })
         }
