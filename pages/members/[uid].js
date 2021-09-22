@@ -29,7 +29,7 @@ import ContentItemSimple from "../../components/content/content-item-simple"
 import WayfindingItem from "../../components/slices/wayfinding-item"
 import NumberedPillars from "../../components/content/numbered-pillars";
 
-import WhiteArrow from "../../public/white-arrow.svg";
+import WhiteArrow from "../../public/white-arrow.svg"; 
 
 const IframeWrapper = styled.iframe`
   margin: 25px 0;
