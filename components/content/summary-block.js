@@ -1,8 +1,14 @@
-import styled from 'styled-components'
+import { useContext } from 'react';
+import styled, { ThemeContext } from 'styled-components'
+
+import { linkResolver } from '../../lib/utils'
+
 import MainContent from '../global/main-content'
+import Button from '../primitives/button'
 
 const Para = styled.div`
   margin: 20px 0;
+  text-align: ${ props => props.buttons ? 'center' : 'left' };
   
   @media screen and (min-width: 320px) {
     margin: calc(20px + 26 * ((100vw - 320px) / 880)) 0;
@@ -12,10 +18,24 @@ const Para = styled.div`
   }  
 
   p {
+    font-size: ${ props => props.fontSize && props.fontSize + ' !important' };
+    line-height: ${ props => props.lineHeight && props.lineHeight + ' !important' };
     margin-left: auto;
     margin-right: auto;
     max-width: ${ props => props.maxWidth || '100%' };
   }
+`
+
+const Title = styled.h2`
+  color: ${ props => props.textColor ? props.textColor : '#fff' };
+  margin: 4vh auto;
+  max-width: ${ props => props.maxWidth || '100%' };
+  text-align: center;
+  text-transform: uppercase;
+`;
+
+const Buffer = styled.div`
+  margin-bottom: ${ props => props.marginBottom ? props.marginBottom : '0' };
 `
 
 /**
@@ -23,28 +43,75 @@ const Para = styled.div`
  * 
  * A really simple paragraph, set off with big margins for landing pages. 
  * This could probably be used in a bunch of places.
+ * NOTE - the main text block is left justified unless you have a button
+ *  If button present, text is centered.
  *
  * @param { object } bgColor - background color of element
+ * @param { object } buttons - group of buttons from payload
  * @param { object } children - React child elements
- * @param { object } maxWidth - width of paragraph (default 100%;)
- * @param { object } textColor - color of text, duh
+ * @param { object } fontSize - size of the font you want
+ * @param { string } marginBottom - gives a little space if we need it
+ * @param { string } maxWidth - width of paragraph (default 100%;)
+ * @param { string } textColor - color of text, duh
+ * @param { string } title - text that goes above the summary block (optional)
  */
 
 const SummaryBlock = ({
   bgColor,
+  buttons,
   children,
+  fontSize,
+  lineHeight,
+  marginBottom,
   maxWidth,
-  textColor
+  textColor,
+  title
 }) => {
+  const themeProps = useContext(ThemeContext)
+
   return (
-    <MainContent
-      bgColor={ bgColor }
-      textColor={ textColor }
+    <Buffer
+      marginBottom={ marginBottom }
     >
-      <Para maxWidth={ maxWidth } >
-        { children }
-      </Para>
-    </MainContent>
+      <MainContent
+        bgColor={ bgColor }
+        textColor={ textColor }
+      >
+        { title && 
+          <Title
+            maxWidth={ maxWidth } 
+            textColor={ textColor }
+          >
+            { title }
+          </Title>
+        }
+        <Para 
+          buttons={ buttons }
+          fontSize={ fontSize }
+          lineHeight={ lineHeight }
+          maxWidth={ maxWidth } 
+        >
+          { children }
+        </Para>
+        { buttons &&
+          buttons.map( button => {
+            return (
+              <Button
+                buttonAlign="center"
+                buttonBg={ themeProps.blue }
+                buttonBorder="none"
+                buttonColor="#fff"
+                buttonFontSize="28px"
+                buttonMargin="4vh"
+                href={ linkResolver(button.button_link) }
+              >
+                { button.button_text }
+              </Button>
+            )
+          })
+        }
+      </MainContent>
+    </Buffer>
   )
 }
 

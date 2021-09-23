@@ -1,49 +1,101 @@
 import React, {useContext, useEffect, useState} from "react";
+import Link from "next/link"
 import Router from 'next/router'
-import styled from "styled-components";
+import styled, { ThemeContext } from "styled-components";
 import { Markup } from 'interweave'
-
-import Wrapper from '../components/global/wrapper'
-import InputButton from "../components/primitives/input-button";
-import {RedTextField} from '../components/primitives/text'
-import Spinner from '../components/global/spinner'
 
 import AuthContext from "../context/auth/auth-context"
 
+import Wrapper from '../components/global/wrapper'
+import MainContent from '../components/global/main-content'
+import InputButton from "../components/primitives/input-button";
+import { BasicTextField } from '../components/primitives/text'
+import Spinner from '../components/global/spinner'
+import BigTitleBanner from '../components/content/big-title-banner'
+import SiteMetaCustom from "../components/meta/site-meta-custom";
+import Header1 from "../components/primitives/h1"
+
+import SigninBG from "../public/promo/signin-bg.jpg"
+
+const ImageContainer = styled.section`
+  align-items: center;
+  background-image: url(${ SigninBG });
+  background-position: center center;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 80vh;
+  margin: 25px 0;
+  padding: 0 5vw;
+  text-align: center;
+
+  @media screen and (min-width: ${ props => props.theme.sm }) {
+    height: 70vh;
+  }
+`
+
 const LoginForm = styled.form`
+  background-color: rgba(255,255,255,0.85);
   display: flex;
   flex-basis: 100%; /* Stretch the signup all the way across the screen */
   flex-direction: column;
   justify-content: space-between;
-  width: 100%;
-
-  @media screen and (min-width: ${ props => props.theme.xs}) {
-    width: 75%;
-  }
-
-  @media screen and (min-width: ${ props => props.theme.sm}) {
-    width: 50%;
-  }  
+  padding: 25px 50px;
 `
-const WhiteButton = styled(InputButton)`
-  margin-top: 2vh;
-`;
 
-const Error = styled.p`
-  color:red;
-`;
-
-const LoginPending = styled.div`
+const ColorBox = styled.div`
+  background-color: rgba(255,255,255,0.85);
   display: flex;
   flex-basis: 100%; /* Stretch the signup all the way across the screen */
   flex-direction: column;
-  justify-content: center;
-  width:50%;
+  justify-content: space-between;
+  padding: 25px 50px;
+`
+
+const LoginContainer = styled.div`
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+
+  @media screen and (min-width: ${ props => props.theme.sm}) {
+    align-items: center;
+    flex-direction: row;
+  }
+`
+
+const Input = styled(BasicTextField)`
+  color: ${ props => props.theme.black };
+  width: 100%;
+`
+
+const Button = styled(InputButton)`
+  margin-top: 10px;
+  padding: 10px 20px;
+  width: 100%;
+
+  @media screen and (min-width: ${ props => props.theme.sm}) {
+    margin-left: 10px;
+    margin-top: 0;
+    max-width: 100px;
+    width: inherit;
+  }
+`;
+
+const Error = styled.p`
+  color: red;
+`;
+
+const Disclaimer = styled.p`
+  font-size: 14px;
+  line-height: 18px;
+  margin-top: 4vh;
 `
 
 function LoginPage() {
 
   const authContext = useContext(AuthContext)
+  const themeProps = useContext(ThemeContext)
 
   const [loading, updateLoading] = useState(false)
 
@@ -85,7 +137,7 @@ function LoginPage() {
     return response.json()
   }
 
-  const onLoginEmailSubmit = (email)=>{
+  const onLoginEmailSubmit = (email) =>{
     updateLoading(true)
     updateErrorState("")
     submitEmail(email).then(data => {
@@ -99,7 +151,7 @@ function LoginPage() {
     })
   }
 
-  const onLoginCodeSubmit = (code, email)=>{
+  const onLoginCodeSubmit = (code, email) =>{
     updateLoading(true)
     updateErrorState("")
     submitLoginCode(code, email).then(data => {
@@ -111,69 +163,101 @@ function LoginPage() {
         },
         "loggedIn":true
       });
-      Router.push('/members')
-      }else{
+      Router.push('/members/member-home')
+      }
+      else{
         updateErrorState(data.error)
         updateLoading(false)
       }     
-      })
+    })
   }
 
   return (
     <>
+      <SiteMetaCustom 
+        desc="Login To the PeopleForBikes Corporate Member Center"
+        title="Login | PeopleForBikes Corporate Member Center"
+        path="https://www.peopleforbikes.org/log-in"
+      />
       <Wrapper 
-        postTitle="People for Bikes Homepage"
-        isWide={ false }
+        postTitle="Log In to the PeopleForBikes Corporate Member Center"
+        isWide={ true }
       >
-        {!loading ? (
-        <>
-          {!loginPending ? (
+        <BigTitleBanner>
+          <Header1>Sign In</Header1>
+        </BigTitleBanner>
+        <ImageContainer>
+          <MainContent maxWidth="600px">
+          { !loading ? (
           <>
-            <h1>Login</h1>
-            <h2>Access the PeopleForBikes Member Center</h2>
-
+            { !loginPending ? (        
             <LoginForm>
-              <h3>Enter Your Email Below.</h3>
-              <p>If you are a corporate member you will be emailed an access code to login.</p>
-              <RedTextField onChange={(e)=>updateEmail(e.target.value)} placeholder="email"/>
-              {Boolean(errorState.length) && (
+              <p>If you are employed by a <Link href="/corporate-members"><a>coalition member company</a></Link>*, enter your company email to be sent an access code to sign in.</p>
+              <LoginContainer>
+                <Input
+                  onChange={ (e) => updateEmail(e.target.value) } 
+                  marginBottom="0"
+                  minWidth="200px"
+                  placeholder="Email Address"
+                />
+                <Button
+                  buttonBg={ themeProps.blue }
+                  buttonBgHover="rgba(255,255,255,1)"
+                  buttonBorder="none"
+                  buttonColor="#fff"
+                  buttonColorHover={ themeProps.blue }
+                  buttonText="Send"
+                  minWidth="25px"
+                  onClick={ () => { onLoginEmailSubmit(email) }}
+                />
+              </LoginContainer>
+              { Boolean(errorState.length) && (
                 <Markup content={ errorState } />
-              )}
-              <WhiteButton
-                buttonBg="rgba(255,255,255,0)"
-                buttonBgHover="rgba(255,255,255,1)"
-                buttonBorder="1px solid black"
-                buttonColor="black"
-                buttonColorHover="#404040"
-                buttonText="Submit"
-                onClick={()=>{onLoginEmailSubmit(email)}}
-              />
+              ) }
+              <Disclaimer>
+                * If you don’t work for a PeopleForBikes Coalition member company, you can sign up for our newsletter at the bottom of this page, <a href="https://ridespot.org/register">download our free Ride Spot app</a> and <a href="https://www.classy.org/give/117371">donate</a> on our individual supporter page.
+              </Disclaimer>
             </LoginForm>
-          </>
-          ) : (
-          <>
-            <LoginPending>
+            ) : (
+            <MainContent>
+            <LoginForm>
               <h5>Check Your Email For An Access Code And Enter It Below</h5>
               <p>Don't close this tab!</p>
-              <RedTextField onChange={(e)=>updateLoginCode(e.target.value)} placeholder="Login Code"/>
+              <LoginContainer>
+                <Input 
+                  onChange={ (e)=>updateLoginCode(e.target.value) } 
+                  marginBottom="0"
+                  minWidth="200px"
+                  placeholder="Login Code"
+                />
+                <Button
+                  buttonBg={ themeProps.blue }
+                  buttonBgHover="rgba(255,255,255,1)"
+                  buttonBorder="none"
+                  buttonColor="#fff"
+                  buttonColorHover={ themeProps.blue }
+                  buttonText="Login"
+                  minWidth="25px"
+                  onClick={()=>{onLoginCodeSubmit(code, email)}}
+                />
+              </LoginContainer>
               {Boolean(errorState.length) && (
                 <Markup content={ errorState } />
               )}
-              <WhiteButton
-                buttonBg="rgba(255,255,255,0)"
-                buttonBgHover="rgba(255,255,255,1)"
-                buttonBorder="1px solid black"
-                buttonColor="black"
-                buttonColorHover="#404040"
-                buttonText="Login Now"
-                onClick={()=>{onLoginCodeSubmit(code, email)}}
-              />
-            </LoginPending>
-          </>
+            </LoginForm>
+          </MainContent>
           )}
-        </>) : (
-          <Spinner />
-      )}
+          </>
+          ) : (
+            <ColorBox>
+            <Spinner 
+              bgColor="rgba(255,255,255,0)"
+              minHeight="20vh"
+            />
+            </ColorBox>
+          )}
+          </MainContent>
+        </ImageContainer>
       </Wrapper>
     </>
   )

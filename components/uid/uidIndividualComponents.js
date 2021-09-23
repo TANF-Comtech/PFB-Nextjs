@@ -10,7 +10,7 @@ export default function UidIndividualComponents({ landing_page }) {
     <>
       {
         // MEMBER CENTER PILLARS
-        landing_page._meta.uid === "members" && <MemberPillars />
+        // landing_page._meta.uid === "members" && <MemberPillars />
       }
 
       {

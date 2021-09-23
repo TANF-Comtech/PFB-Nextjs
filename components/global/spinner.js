@@ -18,10 +18,10 @@ const skChaseDotBefore = keyframes`
 
 const Background = styled.main`
   align-items: center;
-  background-color: white;
+  background-color: ${ props => props.bgColor ? props.bgColor : '#fff' };
   display: flex;
   justify-content: center;
-  min-height: 80vh;
+  min-height: ${ props => props.minHeight ? props.minHeight : '80vh' };
 `
 
 const Container = styled.section`
@@ -72,9 +72,15 @@ const Dot = styled.div`
  *
  */
 
-const Spinner = () => {
+const Spinner = ({
+  bgColor,
+  minHeight
+}) => {
   return (
-    <Background>
+    <Background
+      bgColor={ bgColor }
+      minHeight={ minHeight }
+    >
       <Container>
         <Dot />
         <Dot />

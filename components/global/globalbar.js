@@ -37,7 +37,7 @@ const NetworkControl = styled.div`
   text-transform: uppercase;
 
   &:after {
-    @media( min-width: ${props => props.theme.xs} ) {
+    @media( min-width: ${props => props.theme.sm} ) {
       content: "|";
       padding: 0 10px;
     }
@@ -46,7 +46,7 @@ const NetworkControl = styled.div`
 const MemberLink = styled.div`
   display: none;
 
-  @media( min-width: ${props => props.theme.xs}) {
+  @media( min-width: ${props => props.theme.sm}) {
     display: inline;
 
     a, a:hover, a:focus, a:visited {
@@ -180,7 +180,7 @@ const MobileHide = styled.span`
             <MemberLink>
               <Link href="/members">
                 <a>
-                  Member Center 
+                  Corporate Member Center 
                 </a>
               </Link>              
             </MemberLink>

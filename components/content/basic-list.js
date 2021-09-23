@@ -17,16 +17,16 @@ const ListItem = styled.h3`
 `
 
 /**
- * <List>
+ * <BasicList>
  * 
  * Just a generic list of items to loop through and display
- * This is meant to be a prominent list
+ * They look like a list of links
  *
  * @param { array } payload - response from Prismic API
  * @param { string } title - list title, optional
  * @param { string } textColor - hex value of whatever color you're looking for
  */
-const List = ({
+const BasicList = ({
   payload,
   textColor = "#333",
   title
@@ -57,4 +57,4 @@ const List = ({
   )
 }
 
-export default List
+export default BasicList

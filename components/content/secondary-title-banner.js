@@ -11,7 +11,7 @@ const Container = styled.section`
 
 const MainText = styled.h1`
   color: ${props => props.theme.red };
-  display: inline-block;
+  display: inline;
   font-weight: 700;
   margin: 0 0 0 0;
   text-transform: none;

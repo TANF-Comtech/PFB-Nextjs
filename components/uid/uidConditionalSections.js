@@ -4,13 +4,13 @@ import LocationsList from "../content/locations-list";
 import TopicsList from "../content/topics-list";
 import RidesList from "../content/rides-list";
 import TeamList from "../content/team-list";
-import List from "../content/list";
+import BasicList from "../content/basic-list";
 import JoinList from "../content/join-list";
 import GrantsPillars from "../content/grants-pillars";
 import EventsList from "../content/events-list";
 import PolicyPillars from "../content/policy-pillars";
 import StatsList from "../content/stats-list";
-import RedActionItem from "../slices/action-item-red";
+import WayfindingItem from "../slices/wayfinding-item";
 import MainContent from "../global/main-content";
 import SecondaryCampaign from "../global/secondary-campaign";
 
@@ -21,19 +21,6 @@ export default function ConditionalSections({
 }) {
   return (
     <>
-      {
-        // MEMBER CENTER PILLAR - Up Front
-        landing_page._meta.uid === "members" && (
-          <MainContent contentPadding="4vh 4vw 0 4vw">
-            <RedActionItem
-              path="/members/business-intelligence-hub"
-              title="Business Intelligence Hub"
-              text="Explore our dashboard for insights into the bicycle industry."
-            />
-          </MainContent>
-        )
-      }
-
       {
         // NEWS
         landing_page._meta.uid === "news" && (
@@ -89,7 +76,7 @@ export default function ConditionalSections({
       {
         // CAREERS
         landing_page._meta.uid === "careers" && (
-          <List
+          <BasicList
             payload={landing_page.data}
             textColor="#3E9FDC"
             title="Career Opportunities"
