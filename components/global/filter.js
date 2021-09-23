@@ -5,7 +5,7 @@ import { InstantSearch,
          Hits, 
          RefinementList } from 'react-instantsearch-dom';
 
-import { AlgoliaReactClient, ALGOLIA_INDEX_NAME } from '../../lib/algolia/algoliaClient'
+import { AlgoliaReactClient,  } from '../../lib/algolia/algoliaClient'
 
 const SearchContainer = styled.nav`
   background-color: ${ props => props.theme.lightestGray };
@@ -209,7 +209,7 @@ const HitContainer = styled.div`
    handleSearch 
 }) => {
 
-  const Hit = ({ hit }) => {
+ const Hit = ({ hit }) => {
     return (
       <HitContainer>
         <span>{hit.type}</span>

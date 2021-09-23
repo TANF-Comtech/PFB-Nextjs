@@ -6,41 +6,63 @@ import * as jsforce from "jsforce";
 import Grid from "../components/global/grid";
 import { dummyMembers } from "../components/dummydata";
 import CorporateMember from "../components/global/member-box";
-import BigTitleBanner from '../components/content/big-title-banner'
-import MainContent from '../components/global/main-content'
-import { AlgoliaIndex, AlgoliaReactClient } from '../lib/algolia/algoliaClient'
-import {InstantSearch, Hits, SearchBox, RefinementList, Pagination} from 'react-instantsearch-dom'
+import BigTitleBanner from "../components/content/big-title-banner";
+import MainContent from "../components/global/main-content";
+import { AlgoliaIndex, AlgoliaReactClient } from "../lib/algolia/algoliaClient";
+import { InstantSearch, SearchBox, connectHits } from "react-instantsearch-dom";
+import styled from "styled-components";
+import {CustomSearchBox} from '../components/global/search'
+
+const SearchInput = styled(SearchBox)`
+  form {
+    margin-bottom: 10px;
+  }
+`;
 
 export default function CorporateMembers({ data }) {
+  const Hits = ({ hits }) => (
+    <Grid>
+      {hits.map((hit) => {
+        if (hit.duesPaid) {
+          return (
+            <CorporateMember
+              key={hit.objectID}
+              name={hit.company}
+              url={hit.url}
+            />
+          );
+        }
+      })}
+    </Grid>
+  );
 
+  const CustomHits = connectHits(Hits);
 
   return (
     <Wrapper isWide={true}>
       <BigTitleBanner>
         <h1>Coalition</h1>
       </BigTitleBanner>
-      <InstantSearch
-        searchClient={AlgoliaReactClient}
-        indexName="MAINSITE"
-      >
-        <SearchBox />
-        <Hits hitComponent={} />
-      </InstantSearch>
-
       <MainContent>
-        <Grid>
-          {dummyMembers.map((member) => {
-            if (member.duesPaid) {
-              return <CorporateMember name={member.company} url={member.url} />;
-            }
-          })}
-        </Grid>
+        <InstantSearch
+          searchClient={AlgoliaReactClient}
+          indexName="PFB_COALITION_MEMBERS"
+        >
+          <CustomSearchBox
+            width={"50%"}
+            translations={{
+              placeholder: "SEARCH BY NAME",
+            }}
+          />
+          {/* <Grid> */}
+          <CustomHits />
+          {/* </Grid> */}
+        </InstantSearch>
       </MainContent>
       {/* {data} */}
     </Wrapper>
   );
 }
-
 
 export async function getStaticProps() {
   let pageData;
@@ -57,7 +79,7 @@ export async function getStaticProps() {
     });
   });
 
-  const algoliaMemberData = dummyMembers
+  const algoliaMemberData = dummyMembers;
   await AlgoliaIndex("PFB_COALITION_MEMBERS").saveObjects(algoliaMemberData);
 
   return {
