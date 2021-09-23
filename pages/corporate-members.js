@@ -1,17 +1,19 @@
 import React from "react";
 import Wrapper from "../components/global/wrapper";
+
 import { getAccessToken } from "../lib/salesforce/accessToken";
 import { salesforceInstanceURL } from "../lib/salesforce/checkEmailInSalesforce";
 import * as jsforce from "jsforce";
+
 import Grid from "../components/global/grid";
 import { dummyMembers } from "../components/dummydata";
 import CorporateMember from "../components/global/member-box";
 import BigTitleBanner from "../components/content/big-title-banner";
 import MainContent from "../components/global/main-content";
+
 import { AlgoliaIndex, AlgoliaReactClient } from "../lib/algolia/algoliaClient";
 import { InstantSearch, SearchBox, connectHits } from "react-instantsearch-dom";
-import { CustomSearchBox } from '../components/global/search'
-
+import { CustomSearchBox } from "../components/global/search";
 
 export default function CorporateMembers({ data }) {
   const Hits = ({ hits }) => (
