@@ -10,14 +10,8 @@ import BigTitleBanner from "../components/content/big-title-banner";
 import MainContent from "../components/global/main-content";
 import { AlgoliaIndex, AlgoliaReactClient } from "../lib/algolia/algoliaClient";
 import { InstantSearch, SearchBox, connectHits } from "react-instantsearch-dom";
-import styled from "styled-components";
-import {CustomSearchBox} from '../components/global/search'
+import { CustomSearchBox } from '../components/global/search'
 
-const SearchInput = styled(SearchBox)`
-  form {
-    margin-bottom: 10px;
-  }
-`;
 
 export default function CorporateMembers({ data }) {
   const Hits = ({ hits }) => (
