@@ -1,21 +1,22 @@
 import React from "react";
 import Wrapper from "../components/global/wrapper";
 
-import { getAccessToken } from "../lib/salesforce/accessToken";
-import { salesforceInstanceURL } from "../lib/salesforce/checkEmailInSalesforce";
-import * as jsforce from "jsforce";
-
 import Grid from "../components/global/grid";
 import { dummyMembers } from "../components/dummydata";
 import CorporateMember from "../components/global/member-box";
 import BigTitleBanner from "../components/content/big-title-banner";
 import MainContent from "../components/global/main-content";
+// import {getAccessToken} from '../lib/salesforce/accessToken'
 
 import { AlgoliaIndex, AlgoliaReactClient } from "../lib/algolia/algoliaClient";
-import { InstantSearch, SearchBox, connectHits } from "react-instantsearch-dom";
+import { InstantSearch, connectHits } from "react-instantsearch-dom";
 import { CustomSearchBox } from "../components/global/search";
 
-export default function CorporateMembers({ data }) {
+import * as jsforce from "jsforce";
+
+export default function CorporateMembers({ pageData }) {
+  console.log(pageData);
+
   const Hits = ({ hits }) => (
     <Grid>
       {hits.map((hit) => {
@@ -50,9 +51,7 @@ export default function CorporateMembers({ data }) {
               placeholder: "SEARCH BY NAME",
             }}
           />
-          {/* <Grid> */}
           <CustomHits />
-          {/* </Grid> */}
         </InstantSearch>
       </MainContent>
       {/* {data} */}
@@ -63,16 +62,18 @@ export default function CorporateMembers({ data }) {
 export async function getStaticProps() {
   let pageData;
 
-  getAccessToken().then((data) => {
-    const accessToken = data;
-    const sfConnection = new jsforce.Connection({
-      instanceUrl: salesforceInstanceURL,
-      version: "49.0",
-      accessToken: accessToken,
-    });
-    sfConnection.query(`SELECT * FROM Account`).then(function (res) {
-      pageData = res;
-    });
+  const sfConnection = new jsforce.Connection({
+    instanceUrl: process.env.SALESFORCE_INSTANCE_URL,
+    accessToken: process.env.SALESFORCE_ACCESS_TOKEN,
+  });
+
+  sfConnection.query("SELECT Id, Name  FROM Account", function (err, result) {
+    if (err) {
+      return console.error(err);
+    }
+
+    console.log(result.records.map((record) => record));
+    pageData = result;
   });
 
   const algoliaMemberData = dummyMembers;
@@ -80,7 +81,7 @@ export async function getStaticProps() {
 
   return {
     props: {
-      data: pageData ?? null,
+      page: pageData ?? null,
     },
   };
 }
