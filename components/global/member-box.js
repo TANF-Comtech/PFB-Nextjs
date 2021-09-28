@@ -30,16 +30,24 @@ export default function CoalitionMember({ hit }) {
               hit.Website.includes("https://") ||
               hit.Website.includes("HTTP://") ||
               hit.Website.includes("HTTPS://")) && (
-              <a href={hit.Website} style={{ color: "inherit" }}>
+              <a
+                href={hit.Website}
+                style={{ color: "inherit", textDecoration: "underline", fontWeight: 'bold' }}
+              >
                 {hit.Name}
               </a>
             )}
           {hit.Website &&
-            !(hit.Website.includes("http://") ||
+            !(
+              hit.Website.includes("http://") ||
               hit.Website.includes("https://") ||
               hit.Website.includes("HTTP://") ||
-              hit.Website.includes("HTTPS://")) && (
-              <a href={`https://${hit.Website}`} style={{ color: "inherit" }}>
+              hit.Website.includes("HTTPS://")
+            ) && (
+              <a
+                href={`https://${hit.Website}`}
+                style={{ color: "inherit", textDecoration: "underline", fontWeight: 'bold' }}
+              >
                 {hit.Name}
               </a>
             )}
