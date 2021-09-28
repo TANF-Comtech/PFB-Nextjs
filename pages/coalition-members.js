@@ -8,10 +8,7 @@ import MainContent from "../components/global/main-content";
 import styled from "styled-components";
 
 import { AlgoliaIndex, AlgoliaReactClient } from "../lib/algolia/algoliaClient";
-import {
-  InstantSearch,
-  connectHits,
-} from "react-instantsearch-dom";
+import { InstantSearch, connectHits } from "react-instantsearch-dom";
 import { CustomSearchBox } from "../components/global/search";
 import { FilterMenu } from "../components/global/filter";
 
@@ -33,7 +30,6 @@ const AlgoliaContainer = styled.div`
 `;
 
 export default function CorporateMembers() {
-
   const Hits = ({ hits }) => {
     return (
       <Grid>
@@ -109,8 +105,6 @@ export async function getStaticProps() {
     console.log("Access token refreshed");
     accessToken = newAccessToken;
   });
-
-
 
   const fetchedData = await sfConnection.query(
     "SELECT Id, Name, Website  FROM Account WHERE Coalition_Member__c = true",
