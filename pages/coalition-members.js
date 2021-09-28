@@ -11,7 +11,6 @@ import { AlgoliaIndex, AlgoliaReactClient } from "../lib/algolia/algoliaClient";
 import {
   InstantSearch,
   connectHits,
-  RefinementList,
 } from "react-instantsearch-dom";
 import { CustomSearchBox } from "../components/global/search";
 import { FilterMenu } from "../components/global/filter";
@@ -95,7 +94,7 @@ export async function getStaticProps() {
   });
 
   sfConnection.login(
-    process.env.SALESFORCE_AUTH_USER,
+    process.env.SALESFORCE_AUTH_USER2,
     process.env.SALESFORCE_AUTH_PASS,
     function (err, userInfo) {
       if (err) {
