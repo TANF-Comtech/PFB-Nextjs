@@ -6,20 +6,26 @@ import CorporateMember from "../components/global/member-box";
 import BigTitleBanner from "../components/content/big-title-banner";
 import MainContent from "../components/global/main-content";
 
+
 import { AlgoliaIndex, AlgoliaReactClient } from "../lib/algolia/algoliaClient";
-import { InstantSearch, connectHits } from "react-instantsearch-dom";
+import { InstantSearch, connectHits, RefinementList } from "react-instantsearch-dom";
 import { CustomSearchBox } from "../components/global/search";
+
 
 import * as jsforce from "jsforce";
 import { memberFormatter } from "../lib/algolia/memberFormatter";
 
+
 export default function CorporateMembers() {
+
   const Hits = ({ hits }) => {
+    return(
     <Grid>
       {hits.map((hit) => {
         return <CorporateMember key={hit.objectId} hit={hit} />;
       })}
-    </Grid>;
+      </Grid>
+    )
   };
 
   const CustomHits = connectHits(Hits);
@@ -34,6 +40,12 @@ export default function CorporateMembers() {
           searchClient={AlgoliaReactClient}
           indexName="PFB_COALITION_MEMBERS"
         >
+          <h3>Letter</h3>
+          <RefinementList
+            attribute="Letter"
+            limit={100}
+            showMore
+          />
           <CustomSearchBox
             width={"50%"}
             translations={{
