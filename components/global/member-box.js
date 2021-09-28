@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-
 const Box = styled.div`
   width: 100%;
   background-color: #d8d8d8;
@@ -20,14 +19,16 @@ const Company = styled.p`
   margin: 0;
 `;
 
-export default function CoalitionMember({ name, url }) {
+export default function CoalitionMember({ hit }) {
   return (
-    <Box>
-      <Company>
-        <a href={url} style={{ color: "inherit" }}>
-          {name}
-        </a>
-      </Company>
-    </Box>
+    <>
+      <Box>
+        <Company>
+          <a href={hit.Websit} style={{ color: "inherit" }}>
+            {hit.Name}
+          </a>
+        </Company>
+      </Box>
+    </>
   );
 }
