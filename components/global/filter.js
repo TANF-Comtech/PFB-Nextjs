@@ -105,7 +105,7 @@ const CustomSearchBox = styled(SearchBox)`
   }
 `
 
-const HitsAndFilters = styled.section`
+export const HitsAndFilters = styled.section`
   align-items: flex-start;
   display: flex;  
 `
@@ -129,7 +129,7 @@ const AllFilters = styled.div`
   }
 `
 
-const FilterMenu = styled(RefinementList)`
+export const FilterMenu = styled(RefinementList)`
   color: ${props=> props.theme.darkGray};
 
   label {

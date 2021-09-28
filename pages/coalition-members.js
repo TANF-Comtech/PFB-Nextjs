@@ -5,16 +5,29 @@ import Grid from "../components/global/grid";
 import CorporateMember from "../components/global/member-box";
 import BigTitleBanner from "../components/content/big-title-banner";
 import MainContent from "../components/global/main-content";
-
+import styled from 'styled-components'
 
 import { AlgoliaIndex, AlgoliaReactClient } from "../lib/algolia/algoliaClient";
 import { InstantSearch, connectHits, RefinementList } from "react-instantsearch-dom";
 import { CustomSearchBox } from "../components/global/search";
-
+import  { FilterMenu } from "../components/global/filter";
 
 import * as jsforce from "jsforce";
 import { memberFormatter } from "../lib/algolia/memberFormatter";
 
+const HitsAndFilters = styled.section`
+  display: flex;
+`
+
+const FilterContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 0 1vw;
+`
+
+const AlgoliaContainer = styled.div`
+  display: flex;
+`
 
 export default function CorporateMembers() {
 
@@ -35,26 +48,28 @@ export default function CorporateMembers() {
       <BigTitleBanner>
         <h1>Coalition</h1>
       </BigTitleBanner>
-      <MainContent>
+      <AlgoliaContainer>
         <InstantSearch
           searchClient={AlgoliaReactClient}
           indexName="PFB_COALITION_MEMBERS"
         >
-          <h3>Letter</h3>
-          <RefinementList
-            attribute="Letter"
-            limit={100}
-            showMore
-          />
-          <CustomSearchBox
-            width={"50%"}
-            translations={{
-              placeholder: "SEARCH BY NAME",
-            }}
-          />
-          <CustomHits />
+          <HitsAndFilters>
+            <FilterContainer>
+              <h3 style={{marginBottom: "10px"}}>Letter</h3>
+              <FilterMenu attribute="Letter" limit={5} showMore />
+            </FilterContainer>
+          </HitsAndFilters>
+          <MainContent>
+            <CustomSearchBox
+              width={"50%"}
+              translations={{
+                placeholder: "SEARCH BY NAME",
+              }}
+            />
+            <CustomHits />
+          </MainContent>
         </InstantSearch>
-      </MainContent>
+      </AlgoliaContainer>
     </Wrapper>
   );
 }
