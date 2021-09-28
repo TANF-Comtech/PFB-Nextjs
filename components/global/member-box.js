@@ -19,23 +19,35 @@ const Company = styled.p`
   margin: 0;
 `;
 
+const CompName = styled.p`
+  padding: 0 3vw;
+`
+
+const HyperCompName = styled.a`
+  font-weight: bold;
+  padding: 0 5vw;
+  &:hover {
+    color: inherit;
+  }
+`;
+
 export default function CoalitionMember({ hit }) {
   return (
     <>
       <Box>
         <Company>
-          {!hit.Website && hit.Name}
+          {!hit.Website && <CompName>{hit.Name}</CompName>}
           {hit.Website &&
             (hit.Website.includes("http://") ||
               hit.Website.includes("https://") ||
               hit.Website.includes("HTTP://") ||
               hit.Website.includes("HTTPS://")) && (
-              <a
+              <HyperCompName
+                style={{ textDecoration: "underline", color: "inherit" }}
                 href={hit.Website}
-                style={{ color: "inherit", textDecoration: "underline", fontWeight: 'bold' }}
               >
                 {hit.Name}
-              </a>
+              </HyperCompName>
             )}
           {hit.Website &&
             !(
@@ -44,12 +56,12 @@ export default function CoalitionMember({ hit }) {
               hit.Website.includes("HTTP://") ||
               hit.Website.includes("HTTPS://")
             ) && (
-              <a
+              <HyperCompName
+                style={{ textDecoration: "underline", color: "inherit" }}
                 href={`https://${hit.Website}`}
-                style={{ color: "inherit", textDecoration: "underline", fontWeight: 'bold' }}
               >
                 {hit.Name}
-              </a>
+              </HyperCompName>
             )}
         </Company>
       </Box>

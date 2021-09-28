@@ -5,40 +5,44 @@ import Grid from "../components/global/grid";
 import CorporateMember from "../components/global/member-box";
 import BigTitleBanner from "../components/content/big-title-banner";
 import MainContent from "../components/global/main-content";
-import styled from 'styled-components'
+import styled from "styled-components";
 
 import { AlgoliaIndex, AlgoliaReactClient } from "../lib/algolia/algoliaClient";
-import { InstantSearch, connectHits, RefinementList } from "react-instantsearch-dom";
+import {
+  InstantSearch,
+  connectHits,
+  RefinementList,
+} from "react-instantsearch-dom";
 import { CustomSearchBox } from "../components/global/search";
-import  { FilterMenu } from "../components/global/filter";
+import { FilterMenu } from "../components/global/filter";
 
 import * as jsforce from "jsforce";
 import { memberFormatter } from "../lib/algolia/memberFormatter";
 
 const HitsAndFilters = styled.section`
   display: flex;
-`
+`;
 
 const FilterContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin: 0 1vw;
-`
+`;
 
 const AlgoliaContainer = styled.div`
   display: flex;
-`
+`;
 
 export default function CorporateMembers() {
 
   const Hits = ({ hits }) => {
-    return(
-    <Grid>
-      {hits.map((hit) => {
-        return <CorporateMember key={hit.objectId} hit={hit} />;
-      })}
+    return (
+      <Grid>
+        {hits.map((hit) => {
+          return <CorporateMember key={hit.objectId} hit={hit} />;
+        })}
       </Grid>
-    )
+    );
   };
 
   const CustomHits = connectHits(Hits);
@@ -55,7 +59,7 @@ export default function CorporateMembers() {
         >
           <HitsAndFilters>
             <FilterContainer>
-              <h3 style={{marginBottom: "10px"}}>Letter</h3>
+              <h3 style={{ marginBottom: "10px" }}>Letter</h3>
               <FilterMenu attribute="Letter" limit={5} showMore />
             </FilterContainer>
           </HitsAndFilters>
@@ -75,27 +79,39 @@ export default function CorporateMembers() {
 }
 
 export async function getStaticProps() {
+  let accessToken = process.env.SALESFORCE_OAUTH2_TOKEN;
+  let refreshToken = process.env.SALESFORCE_REFRESH_TOKEN;
+
   const sfConnection = new jsforce.Connection({
+    loginUrl: process.env.SALESFORCE_AUTH_URL,
     oauth2: {
       clientId: process.env.SALESFORCE_CLIENT_ID,
       clientSecret: process.env.SALESFORCE_CLIENT_SECRET,
       redirectUri: process.env.SALESFORCE_REDIRECT_URI,
     },
     instanceUrl: process.env.SALESFORCE_INSTANCE_URL,
-    accessToken: process.env.SALESFORCE_OAUTH2_TOKEN,
-    refreshToken: process.env.SALESFORCE_REFRESH_TOKEN,
+    accessToken: accessToken,
+    refreshToken: refreshToken,
   });
 
-  sfConnection.oauth2.refreshToken(
-    process.env.SALESFORCE_REFRESH_TOKEN,
-    (err, results) => {
-      if (err) return err;
-      new jsforce.Connection({
-        instanceUrl: process.env.SALESFORCE_INSTANCE_URL,
-        accessToken: results.access_token,
-      });
+  sfConnection.login(
+    process.env.SALESFORCE_AUTH_USER,
+    process.env.SALESFORCE_AUTH_PASS,
+    function (err, userInfo) {
+      if (err) {
+        return console.error(err);
+      }
+      accessToken = sfConnection.accessToken;
+      refreshToken = sfConnection.refreshToken;
     }
   );
+
+  sfConnection.on("refresh", (newAccessToken, res) => {
+    console.log("Access token refreshed");
+    accessToken = newAccessToken;
+  });
+
+
 
   const fetchedData = await sfConnection.query(
     "SELECT Id, Name, Website  FROM Account WHERE Coalition_Member__c = true",
@@ -103,7 +119,6 @@ export async function getStaticProps() {
       if (err) {
         return err;
       }
-
       return result;
     }
   );
