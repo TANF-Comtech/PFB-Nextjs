@@ -198,50 +198,75 @@ export default function MembersPage({ page, preview }) {
 }
 
 export async function getServerSideProps({
-  req,
-  res,
   params,
   preview = false,
   previewData,
 }) {
-  const cookies = new Cookies(req, res);
-  const token = cookies.get("auth-token");
+  
+  const pageData = await getSingleMemberPage(params.uid, previewData);
 
-  if (token) {
-    const data = await auth0ValidateToken(token);
-
-    if (data.loggedIn) {
-      const pageData = await getSingleMemberPage(params.uid, previewData);
-
-      if(pageData.member_content.body !== null ) {
-            
-        pageData.member_content.body.map( slice => {
-          if ( slice.type === 'biz_intel_hub' && slice.fields.length > 1) {
-            slice.fields.reverse()
-          } 
-        })
-      }
-
-      return {
-        props: {
-          preview,
-          page: pageData ?? null,
-        },
-      };
-    } else {
-      return {
-        redirect: {
-          destination: "/log-in",
-          permanent: false,
-        },
-      };
-    }
-  } else {
-    return {
-      redirect: {
-        destination: "/log-in",
-        permanent: false,
-      },
-    };
+  if(pageData.member_content.body !== null ) {
+        
+    pageData.member_content.body.map( slice => {
+      if ( slice.type === 'biz_intel_hub' && slice.fields.length > 1) {
+        slice.fields.reverse()
+      } 
+    })
   }
-}
+
+  return {
+    props: {
+      preview,
+      page: pageData ?? null,
+    },
+  };
+} 
+
+// export async function getServerSideProps({
+//   req,
+//   res,
+//   params,
+//   preview = false,
+//   previewData,
+// }) {
+//   const cookies = new Cookies(req, res);
+//   const token = cookies.get("auth-token");
+
+//   if (token) {
+//     const data = await auth0ValidateToken(token);
+
+//     if (data.loggedIn) {
+//       const pageData = await getSingleMemberPage(params.uid, previewData);
+
+//       if(pageData.member_content.body !== null ) {
+            
+//         pageData.member_content.body.map( slice => {
+//           if ( slice.type === 'biz_intel_hub' && slice.fields.length > 1) {
+//             slice.fields.reverse()
+//           } 
+//         })
+//       }
+
+//       return {
+//         props: {
+//           preview,
+//           page: pageData ?? null,
+//         },
+//       };
+//     } else {
+//       return {
+//         redirect: {
+//           destination: "/log-in",
+//           permanent: false,
+//         },
+//       };
+//     }
+//   } else {
+//     return {
+//       redirect: {
+//         destination: "/log-in",
+//         permanent: false,
+//       },
+//     };
+//   }
+// }
