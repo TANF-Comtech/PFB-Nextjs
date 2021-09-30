@@ -76,6 +76,16 @@ export default function CorporateMembers() {
 export async function getStaticProps() {
   let accessToken = process.env.SALESFORCE_OAUTH2_TOKEN;
   let refreshToken = process.env.SALESFORCE_REFRESH_TOKEN;
+  let CurrentDate = new Date();
+
+
+  const MemberDate = (date) => {
+    date.setMonth(date.getMonth() - 6);
+    return date.toISOString().split("T")[0];
+  };
+
+  let MinSixMonths = MemberDate(CurrentDate);
+
 
   const sfConnection = new jsforce.Connection({
     loginUrl: process.env.SALESFORCE_AUTH_URL,
@@ -107,7 +117,7 @@ export async function getStaticProps() {
   });
 
   const fetchedData = await sfConnection.query(
-    "SELECT Id, Name, Website  FROM Account WHERE Coalition_Member__c = true",
+    `SELECT Id,Published_Name__c,Website FROM Account WHERE Do_not_publish_membership__c = false AND (Last_Membership_End_Date__c >= ${MinSixMonths} OR Last_Membership_End_Date_Child__c >= ${MinSixMonths})`,
     function (result, err) {
       if (err) {
         return err;
@@ -117,6 +127,7 @@ export async function getStaticProps() {
   );
 
   const memberData = fetchedData.records.map((record) => record);
+ 
 
   const algoliaFormattedData = memberFormatter(memberData);
   await AlgoliaIndex("PFB_COALITION_MEMBERS").saveObjects(algoliaFormattedData);
