@@ -1,12 +1,17 @@
-import styled from 'styled-components'
+import { useContext } from 'react'
+import styled, { ThemeContext } from 'styled-components'
+
+import { linkResolver } from '../../lib/utils'
 
 import MainContent from './main-content'
 import GridWide from './grid-wide'
+import Button from '../../components/primitives/button'
 
 const Box = styled.div`
   align-items: center;
   background-color: #fff;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   padding: 50px 25px;
 `
@@ -15,72 +20,77 @@ const GridImage = styled.img`
   max-width: 250px;
 `
 
-const Para = styled.p`
+const SectionTitle = styled.h3`
+  margin: 6vh auto;
   text-align: center;
 `
 
+const Para = styled.p`
+  margin: 4vh auto;
+`
+
+/**
+ * <VisualGrid>
+ * 
+ * Component that takes visuals + text and puts them into a grid
+ * 
+ * @param { array } payload - group of the img/text combos
+ * @param { string } title - visual grid heading
+ * 
+ */
 const VisualGrid = ({
   payload,
   title
 }) => {
+  const themeProps = useContext(ThemeContext)
+
   return (
     <MainContent maxWidth="800px">
-      <Para>
-        The PeopleForBikes Community Grant Program is funded by our partners in the bicycle industry. Thanks to the following participating members and their employees for making these awards possible:
-      </Para>
-      <GridWide
-        gridGap="1px"
-        gridGapColor="rgb(225,225,225)"
-      >
-        {/* <Box>
-          <GridImage 
-            alt="Batch Bicycles GridImage"
-            src={ BatchIcon }
-          />
-        </Box>
-        <Box>
-          <GridImage 
-            alt="Cannondale Bicycles GridImage"
-            src={ CannondaleIcon }
-          />
-        </Box>
-        <Box>
-          <GridImage 
-            alt="Giant Bicycles GridImage"
-            src={ GiantIcon }
-          />
-        </Box>
-        <Box>
-          <GridImage 
-            alt="Niner Bicycles GridImage"
-            src={ NinerIcon }
-          />
-        </Box>
-        <Box>
-          <GridImage 
-            alt="Shimano GridImage"
-            src={ ShimanoIcon }
-          />
-        </Box>
-        <Box>
-          <GridImage 
-            alt="Trek Bicycles GridImage"
-            src={ TrekIcon }
-          />
-        </Box>
-        <Box>
-          <GridImage 
-            alt="Vaast GridImage"
-            src={ VaastIcon }
-          />
-        </Box>
-        <Box>
-          <GridImage 
-            alt="Tern GridImage"
-            src={ TernIcon }
-          />
-        </Box> */}
-      </GridWide>
+      { title &&
+        <SectionTitle>
+          { title }
+        </SectionTitle>      
+      }
+      { payload && 
+        <GridWide
+          gridGap="1px"
+          gridGapColor="rgb(225,225,225)"
+        >    
+          { payload.map( (item) => {
+            return(
+              <Box>
+                { 
+                  item.graphic && 
+                  <GridImage 
+                    alt={ item.graphic.alt }
+                    src={ item.graphic.url }
+                  />
+                }
+                {
+                  item.button_link &&
+                  <Button
+                    buttonAlign="center"
+                    buttonBg={ themeProps.darkGray }
+                    buttonBorder="none"
+                    buttonColor="#fff"
+                    buttonFontSize="14px"
+                    buttonMargin="3vh"
+                    href={ linkResolver(item.button_link) }
+                  >
+                    { item.button_text ? item.button_text : 'View' }
+                  </Button>
+                }
+                {
+                  item.label &&
+                  <Para>
+                    { item.label }
+                  </Para>
+                }
+              </Box>
+            )
+          } ) }
+        </GridWide> 
+      }
     </MainContent>
   )
 }
