@@ -111,7 +111,7 @@ export default function MembersPage({ page, preview }) {
             : meta.path
         }
       />
-      <Wrapper postPath="/members" postTitle="Member Center" isWide="true">
+      <Wrapper postPath="/members/member-home" postTitle="Member Center" isWide="true">
 
         { // HEADER - either bold red text + header image OR 
           // big blue stripe with text
