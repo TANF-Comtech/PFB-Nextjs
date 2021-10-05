@@ -5,7 +5,7 @@ import { InstantSearch,
          Hits, 
          RefinementList } from 'react-instantsearch-dom';
 
-import { AlgoliaReactClient, ALGOLIA_INDEX_NAME } from '../../lib/algolia/algoliaClient'
+import { AlgoliaReactClient,  } from '../../lib/algolia/algoliaClient'
 
 const SearchContainer = styled.nav`
   background-color: ${ props => props.theme.lightestGray };
@@ -105,7 +105,7 @@ const CustomSearchBox = styled(SearchBox)`
   }
 `
 
-const HitsAndFilters = styled.section`
+export const HitsAndFilters = styled.section`
   align-items: flex-start;
   display: flex;  
 `
@@ -129,7 +129,7 @@ const AllFilters = styled.div`
   }
 `
 
-const FilterMenu = styled(RefinementList)`
+export const FilterMenu = styled(RefinementList)`
   color: ${props=> props.theme.darkGray};
 
   label {
@@ -209,7 +209,7 @@ const HitContainer = styled.div`
    handleSearch 
 }) => {
 
-  const Hit = ({ hit }) => {
+ const Hit = ({ hit }) => {
     return (
       <HitContainer>
         <span>{hit.type}</span>

@@ -71,7 +71,7 @@ const MenuClose = styled.div`
 `
 
 // Search Components
-const CustomSearchBox = styled(SearchBox)`
+export const CustomSearchBox = styled(SearchBox)`
   form {
     position: relative;
   }
@@ -85,7 +85,7 @@ const CustomSearchBox = styled(SearchBox)`
     line-height: 50px;
     margin-bottom: 2vh;
     padding: 1vh 60px 1vh 15px;
-    width: 100%;
+    width: ${props => props.width || "100%"};
   }
 
   button[type=submit] {
