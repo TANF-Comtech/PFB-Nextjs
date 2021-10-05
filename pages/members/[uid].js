@@ -28,6 +28,7 @@ import Grid from "../../components/global/grid";
 import ContentItemSimple from "../../components/content/content-item-simple"
 import WayfindingItem from "../../components/slices/wayfinding-item"
 import NumberedPillars from "../../components/content/numbered-pillars";
+import VisualGrid from "../../components/global/visual-grid"
 
 import WhiteArrow from "../../public/white-arrow.svg"; 
 
@@ -81,7 +82,7 @@ export default function MembersPage({ page, preview }) {
   const { meta } = useContext(DefaultContext);
   const themeProps = useContext(ThemeContext)
 
-  //console.log(member_content)
+  console.log(member_content)
 
   return (
     <>
@@ -262,6 +263,16 @@ export default function MembersPage({ page, preview }) {
               )
             }
 
+            // VISUAL GRID
+            if( slice.type === "visual_grid" ) {
+              return(
+                <VisualGrid
+                  payload={ slice.fields }
+                  title={ slice.primary.grid_title }
+                />
+              )
+            }
+
             // CONTENT LIST
             if( slice.type === "content_list" ){
               return(
@@ -310,49 +321,74 @@ export default function MembersPage({ page, preview }) {
 }
 
 export async function getServerSideProps({
-  req,
-  res,
   params,
   preview = false,
   previewData,
 }) {
-  const cookies = new Cookies(req, res);
-  const token = cookies.get("auth-token");
+  
+  const pageData = await getSingleMemberPage(params.uid, previewData);
 
-  if (token) {
-    const data = await auth0ValidateToken(token);
-
-    if (data.loggedIn) {
-      const pageData = await getSingleMemberPage(params.uid, previewData);
-
-      if (pageData.member_content.body !== null ) {
-        pageData.member_content.body.map( slice => {
-          if ( slice.type === 'biz_intel_hub' && slice.fields.length > 1) {
-            slice.fields.reverse()
-          } 
-        })
-      }
-
-      return {
-        props: {
-          preview,
-          page: pageData ?? null,
-        },
-      };
-    } else {
-      return {
-        redirect: {
-          destination: "/log-in",
-          permanent: false,
-        },
-      };
-    }
-  } else {
-    return {
-      redirect: {
-        destination: "/log-in",
-        permanent: false,
-      },
-    };
+  if(pageData.member_content.body !== null ) {
+        
+    pageData.member_content.body.map( slice => {
+      if ( slice.type === 'biz_intel_hub' && slice.fields.length > 1) {
+        slice.fields.reverse()
+      } 
+    })
   }
-}
+
+  return {
+    props: {
+      preview,
+      page: pageData ?? null,
+    },
+  };
+} 
+
+// export async function getServerSideProps({
+//   req,
+//   res,
+//   params,
+//   preview = false,
+//   previewData,
+// }) {
+//   const cookies = new Cookies(req, res);
+//   const token = cookies.get("auth-token");
+
+//   if (token) {
+//     const data = await auth0ValidateToken(token);
+
+//     if (data.loggedIn) {
+//       const pageData = await getSingleMemberPage(params.uid, previewData);
+
+//       if (pageData.member_content.body !== null ) {
+//         pageData.member_content.body.map( slice => {
+//           if ( slice.type === 'biz_intel_hub' && slice.fields.length > 1) {
+//             slice.fields.reverse()
+//           } 
+//         })
+//       }
+
+//       return {
+//         props: {
+//           preview,
+//           page: pageData ?? null,
+//         },
+//       };
+//     } else {
+//       return {
+//         redirect: {
+//           destination: "/log-in",
+//           permanent: false,
+//         },
+//       };
+//     }
+//   } else {
+//     return {
+//       redirect: {
+//         destination: "/log-in",
+//         permanent: false,
+//       },
+//     };
+//   }
+// }
