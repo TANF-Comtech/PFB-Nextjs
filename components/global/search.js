@@ -53,7 +53,7 @@ const MenuButtonCont = styled.section`
   right: 8vw;
   top: calc(90vh - 50px);
   transition: 0.4s ease-in-out;
-  transform: ${props => props.searchState ? "translateY(0)" : "translateY(180%)" };
+  transform: ${props => props.searchState ? "translateY(0)" : "translateY(200vh)" };
   width: 84vw;
   will-change: transform;
   z-index: ${props => props.theme.zIndex05};
