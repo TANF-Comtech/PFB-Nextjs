@@ -82,8 +82,6 @@ export default function MembersPage({ page, preview }) {
   const { meta } = useContext(DefaultContext);
   const themeProps = useContext(ThemeContext)
 
-  console.log(member_content)
-
   return (
     <>
       {/* <script
