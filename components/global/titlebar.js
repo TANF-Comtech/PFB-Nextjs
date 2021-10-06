@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import useScrollPosition from '@react-hook/window-scroll'
+import Link from "next/link"
+import useScrollPosition from '@react-hook/window-scroll';
 
 import Logo from "../global/logo"
 import Button from "../primitives/button"
@@ -60,7 +61,6 @@ const Title = styled.h2`
 
   a, a:visited, a:focus, a:active, a:hover {
     color: ${props => props.theme.black};
-    text-decoration: none;
   }
 `
 
@@ -103,11 +103,15 @@ function Titlebar({
         <Container>
           <Content>
             <LeftContent>
-              <Logo
-                logoMargin="0"
-                logoWidth="5vh"
-                logoViewbox="60 0 150 132"
-              />
+              <Link href="/">
+                <a>
+                  <Logo
+                    logoMargin="0"
+                    logoWidth="5vh"
+                    logoViewbox="60 0 150 132"
+                  />
+                </a>
+              </Link>
               <Title>
                 { children }
               </Title>

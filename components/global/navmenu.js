@@ -180,7 +180,7 @@ const MemberLi = styled.li`
 /**
  * <NavMenu>
  * 
- * This component powers the main navigation structure on the left side of the site.
+ * This component powers the main navigation structure on the site.
  * It's kind of a one-off, so you just plug this in and you should be good
  * 
  * @param { boolean } menuState - lifted state true/false toggle for menu opening/closing
@@ -327,7 +327,7 @@ const NavMenu = ({ menuState, handleMenu }) => {
               <MemberLi>
                 <Link href="/members">
                   <a onClick={ handleMenu }>
-                    Member Center 
+                    Corporate Member Center 
                   </a>
                 </Link> 
                 { !authContext.loggedIn ? (

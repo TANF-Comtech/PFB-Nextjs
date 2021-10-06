@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import numWords from 'num-words'
 
 import MainContent from '../global/main-content'
-import RedActionItem from '../slices/action-item-red'
+import WayfindingItem from '../slices/wayfinding-item'
 
 const DeepBlue = styled.section`
   background-color: ${props => props.theme.midnightBlue };
@@ -76,27 +76,27 @@ const MissionPillars = () => {
     <>
       <MainContent>
         <h2>How To Get Involved</h2>
-        <RedActionItem 
+        <WayfindingItem 
           path="/team"
           title="Meet Our Team"
           text="Discover who is helping to deliver your next ride."
         /> 
-        <RedActionItem 
+        <WayfindingItem 
           path="/subcommittees"
           title="Join a PeopleForBikes Subcommittee"
           text="Help guide the world of bicycling forward."
         />
-        <RedActionItem 
+        <WayfindingItem 
           path="/board-orientation"
           title="PeopleForBikes Board Orientation"
           text="Learn how to effectively contribute to our organization."
         />        
-        <RedActionItem 
+        <WayfindingItem 
           path="/board"
           title="Discover our Board"
           text="Our advisors come from all over the world of biking."
         />
-        <RedActionItem 
+        <WayfindingItem 
           path="/coalition-members"
           title="Meet Our Coalition Members"
           text="See which companies support our mission directly."

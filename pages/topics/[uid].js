@@ -24,7 +24,7 @@ import SummaryBlock from '../../components/content/summary-block'
 import Accordion from '../../components/global/accordion'
 import Button from '../../components/primitives/button'
 import SecondaryTitleBanner from '../../components/content/secondary-title-banner'
-import RedActionItem from '../../components/slices/action-item-red'
+import WayfindingItem from '../../components/slices/wayfinding-item'
 
 const SpacedHeading = styled.h2`
   margin: 4vh 0;
@@ -211,7 +211,7 @@ export default function TopicPage({
                   {
                     slice.fields && slice.fields.map( (pillar) => {
                       return(
-                        <RedActionItem 
+                        <WayfindingItem 
                           key={ randomID(894589778) }
                           path={ pillar.pillars }
                           title={ pillar.pillars.title[0].text }

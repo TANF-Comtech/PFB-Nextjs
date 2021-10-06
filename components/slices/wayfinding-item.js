@@ -4,7 +4,7 @@ import Link from "next/link"
 
 import { linkResolver } from '../../lib/utils'
 
-import RedArrowWhiteBlock from '../../public/red-arrow-white-block.svg'
+import BlueArrowWhiteBlock from '../../public/blue-arrow-white-block.svg'
 
 const Container = styled.section`
   align-items: center;
@@ -61,7 +61,7 @@ const Text = styled.p`
 `
 
 /**
- * <RedActionItem>
+ * <WayfindingItem>
  * 
  * This creates an red background with a title and text next to it.
  *
@@ -71,7 +71,7 @@ const Text = styled.p`
  * @param { string } text - content to be shown
  * @param { string } textColor - duh
  */
-const RedActionItem = ({
+const WayfindingItem = ({
   bgColor,
   path,
   title,
@@ -79,6 +79,7 @@ const RedActionItem = ({
   textColor
 }) => {
 
+  
   return (
     <Container bgColor={ bgColor }>
       { path.__typename === '_ExternalLink' ? (
@@ -90,7 +91,7 @@ const RedActionItem = ({
         </ContentContainer>        
       ) : (
         <ContentContainer>
-          <Link href={ linkResolver(path, false) } passHref>
+          <Link href={ linkResolver(path) } passHref>
             <a>
               <Title textColor={ textColor }>{ title }</Title>
             </a>
@@ -99,13 +100,13 @@ const RedActionItem = ({
         </ContentContainer>
       )}
 
-      <Link href={ linkResolver(path, false) } passHref>
+      <Link href={ linkResolver(path) } passHref>
         <a>
-          <Icon src={ RedArrowWhiteBlock } alt="White Arrow" />
+          <Icon src={ BlueArrowWhiteBlock } alt="Blue Arrow" />
         </a>
       </Link>
     </Container>
   )
 }
 
-export default RedActionItem
+export default WayfindingItem
