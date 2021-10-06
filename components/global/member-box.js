@@ -20,6 +20,8 @@ const Company = styled.p`
 `;
 
 const CompName = styled.p`
+  font-weight: bold;
+  margin-bottom: 0;
   padding: 0 3vw;
 `
 

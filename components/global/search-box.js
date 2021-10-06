@@ -1,6 +1,16 @@
 import styled from 'styled-components'
 import { SearchBox } from 'react-instantsearch-dom';
 
+/**
+ * <CustomSearchBox>
+ * 
+ * Overrides Algolia Searchbox instance to match PFB styles
+ * 
+ * @param { string } translation - placeholder text 
+ * @param { string } width - says how long the search box should be (default 100)
+ * 
+ */
+
 const CustomSearchBox = styled(SearchBox)`
   form {
     position: relative;
@@ -15,7 +25,11 @@ const CustomSearchBox = styled(SearchBox)`
     line-height: 50px;
     margin-bottom: 2vh;
     padding: 1vh 60px 1vh 15px;
-    width: ${props => props.width || "100%"};
+    width: "100%";
+
+    @media (min-width: ${props => props.theme.sm }) {
+      width: ${props => props.width || "100%"};
+    }
   }
 
   button[type=submit] {
