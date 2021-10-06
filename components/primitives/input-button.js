@@ -17,7 +17,7 @@ const Button = styled.input`
   font-family: ${props => props.theme.montserrat};
   font-size: 14px;
   font-weight: 700;
-  min-width: 200px;
+  min-width: ${ props => props.minWidth ? props.minWidth : '200px' };
   margin: 0;
   padding: 10px 35px;
   text-align: center;
@@ -61,25 +61,27 @@ const Button = styled.input`
  * @param {string} buttonPosition - uses { left | center | right } to move button container
  * @param {string} buttonText - because <input> is a void element, we can't pass in text, must be a prop instead
  * @param {string} className - helps styled-components extend, and obviously passes a class 
+ * @param {string} margin - how much margin (default is 1vh on bottom)
+ * @param {string} minWidth - how wide should it go (default is 300px)
  * @param {string} name - input name param, just passed down
  * 
  * #################!!!!!!!!####################
  * readOnly flag on component in place because no real data handling has been set up
  * #################!!!!!!!!####################
  */
-function InputButton(
-  { buttonBg, 
-    buttonBgHover,
-    buttonBorder, 
-    buttonColor, 
-    buttonColorHover,
-    buttonPosition,
-    buttonText,
-    className,
-    name,
-    onClick
-    }) {
-
+function InputButton({ 
+  buttonBg, 
+  buttonBgHover,
+  buttonBorder, 
+  buttonColor, 
+  buttonColorHover,
+  buttonPosition,
+  buttonText,
+  className,
+  minWidth,
+  name,
+  onClick
+}) {
   return (
     <>
       <Container buttonPosition={ buttonPosition }>
@@ -90,6 +92,7 @@ function InputButton(
           buttonColor={ buttonColor } 
           buttonColorHover={ buttonColorHover }
           className={ className }
+          minWidth={ minWidth }
           name={ name }
           value={ buttonText }
           readOnly

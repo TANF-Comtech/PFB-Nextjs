@@ -4,6 +4,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import Wrapper from "../components/global/wrapper";
 import styled, { ThemeContext } from "styled-components";
 
+import SiteMetaCustom from "../components/meta/site-meta-custom"
 import MainContent from "../components/global/main-content"
 
 const RevInp = styled.input`
@@ -99,9 +100,14 @@ export default function Payments() {
 
   return (
     <>
+      <SiteMetaCustom
+        desc="PeopleForBikes corporate dues payments can be accepted through this facility up to $3000/year. Click to learn more."
+        title="Dues Payment= | PeopleForBikes Corporate Member Center"
+        path="https://www.peopleforbikes.org/payments"
+      />
       <Wrapper 
         postTitle="Corporate Members Dues Payments" 
-        isWide={false}
+        isWide={ false }
       >
         <h2>Corporate Members Dues Payment</h2>
         <p>

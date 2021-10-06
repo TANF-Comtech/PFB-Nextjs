@@ -37,8 +37,6 @@ export default function useMetadata( dataObject ) {
 
   // Check for SEO-specific overrides, set if they are present (only run once)
   useEffect(() => {
-
-    console.log(dataObject)
     
     // Title
     if ( dataObject.seo_title ) {
