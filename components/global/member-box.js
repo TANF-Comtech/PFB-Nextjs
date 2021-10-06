@@ -61,6 +61,7 @@ export default function CoalitionMember({ hit }) {
               <HyperCompName
                 style={{ textDecoration: "underline", color: "inherit" }}
                 href={`https://${hit.Website}`}
+                target="_blank"
               >
                 {hit.Name}
               </HyperCompName>
