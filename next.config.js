@@ -1,9 +1,22 @@
 module.exports = {
   
-  // Environments - should be handled with environmental variables
+  // Environments - should be handled with environmental variables in webpack 5
   // Talk with your project lead
 
-  // Images
+  // Asset handling
+  webpack: (config, options) => {
+    config.module.rules.push({
+        test: /\.(jpe?g|png|svg|gif|ico|eot|ttf|woff|woff2|mp4|pdf|webm|txt)$/,
+        type: 'asset/resource',
+        generator: {
+            filename: 'static/chunks/[path][name].[hash][ext]'
+        },
+    });
+
+    return config;
+  },
+
+  // To use next/images...
   images: {
     deviceSizes: [320, 380, 480, 768, 980, 1200, 1600],
     domains: ['*.peopleforbikes.org']
