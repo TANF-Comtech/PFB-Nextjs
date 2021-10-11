@@ -1594,7 +1594,7 @@
     "@types/raf-schd" "^4.0.0"
     raf-schd "^4.0.2"
 
-"@react-hook/size@^2.1.0":
+"@react-hook/size@^2.1.2":
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/@react-hook/size/-/size-2.1.2.tgz#87ed634ffb200f65d3e823501e5559aa3d584451"
   integrity sha512-BmE5asyRDxSuQ9p14FUKJ0iBRgV9cROjqNG9jT/EjCM+xHha1HVqbPoT+14FQg1K7xIydabClCibUY4+1tw/iw==
@@ -1617,7 +1617,7 @@
     "@react-hook/event" "^1.2.1"
     "@react-hook/throttle" "^2.2.0"
 
-"@react-hook/window-size@^3.0.6":
+"@react-hook/window-size@^3.0.7":
   version "3.0.7"
   resolved "https://registry.yarnpkg.com/@react-hook/window-size/-/window-size-3.0.7.tgz#00d176e7a8eb55814e161eae34aae20afbcbe35d"
   integrity sha512-bK5ed/jN+cxy0s1jt2CelCnUt7jZRseUvPQ22ZJkUl/QDOsD+7CA/6wcqC3c0QweM/fPBRP6uI56TJ48SnlVww==
