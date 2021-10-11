@@ -1,7 +1,5 @@
 import { useState } from 'react'
 import Head from 'next/head'
-import Router from 'next/router'
-import withFBQ from "next-fbq"
 import { ThemeProvider } from 'styled-components'
 import { ApolloProvider } from '@apollo/client'
 import { useApollo } from '../lib/apollo/apolloClient'
@@ -103,4 +101,4 @@ const MyApp = ({ Component, pageProps, router }) => {
   )
 }
 
-export default withFBQ("3047515995261591", Router)(MyApp)
+export default MyApp
