@@ -4,22 +4,27 @@ module.exports = {
   // Talk with your project lead
 
   // Asset handling
-  webpack: (config, options) => {
-    config.module.rules.push({
-        test: /\.(jpe?g|png|svg|gif|ico|eot|ttf|woff|woff2|mp4|pdf|webm|txt)$/,
-        type: 'asset/resource',
-        generator: {
-            filename: 'static/chunks/[path][name].[hash][ext]'
-        },
-    });
+  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
 
+    // SVG handler, inlines everything under 200KB
+    config.module.rules.push({
+      test: /\.svg$/,
+      type: 'asset',
+      parser: {
+        dataUrlCondition: {
+          maxSize: 200 * 1024
+        }
+      },
+      use: 'svgo-loader'
+    });
+    
     return config;
   },
 
   // To use next/images...
   images: {
     deviceSizes: [320, 380, 480, 768, 980, 1200, 1600],
-    domains: ['*.peopleforbikes.org']
+    domains: ['*.peopleforbikes.org', 'localhost', '*.prismic.io']
   },
 
   // Redirects
