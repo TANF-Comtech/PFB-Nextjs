@@ -94,6 +94,7 @@ const GrantsIconGrid = () => {
             src={ VaastIcon }
           />
         </Box>
+        <Box></Box>
       </GridWide>
     </MainContent>
   )
