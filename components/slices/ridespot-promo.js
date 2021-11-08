@@ -1,11 +1,12 @@
 import React from "react";
 import styled from "styled-components";
+import Image from "next/image"
 
 import { randomID } from "../../lib/utils";
 
 import RideSpotRide from "./ridespot-ride";
 
-import RideSpotBg1 from "../../public/ridespot-bg.jpg";
+import RideSpotBg1 from "../../public/RidespotBg.jpg";
 import RideSpotLogo from "../../public/RideSpotRidesLogo.svg";
 
 const Bg = styled.div`
@@ -17,24 +18,11 @@ const Bg = styled.div`
 const BgImage = styled.section`
   align-items: center;
   background-image: url(${RideSpotBg1});
-  height: 30rem;
   background-position: center center;
   background-size: cover;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  margin-bottom: 1vh;
-  /* padding: ${(props) => (props.payload ? "3vh 0 18vh 0" : "3vh 0")}; */
-
-  h1 {
-    color: #fff;
-  }
-  @media screen and (max-width: 768px) {
-   height: 20rem;
-  }
-  @media screen and (max-width: 480px) {
-   height: 10rem;
-  }
 `;
 
 const RSTitle = styled.h2`
@@ -71,7 +59,7 @@ const RSDeck = styled.h3`
   }
 `;
 
-const RSLogoContainer = styled.img`
+const RSLogoContainer = styled.div`
   margin: 0 auto;
   max-width: 310px;
 
@@ -84,6 +72,7 @@ const RSLogoContainer = styled.img`
     max-width: none;
   }
 `;
+
 // Downloads
 const RSDownload = styled.section`
   align-items: center;
@@ -161,9 +150,16 @@ const RideSpotPromo = ({ isLocal = false, payload }) => {
   return (
     <Bg>
       <RSLink href={"https://ridespot.org/"}>
-        <BgImage payload={payload}>
-          <RSLogoContainer alt="RideSpot Logo" src={RideSpotLogo} />
-        </BgImage>
+        <Image
+          alt="Ride Spot Logo"
+          src={ RideSpotLogo }
+          layout="fill"
+          objectFit="cover"
+          quality={ 80 }
+          width={ 300 }
+          height={ 150 }
+        />
+        {/* <RSLogoContainer alt="RideSpot Logo" src= /> */}
       </RSLink>
       <RSTitle>
         <RSLink href={"https://ridespot.org/"}>
