@@ -24,7 +24,7 @@ module.exports = {
   // To use next/images...
   images: {
     deviceSizes: [320, 380, 480, 768, 980, 1200, 1600],
-    domains: ['*.peopleforbikes.org', 'localhost', '*.prismic.io']
+    domains: ['*.peopleforbikes.org', 'localhost', 'images.prismic.io']
   },
 
   // Redirects
