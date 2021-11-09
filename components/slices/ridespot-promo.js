@@ -116,13 +116,13 @@ const RideSpotPromo = ({
             quality={ 80 }
           />
         </RSHeaderBGContainer>  
-        <RSLogo
+        {/* <RSLogo
           alt="Ride Spot Logo"
           src={ RideSpotLogo }
           quality={ 80 }
           width={ 400 }
           height={ 120 }
-        />
+        /> */}
       </RSHeaderContainer>
 
       <RSTitle>
