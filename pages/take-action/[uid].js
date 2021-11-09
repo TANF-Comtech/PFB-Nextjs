@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import ErrorPage from "next/error";
+import Image from "next/image";
 import styled from "styled-components";
 
 import { RichText } from "prismic-reactjs";
@@ -13,7 +13,7 @@ import SiteMetaCustom from "../../components/meta/site-meta-custom";
 import MainContent from "../../components/global/main-content";
 import Promo from "../../components/slices/promo";
 
-import ResearchPromo from "../../public/ridespot-bg.jpg";
+// import ResearchPromo from "../../public/ridespot-bg.jpg";
 
 import FormImg01 from "../../public/form-images/PFB_Forms_01.jpg";
 import FormImg02 from "../../public/form-images/PFB_Forms_02.jpg";
@@ -79,9 +79,6 @@ const ImageContainer = styled.div`
 `;
 
 export default function ActionForms({ page, preview }) {
-  if (!page || page === null) {
-    return <ErrorPage statusCode={404} />;
-  }
 
   // Destructure page payload and meta from global context
   const { action } = page;
@@ -156,9 +153,11 @@ export default function ActionForms({ page, preview }) {
           <FlexContainer>
             { action.image_selection && <>
               <ImageContainer>
-                <img
+                <Image
                   src={imageSelection}
                   alt="Bike centric image with people present"
+                  height={ 450 }
+                  width={ 450 }
                 />
               </ImageContainer>
               </>
@@ -183,12 +182,12 @@ export default function ActionForms({ page, preview }) {
           </FlexContainer>
         </MainContent>
 
-        <Promo
+        {/* <Promo
           bigWords="Ride Spot"
           path="/rides"
           smallWords="Find Your Next Ride With"
           source={ResearchPromo}
-        />
+        /> */}
       </Wrapper>
     </>
   );
