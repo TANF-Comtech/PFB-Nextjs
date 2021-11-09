@@ -10,24 +10,22 @@ import RideSpotLogo from "../../public/RideSpotRidesLogo.svg";
 const RSContainer = styled.section`
   background-color: ${(props) => props.theme.lightestGray};
   margin-bottom: 2vh;
-  padding: 6vh 2vw 8vh 2vw !important;
+  padding: 6vh 0 8vh 0 !important;
 `;
 
 const RSHeaderContainer = styled.a`
   display: block;
+  width: 100%;
 `
 
 const RSHeaderBGContainer = styled.section`
   display: block;
+  position: relative;
   height: 50vh;
   width: 100vw;
-  z-index: ${ props => props.theme.zIndex01 };
 `;
 
 const RSLogo = styled(Image)`
-  display: absolute;
-  top: 50%;
-  transform: translateY(-50%);
 `
 
 const RSTitle = styled.h2`
@@ -118,13 +116,13 @@ const RideSpotPromo = ({
             quality={ 80 }
           />
         </RSHeaderBGContainer>  
-        {/* <RSLogo
+        <RSLogo
           alt="Ride Spot Logo"
           src={ RideSpotLogo }
           quality={ 80 }
-          width={ 300 }
-          height={ 150 }
-        /> */}
+          width={ 400 }
+          height={ 120 }
+        />
       </RSHeaderContainer>
 
       <RSTitle>
