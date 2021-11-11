@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
-import Arrow from '../../public/arrow.png'
+import Arrow from '../../public/red-arrow.svg'
 import PinImg from '../../public/ridespot-pin.svg'
-import MapImg from '../../public/ridespot-map.jpg'
+import MapImg from '../../public/ridespot-map.svg'
 
 const RSRide = styled.a`
   background-color: ${props => props.theme.midnightBlue };
