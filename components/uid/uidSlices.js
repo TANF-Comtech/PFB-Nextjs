@@ -24,6 +24,7 @@ export default function UidSlices({ landing_page }) {
 
   if (landing_page.body) {
     Slice = landing_page.body.map((slice) => {
+      
       // CONTENT BLOCK
       if (slice.__typename === "Landing_pageBodyContent_block") {
         return (
