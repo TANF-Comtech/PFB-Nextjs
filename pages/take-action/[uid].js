@@ -1,5 +1,6 @@
-import { useContext } from "react";
+import { useContext, useEffect, useRef } from "react";
 import Image from "next/image";
+import { useRouter } from 'next/router'
 import styled from "styled-components";
 
 import { RichText } from "prismic-reactjs";
@@ -84,6 +85,7 @@ export default function ActionForms({ page, preview }) {
   const { action } = page;
   const { meta } = useContext(DefaultContext);
 
+  // Image handling
   let imageSelection;
   if (action.image_selection) {
     switch (action.image_selection) {
@@ -116,13 +118,27 @@ export default function ActionForms({ page, preview }) {
     }
   }
 
+  // An issue with SSR is that JS embed scripts only fire on first visit
+  // If a user continues to navigate around a site, the embeds disappear
+  // We can access the router and force the scripts to build into a ref on each load
+  const router = useRouter()
+  const sparkIframe = useRef()
+
+  useEffect(() => {
+    const frm = document.createElement('script')
+    action.form_id && (
+      frm.src = `https://action.peopleforbikes.org/assets/js/widget.js/?id=${action.form_id}`
+    )
+    sparkIframe.current.appendChild(frm)
+  }, [router])
+
   return (
     <>
-      <script
+      {/* <script
         async
         defer
         src="https://static.cdn.prismic.io/prismic.js?new=true&repo=peopleforbikes"
-      ></script>
+      ></script> */}
       <SiteMetaCustom
         desc={
           action.main_content
@@ -169,13 +185,8 @@ export default function ActionForms({ page, preview }) {
                   <div id="pb-root" className="spkactionform"></div>
                   <script
                     src="https://code.jquery.com/jquery-3.5.1.min.js"
-                    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
-                    crossOrigin="anonymous"
-                  ></script>
-                  <script
-                    src={`https://action.peopleforbikes.org/assets/js/widget.js/?id=${action.form_id}`}
-                    type="text/javascript"
                   />
+                  <div ref={sparkIframe} />
                 </>
               )}
             </FormContainer>
