@@ -19,9 +19,6 @@ const RSHeaderContainer = styled.a`
   width: 100%;
 `
 
-const RSLogo = styled(Image)`
-`
-
 const RSTitle = styled.h2`
   font-size: 36pt;
   line-height: 70px;
@@ -106,7 +103,7 @@ const RideSpotPromo = ({
           imgsrc={ RideSpotBg }
           height='70vh'
         >
-          <RSLogo
+          <Image
             alt="Ride Spot Logo"
             src={ RideSpotLogo }
             quality={ 80 }
