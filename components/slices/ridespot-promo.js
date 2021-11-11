@@ -3,6 +3,7 @@ import Image from "next/image"
 
 import { randomID } from "../../lib/utils";
 import RideSpotRide from "./ridespot-ride";
+import BgImage from '../primitives/bg-image'
 
 import RideSpotBg from "../../public/RidespotBg.jpg";
 import RideSpotLogo from "../../public/RideSpotRidesLogo.svg";
@@ -17,13 +18,6 @@ const RSHeaderContainer = styled.a`
   display: block;
   width: 100%;
 `
-
-const RSHeaderBGContainer = styled.section`
-  display: block;
-  position: relative;
-  height: 50vh;
-  width: 100vw;
-`;
 
 const RSLogo = styled(Image)`
 `
@@ -107,15 +101,11 @@ const RideSpotPromo = ({
         href={"https://ridespot.org/"} 
         passHref
       >
-        <RSHeaderBGContainer>
-          <Image
-            alt="Ride Spot background of mountains"
-            src={ RideSpotBg }
-            layout="fill"
-            objectFit="cover"
-            quality={ 80 }
-          />
-        </RSHeaderBGContainer>  
+        <BgImage
+          imgalt="Ride Spot background of blue mountains"
+          imgsrc={ RideSpotBg }
+          height='70vh'
+        />
         {/* <RSLogo
           alt="Ride Spot Logo"
           src={ RideSpotLogo }
