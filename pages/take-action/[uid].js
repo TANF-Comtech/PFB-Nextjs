@@ -13,7 +13,7 @@ import SiteMetaCustom from "../../components/meta/site-meta-custom";
 import MainContent from "../../components/global/main-content";
 import Promo from "../../components/slices/promo";
 
-// import ResearchPromo from "../../public/ridespot-bg.jpg";
+import ResearchPromo from "../../public/RidespotBg.jpg";
 
 import FormImg01 from "../../public/form-images/PFB_Forms_01.jpg";
 import FormImg02 from "../../public/form-images/PFB_Forms_02.jpg";
@@ -182,12 +182,12 @@ export default function ActionForms({ page, preview }) {
           </FlexContainer>
         </MainContent>
 
-        {/* <Promo
+        <Promo
           bigWords="Ride Spot"
           path="/rides"
           smallWords="Find Your Next Ride With"
           source={ResearchPromo}
-        /> */}
+        />
       </Wrapper>
     </>
   );
