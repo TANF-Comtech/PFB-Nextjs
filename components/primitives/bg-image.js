@@ -2,11 +2,17 @@ import Image from "next/image"
 import styled from 'styled-components'
 
 const Container = styled.section`
-  display: block;
+  align-items: ${ props => props.alignItems };
+  display: flex;
+  justify-content: ${ props => props.justifyContent };
   position: relative;
   height: ${ props => props.height };
   width: ${ props => props.width };
 `;
+
+const InnerContainer = styled.div`
+  z-index: ${ props => props.theme.zIndex01 };
+`
 
 /**
  * <BgImage>
@@ -14,6 +20,8 @@ const Container = styled.section`
  * The new next/image optimization setup handles background images oddly
  * It requires they be foreground images placed inside of a container
  * This component abstracts that logic away for better DX
+ * 
+ * You can layer text and imagery on top of the background image
  * 
  * Note: all images get processed through Webpack so you must import! 
  * No absolute URLs as they will break during site generation
@@ -24,15 +32,20 @@ const Container = styled.section`
  * @param { number } width - how wide image should be (default: 100%)
  */
 const BgImage = ({ 
+  alignItems = 'center',
+  children,
   imgalt = 'Background Image',
   imgsrc,
   height = '50vh',
+  justifyContent = 'center',
   width = '100%'
 }) => {
 
   return(
     <Container
+      alignItems={ alignItems }
       height={ height }
+      justifyContent={ justifyContent }
       width={ width }
     >
       <Image
@@ -42,6 +55,11 @@ const BgImage = ({
         objectFit="cover"
         quality={ 80 }
       />
+      { children && 
+        <InnerContainer>
+          { children }
+        </InnerContainer>
+      }
     </Container>
   )
 }

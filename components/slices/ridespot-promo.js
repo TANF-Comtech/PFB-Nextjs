@@ -105,14 +105,15 @@ const RideSpotPromo = ({
           imgalt="Ride Spot background of blue mountains"
           imgsrc={ RideSpotBg }
           height='70vh'
-        />
-        {/* <RSLogo
-          alt="Ride Spot Logo"
-          src={ RideSpotLogo }
-          quality={ 80 }
-          width={ 400 }
-          height={ 120 }
-        /> */}
+        >
+          <RSLogo
+            alt="Ride Spot Logo"
+            src={ RideSpotLogo }
+            quality={ 80 }
+            width={ 400 }
+            height={ 120 }
+          />
+        </BgImage>
       </RSHeaderContainer>
 
       <RSTitle>
