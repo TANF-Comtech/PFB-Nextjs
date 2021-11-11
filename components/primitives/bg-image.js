@@ -22,12 +22,15 @@ const InnerContainer = styled.div`
  * This component abstracts that logic away for better DX
  * 
  * You can layer text and imagery on top of the background image
+ * All you have to do is pass that text or imagery into this component
  * 
  * Note: all images get processed through Webpack so you must import! 
  * No absolute URLs as they will break during site generation
  *
+ * @param { string } alignItems - vertical alignment of inner content
  * @param { string } imgalt - text description of the image
  * @param { string } imgsrc - url of the image, should be a JS module import
+ * @param { string } justifyContent - horizontal alignment of inner content
  * @param { number } height - how tall the background image should be (default: 50vh)
  * @param { number } width - how wide image should be (default: 100%)
  */
