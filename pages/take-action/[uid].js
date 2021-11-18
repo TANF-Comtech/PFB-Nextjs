@@ -85,6 +85,8 @@ export default function ActionForms({ page, preview }) {
   const { action } = page;
   const { meta } = useContext(DefaultContext);
 
+  console.log(action, action.form_id.toString())
+
   // Image handling
   let imageSelection;
   if (action.image_selection) {
@@ -122,13 +124,14 @@ export default function ActionForms({ page, preview }) {
   // If a user continues to navigate around a site, the embeds disappear
   // We can access the router and force the scripts to build into a ref on each load
   const router = useRouter()
-  const sparkIframe = useRef()
+  const sparkIframe = useRef(null)
 
   useEffect(() => {
     const frm = document.createElement('script')
     action.form_id && (
-      frm.src = `https://action.peopleforbikes.org/assets/js/widget.js/?id=${action.form_id}`
+      frm.src = `https://action.peopleforbikes.org/assets/js/widget.js/?id=${action.form_id.toString()}`
     )
+    console.log(frm.src)
     sparkIframe.current.appendChild(frm)
   }, [router])
 
