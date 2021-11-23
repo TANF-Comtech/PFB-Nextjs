@@ -14,26 +14,9 @@ import Spinner from '../components/global/spinner'
 import BigTitleBanner from '../components/content/big-title-banner'
 import SiteMetaCustom from "../components/meta/site-meta-custom";
 import Header1 from "../components/primitives/h1"
+import BgImage from "../components/primitives/bg-image"
 
 import SigninBG from "../public/promo/signin-bg.jpg"
-
-const ImageContainer = styled.section`
-  align-items: center;
-  background-image: url(${ SigninBG });
-  background-position: center center;
-  background-size: cover;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 80vh;
-  margin: 25px 0;
-  padding: 0 5vw;
-  text-align: center;
-
-  @media screen and (min-width: ${ props => props.theme.sm }) {
-    height: 70vh;
-  }
-`
 
 const LoginForm = styled.form`
   background-color: rgba(255,255,255,0.85);
@@ -42,6 +25,10 @@ const LoginForm = styled.form`
   flex-direction: column;
   justify-content: space-between;
   padding: 25px 50px;
+
+  p {
+    text-align: center;
+  }
 `
 
 const ColorBox = styled.div`
@@ -186,7 +173,10 @@ function LoginPage() {
         <BigTitleBanner>
           <Header1>Sign In</Header1>
         </BigTitleBanner>
-        <ImageContainer>
+        <BgImage
+          height="80vh"
+          imgsrc={ SigninBG }
+        >
           <MainContent maxWidth="600px">
           { !loading ? (
           <>
@@ -257,7 +247,7 @@ function LoginPage() {
             </ColorBox>
           )}
           </MainContent>
-        </ImageContainer>
+        </BgImage>
       </Wrapper>
     </>
   )
