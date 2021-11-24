@@ -91,7 +91,6 @@ const Promo = ({
             <a href={ linkResolver(path) }>
               <BgImage
                 imgsrc={ source }
-                height="70vh"
               >
                 <PromoTextContainer
                   headingRGBA={ headingRGBA }
@@ -107,7 +106,6 @@ const Promo = ({
               <a>
                 <BgImage
                   imgsrc={ source }
-                  height="70vh"
                 >
                   <PromoTextContainer
                     headingRGBA={ headingRGBA }
@@ -124,7 +122,6 @@ const Promo = ({
       ) : (
         <BgImage
           imgsrc={ source }
-          height="70vh"
         >
           <PromoTextContainer
             headingRGBA={ headingRGBA }
