@@ -97,7 +97,7 @@ const Arrow = styled.img`
  * <JoinList>
  * 
  * Put all the big join blocks onto the Join page
- * This is mostly static block, just simplies things as this page will never change
+ * This is mostly static block, just simplifies things as this page will never change
  */
 export default function JoinList() {
 
