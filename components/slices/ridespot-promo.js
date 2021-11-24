@@ -101,7 +101,6 @@ const RideSpotPromo = ({
         <BgImage
           imgalt="Ride Spot background of blue mountains"
           imgsrc={ RideSpotBg }
-          height='70vh'
         >
           <Image
             alt="Ride Spot Logo"
