@@ -97,8 +97,8 @@ const MissionPillars = () => {
           text="Our advisors come from all over the world of biking."
         />
         <WayfindingItem 
-          path="/coalition-members"
-          title="Meet Our Coalition Members"
+          path="/corporate-members"
+          title="Meet Our Corporate Members"
           text="See which companies support our mission directly."
         />
       </MainContent>
