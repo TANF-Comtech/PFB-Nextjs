@@ -8,6 +8,14 @@ const Container = styled.section`
   position: relative;
   height: ${ props => props.height };
   width: ${ props => props.width };
+
+  @media screen and (min-width: ${(props) => props.theme.sm}) {
+    height: calc(${ props => props.height } * 1.4);
+  }
+
+  @media screen and (min-width: ${(props) => props.theme.lg}) {
+    height: calc(${ props => props.height } * 1.6);
+  }
 `;
 
 const InnerContainer = styled.div`
