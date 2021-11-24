@@ -110,6 +110,7 @@ export default function Homepage({ page }) {
 
           <Button
             href={linkResolver(singleHero.hero_link)}
+            buttonAlign="center"
             buttonBg="#00A2DF"
             buttonColor="white"
             buttonBorder="none"
