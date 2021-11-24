@@ -174,7 +174,6 @@ function LoginPage() {
           <Header1>Sign In</Header1>
         </BigTitleBanner>
         <BgImage
-          height="80vh"
           imgsrc={ SigninBG }
         >
           <MainContent maxWidth="600px">
