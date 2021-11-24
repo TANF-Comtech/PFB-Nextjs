@@ -4,21 +4,24 @@ import styled from 'styled-components'
 const Container = styled.section`
   align-items: ${ props => props.alignItems };
   display: flex;
-  justify-content: ${ props => props.justifyContent };
-  position: relative;
   height: ${ props => props.height };
+  justify-content: ${ props => props.justifyContent };
+  margin: ${ props => props.margin };
+  position: relative;
   width: ${ props => props.width };
 
   @media screen and (min-width: ${(props) => props.theme.sm}) {
-    height: calc(${ props => props.height } * 1.4);
+    height: ${ props => props.heightTablet };
   }
 
   @media screen and (min-width: ${(props) => props.theme.lg}) {
-    height: calc(${ props => props.height } * 1.6);
+    height: ${ props => props.heightDesktop };
   }
 `;
 
 const InnerContainer = styled.div`
+  height: 100%;
+  width: 100%;
   z-index: ${ props => props.theme.zIndex01 };
 
   span {
@@ -74,6 +77,9 @@ const InnerContainer = styled.div`
  * @param { string } imgsrc - url of the image, should be a JS module import
  * @param { string } justifyContent - horizontal alignment of inner content
  * @param { string } height - how tall the background image should be (default: 50vh)
+ * @param { string } heightTablet - how tall the background image should be on tablets (default: 70vh)
+ * @param { string } heightDesktop - how tall the background image should be on desktop (default: 80vh)
+ * @param { string } margin - buffer around element
  * @param { string } width - how wide image should be (default: 100%)
  */
 const BgImage = ({ 
@@ -83,7 +89,11 @@ const BgImage = ({
   imgalt = 'Background Image',
   imgsrc,
   height = '50vh',
+  heightTablet = '70vh',
+  heightDesktop = '80vh',
   justifyContent = 'center',
+  margin = '0',
+  quality = 80,
   width = '100%'
 }) => {
 
@@ -91,7 +101,10 @@ const BgImage = ({
     <Container
       alignItems={ alignItems }
       height={ height }
+      heightTablet={ heightTablet }
+      heightDesktop={ heightDesktop }
       justifyContent={ justifyContent }
+      margin={ margin }
       width={ width }
     >
       <Image
@@ -99,7 +112,7 @@ const BgImage = ({
         src={ imgsrc }
         layout="fill"
         objectFit="cover"
-        quality={ 80 }
+        quality={ quality }
       />
       { children && 
         <InnerContainer
