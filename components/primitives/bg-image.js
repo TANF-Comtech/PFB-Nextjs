@@ -20,6 +20,39 @@ const Container = styled.section`
 
 const InnerContainer = styled.div`
   z-index: ${ props => props.theme.zIndex01 };
+
+  span {
+    color: rgba(
+      ${(props) => (props.headingRGBA ? props.headingRGBA : "255,255,255,1")}
+    );
+    font-family: ${(props) => props.theme.dharma};
+    font-size: 40px;
+    font-weight: 600;
+    line-height: 30px;
+    letter-spacing: 1px;
+    margin: 0;
+    text-transform: uppercase;
+  }
+  @media screen and (min-width: 320px) {
+    span {
+      font-size: calc(40px + 20 * ((100vw - 320px) / 880));
+      line-height: calc(30px + 20 * ((100vw - 320px) / 880));
+    }
+  }
+  @media screen and (min-width: 1200px) {
+    span {
+      font-size: 60px;
+      line-height: 50px;
+    }
+  }
+
+  h1 {
+    color: rgba(
+      ${(props) => (props.headingRGBA ? props.headingRGBA : "255,255,255,1")}
+    ) !important;
+    text-align: center !important;
+    text-transform: uppercase !important;
+  }
 `
 
 /**
@@ -36,15 +69,17 @@ const InnerContainer = styled.div`
  * No absolute URLs as they will break during site generation
  *
  * @param { string } alignItems - vertical alignment of inner content
+ * @param { string } headingRGBA - color of text, can provide transparency
  * @param { string } imgalt - text description of the image
  * @param { string } imgsrc - url of the image, should be a JS module import
  * @param { string } justifyContent - horizontal alignment of inner content
- * @param { number } height - how tall the background image should be (default: 50vh)
- * @param { number } width - how wide image should be (default: 100%)
+ * @param { string } height - how tall the background image should be (default: 50vh)
+ * @param { string } width - how wide image should be (default: 100%)
  */
 const BgImage = ({ 
   alignItems = 'center',
   children,
+  headingRGBA = "255,255,255,1",
   imgalt = 'Background Image',
   imgsrc,
   height = '50vh',
@@ -67,7 +102,9 @@ const BgImage = ({
         quality={ 80 }
       />
       { children && 
-        <InnerContainer>
+        <InnerContainer
+          headingRGBA={ headingRGBA }
+        >
           { children }
         </InnerContainer>
       }

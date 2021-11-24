@@ -1,75 +1,8 @@
-import React from "react";
+import Image from "next/image"
 import styled from "styled-components";
+import BgImage from "../primitives/bg-image"
 
-// background-image: url(examples/images/image-384.jpg);
-// background-image:
-//   -webkit-image-set(
-//     url(examples/images/image-384.jpg) 1x,
-//     url(examples/images/image-768.jpg) 2x,
-//   );
-// background-image:
-//   image-set(
-//     url(examples/images/image-384.jpg) 1x,
-//     url(examples/images/image-768.jpg) 2x,
-//   );
-
-const ImageContainer = styled.section`
-  /* align-items: right; */
-  background-image: url(${(props) => props.source});
-  background-position: center center;
-  background-size: cover;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 50vh;
-  margin-bottom: 1vh;
-  padding: 0 5vw;
-  position: relative;
-  text-align: center;
-
-  @media screen and (min-width: ${(props) => props.theme.sm}) {
-    height: 70vh;
-  }
-
-  @media screen and (min-width: ${(props) => props.theme.lg}) {
-    height: 80vh;
-  }
-
-  h1 {
-    color: rgba(
-      ${(props) => (props.headingRGBA ? props.headingRGBA : "255,255,255,1")}
-    );
-    text-transform: uppercase;
-  }
-
-  span {
-    color: rgba(
-      ${(props) => (props.headingRGBA ? props.headingRGBA : "255,255,255,1")}
-    );
-    font-family: ${(props) => props.theme.dharma};
-    font-size: 40px;
-    font-weight: 600;
-    line-height: 30px;
-    letter-spacing: 1px;
-    margin: 0;
-    text-transform: uppercase;
-  }
-  @media screen and (min-width: 320px) {
-    span {
-      font-size: calc(40px + 20 * ((100vw - 320px) / 880));
-      line-height: calc(30px + 20 * ((100vw - 320px) / 880));
-    }
-  }
-  @media screen and (min-width: 1200px) {
-    span {
-      font-size: 60px;
-      line-height: 50px;
-    }
-  }
-`;
-
-const ForegroundImg = styled.img`
+const ForegroundImg = styled(Image)`
   margin-bottom: 2vh;
   max-height: 70vh;
   object-fit: cover;
@@ -92,17 +25,19 @@ const HeaderImage = ({ children, headingRGBA, source, srcSet }) => {
   return (
     <>
       {source && (
-        <ImageContainer headingRGBA={headingRGBA} source={source}>
+        <BgImage
+          headingRGBA={headingRGBA} 
+          imgsrc={source}
+        >
           {children}
-        </ImageContainer>
+        </BgImage>
       )}
       {srcSet && (
         <ForegroundImg
-          alt={srcSet.alt ? srcSet.alt : "Bike-oriented image"}
-          loading="lazy"
-          src={srcSet.url}
-          srcSet={`${srcSet.url} 1600w, ${srcSet.mobile.url} 800w`}
-          sizes="100vw"
+          alt={ srcSet.alt ? srcSet.alt : "Bike-oriented image" }
+          src={ srcSet.url ? srcSet.url : null }
+          height={ srcSet.dimensions.height }
+          width={ srcSet.dimensions.width }
         />
       )}
     </>
