@@ -73,7 +73,7 @@ const ColorBanner = ({
 }) => {
   return (
     <Container>
-      <a href="https://www.classy.org/give/117371" rel="nofollow" target="_blank">
+      <a href="https://www.classy.org/campaign/end-of-year-giving-campaign-2021/c372713" rel="nofollow" target="_blank">
         <ColorContainer
           bgColor={ bgColor }
         >
