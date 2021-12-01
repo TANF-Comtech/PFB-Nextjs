@@ -1,17 +1,19 @@
-The new People for Bike site is a [Next.js](https://nextjs.org/) project using [`styled-components`](https://styled-components.com/docs) for CSS, [`Apollo`]((https://www.apollographql.com/docs/react/)) for data-fetching/state management and [Prismic.io](https://peopleforbikes.prismic.io/) as our headless CMS.
+PeopleForBikes site is a [Next.js](https://nextjs.org/) project using [`styled-components`](https://styled-components.com/docs) for CSS, [`Apollo`]((https://www.apollographql.com/docs/react/)) for component-level data-fetching and [Prismic.io](https://peopleforbikes.prismic.io/) as our headless CMS.
 
 ## Getting Started
 
-If you haven't run this project before, use `yarn` and Node `v12.x`. This project will likely move over to Node `v14.x` but as of 2020-08 we're sticking with `v12`. 
+If you haven't run this project before, use `yarn` and Node `v14.x`. This project will likely move over to Node `v16.x` in 2022 but we're bound by AWS Lambda's Node version, and they're still on `14`.
 
 To get started, make sure your running right version of Node and then run `yarn` and install dependencies:
 ```bash
-node -v # should show v12.x.x, recommend using nvm 
+node -v # should show v14.x.x, recommend using nvm 
 yarn install # should output a bunch of install scripts, ignore warnings
 yarn dev # starts the dev server
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result (`create-next-app` will sometimes put your server at port `3001`, `3002` if you have something else running - check your CLI output).
+
+This app is on Next v11 and Webpack v5 until [this bug is resolved in Next v12](https://github.com/vercel/next.js/discussions/30468).
 
 ## Tooling
 
@@ -27,6 +29,8 @@ Make sure you have a high-level understanding of the tooling being used:
 ## Environmental Variables
 
 All environmental variables are supposed to be stored in `.env.local`. By default, they will be made available to the Node.js application powering the static site generation. Read more about [Next.js Environmental Variables](https://nextjs.org/docs/basic-features/environment-variables). Vercel lets you set the production ones in their [hosting UI](https://vercel.com/people-for-bikes/pfb-nextjs/settings/environment-variables).
+
+If you need the variables, contact the project lead.
 
 ## Site Structure
 
@@ -125,9 +129,9 @@ export async function getSingleBasicPage(uid, previewData) {
 }
 ```
 
-## Data Processing / Rendering
+## Server-Side Data Fetching
 
-Next can do both static and server-side rendering once data has been fetched. They are competing strategies we can use in different parts of the app. If the content is static (and most of a CMS-driven site usually is), we want to use [`getStaticProps`](https://nextjs.org/docs/basic-features/data-fetching#getstaticprops-static-generation) with [`getStaticPaths`](https://nextjs.org/docs/basic-features/data-fetching#getstaticpaths-static-generation) in our page template files MOST of the time.
+Most of the time in a CMS-driven Next app, you want to use server-side data calls and pre-render pages for production. You'll want to use [`getStaticProps`](https://nextjs.org/docs/basic-features/data-fetching#getstaticprops-static-generation) with [`getStaticPaths`](https://nextjs.org/docs/basic-features/data-fetching#getstaticpaths-static-generation) in our page template files to get data. Below is a walk-through of that process.
 
 ### `getStaticProps`
 
@@ -174,9 +178,7 @@ export async function getStaticProps(context) {
 
 ### `getStaticPaths`
 
-Anytime you are using `getStaticProps` to render static pages, you have to tell Next what paths are going to be rendered before it can actually render them. That's what [`getStaticPaths`](https://nextjs.org/docs/basic-features/data-fetching#getstaticpaths-static-generation) does - it gives Next those paths as an array of params objects that define the paths. Check the docs for more info.
-
-An example that builds on the example above:
+Anytime you are using `getStaticProps` to render static pages, you have to tell Next what paths are going to be rendered before it can actually render them. That's what [`getStaticPaths`](https://nextjs.org/docs/basic-features/data-fetching#getstaticpaths-static-generation) does - it gives Next those paths as an array of params objects that define the paths. An example that builds on the example above:
 
 ```js
 /**
@@ -206,6 +208,40 @@ export async function getStaticPaths() {
     paths: allPages?.map(({ node }) => `/page/${node._meta.uid}`) || [],
     fallback: true,
   }
+}
+```
+
+## Component Level Data
+
+If you need to get data at the component level, it's best to use Apollo for that purpose. This actually fetches data client-sie, and slips past Next's SSR mechanisms. 
+
+A good use case for this is a global menu element or a search tool - something that appears on every page but has live data in it. How this works in practice is:
+
+- Set up your GraphQL query like you would elsewhere in the app
+- Import into a component, preferably in the `/components/global/` folder
+- Use Apollo's `useQuery` to fetch/process the query and store the data
+- Ingest data into components like any client-side React normally does
+
+Truncated example from `components/global/navbar.js` where the main menu dropdowns get created using this method:
+```js
+import { useQuery } from '@apollo/client'
+import { MENU_DATA } from '../../lib/apollo/menu-queries'
+
+function NavBar() {
+  const { data: advocacyData } = useQuery(MENU_DATA, {
+    variables: {
+      "uid": "advocacy-menu",
+      "lang": "en-us"
+    }
+  })
+
+  return (
+    <>
+      <Dropdown 
+        data={ advocacyData }
+      />
+    </>
+  )
 }
 ```
 
@@ -265,6 +301,10 @@ Some high level rules of the road:
 - Make components as small as possible. Don't go crazy with this but use it as a general guiding principle. 
 - Use `styled-components` as much as possible to scope styling to components. 
 - Don't wrap components in `<div>` pairs, use [React Fragment short syntax](https://reactjs.org/docs/fragments.html#short-syntax) instead: `<></>`
+
+## Images
+
+
 
 ## Stuff to document
 
