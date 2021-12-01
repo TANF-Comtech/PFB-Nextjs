@@ -20,6 +20,10 @@ const Container = styled.section`
 `;
 
 const InnerContainer = styled.div`
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   height: 100%;
   width: 100%;
   z-index: ${ props => props.theme.zIndex01 };

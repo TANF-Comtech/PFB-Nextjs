@@ -26,8 +26,10 @@ const HeaderImage = ({ children, headingRGBA, source, srcSet }) => {
     <>
       {source && (
         <BgImage
+          alignItems="center"
           headingRGBA={headingRGBA} 
           imgsrc={source}
+          justifyContent="center"
         >
           {children}
         </BgImage>

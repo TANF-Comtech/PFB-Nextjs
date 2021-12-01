@@ -93,7 +93,7 @@ export default function Homepage({ page }) {
   } = useMetadata( new_homepage )
 
   return (
-    <Wrapper postTitle="People for Bikes Homepage" isWide={true}>
+    <Wrapper postTitle="PeopleForBikes Homepage" isWide={true}>
       <SiteMetaCustom
         desc={ theDesc }
         keywords={ theKeywords }
@@ -101,11 +101,13 @@ export default function Homepage({ page }) {
         imgHeight={ theImageHeight }
         imgSrc={ theImage }
         imgWidth={ theImageWidth }
-        path={ thePath }
+        path="https://www.peopleforbikes.org"
       /> 
 
       { singleHero && (
-        <HeaderImage source={singleHero.hero_image.url}>
+        <HeaderImage 
+          source={singleHero.hero_image.url}
+        >
           <HeroText>{singleHero.hero_text}</HeroText>
 
           <Button
