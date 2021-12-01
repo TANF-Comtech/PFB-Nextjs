@@ -15,7 +15,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 This app is on Next v11 and Webpack v5 until [this bug is resolved in Next v12](https://github.com/vercel/next.js/discussions/30468).
 
-## Tooling
+### Tooling
 
 Make sure you have a high-level understanding of the tooling being used:
 
@@ -26,13 +26,13 @@ Make sure you have a high-level understanding of the tooling being used:
 - [Apollo](https://www.apollographql.com/docs/react/), GraphQL query manager, TBD how we're using this
 - [Vercel PFB](https://vercel.com/people-for-bikes/pfb-nextjs), hosting / CI pipeline
 
-## Environmental Variables
+### Environmental Variables
 
 All environmental variables are supposed to be stored in `.env.local`. By default, they will be made available to the Node.js application powering the static site generation. Read more about [Next.js Environmental Variables](https://nextjs.org/docs/basic-features/environment-variables). Vercel lets you set the production ones in their [hosting UI](https://vercel.com/people-for-bikes/pfb-nextjs/settings/environment-variables).
 
 If you need the variables, contact the project lead.
 
-## Site Structure
+### Site Structure
 
 Next.js has some key files and folders that contain set up that is important for the functionality of this site:
 
@@ -46,73 +46,37 @@ Next.js has some key files and folders that contain set up that is important for
 
 ## Data
 
-All data for this site comes from the [Prismic PFB Repo](https://peopleforbikes.prismic.io/) and we are using the well-documented [prismic-javascript](https://github.com/prismicio/prismic-javascript) utility to make data requests. All queries are using GraphQL.
+Almost all the data for this site comes from the [Prismic PFB Repo](https://peopleforbikes.prismic.io/) and we are using the well-documented [prismic-javascript](https://github.com/prismicio/prismic-javascript) utility to make data requests. All queries are using GraphQL and can be found in the `/lib/queries` folder of the app.
 
-## Data Fetching
+### Querying Prismic
 
-There is some overhead in setting up the integration between Next and Prismic but that is already handled by `/lib/api.js`. This file exposes `fetchAPI()`, whose first argument is a GraphQL query. At a minimum that's all you need to get data out of Prismic and into Next.
+Prismic is a headless CMS product the structures all PFB data into [Prismic types](https://peopleforbikes.prismic.io/masks/) we've predefined in the CMS (follow that link to see them all). When you're querying Prismic, you need to know which type you data from to use their [GraphQL endpoint](https://peopleforbikes.prismic.io/graphql). 
 
-Example to get all nodes from a Prismic Content-type:
+Most page-based queries for Prismic should have the following:
 
+- wrapped in an exported `async` function, that Next.js will later ingest
+- `await` the `fetchAPI()`, which should have your query defined
+- two variables passed into the query, `uid` (page ID) an `lang` (usually `en-us`)
+
+Example page-based query (from `/lib/queries/careers.js`):
 ```js
-import { fetchAPI } from '../api'
+import { fetchAPI, API_LOCALE } from '../api'
 
 /**
- * !!!!!!!!!!!!!!!!!
- * Test all queries to know what you are getting back 
- * https://peopleforbikes.prismic.io/graphql
- */
-
-// Get all Grant Cycles
-export async function getAllGrantTypes() {
+  * getSingleCareer()
+  * 
+  * Gives us a single career entry back, depends on what you pass in as variables
+  */
+ export async function getSingleCareer(uid, previewData) {
   const data = await fetchAPI(`
-    {
-      allGrant_cycles {
-        edges {
-          node {
-            cycle_name
-            grant_cycle_time
-          }
-        }
-      }
-    }
-  `)
-  return data?.allGrant_cycles?.edges
-}
-```
-
-Example to get a single node from a Prismic Content-type (`basic_page`):
-
-```js
-export async function getSingleBasicPage(uid, previewData) {
-  const data = await fetchAPI(`
-    query PageByUID($uid: String!, $lang: String!) {
-      basic_page(uid: $uid, lang: $lang) {
-        _meta {
-          uid
-          id
-        }
+    query CareerByUID($uid: String!, $lang: String!) {
+      job(uid: $uid, lang: $lang) {
         title
-        main_content
-        parent_page {
-          _linkType
-        }
-        recent_grants
-        call_to_action
-        body {
-          ... on Basic_pageBodyAccordion_list {
-            fields {
-              accordion_heading
-              accordion_content
-            }
-          }
-          ... on Basic_pageBodyMain_image {
-            label 
-            type
-            primary {
-              main_image
-            }
-          }
+        posting
+        _meta {
+          id
+          uid
+          type
         }
       }
     }
@@ -125,19 +89,37 @@ export async function getSingleBasicPage(uid, previewData) {
       },
     }
   )
+
   return data
 }
 ```
 
-## Server-Side Data Fetching
+Notes on queries:
+
+- There is some overhead in setting up the integration between Next and Prismic but that is already handled by `/lib/api.js`. This file exposes `fetchAPI()`, whose first argument is a GraphQL query. All queries to Prismic should be in GraphQL but their GQL endpoint is in beta. Some queries need REST but it's rare.
+
+- This site has a lot of relational data, which Prismic makes accessible through GraphQL unions mostly. Often when you query a type, you'll need to add GraphQL unions to reach across the different types. They'll look like `...on type_name {}` in the queries (you can see a number of unions in the example above)
+
+- Prismic uses a concept called 'slices', which are repeatable content blocks shared between types. They'll always show up in the `body` area of the query. This site makes heavy use of them. This is the 'Prismic way' and takes a minute to wrap your head around.
+
+
+### Server-Side Data Fetching
 
 Most of the time in a CMS-driven Next app, you want to use server-side data calls and pre-render pages for production. You'll want to use [`getStaticProps`](https://nextjs.org/docs/basic-features/data-fetching#getstaticprops-static-generation) with [`getStaticPaths`](https://nextjs.org/docs/basic-features/data-fetching#getstaticpaths-static-generation) in our page template files to get data. Below is a walk-through of that process.
 
-### `getStaticProps`
+#### `getStaticProps`
 
 The idea of `getStaticProps` is to alert Next.js and let it know to prerender this page at site build time rather than wait for the user to access it to be created. This speeds things up for users tremendously. `getStaticProps` function gets called at site build time to pull the data into this component and then sends it to be rendered. A heavily documented example:
 
+#### `getStaticPaths`
+
+Anytime you are using `getStaticProps` to render static pages, you have to tell Next what paths are going to be rendered before it can actually render them. That's what [`getStaticPaths`](https://nextjs.org/docs/basic-features/data-fetching#getstaticpaths-static-generation) does - it gives Next those paths as an array of params objects that define the paths. 
+
+An example that builds on the example above (`/pages/careers/[uid].js`):
+
 ```js
+import { getAllCareers, getSingleCareer } from "../../lib/queries/careers";
+
 /**
  * Basic getStaticProps definition
  * @param {object} context - contains keys that aid Next in prerendering
@@ -150,47 +132,23 @@ The idea of `getStaticProps` is to alert Next.js and let it know to prerender th
  * @param {object} props - typical React props to send down into the page component
  * @param {string} revalidate - time (in seconds) after which page regen occurs
  * 
- * Example
  */
-// Page gets `pages` from getStaticProps below
-function Page( {pages} ) {
+
+
+// CareerPage gets `pages` from getStaticProps below
+function CareerPage( {page} ) {
   return(
     <>
       // Map over n pages coming in from getStaticProps
-      { pages.map( (page) => {
-        <h1>{page.title}</h1>
+      { page.map( (p) => {
+        <h1>{p.title}</h1>
       })}
     </>
   )
 }
 
-export async function getStaticProps(context) {
-  const pages = await getBasicPages() // example 
-
-  return {
-    props: {
-      pages
-    }, // IMPORTANT - these will be passed to the Page component as a prop!
-    revalidate: 60, // in seconds - Next will regenerate the page when a request comes in, at most once a second
-  }
-}
-```
-
-### `getStaticPaths`
-
-Anytime you are using `getStaticProps` to render static pages, you have to tell Next what paths are going to be rendered before it can actually render them. That's what [`getStaticPaths`](https://nextjs.org/docs/basic-features/data-fetching#getstaticpaths-static-generation) does - it gives Next those paths as an array of params objects that define the paths. An example that builds on the example above:
-
-```js
-/**
- * getStaticPaths definition
- * @param {object} context - contains keys that aid Next in prerendering
- * 
- * in the return -
- * @param {object} paths - needs to contain an array objects that match the dynamic route name
- */
-/* The return here sends the `page` prop back to the BasicPage component above for rendering */
 export async function getStaticProps({ params, preview = false, previewData }) {
-  const pageData = await getSingleBasicPage(params.uid, previewData) //from /lib/repeatable-content-type/basic-page.js
+  const pageData = await getSingleCareer(params.uid, previewData);
 
   return {
     props: {
@@ -201,21 +159,20 @@ export async function getStaticProps({ params, preview = false, previewData }) {
   }
 }
 
-// getStaticPaths requires the whole paths argument to be objects of URL it needs to statically render
 export async function getStaticPaths() {
-  const allPages = await getAllBasicPagesWithUID() //from /lib/repeatable-content-type/basic-page.js
+  const allCareers = await getAllCareers();
   return {
-    paths: allPages?.map(({ node }) => `/page/${node._meta.uid}`) || [],
-    fallback: true,
+    paths: allCareers?.map(({ node }) => `/careers/${node._meta.uid}`) || [],
+    fallback: false,
   }
 }
 ```
 
-## Component Level Data
+### Component Level Data
 
-If you need to get data at the component level, it's best to use Apollo for that purpose. This actually fetches data client-sie, and slips past Next's SSR mechanisms. 
+If you need to get data at the component level, it's best to use Apollo for that purpose. This actually fetches data client-side, and slips past Next's SSR mechanisms. A good use case for this is a global menu element or a search tool - something that appears on every page but has live data in it. 
 
-A good use case for this is a global menu element or a search tool - something that appears on every page but has live data in it. How this works in practice is:
+How this works in practice is:
 
 - Set up your GraphQL query like you would elsewhere in the app
 - Import into a component, preferably in the `/components/global/` folder
@@ -245,11 +202,11 @@ function NavBar() {
 }
 ```
 
-## Dynamic Routing
+### Routing
 
-You can also do [dynamic routing](https://nextjs.org/docs/routing/dynamic-routes) by wrapping the file name inside the `/pages/` folder in brackets (ie, `/pages/page/[uid].js`) and accessing Next's router. Next will automatically apply the template to all page params it finds in `getStaticPaths` and statically build those out.
+You can also do [dynamic routing](https://nextjs.org/docs/routing/dynamic-routes) by wrapping the file name inside the `/pages/` folder in brackets (ie, `/pages/page/[uid].js`) and accessing Next's router. Next will automatically apply the template to all page params it finds in `getStaticPaths` and statically build those out. Next's routing is so good you mostly just don't have to think about it ;)
 
-## Component Styling
+## Styling
 
 This site makes heavy use of [`styled-components`](https://styled-components.com/docs/basics) for styling. This is component-scoped, CSS-in-JS solution that creates a template literal component for each HTML element. The components usually sit atop a larger component with a render method:
 
@@ -283,17 +240,17 @@ const Heading1 = ({ children }) => {
 export default Heading1
 ```
 
-## Global Styling
+### Global Styling
 
 Even though we are using `styled-components` heavily, you might still need to style some elements directly in CSS. The site is already setup to allow for this using styled-components [`createGlobalStyle`].
 
 You only have to invoke `createGlobalStyle` once and it's already setup in our project at: `components/styles/global-css.js`. So if you want to do regular old CSS, this is where you put it. Please do not use `@include` for fonts with `createGlobalStyle` - load them into the head
 
-## Page Wrapper 
+## Components
 
-The site is setup to contain all the basic UI chrome in `components/global/wrapper.js`. This is where the header, footer, main content and all the rest come from. If you want global functionality, this is typically where you will include it.
+**This section is a work in progress, as we refactor and clean up our component library.**
 
-## Component Structure
+### Normal Component Structure
 
 Some high level rules of the road:
 
@@ -302,11 +259,153 @@ Some high level rules of the road:
 - Use `styled-components` as much as possible to scope styling to components. 
 - Don't wrap components in `<div>` pairs, use [React Fragment short syntax](https://reactjs.org/docs/fragments.html#short-syntax) instead: `<></>`
 
-## Images
+### Page Wrapper 
+
+The site is setup to contain all the basic UI chrome in `components/global/wrapper.js`. This is where the header, footer, main content and all the rest come from. If you want global functionality, this is typically where you will include it.
+
+### Imagery
+
+This site now makes use of [`next/images`](https://nextjs.org/docs/api-reference/next/image), but not exclusively. next/image optimizes large imagery through Vercel's infrastructure. Here are some rules of thumb for image usage:
+
+- If you want to use **statically** served **JPEG/PNG foreground** image from `public` folder, use next/image's `<Image>` component
+- If you want to use **dynamically** served **JPEG/PNG background** image from `public` folder, use `<BgImage>` custom component (which uses <Image> under the hood)
+- If you want to use **statically** served **SVG foreground** image from `public` folder, just import it and use with html `<img>`. SVG graphics don't gain from the next/image approach.
+- 
+
+Foreground Image using `<Image>`:
+```js
+import Image from "next/image"
+import Banner from "../../public/promo/take-action-banner.jpg";
+
+const ExampleComponent = () => {
+  return(
+    <>
+      <Image
+        alt="Take Action Banner"
+        src={ Banner }
+        quality={ 80 }
+        width={ 1600 }
+        height={ 800 }
+      />
+    </>
+  )
+}
+```
+
+Background Image using `<BgImage>` (notice how you can pass items through, an control sizing with the BgImage component):
+```js
+import BgImage from "../components/primitives/bg-image.js"
+import Banner from "../../public/promo/take-action-banner.jpg";
+
+const ImageSquare = ({
+  source
+}) => {
+  return (
+    <BgImage
+      alignItems="center"
+      height='450px'
+      heightTablet='450px'
+      heightDesktop='450px'
+      imgsrc={ source }
+      justifyContent="center"
+      quality={ 80 }
+      width={ '100%' }
+    >
+      <h2>Hey there!</h2>
+    </BgImage>
+  )
+}
+```
+
+## Integrations
+
+This site integrates with a number of third-party tools. All of the integrations can be found in the `/lib` folder. Any future integration tool should get it's own subfolder inside of `/lib`.
+
+### Algolia
+
+Algolia is a cloud-based search indexing tool. It's fantastic and it mostly just works for our purposes. The biggest caveat is that you have to get the data in the shape that Algolia wants. Generally, we have set this up already and you don't have to think about it.
+
+But if you structurally change the data in the application, add slices in Prismic, or add new types, you'll need to reconfigure how the search indexer works. We have a [separate doc about Algolia data shapes](/lib/algolia/readme.md) that you should read before doing this work. 
+
+Most of the Algolia data formatters in the application rearrange data to match a singular shape, referenced in that doc above. Here's an example of how we do a transform (notice how we first take complex nested data and flatten it out - that's the general idea of each formatter): 
+
+```js
+import { linkResolver } from '../utils'
+import { dateFormatter } from '../utils/dateFormatter'
+
+/**
+ * topicConcat()
+ * 
+ * Desc: takes full `node` data from topics, build single text blob for algolia
+ * We're looking for the `intro` and `body` keys specifically
+ * This is used to upload to Algolia so search has a singular content block to index
+ * 
+ * @param { array } content - expects rich text field from Prismic
+ */
+const topicConcat = (content) => {
+  const contentBlob = []
+
+  content.intro && contentBlob.push(content.intro)
+  content.body && ( 
+    content.body.map( (slice) => {
+      return(
+        <>
+         { slice.primary && contentBlob.push(slice.primary.long_name) }
+         { slice.fields && slice.fields.map( (item) => {
+            return(
+              contentBlob.push(item.sub_pillar, item.sub_pillar_summary)
+            )
+          })}
+        </>
+      )
+    })
+  ) 
+
+  // returns nested text joined together into a string
+  // this is how algolia wants content, so that's how we're doing it
+  return contentBlob.join(' ')
+}
+
+/**
+ * topicFormatter()
+ * 
+ * Desc: takes full `node` data from topics, makes nodes consistent with algolia shape
+ * See readme.md in this folder for generalized information about what's going on below.
+ * 
+ * @param { array } payload - expects prismic data dump
+ */
+export function topicFormatter(payload) {
+  const formattedPayload = []
+
+  if ( payload.length > 1 ) {
+    payload.map( item => {
+
+      // Build object
+      formattedPayload.push({
+        title: `${item.node.title[0].text} - Landing Page`,
+        objectID: item.node._meta.id,
+        path: `https://www.peopleforbikes.org${linkResolver(item.node._meta)}`,
+        type: "Topics & Policy",
+        content: topicConcat(item.node),
+        date: dateFormatter(item.node._meta.lastPublicationDate).unixTime,
+        topics: [ item.node.title[0].text ],
+        locations: null
+      })
+
+    })
+  }
+
+  return formattedPayload
+
+}
+
+```
 
 
+### Stripe
 
-## Stuff to document
+TBD
 
-- [ ] algolia search system, when it lands
-- [ ] how to use FallbackImage
+### Salesforce
+
+TBD
