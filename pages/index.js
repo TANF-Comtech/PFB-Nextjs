@@ -109,7 +109,6 @@ export default function Homepage({ page }) {
           source={singleHero.hero_image.url}
         >
           <HeroText>{singleHero.hero_text}</HeroText>
-
           <Button
             href={linkResolver(singleHero.hero_link)}
             buttonAlign="center"
