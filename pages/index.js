@@ -91,8 +91,6 @@ export default function Homepage({ page }) {
     theImageHeight,
   } = useMetadata( new_homepage )
 
-  console.log(new_homepage)
-
   return (
     <Wrapper postTitle="PeopleForBikes Homepage" isWide={true}>
       <SiteMetaCustom
