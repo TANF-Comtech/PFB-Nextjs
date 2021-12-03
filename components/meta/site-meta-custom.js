@@ -29,48 +29,29 @@ const SiteMetaCustom = ( {
   return (
     <Head>
       <title key="title">{ title }</title>
-      <meta name="description" 
-            content={ desc } 
-            key="metadesc" ></meta>
-      <meta name="keywords" 
-            content={ keywords } 
-            key="metakeywords" ></meta>  
+      <meta name="description" content={ desc } key="metadesc" ></meta>
+      <meta name="keywords" content={ keywords } key="metakeywords" ></meta>  
       <meta property="fb:app_id" content="1771036746278242" ></meta>
+      
       <meta property="og:locale" content="en_US"></meta>
       <meta property="og:site_name" content="PeopleForBikes"></meta>
       <meta property="og:type" content="website" ></meta>
       <meta property="og:url" content={ path } ></meta>
-      <meta property="og:image" 
-            content={ imgSrc }  
-            key="ogimg" ></meta>
-      <meta property="og:image:width" 
-            content={ imgWidth } 
-            key="ogimgw" ></meta>
-      <meta property="og:image:height" 
-            content={ imgHeight } 
-            key="ogimgh" ></meta>
-      <meta property="og:title" 
-            content={ title }
-            key="ogtitle" ></meta>
-      <meta property="og:description" 
-            content={desc}  
-            key="ogdesc" ></meta>
-      <meta property="og:url" 
-            content={ path } 
-            key="ogurl" ></meta>          
-      <meta name="twitter:title" 
-            content={ title } 
-            key="twtrtitle" ></meta>
-      <meta name="twitter:description" 
-            content={desc}
-            key="twtrdesc" ></meta>
-      <meta name="twitter:card" content="summary_large_image" ></meta>
+      <meta property="og:image" content={ imgSrc } key="ogimg" ></meta>
+      <meta property="og:image:width" content={ imgWidth } key="ogimgw" ></meta>
+      <meta property="og:image:height" content={ imgHeight } key="ogimgh" ></meta>
+      <meta property="og:title" content={ title } key="ogtitle" ></meta>
+      <meta property="og:description" content={desc} key="ogdesc" ></meta>
+      <meta property="og:url" content={ path } key="ogurl" ></meta> 
+
+      <meta property="twitter:card" content="summary_large_image" ></meta>
+      <meta name="twitter:title" content={ title } key="twtrtitle" ></meta>
+      <meta name="twitter:description" content={desc} key="twtrdesc" ></meta>
       <meta name="twitter:domain" content="peopleforbikes.org" ></meta>
       <meta name="twitter:site" content="@peopleforbikes" ></meta>
-      <meta property="twitter:image" content={ imgSrc } key="twitterimg" ></meta>      
-      <link rel="canonical" 
-            href={ path } 
-            key="canonical" ></link>  
+      <meta name="twitter:image" content={ imgSrc } key="twitterimg" ></meta>      
+      
+      <link rel="canonical" href={ path } key="canonical" ></link>  
       { ldJSON &&
         ( <script type="application/ld+json">{JSON.stringify(ldJSON)}</script> ) 
       } 
