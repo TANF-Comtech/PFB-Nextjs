@@ -47,7 +47,7 @@ export default function EBikesPage({ page, preview }) {
         }
         title={
           electric_bikes.title
-            ? `${electric_bikes.title[0].text} - Electric Bikes | People for Bikes`
+            ? `${electric_bikes.title[0].text} - Electric Bikes | PeopleForBikes`
             : meta.title
         }
         imgHeight={meta.imgHeight}

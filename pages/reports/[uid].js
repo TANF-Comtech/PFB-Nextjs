@@ -98,7 +98,7 @@ export default function ReportPage({ page, preview }) {
       ></script>
       <SiteMetaCustom
         desc={ report.main_content ? ( `${ report.main_content[0].text.substring(0,180) } ... ` ) : ( meta.desc ) }
-        title={ report.title ? ( `${ report.title[0].text } | People for Bikes` ) : ( meta.title ) }
+        title={ report.title ? ( `${ report.title[0].text } | PeopleForBikes` ) : ( meta.title ) }
         imgHeight={ meta.imgHeight }
         imgSrc={ meta.imgSrc }
         imgWidth={ meta.imgWidth }

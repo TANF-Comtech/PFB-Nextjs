@@ -86,11 +86,12 @@ export default function Homepage({ page }) {
     theTitle,
     theDesc,
     theKeywords,
-    thePath,
     theImage,
     theImageWidth,
     theImageHeight,
   } = useMetadata( new_homepage )
+
+  console.log(new_homepage)
 
   return (
     <Wrapper postTitle="PeopleForBikes Homepage" isWide={true}>

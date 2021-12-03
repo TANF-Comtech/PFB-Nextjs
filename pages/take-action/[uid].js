@@ -150,7 +150,7 @@ export default function ActionForms({ page, preview }) {
         }
         title={
           action.title
-            ? `${action.title[0].text} | People for Bikes`
+            ? `${action.title[0].text} | PeopleForBikes`
             : meta.title
         }
         imgHeight={meta.imgHeight}
