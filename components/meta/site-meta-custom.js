@@ -45,11 +45,11 @@ const SiteMetaCustom = ( {
       <meta property="og:url" content={ path } key="ogurl" />
 
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content={ title } key="twtrtitle" />
-      <meta name="twitter:description" content={desc} key="twtrdesc" />
-      <meta name="twitter:domain" content="peopleforbikes.org" />
       <meta name="twitter:site" content="@peopleforbikes" />
-      <meta name="twitter:image" content={ imgSrc } key="twitterimg" />
+      <meta name="twitter:domain" content="peopleforbikes.org" />
+      {/* <meta name="twitter:title" content={ title } key="twtrtitle" />
+      <meta name="twitter:description" content={ desc } key="twtrdesc" />
+      <meta name="twitter:image" content={ imgSrc } key="twitterimg" /> */}
 
       <link rel="canonical" href={ path } key="canonical" ></link>  
       { ldJSON &&
