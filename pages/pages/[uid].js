@@ -20,7 +20,7 @@ export default function BasicPage({ page, preview }) {
     <>
       {/* <Head>
         <title>
-          { RichText.asText(page.basic_page.title) } | People for Bikes
+          { RichText.asText(page.basic_page.title) } | PeopleForBikes
         </title>
       </Head>
       <Wrapper postTitle={ RichText.asText(page.basic_page.title) }>

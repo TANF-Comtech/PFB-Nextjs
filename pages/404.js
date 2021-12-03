@@ -1,5 +1,8 @@
 import Link from 'next/link'
 import styled from "styled-components"
+import Image from "next/image"
+
+import SiteMetaCustom from '../components/meta/site-meta-custom'
 
 import BMXRider from '../public/bmx-rider.png'
 import BMXRiderMobile from '../public/bmx-rider-mobile.png'
@@ -20,20 +23,30 @@ const Container = styled.section`
 `
 
 const ImgContainer = styled.div`
-  background-image: url(${ BMXRiderMobile });
-  background-position: center center;
-  background-repeat: none;
-  height: 251px;
-  position: relative;
-  top: 50px;
-  width: 300px;
-  z-index: ${ props => props.theme.zIndex01 };
-
+  display: none;
+  
   @media (min-width: ${ props => props.theme.xs }) {
-    background-image: url(${ BMXRider });
+    display: block;
     height: 290px;
+    position: relative;
+    top: 50px;
     width: 346px;
+    z-index: ${ props => props.theme.zIndex01 };
   }
+`
+
+const ImgContainerMobile = styled.div`
+  display: none;
+
+  @media (max-width: ${ props => props.theme.xs }) {
+    display: block;
+    height: 251px;
+    position: relative;
+    top: 50px;
+    width: 300px;
+    z-index: ${ props => props.theme.zIndex01 };
+  }
+  
 `
 
 const TextContainer = styled.div`
@@ -70,8 +83,29 @@ const Text = styled.h3`
 
 export default function CustomErrorPage() {
   return (
+    <>
+    <SiteMetaCustom
+      title="404 - Page Not Found | PeopleForBikes"
+    />  
     <Container>
-      <ImgContainer />
+      <ImgContainer>
+        <Image
+          alt="Rider"
+          src={ BMXRider }
+          layout="fill"
+          objectFit="cover"
+          quality={ 80 }
+        />
+      </ImgContainer>
+      <ImgContainerMobile>
+        <Image
+          alt="Rider"
+          src={ BMXRiderMobile }
+          layout="fill"
+          objectFit="cover"
+          quality={ 80 }
+        />
+      </ImgContainerMobile>
       <TextContainer>
         <Title>404</Title>
         <Text>
@@ -85,5 +119,6 @@ export default function CustomErrorPage() {
         </Text>
       </TextContainer>
     </Container>
+    </>
   )
 }

@@ -1,15 +1,33 @@
-// next.config.js
-const withPlugins = require('next-compose-plugins')
-const withImages = require('next-images')
+module.exports = {
+  
+  // Environments - should be handled with environmental variables in webpack 5
+  // Talk with your project lead
 
-const { 
-  PHASE_DEVELOPMENT_SERVER, 
-  PHASE_PRODUCTION_BUILD 
-} = require('next/constants')
+  // Asset handling
+  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
 
-const nextConfig = {
+    // SVG handler, inlines everything under 200KB
+    config.module.rules.push({
+      test: /\.svg$/,
+      type: 'asset',
+      parser: {
+        dataUrlCondition: {
+          maxSize: 200 * 1024
+        }
+      },
+      use: 'svgo-loader'
+    });
+    
+    return config;
+  },
 
-  // Set redirects here, objs in arr as needed
+  // To use next/images...
+  images: {
+    deviceSizes: [320, 380, 480, 768, 980, 1200, 1600],
+    domains: ['*.peopleforbikes.org', 'localhost', 'images.prismic.io']
+  },
+
+  // Redirects
   async redirects() {
     return [
       {
@@ -270,15 +288,3 @@ const nextConfig = {
     ]
   }
 }
-
-// This uses phases as outlined here: 
-// https://github.com/vercel/next.js/tree/canary/examples/with-env-from-next-config-js
-module.exports = withPlugins([
-
-  // Processes images during build time
-  [withImages, {
-    [PHASE_DEVELOPMENT_SERVER]: 'http://localhost:3001',
-    [PHASE_PRODUCTION_BUILD]: 'https://www.peopleforbikes.org'
-  }]
-   
-], nextConfig)

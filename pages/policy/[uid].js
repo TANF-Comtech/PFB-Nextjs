@@ -35,7 +35,7 @@ export default function policyPage({ page, preview }) {
         }
         title={
           policy.title
-            ? `${policy.title[0].text} | People for Bikes`
+            ? `${policy.title[0].text} | PeopleForBikes`
             : meta.title
         }
         imgHeight={meta.imgHeight}

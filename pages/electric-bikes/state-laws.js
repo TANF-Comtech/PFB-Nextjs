@@ -70,7 +70,7 @@ export default function EBikesLaws({ page, preview }) {
       ></script>
       <SiteMetaCustom
         desc={meta.desc}
-        title="State by State Electric Bike Laws | People for Bikes"
+        title="State by State Electric Bike Laws | PeopleForBikes"
         imgHeight={meta.imgHeight}
         imgSrc={meta.imgSrc}
         imgWidth={meta.imgWidth}

@@ -61,7 +61,10 @@ export default class MyDocument extends Document {
             rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&display=swap"
           />
-          <script async src="https://www.google-analytics.com/analytics.js" />
+          <script 
+            async 
+            src="https://www.google-analytics.com/analytics.js" 
+          />
           <script
             dangerouslySetInnerHTML={{
               __html: `
@@ -70,6 +73,22 @@ export default class MyDocument extends Document {
                   ga('send', 'pageview');
                 `,
             }}
+          />
+          <script 
+            dangerouslySetInnerHTML={{
+              __html: `
+                !function(f,b,e,v,n,t,s)
+                {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+                n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+                if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+                n.queue=[];t=b.createElement(e);t.async=!0;
+                t.src=v;s=b.getElementsByTagName(e)[0];
+                s.parentNode.insertBefore(t,s)}(window, document,'script',
+                'https://connect.facebook.net/en_US/fbevents.js');
+                fbq('init', '3047515995261591');
+                fbq('track', 'PageView');
+              `,
+            }}          
           />
           <script
             async

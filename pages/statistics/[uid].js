@@ -44,7 +44,7 @@ export default function MembersPage({ page, preview }) {
         }
         title={
           statistic_page.title
-            ? `${statistic_page.title[0].text} Statistics | People for Bikes`
+            ? `${statistic_page.title[0].text} Statistics | PeopleForBikes`
             : meta.title
         }
         imgHeight={meta.imgHeight}

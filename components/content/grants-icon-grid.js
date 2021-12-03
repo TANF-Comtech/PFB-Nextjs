@@ -8,10 +8,11 @@ import CannondaleIcon from '../../public/sponsor-logos/cannondale-logo.svg'
 import GiantIcon from '../../public/sponsor-logos/giant-logo.svg'
 import NinerIcon from '../../public/sponsor-logos/niner-logo.svg'
 import ShimanoIcon from '../../public/sponsor-logos/shimano-logo.svg'
-import TrailTrustIcon from '../../public/sponsor-logos/trail-trust.jpeg'
+import TernIcon from '../../public/sponsor-logos/tern-logo.svg'
+import TrailTrustIcon from '../../public/sponsor-logos/trail-trust-logo.svg'
 import TrekIcon from '../../public/sponsor-logos/trek-logo.svg'
 import VaastIcon from '../../public/sponsor-logos/vaast-logo.svg'
-import TernIcon from '../../public/sponsor-logos/tern-logo.png'
+
 
 const Box = styled.div`
   align-items: center;
@@ -80,21 +81,20 @@ const GrantsIconGrid = () => {
             alt="Trail Trust Icon"
             src={ TrailTrustIcon }
           />
-        </Box>
-                
+        </Box>                
         <Box>
           <Logo 
             alt="Trek Bicycles Logo"
             src={ TrekIcon }
           />
-        </Box>
+        </Box>     
         <Box>
           <Logo 
             alt="Vaast Logo"
             src={ VaastIcon }
           />
         </Box>
-        <Box></Box>
+        <Box />
       </GridWide>
     </MainContent>
   )

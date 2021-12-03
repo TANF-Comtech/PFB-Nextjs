@@ -3,6 +3,7 @@ import Link from "next/link"
 import styled from "styled-components"
 
 import { linkResolver } from "../../lib/utils"
+import BgImage from '../primitives/bg-image'
 
 import WhiteArrow from '../../public/white-arrow.svg'
 import PromoFallback from '../../public/promo/promo-momentum.jpg'
@@ -13,11 +14,8 @@ const Container = styled.section`
   }
 `
 
-const ImageContainer = styled.section`
+const PromoTextContainer = styled.div`
   align-items: center;
-  background-image: url(${ props => props.source });
-  background-position: center center;
-  background-size: cover;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -25,6 +23,7 @@ const ImageContainer = styled.section`
   margin-bottom: 25px;
   padding: 0 5vw;
   text-align: center;
+  width: 100vw;
 
   @media screen and (min-width: ${ props => props.theme.sm }) {
     height: 70vh;
@@ -89,40 +88,49 @@ const Promo = ({
       { path ? (
         <>
           { path.__typename === '_ExternalLink' ? (
-            <a href={ linkResolver(path, true) }>
-              <ImageContainer
-                headingRGBA={ headingRGBA }
-                source={ source }
+            <a href={ linkResolver(path) }>
+              <BgImage
+                imgsrc={ source }
               >
-                <span>{ smallWords }</span>
-                <h1>{ bigWords }</h1>
-                <Arrow src={ WhiteArrow } width="46px" />
-              </ImageContainer>     
-            </a>
-          ) : (
-            <Link href={ linkResolver(path, true) } passHref>
-              <a>
-                <ImageContainer
+                <PromoTextContainer
                   headingRGBA={ headingRGBA }
-                  source={ source }
                 >
                   <span>{ smallWords }</span>
                   <h1>{ bigWords }</h1>
                   <Arrow src={ WhiteArrow } width="46px" />
-                </ImageContainer>
+                </PromoTextContainer>     
+              </BgImage>
+            </a>
+          ) : (
+            <Link href={ linkResolver(path) } passHref>
+              <a>
+                <BgImage
+                  imgsrc={ source }
+                >
+                  <PromoTextContainer
+                    headingRGBA={ headingRGBA }
+                  >
+                    <span>{ smallWords }</span>
+                    <h1>{ bigWords }</h1>
+                    <Arrow src={ WhiteArrow } width="46px" />
+                  </PromoTextContainer>     
+                </BgImage>
               </a>
             </Link>
           )}        
         </>
       ) : (
-        <ImageContainer
-          headingRGBA={ headingRGBA }
-          source={ source }
+        <BgImage
+          imgsrc={ source }
         >
-          <span>{ smallWords }</span>
-          <h1>{ bigWords }</h1>
-          <Arrow src={ WhiteArrow } width="46px" />
-        </ImageContainer> 
+          <PromoTextContainer
+            headingRGBA={ headingRGBA }
+          >
+            <span>{ smallWords }</span>
+            <h1>{ bigWords }</h1>
+            <Arrow src={ WhiteArrow } width="46px" />
+          </PromoTextContainer>     
+        </BgImage>  
       )}
       
     </Container>

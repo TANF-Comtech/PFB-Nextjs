@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Link from "next/link"
 
-import SignUpForm from "./form"
+import FooterSignUpForm from "../content/footer-signup-form"
 import SocialIcon from './social'
 import Logo from './logo'
 import LogoType from './logotype'
@@ -245,7 +245,7 @@ function Footer() {
             </SignUpFooter>            
             <header>
               <h2>Let's stay in touch. Join our newsletter list:</h2>
-              <SignUpForm />
+              <FooterSignUpForm />
             </header>
           </SignUpContainer>
         </Container>

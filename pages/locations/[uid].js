@@ -46,7 +46,7 @@ export default function LocationPage({
         }
         title={
           locations.location
-            ? `${locations.location[0].text} | People for Bikes`
+            ? `${locations.location[0].text} | PeopleForBikes`
             : meta.title
         }
         imgHeight={

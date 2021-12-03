@@ -1,8 +1,6 @@
-import React from "react";
+import { useEffect, useRef } from "react";
+import { useRouter } from 'next/router'
 import styled from "styled-components";
-
-import { RedTextField } from "../primitives/text";
-import InputButton from "../primitives/input-button";
 
 const FormContainer = styled.form`
   display: flex;
@@ -13,8 +11,6 @@ const FormContainer = styled.form`
   @media (min-width: ${(props) => props.theme.lg}) {
     padding: 0;
   }
-
-
 
   dt {
     display: none;
@@ -105,11 +101,16 @@ const FormContainer = styled.form`
   }
 `;
 
-const WhiteButton = styled(InputButton)`
-  margin-top: 2vh;
-`;
+function FooterSignUpForm() {
+  const router = useRouter()
+  const sparkIframe = useRef()
 
-function SignUpForm() {
+  useEffect(() => {
+    const frm = document.createElement('script')
+    frm.src = `https://action.peopleforbikes.org/assets/js/widget.js/?id=111276`
+    sparkIframe.current.appendChild(frm)
+  }, [router])
+
   return (
     <>
       <FormContainer>
@@ -118,10 +119,10 @@ function SignUpForm() {
           src="https://code.jquery.com/jquery-3.5.1.min.js"
           integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
           crossOrigin="anonymous"></script>
-        <script src="https://action.peopleforbikes.org/assets/js/widget.js/?id=111276" async="" type="text/javascript"></script>
+        <div ref={sparkIframe} />
       </FormContainer> 
     </>
   );
 }
 
-export default SignUpForm;
+export default FooterSignUpForm;

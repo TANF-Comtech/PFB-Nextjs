@@ -31,7 +31,7 @@ export default function CareerPages({ page, preview }) {
       <SiteMetaCustom
         desc={meta.desc}
         title={
-          job.title ? `${job.title[0].text} | People for Bikes` : meta.title
+          job.title ? `${job.title[0].text} | PeopleForBikes` : meta.title
         }
         imgHeight={meta.imgHeight}
         imgSrc={meta.imgSrc}

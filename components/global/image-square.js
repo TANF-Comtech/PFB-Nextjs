@@ -1,34 +1,15 @@
-import React from "react";
 import styled from "styled-components";
+
+import BgImage from "../primitives/bg-image"
 
 import Link from "next/link"
 import ArrowIcon from '../../public/red-arrow.svg'
 
-const ImageContainer = styled.div`
+const ImageContentContainer = styled.div`
   align-items: center;
-  background-image: 
-    image-set(
-      url(${props => props.path1X}) 1x,
-      url(${props => props.path2X}) 2x
-    );
-  background-image: url(${props => props.path1X});
-  background-position: center center;
-  background-size: cover;
   display: flex;
-  height: auto;
+  height: 100%;
   justify-content: ${ props => props.isNavItem === true ? 'center' : 'space-between' };
-  margin: ${ props => props.isNavItem === true ? '0 20px 2vh 20px' : '0' };
-  max-width: 100%;
-  transition: 0.2s ease;
-  transform: translateY(0);
-  width: ${ props => props.isNavItem === true ? '150px' : '100%' };
-
-  &::before {
-    content: "";
-    padding-bottom: 100%;
-    display: inline-block;
-    vertical-align: top;
-  }
 `
 
 const Title = styled.h2`
@@ -84,22 +65,29 @@ const ImageSquare = ({
   return (
     <Link href={ imageSquareLink } passHref>
       <a onClick={ handler && handler }>
-        <ImageContainer
-          isNavItem={ isNavItem }
-          path1X={ source1X }
-          path2X={ source2X }
+        <BgImage
+          height={ isNavItem === true ? '150px' : '450px' }
+          heightTablet={ isNavItem === true ? '150px' : '450px' }
+          heightDesktop={ isNavItem === true ? '150px' : '450px' }
+          imgsrc={ source1X }
+          margin={ isNavItem === true ? '0 20px 2vh 20px' : '0' }
+          quality={ isNavItem === true ? 80 : 95 }
+          width={ isNavItem === true ? '150px' : '100%' }
         >
-          { isNavItem === true ? (
-            <NavTitle>{ title }</NavTitle>
-          ) : (
-            <Title>{ title }</Title>
-          )}
-          
-          <Arrow 
+          <ImageContentContainer
             isNavItem={ isNavItem }
-            src={ ArrowIcon } 
-          />
-        </ImageContainer>
+          >
+            { isNavItem === true ? (
+              <NavTitle>{ title }</NavTitle>
+            ) : (
+              <Title>{ title }</Title>
+            )}
+            <Arrow 
+              isNavItem={ isNavItem }
+              src={ ArrowIcon } 
+            />
+          </ImageContentContainer>
+        </BgImage>
       </a>
     </Link>
   )

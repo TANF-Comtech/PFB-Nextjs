@@ -5,7 +5,7 @@ import { linkResolver, randomID } from "../../lib/utils";
 import MainContent from "../global/main-content";
 import Rule from "../primitives/rule"
 
-import BlueArrow from "../../public/PFB_BLUE_ARW_RIGHT.svg";
+import BlueArrow from "../../public/pfb-blue-arrow-right.svg";
 
 const Tile = styled.div`
   display: flex;
