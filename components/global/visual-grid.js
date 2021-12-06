@@ -22,8 +22,12 @@ const GridImage = styled.img`
 `
 
 const SectionTitle = styled.h3`
+  font-size: 28px;
+  font-weight: 300;
+  line-height: 38px;
   margin: 6vh auto;
   text-align: center;
+  
 `
 
 const Para = styled.p`
