@@ -49,8 +49,6 @@ const VisualGrid = ({
 }) => {
   const themeProps = useContext(ThemeContext)
 
-  console.log( payload )
-
   return (
     <MainContent maxWidth="800px">
       { title &&

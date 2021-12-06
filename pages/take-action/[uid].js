@@ -85,7 +85,7 @@ export default function ActionForms({ page, preview }) {
   const { action } = page;
   const { meta } = useContext(DefaultContext);
 
-  console.log(action, action.form_id.toString())
+  // console.log(action, action.form_id.toString())
 
   // Image handling
   let imageSelection;
@@ -131,7 +131,7 @@ export default function ActionForms({ page, preview }) {
     action.form_id && (
       frm.src = `https://action.peopleforbikes.org/assets/js/widget.js/?id=${action.form_id.toString()}`
     )
-    console.log(frm.src)
+    // console.log(frm.src)
     sparkIframe.current.appendChild(frm)
   }, [router])
 
