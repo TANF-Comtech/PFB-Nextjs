@@ -13,6 +13,7 @@ import ResearchPillars from "../content/reesearch-pillars";
 import SecondaryCampaign from "../global/secondary-campaign"
 import SummaryBlock from "../content/summary-block";
 import ToolkitPillars from "../content/toolkit-pillars";
+import VisualGrid from "../global/visual-grid"
 
 import ActionItemGroup from "../slices/action-item-group";
 import Promo from "../slices/promo";
@@ -160,6 +161,17 @@ export default function UidSlices({ landing_page }) {
           />
         );
       }
+
+      // VisualGrid
+      if (slice.__typename === "Landing_pageBodyVisual_grid") {
+        return(
+          <VisualGrid
+            payload={ slice.fields }
+            title={ slice.primary.grid_title }
+          />
+        )
+      }
+
     });
   }
 
