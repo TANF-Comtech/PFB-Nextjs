@@ -2,6 +2,7 @@ import { useContext } from 'react'
 import styled, { ThemeContext } from 'styled-components'
 
 import { linkResolver } from '../../lib/utils'
+import evenOrOdd from '../../lib/utils/evenOrOdd'
 
 import MainContent from './main-content'
 import GridWide from './grid-wide'
@@ -43,6 +44,8 @@ const VisualGrid = ({
   title
 }) => {
   const themeProps = useContext(ThemeContext)
+
+  console.log( payload )
 
   return (
     <MainContent maxWidth="800px">
@@ -89,6 +92,7 @@ const VisualGrid = ({
               </Box>
             )
           } ) }
+          { evenOrOdd( payload.length ) === 'odd' && <Box /> }
         </GridWide> 
       }
     </MainContent>
