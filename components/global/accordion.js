@@ -1,12 +1,13 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 
-import Arrow from "../../public/red-arrow-triangle.svg"
+import RedArrow from "../../public/red-arrow-triangle.svg"
+import WhiteArrow from "../../public/white-arrow-triangle.svg"
 
 const AccordionWrapper = styled.div`
   align-items: center;
-  background-color: white;
-  border-top: 1px solid black;
+  background-color: ${(props) => props.darkMode === true ? props.theme.midnightBlue : '#fff' };
+  border-top: ${(props) => props.darkMode === true ? '1px solid #fff' : '1px solid #222' };
   cursor: pointer;
   display: flex;
   height: auto;
@@ -35,6 +36,7 @@ const ArrowButton = styled.img`
 `;
 
 const Title = styled.h2`
+  color: ${(props) => props.darkMode === true ? props.theme.white : props.theme.black };
   font-size: 40px;
   line-height: 40px;
   margin: 0;
@@ -56,11 +58,16 @@ const Title = styled.h2`
  * Pass in the prop "title" to insert the text that you want to appear next to the arrow button
  * Within the element, pass in the text that you want to appear after the accordion has been activated.
  * 
+ * @param {bool} darkMode - true for dark, false for normal
  * @param {string} title - pass in the title of the accordion as a prop
  * @param {obj} children - accordion content should be passed in using the children object
  */
 
-const Accordion = ({ title, children }) => {
+const Accordion = ({ 
+  darkMode = false,
+  title, 
+  children
+}) => {
   const accordionContent = useRef(null);
   const [accordionHeight, setAccordionHeight] = useState(0)
   const [open, setOpen] = useState(false);
@@ -77,17 +84,24 @@ const Accordion = ({ title, children }) => {
 
   return (
     <>
-      <AccordionWrapper onClick={handleClick} open={open}>
+      <AccordionWrapper 
+        darkMode={ darkMode }
+        onClick={handleClick} 
+        open={open}
+      >
         <ArrowButton
           alt="Accordion Arrow - click to reveal content"
           open={ open }
-          src={ Arrow }
+          src={ darkMode === true ? WhiteArrow : RedArrow }
         />
-        <Title>
+        <Title darkMode={ darkMode }>
           {title}
         </Title>
       </AccordionWrapper>
-      <InternalWrapper open={open} ref={accordionContent}>
+      <InternalWrapper 
+        open={open} 
+        ref={accordionContent}
+      >
         {children}
       </InternalWrapper>
     </>
