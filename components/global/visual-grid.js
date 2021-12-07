@@ -38,12 +38,14 @@ const Para = styled.p`
  * <VisualGrid>
  * 
  * Component that takes visuals + text and puts them into a grid
- * 
+ 
+ * @param { bool } isOneItem - if grid only has one item, this centers it
  * @param { array } payload - group of the img/text combos
  * @param { string } title - visual grid heading
  * 
  */
 const VisualGrid = ({
+  isOneItem = false,
   payload,
   title
 }) => {
@@ -58,8 +60,9 @@ const VisualGrid = ({
       }
       { payload && 
         <GridWide
-          gridGap="1px"
+          gridGap={ isOneItem === true ? '0' : '1px' }
           gridGapColor="rgb(225,225,225)"
+          isOneItem={ isOneItem }
         >    
           { payload.map( (item) => {
             return(

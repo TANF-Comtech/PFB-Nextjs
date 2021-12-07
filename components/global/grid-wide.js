@@ -9,7 +9,7 @@ const MainContainer = styled.section`
   grid-template-columns: repeat(1, minmax(0, 1fr));
 
   @media( min-width: ${(props)  => props.theme.md} ) {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: ${props => props.isOneItem ? 'repeat(1, minmax(0, 1fr))' : 'repeat(2, minmax(0, 1fr))'};
   }
 
   a, a:focus, a:visited, a:hover {
@@ -28,18 +28,21 @@ const MainContainer = styled.section`
  * @param { object } children - nested components beneath this component
  * @param { object } gridGap - how big of a gap in the grid you want (default: 2vw)
  * @param { object } gridGapColor - you can apply a color to the background for a grid
+ * @param { bool } isOneItem - lets you know if the system has only one sponsor
  * 
  */
 const GridWide = ({ 
   children,
   gridGap,
-  gridGapColor
+  gridGapColor,
+  isOneItem = false
 }) => {
   return (
     <>
       <MainContainer
         gridGap={ gridGap }
         gridGapColor={ gridGapColor }
+        isOneItem={ isOneItem }
       >
         {children}
       </MainContainer>
