@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { createPortal } from 'react-dom'
 
-export const IFrame = ({
+const IFrame = ({
   children,
   ...props
 }) => {
@@ -15,3 +15,5 @@ export const IFrame = ({
     </iframe>
   )
 }
+
+export default IFrame
