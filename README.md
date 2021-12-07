@@ -1,4 +1,4 @@
-PeopleForBikes site is a [Next.js](https://nextjs.org/) project using [`styled-components`](https://styled-components.com/docs) for CSS, [`Apollo`]((https://www.apollographql.com/docs/react/)) for component-level data-fetching and [Prismic.io](https://peopleforbikes.prismic.io/) as our headless CMS.
+PeopleForBikes site is a [Next.js](https://nextjs.org/) project using [styled-components](https://styled-components.com/docs) for CSS, [Apollo](https://www.apollographql.com/docs/react/) for component-level data-fetching and [Prismic.io](https://peopleforbikes.prismic.io/) as our headless CMS.
 
 ## Getting Started
 
@@ -11,7 +11,7 @@ yarn install # should output a bunch of install scripts, ignore warnings
 yarn dev # starts the dev server
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result (`create-next-app` will sometimes put your server at port `3001`, `3002` if you have something else running - check your CLI output).
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result (Next will sometimes put your server at port `3001`, `3002` if you have something else running - check your CLI output).
 
 This app is on Next v11 and Webpack v5 until [this bug is resolved in Next v12](https://github.com/vercel/next.js/discussions/30468).
 
@@ -19,11 +19,11 @@ This app is on Next v11 and Webpack v5 until [this bug is resolved in Next v12](
 
 Make sure you have a high-level understanding of the tooling being used:
 
-- [`styled-components`](https://styled-components.com/docs), our styling tool
+- [styled-components](https://styled-components.com/docs), our styling tool
 - [PFB Prismic](https://peopleforbikes.prismic.io/), our Prismic headless CMS instance
 - [PFB Prismic GraphiQL](https://peopleforbikes.prismic.io/graphql), where to test your queries
-- [`prismic-javascript`](https://github.com/prismicio/prismic-javascript), data queries / rendering in components
-- [Apollo](https://www.apollographql.com/docs/react/), GraphQL query manager, TBD how we're using this
+- [prismic-javascript](https://github.com/prismicio/prismic-javascript), data queries / rendering in components
+- [Apollo](https://www.apollographql.com/docs/react/), GraphQL query manager
 - [Vercel PFB](https://vercel.com/people-for-bikes/pfb-nextjs), hosting / CI pipeline
 
 ### Environmental Variables
@@ -44,6 +44,8 @@ Next.js has some key files and folders that contain set up that is important for
 
 - [`/public/`](https://nextjs.org/docs/basic-features/static-file-serving). All static file serving (fonts, images, etc) have to go in the `public` folder. You can then import then like everything else in a React project.
 
+- [`/lib`](https://github.com/PeopleForBikes/pfb-nextjs/tree/master/lib). Integrations and utilities can be found in the `lib` folder. Please reference this folder before building additional functionality (it may already be in here)!
+
 ## Data
 
 Almost all the data for this site comes from the [Prismic PFB Repo](https://peopleforbikes.prismic.io/) and we are using the well-documented [prismic-javascript](https://github.com/prismicio/prismic-javascript) utility to make data requests. All queries are using GraphQL and can be found in the `/lib/queries` folder of the app.
@@ -54,9 +56,10 @@ Prismic is a headless CMS product the structures all PFB data into [Prismic type
 
 Most page-based queries for Prismic should have the following:
 
-- wrapped in an exported `async` function, that Next.js will later ingest
-- `await` the `fetchAPI()`, which should have your query defined
-- two variables passed into the query, `uid` (page ID) an `lang` (usually `en-us`)
+- wrap in an exported, named `async` function, that Next.js will later ingest in `getStaticProps`
+- pass two variables passed into function: 1) `uid` (page ID); 2) `lang` (usually `en-us`)
+- inside of the function, you want to `await` the custom `fetchAPI()` function, which is where you will call your named query (and that query will typically accept the params from the function)
+
 
 Example page-based query (from `/lib/queries/careers.js`):
 ```js
@@ -96,11 +99,13 @@ import { fetchAPI, API_LOCALE } from '../api'
 
 Notes on queries:
 
-- There is some overhead in setting up the integration between Next and Prismic but that is already handled by `/lib/api.js`. This file exposes `fetchAPI()`, whose first argument is a GraphQL query. All queries to Prismic should be in GraphQL but their GQL endpoint is in beta. Some queries need REST but it's rare.
+- All queries to Prismic should be in GraphQL but their GQL endpoint is in beta. Some queries need REST but it's rare.
 
 - This site has a lot of relational data, which Prismic makes accessible through GraphQL unions mostly. Often when you query a type, you'll need to add GraphQL unions to reach across the different types. They'll look like `...on type_name {}` in the queries (you can see a number of unions in the example above)
 
-- Prismic uses a concept called 'slices', which are repeatable content blocks shared between types. They'll always show up in the `body` area of the query. This site makes heavy use of them. This is the 'Prismic way' and takes a minute to wrap your head around.
+- **Querying for links is hard in a headless environment**, mostly because of all the GraphQL unions. Please use `allLinkFields` in [`/lib/queries/fragments.js`](https://github.com/PeopleForBikes/pfb-nextjs/blob/master/lib/queries/fragments.js) if you need to query a link. This fragment checks all possible types for you (this will save you later inside of components).
+
+- Prismic uses a concept called ['slices'](https://prismic.io/docs/core-concepts/slices), which are repeatable content blocks shared between types (they're also queried with GraphQL unions). They'll always show up in the `body` area of the query. This site makes heavy use of them. This is the 'Prismic way' and takes a minute to wrap your head around.
 
 
 ### Server-Side Data Fetching
@@ -170,7 +175,7 @@ export async function getStaticPaths() {
 
 ### Component Level Data
 
-If you need to get data at the component level, it's best to use Apollo for that purpose. This actually fetches data client-side, and slips past Next's SSR mechanisms. A good use case for this is a global menu element or a search tool - something that appears on every page but has live data in it. 
+If you need to get data at the component level, it's best to use Apollo's [`useQuery`](https://www.apollographql.com/docs/react/api/react/hooks/#usequery) for that purpose. This actually fetches data client-side, and slips past Next's SSR mechanisms. A good use case for this is a global menu element or a search tool - something that appears on every page but has live data in it. 
 
 How this works in practice is:
 
