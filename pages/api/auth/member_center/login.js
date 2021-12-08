@@ -11,7 +11,7 @@ export default (req, res) => {
         const code  = req.body?.code
         // if submitting email (step 1)
     if(code == null && email){
-        if(email.endsWith("@peopleforbikes.org")){
+        if(email.endsWith("@peopleforbikes.org") || email.endsWith("@thor-studio.com")){
             return sendAuthCode(email).then(auth0Data=>{ //dont use auth0Data here
                     res.status(200).json({status:true})
                     }).catch(auth0Data=>{
