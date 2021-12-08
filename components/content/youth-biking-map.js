@@ -36,14 +36,14 @@ export default function YouthBikingMap() {
 
   return (
     <Container>
-      <div class="embed-container">
+      <div className="embed-container">
         <iframe 
           width="800" 
           height="500" 
-          frameborder="0" 
+          frameBorder="0" 
           scrolling="no" 
-          marginheight="0" 
-          marginwidth="0" 
+          marginHeight="0" 
+          marginWidth="0" 
           title="National Youth Programs Map" 
           src="https://pfb.maps.arcgis.com/apps/Embed/index.html?webmap=458326200f3745c5908b4ae3aa10f5dc&extent=-139.5761,16.4746,-60.1229,53.5446&zoom=true&previewImage=false&scale=true&legendlayers=true&disable_scroll=true&theme=light">
         </iframe>
