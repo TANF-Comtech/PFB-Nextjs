@@ -1,13 +1,10 @@
 import { useContext } from 'react'
 import Link from 'next/link'
-import { RichText, Date as ParseDate } from 'prismic-reactjs'
+import { RichText } from 'prismic-reactjs'
 import styled, { ThemeContext } from 'styled-components'
 
 import { getPrograms, getProgramPage } from '../../lib/queries/local-innovation'
-
 import { randomID, linkResolver } from '../../lib/utils'
-import { setDateSuffix } from '../../lib/utils/setDateSuffix'
-import { AlgoliaIndex } from '../../lib/algolia/algoliaClient'
 
 import DefaultContext from '../../context/default/default-context'
 import FallbackImage from '../../components/content/fallback-image'
@@ -21,15 +18,6 @@ import Accordion from '../../components/global/accordion'
 import Promo from '../../components/slices/promo'
 import VisualGrid from '../../components/global/visual-grid'
 import YouthBikingMap from '../../components/content/youth-biking-map'
-
-import HeaderImage from '../../components/global/header-image'
-
-import ContentItem from '../../components/content/content-item'
-
-
-import Button from '../../components/primitives/button'
-import SecondaryTitleBanner from '../../components/content/secondary-title-banner'
-import WayfindingItem from '../../components/slices/wayfinding-item'
 
 const RedHeading = styled.h2`
   color: ${ props => props.theme.red };
@@ -48,7 +36,7 @@ export default function ProgramPage({
   const { meta } = useContext(DefaultContext)
   const themeProps = useContext(ThemeContext)
 
-  console.log(program)
+  // console.log(program)
 
   return (
     <>
