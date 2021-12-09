@@ -1,5 +1,6 @@
 import React from "react";
 import { RichText } from 'prismic-reactjs'
+import styled from 'styled-components'
 
 import { linkResolver, randomID } from "../../lib/utils";
 
@@ -12,9 +13,16 @@ import SecondaryCampaign from "../global/secondary-campaign"
 import SummaryBlock from "../content/summary-block";
 import ToolkitPillars from "../content/toolkit-pillars";
 import VisualGrid from "../global/visual-grid"
+import MainContent from "../global/main-content"
 
 import ActionItemGroup from "../slices/action-item-group";
 import Promo from "../slices/promo";
+
+const RedHeading = styled.h2`
+  color: ${ props => props.theme.red };
+  font-weight: 700;
+  text-transform: uppercase;
+`
 
 export default function UidSlices({ landing_page }) {
  
@@ -88,9 +96,17 @@ export default function UidSlices({ landing_page }) {
         landing_page._meta.uid === "local-innovation" 
       ) {
         return (
+          <>
+          <MainContent
+            contentPadding="4vh 4vw 4vh 4vw"
+          >
+            <RedHeading>Programs</RedHeading>
+            <hr />
+          </MainContent>           
           <SecondaryCampaign
             payload={ slice.fields }
           />
+          </>
         );
       }
       
@@ -159,10 +175,18 @@ export default function UidSlices({ landing_page }) {
       // VisualGrid
       if (slice.__typename === "Landing_pageBodyVisual_grid") {
         return(
-          <VisualGrid
-            payload={ slice.fields }
-            title={ slice.primary.grid_title }
-          />
+          <>
+            <MainContent
+              contentPadding="4vh 4vw 4vh 4vw"
+            >
+              <RedHeading>Partners</RedHeading>
+              <hr />
+            </MainContent>         
+            <VisualGrid
+              payload={ slice.fields }
+              title={ slice.primary.grid_title }
+            />
+          </>
         )
       }
 
