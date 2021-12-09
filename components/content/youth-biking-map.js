@@ -71,7 +71,7 @@ export default function YouthBikingMap() {
           </iframe>
         </div>
       </Container>
-      <p><strong>Map Legend is in accessible with the `{'>>'}` icon in the upper left hand corner of the map.</strong></p>
+      <p><strong>Map Legend is accessible with the `{'>>'}` icon in the upper left hand corner of the map.</strong></p>
       <p>Questions about the map? Is there a program near you that you would like to see on the map? <a href="https://docs.google.com/forms/d/e/1FAIpQLSfv_WGPAQiZFb-i4lnkhuk2lAc7S9Y_aN-CMfYDfCBP4NPHcA/viewform" target="_blank">Let us know</a>.</p>
       </MainContent>
     </>
