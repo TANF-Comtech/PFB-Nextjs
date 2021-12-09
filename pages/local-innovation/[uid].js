@@ -151,21 +151,7 @@ export default function ProgramPage({
                   }
                 </MainContent>
                 { program._meta.uid === 'youth-cycling-programs' && 
-                  <>
-                    <MainContent
-                      contentPadding="8vh 4vw 2vh 4vw"
-                      maxWidth="1200px"
-                    >
-                      <RedHeading>National Youth Program Map</RedHeading>
-                      <hr />
-                    </MainContent>
-                    <MainContent
-                      contentPadding="0vh 4vw 4vh 4vw"
-                      maxWidth="800px"
-                    >
-                      <YouthBikingMap />
-                    </MainContent>
-                  </>
+                  <YouthBikingMap />
                 }
                 </>
               )
