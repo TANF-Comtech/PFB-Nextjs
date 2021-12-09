@@ -8,8 +8,6 @@ import GrantsList from "../content/grant-guidelines-list";
 import MissionPillars from "../content/mission-pillars";
 import NumberedPillars from "../content/numbered-pillars";
 import ReportsList from "../content/reports-list";
-import ResearchBanners from "../content/research-banners";
-import ResearchPillars from "../content/reesearch-pillars";
 import SecondaryCampaign from "../global/secondary-campaign"
 import SummaryBlock from "../content/summary-block";
 import ToolkitPillars from "../content/toolkit-pillars";
@@ -85,7 +83,9 @@ export default function UidSlices({ landing_page }) {
       // RELATED LINKS (CAMPAIGNS)
       if (
         slice.__typename === "Landing_pageBodyRelated_list" &&
-        landing_page._meta.uid === "campaigns"
+        landing_page._meta.uid === "campaigns" ||
+        slice.__typename === "Landing_pageBodyRelated_list" &&
+        landing_page._meta.uid === "local-innovation" 
       ) {
         return (
           <SecondaryCampaign
@@ -111,11 +111,6 @@ export default function UidSlices({ landing_page }) {
         );
       }
 
-      // RESEARCH CAMPAIGN BANNERS
-      if (slice.__typename === "Landing_pageBodyResearch") {
-        return <ResearchBanners payload={slice.fields} />;
-      }
-
       // RESEARCH REPORTS
       if (slice.__typename === "Landing_pageBodyResearch__reports") {
         return (
@@ -134,7 +129,6 @@ export default function UidSlices({ landing_page }) {
             >
               See Full Report Library
             </Button>
-            <ResearchPillars />
           </>
         );
       }
