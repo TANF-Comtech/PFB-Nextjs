@@ -32,6 +32,31 @@ All environmental variables are supposed to be stored in `.env.local`. By defaul
 
 If you need the variables, contact the project lead.
 
+### HTTPS Locally
+
+Next.js does not support HTTPS locally, which is a problem if you want to authenticate into the gated part of the site (Member Center) and do work there. 
+
+You can get around this issue by using [`local-ssl-proxy`](). This utility proxies the Next app and applies a TLS cert at another localhost port for your use. Follow these instructions to get your app setup:
+
+#### From your CLI, confirm you are using:
+
+- the correct version of Node for this project (`v14.x` as of 2021-12-10) and that 
+- you have [Homebrew](https://brew.sh/) installed.
+- you are in this application's folder on your local machine (should be `pfb-nextjs`)
+
+#### Installation procedure:
+
+- `npm install -g local-ssl-proxy` (installs the local-ssl-proxy into your node env)
+- `brew install mkcert certutil` (installs certificate generation utilities locally)
+- `mkcert -install` (sets up registries with browsers and the certificate store)
+- `mkcert localhost` (creates `.pem` files for localhost, in the root pfb-nextjs folder)
+
+#### Running HTTPS version of the app
+
+- start `yarn dev` in a CLI instance (starts app at `localhost:3001`)
+- in another CLI instance, run `yarn dev-https`, which will trigger `local-ssl-proxy` to proxy at `localhost:4001`)
+- open the site in Chrome, Firefox or Safari and it should show up without any warnings ;)
+
 ### Site Structure
 
 Next.js has some key files and folders that contain set up that is important for the functionality of this site:
