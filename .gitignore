@@ -28,3 +28,7 @@ yarn-error.log*
 .env.development.local
 .env.test.local
 .env.production.local
+
+# local TLS certs
+localhost-key.pem
+localhost.pem
