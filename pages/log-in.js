@@ -69,8 +69,13 @@ const Button = styled(InputButton)`
   }
 `;
 
-const Error = styled.p`
-  color: red;
+const Error = styled(Markup)`
+  color: red !important;
+  font-family: ${ props => props.theme.montserrat } !important;
+  font-size: 16px !important;
+  line-height: 24px !important;
+  padding: 8px 0 !important;
+  text-transform: none !important;
 `;
 
 const Disclaimer = styled.p`
@@ -201,7 +206,7 @@ function LoginPage() {
                 />
               </LoginContainer>
               { Boolean(errorState.length) && (
-                <Markup content={ errorState } />
+                <Error content={ errorState } />
               ) }
               <Disclaimer>
                 * If you don’t work for a PeopleForBikes Coalition member company, you can sign up for our newsletter at the bottom of this page, <a href="https://ridespot.org/register">download our free Ride Spot app</a> and <a href="https://www.classy.org/give/117371">donate</a> on our individual supporter page.
