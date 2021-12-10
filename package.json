@@ -1,9 +1,10 @@
 {
   "name": "pfb-nextjs",
-  "version": "5.1.0",
+  "version": "6.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev -p 3001",
+    "dev-https": "#",
     "build": "next build",
     "start": "next start",
     "storybook": "start-storybook -p 6006",
@@ -18,7 +19,7 @@
     "@stripe/stripe-js": "^1.19.1",
     "algoliasearch": "^4.10.5",
     "apollo-link-prismic": "^1.0.7",
-    "auth0": "^2.36.2",
+    "auth0": "^2.37.0",
     "aws-sdk": "^2.1005.0",
     "babel-plugin-styled-components": "^1.13.2",
     "cookies": "^0.8.0",
