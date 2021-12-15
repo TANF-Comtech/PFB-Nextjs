@@ -95,6 +95,7 @@ export default class MyDocument extends Document {
             defer
             src="https://static.cdn.prismic.io/prismic.js?new=true&repo=peopleforbikes"
           ></script>
+          <meta name="facebook-domain-verification" content="nrzxc2kmvgvoeqy6hzocktskw38wfq" />
         </Head>
         <body>
           <Main />
