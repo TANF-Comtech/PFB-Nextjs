@@ -195,7 +195,7 @@ const Dropdown = ({
             hasTopics={ hasTopics }
           >
             <li>
-              <AnchorAlign href="https://www.classy.org/campaign/end-of-year-giving-campaign-2021/c372713" target="_blank">
+              <AnchorAlign href="https://www.classy.org/give/117371" target="_blank">
                 Donate
                 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" viewBox="0 0 32 32" enableBackground="new 0 0 32 32" >
                   <path d="M2 30V2h17c0.553 0 1-0.447 1-1s-0.447-1-1-1H2C0.896 0 0 0.896 0 2v28c0 1.104 0.896 2 2 2h28c1.104 0 2-0.896 2-2V13c0-0.553-0.447-1-1-1s-1 0.447-1 1v17H2z"/>
