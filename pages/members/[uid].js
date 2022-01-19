@@ -357,27 +357,11 @@ export async function getServerSideProps({
       };
     }
   } else {
-    const pageData = await getSingleMemberPage(params.uid, previewData);
-
-    if (pageData.member_content.body !== null ) {
-      pageData.member_content.body.map( slice => {
-        if ( slice.type === 'biz_intel_hub' && slice.fields.length > 1) {
-          slice.fields.reverse()
-        } 
-      })
-    }
-
     return {
-      props: {
-        preview,
-        page: pageData ?? null,
+      redirect: {
+        destination: "/log-in",
+        permanent: false,
       },
-    };    
-    // return {
-    //   redirect: {
-    //     destination: "/log-in",
-    //     permanent: false,
-    //   },
-    // };
+    };
   }
 }
