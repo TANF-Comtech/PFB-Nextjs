@@ -32,12 +32,6 @@ import VisualGrid from "../../components/global/visual-grid"
 
 import WhiteArrow from "../../public/white-arrow.svg"; 
 
-const IframeWrapper = styled.iframe`
-  margin: 25px 0;
-  min-height: 300vh;
-  width: 100%;
-`;
-
 const IntroWrapper = styled.div`
   margin: 3vh 0 1vh 0;
 `;
@@ -149,12 +143,14 @@ export default function MembersPage({ page, preview }) {
           {/* DATA STUDIO */}
           {member_content._meta.uid === "business-intelligence-hub" && (
             <>
-              <IframeWrapper
-                src="https://datastudio.google.com/embed/reporting/fe9c9fc6-ee8b-43a6-ae3a-1a2f20377a04/page/63ESB"
-                frameBorder="0"
+              <iframe 
+                width="100%" 
+                height="4504" 
+                src="https://datastudio.google.com/embed/reporting/fe9c9fc6-ee8b-43a6-ae3a-1a2f20377a04/page/WGFSB" 
+                frameborder="0" 
                 allowFullScreen="allowfullscreen"
-                aria-label="PeopleForBikes Business Intelligence Hub"
-              />
+                aria-label="PeopleForBikes Business Intelligence Hub">
+              </iframe>
               <Button
                 buttonAlign="center"
                 buttonBg="#D0021B"
