@@ -146,7 +146,7 @@ export default function MembersPage({ page, preview }) {
               <iframe 
                 width="100%" 
                 height="8000" 
-                src="https://datastudio.google.com/embed/reporting/fe9c9fc6-ee8b-43a6-ae3a-1a2f20377a04" 
+                src="https://datastudio.google.com/u/0/reporting/fe9c9fc6-ee8b-43a6-ae3a-1a2f20377a04/page/pHFSB" 
                 frameborder="0" 
                 allowFullScreen="allowfullscreen"
                 aria-label="PeopleForBikes Business Intelligence Hub">
