@@ -95,17 +95,18 @@ export default function UidSlices({ landing_page }) {
         slice.__typename === "Landing_pageBodyRelated_list" &&
         landing_page._meta.uid === "local-innovation" 
       ) {
+        
         return (
           <>
-          <MainContent
-            contentPadding="4vh 4vw 4vh 4vw"
-          >
-            <RedHeading>Programs</RedHeading>
-            <hr />
-          </MainContent>           
-          <SecondaryCampaign
-            payload={ slice.fields }
-          />
+            <MainContent
+              contentPadding="4vh 4vw 4vh 4vw"
+            >
+              <RedHeading>Programs</RedHeading>
+              <hr />
+            </MainContent>           
+            <SecondaryCampaign
+              payload={ slice.fields }
+            />
           </>
         );
       }

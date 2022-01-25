@@ -82,6 +82,8 @@ export default function SecondaryCampaign({
   payload = [],
   isHomepage = false
 }) {
+  console.log(payload)
+
   return (
     <>
       { isHomepage === true ? (
