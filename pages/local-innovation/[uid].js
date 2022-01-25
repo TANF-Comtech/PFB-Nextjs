@@ -18,10 +18,29 @@ import Accordion from '../../components/global/accordion'
 import Promo from '../../components/slices/promo'
 import VisualGrid from '../../components/global/visual-grid'
 import YouthBikingMap from '../../components/content/youth-biking-map'
+import GreenLaneProject from '../../components/content/green-lane-project'
+
+import ReturnArrow from '../../public/return-arrow.svg'
 
 const RedHeading = styled.h2`
   color: ${ props => props.theme.red };
   font-weight: 700;
+  text-transform: uppercase;
+`
+
+const BlueBox = styled.div`
+  align-items: center;
+  background-color: ${ props => props.theme.blueBright };
+  display: flex;
+  justify-content: center;
+  margin-top: 4vh;
+  width: 180px;
+`
+
+const ArchiveTitle = styled.h2`
+  font-size: 48px;
+  margin: 0;
+  padding: 0 10px;
   text-transform: uppercase;
 `
 
@@ -35,8 +54,6 @@ export default function ProgramPage({
   const { program } = page
   const { meta } = useContext(DefaultContext)
   const themeProps = useContext(ThemeContext)
-
-  // console.log(program)
 
   return (
     <>
@@ -57,6 +74,16 @@ export default function ProgramPage({
               { program.title[0].text }
             </Heading1>
           </BigTitleBanner>
+        }
+
+        { program.archived === true && 
+          <MainContent>
+            <BlueBox>
+              <img src={ReturnArrow} alt="return arrow" />
+              <ArchiveTitle>Archive</ArchiveTitle>
+            </BlueBox>
+          </MainContent>
+          
         }
 
         { program.body &&
@@ -214,6 +241,10 @@ export default function ProgramPage({
             }            
         })}
 
+        {/* Custom content for `green-lane-project` node only */}
+        { program._meta.uid === 'green-lane-project' &&
+          <GreenLaneProject />
+        }
       </Wrapper>
     </>    
   )
