@@ -18,6 +18,7 @@ import Accordion from '../../components/global/accordion'
 import Promo from '../../components/slices/promo'
 import VisualGrid from '../../components/global/visual-grid'
 import YouthBikingMap from '../../components/content/youth-biking-map'
+import GreenLaneProject from '../../components/content/green-lane-project'
 
 const RedHeading = styled.h2`
   color: ${ props => props.theme.red };
@@ -36,7 +37,7 @@ export default function ProgramPage({
   const { meta } = useContext(DefaultContext)
   const themeProps = useContext(ThemeContext)
 
-  // console.log(program)
+  console.log(program)
 
   return (
     <>
@@ -214,6 +215,10 @@ export default function ProgramPage({
             }            
         })}
 
+        {/* Custom content for `green-lane-project` node only */}
+        { program._meta.uid === 'green-lane-project' &&
+          <GreenLaneProject />
+        }
       </Wrapper>
     </>    
   )
