@@ -60,9 +60,9 @@ export default function AlchemerSurvey() {
         <div className="embed-container">
           <iframe 
             width="700" 
-            height="500" 
+            height="700" 
             frameBorder="0" 
-            scrolling="no" 
+            scrolling="yes" 
             marginHeight="0" 
             marginWidth="0" 
             title="Bike Ridership Frequency Survey" 
