@@ -1,11 +1,11 @@
 import { useContext, useEffect, useRef } from "react";
 import Image from "next/image";
-import { useRouter } from 'next/router'
+import Script from "next/script"
 import styled from "styled-components";
-
+import { useRouter } from "next/router"
 import { RichText } from "prismic-reactjs";
 
-import { getActions, getSingleActionPage } from "../../lib/queries/take-action";
+import { getSingleActionPage } from "../../lib/queries/take-action";
 
 import DefaultContext from "../../context/default/default-context";
 
@@ -85,8 +85,6 @@ export default function ActionForms({ page, preview }) {
   const { action } = page;
   const { meta } = useContext(DefaultContext);
 
-  // console.log(action, action.form_id.toString())
-
   // Image handling
   let imageSelection;
   if (action.image_selection) {
@@ -120,28 +118,39 @@ export default function ActionForms({ page, preview }) {
     }
   }
 
-  // An issue with SSR is that JS embed scripts only fire on first visit
-  // If a user continues to navigate around a site, the embeds disappear
-  // We can access the router and force the scripts to build into a ref on each load
+  /**
+   * useEffect() for Spark Form
+   * 
+   * We look for sparkIframe ref (on a div), and clear all children nodes
+   * Then we make a new script, with the src from the action form in Prismic
+   * Finally, that is appended to the ref
+   * This instance of useEffect watches `router.pathname`, so everytime the path changes this sequence will repeat
+   * 
+   * Why do this? We have to force the script to reload because next pages are all synthetic
+   * The browser doesn't know to go fetch and run the script from synthetic events
+   */
   const router = useRouter()
-  const sparkIframe = useRef(null)
+  const sparkIframe = useRef()
+  let frm = null
 
   useEffect(() => {
-    const frm = document.createElement('script')
+    // detect first mount of this component, 
+    // if it's n+1, we know we need to clear out the old sparkIframe with removeChild()
+    if (sparkIframe.current.hasChildNodes() === true) {
+      sparkIframe.current.removeChild(sparkIframe.current.children[0])
+    }
+
+    // implements spark script
+    frm = document.createElement('script')
     action.form_id && (
       frm.src = `https://action.peopleforbikes.org/assets/js/widget.js/?id=${action.form_id.toString()}`
     )
-    // console.log(frm.src)
     sparkIframe.current.appendChild(frm)
-  }, [router])
+    
+  }, [router.pathname])
 
   return (
     <>
-      {/* <script
-        async
-        defer
-        src="https://static.cdn.prismic.io/prismic.js?new=true&repo=peopleforbikes"
-      ></script> */}
       <SiteMetaCustom
         desc={
           action.main_content
@@ -184,12 +193,14 @@ export default function ActionForms({ page, preview }) {
             <FormContainer>
               {action.form_id && (
                 <>
+                  <Script 
+                    src="https://code.jquery.com/jquery-3.5.1.min.js"
+                    strategy="beforeInteractive"
+                  />
                   <div id="wsd-root" className="spkactionform"></div>
                   <div id="pb-root" className="spkactionform"></div>
-                  <script
-                    src="https://code.jquery.com/jquery-3.5.1.min.js"
-                  />
                   <div ref={sparkIframe} />
+                  {/* <Script src={`https://action.peopleforbikes.org/assets/js/widget.js/?id=${action.form_id.toString()}`} strategy="afterInteractive"/> */}
                 </>
               )}
             </FormContainer>
@@ -208,7 +219,7 @@ export default function ActionForms({ page, preview }) {
 }
 
 /* The return here sends the `page` prop back to the Page component above for rendering */
-export async function getStaticProps({ params, preview = false, previewData }) {
+export async function getServerSideProps({ params, preview = false, previewData }) {
   const pageData = await getSingleActionPage(params.uid, previewData);
 
   return {
@@ -216,15 +227,5 @@ export async function getStaticProps({ params, preview = false, previewData }) {
       preview,
       page: pageData ?? null,
     },
-    revalidate: 60,
-  }
-}
-
-// getStaticPaths requires the whole paths argument to be objects of URL it needs to statically render server-side
-export async function getStaticPaths() {
-  const pages = await getActions();
-  return {
-    paths: pages?.map(({ node }) => `/take-action/${node._meta.uid}`) || [],
-    fallback: false,
   }
 }

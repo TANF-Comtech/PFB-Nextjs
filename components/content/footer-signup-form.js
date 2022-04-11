@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { useRouter } from 'next/router'
+import Script from 'next/script'
 import styled from "styled-components";
 
 const FormContainer = styled.form`
@@ -101,25 +102,45 @@ const FormContainer = styled.form`
   }
 `;
 
+/**
+ * FooterSignUpForm
+ * 
+ * The logic to this is counter-intuitive. 
+ * 3rd party scripts should be loaded onto the page and you move along with your life.
+ * But with Next, you have to think about 'pages' differently.
+ * Since all pages are synthetic, and this script is global with dependencies, we need a lot of control to make this work
+ * 
+ * What we're doing is leveraging Next's Script component and setting the jQuery dependency to load before the rest of the page
+ * Then, we setup a ref that stores the state of this components loading - we only want to inject the Spark form
+ * But we want to make sure this logic fires every time a synthetic page is loaded
+ * So useEffect watches router.pathname for changes, and gets us what we need
+ * 
+ * @returns <FormContainer />
+ */
 function FooterSignUpForm() {
   const router = useRouter()
-  const sparkIframe = useRef()
+  const isFirstRenderOfSparkScript = useRef(true)
 
   useEffect(() => {
-    const frm = document.createElement('script')
-    frm.src = `https://action.peopleforbikes.org/assets/js/widget.js/?id=111276`
-    sparkIframe.current.appendChild(frm)
-  }, [router])
+    if (isFirstRenderOfSparkScript.current) {
+      isFirstRenderOfSparkScript.current = false
+    }
+  }, [router.pathname])
 
   return (
     <>
       <FormContainer>
-        <div id="wsd-root" className="spkactionform"></div>
-        <script
+        <div id="pfb-site-footer" className="spkactionform"></div>
+        <Script 
           src="https://code.jquery.com/jquery-3.5.1.min.js"
-          integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
-          crossOrigin="anonymous"></script>
-        <div ref={sparkIframe} />
+          strategy="beforeInteractive"
+        />
+        { isFirstRenderOfSparkScript.current && 
+          <Script 
+            src="https://action.peopleforbikes.org/assets/js/widget.js/?id=111276"
+            strategy="afterInteractive"
+          />
+        }
       </FormContainer> 
     </>
   );
