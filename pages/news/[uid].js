@@ -65,6 +65,8 @@ export default function NewsPage({ fallback, page, preview }) {
 
   // Destructure page payload and meta from global context
   const { news } = page;
+
+  console.log(news)
   
   // Implement metadata hook
   const {
@@ -170,12 +172,17 @@ export default function NewsPage({ fallback, page, preview }) {
         isWide="true"
       >        
         <MainContent maxWidth="700px">
-          { theDate && 
+
+          { /* For whatever reason, the JS date computes as one day behind every time 
+             * So I take the output of toLocaleString and bump by one, very scientific ;)
+             */
+          
+            theDate && 
             <DateBox>
               {
                 `${theDate.toLocaleString('en-us', { month: 'long' } )} 
-                ${setDateSuffix(theDate.getDate())}, 
-                ${theDate.getFullYear()}` 
+                ${setDateSuffix(Number(theDate.toLocaleString('en-us', { day: 'numeric' } )) + 1)}, 
+                ${theDate.toLocaleString('en-us', { year: 'numeric' } )}` 
               }
             </DateBox>          
           }
