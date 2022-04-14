@@ -91,7 +91,7 @@ export default function ConditionalSections({
 
       {
         // GRANTS
-        landing_page._meta.uid === "grants" && <GrantsPillars />
+        // landing_page._meta.uid === "grants" && <GrantsPillars />
       }
 
       {

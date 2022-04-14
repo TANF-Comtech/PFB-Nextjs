@@ -1,6 +1,6 @@
-import React from "react";
+import { useContext} from "react";
 import { RichText } from 'prismic-reactjs'
-import styled from 'styled-components'
+import styled, { ThemeContext } from "styled-components";
 
 import { linkResolver, randomID } from "../../lib/utils";
 
@@ -25,17 +25,20 @@ const RedHeading = styled.h2`
 `
 
 export default function UidSlices({ landing_page }) {
- 
+  const themeProps = useContext(ThemeContext)
+
   // SLICE CONTENT (in body)
   let Slice;
 
   if (landing_page.body) {
     Slice = landing_page.body.map((slice) => {
       
-      // CONTENT BLOCK
-      if (slice.__typename === "Landing_pageBodyContent_block") {
+      // CONTENT BLOCK (but not for Grants right now)
+      if (slice.__typename === "Landing_pageBodyContent_block" && 
+          landing_page._meta.uid !== "grants" ) {
         return (
-          <SummaryBlock key={randomID(10000000)}>
+          <SummaryBlock 
+            key={randomID(10000000)}>
             <RichText
               render={slice.primary.main_content}
               linkResolver={linkResolver}
@@ -153,28 +156,65 @@ export default function UidSlices({ landing_page }) {
       // PROMO
       // logic to catch policy and grant finder custom promos (with internal links)
       if (slice.__typename === "Landing_pageBodyPromo") {
-        return (
-          <Promo
-            bigWords={slice.primary.bottom_text}
-            path={
-              (landing_page._meta.uid === "policy" && "/policy/finder") ||
-              (landing_page._meta.uid === "grants" && "/grants/finder") ||
-              (landing_page._meta.uid === "grant-application" &&
-                "/grants/finder") ||
-              (landing_page._meta.uid === "grant-guidelines" &&
-                "/grants/finder") ||
-              (landing_page._meta.uid === "grant-funding" &&
-                "/grants/finder") ||
-              slice.primary.link
-            }
-            smallWords={slice.primary.top_text}
-            source={slice.primary.main_image.url}
-          />
-        );
+        
+        // SUMMARY BLOCK, (manual, just for Grants as of 2022/04)
+        if (landing_page._meta.uid === "grants") {
+          return (
+            <>
+            <SummaryBlock 
+              bgColor={ themeProps.midnightBlue }
+              buttons={ [ { button_link: "mailto:nancy@peopleforbikes.org", button_text: "Questions? Contact Nancy Hershfield" } ]}
+              key={ randomID(10000000) }
+              fontSize="28px"
+              lineHeight="42px"
+              maxWidth="800px"
+              textColor="#fff"
+            >
+              <p>We're updating our community grants process and ask for your patience. Please check back in the next few months.</p>
+            </SummaryBlock>
+            <Promo
+              bigWords={slice.primary.bottom_text}
+              path={
+                (landing_page._meta.uid === "policy" && "/policy/finder") ||
+                (landing_page._meta.uid === "grants" && "/grants/finder") ||
+                (landing_page._meta.uid === "grant-application" &&
+                  "/grants/finder") ||
+                (landing_page._meta.uid === "grant-guidelines" &&
+                  "/grants/finder") ||
+                (landing_page._meta.uid === "grant-funding" &&
+                  "/grants/finder") ||
+                slice.primary.link
+              }
+              smallWords={slice.primary.top_text}
+              source={slice.primary.main_image.url}
+            />
+            </>            
+          )
+        } else {
+          return (
+            <Promo
+              bigWords={slice.primary.bottom_text}
+              path={
+                (landing_page._meta.uid === "policy" && "/policy/finder") ||
+                (landing_page._meta.uid === "grants" && "/grants/finder") ||
+                (landing_page._meta.uid === "grant-application" &&
+                  "/grants/finder") ||
+                (landing_page._meta.uid === "grant-guidelines" &&
+                  "/grants/finder") ||
+                (landing_page._meta.uid === "grant-funding" &&
+                  "/grants/finder") ||
+                slice.primary.link
+              }
+              smallWords={slice.primary.top_text}
+              source={slice.primary.main_image.url}
+            />
+          );
+        }
       }
 
-      // VisualGrid
-      if (slice.__typename === "Landing_pageBodyVisual_grid") {
+      // VisualGrid (but omitting from Grants for now)
+      if (slice.__typename === "Landing_pageBodyVisual_grid" && 
+          landing_page._meta.uid !== "grants" ) {
         return(
           <>
             <MainContent
