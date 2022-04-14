@@ -124,21 +124,31 @@ const IntroWrapper = styled.div`
   }
 `;
 
-const ParagraphOfLinks = styled.p`
-  a,
-  a:visited,
-  a:focus,
-  a:hover {
-    &:after {
-      color: black;
-      content: "|";
-      padding: 0 10px;
-      text-decoration: none;
-    }
+const BoxOfLinksContainer = styled.section`
+  margin: 4vh 0;
+`
 
-    &:last-child:after {
-      content: "";
-      padding: 0;
+const BoxOfLinksTitle = styled.p`
+  font-weight: 700;
+  margin: 0 5px;
+`
+
+const BoxOfLinks = styled.section`
+  display: flex;
+  flex-wrap: wrap;
+
+  a {
+    background-color: ${ props => props.theme.blue };
+    color: #fff;
+    display: block;
+    padding: 5px 8px;
+    margin: 5px;
+    text-decoration: none;
+    transform: translateX(0);
+    transition: 0.2s ease-in-out;
+
+    &:hover {
+      transform: translateY(-2px);
     }
   }
 `;
@@ -330,11 +340,11 @@ export default function NewsPage({ fallback, page, preview }) {
             </IntroWrapper>
           }
           {news.topics.length > 1 && 
-            <>
+            <BoxOfLinksContainer>
               {news.topics[0].topic !== null && 
-                <strong>Related Topics:</strong>
+                <BoxOfLinksTitle>Related Topics:</BoxOfLinksTitle>
               }
-              <ParagraphOfLinks>
+              <BoxOfLinks>
                 {news.topics.map((topic) => {
                   if (topic.topic !== null) {
                     return (
@@ -347,15 +357,15 @@ export default function NewsPage({ fallback, page, preview }) {
                     );
                   }
                 })}
-              </ParagraphOfLinks>
-            </>
+              </BoxOfLinks>
+            </BoxOfLinksContainer>
           }
           {news.locations.length > 1 &&
-            <>
+            <BoxOfLinksContainer>
               {news.locations[0].location !== null && 
-                <strong>Related Locations:</strong>
+                <BoxOfLinksTitle>Related Locations:</BoxOfLinksTitle>
               }
-              <ParagraphOfLinks>
+              <BoxOfLinks>
                 {news.locations.map((location) => {
                   if (location.location !== null) {
                     return (
@@ -368,8 +378,8 @@ export default function NewsPage({ fallback, page, preview }) {
                     );
                   }
                 })}
-              </ParagraphOfLinks>
-            </>
+              </BoxOfLinks>
+            </BoxOfLinksContainer>
           }
         </MainContent>
 
