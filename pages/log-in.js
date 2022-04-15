@@ -29,6 +29,24 @@ const LoginForm = styled.form`
   p {
     text-align: center;
   }
+
+  span {
+    color: ${ props => props.theme.redAccent };
+    font-family: ${ props => props.theme.montserrat };
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 20px;
+    margin: 20px 0 0 0;
+    text-transform: none;
+  }
+
+  h2 {
+    font-family: ${ props => props.theme.montserrat };
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 28px;
+    text-align: center;
+  }
 `
 
 const ColorBox = styled.div`
@@ -186,7 +204,7 @@ function LoginPage() {
           <>
             { !loginPending ? (        
             <LoginForm>
-              <p>If you are employed by a <Link href="/corporate-members"><a>coalition member company</a></Link>*, enter your company email to be sent an access code to sign in.</p>
+              <p>If you are employed by a <Link href="/corporate-members"><a>coalition member company</a></Link>*, enter your company email and you will be <strong>emailed an access code to sign in</strong>.</p>
               <LoginContainer>
                 <Input
                   onChange={ (e) => updateEmail(e.target.value) } 
@@ -215,8 +233,7 @@ function LoginPage() {
             ) : (
             <MainContent>
             <LoginForm>
-              <h5>Check Your Email For An Access Code And Enter It Below</h5>
-              <p>Don't close this tab!</p>
+              <h2>Check Your Email For An Access Code And Enter It Below</h2>
               <LoginContainer>
                 <Input 
                   onChange={ (e)=>updateLoginCode(e.target.value) } 
@@ -235,8 +252,10 @@ function LoginPage() {
                   onClick={()=>{onLoginCodeSubmit(code, email)}}
                 />
               </LoginContainer>
-              {Boolean(errorState.length) && (
+              {Boolean(errorState.length) ? (
                 <Markup content={ errorState } />
+              ) : (
+                <span style={{ textAlign:'center' }}>Don't Close This Tab!</span>
               )}
             </LoginForm>
           </MainContent>

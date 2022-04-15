@@ -23,7 +23,7 @@ export default (req, res) => {
           console.log(auth0Data)
           res.status(401).json({
             status: false,
-            error:"Authentication service error. Please reach out to Kerri at kerri@peopleforbikes.org if this persists"
+            error:"Authentication service error. Please reach out to Kerri at kerri@peopleforbikes.org if this persists."
           })  
         })
       }
@@ -38,7 +38,7 @@ export default (req, res) => {
             }).catch(auth0Data=>{
               res.status(401).json({
                 status:false,
-                error:"Service Error - Service Unavailable! Please Try Again Soon."
+                error:"We could verify your email address in our database. Try submitting it again. If this error persists, contact kerri@peopleforbikes.org and we will investigate further."
               })  
             })
           }
@@ -62,10 +62,10 @@ export default (req, res) => {
           res.status(200).json({status:true})
         }
         else {
-          res.status(401).json({status:false, error:"Incorrect code or code timed out!"}) 
+          res.status(401).json({status:false, error:"The code you entered was incorrect. Double-check the code and try again. If you continue to see this error, it is likely that your code expired. Reload this page to generate a new code."}) 
         }
       }).catch(error => {
-        res.status(401).json({status:false, error:"Incorrect code or code timed out!"}) 
+        res.status(401).json({status:false, error:"The code you entered was incorrect. Double-check the code and try again. If you continue to see this error, it is likely that your code expired. Reload this page to generate a new code."}) 
       })
     }
     
