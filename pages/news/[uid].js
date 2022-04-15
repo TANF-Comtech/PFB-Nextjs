@@ -164,10 +164,10 @@ const Caption = styled.div`
 const Deck = styled.div`
   border-bottom: 1px solid ${ props => props.theme.darkGray };
   border-top: 1px solid ${ props => props.theme.darkGray };
-  font-weight: 700;
+  font-weight: 300;
   margin: 50px 0;
   padding: 30px;
-  
+  font-style: italic;
 
   p {
     margin: 0;
