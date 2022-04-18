@@ -54,9 +54,9 @@ const TeamList = ({
       <GrayBG>
         <iframe  
           src="https://www.youtube.com/embed/txmmOKBgSO4" 
-          frameborder="0" 
+          frameBorder="0" 
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-          allowfullscreen>
+          allowFullScreen>
         </iframe>
       </GrayBG>
 
