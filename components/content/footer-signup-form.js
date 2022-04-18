@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import Script from 'next/script'
 import styled from "styled-components";
 
-const FormContainer = styled.form`
+const FormContainer = styled.section`
   display: flex;
   flex-direction: column;
   margin: 2vh 0;
