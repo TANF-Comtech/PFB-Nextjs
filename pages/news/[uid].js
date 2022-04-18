@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import styled from "styled-components";
-import { RichText, Date as ParseDate } from "prismic-reactjs";
+import { RichText } from "prismic-reactjs";
 import { htmlSerializer } from "../../lib/prismic/htmlSerializer";
 
 import { getAllNews, 
@@ -28,25 +28,127 @@ const DateBox = styled.div`
   margin-bottom: 1vh;
 `;
 
+// Style overrides for news articles are in here
 const IntroWrapper = styled.div`
   margin: 3vh 0 1vh 0;
+
+  h2  {
+    font-size: 35px;
+    font-weight: 400;
+    line-height: 35px;
+    margin-bottom: 1.5vh;
+  }
+  @media screen and (min-width: 320px) {
+    h2 {
+      font-size: calc(35px + 15 * ((100vw - 320px) / 880));
+      line-height: calc(35px + 15 * ((100vw - 320px) / 880));
+    }
+  }
+  @media screen and (min-width: 1200px) {
+    h2 {
+      font-size: 50px;
+      line-height: 50px;
+    }
+  }  
+
+  h3  {
+    font-size: 25px;
+    font-weight: 700;
+    line-height: 25px;
+    margin-bottom: 1.5vh;
+  }
+  @media screen and (min-width: 320px) {
+    h3 {
+      font-size: calc(25px + 10 * ((100vw - 320px) / 880));
+      line-height: calc(25px + 10 * ((100vw - 320px) / 880));
+    }
+  }
+  @media screen and (min-width: 1200px) {
+    h3 {
+      font-size: 35px;
+      line-height: 35px;
+    }
+  }  
+
+  h4  {
+    font-family: ${ props => props.theme.montserrat };
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 18px;
+    margin-bottom: 1.5vh;
+  }
+  @media screen and (min-width: 320px) {
+    h4 {
+      font-size: calc(18px + 10 * ((100vw - 320px) / 880));
+      line-height: calc(18px + 10 * ((100vw - 320px) / 880));
+    }
+  }
+  @media screen and (min-width: 1200px) {
+    h4 {
+      font-size: 28px;
+      line-height: 28px;
+    }
+  } 
+
+  .block-img {
+    margin-bottom: 0;
+  }
+
+  .image-caption {
+    font-style: italic;
+    font-size: 15px;
+    line-height: 15px;
+  }
+
+  .little-break {
+    display: block;
+    margin-bottom: 8vh;
+  }
+
+  .medium-break {
+    display: block;
+    margin-bottom: 12vh;
+  }
+
+  .big-break {
+    display: block;
+    margin-bottom: 16vh;
+  }
+
+  .horizontal-rule {
+    background-color: ${ props => props.theme.black };
+    display: block;
+    height: 1px;
+    margin: 6vh 0;
+    width: 100%;
+  }
 `;
 
-const ParagraphOfLinks = styled.p`
-  a,
-  a:visited,
-  a:focus,
-  a:hover {
-    &:after {
-      color: black;
-      content: "|";
-      padding: 0 10px;
-      text-decoration: none;
-    }
+const BoxOfLinksContainer = styled.section`
+  margin: 4vh 0;
+`
 
-    &:last-child:after {
-      content: "";
-      padding: 0;
+const BoxOfLinksTitle = styled.p`
+  font-weight: 700;
+  margin: 0 5px;
+`
+
+const BoxOfLinks = styled.section`
+  display: flex;
+  flex-wrap: wrap;
+
+  a {
+    background-color: ${ props => props.theme.blue };
+    color: #fff;
+    display: block;
+    padding: 5px 8px;
+    margin: 5px;
+    text-decoration: none;
+    transform: translateX(0);
+    transition: 0.2s ease-in-out;
+
+    &:hover {
+      transform: translateY(-2px);
     }
   }
 `;
@@ -58,6 +160,19 @@ const ImgContainer = styled.section`
 const Caption = styled.div`
   font-size: 14px;
 `;
+
+const Deck = styled.div`
+  border-bottom: 1px solid ${ props => props.theme.darkGray };
+  border-top: 1px solid ${ props => props.theme.darkGray };
+  font-weight: 300;
+  margin: 50px 0;
+  padding: 30px;
+  font-style: italic;
+
+  p {
+    margin: 0;
+  }
+`
 
 export default function NewsPage({ fallback, page, preview }) {
   // Set up router
@@ -88,7 +203,13 @@ export default function NewsPage({ fallback, page, preview }) {
   useEffect(() => {
     setFi(Math.floor(Math.random(5)));
   }, [router.query.uid]);
- 
+
+  // Build full date obj from theDate
+  let theDateLongform = null
+  if (news.publication_date) {
+    theDateLongform = new Date(news.publication_date.replace(/-/g, '\/'))
+  }
+  
   // Sets up article-specific JSON
   const newsJSONPayload = {
     "@context": "http://schema.org",
@@ -170,12 +291,18 @@ export default function NewsPage({ fallback, page, preview }) {
         isWide="true"
       >        
         <MainContent maxWidth="700px">
-          { theDate && 
+
+          { /* 
+             * For whatever reason, the JS date computes as one day behind every time 
+             * So I take the output of toLocaleString and bump by one, very scientific ;)
+             */
+            
+            theDateLongform !== null && 
             <DateBox>
               {
-                `${theDate.toLocaleString('en-us', { month: 'long' } )} 
-                ${setDateSuffix(theDate.getDate())}, 
-                ${theDate.getFullYear()}` 
+                `${theDateLongform.toLocaleString('en-us', { month: 'long' } )} 
+                ${setDateSuffix(theDateLongform.toLocaleString('en-us', { day: 'numeric' } ))}, 
+                ${theDateLongform.toLocaleString('en-us', { year: 'numeric' } )}` 
               }
             </DateBox>          
           }
@@ -198,6 +325,11 @@ export default function NewsPage({ fallback, page, preview }) {
               </ImgContainer>              
             )
           }     
+          { news.deck && 
+            <Deck>
+              <p>{ news.deck }</p>
+            </Deck>
+          }
           { news.main_content && 
             <IntroWrapper>
               <RichText
@@ -208,11 +340,11 @@ export default function NewsPage({ fallback, page, preview }) {
             </IntroWrapper>
           }
           {news.topics.length > 1 && 
-            <>
+            <BoxOfLinksContainer>
               {news.topics[0].topic !== null && 
-                <strong>Related Topics:</strong>
+                <BoxOfLinksTitle>Related Topics:</BoxOfLinksTitle>
               }
-              <ParagraphOfLinks>
+              <BoxOfLinks>
                 {news.topics.map((topic) => {
                   if (topic.topic !== null) {
                     return (
@@ -225,15 +357,15 @@ export default function NewsPage({ fallback, page, preview }) {
                     );
                   }
                 })}
-              </ParagraphOfLinks>
-            </>
+              </BoxOfLinks>
+            </BoxOfLinksContainer>
           }
           {news.locations.length > 1 &&
-            <>
+            <BoxOfLinksContainer>
               {news.locations[0].location !== null && 
-                <strong>Related Locations:</strong>
+                <BoxOfLinksTitle>Related Locations:</BoxOfLinksTitle>
               }
-              <ParagraphOfLinks>
+              <BoxOfLinks>
                 {news.locations.map((location) => {
                   if (location.location !== null) {
                     return (
@@ -246,8 +378,8 @@ export default function NewsPage({ fallback, page, preview }) {
                     );
                   }
                 })}
-              </ParagraphOfLinks>
-            </>
+              </BoxOfLinks>
+            </BoxOfLinksContainer>
           }
         </MainContent>
 
