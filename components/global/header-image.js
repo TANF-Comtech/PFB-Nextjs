@@ -40,6 +40,7 @@ const HeaderImage = ({ children, headingRGBA, source, srcSet }) => {
           src={ srcSet.url ? srcSet.url : null }
           height={ srcSet.dimensions.height }
           width={ srcSet.dimensions.width }
+          layout="responsive"
         />
       )}
     </>
