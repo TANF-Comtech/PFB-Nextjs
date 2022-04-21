@@ -65,8 +65,8 @@ export default function AlchemerSurvey() {
             scrolling="yes" 
             marginHeight="0" 
             marginWidth="0" 
-            title="Bike Ridership Frequency Survey" 
-            src="https://survey.alchemer.com/s3/6745388/Grassroots-Army-Embedded-Survey-Landing">
+            title="Biking In Your Town Survey" 
+            src="https://survey.alchemer.com/s3/6769415/PFB-CommSvy23">
           </iframe>
         </div>
       </Container>
@@ -75,7 +75,7 @@ export default function AlchemerSurvey() {
         contentPadding="4vh 4vw 2vh 4vw"
         maxWidth="1200px"
       >
-        <p style={{ textAlign: "center" }}>Questions about the riding survey? Reach out to <a href="mailto:patrick@peopleforbikes.org?subject=Questions%20about%20PeopleForBikes%20Survey">Patrick</a> or <a href="mailto:melissa@peopleforbikes.org?subject=Questions%20about%20PeopleForBikes%20Survey">Melissa</a> on our team.</p>
+        <p style={{ textAlign: "center" }}>Questions about the survey? Reach out to <a href="mailto:melissa@peopleforbikes.org?subject=Questions%20about%20PeopleForBikes%20Survey">Melissa</a> on our team.</p>
       </MainContent>
     </>
   )

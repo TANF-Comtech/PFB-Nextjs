@@ -7,7 +7,7 @@ export default function CustomErrorPage() {
   return (
     <Wrapper>
       <SiteMetaCustom
-        title="2022 Ridership Survey | PeopleForBikes"
+        title="Biking Survey | PeopleForBikes"
       />  
       <AlchemerSurvey />
     </Wrapper>
