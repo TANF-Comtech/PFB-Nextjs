@@ -5,7 +5,7 @@ import MainContent from "../global/main-content"
 const Container = styled.section`
   .embed-container {
     position: relative; 
-    padding-bottom: 80%; 
+    padding-bottom: 100%; 
     height: 0; 
     max-width: 100%;
   } 
@@ -56,20 +56,20 @@ export default function AlchemerSurvey() {
         contentPadding="0vh 4vw 4vh 4vw"
         maxWidth="800px"
       >
-      <Container>
-        <div className="embed-container">
-          <iframe 
-            width="700" 
-            height="700" 
-            frameBorder="0" 
-            scrolling="yes" 
-            marginHeight="0" 
-            marginWidth="0" 
-            title="Biking In Your Town Survey" 
-            src="https://survey.alchemer.com/s3/6769415/PFB-CommSvy23">
-          </iframe>
-        </div>
-      </Container>
+        <Container>
+          <div className="embed-container">
+            <iframe 
+              width="700" 
+              height="400" 
+              frameBorder="0" 
+              scrolling="yes" 
+              marginHeight="0" 
+              marginWidth="0" 
+              title="Biking In Your Town Survey" 
+              src="https://survey.alchemer.com/s3/6769415/PFB-CommSvy23">
+            </iframe>
+          </div>
+        </Container>
       </MainContent>
       <MainContent
         contentPadding="4vh 4vw 2vh 4vw"
