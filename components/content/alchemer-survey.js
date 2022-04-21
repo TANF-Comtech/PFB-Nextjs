@@ -48,9 +48,9 @@ export default function AlchemerSurvey() {
         contentPadding="2vh 4vw 2vh 4vw"
         maxWidth="1200px"
       >
-        <RedHeading>Bike Ridership Frequency Survey</RedHeading>
+        <RedHeading>Biking in Your Town Survey</RedHeading>
         <hr />
-        <p>PeopleForBikes wants to know how often you ride and what type of riding you do. The information you provide will help us improve the bike riding experience. There are no right or wrong answers and your <strong>information will be kept strictly confidential</strong>.</p>
+        <p>PeopleForBikes wants to what its like to bike in your city/town. The information you provide will help us improve the bike riding experience. There are no right or wrong answers and your <strong>information will be kept strictly confidential</strong>.</p>
       </MainContent>
       <MainContent
         contentPadding="0vh 4vw 4vh 4vw"
