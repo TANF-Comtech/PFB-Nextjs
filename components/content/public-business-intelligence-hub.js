@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import Link from "next/link"
 
 import MainContent from "../global/main-content"
 
@@ -52,7 +53,7 @@ export default function PublicBusinessIntelligenceHub() {
       >
         <RedHeading>Public Business Intelligence Hub</RedHeading>
         <hr />
-        <p>PeopleForBikes is providing an overview of the business side of the biking industry with our Business Intelligence Hub. Browse the content below and learn how we are improving biking for everyone.</p>
+        <p>PeopleForBikes is providing an overview of the business side of the biking industry for the general public with our Business Intelligence Hub. <Link href="/members">PeopleForBikes Coalition Members</Link> can access the full Business Intelligence Hub in our <Link href="/members/member-home ">Member Center</Link>. Browse the content below and learn how we are improving biking for everyone.</p>
       </MainContent>
       <MainContent
         contentPadding="0vh 4vw 4vh 4vw"
