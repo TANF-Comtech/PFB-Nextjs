@@ -285,6 +285,11 @@ module.exports = {
         destination: '/bike-industry-webinars',
         permanent: true
       },
+      {
+        source: '/donate',
+        destination: 'https://www.classy.org/give/117371#!/donation/checkout?c_src=letter',
+        permanent: true
+      }
     ]
   }
 }
