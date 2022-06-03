@@ -50,11 +50,6 @@ export default function ReportsArchive({ page }) {
 
   return (
     <Wrapper postPath="/research/" postTitle="Research" isWide={true}>
-      <script
-        async
-        defer
-        src="https://static.cdn.prismic.io/prismic.js?new=true&repo=peopleforbikes"
-      ></script>
       <MainContent maxWidth="1200px">
         <Header1 key={randomID(5687502984)}>Reports Archive</Header1>
 

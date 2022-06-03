@@ -31,11 +31,6 @@ export default function EBikesPage({ page, preview }) {
 
   return (
     <>
-      <script
-        async
-        defer
-        src="https://static.cdn.prismic.io/prismic.js?new=true&repo=peopleforbikes"
-      ></script>
       <SiteMetaCustom
         desc={
           electric_bikes.main_content

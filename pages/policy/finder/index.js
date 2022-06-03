@@ -10,11 +10,6 @@ import ColorBanner from '../../../components/global/color-banner';
 export default function PolicyFinder({ page }) {
   return (
     <Wrapper postPath="/policy/" postTitle="Policy" isWide={true}>
-      <script
-        async
-        defer
-        src="https://static.cdn.prismic.io/prismic.js?new=true&repo=peopleforbikes"
-      ></script>
       <MainContent maxWidth="1200px">
         <Header1>Policy Finder</Header1>
 

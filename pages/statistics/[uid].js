@@ -31,11 +31,6 @@ export default function MembersPage({ page, preview }) {
 
   return (
     <>
-      <script
-        async
-        defer
-        src="https://static.cdn.prismic.io/prismic.js?new=true&repo=peopleforbikes"
-      ></script>
       <SiteMetaCustom
         desc={
           statistic_page.main_content

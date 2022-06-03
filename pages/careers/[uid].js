@@ -23,11 +23,6 @@ export default function CareerPages({ page, preview }) {
 
   return (
     <>
-      <script
-        async
-        defer
-        src="https://static.cdn.prismic.io/prismic.js?new=true&repo=peopleforbikes"
-      ></script>
       <SiteMetaCustom
         desc={meta.desc}
         title={job.title ? `${job.title[0].text} | PeopleForBikes` : meta.title}

@@ -63,11 +63,6 @@ export default function EBikesLaws({ page, preview }) {
 
   return (
     <>
-      <script
-        async
-        defer
-        src="https://static.cdn.prismic.io/prismic.js?new=true&repo=peopleforbikes"
-      ></script>
       <SiteMetaCustom
         desc={meta.desc}
         title="State by State Electric Bike Laws | PeopleForBikes"

@@ -13,11 +13,6 @@ import { grantsFormatter, grantsOnlyFormatter } from '../../../lib/algolia/grant
 export default function GrantsFinder({ page }) {
   return (
     <Wrapper postPath="/grants/" postTitle="Grants" isWide={true}>
-      <script
-        async
-        defer
-        src="https://static.cdn.prismic.io/prismic.js?new=true&repo=peopleforbikes"
-      ></script>
       <MainContent maxWidth="1200px">
         <Header1>Grants Finder</Header1>
 

@@ -22,11 +22,6 @@ export default function policyPage({ page, preview }) {
 
   return (
     <>
-      <script
-        async
-        defer
-        src="https://static.cdn.prismic.io/prismic.js?new=true&repo=peopleforbikes"
-      ></script>
       <SiteMetaCustom
         desc={
           policy.main_content ? `${policy.main_content[0].text.substring(0, 180)} ... ` : meta.desc
