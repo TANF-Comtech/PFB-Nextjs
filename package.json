@@ -7,6 +7,7 @@
     "dev-https": "local-ssl-proxy --key localhost-key.pem --cert localhost.pem --source 4001 --target 3001",
     "build": "next build",
     "start": "next start",
+    "lint": "next lint",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
