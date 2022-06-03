@@ -1,35 +1,32 @@
-import { useRouter } from "next/router";
-import { RichText } from "prismic-reactjs";
-import CustomErrorPage from "../pages/404";
+import { useRouter } from 'next/router';
+import { RichText } from 'prismic-reactjs';
+import CustomErrorPage from '../pages/404';
 
-import {
-  getSingleLandingPage,
-  getLandingPages,
-} from "../lib/queries/landing-page";
-import { getAllNewsForLandingPage } from "../lib/queries/news";
-import { getLocations } from "../lib/queries/locations";
-import { getTopics } from "../lib/queries/topics";
-import { getRides } from "../lib/queries/rides";
-import { getTeamMembers, getCEO } from "../lib/queries/team";
-import { getAllCareers } from "../lib/queries/careers";
-import { getEventsByCategory } from "../lib/queries/events";
-import { getStats } from "../lib/queries/statistics";
+import { getSingleLandingPage, getLandingPages } from '../lib/queries/landing-page';
+import { getAllNewsForLandingPage } from '../lib/queries/news';
+import { getLocations } from '../lib/queries/locations';
+import { getTopics } from '../lib/queries/topics';
+import { getRides } from '../lib/queries/rides';
+import { getTeamMembers, getCEO } from '../lib/queries/team';
+import { getAllCareers } from '../lib/queries/careers';
+import { getEventsByCategory } from '../lib/queries/events';
+import { getStats } from '../lib/queries/statistics';
 
-import Wrapper from "../components/global/wrapper";
-import Spinner from "../components/global/spinner";
+import Wrapper from '../components/global/wrapper';
+import Spinner from '../components/global/spinner';
 
-import { AlgoliaIndex } from "../lib/algolia/algoliaClient";
-import { newsFormatter } from "../lib/algolia/newsFormatter";
-import { topicFormatter } from "../lib/algolia/topicFormatter";
-import { statsFormatter } from "../lib/algolia/statsFormatter";
-import { locationFormatter } from "../lib/algolia/locationFormatter";
+import { AlgoliaIndex } from '../lib/algolia/algoliaClient';
+import { newsFormatter } from '../lib/algolia/newsFormatter';
+import { topicFormatter } from '../lib/algolia/topicFormatter';
+import { statsFormatter } from '../lib/algolia/statsFormatter';
+import { locationFormatter } from '../lib/algolia/locationFormatter';
 
-import UidHeader from "../components/uid/uidHeaders";
-import UidMemberSlices from "../components/uid/uidMemberSlices";
-import UidSlices from "../components/uid/uidSlices";
-import UidIndividualComponents from "../components/uid/uidIndividualComponents";
-import ConditionalSections from "../components/uid/uidConditionalSections";
-import FallbackImage from "../components/content/fallback-image";
+import UidHeader from '../components/uid/uidHeaders';
+import UidMemberSlices from '../components/uid/uidMemberSlices';
+import UidSlices from '../components/uid/uidSlices';
+import UidIndividualComponents from '../components/uid/uidIndividualComponents';
+import ConditionalSections from '../components/uid/uidConditionalSections';
+import FallbackImage from '../components/content/fallback-image';
 
 /**
  * TheMonster()
@@ -59,13 +56,13 @@ export default function TheMonster({ page, preview }) {
     <Wrapper postTitle={RichText.asText(landing_page.title)} isWide={true}>
       <UidHeader landing_page={landing_page} />
       <ConditionalSections landing_page={landing_page} />
-      
-      { landing_page._meta.uid === 'members' ? (
+
+      {landing_page._meta.uid === 'members' ? (
         <UidMemberSlices landing_page={landing_page} />
       ) : (
-        <UidSlices landing_page={landing_page} /> 
+        <UidSlices landing_page={landing_page} />
       )}
-      
+
       <UidIndividualComponents landing_page={landing_page} />
     </Wrapper>
   );
@@ -105,60 +102,50 @@ export async function getStaticProps({ params, preview = false, previewData }) {
   let algoliaFormattedData;
 
   // 404 Handling
-  if( !pageData ) {
+  if (!pageData) {
     return {
-      notFound: true
-    }
+      notFound: true,
+    };
   }
 
   // PAGE-SPECIFIC PAYLOADS
   switch (params.uid) {
-
-    case "news":
-      pageData.landing_page.data = await getAllNewsForLandingPage(
-        params.uid,
-        previewData
-      );
+    case 'news':
+      pageData.landing_page.data = await getAllNewsForLandingPage(params.uid, previewData);
       algoliaFormattedData = newsFormatter(pageData.landing_page.data);
       await AlgoliaIndex().saveObjects(algoliaFormattedData);
       break;
 
-    case "locations":
+    case 'locations':
       pageData.landing_page.data = await getLocations(params.uid, previewData);
       algoliaFormattedData = locationFormatter(pageData.landing_page.data);
       await AlgoliaIndex().saveObjects(algoliaFormattedData);
       break;
 
-    case "topics":
+    case 'topics':
       pageData.landing_page.data = await getTopics(params.uid, previewData);
       algoliaFormattedData = topicFormatter(pageData.landing_page.data);
       await AlgoliaIndex().saveObjects(algoliaFormattedData);
       break;
 
-    case "rides":
+    case 'rides':
       pageData.landing_page.data = await getRides(params.uid, previewData);
       break;
 
-    case "team":
-      pageData.landing_page.dataTeam = await getTeamMembers(
-        params.uid,
-        previewData
-      );
+    case 'team':
+      pageData.landing_page.dataTeam = await getTeamMembers(params.uid, previewData);
       pageData.landing_page.dataCEO = await getCEO(params.uid, previewData);
       break;
 
-    case "careers":
+    case 'careers':
       pageData.landing_page.data = await getAllCareers(params.uid, previewData);
       break;
 
-    case "events":
-      pageData.landing_page.data = await getEventsByCategory(
-        params.uid,
-        previewData
-      );
+    case 'events':
+      pageData.landing_page.data = await getEventsByCategory(params.uid, previewData);
       break;
 
-    case "research":
+    case 'research':
       pageData.landing_page.data = await getStats();
       algoliaFormattedData = statsFormatter(pageData.landing_page.data);
       await AlgoliaIndex().saveObjects(algoliaFormattedData);

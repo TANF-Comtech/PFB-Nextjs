@@ -1,22 +1,22 @@
-import React from "react";
-import Link from "next/link"
-import styled from "styled-components";
-import { RichText } from "prismic-reactjs"
+import React from 'react';
+import Link from 'next/link';
+import styled from 'styled-components';
+import { RichText } from 'prismic-reactjs';
 
-import { linkResolver } from "../../lib/utils"
+import { linkResolver } from '../../lib/utils';
 
-import Header1 from "../primitives/h1"
-import Button from "../primitives/button"
+import Header1 from '../primitives/h1';
+import Button from '../primitives/button';
 
 const Container = styled.section`
   align-items: flex-start;
-  border-bottom: 1px solid rgb(216,216,216);
+  border-bottom: 1px solid rgb(216, 216, 216);
   display: flex;
   flex-direction: column;
   margin-bottom: 25px;
   padding-bottom: 25px;
 
-  @media (min-width: ${props => props.theme.sm}) {
+  @media (min-width: ${(props) => props.theme.sm}) {
     flex-direction: row;
   }
 
@@ -24,32 +24,36 @@ const Container = styled.section`
     border-bottom: none;
     padding-bottom: 0;
   }
-`
+`;
 
 const ContentContainer = styled.div`
   flex: 1 1 0px;
   margin: 4vh 0;
 
-  a, a:visited, a:active, a:focus, a:hover {
+  a,
+  a:visited,
+  a:active,
+  a:focus,
+  a:hover {
     color: #333;
     text-decoration: none;
   }
 
   a:hover {
-    color: ${props => props.theme.redAccent};
+    color: ${(props) => props.theme.redAccent};
   }
-`
+`;
 
 const Text = styled.div`
   font-size: 18px;
   line-height: 24px;
   margin-bottom: 25px;
-`
+`;
 
 const Metadata = styled.div`
   align-items: center;
   display: flex;
-`
+`;
 
 const MetaText = styled.h3`
   font-size: 22px;
@@ -58,40 +62,43 @@ const MetaText = styled.h3`
   margin: 0 0 2vh 0;
 
   &:after {
-    content: "|";
+    content: '|';
     padding: 0 10px;
   }
 
   &:last-child:after {
-    content: "";
+    content: '';
     padding: 0;
   }
-`
+`;
 
 const MetaItem = styled.div`
   margin-bottom: 2vh;
 
-  a, a:visited, a:focus, a:active {
-    color: ${props => props.theme.blueAccent} !important;
+  a,
+  a:visited,
+  a:focus,
+  a:active {
+    color: ${(props) => props.theme.blueAccent} !important;
     font-size: 22px;
     font-weight: 700;
     text-decoration: underline !important;
   }
-  
+
   &:after {
-    content: "|";
+    content: '|';
     padding: 0 10px;
   }
 
   &:last-child:after {
-    content: "";
+    content: '';
     padding: 0;
   }
-`
+`;
 
 /**
  * <PolicyItem>
- * 
+ *
  * A simple presentation for content items that show up in lists
  *
  * @param { string } city - place (if local)
@@ -115,59 +122,53 @@ const PolicyItem = ({
   title,
   text,
 }) => {
-
   return (
     <Container>
       <ContentContainer>
-        { !path ? 
-          ( <Header1>{ title }</Header1> )  :
-          (
-            <Link href={ path }>
-              <a>
-                <h2>{ title }</h2>
-              </a>
-            </Link>
-          )
-        }
+        {!path ? (
+          <Header1>{title}</Header1>
+        ) : (
+          <Link href={path}>
+            <a>
+              <h2>{title}</h2>
+            </a>
+          </Link>
+        )}
         <Metadata>
-          { date && <MetaText>{ date }</MetaText> }
-          { govLevel === 'Federal' && <MetaText>{ govLevel }</MetaText> }
-          { govLevel === 'State' && <MetaText>{ `${govLevel} - ${location}` }</MetaText> }
-          { govLevel === 'Local' && <MetaText>{ `${govLevel} - ${city}` }</MetaText> }
+          {date && <MetaText>{date}</MetaText>}
+          {govLevel === 'Federal' && <MetaText>{govLevel}</MetaText>}
+          {govLevel === 'State' && <MetaText>{`${govLevel} - ${location}`}</MetaText>}
+          {govLevel === 'Local' && <MetaText>{`${govLevel} - ${city}`}</MetaText>}
         </Metadata>
-        { text && 
+        {text && (
           <Text>
-            <strong>Summary:</strong> <RichText render={ text }/>   
-          </Text> 
-        }
-        {
-          status && 
-          <Text>
-            <strong>Status:</strong><p>{ status }</p>
+            <strong>Summary:</strong> <RichText render={text} />
           </Text>
-        }
+        )}
+        {status && (
+          <Text>
+            <strong>Status:</strong>
+            <p>{status}</p>
+          </Text>
+        )}
         <Metadata>
-          { bill && 
+          {bill && (
             <MetaItem>
-              <a href={ linkResolver(bill, true) } 
-                 rel="noopener"
-                 target="_blank">
-                  Link to the Bill
+              <a href={linkResolver(bill, true)} rel="noopener" target="_blank">
+                Link to the Bill
               </a>
-            </MetaItem> 
-          }
-          { supportingDoc && 
+            </MetaItem>
+          )}
+          {supportingDoc && (
             <MetaItem>
-              <Link href={ linkResolver(supportingDoc) } passHref>
-                <a>
-                  Supporting Documentation
-                </a>
+              <Link href={linkResolver(supportingDoc)} passHref>
+                <a>Supporting Documentation</a>
               </Link>
             </MetaItem>
-          }
+          )}
         </Metadata>
-               
-        { path ? (
+
+        {path ? (
           <Button
             buttonBg="#D23823"
             buttonBgHover="rgb(216,216,216)"
@@ -175,7 +176,7 @@ const PolicyItem = ({
             buttonColor="white"
             buttonPadding="10px 20px"
             buttonTextTransform="uppercase"
-            href={ path }
+            href={path}
           >
             Read More
           </Button>
@@ -193,12 +194,10 @@ const PolicyItem = ({
           >
             Find Other Policies
           </Button>
-        )
-          
-        }
+        )}
       </ContentContainer>
     </Container>
-  )
-}
+  );
+};
 
-export default PolicyItem
+export default PolicyItem;

@@ -1,8 +1,8 @@
-import React from "react";
-import Wrapper from "../components/global/wrapper";
+import React from 'react';
+import Wrapper from '../components/global/wrapper';
 
 export default {
-  title: "Wrapper",
+  title: 'Wrapper',
   component: Wrapper,
 };
 

@@ -1,8 +1,8 @@
-import React from "react";
-import NavBar from "../components/global/navbar";
+import React from 'react';
+import NavBar from '../components/global/navbar';
 
 export default {
-  title: "NavBar",
+  title: 'NavBar',
   component: NavBar,
 };
 

@@ -1,8 +1,8 @@
-import React from "react";
-import Accordion from "../components/global/accordion";
+import React from 'react';
+import Accordion from '../components/global/accordion';
 
 export default {
-  title: "Accordion",
+  title: 'Accordion',
   component: Accordion,
 };
 

@@ -1,6 +1,6 @@
-import Image from "next/image"
-import styled from "styled-components";
-import BgImage from "../primitives/bg-image"
+import Image from 'next/image';
+import styled from 'styled-components';
+import BgImage from '../primitives/bg-image';
 
 const ForegroundImg = styled(Image)`
   margin-bottom: 2vh;
@@ -27,7 +27,7 @@ const HeaderImage = ({ children, headingRGBA, source, srcSet }) => {
       {source && (
         <BgImage
           alignItems="center"
-          headingRGBA={headingRGBA} 
+          headingRGBA={headingRGBA}
           imgsrc={source}
           justifyContent="center"
         >
@@ -36,10 +36,10 @@ const HeaderImage = ({ children, headingRGBA, source, srcSet }) => {
       )}
       {srcSet && (
         <ForegroundImg
-          alt={ srcSet.alt ? srcSet.alt : "Bike-oriented image" }
-          src={ srcSet.url ? srcSet.url : null }
-          height={ srcSet.dimensions.height }
-          width={ srcSet.dimensions.width }
+          alt={srcSet.alt ? srcSet.alt : 'Bike-oriented image'}
+          src={srcSet.url ? srcSet.url : null}
+          height={srcSet.dimensions.height}
+          width={srcSet.dimensions.width}
           layout="responsive"
         />
       )}

@@ -1,24 +1,24 @@
-import React, { useState, useEffect } from "react"
-import styled from "styled-components"
-import { randomID } from '../../lib/utils'
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import { randomID } from '../../lib/utils';
 
-import BasicInput from './input'
-import BasicLabel from './label'
+import BasicInput from './input';
+import BasicLabel from './label';
 
 const RadioWrapper = styled.section`
   display: block;
-`
+`;
 
 const Container = styled.div`
   align-items: center;
   display: flex;
   margin: 1.5vh 0;
-`
+`;
 
 /* This is kinda hacky - to abstract <input> into one component, I'm doing the radio overrides */
 /* Lesser of two evils - check input.js so see what we're overriding */
 const RadioInput = styled(BasicInput).attrs({
-  type: 'radio'
+  type: 'radio',
 })`
   border-radius: 50% !important;
 
@@ -31,39 +31,34 @@ const RadioInput = styled(BasicInput).attrs({
     left: 0 !important;
     top: 0 !important;
     position: absolute;
-    transition: transform var(--d-t, .3s) var(--d-t-e, ease), opacity var(--d-o, .2s) !important;
+    transition: transform var(--d-t, 0.3s) var(--d-t-e, ease), opacity var(--d-o, 0.2s) !important;
     /* transition: transform .3s ease, opacity .2s */
-    transform: scale(var(--s, .7)) !important;
+    transform: scale(var(--s, 0.7)) !important;
     width: 19px !important;
   }
 
   /* :checked css variable change creates the animation effect */
   &:checked {
-    --s: .5;
+    --s: 0.5;
   }
-`
+`;
 
 /**
  * <Radio>
- * 
+ *
  * A set of radio inputs, because they are linked together we build them at the same time
  * A <Container> holds the <RadioInput> and <RadioLabel> together in a flexbox for alignment
  * There is a LOT of style and pseudo classes required to pull this off above
  * Comments are mostly in the styled-components above
- * 
+ *
  * To make n radio buttons, we have to loop through the label array
  * Then we output each <RadioInput> and <RadioLabel> into a <Container>
- * 
+ *
  * @param {array} radioLabels - label for each radio input
  * @param {array} radioValues- value for each radio input
  * @param {string} radioGroupName- name that ties the radio group together
  */
-const RadioSet = ({ 
-  radioGroupName,
-  radioLabels, 
-  radioValues
-}) => {
-
+const RadioSet = ({ radioGroupName, radioLabels, radioValues }) => {
   // Check to make sure this is rendered
   const [rendered, setRendered] = useState(false);
 
@@ -71,44 +66,37 @@ const RadioSet = ({
   // so when the component gets mounted, we set it true
   useEffect(() => {
     setRendered(true),
-    () => { setRendered(false); }
+      () => {
+        setRendered(false);
+      };
   });
 
   // Now we conditionally render to avoid SSR issues
-  if(rendered) {
+  if (rendered) {
     return (
       <>
         <RadioWrapper>
-
           {/* Loops through each label, effective counts how many inputs we need */}
-          {radioLabels.map( (label, i) => {
-
+          {radioLabels.map((label, i) => {
             // Sets up container for each input/label pair, outputs data
-            return(
-              <Container key={ randomID(10000000) }>
+            return (
+              <Container key={randomID(10000000)}>
                 <RadioInput
-                  name={ radioGroupName }
-                  id={ randomID(10000000) } 
-                  type="radio" 
-                  value={ radioValues[i] }
+                  name={radioGroupName}
+                  id={randomID(10000000)}
+                  type="radio"
+                  value={radioValues[i]}
                 />
-                <BasicLabel htmlFor={ randomID(10000000) }>
-                  { label }
-                </BasicLabel>
+                <BasicLabel htmlFor={randomID(10000000)}>{label}</BasicLabel>
               </Container>
-            )
-
+            );
           })}
         </RadioWrapper>
       </>
-    )
+    );
+  } else {
+    return <p>Still loading...</p>;
   }
+};
 
-  else {
-    return(
-      <p>Still loading...</p>
-    )
-  }
-}
-
-export default RadioSet
+export default RadioSet;

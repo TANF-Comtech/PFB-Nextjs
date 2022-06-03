@@ -1,8 +1,8 @@
-import React from "react";
-import H1 from "../components/global/h1";
+import React from 'react';
+import H1 from '../components/global/h1';
 
 export default {
-  title: "H1",
+  title: 'H1',
   component: H1,
 };
 

@@ -1,12 +1,12 @@
-import styled from "styled-components";
-import Image from "next/image"
+import styled from 'styled-components';
+import Image from 'next/image';
 
-import { randomID } from "../../lib/utils";
-import RideSpotRide from "./ridespot-ride";
-import BgImage from '../primitives/bg-image'
+import { randomID } from '../../lib/utils';
+import RideSpotRide from './ridespot-ride';
+import BgImage from '../primitives/bg-image';
 
-import RideSpotBg from "../../public/RidespotBg.jpg";
-import RideSpotLogo from "../../public/RideSpotRidesLogo.svg";
+import RideSpotBg from '../../public/RidespotBg.jpg';
+import RideSpotLogo from '../../public/RideSpotRidesLogo.svg';
 
 const RSContainer = styled.section`
   background-color: ${(props) => props.theme.lightestGray};
@@ -17,7 +17,7 @@ const RSContainer = styled.section`
 const RSHeaderContainer = styled.a`
   display: block;
   width: 100%;
-`
+`;
 
 const RSTitle = styled.h2`
   font-size: 36pt;
@@ -80,10 +80,7 @@ const RSLink = styled.a`
  *
  * @param { object } payload - all the ridespot ride info
  */
-const RideSpotPromo = ({ 
-  payload 
-}) => {
-
+const RideSpotPromo = ({ payload }) => {
   // Transform payload object into an array
   let payloadArr;
 
@@ -93,28 +90,13 @@ const RideSpotPromo = ({
 
   return (
     <RSContainer>
-
-      <RSHeaderContainer 
-        href={"https://ridespot.org/"} 
-        passHref
-      >
-        <BgImage
-          imgalt="Ride Spot background of blue mountains"
-          imgsrc={ RideSpotBg }
-        >
-          <Image
-            alt="Ride Spot Logo"
-            src={ RideSpotLogo }
-            quality={ 80 }
-            width={ 400 }
-            height={ 120 }
-          />
+      <RSHeaderContainer href={'https://ridespot.org/'} passHref>
+        <BgImage imgalt="Ride Spot background of blue mountains" imgsrc={RideSpotBg}>
+          <Image alt="Ride Spot Logo" src={RideSpotLogo} quality={80} width={400} height={120} />
         </BgImage>
       </RSHeaderContainer>
 
-      <RSTitle>
-        Use the Ride Spot App to access great rides
-      </RSTitle>
+      <RSTitle>Use the Ride Spot App to access great rides</RSTitle>
 
       {payload && (
         <RSRidesContainer>
@@ -141,7 +123,6 @@ const RideSpotPromo = ({
           })}
         </RSRidesContainer>
       )}
-
     </RSContainer>
   );
 };

@@ -1,12 +1,12 @@
-import { useContext } from 'react'
-import styled, { ThemeContext } from 'styled-components'
+import { useContext } from 'react';
+import styled, { ThemeContext } from 'styled-components';
 
-import { linkResolver } from '../../lib/utils'
-import evenOrOdd from '../../lib/utils/evenOrOdd'
+import { linkResolver } from '../../lib/utils';
+import evenOrOdd from '../../lib/utils/evenOrOdd';
 
-import MainContent from './main-content'
-import GridWide from './grid-wide'
-import Button from '../../components/primitives/button'
+import MainContent from './main-content';
+import GridWide from './grid-wide';
+import Button from '../../components/primitives/button';
 
 const Box = styled.div`
   align-items: center;
@@ -15,11 +15,11 @@ const Box = styled.div`
   flex-direction: column;
   justify-content: center;
   padding: 50px 25px;
-`
+`;
 
 const GridImage = styled.img`
   max-width: 250px;
-`
+`;
 
 const SectionTitle = styled.h3`
   font-size: 28px;
@@ -27,12 +27,11 @@ const SectionTitle = styled.h3`
   line-height: 38px;
   margin: 6vh auto;
   text-align: center;
-  
-`
+`;
 
 const Para = styled.p`
   margin: 4vh auto;
-`
+`;
 
 /**
  * <VisualGrid>
@@ -44,64 +43,44 @@ const Para = styled.p`
  * @param { string } title - visual grid heading
  * 
  */
-const VisualGrid = ({
-  isOneItem = false,
-  payload,
-  title
-}) => {
-  const themeProps = useContext(ThemeContext)
+const VisualGrid = ({ isOneItem = false, payload, title }) => {
+  const themeProps = useContext(ThemeContext);
 
   return (
     <MainContent maxWidth="800px">
-      { title &&
-        <SectionTitle>
-          { title }
-        </SectionTitle>      
-      }
-      { payload && 
+      {title && <SectionTitle>{title}</SectionTitle>}
+      {payload && (
         <GridWide
-          gridGap={ isOneItem === true ? '0' : '1px' }
+          gridGap={isOneItem === true ? '0' : '1px'}
           gridGapColor="rgb(225,225,225)"
-          isOneItem={ isOneItem }
-        >    
-          { payload.map( (item) => {
-            return(
+          isOneItem={isOneItem}
+        >
+          {payload.map((item) => {
+            return (
               <Box>
-                { 
-                  item.graphic && 
-                  <GridImage 
-                    alt={ item.graphic.alt }
-                    src={ item.graphic.url }
-                  />
-                }
-                {
-                  item.button_link &&
+                {item.graphic && <GridImage alt={item.graphic.alt} src={item.graphic.url} />}
+                {item.button_link && (
                   <Button
                     buttonAlign="center"
-                    buttonBg={ themeProps.darkGray }
+                    buttonBg={themeProps.darkGray}
                     buttonBorder="none"
                     buttonColor="#fff"
                     buttonFontSize="14px"
                     buttonMargin="3vh"
-                    href={ linkResolver(item.button_link) }
+                    href={linkResolver(item.button_link)}
                   >
-                    { item.button_text ? item.button_text : 'View' }
+                    {item.button_text ? item.button_text : 'View'}
                   </Button>
-                }
-                {
-                  item.label &&
-                  <Para>
-                    { item.label }
-                  </Para>
-                }
+                )}
+                {item.label && <Para>{item.label}</Para>}
               </Box>
-            )
-          } ) }
-          { evenOrOdd( payload.length ) === 'odd' && <Box /> }
-        </GridWide> 
-      }
+            );
+          })}
+          {evenOrOdd(payload.length) === 'odd' && <Box />}
+        </GridWide>
+      )}
     </MainContent>
-  )
-}
+  );
+};
 
-export default VisualGrid
+export default VisualGrid;

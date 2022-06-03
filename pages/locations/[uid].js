@@ -1,29 +1,23 @@
-import { useContext } from 'react'
-import { Date as ParseDate } from 'prismic-reactjs'
+import { useContext } from 'react';
+import { Date as ParseDate } from 'prismic-reactjs';
 
-import { getLocationsNoImages, getSingleLocationsPage } from '../../lib/queries/locations'
-import { randomID } from '../../lib/utils'
-import { setDateSuffix } from '../../lib/utils/setDateSuffix'
+import { getLocationsNoImages, getSingleLocationsPage } from '../../lib/queries/locations';
+import { randomID } from '../../lib/utils';
+import { setDateSuffix } from '../../lib/utils/setDateSuffix';
 
-import DefaultContext from '../../context/default/default-context'
+import DefaultContext from '../../context/default/default-context';
 
-import Wrapper from '../../components/global/wrapper'
-import SiteMetaCustom from '../../components/meta/site-meta-custom'
-import HeaderImage from '../../components/global/header-image'
-import MainContent from '../../components/global/main-content'
-import ContentItem from '../../components/content/content-item'
-import RideSpotPromo from '../../components/slices/ridespot-promo'
-import ActionItemGroup from '../../components/slices/action-item-group'
-import FallbackImage from '../../components/content/fallback-image'
-
+import Wrapper from '../../components/global/wrapper';
+import SiteMetaCustom from '../../components/meta/site-meta-custom';
+import HeaderImage from '../../components/global/header-image';
+import MainContent from '../../components/global/main-content';
+import ContentItem from '../../components/content/content-item';
+import RideSpotPromo from '../../components/slices/ridespot-promo';
+import ActionItemGroup from '../../components/slices/action-item-group';
+import FallbackImage from '../../components/content/fallback-image';
 
 /* You must reference the `topic` prop to get data from `getStaticProps` - check bottom of this file */
-export default function LocationPage({ 
-  fallback, 
-  page, 
-  preview 
-}) {
-
+export default function LocationPage({ fallback, page, preview }) {
   // Incoming data obj (page) is an array of objects
   // 0 - location data
   // 1 - news for this location
@@ -39,35 +33,19 @@ export default function LocationPage({
         src="https://static.cdn.prismic.io/prismic.js?new=true&repo=peopleforbikes"
       ></script>
       <SiteMetaCustom
-        desc={
-          locations.intro
-            ? `${locations.intro[0].text.substring(0, 180)}... `
-            : meta.desc
-        }
-        title={
-          locations.location
-            ? `${locations.location[0].text} | PeopleForBikes`
-            : meta.title
-        }
+        desc={locations.intro ? `${locations.intro[0].text.substring(0, 180)}... ` : meta.desc}
+        title={locations.location ? `${locations.location[0].text} | PeopleForBikes` : meta.title}
         imgHeight={
           locations.header_image
             ? locations.header_image.mobile2x.dimensions.height
             : meta.imgHeight
         }
-        imgSrc={
-          locations.header_image
-            ? locations.header_image.mobile2x.url
-            : meta.imgSrc
-        }
+        imgSrc={locations.header_image ? locations.header_image.mobile2x.url : meta.imgSrc}
         imgWidth={
-          locations.header_image
-            ? locations.header_image.mobile2x.dimensions.width
-            : meta.imgWidth
+          locations.header_image ? locations.header_image.mobile2x.dimensions.width : meta.imgWidth
         }
         path={
-          locations
-            ? `https://www.peopleforbikes.org/locations/${locations._meta.uid}`
-            : meta.path
+          locations ? `https://www.peopleforbikes.org/locations/${locations._meta.uid}` : meta.path
         }
       />
       <Wrapper
@@ -76,10 +54,7 @@ export default function LocationPage({
         isWide={locations.header_image ? true : false}
       >
         {locations.header_image ? (
-          <HeaderImage
-            headingRGBA="255,255,255,1"
-            source={locations.header_image.url}
-          >
+          <HeaderImage headingRGBA="255,255,255,1" source={locations.header_image.url}>
             <h1>{locations.location[0].text}</h1>
           </HeaderImage>
         ) : (
@@ -91,39 +66,21 @@ export default function LocationPage({
         {/* If neither conditions catch, send back placeholder data */}
         {locations.body &&
           locations.body.map((slice) => {
-            if (slice.type === "action_item") {
-              return (
-                <ActionItemGroup
-                  key={randomID(10000000)}
-                  payload={slice.fields}
-                />
-              );
+            if (slice.type === 'action_item') {
+              return <ActionItemGroup key={randomID(10000000)} payload={slice.fields} />;
             } else {
-              return (
-                <ActionItemGroup
-                  key={randomID(10000000)}
-                  payload={actionItems}
-                />
-              );
+              return <ActionItemGroup key={randomID(10000000)} payload={actionItems} />;
             }
           })}
         {locations.body &&
           locations.body.map((slice) => {
-            if (slice.type === "ridespot_promo") {
+            if (slice.type === 'ridespot_promo') {
               return (
-                <RideSpotPromo
-                  isLocal="true"
-                  key={randomID(10000000)}
-                  payload={slice.primary}
-                />
+                <RideSpotPromo isLocal="true" key={randomID(10000000)} payload={slice.primary} />
               );
             } else {
               return (
-                <RideSpotPromo
-                  isLocal="false"
-                  key={randomID(10000000)}
-                  payload={rideSpotRides}
-                />
+                <RideSpotPromo isLocal="false" key={randomID(10000000)} payload={rideSpotRides} />
               );
             }
           })}
@@ -148,22 +105,27 @@ export default function LocationPage({
                 : new Date(ParseDate(newsItem.last_publication_date));
               return (
                 <ContentItem
-                  date={`${newDate.toLocaleString("en-us", { month: "long" })} 
+                  date={`${newDate.toLocaleString('en-us', { month: 'long' })} 
                         ${setDateSuffix(newDate.getDate())}, 
-                        ${newDate.getFullYear()}` }
-                key={ newsItem.id }
-                image={ Object.keys(newsItem.data.header_image).length !== 0 &&
-                        newsItem.data.header_image ? 
-                          newsItem.data.header_image : 
-                          fallback[Math.floor(Math.random()*6)] }                
-                path={ `/news/${newsItem.uid}` }
-                text={ newsItem.data.main_content[0].type === "paragraph" ? newsItem.data.main_content[0].text : "" }
-                title={ newsItem.data.title[0].text }
-              />
-            )
-          } ) }
-           
-        </MainContent>        
+                        ${newDate.getFullYear()}`}
+                  key={newsItem.id}
+                  image={
+                    Object.keys(newsItem.data.header_image).length !== 0 &&
+                    newsItem.data.header_image
+                      ? newsItem.data.header_image
+                      : fallback[Math.floor(Math.random() * 6)]
+                  }
+                  path={`/news/${newsItem.uid}`}
+                  text={
+                    newsItem.data.main_content[0].type === 'paragraph'
+                      ? newsItem.data.main_content[0].text
+                      : ''
+                  }
+                  title={newsItem.data.title[0].text}
+                />
+              );
+            })}
+        </MainContent>
       </Wrapper>
     </>
   );
@@ -180,7 +142,7 @@ export async function getStaticProps({ params, preview = false, previewData }) {
       page: pageData ?? null,
     },
     revalidate: 60,
-  }
+  };
 }
 
 // getStaticPaths requires the whole paths argument to be objects of URL it needs to statically render server-side
@@ -189,5 +151,5 @@ export async function getStaticPaths() {
   return {
     paths: allLocations?.map(({ node }) => `/locations/${node._meta.uid}`) || [],
     fallback: false,
-  }
+  };
 }

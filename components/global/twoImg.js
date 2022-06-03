@@ -9,9 +9,9 @@
  * <TwoImg overlayImg={Bike}>I want this text to appear</TwoImg>.
  ****/
 
-import React from "react";
-import styled from "styled-components";
-import RightArrow from "../../public/arrow.png";
+import React from 'react';
+import styled from 'styled-components';
+import RightArrow from '../../public/arrow.png';
 
 /****
  * Container that holds the background image and will be the main div for the rest of the components.

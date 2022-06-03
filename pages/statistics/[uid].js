@@ -1,20 +1,20 @@
-import { useContext } from "react";
-import ErrorPage from "next/error";
-import styled from "styled-components";
-import { RichText } from "prismic-reactjs";
+import { useContext } from 'react';
+import ErrorPage from 'next/error';
+import styled from 'styled-components';
+import { RichText } from 'prismic-reactjs';
 
-import { getStats, getSingleStatsPage } from "../../lib/queries/statistics";
-import { linkResolver } from "../../lib/utils";
+import { getStats, getSingleStatsPage } from '../../lib/queries/statistics';
+import { linkResolver } from '../../lib/utils';
 
-import DefaultContext from "../../context/default/default-context";
+import DefaultContext from '../../context/default/default-context';
 
-import Wrapper from "../../components/global/wrapper";
-import SiteMetaCustom from "../../components/meta/site-meta-custom";
-import MainContent from "../../components/global/main-content";
-import Header1 from "../../components/primitives/h1";
-import Promo from "../../components/slices/promo";
+import Wrapper from '../../components/global/wrapper';
+import SiteMetaCustom from '../../components/meta/site-meta-custom';
+import MainContent from '../../components/global/main-content';
+import Header1 from '../../components/primitives/h1';
+import Promo from '../../components/slices/promo';
 
-import ResearchPromo from "../../public/promo/promo-research.jpg";
+import ResearchPromo from '../../public/promo/promo-research.jpg';
 
 const IntroWrapper = styled.div`
   margin: 3vh 0 1vh 0;
@@ -58,15 +58,10 @@ export default function MembersPage({ page, preview }) {
       />
       <Wrapper postPath="/research" postTitle="Research" isWide="true">
         <MainContent>
-          {statistic_page.title && (
-            <Header1>{statistic_page.title[0].text} Statistics</Header1>
-          )}
+          {statistic_page.title && <Header1>{statistic_page.title[0].text} Statistics</Header1>}
           {statistic_page.main_content && (
             <IntroWrapper>
-              <RichText
-                render={statistic_page.main_content}
-                linkResolver={linkResolver}
-              />
+              <RichText render={statistic_page.main_content} linkResolver={linkResolver} />
             </IntroWrapper>
           )}
         </MainContent>
@@ -92,7 +87,7 @@ export async function getStaticProps({ params, preview = false, previewData }) {
       page: pageData ?? null,
     },
     revalidate: 60,
-  }
+  };
 }
 
 // getStaticPaths requires the whole paths argument to be objects of URL it needs to statically render server-side
@@ -101,5 +96,5 @@ export async function getStaticPaths() {
   return {
     paths: pages?.map(({ node }) => `/statistics/${node._meta.uid}`) || [],
     fallback: false,
-  }
+  };
 }

@@ -1,75 +1,67 @@
-import { useContext} from "react";
-import { RichText } from 'prismic-reactjs'
-import styled, { ThemeContext } from "styled-components";
+import { useContext } from 'react';
+import { RichText } from 'prismic-reactjs';
+import styled, { ThemeContext } from 'styled-components';
 
-import { linkResolver, randomID } from "../../lib/utils";
+import { linkResolver, randomID } from '../../lib/utils';
 
-import Button from "../primitives/button";
-import GrantsList from "../content/grant-guidelines-list";
-import MissionPillars from "../content/mission-pillars";
-import NumberedPillars from "../content/numbered-pillars";
-import ReportsList from "../content/reports-list";
-import SecondaryCampaign from "../global/secondary-campaign"
-import SummaryBlock from "../content/summary-block";
-import ToolkitPillars from "../content/toolkit-pillars";
-import VisualGrid from "../global/visual-grid"
-import MainContent from "../global/main-content"
+import Button from '../primitives/button';
+import GrantsList from '../content/grant-guidelines-list';
+import MissionPillars from '../content/mission-pillars';
+import NumberedPillars from '../content/numbered-pillars';
+import ReportsList from '../content/reports-list';
+import SecondaryCampaign from '../global/secondary-campaign';
+import SummaryBlock from '../content/summary-block';
+import ToolkitPillars from '../content/toolkit-pillars';
+import VisualGrid from '../global/visual-grid';
+import MainContent from '../global/main-content';
 
-import ActionItemGroup from "../slices/action-item-group";
-import Promo from "../slices/promo";
+import ActionItemGroup from '../slices/action-item-group';
+import Promo from '../slices/promo';
 
 const RedHeading = styled.h2`
-  color: ${ props => props.theme.red };
+  color: ${(props) => props.theme.red};
   font-weight: 700;
   text-transform: uppercase;
-`
+`;
 
 export default function UidSlices({ landing_page }) {
-  const themeProps = useContext(ThemeContext)
+  const themeProps = useContext(ThemeContext);
 
   // SLICE CONTENT (in body)
   let Slice;
 
   if (landing_page.body) {
     Slice = landing_page.body.map((slice) => {
-      
       // CONTENT BLOCK (but not for Grants right now)
-      if (slice.__typename === "Landing_pageBodyContent_block" && 
-          landing_page._meta.uid !== "grants" ) {
+      if (
+        slice.__typename === 'Landing_pageBodyContent_block' &&
+        landing_page._meta.uid !== 'grants'
+      ) {
         return (
-          <SummaryBlock 
-            key={randomID(10000000)}>
-            <RichText
-              render={slice.primary.main_content}
-              linkResolver={linkResolver}
-            />
+          <SummaryBlock key={randomID(10000000)}>
+            <RichText render={slice.primary.main_content} linkResolver={linkResolver} />
           </SummaryBlock>
         );
       }
 
       // ACTION ITEM SLICE
-      if (slice.__typename === "Landing_pageBodyAction_item") {
-        return (
-          <ActionItemGroup key={randomID(10000000)} payload={slice.fields} />
-        );
+      if (slice.__typename === 'Landing_pageBodyAction_item') {
+        return <ActionItemGroup key={randomID(10000000)} payload={slice.fields} />;
       }
 
       // ACCORDION SLICE
-      if (slice.__typename === "Landing_pageBodyAccordion_list") {
+      if (slice.__typename === 'Landing_pageBodyAccordion_list') {
         return <GrantsList payload={slice.fields} />;
       }
 
       // MISSION SLICE
       if (
-        slice.__typename === "Landing_pageBodyMission_content" &&
-        landing_page._meta.uid === "mission"
+        slice.__typename === 'Landing_pageBodyMission_content' &&
+        landing_page._meta.uid === 'mission'
       ) {
         return (
           <>
-            <NumberedPillars
-              payload={slice.fields}
-              title={slice.primary.pillar_title}
-            />
+            <NumberedPillars payload={slice.fields} title={slice.primary.pillar_title} />
             <MissionPillars />
           </>
         );
@@ -77,15 +69,12 @@ export default function UidSlices({ landing_page }) {
 
       // ORIENTATION
       if (
-        slice.__typename === "Landing_pageBodyMission_content" &&
-        landing_page._meta.uid === "board-orientation"
+        slice.__typename === 'Landing_pageBodyMission_content' &&
+        landing_page._meta.uid === 'board-orientation'
       ) {
         return (
           <>
-            <NumberedPillars
-              payload={slice.fields}
-              title={slice.primary.pillar_title}
-            />
+            <NumberedPillars payload={slice.fields} title={slice.primary.pillar_title} />
             <ToolkitPillars />
           </>
         );
@@ -93,32 +82,26 @@ export default function UidSlices({ landing_page }) {
 
       // RELATED LINKS (CAMPAIGNS)
       if (
-        slice.__typename === "Landing_pageBodyRelated_list" &&
-        landing_page._meta.uid === "campaigns" ||
-        slice.__typename === "Landing_pageBodyRelated_list" &&
-        landing_page._meta.uid === "local-innovation" 
+        (slice.__typename === 'Landing_pageBodyRelated_list' &&
+          landing_page._meta.uid === 'campaigns') ||
+        (slice.__typename === 'Landing_pageBodyRelated_list' &&
+          landing_page._meta.uid === 'local-innovation')
       ) {
-        
         return (
           <>
-            <MainContent
-              contentPadding="4vh 4vw 4vh 4vw"
-            >
+            <MainContent contentPadding="4vh 4vw 4vh 4vw">
               <RedHeading>Programs</RedHeading>
               <hr />
-            </MainContent>           
-            <SecondaryCampaign
-              payload={ slice.fields }
-            />
+            </MainContent>
+            <SecondaryCampaign payload={slice.fields} />
           </>
         );
       }
-      
 
       // MISSION SLICE FOR LOCAL INNOVATION
       if (
-        slice.__typename === "Landing_pageBodyMission_content" &&
-        landing_page._meta.uid === "local-innovation"
+        slice.__typename === 'Landing_pageBodyMission_content' &&
+        landing_page._meta.uid === 'local-innovation'
       ) {
         return (
           <>
@@ -132,7 +115,7 @@ export default function UidSlices({ landing_page }) {
       }
 
       // RESEARCH REPORTS
-      if (slice.__typename === "Landing_pageBodyResearch__reports") {
+      if (slice.__typename === 'Landing_pageBodyResearch__reports') {
         return (
           <>
             <ReportsList payload={slice.fields} />
@@ -155,54 +138,55 @@ export default function UidSlices({ landing_page }) {
 
       // PROMO
       // logic to catch policy and grant finder custom promos (with internal links)
-      if (slice.__typename === "Landing_pageBodyPromo") {
-        
+      if (slice.__typename === 'Landing_pageBodyPromo') {
         // SUMMARY BLOCK, (manual, just for Grants as of 2022/04)
-        if (landing_page._meta.uid === "grants") {
+        if (landing_page._meta.uid === 'grants') {
           return (
             <>
-            <SummaryBlock 
-              bgColor={ themeProps.midnightBlue }
-              buttons={ [ { button_link: "mailto:nancy@peopleforbikes.org", button_text: "Questions? Contact Nancy Hershfield" } ]}
-              key={ randomID(10000000) }
-              fontSize="28px"
-              lineHeight="42px"
-              maxWidth="800px"
-              textColor="#fff"
-            >
-              <p>We're updating our community grants process and ask for your patience. Please check back in the next few months.</p>
-            </SummaryBlock>
-            <Promo
-              bigWords={slice.primary.bottom_text}
-              path={
-                (landing_page._meta.uid === "policy" && "/policy/finder") ||
-                (landing_page._meta.uid === "grants" && "/grants/finder") ||
-                (landing_page._meta.uid === "grant-application" &&
-                  "/grants/finder") ||
-                (landing_page._meta.uid === "grant-guidelines" &&
-                  "/grants/finder") ||
-                (landing_page._meta.uid === "grant-funding" &&
-                  "/grants/finder") ||
-                slice.primary.link
-              }
-              smallWords={slice.primary.top_text}
-              source={slice.primary.main_image.url}
-            />
-            </>            
-          )
+              <SummaryBlock
+                bgColor={themeProps.midnightBlue}
+                buttons={[
+                  {
+                    button_link: 'mailto:nancy@peopleforbikes.org',
+                    button_text: 'Questions? Contact Nancy Hershfield',
+                  },
+                ]}
+                key={randomID(10000000)}
+                fontSize="28px"
+                lineHeight="42px"
+                maxWidth="800px"
+                textColor="#fff"
+              >
+                <p>
+                  We're updating our community grants process and ask for your patience. Please
+                  check back in the next few months.
+                </p>
+              </SummaryBlock>
+              <Promo
+                bigWords={slice.primary.bottom_text}
+                path={
+                  (landing_page._meta.uid === 'policy' && '/policy/finder') ||
+                  (landing_page._meta.uid === 'grants' && '/grants/finder') ||
+                  (landing_page._meta.uid === 'grant-application' && '/grants/finder') ||
+                  (landing_page._meta.uid === 'grant-guidelines' && '/grants/finder') ||
+                  (landing_page._meta.uid === 'grant-funding' && '/grants/finder') ||
+                  slice.primary.link
+                }
+                smallWords={slice.primary.top_text}
+                source={slice.primary.main_image.url}
+              />
+            </>
+          );
         } else {
           return (
             <Promo
               bigWords={slice.primary.bottom_text}
               path={
-                (landing_page._meta.uid === "policy" && "/policy/finder") ||
-                (landing_page._meta.uid === "grants" && "/grants/finder") ||
-                (landing_page._meta.uid === "grant-application" &&
-                  "/grants/finder") ||
-                (landing_page._meta.uid === "grant-guidelines" &&
-                  "/grants/finder") ||
-                (landing_page._meta.uid === "grant-funding" &&
-                  "/grants/finder") ||
+                (landing_page._meta.uid === 'policy' && '/policy/finder') ||
+                (landing_page._meta.uid === 'grants' && '/grants/finder') ||
+                (landing_page._meta.uid === 'grant-application' && '/grants/finder') ||
+                (landing_page._meta.uid === 'grant-guidelines' && '/grants/finder') ||
+                (landing_page._meta.uid === 'grant-funding' && '/grants/finder') ||
                 slice.primary.link
               }
               smallWords={slice.primary.top_text}
@@ -213,30 +197,22 @@ export default function UidSlices({ landing_page }) {
       }
 
       // VisualGrid (but omitting from Grants for now)
-      if (slice.__typename === "Landing_pageBodyVisual_grid" && 
-          landing_page._meta.uid !== "grants" ) {
-        return(
+      if (
+        slice.__typename === 'Landing_pageBodyVisual_grid' &&
+        landing_page._meta.uid !== 'grants'
+      ) {
+        return (
           <>
-            <MainContent
-              contentPadding="4vh 4vw 4vh 4vw"
-            >
+            <MainContent contentPadding="4vh 4vw 4vh 4vw">
               <RedHeading>Partners</RedHeading>
               <hr />
-            </MainContent>         
-            <VisualGrid
-              payload={ slice.fields }
-              title={ slice.primary.grid_title }
-            />
+            </MainContent>
+            <VisualGrid payload={slice.fields} title={slice.primary.grid_title} />
           </>
-        )
+        );
       }
-
     });
   }
 
-  return (
-    <>
-      { Slice }
-    </>
-  );
+  return <>{Slice}</>;
 }

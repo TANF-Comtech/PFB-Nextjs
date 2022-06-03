@@ -1,83 +1,74 @@
-import React, { useContext } from "react";
-import { RichText } from 'prismic-reactjs'
-import { ThemeContext } from 'styled-components'
+import React, { useContext } from 'react';
+import { RichText } from 'prismic-reactjs';
+import { ThemeContext } from 'styled-components';
 
-import { linkResolver, randomID } from "../../lib/utils";
+import { linkResolver, randomID } from '../../lib/utils';
 
-import NumberedPillars from "../content/numbered-pillars";
-import MainContent from "../global/main-content";
-import SummaryBlock from "../content/summary-block";
-import ImageList from "../content/image-list"
-import Promo from "../slices/promo";
+import NumberedPillars from '../content/numbered-pillars';
+import MainContent from '../global/main-content';
+import SummaryBlock from '../content/summary-block';
+import ImageList from '../content/image-list';
+import Promo from '../slices/promo';
 
 export default function UidMemberSlices({ landing_page }) {
-  const themeProps = useContext(ThemeContext)
- 
+  const themeProps = useContext(ThemeContext);
+
   // SLICE CONTENT (in body)
   let Slice;
 
   if (landing_page.body) {
     Slice = landing_page.body.map((slice) => {
-
       // SUMMARY BLOCK - TOP /MEMBERS PAGE
-      if (slice.__typename === "Landing_pageBodySummary_block" && 
-          slice.primary.summary_id === 1 ) {
-          return (
-            <SummaryBlock 
-              bgColor={ themeProps.midnightBlue }
-              buttons={ slice.fields }
-              key={ randomID(10000000) }
-              fontSize="28px"
-              lineHeight="42px"
-              maxWidth="800px"
-              textColor="#fff"
-            >
-              <RichText
-                render={slice.primary.summary_area}
-                linkResolver={linkResolver}
-              />
-            </SummaryBlock>
-          );
+      if (slice.__typename === 'Landing_pageBodySummary_block' && slice.primary.summary_id === 1) {
+        return (
+          <SummaryBlock
+            bgColor={themeProps.midnightBlue}
+            buttons={slice.fields}
+            key={randomID(10000000)}
+            fontSize="28px"
+            lineHeight="42px"
+            maxWidth="800px"
+            textColor="#fff"
+          >
+            <RichText render={slice.primary.summary_area} linkResolver={linkResolver} />
+          </SummaryBlock>
+        );
       }
 
       // MEMBER BENEFITS - Image List
-      if (slice.__typename === "Landing_pageBodyImage_list") {
+      if (slice.__typename === 'Landing_pageBodyImage_list') {
         return (
           <MainContent contentPadding="6vh 4vw">
-            <h2 style={{ textAlign: "center" }}>Membership Benefits</h2>
-            <ImageList 
-              key={ randomID(10000000) }
-              payload={ slice.fields } 
-            />
+            <h2 style={{ textAlign: 'center' }}>Membership Benefits</h2>
+            <ImageList key={randomID(10000000)} payload={slice.fields} />
           </MainContent>
-        )
+        );
       }
 
       // SUMMARY BLOCK 2 - MEMBER RENEW
-      if (slice.__typename === "Landing_pageBodySummary_block" && 
-          slice.primary.summary_id === 2 || slice.primary.summary_id === 3) {
-          return (
-            <SummaryBlock 
-              bgColor={ themeProps.midnightBlue }
-              buttons={ slice.fields }
-              key={ randomID(10000000) }
-              fontSize="28px"
-              lineHeight="42px"
-              marginBottom="2vh"
-              maxWidth="800px"
-              textColor="#fff"
-              title={ slice.primary.summary_title }
-            >
-              <RichText
-                render={slice.primary.summary_area}
-                linkResolver={linkResolver}
-              />
-            </SummaryBlock>
-          );
+      if (
+        (slice.__typename === 'Landing_pageBodySummary_block' && slice.primary.summary_id === 2) ||
+        slice.primary.summary_id === 3
+      ) {
+        return (
+          <SummaryBlock
+            bgColor={themeProps.midnightBlue}
+            buttons={slice.fields}
+            key={randomID(10000000)}
+            fontSize="28px"
+            lineHeight="42px"
+            marginBottom="2vh"
+            maxWidth="800px"
+            textColor="#fff"
+            title={slice.primary.summary_title}
+          >
+            <RichText render={slice.primary.summary_area} linkResolver={linkResolver} />
+          </SummaryBlock>
+        );
       }
 
       // PROMO
-      if (slice.__typename === "Landing_pageBodyPromo") {
+      if (slice.__typename === 'Landing_pageBodyPromo') {
         return (
           <Promo
             bigWords={slice.primary.bottom_text}
@@ -90,9 +81,5 @@ export default function UidMemberSlices({ landing_page }) {
     });
   }
 
-  return (
-    <>
-      { Slice }
-    </>
-  );
+  return <>{Slice}</>;
 }

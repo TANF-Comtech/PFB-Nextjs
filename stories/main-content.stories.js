@@ -1,8 +1,8 @@
-import React from "react";
-import mainContent from "../components/global/main-content";
+import React from 'react';
+import mainContent from '../components/global/main-content';
 
 export default {
-  title: "Main-Content",
+  title: 'Main-Content',
   component: mainContent,
 };
 

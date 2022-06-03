@@ -1,5 +1,5 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 const Box = styled.div`
   width: 100%;
@@ -23,7 +23,7 @@ const CompName = styled.p`
   font-weight: bold;
   margin-bottom: 0;
   padding: 0 3vw;
-`
+`;
 
 const HyperCompName = styled.a`
   font-weight: bold;
@@ -40,12 +40,12 @@ export default function CoalitionMember({ hit }) {
         <Company>
           {!hit.Website && <CompName>{hit.Name}</CompName>}
           {hit.Website &&
-            (hit.Website.includes("http://") ||
-              hit.Website.includes("https://") ||
-              hit.Website.includes("HTTP://") ||
-              hit.Website.includes("HTTPS://")) && (
+            (hit.Website.includes('http://') ||
+              hit.Website.includes('https://') ||
+              hit.Website.includes('HTTP://') ||
+              hit.Website.includes('HTTPS://')) && (
               <HyperCompName
-                style={{ textDecoration: "underline", color: "inherit" }}
+                style={{ textDecoration: 'underline', color: 'inherit' }}
                 href={hit.Website}
               >
                 {hit.Name}
@@ -53,13 +53,13 @@ export default function CoalitionMember({ hit }) {
             )}
           {hit.Website &&
             !(
-              hit.Website.includes("http://") ||
-              hit.Website.includes("https://") ||
-              hit.Website.includes("HTTP://") ||
-              hit.Website.includes("HTTPS://")
+              hit.Website.includes('http://') ||
+              hit.Website.includes('https://') ||
+              hit.Website.includes('HTTP://') ||
+              hit.Website.includes('HTTPS://')
             ) && (
               <HyperCompName
-                style={{ textDecoration: "underline", color: "inherit" }}
+                style={{ textDecoration: 'underline', color: 'inherit' }}
                 href={`https://${hit.Website}`}
                 target="_blank"
               >
