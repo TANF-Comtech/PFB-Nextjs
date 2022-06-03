@@ -1,6 +1,5 @@
 // Variables for site
 const Variables = {
-  
   // Colors
   black: 'rgb(26,26,26)',
   darkestGray: '#404040',
@@ -46,8 +45,9 @@ const Variables = {
   // Animation / Effects
   basicAnimation: '0.2s ease-in-out',
   cubicSmooth: 'cubic-bezier(.09,.47,.18,.99)',
-  basicBoxShadow: '0 13px 27px -5px rgba(50,50,93,.25), 0 8px 16px -8px rgba(0,0,0,.3), 0 -6px 16px -6px rgba(0,0,0,.025);',
-  buttonBoxShadow: '0 4px 6px rgba(50,50,93,.11), 0 1px 3px rgba(0,0,0,.08)'
-}
+  basicBoxShadow:
+    '0 13px 27px -5px rgba(50,50,93,.25), 0 8px 16px -8px rgba(0,0,0,.3), 0 -6px 16px -6px rgba(0,0,0,.025);',
+  buttonBoxShadow: '0 4px 6px rgba(50,50,93,.11), 0 1px 3px rgba(0,0,0,.08)',
+};
 
-export default Variables
+export default Variables;

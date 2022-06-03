@@ -1,9 +1,9 @@
-import MainContent from '../global/main-content'
-import WayfindingItem from '../slices/wayfinding-item'
+import MainContent from '../global/main-content';
+import WayfindingItem from '../slices/wayfinding-item';
 
 /**
  * <GrantsPillars>
- * 
+ *
  * Very simple static list of Grants Pillars and their paths
  */
 const GrantsPillars = () => {
@@ -11,24 +11,24 @@ const GrantsPillars = () => {
     <>
       <MainContent>
         <h2>Get Started with Grants</h2>
-        <WayfindingItem 
+        <WayfindingItem
           path="/grant-guidelines"
           title="Grant Guidelines"
           text="Learn more about our grant guidelines and what kind of projects we fund."
-        /> 
-        <WayfindingItem 
+        />
+        <WayfindingItem
           path="/grant-funding"
           title="Grant Funding"
           text="Learn how you can get your company involved in funding better biking."
         />
-        <WayfindingItem 
+        <WayfindingItem
           path="/grant-application"
           title="Grant Application"
           text="Find out when one of our semi-annual grant cycles will be available."
-        />            
+        />
       </MainContent>
     </>
-  )
-}
+  );
+};
 
-export default GrantsPillars
+export default GrantsPillars;

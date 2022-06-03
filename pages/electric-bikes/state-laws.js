@@ -1,19 +1,19 @@
-import { useContext } from "react";
-import ErrorPage from "next/error";
-import styled from "styled-components";
+import { useContext } from 'react';
+import ErrorPage from 'next/error';
+import styled from 'styled-components';
 
-import { getEBikeLaws } from "../../lib/queries/electric-bikes";
+import { getEBikeLaws } from '../../lib/queries/electric-bikes';
 
-import DefaultContext from "../../context/default/default-context";
+import DefaultContext from '../../context/default/default-context';
 
-import Wrapper from "../../components/global/wrapper";
-import SiteMetaCustom from "../../components/meta/site-meta-custom";
-import MainContent from "../../components/global/main-content";
-import Promo from "../../components/slices/promo";
-import Grid from "../../components/global/grid";
+import Wrapper from '../../components/global/wrapper';
+import SiteMetaCustom from '../../components/meta/site-meta-custom';
+import MainContent from '../../components/global/main-content';
+import Promo from '../../components/slices/promo';
+import Grid from '../../components/global/grid';
 
-import EBikesPromo from "../../public/promo/electric-bikes-shaded.jpg";
-import WhiteArrow from "../../public/white-arrow.svg";
+import EBikesPromo from '../../public/promo/electric-bikes-shaded.jpg';
+import WhiteArrow from '../../public/white-arrow.svg';
 
 const GridWrapper = styled.section`
   margin: 2vh 0;
@@ -76,18 +76,13 @@ export default function EBikesLaws({ page, preview }) {
         imgWidth={meta.imgWidth}
         path="https://www.peopleforbikes.org/electric-bikes/state-laws"
       />
-      <Wrapper
-        postPath="/topics/electric-bikes"
-        postTitle="Electric Bikes"
-        isWide="true"
-      >
+      <Wrapper postPath="/topics/electric-bikes" postTitle="Electric Bikes" isWide="true">
         <MainContent maxWidth="800px">
           <h2>Electric Bike Laws - State by State</h2>
           <p>
-            Electric bicycle (e-bike) laws are different in every state, and can
-            be confusing for riders, retailers, and suppliers. PeopleForBikes is
-            making riding an electric bicycle easy and accessible for all. Find
-            your state's specific rules below.
+            Electric bicycle (e-bike) laws are different in every state, and can be confusing for
+            riders, retailers, and suppliers. PeopleForBikes is making riding an electric bicycle
+            easy and accessible for all. Find your state's specific rules below.
           </p>
 
           {page && (
@@ -97,14 +92,8 @@ export default function EBikesLaws({ page, preview }) {
                   return (
                     PDF.node.ebike_laws && (
                       <Box key={PDF.node.ebike_laws.size}>
-                        <a
-                          href={PDF.node.ebike_laws.url}
-                          target="_blank"
-                          rel="noopener"
-                        >
-                          <Text>
-                            {PDF.node.location && PDF.node.location[0].text}
-                          </Text>
+                        <a href={PDF.node.ebike_laws.url} target="_blank" rel="noopener">
+                          <Text>{PDF.node.location && PDF.node.location[0].text}</Text>
                           <Arrow src={WhiteArrow} width="46px" />
                         </a>
                       </Box>
@@ -138,5 +127,5 @@ export async function getStaticProps({ params, preview = false, previewData }) {
       page: pageData ?? null,
     },
     revalidate: 60,
-  }
+  };
 }

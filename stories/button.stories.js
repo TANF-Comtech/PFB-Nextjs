@@ -1,8 +1,8 @@
-import React from "react";
-import Button from "../components/global/button";
+import React from 'react';
+import Button from '../components/global/button';
 
 export default {
-  title: "Button",
+  title: 'Button',
   component: Button,
 };
 

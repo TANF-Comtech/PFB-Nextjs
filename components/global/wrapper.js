@@ -1,16 +1,16 @@
-import React, { useRef } from "react";
-import Link from "next/link"
-import { useRouter } from "next/router"
-import styled from "styled-components";
-import useSize from "@react-hook/size";
+import React, { useRef } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import styled from 'styled-components';
+import useSize from '@react-hook/size';
 
-import { linkResolver } from '../../lib/utils'
+import { linkResolver } from '../../lib/utils';
 
-import Titlebar from "../global/titlebar";
+import Titlebar from '../global/titlebar';
 
 // spacer constrains the layout on big screens but keeps it tight on mobile
 const MainContent = styled.main`
-  padding: ${ props => props.isWidePass ? `20vh 0 4vh 0` : `20vh 4vw 4vh 4vw` };
+  padding: ${(props) => (props.isWidePass ? `20vh 0 4vh 0` : `20vh 4vw 4vh 4vw`)};
   min-height: 80vh;
 `;
 
@@ -43,21 +43,15 @@ const Wrapper = ({ children, isWide, postPath, postTitle }) => {
 
   return (
     <>
-      { (postPath && postTitle) &&
+      {postPath && postTitle && (
         <Titlebar mainHeight={Math.round(mainHeight)}>
-          <Link href={ postPath } passHref>
-            <a>{ postTitle }</a>
-          </Link>        
+          <Link href={postPath} passHref>
+            <a>{postTitle}</a>
+          </Link>
         </Titlebar>
-      }
-      <MainContent 
-        ref={ mainTarget }
-        isWidePass={ isWide }
-      >
-        { isWide 
-          ? ( <> { children } </> )
-          : ( <Container> { children } </Container> )
-        }
+      )}
+      <MainContent ref={mainTarget} isWidePass={isWide}>
+        {isWide ? <> {children} </> : <Container> {children} </Container>}
       </MainContent>
     </>
   );

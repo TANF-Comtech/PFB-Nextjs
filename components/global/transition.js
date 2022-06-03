@@ -1,6 +1,6 @@
-import { TransitionGroup, Transition as ReactTransition } from "react-transition-group"
+import { TransitionGroup, Transition as ReactTransition } from 'react-transition-group';
 
-const TIMEOUT = 300
+const TIMEOUT = 300;
 const getTransitionStyles = {
   entering: {
     opacity: 0,
@@ -13,7 +13,7 @@ const getTransitionStyles = {
     transition: `opacity ${TIMEOUT}ms ease-in-out`,
     opacity: 0,
   },
-}
+};
 const PageTransition = ({ children, location }) => {
   return (
     <TransitionGroup>
@@ -24,7 +24,7 @@ const PageTransition = ({ children, location }) => {
           exit: TIMEOUT,
         }}
       >
-        {status => (
+        {(status) => (
           <div
             style={{
               ...getTransitionStyles[status],
@@ -35,6 +35,6 @@ const PageTransition = ({ children, location }) => {
         )}
       </ReactTransition>
     </TransitionGroup>
-  )
-}
-export default PageTransition
+  );
+};
+export default PageTransition;

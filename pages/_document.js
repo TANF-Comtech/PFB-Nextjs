@@ -1,6 +1,6 @@
-import Document, { Html, Head, Main, NextScript } from "next/document";
-import { ServerStyleSheet } from "styled-components";
-import logo from "../public/logo.svg";
+import Document, { Html, Head, Main, NextScript } from 'next/document';
+import { ServerStyleSheet } from 'styled-components';
+import logo from '../public/logo.svg';
 
 export default class MyDocument extends Document {
   /**
@@ -28,8 +28,7 @@ export default class MyDocument extends Document {
     try {
       ctx.renderPage = () =>
         originalRenderPage({
-          enhanceApp: (App) => (props) =>
-            sheet.collectStyles(<App {...props} />),
+          enhanceApp: (App) => (props) => sheet.collectStyles(<App {...props} />),
         });
 
       // Get all the info from the incoming request
@@ -61,10 +60,7 @@ export default class MyDocument extends Document {
             rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&display=swap"
           />
-          <script 
-            async 
-            src="https://www.google-analytics.com/analytics.js" 
-          />
+          <script async src="https://www.google-analytics.com/analytics.js" />
           <script
             dangerouslySetInnerHTML={{
               __html: `
@@ -74,7 +70,7 @@ export default class MyDocument extends Document {
                 `,
             }}
           />
-          <script 
+          <script
             dangerouslySetInnerHTML={{
               __html: `
                 !function(f,b,e,v,n,t,s)
@@ -88,7 +84,7 @@ export default class MyDocument extends Document {
                 fbq('init', '3047515995261591');
                 fbq('track', 'PageView');
               `,
-            }}          
+            }}
           />
           <script
             async

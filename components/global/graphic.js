@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import styled, { keyframes } from "styled-components";
+import React, { useEffect, useState } from 'react';
+import styled, { keyframes } from 'styled-components';
 
 import hero from '../../public/sample-images/PFB_HERO_IMAGE_03_BLUE.png';
 
@@ -11,7 +11,7 @@ const circleArr = [
   [150, 135, 90],
   [38, 150, 225],
   [15, 75, 225],
-  [90, 38, 60]
+  [90, 38, 60],
 ];
 
 // keyframe
@@ -120,7 +120,7 @@ const HeroCircle = styled.div`
 `;
 
 // Component
-export default function Graphic( { source } ) {
+export default function Graphic({ source }) {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {

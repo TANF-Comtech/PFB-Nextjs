@@ -1,11 +1,10 @@
-import React, { useContext } from "react";
-import Link from "next/link";
-import styled, { ThemeContext } from "styled-components";
-import { RichText } from "prismic-reactjs";
+import React, { useContext } from 'react';
+import Link from 'next/link';
+import styled, { ThemeContext } from 'styled-components';
+import { RichText } from 'prismic-reactjs';
 
-import { linkResolver } from "../../lib/utils";
-import Button from "../primitives/button";
-
+import { linkResolver } from '../../lib/utils';
+import Button from '../primitives/button';
 
 const Container = styled.section`
   align-items: flex-start;
@@ -39,12 +38,11 @@ const ContentContainer = styled.div`
 `;
 
 const Title = styled.h3`
-  color: ${(props) => props.theme.darkestGray };
+  color: ${(props) => props.theme.darkestGray};
   font-size: 40px;
   line-height: 50px;
   margin: 0;
 `;
-
 
 /**
  * <ContentItemSimple>
@@ -57,7 +55,7 @@ const Title = styled.h3`
  * @param { string } text - content to be shown
  */
 const ContentItemSimple = ({ path, title, text }) => {
-  const themeProps = useContext(ThemeContext)
+  const themeProps = useContext(ThemeContext);
 
   return (
     <Container>
@@ -65,23 +63,21 @@ const ContentItemSimple = ({ path, title, text }) => {
         {!path ? (
           <Title>{title}</Title>
         ) : (
-          <Link href={ linkResolver(path) }>
+          <Link href={linkResolver(path)}>
             <a>
               <Title>{title}</Title>
             </a>
           </Link>
         )}
-        { text && 
-          <RichText render={ text } />
-        }
-        { path && (
+        {text && <RichText render={text} />}
+        {path && (
           <Button
-            buttonBg={ themeProps.darkGray }
-            buttonBgHover={ themeProps.darkestGray }
+            buttonBg={themeProps.darkGray}
+            buttonBgHover={themeProps.darkestGray}
             buttonColor="white"
             buttonPadding="10px 25px"
             buttonTextTransform="uppercase"
-            href={ linkResolver(path) }
+            href={linkResolver(path)}
           >
             Explore
           </Button>

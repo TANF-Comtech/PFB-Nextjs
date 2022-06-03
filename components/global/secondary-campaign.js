@@ -1,11 +1,11 @@
-import React from "react";
-import styled from "styled-components";
-import { linkResolver, randomID } from "../../lib/utils";
+import React from 'react';
+import styled from 'styled-components';
+import { linkResolver, randomID } from '../../lib/utils';
 
-import MainContent from "../global/main-content";
-import Rule from "../primitives/rule"
+import MainContent from '../global/main-content';
+import Rule from '../primitives/rule';
 
-import BlueArrow from "../../public/pfb-blue-arrow-right.svg";
+import BlueArrow from '../../public/pfb-blue-arrow-right.svg';
 
 const Tile = styled.div`
   display: flex;
@@ -45,7 +45,7 @@ const SCTitle = styled.h3`
 const Arrow = styled.img`
   width: 50px;
 
-  @media (min-width: ${ props => props.theme.md }) {
+  @media (min-width: ${(props) => props.theme.md}) {
     width: 60px;
   }
 `;
@@ -63,29 +63,25 @@ const Grid = styled.section`
   grid-template-columns: 1fr;
   margin: 0 4vw;
 
-  @media( min-width: ${ props => props.theme.sm } ) {
+  @media (min-width: ${(props) => props.theme.sm}) {
     grid-template-columns: 1fr 1fr;
   }
 `;
 
 /**
  * <SecondaryCampaign>
- * 
+ *
  * A component that makes a nice image with title overlay and description
- * 
+ *
  * @param { boolean } isHomepage - true if homepage usage
  * @param { array } payload - data block full of campaigns
- * 
+ *
  * @returns { object } - JSX of Campaigns in a CSS grid
  */
-export default function SecondaryCampaign({ 
-  payload = [],
-  isHomepage = false
-}) {
-
+export default function SecondaryCampaign({ payload = [], isHomepage = false }) {
   return (
     <>
-      { isHomepage === true ? (
+      {isHomepage === true ? (
         payload.map((sc) => {
           return (
             <Tile
@@ -105,30 +101,27 @@ export default function SecondaryCampaign({
         })
       ) : (
         <MainContent>
-          { payload !== undefined &&
+          {payload !== undefined &&
             payload.map((cl) => {
-            return (
-              <>
-              <Grid key={ cl.item._meta.id }>
-                <Tile source={ cl.item.banner_image?.url }>
-                  { cl.item.link && 
-                    <SCLink href={ linkResolver(cl.item.link) }>
-                      <SCTitleContainer>
-                        <Arrow src={ BlueArrow } />
-                        <SCTitle>{ cl.item.title[0].text }</SCTitle>
-                      </SCTitleContainer>
-                    </SCLink>                  
-                  }
-                </Tile>
-                <Description>{ cl.item.description }</Description>
-              </Grid>
-              <Rule
-                key={ randomID(34093849018) }
-                padding="4vh 4vw"
-              />
-              </>
-            );
-          })}
+              return (
+                <>
+                  <Grid key={cl.item._meta.id}>
+                    <Tile source={cl.item.banner_image?.url}>
+                      {cl.item.link && (
+                        <SCLink href={linkResolver(cl.item.link)}>
+                          <SCTitleContainer>
+                            <Arrow src={BlueArrow} />
+                            <SCTitle>{cl.item.title[0].text}</SCTitle>
+                          </SCTitleContainer>
+                        </SCLink>
+                      )}
+                    </Tile>
+                    <Description>{cl.item.description}</Description>
+                  </Grid>
+                  <Rule key={randomID(34093849018)} padding="4vh 4vw" />
+                </>
+              );
+            })}
         </MainContent>
       )}
     </>

@@ -1,19 +1,19 @@
-import styled from 'styled-components'
-import Link from 'next/link'
+import styled from 'styled-components';
+import Link from 'next/link';
 
-import { getReports } from "../../lib/queries/reports";
-import { linkResolver, randomID } from "../../lib/utils";
+import { getReports } from '../../lib/queries/reports';
+import { linkResolver, randomID } from '../../lib/utils';
 
-import Wrapper from '../../components/global/wrapper'
-import MainContent from '../../components/global/main-content'
-import Header1 from '../../components/primitives/h1'
-import Promo from '../../components/slices/promo'
-import Button from '../../components/primitives/button'
+import Wrapper from '../../components/global/wrapper';
+import MainContent from '../../components/global/main-content';
+import Header1 from '../../components/primitives/h1';
+import Promo from '../../components/slices/promo';
+import Button from '../../components/primitives/button';
 
-import ResearchPromo from "../../public/promo/promo-research.jpg";
+import ResearchPromo from '../../public/promo/promo-research.jpg';
 
-import { AlgoliaIndex } from '../../lib/algolia/algoliaClient'
-import { reportsFormatter } from '../../lib/algolia/reportsFormatter'
+import { AlgoliaIndex } from '../../lib/algolia/algoliaClient';
+import { reportsFormatter } from '../../lib/algolia/reportsFormatter';
 
 const ReportSection = styled.section`
   margin: 5vh 0;
@@ -56,57 +56,51 @@ export default function ReportsArchive({ page }) {
         src="https://static.cdn.prismic.io/prismic.js?new=true&repo=peopleforbikes"
       ></script>
       <MainContent maxWidth="1200px">
-        <Header1 key={ randomID(5687502984) }>Reports Archive</Header1>
+        <Header1 key={randomID(5687502984)}>Reports Archive</Header1>
 
-        { years && years.map( (year) => {
-          return(
-            <ReportSection key={ year }>
-              <ReportSectionHeader key={ randomID(120981371398475) }>
-                <h2>{ year }</h2>
-                <hr />
-              </ReportSectionHeader>
-              
-              { page.map( (report) => {
-                if( report.node.year === year) {
+        {years &&
+          years.map((year) => {
+            return (
+              <ReportSection key={year}>
+                <ReportSectionHeader key={randomID(120981371398475)}>
+                  <h2>{year}</h2>
+                  <hr />
+                </ReportSectionHeader>
 
-                  return(
-                    <>
-                      { report.node.title &&
-                        <ReportListItem
-                          key={report.node._meta.id} 
-                        >
-                          <Link 
-                            href={ linkResolver(report.node._meta) } 
-                            passHref >
-                            <a>
-                              <strong>{ report.node.title[0].text }</strong>
-                            </a>
-                          </Link>
-                          { report.node.summary &&
-                            <p>
-                              { `${report.node.summary[0].text.substring(0,180)} ...` }
-                            </p>    
-                          }
-                          <Button
-                            buttonBg="#404040"
-                            buttonBgHover="rgb(216,216,216)"
-                            buttonColor="white"
-                            buttonMargin="0 0 20px 0"
-                            buttonPadding="10px 20px"
-                            buttonTextTransform="uppercase"
-                            href={ linkResolver(report.node._meta) }
-                          >
-                            Read More
-                          </Button>
-                        </ReportListItem>
-                      }
-                    </>
-                  )
-                }
-              })}
-            </ReportSection>
-          )
-        }) }         
+                {page.map((report) => {
+                  if (report.node.year === year) {
+                    return (
+                      <>
+                        {report.node.title && (
+                          <ReportListItem key={report.node._meta.id}>
+                            <Link href={linkResolver(report.node._meta)} passHref>
+                              <a>
+                                <strong>{report.node.title[0].text}</strong>
+                              </a>
+                            </Link>
+                            {report.node.summary && (
+                              <p>{`${report.node.summary[0].text.substring(0, 180)} ...`}</p>
+                            )}
+                            <Button
+                              buttonBg="#404040"
+                              buttonBgHover="rgb(216,216,216)"
+                              buttonColor="white"
+                              buttonMargin="0 0 20px 0"
+                              buttonPadding="10px 20px"
+                              buttonTextTransform="uppercase"
+                              href={linkResolver(report.node._meta)}
+                            >
+                              Read More
+                            </Button>
+                          </ReportListItem>
+                        )}
+                      </>
+                    );
+                  }
+                })}
+              </ReportSection>
+            );
+          })}
       </MainContent>
 
       <Promo
@@ -123,8 +117,8 @@ export default function ReportsArchive({ page }) {
 export async function getStaticProps({ params, preview = false, previewData }) {
   const pageData = await getReports();
 
-  const algoliaFormattedData = reportsFormatter(pageData)
-  await AlgoliaIndex().saveObjects(algoliaFormattedData)
+  const algoliaFormattedData = reportsFormatter(pageData);
+  await AlgoliaIndex().saveObjects(algoliaFormattedData);
 
   return {
     props: {
@@ -132,5 +126,5 @@ export async function getStaticProps({ params, preview = false, previewData }) {
       page: pageData ?? null,
     },
     revalidate: 60,
-  }
+  };
 }

@@ -1,17 +1,17 @@
-import ErrorPage from "next/error";
-import { useContext } from "react";
-import { RichText } from "prismic-reactjs";
+import ErrorPage from 'next/error';
+import { useContext } from 'react';
+import { RichText } from 'prismic-reactjs';
 
-import { getAllCareers, getSingleCareer } from "../../lib/queries/careers";
+import { getAllCareers, getSingleCareer } from '../../lib/queries/careers';
 
-import DefaultContext from "../../context/default/default-context";
+import DefaultContext from '../../context/default/default-context';
 
-import Wrapper from "../../components/global/wrapper";
-import SiteMetaCustom from "../../components/meta/site-meta-custom";
-import MainContent from "../../components/global/main-content";
-import Heading1 from "../../components/primitives/h1";
-import Rule from "../../components/primitives/rule";
-import Button from "../../components/primitives/button";
+import Wrapper from '../../components/global/wrapper';
+import SiteMetaCustom from '../../components/meta/site-meta-custom';
+import MainContent from '../../components/global/main-content';
+import Heading1 from '../../components/primitives/h1';
+import Rule from '../../components/primitives/rule';
+import Button from '../../components/primitives/button';
 
 export default function CareerPages({ page, preview }) {
   if (!page || page === null) {
@@ -30,17 +30,11 @@ export default function CareerPages({ page, preview }) {
       ></script>
       <SiteMetaCustom
         desc={meta.desc}
-        title={
-          job.title ? `${job.title[0].text} | PeopleForBikes` : meta.title
-        }
+        title={job.title ? `${job.title[0].text} | PeopleForBikes` : meta.title}
         imgHeight={meta.imgHeight}
         imgSrc={meta.imgSrc}
         imgWidth={meta.imgWidth}
-        path={
-          job
-            ? `https://www.peopleforbikes.org/careers/${job._meta.uid}`
-            : meta.path
-        }
+        path={job ? `https://www.peopleforbikes.org/careers/${job._meta.uid}` : meta.path}
       />
       <Wrapper postPath="/careers/" postTitle="Careers" isWide={true}>
         <MainContent>
@@ -80,7 +74,7 @@ export async function getStaticProps({ params, preview = false, previewData }) {
       page: pageData ?? null,
     },
     revalidate: 60,
-  }
+  };
 }
 
 // getStaticPaths requires the whole paths argument to be objects of URL it needs to statically render server-side
@@ -89,5 +83,5 @@ export async function getStaticPaths() {
   return {
     paths: allCareers?.map(({ node }) => `/careers/${node._meta.uid}`) || [],
     fallback: false,
-  }
+  };
 }

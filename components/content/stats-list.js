@@ -1,26 +1,26 @@
-import Link from 'next/link'
-import styled from 'styled-components'
+import Link from 'next/link';
+import styled from 'styled-components';
 
-import MainContent from '../global/main-content'
-import Grid from '../global/grid'
+import MainContent from '../global/main-content';
+import Grid from '../global/grid';
 
-import WhiteArrow from '../../public/white-arrow.svg'
+import WhiteArrow from '../../public/white-arrow.svg';
 
 const GridWrapper = styled.section`
   margin: 2vh 0;
-`
+`;
 
 const Box = styled.div`
   align-items: center;
-  background-color: ${props => props.theme.midnightBlue};
+  background-color: ${(props) => props.theme.midnightBlue};
   display: flex;
   justify-content: center;
   min-height: 190px;
   padding: 25px;
-`
+`;
 
 const Text = styled.h4`
-  color: ${props => props.theme.blueBright};
+  color: ${(props) => props.theme.blueBright};
   font-size: 36px;
   font-weight: 700;
   line-height: 36px;
@@ -34,189 +34,185 @@ const Text = styled.h4`
   @media screen and (min-width: 1200px) {
     font-size: 44px;
     line-height: 44px;
-  }  
-`
+  }
+`;
 
 const Arrow = styled.img`
   display: block;
   margin: 0 auto;
   width: 46px;
-`
+`;
 
 const PageHeading = styled.h2`
-  color: ${ props => props.theme.red };
+  color: ${(props) => props.theme.red};
   font-weight: 700;
   margin-top: 5vh;
   text-transform: uppercase;
-`
+`;
 
 /* So...the landing page query is so large, we've overloaded it */
 /* I had to manually pull the payload into this page, ugh */
 const statsList = [
   {
-    "node": {
-      "title": [
+    node: {
+      title: [
         {
-          "type": "heading1",
-          "text": "Environmental",
-          "spans": []
-        }
+          type: 'heading1',
+          text: 'Environmental',
+          spans: [],
+        },
       ],
-      "_meta": {
-        "id": "X9towREAACQA5Q7G",
-        "uid": "environmental",
-        "type": "statistic_page"
-      }
-    }
+      _meta: {
+        id: 'X9towREAACQA5Q7G',
+        uid: 'environmental',
+        type: 'statistic_page',
+      },
+    },
   },
   {
-    "node": {
-      "title": [
+    node: {
+      title: [
         {
-          "type": "heading1",
-          "text": "Facilities",
-          "spans": []
-        }
+          type: 'heading1',
+          text: 'Facilities',
+          spans: [],
+        },
       ],
-      "_meta": {
-        "id": "X9trThEAACYA5RoJ",
-        "uid": "bicycle-facilities-and-safety",
-        "type": "statistic_page"
-      }
-    }
+      _meta: {
+        id: 'X9trThEAACYA5RoJ',
+        uid: 'bicycle-facilities-and-safety',
+        type: 'statistic_page',
+      },
+    },
   },
   {
-    "node": {
-      "title": [
+    node: {
+      title: [
         {
-          "type": "heading1",
-          "text": "Participation",
-          "spans": []
-        }
+          type: 'heading1',
+          text: 'Participation',
+          spans: [],
+        },
       ],
-      "_meta": {
-        "id": "X9twlBEAACQA5TCu",
-        "uid": "participation",
-        "type": "statistic_page"
-      }
-    }
+      _meta: {
+        id: 'X9twlBEAACQA5TCu',
+        uid: 'participation',
+        type: 'statistic_page',
+      },
+    },
   },
   {
-    "node": {
-      "title": [
+    node: {
+      title: [
         {
-          "type": "heading1",
-          "text": "Protected Bike Lanes",
-          "spans": []
-        }
+          type: 'heading1',
+          text: 'Protected Bike Lanes',
+          spans: [],
+        },
       ],
-      "_meta": {
-        "id": "X9txphEAAOPu5TVn",
-        "uid": "economic-benefits",
-        "type": "statistic_page"
-      }
-    }
+      _meta: {
+        id: 'X9txphEAAOPu5TVn',
+        uid: 'economic-benefits',
+        type: 'statistic_page',
+      },
+    },
   },
   {
-    "node": {
-      "title": [
+    node: {
+      title: [
         {
-          "type": "heading1",
-          "text": "Safety",
-          "spans": []
-        }
+          type: 'heading1',
+          text: 'Safety',
+          spans: [],
+        },
       ],
-      "_meta": {
-        "id": "X9tyohEAAOPu5Tm2",
-        "uid": "safety",
-        "type": "statistic_page"
-      }
-    }
+      _meta: {
+        id: 'X9tyohEAAOPu5Tm2',
+        uid: 'safety',
+        type: 'statistic_page',
+      },
+    },
   },
   {
-    "node": {
-      "title": [
+    node: {
+      title: [
         {
-          "type": "heading1",
-          "text": "Electric Bikes",
-          "spans": []
-        }
+          type: 'heading1',
+          text: 'Electric Bikes',
+          spans: [],
+        },
       ],
-      "_meta": {
-        "id": "X9ty0xEAACQA5TqW",
-        "uid": "e-bikes",
-        "type": "statistic_page"
-      }
-    }
+      _meta: {
+        id: 'X9ty0xEAACQA5TqW',
+        uid: 'e-bikes',
+        type: 'statistic_page',
+      },
+    },
   },
   {
-    "node": {
-      "title": [
+    node: {
+      title: [
         {
-          "type": "heading1",
-          "text": "Health",
-          "spans": []
-        }
+          type: 'heading1',
+          text: 'Health',
+          spans: [],
+        },
       ],
-      "_meta": {
-        "id": "X9ttFBEAACQA5SFr",
-        "uid": "bicycling-and-lungs",
-        "type": "statistic_page"
-      }
-    }
+      _meta: {
+        id: 'X9ttFBEAACQA5SFr',
+        uid: 'bicycling-and-lungs',
+        type: 'statistic_page',
+      },
+    },
   },
   {
-    "node": {
-      "title": [
+    node: {
+      title: [
         {
-          "type": "heading1",
-          "text": "Economic",
-          "spans": []
-        }
+          type: 'heading1',
+          text: 'Economic',
+          spans: [],
+        },
       ],
-      "_meta": {
-        "id": "X9tmVBEAACYA5QQW",
-        "uid": "economic",
-        "type": "statistic_page"
-      }
-    }
-  }
-]
+      _meta: {
+        id: 'X9tmVBEAACYA5QQW',
+        uid: 'economic',
+        type: 'statistic_page',
+      },
+    },
+  },
+];
 
 /**
  * <StatsList>
- * 
+ *
  * Grid of all stats pages for the research landing page
  *
  * @param { array } payload - list of locations from Prismic API
  */
-const StatsList = ({
-  payload
-}) => {
+const StatsList = ({ payload }) => {
   return (
     <MainContent>
       <PageHeading>Statistics Library</PageHeading>
       <hr />
       <GridWrapper>
         <Grid>
-          { statsList.map( (stat) => {
-            return(
-              <Box key={ stat.node._meta.id }>
-                <Link href={ `/statistics/${stat.node._meta.uid}` }>
+          {statsList.map((stat) => {
+            return (
+              <Box key={stat.node._meta.id}>
+                <Link href={`/statistics/${stat.node._meta.uid}`}>
                   <a>
-                    <Text>
-                      { `${stat.node.title[0].text} Statistics` }
-                    </Text>
-                    <Arrow src={ WhiteArrow } width="46px" />
+                    <Text>{`${stat.node.title[0].text} Statistics`}</Text>
+                    <Arrow src={WhiteArrow} width="46px" />
                   </a>
                 </Link>
               </Box>
-            )
+            );
           })}
         </Grid>
       </GridWrapper>
     </MainContent>
-  )
-}
+  );
+};
 
-export default StatsList
+export default StatsList;

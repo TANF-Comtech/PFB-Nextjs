@@ -1,8 +1,8 @@
-import React from "react";
-import Logo from "../components/global/logo";
+import React from 'react';
+import Logo from '../components/global/logo';
 
 export default {
-  title: "Logo",
+  title: 'Logo',
   component: Logo,
 };
 

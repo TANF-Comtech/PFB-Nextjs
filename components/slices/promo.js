@@ -1,18 +1,22 @@
-import React from "react"
-import Link from "next/link"
-import styled from "styled-components"
+import React from 'react';
+import Link from 'next/link';
+import styled from 'styled-components';
 
-import { linkResolver } from "../../lib/utils"
-import BgImage from '../primitives/bg-image'
+import { linkResolver } from '../../lib/utils';
+import BgImage from '../primitives/bg-image';
 
-import WhiteArrow from '../../public/white-arrow.svg'
-import PromoFallback from '../../public/promo/promo-momentum.jpg'
+import WhiteArrow from '../../public/white-arrow.svg';
+import PromoFallback from '../../public/promo/promo-momentum.jpg';
 
 const Container = styled.section`
-  a, a:visited, a:focus, a:hover, a:active {
+  a,
+  a:visited,
+  a:focus,
+  a:hover,
+  a:active {
     text-decoration: none;
   }
-`
+`;
 
 const PromoTextContainer = styled.div`
   align-items: center;
@@ -25,18 +29,18 @@ const PromoTextContainer = styled.div`
   text-align: center;
   width: 100vw;
 
-  @media screen and (min-width: ${ props => props.theme.sm }) {
+  @media screen and (min-width: ${(props) => props.theme.sm}) {
     height: 70vh;
   }
 
   h1 {
-    color: rgba(${props => props.headingRGBA ? props.headingRGBA : "255,255,255,1" });
+    color: rgba(${(props) => (props.headingRGBA ? props.headingRGBA : '255,255,255,1')});
     text-transform: uppercase;
   }
 
   span {
-    color: rgba(${props => props.headingRGBA ? props.headingRGBA : "255,255,255,1" });
-    font-family: ${ props => props.theme.dharma };
+    color: rgba(${(props) => (props.headingRGBA ? props.headingRGBA : '255,255,255,1')});
+    font-family: ${(props) => props.theme.dharma};
     font-size: 40px;
     font-weight: 600;
     line-height: 40px;
@@ -55,18 +59,18 @@ const PromoTextContainer = styled.div`
       font-size: 60px;
       line-height: 60px;
     }
-  } 
-`
+  }
+`;
 
 const Arrow = styled.img`
   display: block;
   margin: 10px auto;
   width: 46px;
-`
+`;
 
 /**
  * <Promo>
- * 
+ *
  * Promo is just like a HeaderImage component, except it links to page
  *
  * @param { string } bigWords - large lettering in promo
@@ -75,66 +79,52 @@ const Arrow = styled.img`
  * @param { string } smallWords - small lettering in promo
  * @param { string } source - single image to display as a banner/hero (default: PromoFallback)
  */
-const Promo = ({ 
-  bigWords = "See How Our Work",
+const Promo = ({
+  bigWords = 'See How Our Work',
   headingRGBA,
   path = 'https://www.peopleforbikes.org',
   smallWords = 'Creates Momentum',
-  source = PromoFallback
+  source = PromoFallback,
 }) => {
-  
   return (
     <Container>
-      { path ? (
+      {path ? (
         <>
-          { path.__typename === '_ExternalLink' ? (
-            <a href={ linkResolver(path) }>
-              <BgImage
-                imgsrc={ source }
-              >
-                <PromoTextContainer
-                  headingRGBA={ headingRGBA }
-                >
-                  <span>{ smallWords }</span>
-                  <h1>{ bigWords }</h1>
-                  <Arrow src={ WhiteArrow } width="46px" />
-                </PromoTextContainer>     
+          {path.__typename === '_ExternalLink' ? (
+            <a href={linkResolver(path)}>
+              <BgImage imgsrc={source}>
+                <PromoTextContainer headingRGBA={headingRGBA}>
+                  <span>{smallWords}</span>
+                  <h1>{bigWords}</h1>
+                  <Arrow src={WhiteArrow} width="46px" />
+                </PromoTextContainer>
               </BgImage>
             </a>
           ) : (
-            <Link href={ linkResolver(path) } passHref>
+            <Link href={linkResolver(path)} passHref>
               <a>
-                <BgImage
-                  imgsrc={ source }
-                >
-                  <PromoTextContainer
-                    headingRGBA={ headingRGBA }
-                  >
-                    <span>{ smallWords }</span>
-                    <h1>{ bigWords }</h1>
-                    <Arrow src={ WhiteArrow } width="46px" />
-                  </PromoTextContainer>     
+                <BgImage imgsrc={source}>
+                  <PromoTextContainer headingRGBA={headingRGBA}>
+                    <span>{smallWords}</span>
+                    <h1>{bigWords}</h1>
+                    <Arrow src={WhiteArrow} width="46px" />
+                  </PromoTextContainer>
                 </BgImage>
               </a>
             </Link>
-          )}        
+          )}
         </>
       ) : (
-        <BgImage
-          imgsrc={ source }
-        >
-          <PromoTextContainer
-            headingRGBA={ headingRGBA }
-          >
-            <span>{ smallWords }</span>
-            <h1>{ bigWords }</h1>
-            <Arrow src={ WhiteArrow } width="46px" />
-          </PromoTextContainer>     
-        </BgImage>  
+        <BgImage imgsrc={source}>
+          <PromoTextContainer headingRGBA={headingRGBA}>
+            <span>{smallWords}</span>
+            <h1>{bigWords}</h1>
+            <Arrow src={WhiteArrow} width="46px" />
+          </PromoTextContainer>
+        </BgImage>
       )}
-      
     </Container>
-  )
-}
+  );
+};
 
-export default Promo
+export default Promo;

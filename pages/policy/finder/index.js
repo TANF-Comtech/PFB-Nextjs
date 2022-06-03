@@ -1,11 +1,11 @@
-import { getPolicies } from "../../../lib/queries/policies";
+import { getPolicies } from '../../../lib/queries/policies';
 
-import Wrapper from "../../../components/global/wrapper";
-import Header1 from "../../../components/primitives/h1";
-import PolicyItem from "../../../components/content/policy-item";
-import Button from "../../../components/primitives/button";
-import MainContent from "../../../components/global/main-content";
-import ColorBanner from "../../../components/global/color-banner";
+import Wrapper from '../../../components/global/wrapper';
+import Header1 from '../../../components/primitives/h1';
+import PolicyItem from '../../../components/content/policy-item';
+import Button from '../../../components/primitives/button';
+import MainContent from '../../../components/global/main-content';
+import ColorBanner from '../../../components/global/color-banner';
 
 export default function PolicyFinder({ page }) {
   return (
@@ -25,11 +25,7 @@ export default function PolicyFinder({ page }) {
               date={policy.node.year ? policy.node.year : null}
               govLevel={policy.node.government_level}
               key={policy.node._meta.id}
-              location={
-                policy.node.location
-                  ? policy.node.location.location[0].text
-                  : null
-              }
+              location={policy.node.location ? policy.node.location.location[0].text : null}
               path={`/policy/${policy.node._meta.uid}`}
               title={policy.node.title[0].text}
               text={policy.node.main_content}
@@ -66,5 +62,5 @@ export async function getStaticProps({ params, preview = false, previewData }) {
       page: pageData ?? null,
     },
     revalidate: 60,
-  }
+  };
 }

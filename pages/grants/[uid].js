@@ -1,14 +1,14 @@
-import { useContext } from "react";
-import ErrorPage from "next/error";
+import { useContext } from 'react';
+import ErrorPage from 'next/error';
 
-import { getGrants, getSingleGrantPage } from "../../lib/queries/grants";
+import { getGrants, getSingleGrantPage } from '../../lib/queries/grants';
 
-import DefaultContext from "../../context/default/default-context";
+import DefaultContext from '../../context/default/default-context';
 
-import Wrapper from "../../components/global/wrapper";
-import SiteMetaCustom from "../../components/meta/site-meta-custom";
-import MainContent from "../../components/global/main-content";
-import GrantsItem from "../../components/content/grants-item";
+import Wrapper from '../../components/global/wrapper';
+import SiteMetaCustom from '../../components/meta/site-meta-custom';
+import MainContent from '../../components/global/main-content';
+import GrantsItem from '../../components/content/grants-item';
 
 /* You must reference the `policy` prop to get data from `getStaticProps` - check bottom of this file */
 export default function policyPage({ page, preview }) {
@@ -29,21 +29,13 @@ export default function policyPage({ page, preview }) {
       ></script>
       <SiteMetaCustom
         desc={
-          grant.main_content
-            ? `${grant.main_content[0].text.substring(0, 180)} ... `
-            : meta.desc
+          grant.main_content ? `${grant.main_content[0].text.substring(0, 180)} ... ` : meta.desc
         }
-        title={
-          grant.title ? `${grant.title[0].text} | PeopleForBikes` : meta.title
-        }
+        title={grant.title ? `${grant.title[0].text} | PeopleForBikes` : meta.title}
         imgHeight={meta.imgHeight}
         imgSrc={meta.imgSrc}
         imgWidth={meta.imgWidth}
-        path={
-          grant
-            ? `https://www.peopleforbikes.org/grants/${grant._meta.uid}`
-            : meta.path
-        }
+        path={grant ? `https://www.peopleforbikes.org/grants/${grant._meta.uid}` : meta.path}
       />
       <Wrapper postPath="/grant" postTitle="Grants" isWide="false">
         <MainContent>
@@ -74,7 +66,7 @@ export async function getStaticProps({ params, preview = false, previewData }) {
       page: pageData ?? null,
     },
     revalidate: 60,
-  }
+  };
 }
 
 // getStaticPaths requires the whole paths argument to be objects of URL it needs to statically render server-side
@@ -83,5 +75,5 @@ export async function getStaticPaths() {
   return {
     paths: grants?.map(({ node }) => `/grants/${node._meta.uid}`) || [],
     fallback: false,
-  }
+  };
 }

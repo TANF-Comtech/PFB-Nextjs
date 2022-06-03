@@ -1,8 +1,8 @@
-import React from "react";
-import BlueQuestion from "../components/global/blueQuestion";
+import React from 'react';
+import BlueQuestion from '../components/global/blueQuestion';
 
 export default {
-  title: "BlueQuestion",
+  title: 'BlueQuestion',
   component: BlueQuestion,
 };
 

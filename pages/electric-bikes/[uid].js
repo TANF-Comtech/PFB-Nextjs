@@ -1,23 +1,20 @@
-import { useContext } from "react";
-import ErrorPage from "next/error";
-import styled from "styled-components";
-import { RichText } from "prismic-reactjs";
+import { useContext } from 'react';
+import ErrorPage from 'next/error';
+import styled from 'styled-components';
+import { RichText } from 'prismic-reactjs';
 
-import {
-  getEBikesPages,
-  getSingleEBikesPage,
-} from "../../lib/queries/electric-bikes";
-import { linkResolver } from "../../lib/utils";
+import { getEBikesPages, getSingleEBikesPage } from '../../lib/queries/electric-bikes';
+import { linkResolver } from '../../lib/utils';
 
-import DefaultContext from "../../context/default/default-context";
+import DefaultContext from '../../context/default/default-context';
 
-import Wrapper from "../../components/global/wrapper";
-import SiteMetaCustom from "../../components/meta/site-meta-custom";
-import MainContent from "../../components/global/main-content";
-import Header1 from "../../components/primitives/h1";
-import Promo from "../../components/slices/promo";
+import Wrapper from '../../components/global/wrapper';
+import SiteMetaCustom from '../../components/meta/site-meta-custom';
+import MainContent from '../../components/global/main-content';
+import Header1 from '../../components/primitives/h1';
+import Promo from '../../components/slices/promo';
 
-import EBikesPromo from "../../public/promo/electric-bikes-shaded.jpg";
+import EBikesPromo from '../../public/promo/electric-bikes-shaded.jpg';
 
 const IntroWrapper = styled.div`
   margin: 3vh 0 1vh 0;
@@ -59,16 +56,10 @@ export default function EBikesPage({ page, preview }) {
             : meta.path
         }
       />
-      <Wrapper
-        postPath="/topics/electric-bikes"
-        postTitle="Electric Bikes"
-        isWide="true"
-      >
+      <Wrapper postPath="/topics/electric-bikes" postTitle="Electric Bikes" isWide="true">
         <MainContent maxWidth="800px">
-          {electric_bikes.title && (
-            <Header1>{electric_bikes.title[0].text}</Header1>
-          )}
-          {electric_bikes._meta.uid === "emtb-map" && (
+          {electric_bikes.title && <Header1>{electric_bikes.title[0].text}</Header1>}
+          {electric_bikes._meta.uid === 'emtb-map' && (
             <iframe
               width="800"
               height="533"
@@ -80,10 +71,7 @@ export default function EBikesPage({ page, preview }) {
           )}
           {electric_bikes.main_content && (
             <IntroWrapper>
-              <RichText
-                linkResolver={linkResolver}
-                render={electric_bikes.main_content}
-              />
+              <RichText linkResolver={linkResolver} render={electric_bikes.main_content} />
             </IntroWrapper>
           )}
         </MainContent>
@@ -109,7 +97,7 @@ export async function getStaticProps({ params, preview = false, previewData }) {
       page: pageData ?? null,
     },
     revalidate: 60,
-  }
+  };
 }
 
 // getStaticPaths requires the whole paths argument to be objects of URL it needs to statically render server-side
@@ -118,5 +106,5 @@ export async function getStaticPaths() {
   return {
     paths: pages?.map(({ node }) => `/electric-bikes/${node._meta.uid}`) || [],
     fallback: false,
-  }
+  };
 }

@@ -1,22 +1,20 @@
-import React from "react";
-import styled from "styled-components";
-import { InstantSearch, 
-         connectHits, 
-         RefinementList } from "react-instantsearch-dom";
-import * as jsforce from "jsforce";
+import React from 'react';
+import styled from 'styled-components';
+import { InstantSearch, connectHits, RefinementList } from 'react-instantsearch-dom';
+import * as jsforce from 'jsforce';
 
-import { AlgoliaIndex, AlgoliaReactClient, } from "../lib/algolia/algoliaClient";
-import { memberFormatter } from "../lib/algolia/memberFormatter";
+import { AlgoliaIndex, AlgoliaReactClient } from '../lib/algolia/algoliaClient';
+import { memberFormatter } from '../lib/algolia/memberFormatter';
 
-import Wrapper from "../components/global/wrapper";
-import Grid from "../components/global/grid";
-import CorporateMember from "../components/global/member-box";
-import BigTitleBanner from "../components/content/big-title-banner";
-import MainContent from "../components/global/main-content";
-import Heading1 from "../components/primitives/h1"
-import CustomSearchBox from "../components/global/search-box";
-import SiteMetaCustom from '../components/meta/site-meta-custom'
-import Button from '../components/primitives/button'
+import Wrapper from '../components/global/wrapper';
+import Grid from '../components/global/grid';
+import CorporateMember from '../components/global/member-box';
+import BigTitleBanner from '../components/content/big-title-banner';
+import MainContent from '../components/global/main-content';
+import Heading1 from '../components/primitives/h1';
+import CustomSearchBox from '../components/global/search-box';
+import SiteMetaCustom from '../components/meta/site-meta-custom';
+import Button from '../components/primitives/button';
 
 const HitsAndFilters = styled.section`
   align-items: flex-start;
@@ -32,8 +30,8 @@ const HitsAndFilters = styled.section`
 `;
 
 const FilterMenu = styled(RefinementList)`
-  color: ${props=> props.theme.darkGray};
-  
+  color: ${(props) => props.theme.darkGray};
+
   ul {
     display: flex;
     flex-wrap: wrap;
@@ -47,7 +45,7 @@ const FilterMenu = styled(RefinementList)`
   }
 
   span {
-    color: ${ props => props.theme.blue };
+    color: ${(props) => props.theme.blue};
     cursor: pointer;
     font-size: 14px;
     font-weight: bold;
@@ -60,19 +58,19 @@ const FilterMenu = styled(RefinementList)`
     }
   }
 
-  li[class="ais-RefinementList-item ais-RefinementList-item--selected"] {
-    color: ${ props => props.theme.blue };
+  li[class='ais-RefinementList-item ais-RefinementList-item--selected'] {
+    color: ${(props) => props.theme.blue};
     text-decoration: underline !important;
   }
 
   // hides checkbox and count
-  input[class="ais-RefinementList-checkbox"] {
+  input[class='ais-RefinementList-checkbox'] {
     display: none;
   }
-  span[class="ais-RefinementList-count"] {
+  span[class='ais-RefinementList-count'] {
     display: none;
   }
-`
+`;
 
 export default function CorporateMembers() {
   const Hits = ({ hits }) => {
@@ -89,49 +87,40 @@ export default function CorporateMembers() {
 
   return (
     <>
-    <SiteMetaCustom
-      title="Corporate Members | PeopleForBikes"
-    />     
-    <Wrapper isWide={true}>
-      <BigTitleBanner>
-        <Heading1>Corporate Members</Heading1>
-      </BigTitleBanner>            
-      <MainContent>
-        <InstantSearch
-          searchClient={AlgoliaReactClient}
-          indexName="PFB_COALITION_MEMBERS"
-        >
-          <CustomSearchBox
-            width={"50%"}
-            translations={{
-              placeholder: "SEARCH BY NAME",
-            }}
-          />
-          <HitsAndFilters>
-            <h3>Filter By Letter:</h3>
-            <FilterMenu 
-              attribute="Letter" 
-              limit={40} 
-              operator="or"
+      <SiteMetaCustom title="Corporate Members | PeopleForBikes" />
+      <Wrapper isWide={true}>
+        <BigTitleBanner>
+          <Heading1>Corporate Members</Heading1>
+        </BigTitleBanner>
+        <MainContent>
+          <InstantSearch searchClient={AlgoliaReactClient} indexName="PFB_COALITION_MEMBERS">
+            <CustomSearchBox
+              width={'50%'}
+              translations={{
+                placeholder: 'SEARCH BY NAME',
+              }}
             />
-          </HitsAndFilters>          
-          <CustomHits />
-        </InstantSearch>
-      </MainContent>
-      <Button
-        buttonAlign="center"
-        buttonBg="#D0021B"
-        buttonBorder="none"
-        buttonColor="white"
-        buttonFontSize="24px"
-        buttonMargin="50px 0 0 0"
-        buttonPadding="10px 30px"
-        buttonTextTransform="uppercase"
-        href="/members"
-      >
-        Become a Corporate Member
-      </Button>
-    </Wrapper>
+            <HitsAndFilters>
+              <h3>Filter By Letter:</h3>
+              <FilterMenu attribute="Letter" limit={40} operator="or" />
+            </HitsAndFilters>
+            <CustomHits />
+          </InstantSearch>
+        </MainContent>
+        <Button
+          buttonAlign="center"
+          buttonBg="#D0021B"
+          buttonBorder="none"
+          buttonColor="white"
+          buttonFontSize="24px"
+          buttonMargin="50px 0 0 0"
+          buttonPadding="10px 30px"
+          buttonTextTransform="uppercase"
+          href="/members"
+        >
+          Become a Corporate Member
+        </Button>
+      </Wrapper>
     </>
   );
 }
@@ -143,11 +132,10 @@ export async function getStaticProps() {
 
   const MemberDate = (date) => {
     date.setMonth(date.getMonth() - 6);
-    return date.toISOString().split("T")[0];
+    return date.toISOString().split('T')[0];
   };
 
   let MinSixMonths = MemberDate(CurrentDate);
-
 
   const sfConnection = new jsforce.Connection({
     loginUrl: process.env.SALESFORCE_AUTH_URL,
@@ -170,11 +158,11 @@ export async function getStaticProps() {
       }
       accessToken = sfConnection.accessToken;
       refreshToken = sfConnection.refreshToken;
-    }
+    },
   );
 
-  sfConnection.on("refresh", (newAccessToken, res) => {
-    console.log("Access token refreshed");
+  sfConnection.on('refresh', (newAccessToken, res) => {
+    console.log('Access token refreshed');
     accessToken = newAccessToken;
   });
 
@@ -185,14 +173,13 @@ export async function getStaticProps() {
         return err;
       }
       return result;
-    }
+    },
   );
 
   const memberData = fetchedData.records.map((record) => record);
- 
 
   const algoliaFormattedData = memberFormatter(memberData);
-  await AlgoliaIndex("PFB_COALITION_MEMBERS").saveObjects(algoliaFormattedData);
+  await AlgoliaIndex('PFB_COALITION_MEMBERS').saveObjects(algoliaFormattedData);
 
   return {
     props: {

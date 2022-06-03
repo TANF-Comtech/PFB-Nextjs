@@ -1,9 +1,9 @@
-import React from "react";
-import Link from "next/link";
-import styled from "styled-components";
+import React from 'react';
+import Link from 'next/link';
+import styled from 'styled-components';
 
-import FallbackImage from "./fallback-image";
-import Button from "../primitives/button";
+import FallbackImage from './fallback-image';
+import Button from '../primitives/button';
 
 const Container = styled.section`
   align-items: flex-start;
@@ -88,9 +88,9 @@ const ContentItem = ({ date, image, path, title, text }) => {
     <Container>
       {image.url ? (
         <Image
-          alt={image.alt ? image.alt : "Bike-oriented image"}
+          alt={image.alt ? image.alt : 'Bike-oriented image'}
           loading="lazy"
-          src={image["1x"] ? image["1x"].url : image.url}
+          src={image['1x'] ? image['1x'].url : image.url}
         />
       ) : (
         // Utilizes fallback image functionality

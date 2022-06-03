@@ -1,19 +1,18 @@
-import Head from 'next/head'
-import ErrorPage from 'next/error'
-import { RichText } from 'prismic-reactjs'
+import Head from 'next/head';
+import ErrorPage from 'next/error';
+import { RichText } from 'prismic-reactjs';
 
-import { getSingleBasicPage, 
-         getAllBasicPagesWithUID } from '../../lib/queries/basic-page'
+import { getSingleBasicPage, getAllBasicPagesWithUID } from '../../lib/queries/basic-page';
 
-import { randomID } from '../../lib/utils'
-import Wrapper from '../../components/global/wrapper'
-import Heading1 from '../../components/primitives/h1'
-import Accordion from '../../components/global/accordion'
+import { randomID } from '../../lib/utils';
+import Wrapper from '../../components/global/wrapper';
+import Heading1 from '../../components/primitives/h1';
+import Accordion from '../../components/global/accordion';
 
 export default function BasicPage({ page, preview }) {
   // Check to make sure there is actually a page at this UID path
   if (!page?.basic_page?._meta?.uid) {
-    return <ErrorPage statusCode={404} />
+    return <ErrorPage statusCode={404} />;
   }
 
   return (
@@ -49,7 +48,7 @@ export default function BasicPage({ page, preview }) {
         )}
       </Wrapper> */}
     </>
-  )
+  );
 }
 
 /* The return here sends the `page` prop back to the BasicPage component above for rendering */

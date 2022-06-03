@@ -1,12 +1,12 @@
-import Link from 'next/link'
-import styled from "styled-components"
+import Link from 'next/link';
+import styled from 'styled-components';
 
-import HeaderImage from '../global/header-image'
+import HeaderImage from '../global/header-image';
 
-import IndividualsBG from '../../public/join/individuals.jpg'
-import RetailersBG from '../../public/join/retailers.jpg'
-import SuppliersBG from '../../public/join/suppliers.jpg'
-import WhiteArrow from '../../public/white-arrow.svg'
+import IndividualsBG from '../../public/join/individuals.jpg';
+import RetailersBG from '../../public/join/retailers.jpg';
+import SuppliersBG from '../../public/join/suppliers.jpg';
+import WhiteArrow from '../../public/white-arrow.svg';
 
 const SectionTitle = styled.h2`
   color: #333;
@@ -14,12 +14,12 @@ const SectionTitle = styled.h2`
   text-align: center;
   text-transform: uppercase;
   margin: 4vh;
-`
+`;
 
 const Subtext = styled.span`
   color: white;
   display: block;
-  font-family: ${ props => props.theme.dharma };
+  font-family: ${(props) => props.theme.dharma};
   font-size: 40px;
   font-weight: 600;
   line-height: 30px;
@@ -35,8 +35,8 @@ const Subtext = styled.span`
   @media screen and (min-width: 1200px) {
     font-size: 60px;
     line-height: 50px;
-  } 
-`
+  }
+`;
 
 const BoxContainer = styled.section`
   align-items: center;
@@ -47,19 +47,23 @@ const BoxContainer = styled.section`
   position: relative;
   z-index: 2;
 
-  a, a:visited, a:focus, a:active, a:hover {
+  a,
+  a:visited,
+  a:focus,
+  a:active,
+  a:hover {
     text-decoration: none;
   }
 
-  @media (min-width: ${props => props.theme.sm}) {
+  @media (min-width: ${(props) => props.theme.sm}) {
     flex-direction: row;
     transform: translateY(-120px);
   }
-`
+`;
 
 const Box = styled.div`
   align-items: center;
-  background-color: ${props => props.bgColor ? props.bgColor : props.theme.redAccent };
+  background-color: ${(props) => (props.bgColor ? props.bgColor : props.theme.redAccent)};
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -67,7 +71,7 @@ const Box = styled.div`
   min-height: 190px;
   padding: 25px;
   width: 300px;
-`
+`;
 
 const Text = styled.h4`
   color: white;
@@ -84,28 +88,27 @@ const Text = styled.h4`
   @media screen and (min-width: 1200px) {
     font-size: 44px;
     line-height: 44px;
-  }  
-`
+  }
+`;
 
 const Arrow = styled.img`
   display: block;
   margin: 0 auto;
   width: 46px;
-`
+`;
 
 /**
  * <JoinList>
- * 
+ *
  * Put all the big join blocks onto the Join page
  * This is mostly static block, just simplifies things as this page will never change
  */
 export default function JoinList() {
-
   return (
     <>
-      <SectionTitle>TAKE ACTION</SectionTitle> 
+      <SectionTitle>TAKE ACTION</SectionTitle>
 
-      <HeaderImage source={ IndividualsBG }>
+      <HeaderImage source={IndividualsBG}>
         <h1>Individuals</h1>
         <Subtext>Advocate for Better Biking</Subtext>
       </HeaderImage>
@@ -113,18 +116,18 @@ export default function JoinList() {
         <a href="https://ridespot.org/register" rel="nofollow" target="_blank">
           <Box bgColor="#D0021B">
             <Text>Join Ride Spot</Text>
-            <Arrow src={ WhiteArrow } width="46px" />
+            <Arrow src={WhiteArrow} width="46px" />
           </Box>
         </a>
         <a href="https://www.classy.org/give/117371" rel="nofollow" target="_blank">
           <Box bgColor="#D0021B">
             <Text>Donate Now</Text>
-            <Arrow src={ WhiteArrow } width="46px" />
+            <Arrow src={WhiteArrow} width="46px" />
           </Box>
         </a>
       </BoxContainer>
 
-      <HeaderImage source={ RetailersBG }>
+      <HeaderImage source={RetailersBG}>
         <h1>Retailers</h1>
         <Subtext>Connect With Riders in Your Area</Subtext>
       </HeaderImage>
@@ -132,12 +135,12 @@ export default function JoinList() {
         <a href="https://ridespot.org/register" rel="nofollow" target="_blank">
           <Box bgColor="#D0021B">
             <Text>Join Ride Spot Premium</Text>
-            <Arrow src={ WhiteArrow } width="46px" />
+            <Arrow src={WhiteArrow} width="46px" />
           </Box>
         </a>
-      </BoxContainer>      
+      </BoxContainer>
 
-      <HeaderImage source={ SuppliersBG }>
+      <HeaderImage source={SuppliersBG}>
         <h1>Corporate</h1>
         <Subtext>Create a Bright Future for Biking</Subtext>
       </HeaderImage>
@@ -146,11 +149,11 @@ export default function JoinList() {
           <a>
             <Box bgColor="#D0021B">
               <Text>Learn More About Membership</Text>
-              <Arrow src={ WhiteArrow } width="46px" />
+              <Arrow src={WhiteArrow} width="46px" />
             </Box>
           </a>
         </Link>
-      </BoxContainer>        
+      </BoxContainer>
     </>
-  )
+  );
 }

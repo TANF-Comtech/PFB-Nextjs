@@ -1,6 +1,6 @@
-import { createContext } from 'react'
-import { defaultData } from './default-data'
+import { createContext } from 'react';
+import { defaultData } from './default-data';
 
-const DefaultContext = createContext(defaultData)
+const DefaultContext = createContext(defaultData);
 
-export default DefaultContext
+export default DefaultContext;
