@@ -130,7 +130,7 @@ function FooterSignUpForm() {
   return (
     <>
       <FormContainer>
-        <div id="pfb-site-footer" className="spkactionform"></div>
+        <div id="pfb-site-footer" className="spkactionform" />
         <Script src="https://code.jquery.com/jquery-3.5.1.min.js" strategy="beforeInteractive" />
         {isFirstRenderOfSparkScript.current && (
           <Script

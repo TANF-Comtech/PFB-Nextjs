@@ -83,6 +83,8 @@ const SummaryBlock = ({
         {buttons &&
           buttons.map((button) => {
             return (
+              // @TODO add valid key prop from button
+              // eslint-disable-next-line react/jsx-key
               <Button
                 buttonAlign="center"
                 buttonBg={themeProps.blue}

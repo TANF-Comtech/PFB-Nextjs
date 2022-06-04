@@ -1,4 +1,3 @@
-import ErrorPage from 'next/error';
 import { useContext } from 'react';
 import { RichText } from 'prismic-reactjs';
 
@@ -14,10 +13,6 @@ import Rule from '../../components/primitives/rule';
 import Button from '../../components/primitives/button';
 
 export default function CareerPages({ page, preview }) {
-  if (!page || page === null) {
-    return <ErrorPage statusCode={404} />;
-  }
-
   const { job } = page;
   const { meta } = useContext(DefaultContext);
 

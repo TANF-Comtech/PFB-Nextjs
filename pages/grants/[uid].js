@@ -1,5 +1,4 @@
 import { useContext } from 'react';
-import ErrorPage from 'next/error';
 
 import { getGrants, getSingleGrantPage } from '../../lib/queries/grants';
 
@@ -11,11 +10,7 @@ import MainContent from '../../components/global/main-content';
 import GrantsItem from '../../components/content/grants-item';
 
 /* You must reference the `policy` prop to get data from `getStaticProps` - check bottom of this file */
-export default function policyPage({ page, preview }) {
-  if (!page || page === null) {
-    return <ErrorPage statusCode={404} />;
-  }
-
+export default function PolicyPage({ page, preview }) {
   // Destructure page payload and meta from global context
   const { grant } = page;
   const { meta } = useContext(DefaultContext);

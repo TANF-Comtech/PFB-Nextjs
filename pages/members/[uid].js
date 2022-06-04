@@ -1,5 +1,4 @@
 import { useContext } from 'react';
-import ErrorPage from 'next/error';
 import styled, { ThemeContext } from 'styled-components';
 import { RichText, Date as ParseDate } from 'prismic-reactjs';
 import Link from 'next/link';
@@ -65,10 +64,6 @@ const Arrow = styled.img`
 `;
 
 export default function MembersPage({ page, preview }) {
-  if (!page || page === null) {
-    return <ErrorPage statusCode={404} />;
-  }
-
   // Destructure page payload and meta from global context
   const { member_content } = page;
   const { meta } = useContext(DefaultContext);
@@ -136,9 +131,9 @@ export default function MembersPage({ page, preview }) {
                 width="100%"
                 height="8000"
                 src="https://datastudio.google.com/embed/reporting/fe9c9fc6-ee8b-43a6-ae3a-1a2f20377a04/page/pHFSB"
-                frameborder="0"
-                allowfullscreen
-              ></iframe>
+                frameBorder="0"
+                allowFullScreen
+              />
               <Button
                 buttonAlign="center"
                 buttonBg="#D0021B"
@@ -217,6 +212,8 @@ export default function MembersPage({ page, preview }) {
                 <MainContent>
                   {slice.fields.map((item, i) => {
                     return (
+                      // @TODO add valid key prop from field
+                      // eslint-disable-next-line react/jsx-key
                       <WayfindingItem
                         bgColor={
                           ((i === 2 || i === 5 || i === 8 || i === 11) && themeProps.darkGray) ||
@@ -296,6 +293,12 @@ export async function getServerSideProps({ req, res, params, preview = false, pr
 
     if (data.loggedIn) {
       const pageData = await getSingleMemberPage(params.uid, previewData);
+
+      if (!pageData) {
+        return {
+          notFound: true,
+        };
+      }
 
       if (pageData.member_content.body !== null) {
         pageData.member_content.body.map((slice) => {

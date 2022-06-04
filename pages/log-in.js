@@ -118,7 +118,7 @@ function LoginPage() {
 
   useEffect(() => {
     authContext.checkLogin();
-  }, []);
+  }, [authContext]);
 
   const submitEmail = async (email) => {
     const response = await fetch(`/api/auth/member_center/login`, {
@@ -259,7 +259,7 @@ function LoginPage() {
                       {Boolean(errorState.length) ? (
                         <Markup content={errorState} />
                       ) : (
-                        <span style={{ textAlign: 'center' }}>Don't Close This Tab!</span>
+                        <span style={{ textAlign: 'center' }}>Don&apos;t Close This Tab!</span>
                       )}
                     </LoginForm>
                   </MainContent>

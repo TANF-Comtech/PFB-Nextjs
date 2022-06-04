@@ -41,7 +41,7 @@ const SiteMetaCustom = ({ desc, imgHeight, imgSrc, imgWidth, keywords, ldJSON, p
       <meta name="twitter:description" content={desc} key="twtrdesc" />
       <meta name="twitter:image" content={imgSrc} key="twitterimg" />
 
-      <link rel="canonical" href={path} key="canonical"></link>
+      <link rel="canonical" href={path} key="canonical" />
       {ldJSON && <script type="application/ld+json">{JSON.stringify(ldJSON)}</script>}
     </Head>
   );

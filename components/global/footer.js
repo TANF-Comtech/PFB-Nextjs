@@ -270,7 +270,7 @@ function Footer() {
               />
             </SignUpFooter>
             <header>
-              <h2>Let's stay in touch. Join our newsletter list:</h2>
+              <h2>Let&apos;s stay in touch. Join our newsletter list:</h2>
               <FooterSignUpForm />
             </header>
           </SignUpContainer>

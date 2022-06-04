@@ -109,7 +109,7 @@ export default function Payments() {
       />
       <Wrapper postTitle="Corporate Members Dues Payments" isWide={false}>
         <h2>Corporate Members Dues Payment</h2>
-        <p>Annual dues are calculated based on your company's annual sales revenue.</p>
+        <p>Annual dues are calculated based on your company&apos;s annual sales revenue.</p>
         <ul>
           <li>
             Organizations with $1 million or more in US bike related annual sales will pay{' '}

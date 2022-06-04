@@ -182,7 +182,7 @@ export default function ActionForms({ page, preview }) {
    */
   const router = useRouter();
   const sparkIframe = useRef();
-  let frm = null;
+  const frm = useRef(null);
 
   useEffect(() => {
     // detect first mount of this component,
@@ -192,11 +192,11 @@ export default function ActionForms({ page, preview }) {
     }
 
     // implements spark script
-    frm = document.createElement('script');
+    frm.current = document.createElement('script');
     action.form_id &&
-      (frm.src = `https://action.peopleforbikes.org/assets/js/widget.js/?id=${action.form_id.toString()}`);
+      (frm.current.src = `https://action.peopleforbikes.org/assets/js/widget.js/?id=${action.form_id.toString()}`);
     sparkIframe.current.appendChild(frm);
-  }, [router.pathname]);
+  }, [router.pathname, action.form_id]);
 
   return (
     <>
@@ -233,8 +233,8 @@ export default function ActionForms({ page, preview }) {
                     src="https://code.jquery.com/jquery-3.5.1.min.js"
                     strategy="beforeInteractive"
                   />
-                  <div id="wsd-root" className="spkactionform"></div>
-                  <div id="pb-root" className="spkactionform"></div>
+                  <div id="wsd-root" className="spkactionform" />
+                  <div id="pb-root" className="spkactionform" />
                   <div ref={sparkIframe} />
                   {/* <Script src={`https://action.peopleforbikes.org/assets/js/widget.js/?id=${action.form_id.toString()}`} strategy="afterInteractive"/> */}
                 </>

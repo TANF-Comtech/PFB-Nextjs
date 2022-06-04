@@ -180,6 +180,8 @@ export default function ProgramPage({ fallback, page, preview }) {
                   <MainContent contentPadding="0vh 4vw 4vh 4vw">
                     {slice.fields.map((item) => {
                       return (
+                        // @TODO add valid key prop from field
+                        // eslint-disable-next-line react/jsx-key
                         <ul>
                           {item.news_item_title && item.news && (
                             <li>

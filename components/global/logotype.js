@@ -50,8 +50,8 @@ function LogoType({
             strokeWidth="2"
             strokeLinecap="square"
             fillRule="nonzero"
-          ></path>
-          <rect id="Rectangle-3" fill="#FFFFFF" fillRule="nonzero" x="0" y="0"></rect>
+          />
+          <rect id="Rectangle-3" fill="#FFFFFF" fillRule="nonzero" x="0" y="0" />
           <g id="PFB_LOGO_HORIZ" transform="translate(57.000000, 105.000000)">
             <g id="pfb_logotype" transform="translate(114.847000, 44.421000)">
               {/* P-e-o-p-l-e */}

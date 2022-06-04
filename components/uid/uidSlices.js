@@ -158,7 +158,7 @@ export default function UidSlices({ landing_page }) {
                 textColor="#fff"
               >
                 <p>
-                  We're updating our community grants process and ask for your patience. Please
+                  We&apos;re updating our community grants process and ask for your patience. Please
                   check back in the next few months.
                 </p>
               </SummaryBlock>

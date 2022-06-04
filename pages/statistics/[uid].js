@@ -1,5 +1,4 @@
 import { useContext } from 'react';
-import ErrorPage from 'next/error';
 import styled from 'styled-components';
 import { RichText } from 'prismic-reactjs';
 
@@ -21,10 +20,6 @@ const IntroWrapper = styled.div`
 `;
 
 export default function MembersPage({ page, preview }) {
-  if (!page || page === null) {
-    return <ErrorPage statusCode={404} />;
-  }
-
   // Destructure page payload and meta from global context
   const { statistic_page } = page;
   const { meta } = useContext(DefaultContext);

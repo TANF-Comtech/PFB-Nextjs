@@ -1,5 +1,4 @@
 import { useContext } from 'react';
-import ErrorPage from 'next/error';
 import styled from 'styled-components';
 import { RichText } from 'prismic-reactjs';
 
@@ -21,10 +20,6 @@ const IntroWrapper = styled.div`
 `;
 
 export default function EBikesPage({ page, preview }) {
-  if (!page || page === null) {
-    return <ErrorPage statusCode={404} />;
-  }
-
   // Destructure page payload and meta from global context
   const { electric_bikes } = page;
   const { meta } = useContext(DefaultContext);
@@ -58,11 +53,11 @@ export default function EBikesPage({ page, preview }) {
             <iframe
               width="800"
               height="533"
-              frameborder="0"
+              frameBorder="0"
               scrolling="no"
-              allowfullscreen
+              allowFullScreen
               src="https://arcg.is/1LuLuj"
-            ></iframe>
+            />
           )}
           {electric_bikes.main_content && (
             <IntroWrapper>

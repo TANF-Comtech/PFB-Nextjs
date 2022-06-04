@@ -24,6 +24,8 @@ const ResearchBanners = ({ payload }) => {
       <hr />
       {payload.map((campaign) => {
         return (
+          // @TODO add valid key prop from payload
+          // eslint-disable-next-line react/jsx-key
           <Promo
             bigWords={campaign.campaign.big_text}
             path={campaign.campaign.link}

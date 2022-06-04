@@ -69,8 +69,8 @@ export default function PublicBusinessIntelligenceHub() {
               marginWidth="0"
               title="Public Business Intelligence Hub"
               frameBorder="0"
-              allowfullscreen
-            ></iframe>
+              allowFullScreen
+            />
           </div>
         </Container>
       </MainContent>

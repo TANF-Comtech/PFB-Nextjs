@@ -1,7 +1,7 @@
 import Cookies from 'cookies';
 import auth0ValidateToken from '../../../../lib/auth0/auth0ValidateToken';
 
-export default (req, res) => {
+const checkLogin = (req, res) => {
   if (req.method === 'GET') {
     const cookies = new Cookies(req, res);
     const token = cookies.get('auth-token');
@@ -15,3 +15,5 @@ export default (req, res) => {
     }
   }
 };
+
+export default checkLogin;

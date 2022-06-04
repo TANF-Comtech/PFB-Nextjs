@@ -1,5 +1,4 @@
 import { useContext } from 'react';
-import ErrorPage from 'next/error';
 import styled from 'styled-components';
 
 import { getEBikeLaws } from '../../lib/queries/electric-bikes';
@@ -54,10 +53,6 @@ const Arrow = styled.img`
 `;
 
 export default function EBikesLaws({ page, preview }) {
-  if (!page || page === null) {
-    return <ErrorPage statusCode={404} />;
-  }
-
   // Destructure page payload and meta from global context
   const { meta } = useContext(DefaultContext);
 
@@ -77,7 +72,7 @@ export default function EBikesLaws({ page, preview }) {
           <p>
             Electric bicycle (e-bike) laws are different in every state, and can be confusing for
             riders, retailers, and suppliers. PeopleForBikes is making riding an electric bicycle
-            easy and accessible for all. Find your state's specific rules below.
+            easy and accessible for all. Find your state&apos;s specific rules below.
           </p>
 
           {page && (
@@ -115,6 +110,12 @@ export default function EBikesLaws({ page, preview }) {
 /* The return here sends the `page` prop back to the component above for rendering */
 export async function getStaticProps({ params, preview = false, previewData }) {
   const pageData = await getEBikeLaws();
+
+  if (!pageData) {
+    return {
+      notFound: true,
+    };
+  }
 
   return {
     props: {
