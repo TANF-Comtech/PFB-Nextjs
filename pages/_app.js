@@ -19,6 +19,8 @@ import NavBar from '../components/global/navbar';
 import Footer from '../components/global/footer';
 import PageTransition from '../components/global/transition';
 
+import '../styles/globals.css';
+
 /**
  * <MyApp>
  *
