@@ -74,10 +74,10 @@ const GreenLaneProject = () => {
           <iframe
             src="https://player.vimeo.com/video/93261795?h=82fbe33ea2"
             width="100%"
-            frameborder="0"
+            frameBorder="0"
             allow="autoplay; fullscreen; picture-in-picture"
-            allowfullscreen
-          ></iframe>
+            allowFullScreen
+          />
         </VideoFrame>
       </MainContent>
 
@@ -247,12 +247,14 @@ const GreenLaneProject = () => {
             </GridBox>
             <GridBox>
               <Link href="/news/green-lane-links-atlantas-big-plan-and-more">
-                <a>Green Lane Links: Atlanta's big plan and more</a>
+                <a>Green Lane Links: Atlanta&apos;s big plan and more</a>
               </Link>
             </GridBox>
             <GridBox>
               <Link href="/news/two-day-demo-will-reclaim-one-of-atlantas-most-celebrated-streets-for-people">
-                <a>Two-day demo will reclaim one of Atlanta's most celebrated streets for people</a>
+                <a>
+                  Two-day demo will reclaim one of Atlanta&apos;s most celebrated streets for people
+                </a>
               </Link>
             </GridBox>
             <GridBox>
@@ -286,7 +288,7 @@ const GreenLaneProject = () => {
             </GridBox>
             <GridBox>
               <Link href="/news/four-simple-lessons-from-austins-brilliant-bike-plan-update">
-                <a>Four simple lessons from Austin's brilliant bike plan update</a>
+                <a>Four simple lessons from Austin&apos;s brilliant bike plan update</a>
               </Link>
             </GridBox>
             <GridBox>
@@ -316,14 +318,16 @@ const GreenLaneProject = () => {
             <GridBox>
               <Link href="/news/massachusetts-is-about-to-release-a-new-bikeway-guide-and-its-going-to-be-awesome">
                 <a>
-                  Massachusetts is about to release a new bikeway guide and it's going to be awesome
+                  Massachusetts is about to release a new bikeway guide and it&apos;s going to be
+                  awesome
                 </a>
               </Link>
             </GridBox>
             <GridBox>
               <Link href="/news/pedaling-prosperity-for-bostons-council-president-safe-streets-arent-enough">
                 <a>
-                  Pedaling prosperity: For Boston's council president,'safe streets' aren't enough
+                  Pedaling prosperity: For Boston&apos;s council president,&apos;safe streets&apos;
+                  aren&apos;t enough
                 </a>
               </Link>
             </GridBox>
@@ -339,7 +343,7 @@ const GreenLaneProject = () => {
             <Grid>
               <GridBox>
                 <Link href="/news/chicago-getting-ready-for-the-green-lane-breakthrough">
-                  <a>Chicago: Getting Ready for the Green Lane 'Breakthrough'</a>
+                  <a>Chicago: Getting Ready for the Green Lane &apos;Breakthrough&apos;</a>
                 </Link>
               </GridBox>
               <GridBox>
@@ -349,7 +353,7 @@ const GreenLaneProject = () => {
               </GridBox>
               <GridBox>
                 <Link href="/news/oh-dearborn-a-virtual-tour-of-chicagos-first-2-way-green-lane">
-                  <a>Oh Dearborn! A virtual tour of Chicago's first 2-way green lane</a>
+                  <a>Oh Dearborn! A virtual tour of Chicago&apos;s first 2-way green lane</a>
                 </Link>
               </GridBox>
               <GridBox>
@@ -378,7 +382,7 @@ const GreenLaneProject = () => {
             <Grid>
               <GridBox>
                 <Link href="/news/denver-tech-companies-the-no-1-thing-they-want-is-bike-lanes">
-                  <a>Denver tech companies: 'The No. 1 thing they want is bike lanes'</a>
+                  <a>Denver tech companies: &apos;The No. 1 thing they want is bike lanes&apos;</a>
                 </Link>
               </GridBox>
               <GridBox>
@@ -388,17 +392,19 @@ const GreenLaneProject = () => {
               </GridBox>
               <GridBox>
                 <Link href="/news/qa-lessons-from-denvers-crowdfunded-bike-lane-success">
-                  <a>Q&A: Lessons from Denver's crowdfunded bike lane success</a>
+                  <a>Q&A: Lessons from Denver&apos;s crowdfunded bike lane success</a>
                 </Link>
               </GridBox>
               <GridBox>
                 <Link href="/news/denverites-say-theyd-shop-more-on-broadway-with-a-protected-bike-lane">
-                  <a>Denverites say they'd shop more on Broadway with a protected bike lane</a>
+                  <a>Denverites say they&apos;d shop more on Broadway with a protected bike lane</a>
                 </Link>
               </GridBox>
               <GridBox>
                 <Link href="/news/denvers-two-newest-protected-bike-lanes-from-zero-to-finished-in-one-year">
-                  <a>Denver's two newest protected bike lanes: From zero to finished in one year</a>
+                  <a>
+                    Denver&apos;s two newest protected bike lanes: From zero to finished in one year
+                  </a>
                 </Link>
               </GridBox>
               <GridBox>
@@ -422,7 +428,10 @@ const GreenLaneProject = () => {
               </GridBox>
               <GridBox>
                 <Link href="/news/indianapolis-gop-mayor-on-bikes-and-the-great-revival-of-us-cities">
-                  <a>Indianapolis' GOP mayor on bikes and the 'great revival' of US cities</a>
+                  <a>
+                    Indianapolis&apos; GOP mayor on bikes and the &apos;great revival&apos; of US
+                    cities
+                  </a>
                 </Link>
               </GridBox>
               <GridBox>
@@ -464,7 +473,7 @@ const GreenLaneProject = () => {
               </GridBox>
               <GridBox>
                 <Link href="/news/memphis-in-the-netherlands-blown-away">
-                  <a>Memphis in the Netherlands: "Blown Away"</a>
+                  <a>Memphis in the Netherlands: &quot;Blown Away&quot;</a>
                 </Link>
               </GridBox>
               <GridBox>
@@ -474,7 +483,7 @@ const GreenLaneProject = () => {
               </GridBox>
               <GridBox>
                 <Link href="/news/memphis-is-about-to-build-the-countrys-first-crowdfunded-bike-lane">
-                  <a>Memphis is about to build the country's first crowdfunded bike lane</a>
+                  <a>Memphis is about to build the country&apos;s first crowdfunded bike lane</a>
                 </Link>
               </GridBox>
               <GridBox>
@@ -498,13 +507,14 @@ const GreenLaneProject = () => {
             <Grid>
               <GridBox>
                 <Link href="/news/celebrate-nycs-latest-biking-win">
-                  <a>Celebrate NYC's latest biking win</a>
+                  <a>Celebrate NYC&apos;s latest biking win</a>
                 </Link>
               </GridBox>
               <GridBox>
                 <Link href="/news/10-years-ago-next-month-this-letter-to-the-nyt-foresaw-new-yorks-biking-triumph">
                   <a>
-                    10 years ago next month,this letter to the NYT foresaw New York's biking triumph
+                    10 years ago next month,this letter to the NYT foresaw New York&apos;s biking
+                    triumph
                   </a>
                 </Link>
               </GridBox>
@@ -520,7 +530,9 @@ const GreenLaneProject = () => {
               </GridBox>
               <GridBox>
                 <Link href="/news/new-yorks-network-nine-miles-of-protected-biking-from-brooklyn-to-bronx">
-                  <a>New York's network: Nine miles of protected biking from Brooklyn to Bronx</a>
+                  <a>
+                    New York&apos;s network: Nine miles of protected biking from Brooklyn to Bronx
+                  </a>
                 </Link>
               </GridBox>
             </Grid>
@@ -540,8 +552,8 @@ const GreenLaneProject = () => {
               <GridBox>
                 <Link href="/news/how-copenhagen-helped-pittsburghs-mayor-peduto-understand-the-wedding-cake-of-transportation">
                   <a>
-                    How Copenhagen helped Pittsburgh's Mayor Peduto understand the 'wedding cake of
-                    transportation'
+                    How Copenhagen helped Pittsburgh&apos;s Mayor Peduto understand the
+                    &apos;wedding cake of transportation&apos;
                   </a>
                 </Link>
               </GridBox>
@@ -591,8 +603,8 @@ const GreenLaneProject = () => {
               <GridBox>
                 <Link href="/news/the-private-sector-understands-opportunity-how-portland-scored-its-latest-biking-win">
                   <a>
-                    'The private sector understands opportunity': How Portland scored its latest
-                    biking win
+                    &apos;The private sector understands opportunity&apos;: How Portland scored its
+                    latest biking win
                   </a>
                 </Link>
               </GridBox>
@@ -630,7 +642,7 @@ const GreenLaneProject = () => {
               </GridBox>
               <GridBox>
                 <Link href="/news/looking-back-at-san-franciscos-big-year">
-                  <a>Looking back at San Francisco's big year</a>
+                  <a>Looking back at San Francisco&apos;s big year</a>
                 </Link>
               </GridBox>
               <GridBox>
@@ -654,7 +666,7 @@ const GreenLaneProject = () => {
             <Grid>
               <GridBox>
                 <Link href="/news/7-lessons-from-seattles-spectacular-broadway-protected-bike-lanes">
-                  <a>7 lessons from Seattle's spectacular protected bike lanes on Broadway</a>
+                  <a>7 lessons from Seattle&apos;s spectacular protected bike lanes on Broadway</a>
                 </Link>
               </GridBox>
               <GridBox>
@@ -671,7 +683,7 @@ const GreenLaneProject = () => {
               </GridBox>
               <GridBox>
                 <Link href="/news/how-seattles-mayor-gave-planners-the-fire-to-make-improvements-fast">
-                  <a>How Seattle's mayor gave planners the fire to make improvements fast</a>
+                  <a>How Seattle&apos;s mayor gave planners the fire to make improvements fast</a>
                 </Link>
               </GridBox>
             </Grid>
@@ -685,7 +697,7 @@ const GreenLaneProject = () => {
             <Grid>
               <GridBox>
                 <Link href="/news/washington-dc-nations-capital-commits-to-green-lanes">
-                  <a>Washington, DC: Nation's Capital Commits to Green Lanes</a>
+                  <a>Washington, DC: Nation&apos;s Capital Commits to Green Lanes</a>
                 </Link>
               </GridBox>
               <GridBox>

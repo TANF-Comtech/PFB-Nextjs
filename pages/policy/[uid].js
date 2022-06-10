@@ -1,5 +1,4 @@
 import { useContext } from 'react';
-import ErrorPage from 'next/error';
 
 import { getPolicies, getSinglePolicyPage } from '../../lib/queries/policies';
 
@@ -11,22 +10,13 @@ import MainContent from '../../components/global/main-content';
 import PolicyItem from '../../components/content/policy-item';
 
 /* You must reference the `policy` prop to get data from `getStaticProps` - check bottom of this file */
-export default function policyPage({ page, preview }) {
-  if (!page || page === null) {
-    return <ErrorPage statusCode={404} />;
-  }
-
+export default function PolicyPage({ page, preview }) {
   // Destructure page payload and meta from global context
   const { policy } = page;
   const { meta } = useContext(DefaultContext);
 
   return (
     <>
-      <script
-        async
-        defer
-        src="https://static.cdn.prismic.io/prismic.js?new=true&repo=peopleforbikes"
-      ></script>
       <SiteMetaCustom
         desc={
           policy.main_content ? `${policy.main_content[0].text.substring(0, 180)} ... ` : meta.desc

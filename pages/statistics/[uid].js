@@ -1,5 +1,4 @@
 import { useContext } from 'react';
-import ErrorPage from 'next/error';
 import styled from 'styled-components';
 import { RichText } from 'prismic-reactjs';
 
@@ -21,21 +20,12 @@ const IntroWrapper = styled.div`
 `;
 
 export default function MembersPage({ page, preview }) {
-  if (!page || page === null) {
-    return <ErrorPage statusCode={404} />;
-  }
-
   // Destructure page payload and meta from global context
   const { statistic_page } = page;
   const { meta } = useContext(DefaultContext);
 
   return (
     <>
-      <script
-        async
-        defer
-        src="https://static.cdn.prismic.io/prismic.js?new=true&repo=peopleforbikes"
-      ></script>
       <SiteMetaCustom
         desc={
           statistic_page.main_content

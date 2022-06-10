@@ -27,11 +27,6 @@ export default function LocationPage({ fallback, page, preview }) {
 
   return (
     <>
-      <script
-        async
-        defer
-        src="https://static.cdn.prismic.io/prismic.js?new=true&repo=peopleforbikes"
-      ></script>
       <SiteMetaCustom
         desc={locations.intro ? `${locations.intro[0].text.substring(0, 180)}... ` : meta.desc}
         title={locations.location ? `${locations.location[0].text} | PeopleForBikes` : meta.title}
@@ -105,8 +100,8 @@ export default function LocationPage({ fallback, page, preview }) {
                 : new Date(ParseDate(newsItem.last_publication_date));
               return (
                 <ContentItem
-                  date={`${newDate.toLocaleString('en-us', { month: 'long' })} 
-                        ${setDateSuffix(newDate.getDate())}, 
+                  date={`${newDate.toLocaleString('en-us', { month: 'long' })}
+                        ${setDateSuffix(newDate.getDate())},
                         ${newDate.getFullYear()}`}
                   key={newsItem.id}
                   image={

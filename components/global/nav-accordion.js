@@ -56,7 +56,7 @@ const NavAccordion = ({ title, children }) => {
   // Get accordion element height on page load
   useEffect(() => {
     setAccordionHeight(accordionContent.current.clientHeight);
-  });
+  }, []);
 
   // Toggle accordion state when clicked
   const handleClick = () => {

@@ -152,8 +152,8 @@ export default function TopicPage({ fallback, page, preview }) {
                             <ContentItem
                               date={`${newDate.toLocaleString('en-us', {
                                 month: 'long',
-                              })} 
-                              ${setDateSuffix(newDate.getDate())}, 
+                              })}
+                              ${setDateSuffix(newDate.getDate())},
                               ${newDate.getFullYear()}`}
                               key={newsItem.id}
                               image={

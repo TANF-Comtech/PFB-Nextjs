@@ -1,3 +1,6 @@
+/* eslint-disable @next/next/next-script-for-ga */
+// @TODO move scripts to <Script> components in `_app.js`
+
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 import logo from '../public/logo.svg';
@@ -90,7 +93,7 @@ export default class MyDocument extends Document {
             async
             defer
             src="https://static.cdn.prismic.io/prismic.js?new=true&repo=peopleforbikes"
-          ></script>
+          />
           <meta name="facebook-domain-verification" content="nrzxc2kmvgvoeqy6hzocktskw38wfq" />
         </Head>
         <body>

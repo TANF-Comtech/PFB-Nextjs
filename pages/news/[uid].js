@@ -271,11 +271,6 @@ export default function NewsPage({ fallback, page, preview }) {
 
   return (
     <>
-      <script
-        async
-        defer
-        src="https://static.cdn.prismic.io/prismic.js?new=true&repo=peopleforbikes"
-      ></script>
       <SiteMetaCustom
         desc={theDesc}
         keywords={theKeywords}
@@ -296,8 +291,8 @@ export default function NewsPage({ fallback, page, preview }) {
 
             theDateLongform !== null && (
               <DateBox>
-                {`${theDateLongform.toLocaleString('en-us', { month: 'long' })} 
-                ${setDateSuffix(theDateLongform.toLocaleString('en-us', { day: 'numeric' }))}, 
+                {`${theDateLongform.toLocaleString('en-us', { month: 'long' })}
+                ${setDateSuffix(theDateLongform.toLocaleString('en-us', { day: 'numeric' }))},
                 ${theDateLongform.toLocaleString('en-us', {
                   year: 'numeric',
                 })}`}

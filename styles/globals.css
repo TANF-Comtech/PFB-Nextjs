@@ -1,0 +1,9 @@
+/* @TODO enable base styles after preflight is tested with existing styled components */
+/* @tailwind base; */
+
+body {
+  @apply overflow-x-clip;
+}
+
+@tailwind components;
+@tailwind utilities;

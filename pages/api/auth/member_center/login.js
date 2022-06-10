@@ -5,7 +5,7 @@ import loginAuth0 from '../../../../lib/auth0/loginAuth0';
 
 const cookieLifeTimeHours = process.env.AUTH0_TOKEN_LIFETIME_HOURS;
 
-export default (req, res) => {
+const login = (req, res) => {
   if (req.method === 'POST') {
     const email = req.body?.email;
     const code = req.body?.code;
@@ -84,3 +84,5 @@ export default (req, res) => {
     }
   }
 };
+
+export default login;

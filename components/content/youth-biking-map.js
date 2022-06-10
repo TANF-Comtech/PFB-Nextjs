@@ -43,7 +43,7 @@ const RedHeading = styled.h2`
 export default function YouthBikingMap() {
   return (
     <>
-      <a id="map"></a>
+      <a id="map" />
       <MainContent contentPadding="8vh 4vw 2vh 4vw" maxWidth="1200px">
         <RedHeading>National Youth Bicycle Programs Map</RedHeading>
         <hr />
@@ -70,7 +70,7 @@ export default function YouthBikingMap() {
               marginWidth="0"
               title="National Youth Programs Map"
               src="https://pfb.maps.arcgis.com/apps/Embed/index.html?webmap=458326200f3745c5908b4ae3aa10f5dc&extent=-139.5761,16.4746,-60.1229,53.5446&zoom=true&previewImage=false&scale=true&legendlayers=true&disable_scroll=true&theme=light"
-            ></iframe>
+            />
           </div>
         </Container>
         <p>

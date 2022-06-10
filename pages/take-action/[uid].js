@@ -192,6 +192,7 @@ export default function ActionForms({ page, preview }) {
     }
 
     // implements spark script
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     frm = document.createElement('script');
     action.form_id &&
       (frm.src = `https://action.peopleforbikes.org/assets/js/widget.js/?id=${action.form_id.toString()}`);
@@ -233,8 +234,8 @@ export default function ActionForms({ page, preview }) {
                     src="https://code.jquery.com/jquery-3.5.1.min.js"
                     strategy="beforeInteractive"
                   />
-                  <div id="wsd-root" className="spkactionform"></div>
-                  <div id="pb-root" className="spkactionform"></div>
+                  <div id="wsd-root" className="spkactionform" />
+                  <div id="pb-root" className="spkactionform" />
                   <div ref={sparkIframe} />
                   {/* <Script src={`https://action.peopleforbikes.org/assets/js/widget.js/?id=${action.form_id.toString()}`} strategy="afterInteractive"/> */}
                 </>
@@ -242,7 +243,6 @@ export default function ActionForms({ page, preview }) {
             </FormContainer>
           </FlexContainer>
         </MainContent>
-
         <Promo
           bigWords="Ride Spot"
           path="/rides"

@@ -35,13 +35,13 @@ const Para = styled.p`
 
 /**
  * <VisualGrid>
- * 
+ *
  * Component that takes visuals + text and puts them into a grid
- 
+
  * @param { bool } isOneItem - if grid only has one item, this centers it
  * @param { array } payload - group of the img/text combos
  * @param { string } title - visual grid heading
- * 
+ *
  */
 const VisualGrid = ({ isOneItem = false, payload, title }) => {
   const themeProps = useContext(ThemeContext);
@@ -57,6 +57,8 @@ const VisualGrid = ({ isOneItem = false, payload, title }) => {
         >
           {payload.map((item) => {
             return (
+              // @TODO add valid key prop from payload
+              // eslint-disable-next-line react/jsx-key
               <Box>
                 {item.graphic && <GridImage alt={item.graphic.alt} src={item.graphic.url} />}
                 {item.button_link && (

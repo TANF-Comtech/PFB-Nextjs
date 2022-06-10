@@ -69,7 +69,7 @@ const RadioSet = ({ radioGroupName, radioLabels, radioValues }) => {
       () => {
         setRendered(false);
       };
-  });
+  }, []);
 
   // Now we conditionally render to avoid SSR issues
   if (rendered) {

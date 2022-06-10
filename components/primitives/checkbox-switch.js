@@ -41,7 +41,7 @@ const CheckboxSwitch = ({ checkboxLabel, checked, className, disabled }) => {
       () => {
         setRendered(false);
       };
-  });
+  }, []);
 
   // Now we conditionally render to avoid SSR issues
   if (rendered) {

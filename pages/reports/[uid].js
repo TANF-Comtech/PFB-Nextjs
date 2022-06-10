@@ -1,5 +1,4 @@
 import { useContext } from 'react';
-import ErrorPage from 'next/error';
 import styled from 'styled-components';
 import { RichText } from 'prismic-reactjs';
 import Link from 'next/link';
@@ -83,21 +82,12 @@ const ReportContainer = styled.section`
 `;
 
 export default function ReportPage({ page, preview }) {
-  if (!page || page === null) {
-    return <ErrorPage statusCode={404} />;
-  }
-
   // Destructure page payload and meta from global context
   const { report } = page;
   const { meta } = useContext(DefaultContext);
 
   return (
     <>
-      <script
-        async
-        defer
-        src="https://static.cdn.prismic.io/prismic.js?new=true&repo=peopleforbikes"
-      ></script>
       <SiteMetaCustom
         desc={
           report.main_content ? `${report.main_content[0].text.substring(0, 180)} ... ` : meta.desc
