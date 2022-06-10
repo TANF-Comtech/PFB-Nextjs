@@ -73,11 +73,6 @@ export default function Payments() {
   const [revenue, setRevenue] = useState('');
   const [memberDues, setMemberDues] = useState();
 
-  // @TODO remove useEffect and console.info for price, revenue, memberDues
-  useEffect(() => {
-    console.info('price, revenue, memberDues:', price, revenue, memberDues);
-  }, [price, revenue, memberDues]);
-
   const handleRevenue = (e) => {
     e.preventDefault();
     const maskedRevenue = addCommas(removeNonNumericCharacters(e.currentTarget.value));
