@@ -182,7 +182,7 @@ export default function ActionForms({ page, preview }) {
    */
   const router = useRouter();
   const sparkIframe = useRef();
-  const frm = useRef(null);
+  let frm = null;
 
   useEffect(() => {
     // detect first mount of this component,
@@ -192,11 +192,12 @@ export default function ActionForms({ page, preview }) {
     }
 
     // implements spark script
-    frm.current = document.createElement('script');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    frm = document.createElement('script');
     action.form_id &&
-      (frm.current.src = `https://action.peopleforbikes.org/assets/js/widget.js/?id=${action.form_id.toString()}`);
+      (frm.src = `https://action.peopleforbikes.org/assets/js/widget.js/?id=${action.form_id.toString()}`);
     sparkIframe.current.appendChild(frm);
-  }, [router.pathname, action.form_id]);
+  }, [router.pathname]);
 
   return (
     <>
@@ -242,7 +243,6 @@ export default function ActionForms({ page, preview }) {
             </FormContainer>
           </FlexContainer>
         </MainContent>
-
         <Promo
           bigWords="Ride Spot"
           path="/rides"
