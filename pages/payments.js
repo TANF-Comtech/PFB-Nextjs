@@ -10,6 +10,10 @@ import MainContent from '../components/global/main-content';
 const RevInp = styled.input`
   min-width: 20vw;
   margin-right: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: right;
+  font-family: monospace;
 `;
 
 const CalcWrapper = styled.span`
@@ -58,22 +62,34 @@ const Checkout = styled.button`
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY);
 
+const addCommas = (value) => value.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+const removeCommas = (value) => value.replace(/,/g, '');
+const removeNonNumericCharacters = (value) => value.replace(/[^0-9]/g, '');
+
 export default function Payments() {
   const themeProps = useContext(ThemeContext);
 
-  const [price, setPrice] = useState();
-  const [revenue, setRevenue] = useState(null);
+  const [price, setPrice] = useState(1000);
+  const [revenue, setRevenue] = useState('');
   const [memberDues, setMemberDues] = useState();
+
+  // @TODO remove useEffect and console.info for price, revenue, memberDues
+  useEffect(() => {
+    console.info('price, revenue, memberDues:', price, revenue, memberDues);
+  }, [price, revenue, memberDues]);
 
   const handleRevenue = (e) => {
     e.preventDefault();
-    setRevenue(e.target.value);
+    const maskedRevenue = addCommas(removeNonNumericCharacters(e.currentTarget.value));
+    setRevenue(maskedRevenue);
   };
 
   useEffect(() => {
-    if (revenue < 1000000) {
+    const rawRevenue = parseInt(removeCommas(revenue), 10);
+
+    if (rawRevenue < 1000000) {
       setPrice(1000);
-    } else if (revenue >= 1000000) setPrice((revenue / 1000000) * 1250);
+    } else if (rawRevenue >= 1000000) setPrice((rawRevenue / 1000000) * 1250);
   }, [revenue]);
 
   const handleSubCalc = () => {
@@ -124,7 +140,7 @@ export default function Payments() {
         <CalcWrapper>
           <InputWrapper>
             <p style={{ margin: 0 }}>$&nbsp;</p>
-            <RevInp placeholder="Annual Sales" onChange={handleRevenue} />
+            <RevInp placeholder="Annual Sales" value={revenue} onChange={handleRevenue} />
             <p style={{ margin: 0 }}>&nbsp;/&nbsp;&nbsp;$1,000,000 x 1250</p>
           </InputWrapper>
           <CalcButton onClick={handleSubCalc}>CALCULATE</CalcButton>
