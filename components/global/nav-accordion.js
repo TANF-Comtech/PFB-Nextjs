@@ -1,8 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 
-import controlIcon from '../../public/thin-x.svg';
-
 const AccordionWrapper = styled.div`
   align-items: center;
   cursor: pointer;
@@ -70,7 +68,7 @@ const NavAccordion = ({ title, children }) => {
         <ArrowButton
           alt="Accordion Control - click to reveal content"
           open={open}
-          src={controlIcon}
+          src="/thin-x.svg"
         />
       </AccordionWrapper>
       <InternalWrapper open={open} ref={accordionContent}>

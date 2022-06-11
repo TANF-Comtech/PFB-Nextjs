@@ -1,9 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 
-import RedArrow from '../../public/red-arrow-triangle.svg';
-import WhiteArrow from '../../public/white-arrow-triangle.svg';
-
 const AccordionWrapper = styled.div`
   align-items: center;
   background-color: ${(props) => (props.darkMode === true ? props.theme.midnightBlue : '#fff')};
@@ -93,7 +90,7 @@ const Accordion = ({ darkMode = false, smallMode = false, title, children }) => 
           alt="Accordion Arrow - click to reveal content"
           open={open}
           smallMode={smallMode}
-          src={darkMode === true ? WhiteArrow : RedArrow}
+          src={darkMode === true ? '/white-arrow-triangle.svg' : '/red-arrow-triangle.svg'}
         />
         <Title darkMode={darkMode} smallMode={smallMode}>
           {title}

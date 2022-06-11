@@ -1,22 +1,17 @@
+/**
+ * @type {import('next').NextConfig}
+ */
+
 module.exports = {
   // Environments - should be handled with environmental variables in webpack 5
   // Talk with your project lead
 
-  // Asset handling
-  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
-    // SVG handler, inlines everything under 200KB
-    config.module.rules.push({
-      test: /\.svg$/,
-      type: 'asset',
-      parser: {
-        dataUrlCondition: {
-          maxSize: 200 * 1024,
-        },
-      },
-      use: 'svgo-loader',
-    });
+  // Use SWC for minification instead of Terser
+  swcMinify: true,
 
-    return config;
+  // Enable styled components
+  compiler: {
+    styledComponents: true, // ssr and displayName are configured by default
   },
 
   // To use next/images...

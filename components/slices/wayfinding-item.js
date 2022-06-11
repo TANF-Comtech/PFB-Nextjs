@@ -4,8 +4,6 @@ import Link from 'next/link';
 
 import { linkResolver } from '../../lib/utils';
 
-import BlueArrowWhiteBlock from '../../public/blue-arrow-white-block.svg';
-
 const Container = styled.section`
   align-items: center;
   background-color: ${(props) => props.bgColor || props.theme.midnightBlue};
@@ -97,7 +95,7 @@ const WayfindingItem = ({ bgColor, path, title, text, textColor }) => {
 
       <Link href={linkResolver(path)} passHref>
         <a>
-          <Icon src={BlueArrowWhiteBlock} alt="Blue Arrow" />
+          <Icon src="/blue-arrow-white-block.svg" alt="Blue Arrow" />
         </a>
       </Link>
     </Container>

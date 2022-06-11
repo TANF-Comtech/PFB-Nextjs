@@ -16,7 +16,6 @@ import Promo from '../../components/slices/promo';
 import Grid from '../../components/global/grid';
 
 import ResearchPromo from '../../public/promo/promo-research.jpg';
-import WhiteArrow from '../../public/white-arrow.svg';
 
 const Box = styled.div`
   align-items: center;
@@ -160,7 +159,7 @@ export default function ReportPage({ page, preview }) {
                               <Box key={doc.pdf_doc.size}>
                                 <a href={doc.pdf_doc.url} target="_blank" rel="noopener">
                                   <Text>{doc.link_name}</Text>
-                                  <Arrow src={WhiteArrow} width="46px" />
+                                  <Arrow src="/white-arrow.svg" />
                                 </a>
                               </Box>
                             );
@@ -208,7 +207,6 @@ export default function ReportPage({ page, preview }) {
             )}
           </ReportContainer>
         </MainContent>
-
         <Promo
           bigWords="Research Library"
           path="/research"

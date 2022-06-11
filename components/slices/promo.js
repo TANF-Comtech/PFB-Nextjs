@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import { linkResolver } from '../../lib/utils';
 import BgImage from '../primitives/bg-image';
 
-import WhiteArrow from '../../public/white-arrow.svg';
 import PromoFallback from '../../public/promo/promo-momentum.jpg';
 
 const Container = styled.section`
@@ -96,7 +95,7 @@ const Promo = ({
                 <PromoTextContainer headingRGBA={headingRGBA}>
                   <span>{smallWords}</span>
                   <h1>{bigWords}</h1>
-                  <Arrow src={WhiteArrow} width="46px" />
+                  <Arrow src="/white-arrow.svg" />
                 </PromoTextContainer>
               </BgImage>
             </a>
@@ -107,7 +106,7 @@ const Promo = ({
                   <PromoTextContainer headingRGBA={headingRGBA}>
                     <span>{smallWords}</span>
                     <h1>{bigWords}</h1>
-                    <Arrow src={WhiteArrow} width="46px" />
+                    <Arrow src="/white-arrow.svg" />
                   </PromoTextContainer>
                 </BgImage>
               </a>
@@ -119,7 +118,7 @@ const Promo = ({
           <PromoTextContainer headingRGBA={headingRGBA}>
             <span>{smallWords}</span>
             <h1>{bigWords}</h1>
-            <Arrow src={WhiteArrow} width="46px" />
+            <Arrow src="/white-arrow.svg" />
           </PromoTextContainer>
         </BgImage>
       )}

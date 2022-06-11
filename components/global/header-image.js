@@ -34,10 +34,10 @@ const HeaderImage = ({ children, headingRGBA, source, srcSet }) => {
           {children}
         </BgImage>
       )}
-      {srcSet && (
+      {srcSet && srcSet?.url && (
         <ForegroundImg
           alt={srcSet.alt ? srcSet.alt : 'Bike-oriented image'}
-          src={srcSet.url ? srcSet.url : null}
+          src={srcSet.url}
           height={srcSet.dimensions.height}
           width={srcSet.dimensions.width}
           layout="responsive"

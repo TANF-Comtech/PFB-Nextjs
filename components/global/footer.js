@@ -8,12 +8,6 @@ import Logo from './logo';
 import LogoType from './logotype';
 import Rule from '../primitives/rule';
 
-import fb from '../../public/socials/fb.svg';
-import insta from '../../public/socials/insta.svg';
-import linkedin from '../../public/socials/linkedin.svg';
-import twitter from '../../public/socials/twitter.svg';
-import yt from '../../public/socials/yt.svg';
-
 const Bar = styled.footer`
   background-color: ${(props) => props.theme.darkestGray};
   color: white;
@@ -217,27 +211,27 @@ function Footer() {
             <SocialContainer>
               <SocialIcon
                 url="https://www.facebook.com/PeopleForBikes/"
-                source={fb}
+                source="/socials/fb.svg"
                 alt="Facebook Logo"
               />
               <SocialIcon
                 url="https://www.instagram.com/peopleforbikes/"
-                source={insta}
+                source="/socials/insta.svg"
                 alt="Instagram Logo"
               />
               <SocialIcon
                 url="https://www.linkedin.com/company/peopleforbikes/"
-                source={linkedin}
+                source="/socials/linkedin.svg"
                 alt="LinkedIn Logo"
               />
               <SocialIcon
                 url="https://twitter.com/peopleforbikes"
-                source={twitter}
+                source="/socials/twitter.svg"
                 alt="Twitter Logo"
               />
               <SocialIcon
                 url="https://www.youtube.com/user/peopleforbikes/videos"
-                source={yt}
+                source="/socials/yt.svg"
                 alt="YouTube Logo"
               />
             </SocialContainer>

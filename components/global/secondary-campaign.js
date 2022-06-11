@@ -5,8 +5,6 @@ import { linkResolver, randomID } from '../../lib/utils';
 import MainContent from '../global/main-content';
 import Rule from '../primitives/rule';
 
-import BlueArrow from '../../public/pfb-blue-arrow-right.svg';
-
 const Tile = styled.div`
   display: flex;
   background-image: url(${(props) => props.source});
@@ -90,7 +88,7 @@ export default function SecondaryCampaign({ payload = [], isHomepage = false }) 
             >
               <SCLink href={linkResolver(sc.secondary_campaign.link, true)}>
                 <SCTitleContainer>
-                  <Arrow src={BlueArrow} />
+                  <Arrow src="/pfb-blue-arrow-right.svg" />
                   {sc.secondary_campaign.big_text && (
                     <SCTitle>{sc.secondary_campaign.big_text}</SCTitle>
                   )}
@@ -110,7 +108,7 @@ export default function SecondaryCampaign({ payload = [], isHomepage = false }) 
                       {cl.item.link && (
                         <SCLink href={linkResolver(cl.item.link)}>
                           <SCTitleContainer>
-                            <Arrow src={BlueArrow} />
+                            <Arrow src="/pfb-blue-arrow-right.svg" />
                             <SCTitle>{cl.item.title[0].text}</SCTitle>
                           </SCTitleContainer>
                         </SCLink>

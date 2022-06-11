@@ -7,7 +7,6 @@ import SummaryBlock from '../content/summary-block';
 import AdvocacyAcademyBG from '../../public/take-action/advocacy-academy.jpg';
 import CityRatingsBG from '../../public/take-action/city-ratings.jpg';
 import GrantsBG from '../../public/take-action/grants.jpg';
-import WhiteArrow from '../../public/white-arrow.svg';
 
 const Container = styled.section`
   padding-bottom: 10vh;
@@ -40,7 +39,7 @@ export default function TakeActionList() {
         <a href="https://cityratings.peopleforbikes.org/" rel="nofollow" target="_blank">
           <HeaderImage source={CityRatingsBG}>
             <h1>City Ratings</h1>
-            <Arrow src={WhiteArrow} width="46px" />
+            <Arrow src="/white-arrow.svg" />
           </HeaderImage>
         </a>
         <SummaryBlock bgColor="#002C40" textColor="#fff">
@@ -55,7 +54,7 @@ export default function TakeActionList() {
         <a href="https://academy.peopleforbikes.org/" rel="nofollow" target="_blank">
           <HeaderImage source={AdvocacyAcademyBG}>
             <h1>Advocacy Academy</h1>
-            <Arrow src={WhiteArrow} width="46px" />
+            <Arrow src="/white-arrow.svg" />
           </HeaderImage>
         </a>
         <SummaryBlock bgColor="#002C40" textColor="#fff">
@@ -71,7 +70,7 @@ export default function TakeActionList() {
           <a>
             <HeaderImage source={GrantsBG}>
               <h1>Community Grants</h1>
-              <Arrow src={WhiteArrow} width="46px" />
+              <Arrow src="/white-arrow.svg" />
             </HeaderImage>
           </a>
         </Link>

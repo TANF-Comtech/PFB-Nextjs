@@ -1,10 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Arrow from '../../public/red-arrow.svg';
-import PinImg from '../../public/ridespot-pin.svg';
-import MapImg from '../../public/ridespot-map.svg';
-
 const RSRide = styled.a`
   background-color: ${(props) => props.theme.midnightBlue};
   border-radius: 0 0 15px 15px;
@@ -40,7 +36,7 @@ const RSRide = styled.a`
 // Map
 const Map = styled.div`
   align-items: center;
-  background-image: url(${MapImg});
+  background-image: url(${'/ridespot-map.svg'});
   background-position: center center;
   background-size: cover;
   display: flex;
@@ -118,7 +114,7 @@ const RideSpotRide = ({ distance, extLink, owner, title }) => {
   return (
     <RSRide href={extLink} target="_blank">
       <Map>
-        <Pin src={PinImg} alt="Ridespot Map Pin" />
+        <Pin src="/ridespot-pin.svg" alt="Ridespot Map Pin" />
       </Map>
       <RSContent>
         <RSData>
@@ -126,7 +122,7 @@ const RideSpotRide = ({ distance, extLink, owner, title }) => {
           {distance && <RSDistance>Distance: {distance}</RSDistance>}
           {owner && <RSInfo>{owner}</RSInfo>}
         </RSData>
-        <RSArrow src={Arrow} />
+        <RSArrow src="/red-arrow.svg" />
       </RSContent>
     </RSRide>
   );

@@ -4,8 +4,6 @@ import Flickity from 'react-flickity-component';
 
 import { linkResolver } from '../../lib/utils';
 
-import WhiteArrow from '../../public/white-arrow.svg';
-
 const Slide = styled.section`
   align-items: center;
   background-image: url(${(props) => props.source});
@@ -152,7 +150,7 @@ const Carousel = ({ payload }) => {
               >
                 {c.campaign.small_text && <SmallText>{c.campaign.small_text}</SmallText>}
                 {c.campaign.big_text && <BigText>{c.campaign.big_text}</BigText>}
-                <Arrow src={WhiteArrow} width="46px" />
+                <Arrow src="/white-arrow.svg" />
               </SlideWrapper>
             </Slide>
           );
