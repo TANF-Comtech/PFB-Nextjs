@@ -6,6 +6,7 @@ import HeaderImage from '../global/header-image';
 import IndividualsBG from '../../public/join/individuals.jpg';
 import RetailersBG from '../../public/join/retailers.jpg';
 import SuppliersBG from '../../public/join/suppliers.jpg';
+import WhiteArrow from '../../public/white-arrow.svg';
 
 const SectionTitle = styled.h2`
   color: #333;
@@ -115,13 +116,13 @@ export default function JoinList() {
         <a href="https://ridespot.org/register" rel="nofollow" target="_blank">
           <Box bgColor="#D0021B">
             <Text>Join Ride Spot</Text>
-            <Arrow src="/white-arrow.svg" />
+            <Arrow src={WhiteArrow} />
           </Box>
         </a>
         <a href="https://www.classy.org/give/117371" rel="nofollow" target="_blank">
           <Box bgColor="#D0021B">
             <Text>Donate Now</Text>
-            <Arrow src="/white-arrow.svg" />
+            <Arrow src={WhiteArrow} />
           </Box>
         </a>
       </BoxContainer>
@@ -134,7 +135,7 @@ export default function JoinList() {
         <a href="https://ridespot.org/register" rel="nofollow" target="_blank">
           <Box bgColor="#D0021B">
             <Text>Join Ride Spot Premium</Text>
-            <Arrow src="/white-arrow.svg" />
+            <Arrow src={WhiteArrow} />
           </Box>
         </a>
       </BoxContainer>
@@ -148,7 +149,7 @@ export default function JoinList() {
           <a>
             <Box bgColor="#D0021B">
               <Text>Learn More About Membership</Text>
-              <Arrow src="/white-arrow.svg" />
+              <Arrow src={WhiteArrow} />
             </Box>
           </a>
         </Link>

@@ -6,6 +6,7 @@ import RideSpotRide from './ridespot-ride';
 import BgImage from '../primitives/bg-image';
 
 import RideSpotBg from '../../public/RidespotBg.jpg';
+import RideSpotLogo from '../../public/RideSpotRidesLogo.svg';
 
 const RSContainer = styled.section`
   background-color: ${(props) => props.theme.lightestGray};
@@ -91,7 +92,7 @@ const RideSpotPromo = ({ payload }) => {
     <RSContainer>
       <RSHeaderContainer href={'https://ridespot.org/'} passHref>
         <BgImage imgalt="Ride Spot background of blue mountains" imgsrc={RideSpotBg}>
-          <img alt="Ride Spot Logo" src="/RideSpotRidesLogo.svg" width={400} height={120} />
+          <Image alt="Ride Spot Logo" src={RideSpotLogo} quality={80} width={400} height={120} />
         </BgImage>
       </RSHeaderContainer>
 

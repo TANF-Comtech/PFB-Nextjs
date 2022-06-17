@@ -3,6 +3,8 @@ import styled from 'styled-components';
 
 import MainContent from '../global/main-content';
 
+import RedArrowWhiteBlock from '../../public/red-arrow-white-block.svg';
+
 const Container = styled.section`
   a,
   a:visited,

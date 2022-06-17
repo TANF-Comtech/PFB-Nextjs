@@ -1,8 +1,9 @@
+import Link from 'next/link';
 import styled from 'styled-components';
 
 import BgImage from '../primitives/bg-image';
 
-import Link from 'next/link';
+import ArrowIcon from '../../public/red-arrow.svg';
 
 const ImageContentContainer = styled.div`
   align-items: center;
@@ -67,7 +68,7 @@ const ImageSquare = ({ handler, imageSquareLink, isNavItem, source1X, source2X, 
         >
           <ImageContentContainer isNavItem={isNavItem}>
             {isNavItem === true ? <NavTitle>{title}</NavTitle> : <Title>{title}</Title>}
-            <Arrow isNavItem={isNavItem} src="/red-arrow.svg" />
+            <Arrow isNavItem={isNavItem} src={ArrowIcon} />
           </ImageContentContainer>
         </BgImage>
       </a>

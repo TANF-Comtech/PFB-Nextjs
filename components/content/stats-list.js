@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import MainContent from '../global/main-content';
 import Grid from '../global/grid';
 
+import WhiteArrow from '../../public/white-arrow.svg';
+
 const GridWrapper = styled.section`
   margin: 2vh 0;
 `;
@@ -201,7 +203,7 @@ const StatsList = ({ payload }) => {
                 <Link href={`/statistics/${stat.node._meta.uid}`}>
                   <a>
                     <Text>{`${stat.node.title[0].text} Statistics`}</Text>
-                    <Arrow src="/white-arrow.svg" />
+                    <Arrow src={WhiteArrow} />
                   </a>
                 </Link>
               </Box>

@@ -3,6 +3,8 @@ import styled from 'styled-components';
 
 import MainContent from '../global/main-content';
 
+import RedArrowWhiteBlock from '../../public/red-arrow-white-block.svg';
+
 const Container = styled.section`
   a,
   a:visited,
@@ -81,7 +83,7 @@ const ColorBanner = ({
           <MainContent maxWidth="800px">
             <h1>{bannerTitle}</h1>
             <span>{bannerContent}</span>
-            <Arrow src="/red-arrow-white-block.svg" />
+            <Arrow src={RedArrowWhiteBlock} />
           </MainContent>
         </ColorContainer>
       </a>
