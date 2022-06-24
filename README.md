@@ -2,9 +2,7 @@ PeopleForBikes site is a [Next.js](https://nextjs.org/) project using [styled-co
 
 ## Getting Started
 
-If you haven't run this project before, use `yarn` and Node `v14.x`. This project will likely move over to Node `v16.x` in 2022 but we're bound by AWS Lambda's Node version, and they're still on `14`.
-
-To get started, make sure your running right version of Node and then run `yarn` and install dependencies:
+If you haven't run this project before, we're using `yarn` and Node `v16.x`. To get started, make sure your running right version of Node and then run `yarn` and install dependencies:
 ```bash
 node -v # should show v14.x.x, recommend using nvm 
 yarn install # should output a bunch of install scripts, ignore warnings
@@ -12,8 +10,6 @@ yarn dev # starts the dev server
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result (Next will sometimes put your server at port `3001`, `3002` if you have something else running - check your CLI output).
-
-This app is on Next v11 and Webpack v5 until [this bug is resolved in Next v12](https://github.com/vercel/next.js/discussions/30468).
 
 ### Tooling
 
@@ -26,6 +22,8 @@ Make sure you have a high-level understanding of the tooling being used:
 - [Apollo](https://www.apollographql.com/docs/react/), GraphQL query manager
 - [Vercel PFB](https://vercel.com/people-for-bikes/pfb-nextjs), hosting / CI pipeline
 
+We're also starting to use Tailwind and Typescript, h/t to [@sandren](https://github.com/sandren) for getting that going!
+
 ### Environmental Variables
 
 All environmental variables are supposed to be stored in `.env.local`. By default, they will be made available to the Node.js application powering the static site generation. Read more about [Next.js Environmental Variables](https://nextjs.org/docs/basic-features/environment-variables). Vercel lets you set the production ones in their [hosting UI](https://vercel.com/people-for-bikes/pfb-nextjs/settings/environment-variables).
@@ -36,11 +34,11 @@ If you need the variables, contact the project lead.
 
 Next.js does not support HTTPS locally, which is a problem if you want to authenticate into the gated part of the site (Member Center) and do work there. 
 
-You can get around this issue by using [`local-ssl-proxy`](). This utility proxies the Next app and applies a TLS cert at another localhost port for your use. Follow these instructions to get your app setup:
+You can get around this issue by using `local-ssl-proxy`. This utility proxies the Next app and applies a TLS cert at another localhost port for your use. Follow these instructions to get your app setup:
 
 #### From your CLI, confirm you are using:
 
-- the correct version of Node for this project (`v14.x` as of 2021-12-10) and that 
+- the correct version of Node for this project (`v16.x` as of 2022-06) and that 
 - you have [Homebrew](https://brew.sh/) installed.
 - you are in this application's folder on your local machine (should be `pfb-nextjs`)
 
