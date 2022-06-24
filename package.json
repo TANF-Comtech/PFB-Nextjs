@@ -18,7 +18,7 @@
     "@stripe/stripe-js": "^1.19.1",
     "algoliasearch": "^4.10.5",
     "apollo-link-prismic": "^1.0.7",
-    "auth0": "^2.37.0",
+    "auth0": "^2.42.0",
     "aws-sdk": "^2.1005.0",
     "cookies": "^0.8.0",
     "flickity": "^2.2.1",
