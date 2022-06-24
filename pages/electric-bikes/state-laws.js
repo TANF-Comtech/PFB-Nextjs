@@ -12,7 +12,6 @@ import Promo from '../../components/slices/promo';
 import Grid from '../../components/global/grid';
 
 import EBikesPromo from '../../public/promo/electric-bikes-shaded.jpg';
-import WhiteArrow from '../../public/white-arrow.svg';
 
 const GridWrapper = styled.section`
   margin: 2vh 0;
@@ -84,7 +83,7 @@ export default function EBikesLaws({ page, preview }) {
                       <Box key={PDF.node.ebike_laws.size}>
                         <a href={PDF.node.ebike_laws.url} target="_blank" rel="noopener">
                           <Text>{PDF.node.location && PDF.node.location[0].text}</Text>
-                          <Arrow src={WhiteArrow} width="46px" />
+                          <Arrow src="/white-arrow.svg" />
                         </a>
                       </Box>
                     )

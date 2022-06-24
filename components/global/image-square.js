@@ -1,8 +1,8 @@
+import Link from 'next/link';
 import styled from 'styled-components';
 
 import BgImage from '../primitives/bg-image';
 
-import Link from 'next/link';
 import ArrowIcon from '../../public/red-arrow.svg';
 
 const ImageContentContainer = styled.div`

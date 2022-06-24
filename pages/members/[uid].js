@@ -27,8 +27,6 @@ import WayfindingItem from '../../components/slices/wayfinding-item';
 import NumberedPillars from '../../components/content/numbered-pillars';
 import VisualGrid from '../../components/global/visual-grid';
 
-import WhiteArrow from '../../public/white-arrow.svg';
-
 const IntroWrapper = styled.div`
   margin: 3vh 0 1vh 0;
 `;
@@ -194,7 +192,7 @@ export default function MembersPage({ page, preview }) {
                                     year: 'numeric',
                                   })}
                                 </Text>
-                                <Arrow src={WhiteArrow} width="46px" />
+                                <Arrow src="/white-arrow.svg" />
                               </a>
                             </Link>
                           )}

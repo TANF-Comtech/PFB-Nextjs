@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import MainContent from '../global/main-content';
+
 import RedArrowWhiteBlock from '../../public/red-arrow-white-block.svg';
 
 const Container = styled.section`
@@ -82,7 +83,7 @@ const ColorBanner = ({
           <MainContent maxWidth="800px">
             <h1>{bannerTitle}</h1>
             <span>{bannerContent}</span>
-            <Arrow src={RedArrowWhiteBlock} width="46px" />
+            <Arrow src={RedArrowWhiteBlock} />
           </MainContent>
         </ColorContainer>
       </a>

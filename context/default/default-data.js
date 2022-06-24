@@ -1,12 +1,3 @@
-import splashOne from '../../public/social-splash/PFB_Social-01.jpg';
-import splashTwo from '../../public/social-splash/PFB_Social-02.jpg';
-import splashThree from '../../public/social-splash/PFB_Social-03.jpg';
-import splashFour from '../../public/social-splash/PFB_Social-04.jpg';
-import logo from '../../public/PFB_Stacked_LOGO_512x512.jpg';
-
-// social images
-const socialSplashArr = [splashOne, splashTwo, splashThree, splashFour];
-
 /**
  * defaultData (variable)
  *
@@ -23,6 +14,16 @@ const socialSplashArr = [splashOne, splashTwo, splashThree, splashFour];
  * @param { string } rideSpotRides - three default RideSpot Rides
  * @param { string } newsItems - three News Stories we can use anywhere (TBD)
  */
+
+// social images, stored in S3 because next/image doesn't work here
+// and it seems kind of silly to put a JPG loader into webpack5 just for this...
+const socialSplashArr = [
+  'https://pfb-main-site-assets.s3.amazonaws.com/PFB_Social-01.jpg',
+  'https://pfb-main-site-assets.s3.amazonaws.com/PFB_Social-02.jpg',
+  'https://pfb-main-site-assets.s3.amazonaws.com/PFB_Social-03.jpg',
+  'https://pfb-main-site-assets.s3.amazonaws.com/PFB_Social-04.jpg'
+];
+
 export const defaultData = {
   meta: {
     desc: 'PeopleForBikes is committed to improving biking for everyone. Learn more about our work and join our movement.',
@@ -194,7 +195,7 @@ export const ldJSONBasic = {
   'logo': {
     '@context': 'http://schema.org',
     '@type': 'ImageObject',
-    'url': `${logo}`,
+    'url': 'https://pfb-main-site-assets.s3.amazonaws.com/PFB_Stacked_LOGO_512x512.jpg',
     'height': 512,
     'width': 512,
   },

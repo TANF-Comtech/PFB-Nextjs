@@ -152,7 +152,7 @@ const Carousel = ({ payload }) => {
               >
                 {c.campaign.small_text && <SmallText>{c.campaign.small_text}</SmallText>}
                 {c.campaign.big_text && <BigText>{c.campaign.big_text}</BigText>}
-                <Arrow src={WhiteArrow} width="46px" />
+                <Arrow src={WhiteArrow} />
               </SlideWrapper>
             </Slide>
           );

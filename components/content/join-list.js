@@ -116,13 +116,13 @@ export default function JoinList() {
         <a href="https://ridespot.org/register" rel="nofollow" target="_blank">
           <Box bgColor="#D0021B">
             <Text>Join Ride Spot</Text>
-            <Arrow src={WhiteArrow} width="46px" />
+            <Arrow src={WhiteArrow} />
           </Box>
         </a>
         <a href="https://www.classy.org/give/117371" rel="nofollow" target="_blank">
           <Box bgColor="#D0021B">
             <Text>Donate Now</Text>
-            <Arrow src={WhiteArrow} width="46px" />
+            <Arrow src={WhiteArrow} />
           </Box>
         </a>
       </BoxContainer>
@@ -135,7 +135,7 @@ export default function JoinList() {
         <a href="https://ridespot.org/register" rel="nofollow" target="_blank">
           <Box bgColor="#D0021B">
             <Text>Join Ride Spot Premium</Text>
-            <Arrow src={WhiteArrow} width="46px" />
+            <Arrow src={WhiteArrow} />
           </Box>
         </a>
       </BoxContainer>
@@ -149,7 +149,7 @@ export default function JoinList() {
           <a>
             <Box bgColor="#D0021B">
               <Text>Learn More About Membership</Text>
-              <Arrow src={WhiteArrow} width="46px" />
+              <Arrow src={WhiteArrow} />
             </Box>
           </a>
         </Link>

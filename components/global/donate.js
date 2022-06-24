@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import MainContent from '../global/main-content';
+
 import RedArrowWhiteBlock from '../../public/red-arrow-white-block.svg';
 
 const Container = styled.section`
@@ -77,7 +78,7 @@ const Donate = ({ bgColor }) => {
           <MainContent maxWidth="800px">
             <h1>Donate Now</h1>
             <span>Bring Better Biking to Your Community</span>
-            <Arrow src={RedArrowWhiteBlock} width="46px" />
+            <Arrow src="/red-arrow-white-block.svg" />
           </MainContent>
         </ColorContainer>
       </a>

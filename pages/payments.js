@@ -115,7 +115,7 @@ export default function Payments() {
     <>
       <SiteMetaCustom
         desc="PeopleForBikes corporate dues payments can be accepted through this facility up to $3000/year. Click to learn more."
-        title="Dues Payment= | PeopleForBikes Corporate Member Center"
+        title="Dues Payment | PeopleForBikes Corporate Member Center"
         path="https://www.peopleforbikes.org/payments"
       />
       <Wrapper postTitle="Corporate Members Dues Payments" isWide={false}>

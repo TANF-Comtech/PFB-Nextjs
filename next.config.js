@@ -1,3 +1,7 @@
+/**
+ * @type {import('next').NextConfig}
+ */
+
 module.exports = {
   // Environments - should be handled with environmental variables in webpack 5
   // Talk with your project lead
@@ -17,6 +21,14 @@ module.exports = {
     });
 
     return config;
+  },
+
+  // Use SWC for minification instead of Terser
+  swcMinify: true,
+
+  // Enable styled components
+  compiler: {
+    styledComponents: true, // ssr and displayName are configured by default
   },
 
   // To use next/images...

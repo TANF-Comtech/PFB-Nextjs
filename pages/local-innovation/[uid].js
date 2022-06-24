@@ -20,8 +20,6 @@ import VisualGrid from '../../components/global/visual-grid';
 import YouthBikingMap from '../../components/content/youth-biking-map';
 import GreenLaneProject from '../../components/content/green-lane-project';
 
-import ReturnArrow from '../../public/return-arrow.svg';
-
 const RedHeading = styled.h2`
   color: ${(props) => props.theme.red};
   font-weight: 700;
@@ -76,7 +74,7 @@ export default function ProgramPage({ fallback, page, preview }) {
         {program.archived === true && (
           <MainContent>
             <BlueBox>
-              <img src={ReturnArrow} alt="return arrow" />
+              <img src="/return-arrow.svg" alt="return arrow" />
               <ArchiveTitle>Archive</ArchiveTitle>
             </BlueBox>
           </MainContent>

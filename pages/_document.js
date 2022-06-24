@@ -1,9 +1,9 @@
+/* eslint-disable @next/next/no-page-custom-font */
 /* eslint-disable @next/next/next-script-for-ga */
 // @TODO move scripts to <Script> components in `_app.js`
 
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
-import logo from '../public/logo.svg';
 
 export default class MyDocument extends Document {
   /**
@@ -57,7 +57,7 @@ export default class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          <link rel="icon" href={logo} sizes="any" type="image/svg+xml" />
+          <link rel="icon" href="/logo.svg" sizes="any" type="image/svg+xml" />
           <link rel="stylesheet" href="https://use.typekit.net/xgf1cpe.css" />
           <link
             rel="stylesheet"

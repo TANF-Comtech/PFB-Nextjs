@@ -203,7 +203,7 @@ const StatsList = ({ payload }) => {
                 <Link href={`/statistics/${stat.node._meta.uid}`}>
                   <a>
                     <Text>{`${stat.node.title[0].text} Statistics`}</Text>
-                    <Arrow src={WhiteArrow} width="46px" />
+                    <Arrow src={WhiteArrow} />
                   </a>
                 </Link>
               </Box>
