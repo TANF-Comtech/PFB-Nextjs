@@ -60,6 +60,17 @@ const getAttachments = (files: any) => {
   return attachments;
 };
 
+const getLinks = (files: any) => {
+  const links = [...Object.entries(files)].map(
+    (file: any) =>
+      `https://pfb-grants.s3.us-east-2.amazonaws.com/${file[1].newFilename}.${
+        file[1].originalFilename.split('.')[1]
+      }`,
+  );
+
+  return links;
+};
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const form = new formidable.IncomingForm({
     fileWriteStreamHandler: uploadStream as any,
@@ -82,6 +93,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     const subject = `Grant application`;
 
+    const links = getLinks(files);
+
     const text = `Mission and history:\n
 ${fields.missionAndHistory}\r\n
 \r\n
@@ -95,7 +108,10 @@ Diversity statement:\n
 ${fields.diversityStatement}\r\n
 \r\n
 Evaluation:\n
-${fields.evaluation}`;
+${fields.evaluation}\r\n
+\r\n
+Attachments:\n
+${links.map((link) => `${link}\n`)}`;
 
     const attachments = getAttachments(files);
 
