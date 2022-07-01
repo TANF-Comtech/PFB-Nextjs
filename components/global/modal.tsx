@@ -26,7 +26,7 @@ export const Modal = ({ dark = false, show, onClose, children }: ModalProps) => 
           <div className="fixed inset-0 z-[1010] bg-black/50" />
         </Transition.Child>
         <div className="!fixed !inset-0 z-[1020] !overflow-y-auto">
-          <div className="flex min-h-full items-center justify-center p-10">
+          <div className="flex min-h-full items-center justify-center p-5 sm:p-10">
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-300"
@@ -36,7 +36,7 @@ export const Modal = ({ dark = false, show, onClose, children }: ModalProps) => 
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="relative w-full max-w-screen-lg transform overflow-hidden rounded-xl bg-white p-10 text-left shadow-xl transition-all">
+              <Dialog.Panel className="relative w-full max-w-screen-lg transform overflow-hidden rounded-xl bg-white p-5 text-left shadow-xl transition-all sm:p-10">
                 <button
                   onClick={onClose}
                   className={cx(

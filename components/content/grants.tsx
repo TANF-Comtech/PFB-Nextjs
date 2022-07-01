@@ -16,9 +16,9 @@ export const Grants = () => {
 
   return (
     <>
-      <div className="bg-midnightBlue p-20">
+      <div className="bg-midnightBlue p-10 sm:p-20">
         <div className="mx-auto max-w-screen-lg text-center text-lightestGray">
-          <p className="text-3xl leading-relaxed">
+          <p className="text-base leading-relaxed sm:text-3xl">
             The PeopleForBikes Industry Community Grant Program provides funding for projects that
             make bicycling better in communities across the U.S. Since 1999, PeopleForBikes has
             awarded more than 400 grants to nonprofit organizations and local governments in all 50
@@ -34,18 +34,18 @@ export const Grants = () => {
           />
         </div>
       </div>
-      <div className="p-20">
+      <div className="p-10 sm:p-20">
         <div className="mx-auto max-w-screen-lg text-center text-darkestGray">
-          <p className="text-3xl leading-relaxed">
+          <p className="text-base leading-relaxed sm:text-3xl">
             PeopleForBikes simplified its granting process. Applications will now be accepted year
             round and reviewed in May and November. Grants will be awarded in June and December.
           </p>
-          <p className="text-3xl leading-relaxed">
+          <p className="text-base leading-relaxed sm:text-3xl">
             We look forward to supporting advocacy and community-based organizations that partner
             with PeopleForBikes to build connected bike networks, trails and bike parks, expand and
             enhance bike access and get more people on bikes safely.
           </p>
-          <p className="text-3xl font-bold leading-relaxed">
+          <p className="text-base font-bold leading-relaxed sm:text-3xl">
             Please complete and submit the grant application no later than October 31 for full
             consideration.
           </p>
@@ -57,10 +57,10 @@ export const Grants = () => {
           />
         </div>
       </div>
-      <div className="bg-midnightBlue p-20">
+      <div className="bg-midnightBlue p-10 sm:p-20">
         <div className="mx-auto max-w-screen-lg text-center text-lightestGray">
-          <h2 className="font-dharma text-8xl">Grant Guidance</h2>
-          <p className="!text-3xl !leading-relaxed">
+          <h2 className="font-dharma text-6xl sm:text-8xl">Grant Guidance</h2>
+          <p className="!text-base !leading-relaxed sm:text-3xl">
             In addition to the PeopleForBikes Industry Community Grant Program, consider exploring
             the following funding sources:
           </p>
@@ -68,7 +68,7 @@ export const Grants = () => {
         <div className="mx-auto max-w-screen-lg divide-y divide-lightestGray text-lightestGray">
           <GrantGuidanceSection
             label="Grocery"
-            GRANT_RECIPIENTS={[
+            grantRecipients={[
               ['Safeway', 'http://safewayfoundation.org/'],
               ['Walmart', 'https://walmart.org/how-we-give/local-community-grants'],
               [
@@ -79,12 +79,12 @@ export const Grants = () => {
           >
             <p>
               Grocery or big box store chains often have $500 to $10,000 grants to invest in great
-              community projects. Some GRANT_RECIPIENTS:
+              community projects. Some grant recipients:
             </p>
           </GrantGuidanceSection>
           <GrantGuidanceSection
             label="Banks and Credit Unions"
-            GRANT_RECIPIENTS={[
+            grantRecipients={[
               [
                 'Wells Fargo',
                 'https://www.wellsfargo.com/about/corporate-responsibility/community-giving/',
@@ -97,12 +97,12 @@ export const Grants = () => {
           >
             <p>
               Ask your bank if they have a community grant program or otherwise support the
-              non-profits that use their services. Some GRANT_RECIPIENTS:
+              non-profits that use their services. Some grantRecipients:
             </p>
           </GrantGuidanceSection>
           <GrantGuidanceSection
             label="Healthcare"
-            GRANT_RECIPIENTS={[
+            grantRecipients={[
               ['Local hospital foundations', null],
               ['Anthem', 'https://www.anthemcorporateresponsibility.com/funding-options'],
               ['Kaiser Permanente', 'check your state office for info on funding opportunities'],
@@ -119,7 +119,7 @@ export const Grants = () => {
           </GrantGuidanceSection>
           <GrantGuidanceSection
             label="Bicycling Grant Programs"
-            GRANT_RECIPIENTS={[
+            grantRecipients={[
               ['Quality Bicycle Products Community Grants', 'https://www.qbp.com/community-grant'],
               ['Santa Cruz PayDirt Fund', 'https://www.santacruzbicycles.com/en-US/paydirt'],
               ['Outride Fund', 'https://outridebike.org/outride-fund'],
@@ -133,7 +133,7 @@ export const Grants = () => {
           >
             <p>
               Several bicycle companies and organizations provide grants in support of bike
-              projects. Here are a few GRANT_RECIPIENTS:
+              projects. Here are a few grantRecipients:
             </p>
           </GrantGuidanceSection>
           <GrantGuidanceSection label="Other">
@@ -145,6 +145,7 @@ export const Grants = () => {
                 /community-grants-program.html"
                   target="_blank"
                   rel="noopener"
+                  className="break-words"
                 >
                   https://www.uhccommunityandstate.com/content/uhccomstate/content/articles
                   /community-grants-program.html
@@ -156,6 +157,7 @@ export const Grants = () => {
                   href="https://www.cof.org/page/community-foundation-locator"
                   target="_blank"
                   rel="noopener"
+                  className="break-words"
                 >
                   https://www.cof.org/page/community-foundation-locator
                 </a>
@@ -166,6 +168,7 @@ export const Grants = () => {
                   href="https://blog.charityhowto.com/grant-writing-tips-for-nonprofit"
                   target="_blank"
                   rel="noopener"
+                  className="break-words"
                 >
                   https://blog.charityhowto.com/grant-writing-tips-for-nonprofit
                 </a>
@@ -184,27 +187,32 @@ export const Grants = () => {
   );
 };
 
-const GrantGuidanceSection = ({ label, GRANT_RECIPIENTS = [], children }) => {
+const GrantGuidanceSection = ({ label, grantRecipients = [], children }) => {
   return (
     <Disclosure as="div" className="py-10">
       {({ open }) => (
         <>
-          <Disclosure.Button className="flex items-center space-x-5">
-            <div className={cx(open && 'rotate-90', 'relative transform transition duration-300')}>
-              <img src={WhiteArrow} className="h-7 w-7" alt="" />
+          <Disclosure.Button className="flex items-center space-x-5 text-left">
+            <div
+              className={cx(
+                open && 'rotate-90',
+                'relative inline-block transform transition duration-300',
+              )}
+            >
+              <img src={WhiteArrow} className="h-4 w-4 sm:h-7 sm:w-7" alt="" />
             </div>
-            <div className="font-dharma text-7xl text-blue">{label}</div>
+            <div className="flex-grow font-dharma text-5xl text-blue sm:text-7xl">{label}</div>
           </Disclosure.Button>
           <Disclosure.Panel>
             <div>{children}</div>
-            {GRANT_RECIPIENTS.length > 0 && (
-              <div className="mt-10 grid grid-cols-3 gap-5">
-                {GRANT_RECIPIENTS.map(([title, urlOrLabel]) => {
+            {grantRecipients.length > 0 && (
+              <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                {grantRecipients.map(([title, urlOrLabel]) => {
                   if (!urlOrLabel)
                     return (
                       <div
                         key={title}
-                        className="inline-flex flex-col items-center justify-center bg-lightestGray p-10 text-center text-2xl text-darkestGray"
+                        className="inline-flex flex-col items-center justify-center bg-lightestGray p-10 text-center text-lg text-darkestGray sm:text-2xl"
                       >
                         <div>{title}</div>
                       </div>
@@ -216,14 +224,14 @@ const GrantGuidanceSection = ({ label, GRANT_RECIPIENTS = [], children }) => {
                       href={urlOrLabel}
                       target="_blank"
                       rel="noopener"
-                      className="inline-flex items-center justify-center bg-lightestGray p-10 text-center text-2xl"
+                      className="inline-flex items-center justify-center bg-lightestGray p-10 text-center text-lg sm:text-2xl"
                     >
                       {title}
                     </a>
                   ) : (
                     <div
                       key={title}
-                      className="inline-flex flex-col items-center justify-center bg-lightestGray p-10 text-center text-2xl text-darkestGray"
+                      className="inline-flex flex-col items-center justify-center bg-lightestGray p-10 text-center text-lg text-darkestGray sm:text-2xl"
                     >
                       <div>{title}</div>
                       <div className="mt-1 text-sm">{urlOrLabel}</div>
@@ -242,11 +250,11 @@ const GrantGuidanceSection = ({ label, GRANT_RECIPIENTS = [], children }) => {
 const GrantRecipients = () => {
   return (
     <>
-      <h3 className="-mx-10 -mt-10 bg-midnightBlue p-10 font-dharma text-7xl font-normal text-white">
+      <h3 className="-mx-10 -mt-10 bg-midnightBlue p-10 font-dharma text-4xl font-normal text-white sm:text-7xl">
         PeopleForBikes Industry Community Grants, Special Grants and Sponsorships
       </h3>
-      <div className="mt-10 grid grid-cols-3 gap-5">
-        {GRANT_RECIPIENTS.map((recipient) => (
+      <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {grantRecipients.map((recipient) => (
           <div
             key={recipient}
             className="inline-flex items-center justify-center bg-lightestGray p-10 text-center text-xl"
@@ -325,8 +333,10 @@ const GrantApplication = () => {
 
   return (
     <>
-      <h3 className="font-dharma text-8xl font-normal">PeopleForBikes Grant Application</h3>
-      <div className="mx-auto mt-20 max-w-screen-lg space-y-20 text-xl">
+      <h3 className="font-dharma text-5xl font-normal sm:text-8xl">
+        PeopleForBikes Grant Application
+      </h3>
+      <div className="mx-auto mt-10 max-w-screen-lg space-y-10 text-lg sm:mt-20 sm:space-y-20 sm:text-xl">
         <div>
           <div className="font-bold">MISSION AND HISTORY:</div>
           <div>Summarize your organization&apos;s mission and history</div>
@@ -462,7 +472,7 @@ const GrantApplication = () => {
   );
 };
 
-const GRANT_RECIPIENTS = [
+const grantRecipients = [
   'Active Transportation Alliance',
   'Association of Pedestrian and Bicycle Professionals',
   'Balance Bike Course at Trails End Park',
