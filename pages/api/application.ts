@@ -38,12 +38,26 @@ const uploadStream = (file) => {
       ContentType: file.mimeType,
       Body: pass,
     },
-    (error, data) => {
-      console.log(error, data);
-    },
+    (error, data) => {},
   );
 
   return pass;
+};
+
+const getAttachments = (files: any) => {
+  const attachments = [...Object.entries(files)].map((file: any) => {
+    const filename = `${file[1].newFilename}.${file[1].originalFilename.split('.')[1]}`;
+    const contentType = `${file[1].mimetype}`;
+    const path = `https://pfb-grants.s3.us-east-2.amazonaws.com/${filename}`;
+
+    return {
+      filename,
+      contentType,
+      path,
+    };
+  });
+
+  return attachments;
 };
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -83,13 +97,7 @@ ${fields.diversityStatement}\r\n
 Evaluation:\n
 ${fields.evaluation}`;
 
-    const newFiles = [...Object.entries(files)].map((item) => item.slice(-1)[0]);
-    console.log(newFiles);
-
-    // @TODO remove
-    return;
-
-    //@TODO populate attachments with array of objects containing `filename` and `path` (AWS S3 URL) properties
+    const attachments = getAttachments(files);
 
     const sendMail = async () => {
       try {
@@ -98,7 +106,7 @@ ${fields.evaluation}`;
           to: process.env.GRANTS_APPLICATION_TO_ADDRESS,
           subject,
           text,
-          attachments: [],
+          attachments,
         });
 
         return response;
@@ -108,7 +116,10 @@ ${fields.evaluation}`;
     };
 
     try {
-      await sendMail();
+      const emailResponse = await sendMail();
+
+      // @TODO remove console.info for emailResponse
+      console.info('emailResponse:', emailResponse);
 
       return res.status(200).json({ status: 'Application sent' });
     } catch (error) {
