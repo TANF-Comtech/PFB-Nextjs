@@ -81,21 +81,34 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.status(500).json({ error });
     }
 
+    const links = getLinks(files);
+
     if (
+      !fields.name ||
+      !fields.email ||
+      !fields.phone ||
       !fields.missionAndHistory ||
       !fields.projectDescription ||
       !fields.communityBenefits ||
       !fields.diversityStatement ||
-      !fields.evaluation
+      !fields.evaluation ||
+      links.length < 3
     ) {
       return res.status(400).json({ data: 'Invalid application' });
     }
 
     const subject = `Grant application`;
 
-    const links = getLinks(files);
-
-    const text = `Mission and history:\n
+    const text = `Name:\n
+${fields.name}\r\n
+\r\n
+Email:\n
+${fields.email}\r\n
+\r\n
+Phone:\n
+${fields.phone}\r\n
+\r\n
+Mission and history:\n
 ${fields.missionAndHistory}\r\n
 \r\n
 Project description:\n
@@ -119,6 +132,7 @@ ${links.map((link) => `${link}\n`)}`;
       try {
         const response = await transporter.sendMail({
           from: process.env.GRANTS_APPLICATION_FROM_ADDRESS,
+          replyTo: fields.email as string,
           to: process.env.GRANTS_APPLICATION_TO_ADDRESS,
           subject,
           text,

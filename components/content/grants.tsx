@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useRef, useCallback } from 'react';
 import cx from 'classnames';
 import { Disclosure } from '@headlessui/react';
 import { useDropzone } from 'react-dropzone';
@@ -268,23 +268,32 @@ const GrantRecipients = () => {
 };
 
 const GrantApplication = () => {
-  const [hasSent, setHasSent] = useState(false);
-  const [hasReceived, setHasReceived] = useState(false);
+  const [step, setStep] = useState<number>(1);
+  const [hasSent, setHasSent] = useState<boolean>(false);
+  const [hasReceived, setHasReceived] = useState<boolean>(false);
 
+  const [name, setName] = useLocalStorage('name', '');
+  const [email, setEmail] = useLocalStorage('email', '');
+  const [phone, setPhone] = useLocalStorage('phone', '');
   const [missionAndHistory, setMissionAndHistory] = useLocalStorage('missionAndHistory', '');
   const [projectDescription, setProjectDescription] = useLocalStorage('projectDescription', '');
   const [communityBenefits, setCommunityBenefits] = useLocalStorage('communityBenefits', '');
   const [diversityStatement, setDiversityStatement] = useLocalStorage('diversityStatement', '');
   const [evaluation, setEvaluation] = useLocalStorage('evaluation', '');
 
-  const [attachments, setAttachments] = useState([]);
+  const [attachments, setAttachments] = useState<Array<any>>([]);
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop: (acceptedAttachments) => {
       setAttachments([...attachments, ...acceptedAttachments]);
     },
   });
 
+  const ref = useRef(null);
+
   const handleReset = useCallback(() => {
+    setName('');
+    setEmail('');
+    setPhone('');
     setMissionAndHistory('');
     setProjectDescription('');
     setCommunityBenefits('');
@@ -293,183 +302,306 @@ const GrantApplication = () => {
     setAttachments([]);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const handleSubmit = useCallback(async () => {
-    const formData = new FormData();
-    formData.append('missionAndHistory', missionAndHistory);
-    formData.append('projectDescription', projectDescription);
-    formData.append('communityBenefits', communityBenefits);
-    formData.append('diversityStatement', diversityStatement);
-    formData.append('evaluation', evaluation);
-
-    attachments.forEach((attachment, index) => {
-      formData.append(`attachment${index + 1}`, attachment, attachment.name);
-    });
-
-    setHasSent(true);
-
-    const response = await fetch('/api/application', {
-      method: 'POST',
-      body: formData,
-    });
-
-    const result = await response.json();
-
-    // @TODO remove console.info for result
-    console.info('result:', result);
-
-    if (result.status === 'Application sent') {
-      setHasReceived(true);
-      // @TODO re-enable reset
-      // handleReset();
+  const handleReview = () => {
+    setStep(2);
+    if (ref.current) {
+      ref.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
     }
-  }, [
-    missionAndHistory,
-    projectDescription,
-    communityBenefits,
-    diversityStatement,
-    evaluation,
-    attachments,
-  ]); // eslint-disable-line react-hooks/exhaustive-deps
+  };
+
+  const handleEdit = () => {
+    setStep(1);
+  };
+
+  const handleSubmit = useCallback(
+    async (event) => {
+      event.preventDefault();
+
+      const formData = new FormData();
+      formData.append('name', name);
+      formData.append('email', email);
+      formData.append('phone', phone);
+      formData.append('missionAndHistory', missionAndHistory);
+      formData.append('projectDescription', projectDescription);
+      formData.append('communityBenefits', communityBenefits);
+      formData.append('diversityStatement', diversityStatement);
+      formData.append('evaluation', evaluation);
+
+      attachments.forEach((attachment, index) => {
+        formData.append(`attachment${index + 1}`, attachment, attachment.name);
+      });
+
+      setHasSent(true);
+
+      const response = await fetch('/api/application', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const result = await response.json();
+
+      if (result.status === 'Application sent') {
+        setHasReceived(true);
+        setStep(3);
+        if (ref.current) {
+          ref.current.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start',
+          });
+        }
+      }
+    },
+    [
+      name,
+      email,
+      phone,
+      missionAndHistory,
+      projectDescription,
+      communityBenefits,
+      diversityStatement,
+      evaluation,
+      attachments,
+    ],
+  ); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>
-      <h3 className="font-dharma text-5xl font-normal sm:text-8xl">
+      <h3 ref={ref} className="font-dharma text-5xl font-normal sm:text-8xl">
         PeopleForBikes Grant Application
       </h3>
-      <div className="mx-auto mt-10 max-w-screen-lg space-y-10 text-lg sm:mt-20 sm:space-y-20 sm:text-xl">
-        <div>
-          <div className="font-bold">MISSION AND HISTORY:</div>
-          <div>Summarize your organization&apos;s mission and history</div>
-          <textarea
-            value={missionAndHistory}
-            onChange={(evt) => setMissionAndHistory(evt.currentTarget.value)}
-            className="form-textarea mt-5 w-full"
-            required
-            rows={10}
-          />
-        </div>
-        <div>
-          <div className="font-bold">PROJECT DESCRIPTION:</div>
-          <div>Please summarize your project</div>
-          <textarea
-            value={projectDescription}
-            onChange={(evt) => setProjectDescription(evt.currentTarget.value)}
-            className="form-textarea mt-5 w-full"
-            required
-            rows={10}
-          />
-        </div>
-        <div>
-          <div className="font-bold">COMMUNITY BENEFITS AND PEOPLE SERVED:</div>
+      {step === 1 && (
+        <div className="mx-auto mt-10 max-w-screen-lg space-y-10 text-lg sm:mt-20 sm:space-y-20 sm:text-xl">
           <div>
-            1) Describe the benefits you expect this project to bring to the community, such as
-            increased ridership, improved safety or health, or economic improvements. 2) Describe
-            who will be served by this project, including information such as age, ability,
-            socioeconomic and/or racial demographics.
-          </div>
-          <textarea
-            value={communityBenefits}
-            onChange={(evt) => setCommunityBenefits(evt.currentTarget.value)}
-            className="form-textarea mt-5 w-full"
-            required
-            rows={10}
-          />
-        </div>
-        <div>
-          <div className="font-bold">DIVERSITY, EQUITY, AND INCLUSION:</div>
-          <div>Please describe how your project addresses diversity, equity, and inclusion.</div>
-          <textarea
-            value={diversityStatement}
-            onChange={(evt) => setDiversityStatement(evt.currentTarget.value)}
-            className="form-textarea mt-5 w-full"
-            required
-            rows={10}
-          />
-        </div>
-        <div>
-          <div className="font-bold">EVALUATION:</div>
-          <div>
-            Measureable Outcomes: Describe what will change as a result of this project.
-            Measurement: Describe your plans for measuring the success of your project. What will
-            you measure (i.e. ridership, economic impact) and how?
-          </div>
-          <textarea
-            value={evaluation}
-            onChange={(evt) => setEvaluation(evt.currentTarget.value)}
-            className="form-textarea mt-5 w-full"
-            required
-            rows={10}
-          />
-        </div>
-        <div>
-          <div className="font-bold">REQUIRED ATTACHMENTS:</div>
-          <div>
-            <div className="inline font-bold">Support Letters</div> (submit two letters total
-            representing two of the following):
-          </div>
-          <ul className="list-disc">
-            <li>
-              Elected official &mdash; mayor, city councilmember, alderman, state representative,
-              governor or federal elected official
-            </li>
-            <li>Federal legislator &mdash; congressional representative or senator</li>
-            <li>Bicycle industry &mdash; owner or manager of a bike-related business</li>
-            <li>
-              Business representative &mdash; owner, manager or principal employee of a
-              business/corporation not related to bicycling
-            </li>
-            <li>
-              Business association representative &mdash; leader from a business improvement
-              district, business development office, chamber or commerce or similar organization
-            </li>
-          </ul>
-          <div>
-            <div className="inline font-bold">List of Board Members and Affiliations</div>{' '}
-            (nonprofit organizations only)
+            <div className="font-bold">NAME:</div>
+            <input
+              value={name}
+              onChange={(evt) => setName(evt.currentTarget.value)}
+              className="form-input mt-1 w-full"
+              required
+            />
           </div>
           <div>
-            <div className="inline font-bold">IRS Determination Letter</div> (nonprofit
-            organizations only)
+            <div className="font-bold">EMAIL:</div>
+            <input
+              type="email"
+              value={email}
+              onChange={(evt) => setEmail(evt.currentTarget.value)}
+              className="form-input mt-1 w-full"
+              required
+            />
           </div>
           <div>
-            <div className="inline font-bold">Project Budget</div> including pending or commited
-            sources of funding and indicating how PeopleForBikes funding will be used.
+            <div className="font-bold">PHONE:</div>
+            <input
+              value={phone}
+              onChange={(evt) => setPhone(evt.currentTarget.value)}
+              className="form-input mt-1 w-full"
+              required
+            />
           </div>
           <div>
-            <div className="inline font-bold">Organizational Budget</div> for the current year; you
-            may alternatively provide a link to your annual budget.
+            <div className="font-bold">MISSION AND HISTORY:</div>
+            <div>Summarize your organization&apos;s mission and history</div>
+            <textarea
+              value={missionAndHistory}
+              onChange={(evt) => setMissionAndHistory(evt.currentTarget.value)}
+              className="form-textarea mt-5 w-full"
+              required
+              rows={10}
+            />
           </div>
-          <div className="mt-10">
-            <div className="rounded-md bg-lightestGray p-5" {...getRootProps()}>
-              <input {...getInputProps()} />
-              {isDragActive ? (
-                <p>Drop the files here...</p>
-              ) : (
-                <p>Drag and drop some files here, or click to select files</p>
-              )}
+          <div>
+            <div className="font-bold">PROJECT DESCRIPTION:</div>
+            <div>Please summarize your project</div>
+            <textarea
+              value={projectDescription}
+              onChange={(evt) => setProjectDescription(evt.currentTarget.value)}
+              className="form-textarea mt-5 w-full"
+              required
+              rows={10}
+            />
+          </div>
+          <div>
+            <div className="font-bold">COMMUNITY BENEFITS AND PEOPLE SERVED:</div>
+            <div>
+              1) Describe the benefits you expect this project to bring to the community, such as
+              increased ridership, improved safety or health, or economic improvements. 2) Describe
+              who will be served by this project, including information such as age, ability,
+              socioeconomic and/or racial demographics.
             </div>
-            <div className="mt-5 flex flex-col space-y-5">
-              {attachments.map((attachment) => (
-                <div key={attachment.name}>
-                  <span className="rounded bg-gray p-2 text-white">{attachment.name}</span>
-                </div>
-              ))}
+            <textarea
+              value={communityBenefits}
+              onChange={(evt) => setCommunityBenefits(evt.currentTarget.value)}
+              className="form-textarea mt-5 w-full"
+              required
+              rows={10}
+            />
+          </div>
+          <div>
+            <div className="font-bold">DIVERSITY, EQUITY, AND INCLUSION:</div>
+            <div>Please describe how your project addresses diversity, equity, and inclusion.</div>
+            <textarea
+              value={diversityStatement}
+              onChange={(evt) => setDiversityStatement(evt.currentTarget.value)}
+              className="form-textarea mt-5 w-full"
+              required
+              rows={10}
+            />
+          </div>
+          <div>
+            <div className="font-bold">EVALUATION:</div>
+            <div>
+              Measureable Outcomes: Describe what will change as a result of this project.
+              Measurement: Describe your plans for measuring the success of your project. What will
+              you measure (i.e. ridership, economic impact) and how?
             </div>
-            <button
-              onClick={() => setAttachments([])}
-              className="mt-5 rounded bg-red px-2 py-1 text-white"
-            >
-              Delete attachments
-            </button>
+            <textarea
+              value={evaluation}
+              onChange={(evt) => setEvaluation(evt.currentTarget.value)}
+              className="form-textarea mt-5 w-full"
+              required
+              rows={10}
+            />
+          </div>
+          <div>
+            <div className="font-bold">REQUIRED ATTACHMENTS:</div>
+            <div>
+              <div className="inline font-bold">Support Letters</div> (submit two letters total
+              representing two of the following):
+            </div>
+            <ul className="list-disc">
+              <li>
+                Elected official &mdash; mayor, city councilmember, alderman, state representative,
+                governor or federal elected official
+              </li>
+              <li>Federal legislator &mdash; congressional representative or senator</li>
+              <li>Bicycle industry &mdash; owner or manager of a bike-related business</li>
+              <li>
+                Business representative &mdash; owner, manager or principal employee of a
+                business/corporation not related to bicycling
+              </li>
+              <li>
+                Business association representative &mdash; leader from a business improvement
+                district, business development office, chamber or commerce or similar organization
+              </li>
+            </ul>
+            <div>
+              <div className="inline font-bold">List of Board Members and Affiliations</div>{' '}
+              (nonprofit organizations only)
+            </div>
+            <div>
+              <div className="inline font-bold">IRS Determination Letter</div> (nonprofit
+              organizations only)
+            </div>
+            <div>
+              <div className="inline font-bold">Project Budget</div> including pending or commited
+              sources of funding and indicating how PeopleForBikes funding will be used.
+            </div>
+            <div>
+              <div className="inline font-bold">Organizational Budget</div> for the current year;
+              you may alternatively provide a link to your annual budget.
+            </div>
+            <div className="mt-10">
+              <div className="rounded-md bg-lightestGray p-5" {...getRootProps()}>
+                <input {...getInputProps()} />
+                {isDragActive ? (
+                  <p>Drop the files here...</p>
+                ) : (
+                  <p>Drag and drop some files here, or click to select files</p>
+                )}
+              </div>
+              <div className="mt-5 flex flex-col space-y-5">
+                {attachments.map((attachment) => (
+                  <div key={attachment.name}>
+                    <span className="rounded bg-gray p-2 text-white">{attachment.name}</span>
+                  </div>
+                ))}
+              </div>
+              <button
+                onClick={() => setAttachments([])}
+                className="mt-5 rounded bg-red px-2 py-1 text-white"
+              >
+                Delete attachments
+              </button>
+            </div>
+          </div>
+          <div className="flex space-x-10">
+            <Button onClick={handleReview} label="Review" />
+            <Button onClick={handleReset} variant="lightGray" label="Reset" />
           </div>
         </div>
-        <div className="flex space-x-10">
-          <Button onClick={handleSubmit} label="Submit" />
-          <Button onClick={handleReset} variant="lightGray" label="Reset" />
+      )}
+      {step === 2 && (
+        <form
+          onSubmit={handleSubmit}
+          className="mx-auto mt-10 max-w-screen-lg space-y-10 text-lg sm:mt-20 sm:space-y-20 sm:text-xl"
+        >
+          <div>
+            <div className="font-bold">NAME:</div>
+            <div>{name}</div>
+          </div>
+          <div>
+            <div className="font-bold">EMAIL:</div>
+            <div>{email}</div>
+          </div>
+          <div>
+            <div className="font-bold">PHONE:</div>
+            <div>{phone}</div>
+          </div>
+          <div>
+            <div className="font-bold">MISSION AND HISTORY:</div>
+            <Paragraphs>{missionAndHistory}</Paragraphs>
+          </div>
+          <div>
+            <div className="font-bold">PROJECT DESCRIPTION:</div>
+            <Paragraphs>{projectDescription}</Paragraphs>
+          </div>
+          <div>
+            <div className="font-bold">COMMUNITY BENEFITS AND PEOPLE SERVED:</div>
+            <Paragraphs>{communityBenefits}</Paragraphs>
+          </div>
+          <div>
+            <div className="font-bold">DIVERSITY, EQUITY, AND INCLUSION:</div>
+            <Paragraphs>{diversityStatement}</Paragraphs>
+          </div>
+          <div>
+            <div className="font-bold">EVALUATION:</div>
+            <Paragraphs>{evaluation}</Paragraphs>
+          </div>
+          <div>
+            <div className="mt-10">
+              <div className="font-bold">ATTACHMENTS:</div>
+              <div className="mt-5 flex flex-col space-y-5">
+                {attachments.map((attachment) => (
+                  <div key={attachment.name}>
+                    <span className="rounded bg-gray p-2 text-white">{attachment.name}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+          <div className="flex space-x-10">
+            <Button type="submit" label="Submit" />
+            <Button onClick={handleEdit} variant="lightGray" label="Edit" />
+          </div>
+        </form>
+      )}
+      {step === 3 && (
+        <div className="mx-auto mt-10 max-w-screen-lg space-y-10 text-xl sm:mt-20 sm:space-y-20 sm:text-3xl">
+          <div>Thank you for your application!</div>
         </div>
-      </div>
+      )}
     </>
   );
+};
+
+const Paragraphs = ({ children }) => {
+  return typeof children === 'string'
+    ? children.split('\n').map((line: string) => <p key={line}>{line}</p>)
+    : children;
 };
 
 const grantRecipients = [
