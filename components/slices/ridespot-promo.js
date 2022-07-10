@@ -10,59 +10,54 @@ import RideSpotLogo from '../../public/RideSpotRidesLogo.svg';
 
 const RSContainer = styled.section`
   background-color: ${(props) => props.theme.lightestGray};
-  margin-bottom: 2vh;
-  padding: 6vh 0 8vh 0 !important;
+  padding-bottom: 4vh;
 `;
 
 const RSHeaderContainer = styled.a`
   display: block;
-  width: 100%;
 `;
 
 const RSTitle = styled.h2`
-  font-size: 36pt;
-  line-height: 70px;
-  margin: 2vh 10px 0vh 10px;
+  margin: 4vh 4vw;
   text-align: center;
   text-transform: uppercase;
-  color: black;
-  line-height: 1;
-  @media screen and (min-width: 1200px) {
-    font-size: 60px;
-    line-height: 120px;
-  }
 `;
 
 // Rides
 const RSRidesContainer = styled.section`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
+  display: grid;
+  grid-gap: 15px;
+  grid-template-columns: 1fr;
   margin: 0 auto;
-  padding-bottom: 5vh;
+  max-width: 1400px;
+  padding: 0 4vw;
 
-  @media (min-width: ${(props) => props.theme.md}) {
-    flex-wrap: nowrap;
+  @media (min-width: ${(props) => props.theme.sm}) {
+    grid-template-columns: 1fr 1fr;
   }
 
   @media (min-width: ${(props) => props.theme.lg}) {
-    max-width: 81vw;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 `;
 
 const RSCardContainer = styled.div`
   margin: 1vh 1vw;
+
+  @media (max-width: ${(props) => props.theme.sm}) {
+    margin: 1vh auto;
+    max-width: 450px;
+  }
 `;
 
 const RSCard = styled.img`
-  height: 60vh;
+  object-fit: cover;
 `;
 
 const RSLink = styled.a`
   text-decoration: none;
   color: black;
   margin: 0;
-  padding: 6vh 2vw 8vh 2vw !important;
   &:hover,
   &:focus,
   &:active,
@@ -91,8 +86,20 @@ const RideSpotPromo = ({ payload }) => {
   return (
     <RSContainer>
       <RSHeaderContainer href={'https://ridespot.org/'} passHref>
-        <BgImage imgalt="Ride Spot background of blue mountains" imgsrc={RideSpotBg}>
-          <Image alt="Ride Spot Logo" src={RideSpotLogo} quality={80} width={400} height={120} />
+        <BgImage 
+          height="30vh"
+          heightTablet="30vh"
+          heightDesktop="40vh"
+          imgalt="Ride Spot background of blue mountains" 
+          imgsrc={RideSpotBg}
+        >
+          <Image 
+            alt="Ride Spot Logo" 
+            src={RideSpotLogo} 
+            quality={80}  
+            height={150} 
+            width={500}
+          />
         </BgImage>
       </RSHeaderContainer>
 
@@ -103,7 +110,7 @@ const RideSpotPromo = ({ payload }) => {
           {payloadArr.map((ride) => {
             if (ride && ride.ridespot_card) {
               return (
-                <RSCardContainer>
+                <RSCardContainer key={randomID(1000000000)}>
                   <RSLink href={ride.ridespot_link.url}>
                     <RSCard src={ride.ridespot_card.url} />
                   </RSLink>
