@@ -18,7 +18,7 @@ export const Grants = () => {
     <>
       <div className="bg-midnightBlue p-10 sm:p-20">
         <div className="mx-auto max-w-screen-lg text-center text-lightestGray">
-          <p className="text-base leading-relaxed sm:text-3xl">
+          <p className="text-base leading-10 sm:text-3xl">
             The PeopleForBikes Industry Community Grant Program provides funding for projects that
             make bicycling better in communities across the U.S. Since 1999, PeopleForBikes has
             awarded more than 400 grants to nonprofit organizations and local governments in all 50
@@ -60,7 +60,7 @@ export const Grants = () => {
       <div className="bg-midnightBlue p-10 sm:p-20">
         <div className="mx-auto max-w-screen-lg text-center text-lightestGray">
           <h2 className="font-dharma text-6xl sm:text-8xl">Grant Guidance</h2>
-          <p className="!text-base !leading-relaxed sm:text-3xl">
+          <p className="text-base leading-relaxed sm:text-3xl">
             In addition to the PeopleForBikes Industry Community Grant Program, consider exploring
             the following funding sources:
           </p>
@@ -97,7 +97,7 @@ export const Grants = () => {
           >
             <p>
               Ask your bank if they have a community grant program or otherwise support the
-              non-profits that use their services. Some grantRecipients:
+              non-profits that use their services. Some grant recipients:
             </p>
           </GrantGuidanceSection>
           <GrantGuidanceSection
