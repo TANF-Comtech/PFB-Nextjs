@@ -32,11 +32,8 @@ export default function UidSlices({ landing_page }) {
 
   if (landing_page.body) {
     Slice = landing_page.body.map((slice) => {
-      // CONTENT BLOCK (but not for Grants right now)
-      if (
-        slice.__typename === 'Landing_pageBodyContent_block' &&
-        landing_page._meta.uid !== 'grants'
-      ) {
+      // CONTENT BLOCK
+      if (slice.__typename === 'Landing_pageBodyContent_block') {
         return (
           <SummaryBlock key={randomID(10000000)}>
             <RichText render={slice.primary.main_content} linkResolver={linkResolver} />
@@ -196,11 +193,8 @@ export default function UidSlices({ landing_page }) {
         }
       }
 
-      // VisualGrid (but omitting from Grants for now)
-      if (
-        slice.__typename === 'Landing_pageBodyVisual_grid' &&
-        landing_page._meta.uid !== 'grants'
-      ) {
+      // VisualGrid
+      if (slice.__typename === 'Landing_pageBodyVisual_grid') {
         return (
           <>
             <MainContent contentPadding="4vh 4vw 4vh 4vw">
