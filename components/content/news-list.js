@@ -16,21 +16,26 @@ import FallbackImage from './fallback-image';
  * @param { array } payload - list of news posts from Prismic API
  */
 const NewsList = ({ nodeName = 'news_item', payload }) => {
+
   return (
     <MainContent>
       {payload !== null &&
         payload.map((news) => {
-          let newDate;
+
+          // Date Processing - must use .replace() to avoid JS date bug!
+          let theDateLongform = null;
           if (news[nodeName].publication_date) {
-            newDate = new Date(ParseDate(news[nodeName].publication_date));
+            theDateLongform = new Date(news[nodeName].publication_date.replace(/-/g, '/'));
           } else {
-            newDate = new Date(ParseDate(news[nodeName]._meta.lastPublicationDate));
+            theDateLongform = new Date(news[nodeName]._meta.lastPublicationDate.replace(/-/g, '/'));
           }
+
           return (
             <ContentItem
-              date={`${newDate.toLocaleString('en-us', { month: 'long' })} 
-                    ${setDateSuffix(newDate.getDate())}, 
-                    ${newDate.getFullYear()}`}
+              date={`${theDateLongform.toLocaleString('en-us', { month: 'long' })}
+                     ${setDateSuffix(theDateLongform.toLocaleString('en-us', { day: 'numeric' }))},
+                     ${theDateLongform.toLocaleString('en-us', { year: 'numeric',})}`}
+              deck={news[nodeName].deck}
               key={news[nodeName]._meta.id}
               image={news[nodeName].header_image ? news[nodeName].header_image : FallbackImage}
               path={`/news/${news[nodeName]._meta.uid}`}

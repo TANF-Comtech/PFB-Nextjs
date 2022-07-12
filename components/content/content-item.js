@@ -77,51 +77,63 @@ const Image = styled.img`
  * A simple presentation for content items that show up in lists
  *
  * @param { string } date - when the content item occurred (optional)
+ * @param { string } deck - intro to article, dek in content terms (optional)
  * @param { object } image - image to go with post (optional)
  * @param { string } path - tells us the URL to the item
  * @param { number } randomId - generated to give us a randomized ID for fallback images
  * @param { string } title - title that goes next to the icon
  * @param { string } text - content to be shown
  */
-const ContentItem = ({ date, image, path, title, text }) => {
-  return (
-    <Container>
-      {image.url ? (
-        <Image
-          alt={image.alt ? image.alt : 'Bike-oriented image'}
-          loading="lazy"
-          src={image['1x'] ? image['1x'].url : image.url}
-        />
-      ) : (
-        // Utilizes fallback image functionality
-        <Image alt={image.alt} loading="lazy" src={image.path} />
-      )}
-      <ContentContainer>
-        {!path ? (
-          <Title>{title}</Title>
+const ContentItem = ({ 
+  date, 
+  deck, 
+  image, 
+  path, 
+  title, 
+  text }) => {
+    return (
+      <Container>
+        {image.url ? (
+          <Image
+            alt={image.alt ? image.alt : 'Bike-oriented image'}
+            loading="lazy"
+            src={image['1x'] ? image['1x'].url : image.url}
+          />
         ) : (
-          <Link href={path}>
-            <a>
-              <Title>{title}</Title>
-            </a>
-          </Link>
+          // Utilizes fallback image functionality
+          <Image alt={image.alt} loading="lazy" src={image.path} />
         )}
-        {date && <Datestamp>{date}</Datestamp>}
-        {text && <Text>{`${text.substring(0, 300)} ...`}</Text>}
-        {path && (
-          <Button
-            buttonBg="#404040"
-            buttonBgHover="rgb(216,216,216)"
-            buttonColor="white"
-            buttonPadding="10px 20px"
-            buttonTextTransform="uppercase"
-            href={path}
-          >
-            Read More
-          </Button>
-        )}
-      </ContentContainer>
-    </Container>
-  );
+        <ContentContainer>
+          {!path ? (
+            <Title>{title}</Title>
+          ) : (
+            <Link href={path}>
+              <a>
+                <Title>{title}</Title>
+              </a>
+            </Link>
+          )}
+          { date && <Datestamp>{date}</Datestamp> }
+          { deck !== null ? (
+              <Text>{ deck }</Text>
+            ) : (
+              text ? (<Text>{`${text.substring(0, 300)} ...`}</Text>) : (<></>)
+            )
+          }
+          {path && (
+            <Button
+              buttonBg="#404040"
+              buttonBgHover="rgb(216,216,216)"
+              buttonColor="white"
+              buttonPadding="10px 20px"
+              buttonTextTransform="uppercase"
+              href={path}
+            >
+              Read More
+            </Button>
+          )}
+        </ContentContainer>
+      </Container>
+    );
 };
 export default ContentItem;
