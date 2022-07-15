@@ -236,7 +236,7 @@ export async function getStaticProps({ params, preview = false, previewData }) {
   // E-bikes for Algolia (only run on /topics/electric-bikes)
   if (params.uid === 'electric-bikes') {
     const ebikesData = await getEBikesPages();
-    if (process.env.ALGOLIA_INDEXING_ENABLED) {
+    if (process.env.ALGOLIA_INDEXING_ENABLED === 'true') {
       const algoliaFormattedData = ebikeFormatter(ebikesData);
       await AlgoliaIndex().saveObjects(algoliaFormattedData);
     }
