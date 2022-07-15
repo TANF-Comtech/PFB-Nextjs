@@ -83,48 +83,25 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     const links = getLinks(files);
 
-    if (
-      !fields.name ||
-      !fields.email ||
-      !fields.phone ||
-      !fields.missionAndHistory ||
-      !fields.projectDescription ||
-      !fields.communityBenefits ||
-      !fields.diversityStatement ||
-      !fields.evaluation ||
-      !links.length
-    ) {
+    if (!fields.name || !fields.email) {
       return res.status(400).json({ status: 'Invalid application' });
     }
 
-    const subject = `Grant application from ${fields.name} (${fields.email})`;
+    const subject = `Grant application from ${fields?.name} on behalf of ${fields?.organization}`;
 
-    const text = `Name:\n
-${fields.name}\r\n
-\r\n
-Email:\n
-${fields.email}\r\n
-\r\n
-Phone:\n
-${fields.phone}\r\n
-\r\n
-Mission and history:\n
-${fields.missionAndHistory}\r\n
-\r\n
-Project description:\n
-${fields.projectDescription}\r\n
-\r\n
-Community benefits:\n
-${fields.communityBenefits}\r\n
-\r\n
-Diversity statement:\n
-${fields.diversityStatement}\r\n
-\r\n
-Evaluation:\n
-${fields.evaluation}\r\n
-\r\n
-Attachments:\n
-${links.map((link) => `${link}\n`)}`;
+    const text = `NAME OF PERSON SUBMITTING REQUEST:\n${
+      fields?.name
+    }\r\n\r\nTITLE OF PERSON SUBMITTING REQUEST:\n${fields?.title}\r\n\r\nNAME OF ORGANIZATION:\n${
+      fields?.organization
+    }\r\n\r\nADDRESS OF ORGANIZATION:\n${fields?.address}\r\n\r\nEMAIL:\n${
+      fields?.email
+    }\r\n\r\nPHONE:\n${fields?.phone}\r\n\r\nMISSION AND HISTORY:\n${
+      fields?.missionAndHistory
+    }\r\n\r\nPROJECT DESCRIPTION:\n${fields?.projectDescription}\r\n\r\nCOMMUNITY BENEFITS:\n${
+      fields?.communityBenefits
+    }\r\n\r\nDIVERSITY STATEMENT:\n${fields?.diversityStatement}\r\n\r\nEVALUATION:\n${
+      fields?.evaluation
+    }\r\n\r\nATTACHMENTS:\n${links?.length ? links.map((link) => `${link}\n`) : 'No attachments'}`;
 
     // @TODO restore attachments
     // const attachments = getAttachments(files);
@@ -149,6 +126,9 @@ ${links.map((link) => `${link}\n`)}`;
 
     try {
       const emailResponse = await sendMail();
+
+      // @TODO remove console.info for emailResponse
+      console.info('emailResponse:', emailResponse);
 
       return res.status(200).json({ status: 'Application sent' });
     } catch (error) {

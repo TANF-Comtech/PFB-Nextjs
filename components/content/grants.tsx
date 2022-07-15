@@ -269,13 +269,18 @@ const GrantRecipients = () => {
 
 const GrantApplication = () => {
   const [step, setStep] = useState<number>(1);
+
+  // @TODO remove these 3 states if unused
   const [hasSent, setHasSent] = useState<boolean>(false);
   const [hasReceived, setHasReceived] = useState<boolean>(false);
   const [error, setError] = useState<string | undefined>(undefined);
 
   const [name, setName] = useLocalStorage('name', '');
+  const [title, setTitle] = useLocalStorage('title', '');
   const [email, setEmail] = useLocalStorage('email', '');
   const [phone, setPhone] = useLocalStorage('phone', '');
+  const [organization, setOrganization] = useLocalStorage('organization', '');
+  const [address, setAddress] = useLocalStorage('address', '');
   const [missionAndHistory, setMissionAndHistory] = useLocalStorage('missionAndHistory', '');
   const [projectDescription, setProjectDescription] = useLocalStorage('projectDescription', '');
   const [communityBenefits, setCommunityBenefits] = useLocalStorage('communityBenefits', '');
@@ -293,8 +298,11 @@ const GrantApplication = () => {
 
   const handleReset = useCallback(() => {
     setName('');
+    setTitle('');
     setEmail('');
     setPhone('');
+    setOrganization('');
+    setAddress('');
     setMissionAndHistory('');
     setProjectDescription('');
     setCommunityBenefits('');
@@ -323,8 +331,11 @@ const GrantApplication = () => {
 
       const formData = new FormData();
       formData.append('name', name);
+      formData.append('title', title);
       formData.append('email', email);
       formData.append('phone', phone);
+      formData.append('organization', organization);
+      formData.append('address', address);
       formData.append('missionAndHistory', missionAndHistory);
       formData.append('projectDescription', projectDescription);
       formData.append('communityBenefits', communityBenefits);
@@ -363,8 +374,11 @@ const GrantApplication = () => {
     },
     [
       name,
+      title,
       email,
       phone,
+      organization,
+      address,
       missionAndHistory,
       projectDescription,
       communityBenefits,
@@ -375,16 +389,7 @@ const GrantApplication = () => {
     ],
   );
 
-  const isFormValid =
-    name?.length > 5 &&
-    email?.length > 5 &&
-    phone?.length > 5 &&
-    missionAndHistory?.length > 10 &&
-    projectDescription?.length > 10 &&
-    communityBenefits?.length > 10 &&
-    diversityStatement?.length > 10 &&
-    evaluation?.length > 10 &&
-    attachments?.length > 0;
+  const isFormValid = name?.length > 5 && email?.length > 5;
 
   return (
     <>
@@ -403,7 +408,7 @@ const GrantApplication = () => {
       {step === 1 && (
         <div className="mx-auto mt-10 max-w-screen-lg space-y-10 text-lg sm:mt-20 sm:space-y-20 sm:text-xl">
           <div>
-            <div className="font-bold">NAME:</div>
+            <div className="font-bold">NAME OF PERSON SUBMITTING THE REQUEST</div>
             <input
               value={name}
               onChange={(evt) => setName(evt.currentTarget.value)}
@@ -412,7 +417,32 @@ const GrantApplication = () => {
             />
           </div>
           <div>
-            <div className="font-bold">EMAIL:</div>
+            <div className="font-bold">TITLE OF PERSON SUBMITTING THE REQUEST</div>
+            <input
+              value={title}
+              onChange={(evt) => setTitle(evt.currentTarget.value)}
+              className="form-input mt-1 w-full"
+            />
+          </div>
+          <div>
+            <div className="font-bold">NAME OF ORGANIZATION</div>
+            <input
+              value={organization}
+              onChange={(evt) => setOrganization(evt.currentTarget.value)}
+              className="form-input mt-1 w-full"
+            />
+          </div>
+          <div>
+            <div className="font-bold">ADDRESS OF ORGANIZATION</div>
+            <textarea
+              value={address}
+              onChange={(evt) => setAddress(evt.currentTarget.value)}
+              className="form-textarea mt-5 w-full"
+              rows={4}
+            />
+          </div>
+          <div>
+            <div className="font-bold">EMAIL</div>
             <input
               type="email"
               value={email}
@@ -422,38 +452,35 @@ const GrantApplication = () => {
             />
           </div>
           <div>
-            <div className="font-bold">PHONE:</div>
+            <div className="font-bold">PHONE</div>
             <input
               value={phone}
               onChange={(evt) => setPhone(evt.currentTarget.value)}
               className="form-input mt-1 w-full"
-              required
             />
           </div>
           <div>
-            <div className="font-bold">MISSION AND HISTORY:</div>
+            <div className="font-bold">MISSION AND HISTORY</div>
             <div>Summarize your organization&apos;s mission and history</div>
             <textarea
               value={missionAndHistory}
               onChange={(evt) => setMissionAndHistory(evt.currentTarget.value)}
               className="form-textarea mt-5 w-full"
-              required
-              rows={10}
+              rows={8}
             />
           </div>
           <div>
-            <div className="font-bold">PROJECT DESCRIPTION:</div>
+            <div className="font-bold">PROJECT DESCRIPTION</div>
             <div>Please summarize your project</div>
             <textarea
               value={projectDescription}
               onChange={(evt) => setProjectDescription(evt.currentTarget.value)}
               className="form-textarea mt-5 w-full"
-              required
-              rows={10}
+              rows={8}
             />
           </div>
           <div>
-            <div className="font-bold">COMMUNITY BENEFITS AND PEOPLE SERVED:</div>
+            <div className="font-bold">COMMUNITY BENEFITS AND PEOPLE SERVED</div>
             <div>
               1) Describe the benefits you expect this project to bring to the community, such as
               increased ridership, improved safety or health, or economic improvements. 2) Describe
@@ -464,23 +491,21 @@ const GrantApplication = () => {
               value={communityBenefits}
               onChange={(evt) => setCommunityBenefits(evt.currentTarget.value)}
               className="form-textarea mt-5 w-full"
-              required
-              rows={10}
+              rows={8}
             />
           </div>
           <div>
-            <div className="font-bold">DIVERSITY, EQUITY, AND INCLUSION:</div>
+            <div className="font-bold">DIVERSITY, EQUITY, AND INCLUSION</div>
             <div>Please describe how your project addresses diversity, equity, and inclusion.</div>
             <textarea
               value={diversityStatement}
               onChange={(evt) => setDiversityStatement(evt.currentTarget.value)}
               className="form-textarea mt-5 w-full"
-              required
-              rows={10}
+              rows={8}
             />
           </div>
           <div>
-            <div className="font-bold">EVALUATION:</div>
+            <div className="font-bold">EVALUATION</div>
             <div>
               Measureable Outcomes: Describe what will change as a result of this project.
               Measurement: Describe your plans for measuring the success of your project. What will
@@ -490,47 +515,29 @@ const GrantApplication = () => {
               value={evaluation}
               onChange={(evt) => setEvaluation(evt.currentTarget.value)}
               className="form-textarea mt-5 w-full"
-              required
-              rows={10}
+              rows={8}
             />
           </div>
           <div>
-            <div className="font-bold">REQUIRED ATTACHMENTS:</div>
-            <div>
-              <div className="inline font-bold">Support Letters</div> (submit two letters total
-              representing two of the following):
-            </div>
-            <ul className="list-disc">
-              <li>
-                Elected official &mdash; mayor, city councilmember, alderman, state representative,
-                governor or federal elected official
-              </li>
-              <li>Federal legislator &mdash; congressional representative or senator</li>
-              <li>Bicycle industry &mdash; owner or manager of a bike-related business</li>
-              <li>
-                Business representative &mdash; owner, manager or principal employee of a
-                business/corporation not related to bicycling
-              </li>
-              <li>
-                Business association representative &mdash; leader from a business improvement
-                district, business development office, chamber or commerce or similar organization
-              </li>
-            </ul>
-            <div>
+            <div className="font-bold">REQUIRED ATTACHMENTS</div>
+            <div className="mt-5">
               <div className="inline font-bold">List of Board Members and Affiliations</div>{' '}
               (nonprofit organizations only)
             </div>
-            <div>
+            <div className="mt-5">
               <div className="inline font-bold">IRS Determination Letter</div> (nonprofit
               organizations only)
             </div>
-            <div>
-              <div className="inline font-bold">Project Budget</div> including pending or commited
-              sources of funding and indicating how PeopleForBikes funding will be used.
+            <div className="mt-5">
+              <div className="inline font-bold">Project Budget</div>
+              <br />
+              including pending or commited sources of funding and indicating how PeopleForBikes
+              funding will be used
             </div>
-            <div>
-              <div className="inline font-bold">Organizational Budget</div> for the current year;
-              you may alternatively provide a link to your annual budget.
+            <div className="mt-5">
+              <div className="inline font-bold">Organizational Budget</div>
+              <br />
+              for the current year; you may alternatively provide a link to your annual budget
             </div>
             <div className="mt-10">
               <div className="rounded-md bg-lightestGray p-5" {...getRootProps()}>
@@ -568,60 +575,52 @@ const GrantApplication = () => {
           className="mx-auto mt-10 max-w-screen-lg space-y-10 text-lg sm:mt-20 sm:space-y-20 sm:text-xl"
         >
           <div>
-            <div className="font-bold">NAME:</div>
+            <div className="font-bold">NAME OF PERSON SUBMITTING THE REQUEST</div>
             {name?.length > 5 ? <div>{name}</div> : <Error>Missing field!</Error>}
           </div>
           <div>
-            <div className="font-bold">EMAIL:</div>
+            <div className="font-bold">TITLE OF PERSON SUBMITTING THE REQUEST</div>
+            <div>{title}</div>
+          </div>
+          <div>
+            <div className="font-bold">NAME OF ORGANIZATION</div>
+            <div>{organization}</div>
+          </div>
+          <div>
+            <div className="font-bold">ADDRESS OF ORGANIZATION</div>
+            <div>{address}</div>
+          </div>
+          <div>
+            <div className="font-bold">EMAIL</div>
             {email?.length > 5 ? <div>{email}</div> : <Error>Missing field!</Error>}
           </div>
           <div>
-            <div className="font-bold">PHONE:</div>
-            {phone?.length > 5 ? <div>{phone}</div> : <Error>Missing field!</Error>}
+            <div className="font-bold">PHONE</div>
+            <div>{phone}</div>
           </div>
           <div>
-            <div className="font-bold">MISSION AND HISTORY:</div>
-            {missionAndHistory?.length > 10 ? (
-              <Paragraphs>{missionAndHistory}</Paragraphs>
-            ) : (
-              <Error>Missing field!</Error>
-            )}
+            <div className="font-bold">MISSION AND HISTORY</div>
+            <Paragraphs>{missionAndHistory}</Paragraphs>
           </div>
           <div>
-            <div className="font-bold">PROJECT DESCRIPTION:</div>
-            {projectDescription?.length > 10 ? (
-              <Paragraphs>{projectDescription}</Paragraphs>
-            ) : (
-              <Error>Missing field!</Error>
-            )}
+            <div className="font-bold">PROJECT DESCRIPTION</div>
+            <Paragraphs>{projectDescription}</Paragraphs>
           </div>
           <div>
-            <div className="font-bold">COMMUNITY BENEFITS AND PEOPLE SERVED:</div>
-            {communityBenefits?.length > 10 ? (
-              <Paragraphs>{communityBenefits}</Paragraphs>
-            ) : (
-              <Error>Missing field!</Error>
-            )}
+            <div className="font-bold">COMMUNITY BENEFITS AND PEOPLE SERVED</div>
+            <Paragraphs>{communityBenefits}</Paragraphs>
           </div>
           <div>
-            <div className="font-bold">DIVERSITY, EQUITY, AND INCLUSION:</div>
-            {diversityStatement?.length > 10 ? (
-              <Paragraphs>{diversityStatement}</Paragraphs>
-            ) : (
-              <Error>Missing field!</Error>
-            )}
+            <div className="font-bold">DIVERSITY, EQUITY, AND INCLUSION</div>
+            <Paragraphs>{diversityStatement}</Paragraphs>
           </div>
           <div>
-            <div className="font-bold">EVALUATION:</div>
-            {evaluation?.length > 10 ? (
-              <Paragraphs>{evaluation}</Paragraphs>
-            ) : (
-              <Error>Missing field!</Error>
-            )}
+            <div className="font-bold">EVALUATION</div>
+            <Paragraphs>{evaluation}</Paragraphs>
           </div>
           <div>
             <div className="mt-10">
-              <div className="font-bold">ATTACHMENTS:</div>
+              <div className="font-bold">ATTACHMENTS</div>
               {attachments?.length > 0 ? (
                 <div className="flex flex-col space-y-5">
                   {attachments.map((attachment) => (
