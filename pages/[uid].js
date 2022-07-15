@@ -112,20 +112,26 @@ export async function getStaticProps({ params, preview = false, previewData }) {
   switch (params.uid) {
     case 'news':
       pageData.landing_page.data = await getAllNewsForLandingPage(params.uid, previewData);
-      algoliaFormattedData = newsFormatter(pageData.landing_page.data);
-      await AlgoliaIndex().saveObjects(algoliaFormattedData);
+      if (process.env.ALGOLIA_INDEXING_ENABLED) {
+        algoliaFormattedData = newsFormatter(pageData.landing_page.data);
+        await AlgoliaIndex().saveObjects(algoliaFormattedData);
+      }
       break;
 
     case 'locations':
       pageData.landing_page.data = await getLocations(params.uid, previewData);
-      algoliaFormattedData = locationFormatter(pageData.landing_page.data);
-      await AlgoliaIndex().saveObjects(algoliaFormattedData);
+      if (process.env.ALGOLIA_INDEXING_ENABLED) {
+        algoliaFormattedData = locationFormatter(pageData.landing_page.data);
+        await AlgoliaIndex().saveObjects(algoliaFormattedData);
+      }
       break;
 
     case 'topics':
       pageData.landing_page.data = await getTopics(params.uid, previewData);
-      algoliaFormattedData = topicFormatter(pageData.landing_page.data);
-      await AlgoliaIndex().saveObjects(algoliaFormattedData);
+      if (process.env.ALGOLIA_INDEXING_ENABLED) {
+        algoliaFormattedData = topicFormatter(pageData.landing_page.data);
+        await AlgoliaIndex().saveObjects(algoliaFormattedData);
+      }
       break;
 
     case 'rides':
@@ -147,8 +153,10 @@ export async function getStaticProps({ params, preview = false, previewData }) {
 
     case 'research':
       pageData.landing_page.data = await getStats();
-      algoliaFormattedData = statsFormatter(pageData.landing_page.data);
-      await AlgoliaIndex().saveObjects(algoliaFormattedData);
+      if (process.env.ALGOLIA_INDEXING_ENABLED) {
+        algoliaFormattedData = statsFormatter(pageData.landing_page.data);
+        await AlgoliaIndex().saveObjects(algoliaFormattedData);
+      }
       break;
   }
 

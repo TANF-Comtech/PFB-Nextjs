@@ -56,12 +56,16 @@ export async function getStaticProps({ params, preview = false, previewData }) {
   const pageData = await getGrants();
 
   // Algolia General Search
-  const algoliaFormattedData = grantsFormatter(pageData);
-  await AlgoliaIndex().saveObjects(algoliaFormattedData);
+  if (process.env.ALGOLIA_INDEXING_ENABLED) {
+    const algoliaFormattedData = grantsFormatter(pageData);
+    await AlgoliaIndex().saveObjects(algoliaFormattedData);
+  }
 
   // Algolia Grants Search
-  const algoliaGrantsData = grantsOnlyFormatter(pageData);
-  await AlgoliaIndex('PFB_GRANTS').saveObjects(algoliaGrantsData);
+  if (process.env.ALGOLIA_INDEXING_ENABLED) {
+    const algoliaGrantsData = grantsOnlyFormatter(pageData);
+    await AlgoliaIndex('PFB_GRANTS').saveObjects(algoliaGrantsData);
+  }
 
   return {
     props: {
