@@ -230,10 +230,6 @@ export default function ActionForms({ page, preview }) {
             <FormContainer>
               {action.form_id && (
                 <>
-                  <Script
-                    src="https://code.jquery.com/jquery-3.5.1.min.js"
-                    strategy="beforeInteractive"
-                  />
                   <div id="wsd-root" className="spkactionform" />
                   <div id="pb-root" className="spkactionform" />
                   <div ref={sparkIframe} />

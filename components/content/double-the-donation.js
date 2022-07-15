@@ -1,6 +1,4 @@
-/* eslint-disable @next/next/no-sync-scripts */
-// @TODO make script async or replace with <Script> component
-
+import Script from 'next/script';
 import styled from 'styled-components';
 
 import MainContent from '../global/main-content';
@@ -60,7 +58,10 @@ export default function DoubleTheDonation() {
       </MainContent>
       <MainContent contentPadding="0vh 4vw 4vh 4vw" maxWidth="800px">
         <Container>
-          <script src="https://doublethedonation.com/api/js/ddplugin.js" />
+          <Script
+            src="https://doublethedonation.com/api/js/ddplugin.js"
+            strategy="afterInteractive"
+          />
           <div id="dd-container">
             <a href="https://doublethedonation.com/matching-grant-resources/matching-gift-basics/">
               Matching Gift

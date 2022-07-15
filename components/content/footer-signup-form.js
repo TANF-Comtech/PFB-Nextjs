@@ -131,7 +131,6 @@ function FooterSignUpForm() {
     <>
       <FormContainer>
         <div id="pfb-site-footer" className="spkactionform" />
-        <Script src="https://code.jquery.com/jquery-3.5.1.min.js" strategy="beforeInteractive" />
         {isFirstRenderOfSparkScript.current && (
           <Script
             src="https://action.peopleforbikes.org/assets/js/widget.js/?id=111276"

@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-page-custom-font */
 /* eslint-disable @next/next/next-script-for-ga */
-// @TODO move scripts to <Script> components in `_app.js`
 
 import Document, { Html, Head, Main, NextScript } from 'next/document';
+import Script from 'next/script';
 import { ServerStyleSheet } from 'styled-components';
 
 export default class MyDocument extends Document {
@@ -63,8 +63,14 @@ export default class MyDocument extends Document {
             rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&display=swap"
           />
-          <script async src="https://www.google-analytics.com/analytics.js" />
-          <script
+          <Script src="https://code.jquery.com/jquery-3.5.1.min.js" strategy="beforeInteractive" />
+          <Script
+            src="https://www.google-analytics.com/analytics.js"
+            strategy="beforeInteractive"
+          />
+          <Script
+            id="google-analytics"
+            strategy="afterInteractive"
             dangerouslySetInnerHTML={{
               __html: `
                   window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
@@ -73,7 +79,9 @@ export default class MyDocument extends Document {
                 `,
             }}
           />
-          <script
+          <Script
+            id="facebook-analytics"
+            strategy="afterInteractive"
             dangerouslySetInnerHTML={{
               __html: `
                 !function(f,b,e,v,n,t,s)
@@ -89,10 +97,9 @@ export default class MyDocument extends Document {
               `,
             }}
           />
-          <script
-            async
-            defer
+          <Script
             src="https://static.cdn.prismic.io/prismic.js?new=true&repo=peopleforbikes"
+            strategy="afterInteractive"
           />
           <meta name="facebook-domain-verification" content="nrzxc2kmvgvoeqy6hzocktskw38wfq" />
         </Head>
