@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import { InstantSearch, connectHits, RefinementList } from 'react-instantsearch-dom';
-import * as jsforce from 'jsforce';
 
 import { AlgoliaIndex, AlgoliaReactClient } from '../lib/algolia/algoliaClient';
 import { memberFormatter } from '../lib/algolia/memberFormatter';
+import getCorporateMembers from '../lib/salesforce/getCorporateMembers';
 
 import Wrapper from '../components/global/wrapper';
 import Grid from '../components/global/grid';
@@ -126,60 +126,13 @@ export default function CorporateMembers() {
 }
 
 export async function getStaticProps() {
-  let accessToken = process.env.SALESFORCE_OAUTH2_TOKEN;
-  let refreshToken = process.env.SALESFORCE_REFRESH_TOKEN;
-  let CurrentDate = new Date();
-
-  const MemberDate = (date) => {
-    date.setMonth(date.getMonth() - 6);
-    return date.toISOString().split('T')[0];
-  };
-
-  let MinSixMonths = MemberDate(CurrentDate);
-
-  const sfConnection = new jsforce.Connection({
-    loginUrl: process.env.SALESFORCE_AUTH_URL,
-    oauth2: {
-      clientId: process.env.SALESFORCE_CLIENT_ID,
-      clientSecret: process.env.SALESFORCE_CLIENT_SECRET,
-      redirectUri: process.env.SALESFORCE_REDIRECT_URI,
-    },
-    instanceUrl: process.env.SALESFORCE_INSTANCE_URL,
-    accessToken: accessToken,
-    refreshToken: refreshToken,
-  });
-
-  sfConnection.login(
-    process.env.SALESFORCE_AUTH_USER2,
-    process.env.SALESFORCE_AUTH_PASS,
-    function (err, userInfo) {
-      if (err) {
-        return console.error(err);
-      }
-      accessToken = sfConnection.accessToken;
-      refreshToken = sfConnection.refreshToken;
-    },
-  );
-
-  sfConnection.on('refresh', (newAccessToken, res) => {
-    console.log('Access token refreshed');
-    accessToken = newAccessToken;
-  });
-
-  const fetchedData = await sfConnection.query(
-    `SELECT Id,Published_Name__c,Website FROM Account WHERE Do_not_publish_membership__c = false AND (Last_Membership_End_Date__c >= ${MinSixMonths} OR Last_Membership_End_Date_Child__c >= ${MinSixMonths})`,
-    function (result, err) {
-      if (err) {
-        return err;
-      }
-      return result;
-    },
-  );
-
-  const memberData = fetchedData.records.map((record) => record);
-
+  const memberData = await getCorporateMembers();
   const algoliaFormattedData = memberFormatter(memberData);
-  await AlgoliaIndex('PFB_COALITION_MEMBERS').saveObjects(algoliaFormattedData);
+
+  // only update index on production builds
+  if (process.env.NODE_ENV === 'production') {
+    await AlgoliaIndex('PFB_COALITION_MEMBERS').saveObjects(algoliaFormattedData);
+  }
 
   return {
     props: {
