@@ -271,6 +271,7 @@ const GrantApplication = () => {
   const [step, setStep] = useState<number>(1);
   const [hasSent, setHasSent] = useState<boolean>(false);
   const [hasReceived, setHasReceived] = useState<boolean>(false);
+  const [error, setError] = useState<string | undefined>(undefined);
 
   const [name, setName] = useLocalStorage('name', '');
   const [email, setEmail] = useLocalStorage('email', '');
@@ -345,6 +346,7 @@ const GrantApplication = () => {
 
       if (result.status === 'Application sent') {
         setHasReceived(true);
+        handleReset();
         setStep(3);
         if (ref.current) {
           ref.current.scrollIntoView({
@@ -352,6 +354,11 @@ const GrantApplication = () => {
             block: 'start',
           });
         }
+      }
+
+      if (result.status === 'Invalid application') {
+        setError(`Invalid application`);
+        setStep(0);
       }
     },
     [
@@ -364,14 +371,35 @@ const GrantApplication = () => {
       diversityStatement,
       evaluation,
       attachments,
+      handleReset,
     ],
-  ); // eslint-disable-line react-hooks/exhaustive-deps
+  );
+
+  const isFormValid =
+    !!name &&
+    !!email &&
+    !!phone &&
+    !!missionAndHistory &&
+    !!projectDescription &&
+    !!communityBenefits &&
+    !!diversityStatement &&
+    !!evaluation &&
+    !!attachments?.length;
 
   return (
     <>
       <h3 ref={ref} className="font-dharma text-5xl font-normal sm:text-8xl">
         PeopleForBikes Grant Application
       </h3>
+      {step === 0 && (
+        <div className="mx-auto mt-10 max-w-screen-lg space-y-10 text-xl sm:mt-20 sm:space-y-20 sm:text-3xl">
+          <div>
+            Invalid submission: please make sure you have filled out every field and required
+            attachments and try again.
+          </div>
+          <Button onClick={handleEdit} variant="lightGray" label="Edit" />
+        </div>
+      )}
       {step === 1 && (
         <div className="mx-auto mt-10 max-w-screen-lg space-y-10 text-lg sm:mt-20 sm:space-y-20 sm:text-xl">
           <div>
@@ -541,50 +569,70 @@ const GrantApplication = () => {
         >
           <div>
             <div className="font-bold">NAME:</div>
-            <div>{name}</div>
+            {name?.length > 5 ? <div>{name}</div> : <Error>Missing field!</Error>}
           </div>
           <div>
             <div className="font-bold">EMAIL:</div>
-            <div>{email}</div>
+            {email?.length > 5 ? <div>{email}</div> : <Error>Missing field!</Error>}
           </div>
           <div>
             <div className="font-bold">PHONE:</div>
-            <div>{phone}</div>
+            {phone?.length > 5 ? <div>{phone}</div> : <Error>Missing field!</Error>}
           </div>
           <div>
             <div className="font-bold">MISSION AND HISTORY:</div>
-            <Paragraphs>{missionAndHistory}</Paragraphs>
+            {missionAndHistory?.length > 10 ? (
+              <Paragraphs>{missionAndHistory}</Paragraphs>
+            ) : (
+              <Error>Missing field!</Error>
+            )}
           </div>
           <div>
             <div className="font-bold">PROJECT DESCRIPTION:</div>
-            <Paragraphs>{projectDescription}</Paragraphs>
+            {projectDescription?.length > 10 ? (
+              <Paragraphs>{projectDescription}</Paragraphs>
+            ) : (
+              <Error>Missing field!</Error>
+            )}
           </div>
           <div>
             <div className="font-bold">COMMUNITY BENEFITS AND PEOPLE SERVED:</div>
-            <Paragraphs>{communityBenefits}</Paragraphs>
+            {communityBenefits?.length > 10 ? (
+              <Paragraphs>{communityBenefits}</Paragraphs>
+            ) : (
+              <Error>Missing field!</Error>
+            )}
           </div>
           <div>
             <div className="font-bold">DIVERSITY, EQUITY, AND INCLUSION:</div>
-            <Paragraphs>{diversityStatement}</Paragraphs>
+            {diversityStatement?.length > 10 ? (
+              <Paragraphs>{diversityStatement}</Paragraphs>
+            ) : (
+              <Error>Missing field!</Error>
+            )}
           </div>
           <div>
             <div className="font-bold">EVALUATION:</div>
-            <Paragraphs>{evaluation}</Paragraphs>
+            {evaluation ? <Paragraphs>{evaluation}</Paragraphs> : <Error>Missing field!</Error>}
           </div>
           <div>
             <div className="mt-10">
               <div className="font-bold">ATTACHMENTS:</div>
-              <div className="mt-5 flex flex-col space-y-5">
-                {attachments.map((attachment) => (
-                  <div key={attachment.name}>
-                    <span className="rounded bg-gray p-2 text-white">{attachment.name}</span>
-                  </div>
-                ))}
-              </div>
+              {attachments?.length > 0 ? (
+                <div className="flex flex-col space-y-5">
+                  {attachments.map((attachment) => (
+                    <div key={attachment.name} className="mt-5">
+                      <span className="rounded bg-gray p-2 text-white">{attachment.name}</span>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <Error>No attachments found!</Error>
+              )}
             </div>
           </div>
           <div className="flex space-x-10">
-            <Button type="submit" label="Submit" />
+            {isFormValid && <Button type="submit" label="Submit" />}
             <Button onClick={handleEdit} variant="lightGray" label="Edit" />
           </div>
         </form>
@@ -602,6 +650,10 @@ const Paragraphs = ({ children }) => {
   return typeof children === 'string'
     ? children.split('\n').map((line: string) => <p key={line}>{line}</p>)
     : children;
+};
+
+const Error = ({ children }) => {
+  return <div className="font-bold text-red">{children}</div>;
 };
 
 const grantRecipients = [

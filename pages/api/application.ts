@@ -92,12 +92,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       !fields.communityBenefits ||
       !fields.diversityStatement ||
       !fields.evaluation ||
-      links.length < 3
+      !links.length
     ) {
-      return res.status(400).json({ data: 'Invalid application' });
+      return res.status(400).json({ status: 'Invalid application' });
     }
 
-    const subject = `Grant application`;
+    const subject = `Grant application from ${fields.name} (${fields.email})`;
 
     const text = `Name:\n
 ${fields.name}\r\n
@@ -126,7 +126,8 @@ ${fields.evaluation}\r\n
 Attachments:\n
 ${links.map((link) => `${link}\n`)}`;
 
-    const attachments = getAttachments(files);
+    // @TODO restore attachments
+    // const attachments = getAttachments(files);
 
     const sendMail = async () => {
       try {
@@ -136,7 +137,8 @@ ${links.map((link) => `${link}\n`)}`;
           to: process.env.GRANTS_APPLICATION_TO_ADDRESS,
           subject,
           text,
-          attachments,
+          // @TODO restore attachments
+          // attachments,
         });
 
         return response;
@@ -147,9 +149,6 @@ ${links.map((link) => `${link}\n`)}`;
 
     try {
       const emailResponse = await sendMail();
-
-      // @TODO remove console.info for emailResponse
-      console.info('emailResponse:', emailResponse);
 
       return res.status(200).json({ status: 'Application sent' });
     } catch (error) {
