@@ -36,18 +36,18 @@ export const Grants = () => {
       </div>
       <div className="p-10 sm:p-20">
         <div className="mx-auto max-w-screen-lg text-center text-darkestGray">
-          <p className="text-base leading-relaxed sm:text-3xl">
-            PeopleForBikes simplified its granting process. Applications will now be accepted year
-            round and reviewed in May and November. Grants will be awarded in June and December.
+          <p className="text-base !leading-normal sm:text-3xl">
+            PeopleForBikes simplified our grant process with just one annual cycle and no
+            requirement for a Letter of Intent. To be considered, simply submit your application by
+            the annual application deadline on October 31. Grant requests will be reviewed in
+            November and awards will be presented in December.
           </p>
-          <p className="text-base leading-relaxed sm:text-3xl">
-            We look forward to supporting advocacy and community-based organizations that partner
-            with PeopleForBikes to build connected bike networks, trails and bike parks, expand and
-            enhance bike access and get more people on bikes safely.
+          <p className="text-base !leading-normal sm:text-3xl">
+            We look forward to continuing to support work that aligns with PeopleForBikes&rsquo;
+            mission — making biking better for everyone and getting more people on bikes more often.
           </p>
-          <p className="text-base font-bold leading-relaxed sm:text-3xl">
-            Please complete and submit the grant application no later than October 31 for full
-            consideration.
+          <p className="text-base font-bold !leading-normal sm:text-3xl">
+            Thank you, and keep up your amazing work!
           </p>
           <Button
             label="Apply now"
