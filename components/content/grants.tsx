@@ -376,15 +376,15 @@ const GrantApplication = () => {
   );
 
   const isFormValid =
-    !!name &&
-    !!email &&
-    !!phone &&
-    !!missionAndHistory &&
-    !!projectDescription &&
-    !!communityBenefits &&
-    !!diversityStatement &&
-    !!evaluation &&
-    !!attachments?.length;
+    name?.length > 5 &&
+    email?.length > 5 &&
+    phone?.length > 5 &&
+    missionAndHistory?.length > 10 &&
+    projectDescription?.length > 10 &&
+    communityBenefits?.length > 10 &&
+    diversityStatement?.length > 10 &&
+    evaluation?.length > 10 &&
+    attachments?.length > 0;
 
   return (
     <>
@@ -613,7 +613,11 @@ const GrantApplication = () => {
           </div>
           <div>
             <div className="font-bold">EVALUATION:</div>
-            {evaluation ? <Paragraphs>{evaluation}</Paragraphs> : <Error>Missing field!</Error>}
+            {evaluation?.length > 10 ? (
+              <Paragraphs>{evaluation}</Paragraphs>
+            ) : (
+              <Error>Missing field!</Error>
+            )}
           </div>
           <div>
             <div className="mt-10">
