@@ -250,10 +250,10 @@ const GrantGuidanceSection = ({ label, grantRecipients = [], children }) => {
 const GrantRecipients = () => {
   return (
     <>
-      <h3 className="-mx-10 -mt-10 bg-midnightBlue p-10 font-dharma text-4xl font-normal text-white sm:text-7xl">
+      <h3 className="-mx-10 -mt-10 bg-midnightBlue p-10 font-dharma text-4xl font-normal text-white sm:text-7xl lg:-mx-20 lg:-mt-20 lg:p-20">
         PeopleForBikes Industry Community Grants, Special Grants and Sponsorships
       </h3>
-      <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:mt-20 lg:grid-cols-3">
         {grantRecipients.map((recipient) => (
           <div
             key={recipient}

@@ -36,7 +36,7 @@ export const Modal = ({ dark = false, show, onClose, children }: ModalProps) => 
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="relative w-full max-w-screen-lg transform overflow-hidden rounded-xl bg-white p-5 text-left shadow-xl transition-all sm:p-10">
+              <Dialog.Panel className="relative w-full max-w-screen-lg transform overflow-hidden rounded-xl bg-white p-5 text-left shadow-xl transition-all sm:p-10 lg:p-20">
                 <button
                   onClick={onClose}
                   className={cx(
