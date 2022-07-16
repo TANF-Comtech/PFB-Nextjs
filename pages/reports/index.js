@@ -112,8 +112,10 @@ export default function ReportsArchive({ page }) {
 export async function getStaticProps({ params, preview = false, previewData }) {
   const pageData = await getReports();
 
-  const algoliaFormattedData = reportsFormatter(pageData);
-  await AlgoliaIndex().saveObjects(algoliaFormattedData);
+  if (process.env.ALGOLIA_INDEXING_ENABLED) {
+    const algoliaFormattedData = reportsFormatter(pageData);
+    await AlgoliaIndex().saveObjects(algoliaFormattedData);
+  }
 
   return {
     props: {

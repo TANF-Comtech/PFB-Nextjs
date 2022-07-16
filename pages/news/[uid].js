@@ -284,22 +284,14 @@ export default function NewsPage({ fallback, page, preview }) {
       <Wrapper postPath="/news" postTitle="News" isWide="true">
         <MainContent maxWidth="700px">
           {
-            /*
-             * For whatever reason, the JS date computes as one day behind every time
-             * So I take the output of toLocaleString and bump by one, very scientific ;)
-             */
-
             theDateLongform !== null && (
               <DateBox>
                 {`${theDateLongform.toLocaleString('en-us', { month: 'long' })}
                 ${setDateSuffix(theDateLongform.toLocaleString('en-us', { day: 'numeric' }))},
-                ${theDateLongform.toLocaleString('en-us', {
-                  year: 'numeric',
-                })}`}
+                ${theDateLongform.toLocaleString('en-us', { year: 'numeric' })}`}
               </DateBox>
             )
           }
-
           {news.title && <h2>{news.title[0].text}</h2>}
           <p>By: {theByline}</p>
           {news.header_image ? (
