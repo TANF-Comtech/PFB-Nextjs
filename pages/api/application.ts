@@ -109,7 +109,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const sendMail = async () => {
       try {
         const response = await transporter.sendMail({
-          from: process.env.GRANTS_APPLICATION_FROM_ADDRESS,
+          from: 'info@peopleforbikes.org',
           replyTo: fields.email as string,
           to: process.env.GRANTS_APPLICATION_TO_ADDRESS,
           subject,
