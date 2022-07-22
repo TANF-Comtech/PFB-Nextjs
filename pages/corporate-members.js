@@ -128,7 +128,7 @@ export default function CorporateMembers() {
 export async function getStaticProps() {
   const memberData = await getCorporateMembers();
 
-  if (process.env.ALGOLIA_INDEXING_ENABLED) {
+  if (process.env.ALGOLIA_INDEXING_ENABLED === 'true') {
     const algoliaFormattedData = memberFormatter(memberData);
     await AlgoliaIndex('PFB_COALITION_MEMBERS').saveObjects(algoliaFormattedData);
   }

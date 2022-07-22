@@ -112,7 +112,7 @@ export default function ReportsArchive({ page }) {
 export async function getStaticProps({ params, preview = false, previewData }) {
   const pageData = await getReports();
 
-  if (process.env.ALGOLIA_INDEXING_ENABLED) {
+  if (process.env.ALGOLIA_INDEXING_ENABLED === 'true') {
     const algoliaFormattedData = reportsFormatter(pageData);
     await AlgoliaIndex().saveObjects(algoliaFormattedData);
   }

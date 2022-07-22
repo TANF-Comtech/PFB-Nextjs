@@ -56,13 +56,13 @@ export async function getStaticProps({ params, preview = false, previewData }) {
   const pageData = await getGrants();
 
   // Algolia General Search
-  if (process.env.ALGOLIA_INDEXING_ENABLED) {
+  if (process.env.ALGOLIA_INDEXING_ENABLED === 'true') {
     const algoliaFormattedData = grantsFormatter(pageData);
     await AlgoliaIndex().saveObjects(algoliaFormattedData);
   }
 
   // Algolia Grants Search
-  if (process.env.ALGOLIA_INDEXING_ENABLED) {
+  if (process.env.ALGOLIA_INDEXING_ENABLED === 'true') {
     const algoliaGrantsData = grantsOnlyFormatter(pageData);
     await AlgoliaIndex('PFB_GRANTS').saveObjects(algoliaGrantsData);
   }
