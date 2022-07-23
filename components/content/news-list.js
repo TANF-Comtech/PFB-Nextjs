@@ -1,3 +1,4 @@
+import React from 'react';
 import { Date as ParseDate } from 'prismic-reactjs';
 
 import { setDateSuffix } from '../../lib/utils/setDateSuffix';
@@ -16,12 +17,10 @@ import FallbackImage from './fallback-image';
  * @param { array } payload - list of news posts from Prismic API
  */
 const NewsList = ({ nodeName = 'news_item', payload }) => {
-
   return (
     <MainContent>
       {payload !== null &&
         payload.map((news) => {
-
           // Date Processing - must use .replace() to avoid JS date bug!
           let theDateLongform = null;
           if (news[nodeName].publication_date) {
@@ -34,7 +33,7 @@ const NewsList = ({ nodeName = 'news_item', payload }) => {
             <ContentItem
               date={`${theDateLongform.toLocaleString('en-us', { month: 'long' })}
                      ${setDateSuffix(theDateLongform.toLocaleString('en-us', { day: 'numeric' }))},
-                     ${theDateLongform.toLocaleString('en-us', { year: 'numeric',})}`}
+                     ${theDateLongform.toLocaleString('en-us', { year: 'numeric' })}`}
               deck={news[nodeName].deck}
               key={news[nodeName]._meta.id}
               image={news[nodeName].header_image ? news[nodeName].header_image : FallbackImage}

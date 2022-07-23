@@ -1,5 +1,7 @@
+import React from 'react';
 import { useRouter } from 'next/router';
 import { RichText } from 'prismic-reactjs';
+
 import CustomErrorPage from '../pages/404';
 
 import { getSingleLandingPage, getLandingPages } from '../lib/queries/landing-page';

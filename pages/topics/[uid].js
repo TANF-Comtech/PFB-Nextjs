@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import Link from 'next/link';
 import { RichText, Date as ParseDate } from 'prismic-reactjs';
 import styled from 'styled-components';

@@ -1,4 +1,5 @@
 import React from 'react';
+
 import NewsList from '../content/news-list';
 import LocationsList from '../content/locations-list';
 import TopicsList from '../content/topics-list';

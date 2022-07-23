@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 import Image from 'next/image';
 
@@ -86,20 +87,14 @@ const RideSpotPromo = ({ payload }) => {
   return (
     <RSContainer>
       <RSHeaderContainer href={'https://ridespot.org/'} passHref>
-        <BgImage 
+        <BgImage
           height="30vh"
           heightTablet="30vh"
           heightDesktop="40vh"
-          imgalt="Ride Spot background of blue mountains" 
+          imgalt="Ride Spot background of blue mountains"
           imgsrc={RideSpotBg}
         >
-          <Image 
-            alt="Ride Spot Logo" 
-            src={RideSpotLogo} 
-            quality={80}  
-            height={150} 
-            width={500}
-          />
+          <Image alt="Ride Spot Logo" src={RideSpotLogo} quality={80} height={150} width={500} />
         </BgImage>
       </RSHeaderContainer>
 

@@ -1,5 +1,7 @@
+import React from 'react';
 import Image from 'next/image';
 import styled from 'styled-components';
+
 import BgImage from '../primitives/bg-image';
 
 const ForegroundImg = styled(Image)`

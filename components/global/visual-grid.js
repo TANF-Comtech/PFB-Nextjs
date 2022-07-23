@@ -1,8 +1,7 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import styled, { ThemeContext } from 'styled-components';
 
 import { linkResolver } from '../../lib/utils';
-import evenOrOdd from '../../lib/utils/evenOrOdd';
 
 import MainContent from './main-content';
 import GridWide from './grid-wide';
@@ -86,3 +85,7 @@ const VisualGrid = ({ isOneItem = false, payload, title }) => {
 };
 
 export default VisualGrid;
+
+function evenOrOdd(x) {
+  return x & 1 ? 'odd' : 'even';
+}

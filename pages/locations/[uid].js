@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import { Date as ParseDate } from 'prismic-reactjs';
 
 import { getLocationsNoImages, getSingleLocationsPage } from '../../lib/queries/locations';

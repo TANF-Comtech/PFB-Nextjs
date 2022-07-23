@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { arrayShuffle } from '../../lib/utils/arrayShuffle';
 
 import fallbackOne from '../../public/fallbacks/01_PFB_General.jpg';

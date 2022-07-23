@@ -32,3 +32,6 @@ yarn-error.log*
 # local TLS certs
 localhost-key.pem
 localhost.pem
+
+# local scratchpad
+/.temp/

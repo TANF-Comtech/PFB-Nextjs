@@ -1,3 +1,4 @@
+import React from 'react';
 import { TransitionGroup, Transition as ReactTransition } from 'react-transition-group';
 
 const TIMEOUT = 300;

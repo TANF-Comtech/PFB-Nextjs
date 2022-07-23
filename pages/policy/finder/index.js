@@ -1,3 +1,4 @@
+import React from 'react';
 import { getPolicies } from '../../../lib/queries/policies';
 
 import Wrapper from '../../../components/global/wrapper';

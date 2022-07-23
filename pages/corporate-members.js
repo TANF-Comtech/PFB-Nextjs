@@ -8,7 +8,6 @@ import getCorporateMembers from '../lib/salesforce/getCorporateMembers';
 
 import Wrapper from '../components/global/wrapper';
 import Grid from '../components/global/grid';
-import CorporateMember from '../components/global/member-box';
 import BigTitleBanner from '../components/content/big-title-banner';
 import MainContent from '../components/global/main-content';
 import Heading1 from '../components/primitives/h1';
@@ -72,12 +71,83 @@ const FilterMenu = styled(RefinementList)`
   }
 `;
 
+const Box = styled.div`
+  width: 100%;
+  background-color: #d8d8d8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5vh 0;
+`;
+
+const Company = styled.p`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  text-align: center;
+  margin: 0;
+`;
+
+const CompName = styled.p`
+  font-weight: bold;
+  margin-bottom: 0;
+  padding: 0 3vw;
+`;
+
+const HyperCompName = styled.a`
+  font-weight: bold;
+  padding: 0 5vw;
+  &:hover {
+    color: inherit;
+  }
+`;
+
+function CoalitionMember({ hit }) {
+  return (
+    <>
+      <Box>
+        <Company>
+          {!hit.Website && <CompName>{hit.Name}</CompName>}
+          {hit.Website &&
+            (hit.Website.includes('http://') ||
+              hit.Website.includes('https://') ||
+              hit.Website.includes('HTTP://') ||
+              hit.Website.includes('HTTPS://')) && (
+              <HyperCompName
+                style={{ textDecoration: 'underline', color: 'inherit' }}
+                href={hit.Website}
+              >
+                {hit.Name}
+              </HyperCompName>
+            )}
+          {hit.Website &&
+            !(
+              hit.Website.includes('http://') ||
+              hit.Website.includes('https://') ||
+              hit.Website.includes('HTTP://') ||
+              hit.Website.includes('HTTPS://')
+            ) && (
+              <HyperCompName
+                style={{ textDecoration: 'underline', color: 'inherit' }}
+                href={`https://${hit.Website}`}
+                target="_blank"
+              >
+                {hit.Name}
+              </HyperCompName>
+            )}
+        </Company>
+      </Box>
+    </>
+  );
+}
+
 export default function CorporateMembers() {
   const Hits = ({ hits }) => {
     return (
       <Grid>
         {hits.map((hit) => {
-          return <CorporateMember key={hit.objectId} hit={hit} />;
+          return <CoalitionMember key={hit.objectId} hit={hit} />;
         })}
       </Grid>
     );

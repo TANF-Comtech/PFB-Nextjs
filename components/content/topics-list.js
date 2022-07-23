@@ -1,3 +1,5 @@
+import React from 'react';
+
 import MainContent from '../global/main-content';
 import Grid from '../global/grid';
 import ImageSquare from '../global/image-square';

@@ -1,8 +1,8 @@
+import React from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
 
 import { randomID, linkResolver } from '../../lib/utils';
-
 const ItemList = styled.ul`
   list-style: none;
   padding: 0;

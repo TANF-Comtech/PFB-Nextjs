@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { getGrants } from '../../../lib/queries/grants';
 
 import Wrapper from '../../../components/global/wrapper';

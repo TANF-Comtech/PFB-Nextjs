@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import { RichText } from 'prismic-reactjs';
 
 import { getAllCareers, getSingleCareer } from '../../lib/queries/careers';

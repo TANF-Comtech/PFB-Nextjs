@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Script from 'next/script';
 import styled from 'styled-components';

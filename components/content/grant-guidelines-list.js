@@ -1,3 +1,4 @@
+import React from 'react';
 import { RichText } from 'prismic-reactjs';
 
 import { randomID } from '../../lib/utils';

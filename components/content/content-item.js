@@ -84,56 +84,51 @@ const Image = styled.img`
  * @param { string } title - title that goes next to the icon
  * @param { string } text - content to be shown
  */
-const ContentItem = ({ 
-  date, 
-  deck, 
-  image, 
-  path, 
-  title, 
-  text }) => {
-    return (
-      <Container>
-        {image.url ? (
-          <Image
-            alt={image.alt ? image.alt : 'Bike-oriented image'}
-            loading="lazy"
-            src={image['1x'] ? image['1x'].url : image.url}
-          />
+const ContentItem = ({ date, deck, image, path, title, text }) => {
+  return (
+    <Container>
+      {image.url ? (
+        <Image
+          alt={image.alt ? image.alt : 'Bike-oriented image'}
+          loading="lazy"
+          src={image['1x'] ? image['1x'].url : image.url}
+        />
+      ) : (
+        // Utilizes fallback image functionality
+        <Image alt={image.alt} loading="lazy" src={image.path} />
+      )}
+      <ContentContainer>
+        {!path ? (
+          <Title>{title}</Title>
         ) : (
-          // Utilizes fallback image functionality
-          <Image alt={image.alt} loading="lazy" src={image.path} />
+          <Link href={path}>
+            <a>
+              <Title>{title}</Title>
+            </a>
+          </Link>
         )}
-        <ContentContainer>
-          {!path ? (
-            <Title>{title}</Title>
-          ) : (
-            <Link href={path}>
-              <a>
-                <Title>{title}</Title>
-              </a>
-            </Link>
-          )}
-          { date && <Datestamp>{date}</Datestamp> }
-          { deck !== null ? (
-              <Text>{ deck }</Text>
-            ) : (
-              text ? (<Text>{`${text.substring(0, 300)} ...`}</Text>) : (<></>)
-            )
-          }
-          {path && (
-            <Button
-              buttonBg="#404040"
-              buttonBgHover="rgb(216,216,216)"
-              buttonColor="white"
-              buttonPadding="10px 20px"
-              buttonTextTransform="uppercase"
-              href={path}
-            >
-              Read More
-            </Button>
-          )}
-        </ContentContainer>
-      </Container>
-    );
+        {date && <Datestamp>{date}</Datestamp>}
+        {deck !== null ? (
+          <Text>{deck}</Text>
+        ) : text ? (
+          <Text>{`${text.substring(0, 300)} ...`}</Text>
+        ) : (
+          <></>
+        )}
+        {path && (
+          <Button
+            buttonBg="#404040"
+            buttonBgHover="rgb(216,216,216)"
+            buttonColor="white"
+            buttonPadding="10px 20px"
+            buttonTextTransform="uppercase"
+            href={path}
+          >
+            Read More
+          </Button>
+        )}
+      </ContentContainer>
+    </Container>
+  );
 };
 export default ContentItem;

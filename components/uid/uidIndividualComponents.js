@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Grants } from '../content/grants';
 import TakeActionList from '../content/takeaction-list';
 import ColorBanner from '../global/color-banner';

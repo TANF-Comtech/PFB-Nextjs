@@ -1,3 +1,4 @@
+import React from 'react';
 import Head from 'next/head';
 import ErrorPage from 'next/error';
 import { RichText } from 'prismic-reactjs';
@@ -35,7 +36,7 @@ export default function BasicPage({ page, preview }) {
             {page.basic_page.body.map( ( slice ) => {
               return slice.fields.map( ( accordion ) => {
                 return (
-                  <Accordion 
+                  <Accordion
                     key={ randomID(10000000) }
                     title={RichText.asText(accordion.accordion_heading)}
                   >

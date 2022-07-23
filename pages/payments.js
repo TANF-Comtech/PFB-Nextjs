@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
 import Link from 'next/link';
 import { loadStripe } from '@stripe/stripe-js';
-import Wrapper from '../components/global/wrapper';
 import styled, { ThemeContext } from 'styled-components';
 
 import SiteMetaCustom from '../components/meta/site-meta-custom';
 import MainContent from '../components/global/main-content';
+import Wrapper from '../components/global/wrapper';
 
 const RevInp = styled.input`
   min-width: 20vw;

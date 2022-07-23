@@ -1,19 +1,20 @@
+import React from 'react';
 import styled, { keyframes } from 'styled-components';
 
 const skChase = keyframes`
-  100% { transform: rotate(360deg); } 
+  100% { transform: rotate(360deg); }
 `;
 
 const skChaseDot = keyframes`
-  80%, 100% { transform: rotate(360deg); } 
+  80%, 100% { transform: rotate(360deg); }
 `;
 
 const skChaseDotBefore = keyframes`
   50% {
-    transform: scale(0.4); 
+    transform: scale(0.4);
   } 100%, 0% {
-    transform: scale(1.0); 
-  } 
+    transform: scale(1.0);
+  }
 `;
 
 const Background = styled.main`

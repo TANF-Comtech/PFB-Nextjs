@@ -1,3 +1,5 @@
+import React from 'react';
+
 import MainContent from '../global/main-content';
 import WayfindingItem from '../slices/wayfinding-item';
 import Promo from '../slices/promo';
