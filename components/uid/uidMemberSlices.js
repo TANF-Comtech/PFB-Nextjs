@@ -2,13 +2,13 @@ import React, { useContext } from 'react';
 import { RichText } from 'prismic-reactjs';
 import { ThemeContext } from 'styled-components';
 
-import { linkResolver, randomID } from '../../lib/utils';
+import { linkResolver, randomID } from '~/utils';
 
-import NumberedPillars from '../content/numbered-pillars';
-import MainContent from '../global/main-content';
-import SummaryBlock from '../content/summary-block';
-import ImageList from '../content/image-list';
-import Promo from '../slices/promo';
+import NumberedPillars from '~/components/numbered-pillars';
+import MainContent from '~/components/main-content';
+import SummaryBlock from '~/components/summary-block';
+import ImageList from '~/components/image-list';
+import Promo from '~/components/promo';
 
 export default function UidMemberSlices({ landing_page }) {
   const themeProps = useContext(ThemeContext);

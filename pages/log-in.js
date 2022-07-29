@@ -4,17 +4,17 @@ import Router from 'next/router';
 import styled, { ThemeContext } from 'styled-components';
 import { Markup } from 'interweave';
 
-import AuthContext from '../context/auth/auth-context';
+import AuthContext from '~/context/auth/auth-context';
 
-import Wrapper from '../components/global/wrapper';
-import MainContent from '../components/global/main-content';
-import Spinner from '../components/global/spinner';
-import BigTitleBanner from '../components/content/big-title-banner';
-import SiteMetaCustom from '../components/meta/site-meta-custom';
-import Header1 from '../components/primitives/h1';
-import BgImage from '../components/primitives/bg-image';
+import Wrapper from '~/components/wrapper';
+import MainContent from '~/components/main-content';
+import Spinner from '~/components/spinner';
+import BigTitleBanner from '~/components/big-title-banner';
+import SiteMetaCustom from '~/components/site-meta-custom';
+import Header1 from '~/components/h1';
+import BgImage from '~/components/bg-image';
 
-import SigninBG from '../public/promo/signin-bg.jpg';
+import SigninBG from '~/public/promo/signin-bg.jpg';
 
 const LoginForm = styled.form`
   background-color: rgba(255, 255, 255, 0.85);

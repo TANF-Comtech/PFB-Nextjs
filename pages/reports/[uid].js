@@ -3,19 +3,18 @@ import styled from 'styled-components';
 import { RichText } from 'prismic-reactjs';
 import Link from 'next/link';
 
-import { getReports, getSingleReportPage } from '../../lib/queries/reports';
-import { linkResolver } from '../../lib/utils';
+import { getReports, getSingleReportPage } from '~/lib/queries/reports';
+import { linkResolver } from '~/utils';
+import DefaultContext from '~/context/default/default-context';
 
-import DefaultContext from '../../context/default/default-context';
+import Wrapper from '~/components/wrapper';
+import SiteMetaCustom from '~/components/site-meta-custom';
+import MainContent from '~/components/main-content';
+import Header1 from '~/components/h1';
+import Promo from '~/components/promo';
+import Grid from '~/components/grid';
 
-import Wrapper from '../../components/global/wrapper';
-import SiteMetaCustom from '../../components/meta/site-meta-custom';
-import MainContent from '../../components/global/main-content';
-import Header1 from '../../components/primitives/h1';
-import Promo from '../../components/slices/promo';
-import Grid from '../../components/global/grid';
-
-import ResearchPromo from '../../public/promo/promo-research.jpg';
+import ResearchPromo from '~/public/promo/promo-research.jpg';
 
 const Box = styled.div`
   align-items: center;

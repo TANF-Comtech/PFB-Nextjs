@@ -2,8 +2,8 @@ import { useEffect, useState, useContext } from 'react';
 import { useRouter } from 'next/router';
 import { Date as ParseDate } from 'prismic-reactjs';
 
-import { linkResolver } from '../lib/utils';
-import DefaultContext from '../context/default/default-context';
+import { linkResolver } from '~/utils';
+import DefaultContext from '~/context/default/default-context';
 
 /**
  *

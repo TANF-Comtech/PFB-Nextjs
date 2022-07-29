@@ -2,24 +2,21 @@ import React, { useState } from 'react';
 import Head from 'next/head';
 import { ThemeProvider } from 'styled-components';
 import { ApolloProvider } from '@apollo/client';
-import { useApollo } from '../lib/apollo/apolloClient';
 
-import Variables from '../components/styles/variables';
-import GlobalStyle from '../components/styles/global-css';
+import { useApollo } from '~/lib/apollo/apolloClient';
+import useWindowSize from '~/hooks/useWindowSize';
+import DefaultContext from '~/context/default/default-context';
+import MenuContext from '~/context/menu/menu-context';
+import { ldJSONBasic, defaultData } from '~/context/default/default-data';
+import { AuthProvider } from '~/context/auth/auth-context';
 
-import useWindowSize from '../hooks/useWindowSize';
+import Variables from '~/components/styles/variables';
+import GlobalStyle from '~/components/styles/global-css';
+import NavBar from '~/components/navbar';
+import Footer from '~/components/footer';
+import PageTransition from '~/components/transition';
 
-import DefaultContext from '../context/default/default-context';
-import MenuContext from '../context/menu/menu-context';
-import { ldJSONBasic, defaultData } from '../context/default/default-data';
-
-import { AuthProvider } from '../context/auth/auth-context';
-
-import NavBar from '../components/global/navbar';
-import Footer from '../components/global/footer';
-import PageTransition from '../components/global/transition';
-
-import '../styles/globals.css';
+import '~/styles/globals.css';
 
 /**
  * <MyApp>

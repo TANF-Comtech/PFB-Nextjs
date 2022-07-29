@@ -1,20 +1,19 @@
 import React, { useContext } from 'react';
 import { Date as ParseDate } from 'prismic-reactjs';
 
-import { getLocationsNoImages, getSingleLocationsPage } from '../../lib/queries/locations';
-import { randomID } from '../../lib/utils';
-import { setDateSuffix } from '../../lib/utils/setDateSuffix';
+import { getLocationsNoImages, getSingleLocationsPage } from '~/lib/queries/locations';
+import { randomID } from '~/utils';
+import { setDateSuffix } from '~/utils/setDateSuffix';
+import DefaultContext from '~/context/default/default-context';
 
-import DefaultContext from '../../context/default/default-context';
-
-import Wrapper from '../../components/global/wrapper';
-import SiteMetaCustom from '../../components/meta/site-meta-custom';
-import HeaderImage from '../../components/global/header-image';
-import MainContent from '../../components/global/main-content';
-import ContentItem from '../../components/content/content-item';
-import RideSpotPromo from '../../components/slices/ridespot-promo';
-import ActionItemGroup from '../../components/slices/action-item-group';
-import FallbackImage from '../../components/content/fallback-image';
+import Wrapper from '~/components/wrapper';
+import SiteMetaCustom from '~/components/site-meta-custom';
+import HeaderImage from '~/components/header-image';
+import MainContent from '~/components/main-content';
+import ContentItem from '~/components/content-item';
+import RideSpotPromo from '~/components/ridespot-promo';
+import ActionItemGroup from '~/components/action-item-group';
+import FallbackImage from '~/components/fallback-image';
 
 /* You must reference the `topic` prop to get data from `getStaticProps` - check bottom of this file */
 export default function LocationPage({ fallback, page, preview }) {

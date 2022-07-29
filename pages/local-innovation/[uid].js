@@ -4,35 +4,34 @@ import Image from 'next/image';
 import { RichText } from 'prismic-reactjs';
 import styled, { ThemeContext } from 'styled-components';
 
-import { getPrograms, getProgramPage } from '../../lib/queries/local-innovation';
-import { randomID, linkResolver } from '../../lib/utils';
+import { getPrograms, getProgramPage } from '~/lib/queries/local-innovation';
+import { randomID, linkResolver } from '~/utils';
 
-import DefaultContext from '../../context/default/default-context';
-import FallbackImage from '../../components/content/fallback-image';
+import DefaultContext from '~/context/default/default-context';
+import FallbackImage from '~/components/fallback-image';
+import Wrapper from '~/components/wrapper';
+import SiteMetaCustom from '~/components/site-meta-custom';
+import BigTitleBanner from '~/components/big-title-banner';
+import Heading1 from '~/components/h1';
+import MainContent from '~/components/main-content';
+import Accordion from '~/components/accordion';
+import Promo from '~/components/promo';
+import VisualGrid from '~/components/visual-grid';
+import Grid from '~/components/grid';
 
-import Wrapper from '../../components/global/wrapper';
-import SiteMetaCustom from '../../components/meta/site-meta-custom';
-import BigTitleBanner from '../../components/content/big-title-banner';
-import Heading1 from '../../components/primitives/h1';
-import MainContent from '../../components/global/main-content';
-import Accordion from '../../components/global/accordion';
-import Promo from '../../components/slices/promo';
-import VisualGrid from '../../components/global/visual-grid';
-import Grid from '../../components/global/grid';
-
-import Atlanta from '../../public/cities/atlanta.jpg';
-import Austin from '../../public/cities/austin.jpg';
-import Boston from '../../public/cities/boston.jpg';
-import Chicago from '../../public/cities/chicago.jpg';
-import Denver from '../../public/cities/denver.jpg';
-import Indianapolis from '../../public/cities/indianapolis.jpg';
-import Memphis from '../../public/cities/memphis.jpg';
-import NYC from '../../public/cities/nyc.jpg';
-import Pittsburgh from '../../public/cities/pittsburgh.jpg';
-import Portland from '../../public/cities/portland.jpg';
-import Seattle from '../../public/cities/seattle.jpg';
-import SF from '../../public/cities/sf.jpg';
-import WashingtonDC from '../../public/cities/dc.jpg';
+import Atlanta from '~/public/cities/atlanta.jpg';
+import Austin from '~/public/cities/austin.jpg';
+import Boston from '~/public/cities/boston.jpg';
+import Chicago from '~/public/cities/chicago.jpg';
+import Denver from '~/public/cities/denver.jpg';
+import Indianapolis from '~/public/cities/indianapolis.jpg';
+import Memphis from '~/public/cities/memphis.jpg';
+import NYC from '~/public/cities/nyc.jpg';
+import Pittsburgh from '~/public/cities/pittsburgh.jpg';
+import Portland from '~/public/cities/portland.jpg';
+import Seattle from '~/public/cities/seattle.jpg';
+import SF from '~/public/cities/sf.jpg';
+import WashingtonDC from '~/public/cities/dc.jpg';
 
 const RedHeading = styled.h2`
   color: ${(props) => props.theme.red};

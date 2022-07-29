@@ -4,25 +4,24 @@ import { RichText, Date as ParseDate } from 'prismic-reactjs';
 import Link from 'next/link';
 import Cookies from 'cookies';
 
-import { getSingleMemberPage } from '../../lib/queries/member-center';
-import { randomID, linkResolver } from '../../lib/utils';
-import auth0ValidateToken from '../../lib/auth0/auth0ValidateToken';
+import { getSingleMemberPage } from '~/lib/queries/member-center';
+import { randomID, linkResolver } from '~/utils';
+import auth0ValidateToken from '~/lib/auth0/auth0ValidateToken';
+import DefaultContext from '~/context/default/default-context';
 
-import DefaultContext from '../../context/default/default-context';
-
-import Wrapper from '../../components/global/wrapper';
-import SiteMetaCustom from '../../components/meta/site-meta-custom';
-import SecondaryTitleBanner from '../../components/content/secondary-title-banner';
-import HeaderImage from '../../components/global/header-image';
-import MainContent from '../../components/global/main-content';
-import SummaryBlock from '../../components/content/summary-block';
-import Header1 from '../../components/primitives/h1';
-import BigTitleBanner from '../../components/content/big-title-banner';
-import Button from '../../components/primitives/button';
-import Grid from '../../components/global/grid';
-import WayfindingItem from '../../components/slices/wayfinding-item';
-import NumberedPillars from '../../components/content/numbered-pillars';
-import VisualGrid from '../../components/global/visual-grid';
+import Wrapper from '~/components/wrapper';
+import SiteMetaCustom from '~/components/site-meta-custom';
+import SecondaryTitleBanner from '~/components/secondary-title-banner';
+import HeaderImage from '~/components/header-image';
+import MainContent from '~/components/main-content';
+import SummaryBlock from '~/components/summary-block';
+import Header1 from '~/components/h1';
+import BigTitleBanner from '~/components/big-title-banner';
+import Button from '~/components/button';
+import Grid from '~/components/grid';
+import WayfindingItem from '~/components/wayfinding-item';
+import NumberedPillars from '~/components/numbered-pillars';
+import VisualGrid from '~/components/visual-grid';
 
 const IntroWrapper = styled.div`
   margin: 3vh 0 1vh 0;

@@ -3,9 +3,9 @@ import Link from 'next/link';
 import { loadStripe } from '@stripe/stripe-js';
 import styled, { ThemeContext } from 'styled-components';
 
-import SiteMetaCustom from '../components/meta/site-meta-custom';
-import MainContent from '../components/global/main-content';
-import Wrapper from '../components/global/wrapper';
+import SiteMetaCustom from '~/components/site-meta-custom';
+import MainContent from '~/components/main-content';
+import Wrapper from '~/components/wrapper';
 
 const RevInp = styled.input`
   min-width: 20vw;

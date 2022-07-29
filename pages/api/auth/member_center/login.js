@@ -1,7 +1,8 @@
 import Cookies from 'cookies';
-import checkEmailInSalesforce from '../../../../lib/salesforce/checkEmailInSalesforce';
-import sendAuthCode from '../../../../lib/auth0/sendAuthCode';
-import loginAuth0 from '../../../../lib/auth0/loginAuth0';
+
+import checkEmailInSalesforce from '~/lib/salesforce/checkEmailInSalesforce';
+import sendAuthCode from '~/lib/auth0/sendAuthCode';
+import loginAuth0 from '~/lib/auth0/loginAuth0';
 
 const cookieLifeTimeHours = process.env.AUTH0_TOKEN_LIFETIME_HOURS;
 

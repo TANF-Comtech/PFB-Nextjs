@@ -1,13 +1,12 @@
 import React, { useContext } from 'react';
 
-import { getPolicies, getSinglePolicyPage } from '../../lib/queries/policies';
+import { getPolicies, getSinglePolicyPage } from '~/lib/queries/policies';
+import DefaultContext from '~/context/default/default-context';
 
-import DefaultContext from '../../context/default/default-context';
-
-import Wrapper from '../../components/global/wrapper';
-import SiteMetaCustom from '../../components/meta/site-meta-custom';
-import MainContent from '../../components/global/main-content';
-import PolicyItem from '../../components/content/policy-item';
+import Wrapper from '~/components/wrapper';
+import SiteMetaCustom from '~/components/site-meta-custom';
+import MainContent from '~/components/main-content';
+import PolicyItem from '~/components/policy-item';
 
 /* You must reference the `policy` prop to get data from `getStaticProps` - check bottom of this file */
 export default function PolicyPage({ page, preview }) {

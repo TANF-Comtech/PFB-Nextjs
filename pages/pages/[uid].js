@@ -3,12 +3,12 @@ import Head from 'next/head';
 import ErrorPage from 'next/error';
 import { RichText } from 'prismic-reactjs';
 
-import { getSingleBasicPage, getAllBasicPagesWithUID } from '../../lib/queries/basic-page';
+import { getSingleBasicPage, getAllBasicPagesWithUID } from '~/lib/queries/basic-page';
+import { randomID } from '~/utils';
 
-import { randomID } from '../../lib/utils';
-import Wrapper from '../../components/global/wrapper';
-import Heading1 from '../../components/primitives/h1';
-import Accordion from '../../components/global/accordion';
+import Wrapper from '~/components/wrapper';
+import Heading1 from '~/components/h1';
+import Accordion from '~/components/accordion';
 
 export default function BasicPage({ page, preview }) {
   // Check to make sure there is actually a page at this UID path

@@ -2,19 +2,18 @@ import React from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
 
-import { getReports } from '../../lib/queries/reports';
-import { linkResolver, randomID } from '../../lib/utils';
+import { getReports } from '~/lib/queries/reports';
+import { linkResolver, randomID } from '~/utils';
+import { AlgoliaIndex } from '~/lib/algolia/algoliaClient';
+import { reportsFormatter } from '~/lib/algolia/reportsFormatter';
 
-import Wrapper from '../../components/global/wrapper';
-import MainContent from '../../components/global/main-content';
-import Header1 from '../../components/primitives/h1';
-import Promo from '../../components/slices/promo';
-import Button from '../../components/primitives/button';
+import Wrapper from '~/components/wrapper';
+import MainContent from '~/components/main-content';
+import Header1 from '~/components/h1';
+import Promo from '~/components/promo';
+import Button from '~/components/button';
 
-import ResearchPromo from '../../public/promo/promo-research.jpg';
-
-import { AlgoliaIndex } from '../../lib/algolia/algoliaClient';
-import { reportsFormatter } from '../../lib/algolia/reportsFormatter';
+import ResearchPromo from '~/public/promo/promo-research.jpg';
 
 const ReportSection = styled.section`
   margin: 5vh 0;

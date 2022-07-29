@@ -2,21 +2,20 @@ import React, { useContext } from 'react';
 import { RichText } from 'prismic-reactjs';
 import styled, { ThemeContext } from 'styled-components';
 
-import { linkResolver, randomID } from '../../lib/utils';
+import { linkResolver, randomID } from '~/utils';
 
-import Button from '../primitives/button';
-import GrantsList from '../content/grant-guidelines-list';
-import MissionPillars from '../content/mission-pillars';
-import NumberedPillars from '../content/numbered-pillars';
-import ReportsList from '../content/reports-list';
-import SecondaryCampaign from '../global/secondary-campaign';
-import SummaryBlock from '../content/summary-block';
-import ToolkitPillars from '../content/toolkit-pillars';
-import VisualGrid from '../global/visual-grid';
-import MainContent from '../global/main-content';
-
-import ActionItemGroup from '../slices/action-item-group';
-import Promo from '../slices/promo';
+import Button from '~/components/button';
+import GrantsList from '~/components/grant-guidelines-list';
+import MissionPillars from '~/components/mission-pillars';
+import NumberedPillars from '~/components/numbered-pillars';
+import ReportsList from '~/components/reports-list';
+import SecondaryCampaign from '~/components/secondary-campaign';
+import SummaryBlock from '~/components/summary-block';
+import ToolkitPillars from '~/components/toolkit-pillars';
+import VisualGrid from '~/components/visual-grid';
+import MainContent from '~/components/main-content';
+import ActionItemGroup from '~/components/action-item-group';
+import Promo from '~/components/promo';
 
 const RedHeading = styled.h2`
   color: ${(props) => props.theme.red};

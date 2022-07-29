@@ -2,18 +2,18 @@ import React from 'react';
 import styled from 'styled-components';
 import { InstantSearch, connectHits, RefinementList } from 'react-instantsearch-dom';
 
-import { AlgoliaIndex, AlgoliaReactClient } from '../lib/algolia/algoliaClient';
-import { memberFormatter } from '../lib/algolia/memberFormatter';
-import getCorporateMembers from '../lib/salesforce/getCorporateMembers';
+import { AlgoliaIndex, AlgoliaReactClient } from '~/lib/algolia/algoliaClient';
+import { memberFormatter } from '~/lib/algolia/memberFormatter';
+import getCorporateMembers from '~/lib/salesforce/getCorporateMembers';
 
-import Wrapper from '../components/global/wrapper';
-import Grid from '../components/global/grid';
-import BigTitleBanner from '../components/content/big-title-banner';
-import MainContent from '../components/global/main-content';
-import Heading1 from '../components/primitives/h1';
-import CustomSearchBox from '../components/global/search-box';
-import SiteMetaCustom from '../components/meta/site-meta-custom';
-import Button from '../components/primitives/button';
+import Wrapper from '~/components/wrapper';
+import Grid from '~/components/grid';
+import BigTitleBanner from '~/components/big-title-banner';
+import MainContent from '~/components/main-content';
+import Heading1 from '~/components/h1';
+import CustomSearchBox from '~/components/search-box';
+import SiteMetaCustom from '~/components/site-meta-custom';
+import Button from '~/components/button';
 
 const HitsAndFilters = styled.section`
   align-items: flex-start;

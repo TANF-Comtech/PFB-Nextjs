@@ -1,16 +1,15 @@
 import React from 'react';
 
-import { getGrants } from '../../../lib/queries/grants';
+import { getGrants } from '~/lib/queries/grants';
+import { AlgoliaIndex } from '~/lib/algolia/algoliaClient';
+import { grantsFormatter, grantsOnlyFormatter } from '~/lib/algolia/grantsFormatter';
 
-import Wrapper from '../../../components/global/wrapper';
-import Header1 from '../../../components/primitives/h1';
-import GrantsItem from '../../../components/content/grants-item';
-import Button from '../../../components/primitives/button';
-import MainContent from '../../../components/global/main-content';
-import ColorBanner from '../../../components/global/color-banner';
-
-import { AlgoliaIndex } from '../../../lib/algolia/algoliaClient';
-import { grantsFormatter, grantsOnlyFormatter } from '../../../lib/algolia/grantsFormatter';
+import Wrapper from '~/components/wrapper';
+import Header1 from '~/components/h1';
+import GrantsItem from '~/components/grants-item';
+import Button from '~/components/button';
+import MainContent from '~/components/main-content';
+import ColorBanner from '~/components/color-banner';
 
 export default function GrantsFinder({ page }) {
   return (

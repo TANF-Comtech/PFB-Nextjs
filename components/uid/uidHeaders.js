@@ -1,14 +1,14 @@
 import React from 'react';
 import { RichText } from 'prismic-reactjs';
 
-import useMetadata from '../../hooks/useMetadata';
+import useMetadata from '~/hooks/useMetadata';
 
-import BigTitleBanner from '../content/big-title-banner';
-import SecondaryTitleBanner from '../content/secondary-title-banner';
-import Heading1 from '../primitives/h1';
-import HeaderImage from '../global/header-image';
-import SummaryBlock from '../content/summary-block';
-import SiteMetaCustom from '../meta/site-meta-custom';
+import BigTitleBanner from '~/components/big-title-banner';
+import SecondaryTitleBanner from '~/components/secondary-title-banner';
+import Heading1 from '~/components/h1';
+import HeaderImage from '~/components/header-image';
+import SummaryBlock from '~/components/summary-block';
+import SiteMetaCustom from '~/components/site-meta-custom';
 
 export default function UidHeader({ landing_page }) {
   const { theTitle, theDesc, theKeywords, thePath, theImage, theImageWidth, theImageHeight } =

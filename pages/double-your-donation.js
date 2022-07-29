@@ -1,10 +1,10 @@
-import React from 'react'
+import React from 'react';
 import Script from 'next/script';
 import styled from 'styled-components';
 
-import SiteMetaCustom from '../components/meta/site-meta-custom';
-import Wrapper from '../components/global/wrapper';
-import MainContent from '../components/global/main-content';
+import SiteMetaCustom from '~/components/site-meta-custom';
+import Wrapper from '~/components/wrapper';
+import MainContent from '~/components/main-content';
 
 const Container = styled.section`
   .embed-container {

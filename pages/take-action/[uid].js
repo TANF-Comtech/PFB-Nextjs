@@ -5,43 +5,41 @@ import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import { RichText } from 'prismic-reactjs';
 
-import { getSingleActionPage } from '../../lib/queries/take-action';
+import { getSingleActionPage } from '~/lib/queries/take-action';
+import DefaultContext from '~/context/default/default-context';
 
-import DefaultContext from '../../context/default/default-context';
+import Wrapper from '~/components/wrapper';
+import SiteMetaCustom from '~/components/site-meta-custom';
+import MainContent from '~/components/main-content';
+import Promo from '~/components/promo';
 
-import Wrapper from '../../components/global/wrapper';
-import SiteMetaCustom from '../../components/meta/site-meta-custom';
-import MainContent from '../../components/global/main-content';
-import Promo from '../../components/slices/promo';
-
-import ResearchPromo from '../../public/RidespotBg.jpg';
-
-import FormImg01 from '../../public/form-images/PFB_Forms_01.jpg';
-import FormImg02 from '../../public/form-images/PFB_Forms_02.jpg';
-import FormImg03 from '../../public/form-images/PFB_Forms_03.jpg';
-import FormImg04 from '../../public/form-images/PFB_Forms_04.jpg';
-import FormImg05 from '../../public/form-images/PFB_Forms_05.jpg';
-import FormImg06 from '../../public/form-images/PFB_Forms_06.jpg';
-import FormImg07 from '../../public/form-images/PFB_Forms_07.jpg';
-import FormImg08 from '../../public/form-images/PFB_Forms_08.jpg';
-import FormImg09 from '../../public/form-images/PFB_Forms_09.jpg';
-import FormImg10 from '../../public/form-images/PFB_Forms_10.jpg';
-import FormImg11 from '../../public/form-images/PFB_Forms_11.jpg';
-import FormImg12 from '../../public/form-images/PFB_Forms_12.jpg';
-import FormImg13 from '../../public/form-images/PFB_Forms_13.jpg';
-import FormImg14 from '../../public/form-images/PFB_Forms_14.jpg';
-import FormImg15 from '../../public/form-images/PFB_Forms_15.jpg';
-import FormImg16 from '../../public/form-images/PFB_Forms_16.jpg';
-import FormImg17 from '../../public/form-images/PFB_Forms_17.jpg';
-import FormImg18 from '../../public/form-images/PFB_Forms_18.jpg';
-import FormImg19 from '../../public/form-images/PFB_Forms_19.jpg';
-import FormImg20 from '../../public/form-images/PFB_Forms_20.jpg';
-import FormImg21 from '../../public/form-images/PFB_Forms_21.jpg';
-import FormImg22 from '../../public/form-images/PFB_Forms_22.jpg';
-import FormImg23 from '../../public/form-images/PFB_Forms_23.jpg';
-import FormImg24 from '../../public/form-images/PFB_Forms_24.jpg';
-import FormImg25 from '../../public/form-images/PFB_Forms_25.jpg';
-import FormImg26 from '../../public/form-images/PFB_Forms_26.jpg';
+import ResearchPromo from '~/public/RidespotBg.jpg';
+import FormImg01 from '~/public/form-images/PFB_Forms_01.jpg';
+import FormImg02 from '~/public/form-images/PFB_Forms_02.jpg';
+import FormImg03 from '~/public/form-images/PFB_Forms_03.jpg';
+import FormImg04 from '~/public/form-images/PFB_Forms_04.jpg';
+import FormImg05 from '~/public/form-images/PFB_Forms_05.jpg';
+import FormImg06 from '~/public/form-images/PFB_Forms_06.jpg';
+import FormImg07 from '~/public/form-images/PFB_Forms_07.jpg';
+import FormImg08 from '~/public/form-images/PFB_Forms_08.jpg';
+import FormImg09 from '~/public/form-images/PFB_Forms_09.jpg';
+import FormImg10 from '~/public/form-images/PFB_Forms_10.jpg';
+import FormImg11 from '~/public/form-images/PFB_Forms_11.jpg';
+import FormImg12 from '~/public/form-images/PFB_Forms_12.jpg';
+import FormImg13 from '~/public/form-images/PFB_Forms_13.jpg';
+import FormImg14 from '~/public/form-images/PFB_Forms_14.jpg';
+import FormImg15 from '~/public/form-images/PFB_Forms_15.jpg';
+import FormImg16 from '~/public/form-images/PFB_Forms_16.jpg';
+import FormImg17 from '~/public/form-images/PFB_Forms_17.jpg';
+import FormImg18 from '~/public/form-images/PFB_Forms_18.jpg';
+import FormImg19 from '~/public/form-images/PFB_Forms_19.jpg';
+import FormImg20 from '~/public/form-images/PFB_Forms_20.jpg';
+import FormImg21 from '~/public/form-images/PFB_Forms_21.jpg';
+import FormImg22 from '~/public/form-images/PFB_Forms_22.jpg';
+import FormImg23 from '~/public/form-images/PFB_Forms_23.jpg';
+import FormImg24 from '~/public/form-images/PFB_Forms_24.jpg';
+import FormImg25 from '~/public/form-images/PFB_Forms_25.jpg';
+import FormImg26 from '~/public/form-images/PFB_Forms_26.jpg';
 
 const CenteredTitle = styled.h2`
   text-align: center;

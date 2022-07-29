@@ -1,5 +1,6 @@
 import Cookies from 'cookies';
-import auth0ValidateToken from '../../../../lib/auth0/auth0ValidateToken';
+
+import auth0ValidateToken from '~/lib/auth0/auth0ValidateToken';
 
 const checkLogin = (req, res) => {
   if (req.method === 'GET') {

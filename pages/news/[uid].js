@@ -3,22 +3,21 @@ import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { RichText } from 'prismic-reactjs';
 
-import { htmlSerializer } from '../../lib/prismic/htmlSerializer';
-import { getAllNews, getSingleNewsPage } from '../../lib/queries/news';
-import { linkResolver } from '../../lib/utils';
-import { setDateSuffix } from '../../lib/utils/setDateSuffix';
+import { htmlSerializer } from '~/lib/prismic/htmlSerializer';
+import { getAllNews, getSingleNewsPage } from '~/lib/queries/news';
+import { linkResolver } from '~/utils';
+import { setDateSuffix } from '~/utils/setDateSuffix';
+import useMetadata from '~/hooks/useMetadata';
 
-import useMetadata from '../../hooks/useMetadata';
+import SiteMetaCustom from '~/components/site-meta-custom';
+import Wrapper from '~/components/wrapper';
+import MainContent from '~/components/main-content';
+import Promo from '~/components/promo';
+import FallbackImage from '~/components/fallback-image';
 
-import SiteMetaCustom from '../../components/meta/site-meta-custom';
-import Wrapper from '../../components/global/wrapper';
-import MainContent from '../../components/global/main-content';
-import Promo from '../../components/slices/promo';
-import FallbackImage from '../../components/content/fallback-image';
-
-import TakeActionPromo from '../../public/promo/take-action-banner.jpg';
-import logo from '../../public/PFB_Stacked_LOGO_512x512.jpg';
-import RedArrowWhiteBlock from '../../public/red-arrow-white-block.svg';
+import TakeActionPromo from '~/public/promo/take-action-banner.jpg';
+import logo from '~/public/PFB_Stacked_LOGO_512x512.jpg';
+import RedArrowWhiteBlock from '~/public/red-arrow-white-block.svg';
 
 const DateBox = styled.div`
   font-size: 20px;
