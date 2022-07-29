@@ -20,10 +20,10 @@ import DefaultContext from '~/context/default/default-context';
  */
 
 function paraFinder(array) {
-  const contentFiltered = array.filter((section) => section.type === 'paragraph');
+  const contentFiltered = array.find((section) => section.type === 'paragraph');
 
   // returns the first paragraph from the rich text field
-  return contentFiltered[0];
+  return contentFiltered;
 }
 
 /**
