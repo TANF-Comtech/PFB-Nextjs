@@ -4,7 +4,7 @@ import { RichText } from 'prismic-reactjs';
 
 import { getStats, getSingleStatsPage } from '~/lib/queries/statistics';
 import { linkResolver } from '~/utils';
-import DefaultContext from '~/context/default/default-context';
+import data from '~/data';
 
 import Wrapper from '~/components/wrapper';
 import SiteMetaCustom from '~/components/site-meta-custom';
@@ -21,7 +21,7 @@ const IntroWrapper = styled.div`
 export default function MembersPage({ page, preview }) {
   // Destructure page payload and meta from global context
   const { statistic_page } = page;
-  const { meta } = useContext(DefaultContext);
+  const { meta } = data;
 
   return (
     <>

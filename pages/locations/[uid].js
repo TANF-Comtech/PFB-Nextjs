@@ -4,7 +4,7 @@ import { Date as ParseDate } from 'prismic-reactjs';
 import { getLocationsNoImages, getSingleLocationsPage } from '~/lib/queries/locations';
 import { randomID } from '~/utils';
 import { setDateSuffix } from '~/utils/setDateSuffix';
-import DefaultContext from '~/context/default/default-context';
+import data from '~/data';
 
 import Wrapper from '~/components/wrapper';
 import SiteMetaCustom from '~/components/site-meta-custom';
@@ -22,7 +22,7 @@ export default function LocationPage({ fallback, page, preview }) {
   // 1 - news for this location
   // more to come...
   const { locations } = page[0];
-  const { meta, actionItems, rideSpotRides } = useContext(DefaultContext);
+  const { meta, actionItems, rideSpotRides } = data;
 
   return (
     <>

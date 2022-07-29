@@ -9,7 +9,7 @@ import { randomID, linkResolver } from '~/utils';
 import { setDateSuffix } from '~/utils/setDateSuffix';
 import { ebikeFormatter } from '~/lib/algolia/ebikeFormatter';
 import { AlgoliaIndex } from '~/lib/algolia/algoliaClient';
-import DefaultContext from '~/context/default/default-context';
+import data from '~/data';
 
 import FallbackImage from '~/components/fallback-image';
 import Wrapper from '~/components/wrapper';
@@ -32,7 +32,7 @@ const SpacedHeading = styled.h2`
 export default function TopicPage({ fallback, page, preview }) {
   // Destructure topic from main page payload and meta from global context
   const { topic } = page[0];
-  const { meta } = useContext(DefaultContext);
+  const { meta } = data;
   const pillars = []; // setup for pillar content
 
   return (

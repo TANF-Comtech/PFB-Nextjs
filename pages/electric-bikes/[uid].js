@@ -4,7 +4,7 @@ import { RichText } from 'prismic-reactjs';
 
 import { getEBikesPages, getSingleEBikesPage } from '~/lib/queries/electric-bikes';
 import { linkResolver } from '~/utils';
-import DefaultContext from '~/context/default/default-context';
+import data from '~/data';
 
 import Wrapper from '~/components/wrapper';
 import SiteMetaCustom from '~/components/site-meta-custom';
@@ -21,7 +21,7 @@ const IntroWrapper = styled.div`
 export default function EBikesPage({ page, preview }) {
   // Destructure page payload and meta from global context
   const { electric_bikes } = page;
-  const { meta } = useContext(DefaultContext);
+  const { meta } = data;
 
   return (
     <>

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 
 import { getPolicies, getSinglePolicyPage } from '~/lib/queries/policies';
-import DefaultContext from '~/context/default/default-context';
+import data from '~/data';
 
 import Wrapper from '~/components/wrapper';
 import SiteMetaCustom from '~/components/site-meta-custom';
@@ -12,7 +12,7 @@ import PolicyItem from '~/components/policy-item';
 export default function PolicyPage({ page, preview }) {
   // Destructure page payload and meta from global context
   const { policy } = page;
-  const { meta } = useContext(DefaultContext);
+  const { meta } = data;
 
   return (
     <>

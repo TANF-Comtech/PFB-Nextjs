@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { RichText } from 'prismic-reactjs';
 
 import { getAllCareers, getSingleCareer } from '~/lib/queries/careers';
-import DefaultContext from '~/context/default/default-context';
+import data from '~/data';
 
 import Wrapper from '~/components/wrapper';
 import SiteMetaCustom from '~/components/site-meta-custom';
@@ -13,7 +13,7 @@ import Button from '~/components/button';
 
 export default function CareerPages({ page, preview }) {
   const { job } = page;
-  const { meta } = useContext(DefaultContext);
+  const { meta } = data;
 
   return (
     <>

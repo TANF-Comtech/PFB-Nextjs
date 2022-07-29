@@ -7,7 +7,7 @@ import Cookies from 'cookies';
 import { getSingleMemberPage } from '~/lib/queries/member-center';
 import { randomID, linkResolver } from '~/utils';
 import auth0ValidateToken from '~/lib/auth0/auth0ValidateToken';
-import DefaultContext from '~/context/default/default-context';
+import data from '~/data';
 
 import Wrapper from '~/components/wrapper';
 import SiteMetaCustom from '~/components/site-meta-custom';
@@ -141,7 +141,7 @@ const ContentItemSimple = ({ path, title, text }) => {
 export default function MembersPage({ page, preview }) {
   // Destructure page payload and meta from global context
   const { member_content } = page;
-  const { meta } = useContext(DefaultContext);
+  const { meta } = data;
   const themeProps = useContext(ThemeContext);
 
   return (

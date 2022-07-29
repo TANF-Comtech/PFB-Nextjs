@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { Date as ParseDate } from 'prismic-reactjs';
 
 import { linkResolver } from '~/utils';
-import DefaultContext from '~/context/default/default-context';
+import data from '~/data';
 
 /**
  *
@@ -42,7 +42,7 @@ export default function useMetadata(dataObject) {
   // Set up router
   const router = useRouter();
 
-  const { meta } = useContext(DefaultContext);
+  const { meta } = data;
 
   const [theTitle, setTheTitle] = useState();
   const [theByline, setTheByline] = useState();

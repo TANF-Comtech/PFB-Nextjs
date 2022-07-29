@@ -7,7 +7,7 @@ import styled, { ThemeContext } from 'styled-components';
 import { getPrograms, getProgramPage } from '~/lib/queries/local-innovation';
 import { randomID, linkResolver } from '~/utils';
 
-import DefaultContext from '~/context/default/default-context';
+import data from '~/data';
 import FallbackImage from '~/components/fallback-image';
 import Wrapper from '~/components/wrapper';
 import SiteMetaCustom from '~/components/site-meta-custom';
@@ -854,7 +854,7 @@ function YouthBikingMap() {
 export default function ProgramPage({ fallback, page, preview }) {
   // Destructure topic from main page payload and meta from global context
   const { program } = page;
-  const { meta } = useContext(DefaultContext);
+  const { meta } = data;
   const themeProps = useContext(ThemeContext);
 
   return (
