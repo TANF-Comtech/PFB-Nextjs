@@ -8,8 +8,8 @@ import { useQuery } from '@apollo/client';
 import { MENU_DATA } from '~/lib/apollo/menu-queries';
 import logoutRequest from '~/lib/auth/logoutRequest';
 import AuthContext from '~/context/auth/auth-context';
-import MenuContext from '~/context/menu/menu-context';
 import useOnClickOutside from '~/hooks/useOnClickOutside';
+import useWindowSize from '~/hooks/useWindowSize';
 
 import MainContent from '~/components/main-content';
 import Search from '~/components/search';
@@ -189,6 +189,7 @@ const NetworkControl = styled.div`
     }
   }
 `;
+
 const MemberLink = styled.div`
   display: none;
 
@@ -294,7 +295,7 @@ const SearchButton = ({ color = '#111', size = '32px' }) => {
  * @param { string } margin - how much cushion do you want bro?
  *
  */
-export const FlexContainer = styled.section`
+const FlexContainer = styled.section`
   align-items: ${(props) => (props.alignItemsMobile ? props.alignItemsMobile : 'center')};
   flex-direction: ${(props) => (props.flexDirectionMobile ? props.flexDirectionMobile : 'column')};
   justify-content: ${(props) =>
@@ -314,7 +315,7 @@ export const FlexContainer = styled.section`
  *
  * If you can't get this, you're NGMI
  */
-export const UnderlinedText = styled.span`
+const UnderlinedText = styled.span`
   text-decoration: underline;
 `;
 
@@ -340,9 +341,17 @@ const GlobalBar = () => {
     },
   });
 
-  // Pull in search and global dropdown menu state from context
-  const { search, handleSearch, globalSites, setGlobalSites, handleGlobalSites, windowSize } =
-    useContext(MenuContext);
+  // Search state
+  const [search, setSearch] = useState(false);
+  const handleSearch = () => {
+    setSearch(!search);
+  };
+
+  // Global sites state
+  const [globalSites, setGlobalSites] = useState(false);
+  const handleGlobalSites = () => {
+    setGlobalSites(!globalSites);
+  };
 
   // Logout for authenticated users
   const logout = () => {
@@ -374,6 +383,8 @@ const GlobalBar = () => {
   // This allows us to recognize any non-dropdown click and close menu appropriately
   const globalDropdownRef = useRef();
   useOnClickOutside(globalDropdownRef, () => setGlobalSites(false));
+
+  const windowSize = useWindowSize();
 
   return (
     <>
@@ -434,19 +445,21 @@ function NavBar() {
   const themeProps = useContext(ThemeContext);
   const authContext = useContext(AuthContext);
 
-  // Import menu contexts for each dropdown
-  const {
-    advocacyState,
-    setAdvocacyState,
-    handleAdvocacy,
-    ourWorkState,
-    setOurWorkState,
-    handleOurWork,
-    ridesState,
-    setRidesState,
-    handleRides,
-    windowSize,
-  } = useContext(MenuContext);
+  // State for each dropdown
+  const [advocacyState, setAdvocacyState] = useState(false);
+  const handleAdvocacy = () => {
+    setAdvocacyState(!advocacyState);
+  };
+
+  const [ourWorkState, setOurWorkState] = useState(false);
+  const handleOurWork = () => {
+    setOurWorkState(!ourWorkState);
+  };
+
+  const [ridesState, setRidesState] = useState(false);
+  const handleRides = () => {
+    setRidesState(!ridesState);
+  };
 
   // Refs and click detection for each dropdown
   const advocacyRef = useRef();
@@ -484,6 +497,9 @@ function NavBar() {
   const handleMenu = () => {
     setMenu(!menu);
   };
+
+  // Window dimensions
+  const windowSize = useWindowSize();
 
   return (
     <>

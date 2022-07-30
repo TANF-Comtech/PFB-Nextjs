@@ -4,8 +4,6 @@ import { ThemeProvider } from 'styled-components';
 import { ApolloProvider } from '@apollo/client';
 
 import { useApollo } from '~/lib/apollo/apolloClient';
-import useWindowSize from '~/hooks/useWindowSize';
-import MenuContext from '~/context/menu/menu-context';
 import { AuthProvider } from '~/context/auth/auth-context';
 
 import Variables from '~/components/styles/variables';
@@ -76,73 +74,29 @@ const MyApp = ({ Component, pageProps, router }) => {
   const apolloClient = useApollo(pageProps.initialApolloState);
 
   // Advocacy Menu control
-  const [advocacyState, setAdvocacyState] = useState(false);
-  const handleAdvocacy = () => {
-    setAdvocacyState(!advocacyState);
-  };
 
   // Network of Sites Menu control
-  const [globalSites, setGlobalSites] = useState(false);
-  const handleGlobalSites = () => {
-    setGlobalSites(!globalSites);
-  };
 
   // Our Work Menu Control
-  const [ourWorkState, setOurWorkState] = useState(false);
-  const handleOurWork = () => {
-    setOurWorkState(!ourWorkState);
-  };
-
-  // Rides Menu Control
-  const [ridesState, setRidesState] = useState(false);
-  const handleRides = () => {
-    setRidesState(!ridesState);
-  };
 
   // Search Menu controls
-  const [search, setSearch] = useState(false);
-  const handleSearch = () => {
-    setSearch(!search);
-  };
 
   // Global look at height/width of page
-  const windowSize = useWindowSize();
 
   return (
     <ApolloProvider client={apolloClient}>
       <ThemeProvider theme={Variables}>
-        <MenuContext.Provider
-          value={{
-            advocacyState,
-            setAdvocacyState,
-            handleAdvocacy,
-            globalSites,
-            setGlobalSites,
-            handleGlobalSites,
-            ourWorkState,
-            setOurWorkState,
-            handleOurWork,
-            ridesState,
-            setRidesState,
-            handleRides,
-            search,
-            setSearch,
-            handleSearch,
-            windowSize,
-          }}
-        >
-          <AuthProvider>
-            <Head>
-              <script type="application/ld+json">{JSON.stringify(ldJSONBasic)}</script>
-            </Head>
-            <GlobalStyle />
-            <NavBar />
-            <PageTransition location={router.pathname}>
-              <Component {...pageProps} key={router.route} />
-            </PageTransition>
-            <Footer />
-          </AuthProvider>
-        </MenuContext.Provider>
+        <AuthProvider>
+          <Head>
+            <script type="application/ld+json">{JSON.stringify(ldJSONBasic)}</script>
+          </Head>
+          <GlobalStyle />
+          <NavBar />
+          <PageTransition location={router.pathname}>
+            <Component {...pageProps} key={router.route} />
+          </PageTransition>
+          <Footer />
+        </AuthProvider>
       </ThemeProvider>
     </ApolloProvider>
   );
