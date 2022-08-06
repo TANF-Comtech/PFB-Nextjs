@@ -7,8 +7,8 @@ import { linkResolver, randomID } from '~/utils';
 import NumberedPillars from '~/components/numbered-pillars';
 import MainContent from '~/components/main-content';
 import SummaryBlock from '~/components/summary-block';
-import ImageList from '~/components/image-list';
 import Promo from '~/components/promo';
+import ImageList from '~/components/uid/parts/image-list';
 
 export default function UidMemberSlices({ landing_page }) {
   const themeProps = useContext(ThemeContext);

@@ -1,19 +1,19 @@
 import React from 'react';
 
 import NewsList from '~/components/news-list';
-import LocationsList from '~/components/locations-list';
-import TopicsList from '~/components/topics-list';
-import RidesList from '~/components/rides-list';
-import TeamList from '~/components/team-list';
-import BasicList from '~/components/basic-list';
-import JoinList from '~/components/join-list';
-import GrantsPillars from '~/components/grants-pillars';
-import EventsList from '~/components/events-list';
-import PolicyPillars from '~/components/policy-pillars';
-import StatsList from '~/components/stats-list';
 import WayfindingItem from '~/components/wayfinding-item';
 import MainContent from '~/components/main-content';
 import SecondaryCampaign from '~/components/secondary-campaign';
+import BasicList from '~/components/uid/parts/basic-list';
+import EventsList from '~/components/uid/parts/events-list';
+import GrantsPillars from '~/components/uid/parts/grants-pillars';
+import JoinList from '~/components/uid/parts/join-list';
+import LocationsList from '~/components/uid/parts/locations-list';
+import PolicyPillars from '~/components/uid/parts/policy-pillars';
+import RidesList from '~/components/uid/parts/rides-list';
+import StatsList from '~/components/uid/parts/stats-list';
+import TeamList from '~/components/uid/parts/team-list';
+import TopicsList from '~/components/uid/parts/topics-list';
 
 export default function ConditionalSections({ landing_page, fallback, preview }) {
   return (

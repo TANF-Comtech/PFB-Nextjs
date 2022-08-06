@@ -5,17 +5,17 @@ import styled, { ThemeContext } from 'styled-components';
 import { linkResolver, randomID } from '~/utils';
 
 import Button from '~/components/button';
-import GrantsList from '~/components/grant-guidelines-list';
-import MissionPillars from '~/components/mission-pillars';
 import NumberedPillars from '~/components/numbered-pillars';
-import ReportsList from '~/components/reports-list';
 import SecondaryCampaign from '~/components/secondary-campaign';
 import SummaryBlock from '~/components/summary-block';
-import ToolkitPillars from '~/components/toolkit-pillars';
 import VisualGrid from '~/components/visual-grid';
 import MainContent from '~/components/main-content';
 import ActionItemGroup from '~/components/action-item-group';
 import Promo from '~/components/promo';
+import GrantsList from '~/components/uid/parts/grant-guidelines-list';
+import MissionPillars from '~/components/uid/parts/mission-pillars';
+import ReportsList from '~/components/uid/parts/reports-list';
+import ToolkitPillars from '~/components/uid/parts/toolkit-pillars';
 
 const RedHeading = styled.h2`
   color: ${(props) => props.theme.red};
