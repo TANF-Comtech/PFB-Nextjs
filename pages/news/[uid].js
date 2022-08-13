@@ -7,7 +7,7 @@ import { htmlSerializer } from '~/lib/prismic/htmlSerializer';
 import { getAllNews, getSingleNewsPage } from '~/lib/queries/news';
 import { linkResolver } from '~/utils';
 import { setDateSuffix } from '~/utils/setDateSuffix';
-import useMetadata from '~/hooks/useMetadata';
+import getMetadata from '~/utils/getMetadata';
 
 import SiteMetaCustom from '~/components/site-meta-custom';
 import Wrapper from '~/components/wrapper';
@@ -264,7 +264,7 @@ export default function NewsPage({ fallback, page, preview }) {
     theImage,
     theImageWidth,
     theImageHeight,
-  } = useMetadata(news);
+  } = getMetadata(news);
 
   // Set fallback index, one of six possible fallback images
   const [fi, setFi] = useState(Math.floor(Math.random(5)));

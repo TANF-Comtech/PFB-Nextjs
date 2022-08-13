@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { getNewHomepage } from '~/lib/queries/new-homepage';
 import { randomID } from '~/utils';
-import useMetadata from '~/hooks/useMetadata';
+import getMetadata from '~/utils/getMetadata';
 import { linkResolver } from '~/utils';
 import { arrayShuffle } from '~/utils/arrayShuffle';
 
@@ -81,7 +81,7 @@ export default function Homepage({ page }) {
 
   // metadata
   const { theTitle, theDesc, theKeywords, theImage, theImageWidth, theImageHeight } =
-    useMetadata(new_homepage);
+    getMetadata(new_homepage);
 
   return (
     <Wrapper postTitle="PeopleForBikes Homepage" isWide={true}>

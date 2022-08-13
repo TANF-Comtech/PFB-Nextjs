@@ -16,14 +16,15 @@ import Head from 'next/head';
  * @param { string } path - URL of the page
  * @param { string } title - the title of the page
  */
-const SiteMetaCustom = ({ desc, imgHeight, imgSrc, imgWidth, keywords, ldJSON, path, title }) => {
+const SiteMetaCustom = (props) => {
+  const { desc, imgHeight, imgSrc, imgWidth, keywords, ldJSON, path, title } = props;
+
   return (
     <Head>
       <title key="title">{title}</title>
       <meta name="description" content={desc} key="metadesc" />
       <meta name="keywords" content={keywords} key="metakeywords" />
       <meta property="fb:app_id" content="1771036746278242" />
-
       <meta property="og:locale" content="en_US" />
       <meta property="og:site_name" content="PeopleForBikes" />
       <meta property="og:type" content="website" />
@@ -34,14 +35,12 @@ const SiteMetaCustom = ({ desc, imgHeight, imgSrc, imgWidth, keywords, ldJSON, p
       <meta property="og:title" content={title} key="ogtitle" />
       <meta property="og:description" content={desc} key="ogdesc" />
       <meta property="og:url" content={path} key="ogurl" />
-
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:site" content="@peopleforbikes" />
       <meta name="twitter:domain" content="peopleforbikes.org" />
       <meta name="twitter:title" content={title} key="twtrtitle" />
       <meta name="twitter:description" content={desc} key="twtrdesc" />
       <meta name="twitter:image" content={imgSrc} key="twitterimg" />
-
       <link rel="canonical" href={path} key="canonical" />
       {ldJSON && <script type="application/ld+json">{JSON.stringify(ldJSON)}</script>}
     </Head>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { RichText } from 'prismic-reactjs';
 
-import useMetadata from '~/hooks/useMetadata';
+import getMetadata from '~/utils/getMetadata';
 
 import BigTitleBanner from '~/components/big-title-banner';
 import SecondaryTitleBanner from '~/components/secondary-title-banner';
@@ -12,7 +12,7 @@ import SiteMetaCustom from '~/components/site-meta-custom';
 
 export default function UidHeader({ landing_page }) {
   const { theTitle, theDesc, theKeywords, thePath, theImage, theImageWidth, theImageHeight } =
-    useMetadata(landing_page);
+    getMetadata(landing_page);
 
   return (
     <>
