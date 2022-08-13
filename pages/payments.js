@@ -14,6 +14,8 @@ const RevInp = styled.input`
   padding-right: 10px;
   text-align: right;
   font-family: monospace;
+  border: 1px solid black;
+  border-radius: 3px;
 `;
 
 const CalcWrapper = styled.span`

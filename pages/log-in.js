@@ -109,7 +109,7 @@ const Input = styled(BasicTextField)`
 const Button = styled(InputButton)`
   margin-top: 10px;
   padding: 10px 20px;
-  width: 100%;
+  whitespace: nowrap;
 
   @media screen and (min-width: ${(props) => props.theme.sm}) {
     margin-left: 10px;
@@ -149,9 +149,7 @@ const InputButtonElement = styled.input`
   font-family: ${(props) => props.theme.montserrat};
   font-size: 14px;
   font-weight: 700;
-  min-width: ${(props) => (props.minWidth ? props.minWidth : '200px')};
   margin: 0;
-  padding: 10px 35px;
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
@@ -167,12 +165,10 @@ const InputButtonElement = styled.input`
 
   @media (min-width: ${(props) => props.theme.bm}) {
     font-size: calc(14px + 4 * ((100vw - 320px) / 880));
-    padding: 10px calc(35px + 15 * ((100vw - 320px) / 880));
   }
 
   @media (min-width: ${(props) => props.theme.lg}) {
     font-size: 18px;
-    padding: 10px 60px;
   }
 `;
 

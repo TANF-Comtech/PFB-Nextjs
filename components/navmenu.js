@@ -109,12 +109,18 @@ const MainNavItem = styled.li`
 
 const AnchorAlign = styled.a`
   align-items: center;
-  display: flex;
+  display: flex !important;
+
+  span {
+    display: inline !important;
+    margin-bottom: 0 !important;
+  }
 
   svg {
     fill: #fff;
     margin-left: 12px;
     width: 12px;
+    display: inline !important;
     transition: 0.2s ease-in-out;
 
     &:hover {
@@ -369,7 +375,7 @@ const NavMenu = ({ menuState, handleMenu }) => {
                   onClick={handleMenu}
                   target="_blank"
                 >
-                  Donate
+                  <span>Donate</span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     version="1.1"
@@ -389,7 +395,7 @@ const NavMenu = ({ menuState, handleMenu }) => {
                   onClick={handleMenu}
                   target="_blank"
                 >
-                  Shop
+                  <span>Shop</span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     version="1.1"
