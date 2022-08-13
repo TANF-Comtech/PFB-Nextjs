@@ -40,11 +40,21 @@ const SiteMetaCustom = ({ desc, imgHeight, imgSrc, imgWidth, keywords, ldJSON, p
       <meta name="twitter:title" content={title} key="twtrtitle" />
       <meta name="twitter:description" content={desc} key="twtrdesc" />
       <meta name="twitter:image" content={imgSrc} key="twitterimg" />
-
       <link rel="canonical" href={path} key="canonical" />
-      {ldJSON && <script type="application/ld+json">{JSON.stringify(ldJSON)}</script>}
+      {ldJSON && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: formatLinkedData(ldJSON) }}
+        />
+      )}
     </Head>
   );
+};
+
+const formatLinkedData = (value) => {
+  const formattedValue = JSON.stringify(value, null, 2);
+
+  return formattedValue;
 };
 
 export default SiteMetaCustom;
