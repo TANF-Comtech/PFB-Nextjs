@@ -80,7 +80,7 @@ export const Grants = () => {
           >
             <p>
               Grocery or big box store chains often have $500 to $10,000 grants to invest in great
-              community projects. Some grant recipients:
+              community projects. Some grant funders:
             </p>
           </GrantGuidanceSection>
           <GrantGuidanceSection
@@ -98,7 +98,7 @@ export const Grants = () => {
           >
             <p>
               Ask your bank if they have a community grant program or otherwise support the
-              non-profits that use their services. Some grant recipients:
+              non-profits that use their services. Some grant funders:
             </p>
           </GrantGuidanceSection>
           <GrantGuidanceSection
@@ -134,7 +134,7 @@ export const Grants = () => {
           >
             <p>
               Several bicycle companies and organizations provide grants in support of bike
-              projects. Here are a few grantRecipients:
+              projects. Here are a few grant funders:
             </p>
           </GrantGuidanceSection>
           <GrantGuidanceSection label="Other">
