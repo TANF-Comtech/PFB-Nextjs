@@ -1,31 +1,27 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import styled, { ThemeContext } from 'styled-components';
 import { RichText, Date as ParseDate } from 'prismic-reactjs';
 import Link from 'next/link';
-
-import { getSingleMemberPage } from '../../lib/queries/member-center';
-
-import { randomID, linkResolver } from '../../lib/utils';
-
-import auth0ValidateToken from '../../lib/auth0/auth0ValidateToken';
 import Cookies from 'cookies';
 
-import DefaultContext from '../../context/default/default-context';
+import { getSingleMemberPage } from '~/lib/queries/member-center';
+import { randomID, linkResolver } from '~/utils';
+import auth0ValidateToken from '~/lib/auth0/auth0ValidateToken';
+import data from '~/data';
 
-import Wrapper from '../../components/global/wrapper';
-import SiteMetaCustom from '../../components/meta/site-meta-custom';
-import SecondaryTitleBanner from '../../components/content/secondary-title-banner';
-import HeaderImage from '../../components/global/header-image';
-import MainContent from '../../components/global/main-content';
-import SummaryBlock from '../../components/content/summary-block';
-import Header1 from '../../components/primitives/h1';
-import BigTitleBanner from '../../components/content/big-title-banner';
-import Button from '../../components/primitives/button';
-import Grid from '../../components/global/grid';
-import ContentItemSimple from '../../components/content/content-item-simple';
-import WayfindingItem from '../../components/slices/wayfinding-item';
-import NumberedPillars from '../../components/content/numbered-pillars';
-import VisualGrid from '../../components/global/visual-grid';
+import Wrapper from '~/components/wrapper';
+import SiteMetaCustom from '~/components/site-meta-custom';
+import SecondaryTitleBanner from '~/components/secondary-title-banner';
+import HeaderImage from '~/components/header-image';
+import MainContent from '~/components/main-content';
+import SummaryBlock from '~/components/summary-block';
+import Header1 from '~/components/h1';
+import BigTitleBanner from '~/components/big-title-banner';
+import Button from '~/components/button';
+import Grid from '~/components/grid';
+import WayfindingItem from '~/components/wayfinding-item';
+import NumberedPillars from '~/components/numbered-pillars';
+import VisualGrid from '~/components/visual-grid';
 
 const IntroWrapper = styled.div`
   margin: 3vh 0 1vh 0;
@@ -61,10 +57,91 @@ const Arrow = styled.img`
   width: 46px;
 `;
 
+const Container = styled.section`
+  align-items: flex-start;
+  border-bottom: 1px solid rgb(216, 216, 216);
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 25px;
+  padding-bottom: 25px;
+
+  @media (min-width: ${(props) => props.theme.sm}) {
+    flex-direction: row;
+  }
+
+  &:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+`;
+
+const ContentContainer = styled.div`
+  flex: 1 1 0px;
+  margin: 4vh 0;
+
+  a,
+  a:visited,
+  a:active,
+  a:focus,
+  a:hover {
+    text-decoration: none;
+  }
+`;
+
+const Title = styled.h3`
+  color: ${(props) => props.theme.darkestGray};
+  font-size: 40px;
+  line-height: 50px;
+  margin: 0;
+`;
+
+/**
+ * <ContentItemSimple>
+ *
+ * Almost exactly like ContentItem but different font, colors and no imagery
+ * Oy vey with the 10% different components...
+ *
+ * @param { string } path - tells us the URL to the item
+ * @param { string } title - title that goes next to the icon
+ * @param { string } text - content to be shown
+ */
+const ContentItemSimple = ({ path, title, text }) => {
+  const themeProps = useContext(ThemeContext);
+
+  return (
+    <Container>
+      <ContentContainer>
+        {!path ? (
+          <Title>{title}</Title>
+        ) : (
+          <Link href={linkResolver(path)}>
+            <a>
+              <Title>{title}</Title>
+            </a>
+          </Link>
+        )}
+        {text && <RichText render={text} />}
+        {path && (
+          <Button
+            buttonBg={themeProps.darkGray}
+            buttonBgHover={themeProps.darkestGray}
+            buttonColor="white"
+            buttonPadding="10px 25px"
+            buttonTextTransform="uppercase"
+            href={linkResolver(path)}
+          >
+            Explore
+          </Button>
+        )}
+      </ContentContainer>
+    </Container>
+  );
+};
+
 export default function MembersPage({ page, preview }) {
   // Destructure page payload and meta from global context
   const { member_content } = page;
-  const { meta } = useContext(DefaultContext);
+  const { meta } = data;
   const themeProps = useContext(ThemeContext);
 
   return (

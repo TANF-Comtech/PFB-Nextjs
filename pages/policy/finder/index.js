@@ -1,11 +1,13 @@
-import { getPolicies } from '../../../lib/queries/policies';
+import React from 'react';
 
-import Wrapper from '../../../components/global/wrapper';
-import Header1 from '../../../components/primitives/h1';
-import PolicyItem from '../../../components/content/policy-item';
-import Button from '../../../components/primitives/button';
-import MainContent from '../../../components/global/main-content';
-import ColorBanner from '../../../components/global/color-banner';
+import { getPolicies } from '~/lib/queries/policies';
+
+import Wrapper from '~/components/wrapper';
+import Header1 from '~/components/h1';
+import PolicyItem from '~/components/policy-item';
+import Button from '~/components/button';
+import MainContent from '~/components/main-content';
+import ColorBanner from '~/components/color-banner';
 
 export default function PolicyFinder({ page }) {
   return (

@@ -1,22 +1,20 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import { RichText } from 'prismic-reactjs';
 import styled, { ThemeContext } from 'styled-components';
 
-import { linkResolver, randomID } from '../../lib/utils';
+import { linkResolver, randomID } from '~/utils';
 
-import Button from '../primitives/button';
-import GrantsList from '../content/grant-guidelines-list';
-import MissionPillars from '../content/mission-pillars';
-import NumberedPillars from '../content/numbered-pillars';
-import ReportsList from '../content/reports-list';
-import SecondaryCampaign from '../global/secondary-campaign';
-import SummaryBlock from '../content/summary-block';
-import ToolkitPillars from '../content/toolkit-pillars';
-import VisualGrid from '../global/visual-grid';
-import MainContent from '../global/main-content';
-
-import ActionItemGroup from '../slices/action-item-group';
-import Promo from '../slices/promo';
+import Button from '~/components/button';
+import NumberedPillars from '~/components/numbered-pillars';
+import SecondaryCampaign from '~/components/secondary-campaign';
+import SummaryBlock from '~/components/summary-block';
+import VisualGrid from '~/components/visual-grid';
+import MainContent from '~/components/main-content';
+import ActionItemGroup from '~/components/action-item-group';
+import Promo from '~/components/promo';
+import MissionPillars from '~/components/uid/parts/mission-pillars';
+import ReportsList from '~/components/uid/parts/reports-list';
+import ToolkitPillars from '~/components/uid/parts/toolkit-pillars';
 
 const RedHeading = styled.h2`
   color: ${(props) => props.theme.red};
@@ -44,11 +42,6 @@ export default function UidSlices({ landing_page }) {
       // ACTION ITEM SLICE
       if (slice.__typename === 'Landing_pageBodyAction_item') {
         return <ActionItemGroup key={randomID(10000000)} payload={slice.fields} />;
-      }
-
-      // ACCORDION SLICE
-      if (slice.__typename === 'Landing_pageBodyAccordion_list') {
-        return <GrantsList payload={slice.fields} />;
       }
 
       // MISSION SLICE

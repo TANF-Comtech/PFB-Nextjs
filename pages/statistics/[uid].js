@@ -1,19 +1,18 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { RichText } from 'prismic-reactjs';
 
-import { getStats, getSingleStatsPage } from '../../lib/queries/statistics';
-import { linkResolver } from '../../lib/utils';
+import { getStats, getSingleStatsPage } from '~/lib/queries/statistics';
+import { linkResolver } from '~/utils';
+import data from '~/data';
 
-import DefaultContext from '../../context/default/default-context';
+import Wrapper from '~/components/wrapper';
+import SiteMetaCustom from '~/components/site-meta-custom';
+import MainContent from '~/components/main-content';
+import Header1 from '~/components/h1';
+import Promo from '~/components/promo';
 
-import Wrapper from '../../components/global/wrapper';
-import SiteMetaCustom from '../../components/meta/site-meta-custom';
-import MainContent from '../../components/global/main-content';
-import Header1 from '../../components/primitives/h1';
-import Promo from '../../components/slices/promo';
-
-import ResearchPromo from '../../public/promo/promo-research.jpg';
+import ResearchPromo from '~/public/promo/promo-research.jpg';
 
 const IntroWrapper = styled.div`
   margin: 3vh 0 1vh 0;
@@ -22,7 +21,7 @@ const IntroWrapper = styled.div`
 export default function MembersPage({ page, preview }) {
   // Destructure page payload and meta from global context
   const { statistic_page } = page;
-  const { meta } = useContext(DefaultContext);
+  const { meta } = data;
 
   return (
     <>

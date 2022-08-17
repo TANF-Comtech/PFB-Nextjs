@@ -1,18 +1,16 @@
 import React from 'react';
-import NewsList from '../content/news-list';
-import LocationsList from '../content/locations-list';
-import TopicsList from '../content/topics-list';
-import RidesList from '../content/rides-list';
-import TeamList from '../content/team-list';
-import BasicList from '../content/basic-list';
-import JoinList from '../content/join-list';
-import GrantsPillars from '../content/grants-pillars';
-import EventsList from '../content/events-list';
-import PolicyPillars from '../content/policy-pillars';
-import StatsList from '../content/stats-list';
-import WayfindingItem from '../slices/wayfinding-item';
-import MainContent from '../global/main-content';
-import SecondaryCampaign from '../global/secondary-campaign';
+
+import NewsList from '~/components/news-list';
+import SecondaryCampaign from '~/components/secondary-campaign';
+import BasicList from '~/components/uid/parts/basic-list';
+import EventsList from '~/components/uid/parts/events-list';
+import JoinList from '~/components/uid/parts/join-list';
+import LocationsList from '~/components/uid/parts/locations-list';
+import PolicyPillars from '~/components/uid/parts/policy-pillars';
+import RidesList from '~/components/uid/parts/rides-list';
+import StatsList from '~/components/uid/parts/stats-list';
+import TeamList from '~/components/uid/parts/team-list';
+import TopicsList from '~/components/uid/parts/topics-list';
 
 export default function ConditionalSections({ landing_page, fallback, preview }) {
   return (
@@ -63,11 +61,6 @@ export default function ConditionalSections({ landing_page, fallback, preview })
       {
         // JOIN
         landing_page._meta.uid === 'join' && <JoinList />
-      }
-
-      {
-        // GRANTS
-        // landing_page._meta.uid === "grants" && <GrantsPillars />
       }
 
       {

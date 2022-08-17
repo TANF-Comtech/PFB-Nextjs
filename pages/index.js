@@ -1,23 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-import { getNewHomepage } from '../lib/queries/new-homepage';
-import { randomID } from '../lib/utils';
+import { getNewHomepage } from '~/lib/queries/new-homepage';
+import { randomID } from '~/utils';
+import getMetadata from '~/utils/getMetadata';
+import { linkResolver } from '~/utils';
+import { arrayShuffle } from '~/utils/arrayShuffle';
 
-import useMetadata from '../hooks/useMetadata';
-
-import Wrapper from '../components/global/wrapper';
-import HeaderImage from '../components/global/header-image';
-import MainContent from '../components/global/main-content';
-import RideSpotPromo from '../components/slices/ridespot-promo';
-import Button from '../components/primitives/button';
-import Carousel from '../components/global/carousel';
-import SecondaryCampaign from '../components/global/secondary-campaign';
-import NewsList from '../components/content/news-list';
-import SiteMetaCustom from '../components/meta/site-meta-custom';
-
-import { linkResolver } from '../lib/utils';
-import { arrayShuffle } from '../lib/utils/arrayShuffle';
+import Wrapper from '~/components/wrapper';
+import HeaderImage from '~/components/header-image';
+import MainContent from '~/components/main-content';
+import RideSpotPromo from '~/components/ridespot-promo';
+import Button from '~/components/button';
+import Carousel from '~/components/carousel';
+import SecondaryCampaign from '~/components/secondary-campaign';
+import NewsList from '~/components/news-list';
+import SiteMetaCustom from '~/components/site-meta-custom';
 
 const BigSectionTitle = styled.h2`
   color: ${(props) => props.theme.darkestGray};
@@ -83,7 +81,7 @@ export default function Homepage({ page }) {
 
   // metadata
   const { theTitle, theDesc, theKeywords, theImage, theImageWidth, theImageHeight } =
-    useMetadata(new_homepage);
+    getMetadata(new_homepage);
 
   return (
     <Wrapper postTitle="PeopleForBikes Homepage" isWide={true}>

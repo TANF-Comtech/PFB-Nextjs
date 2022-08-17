@@ -1,20 +1,19 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import { RichText } from 'prismic-reactjs';
 
-import { getAllCareers, getSingleCareer } from '../../lib/queries/careers';
+import { getAllCareers, getSingleCareer } from '~/lib/queries/careers';
+import data from '~/data';
 
-import DefaultContext from '../../context/default/default-context';
-
-import Wrapper from '../../components/global/wrapper';
-import SiteMetaCustom from '../../components/meta/site-meta-custom';
-import MainContent from '../../components/global/main-content';
-import Heading1 from '../../components/primitives/h1';
-import Rule from '../../components/primitives/rule';
-import Button from '../../components/primitives/button';
+import Wrapper from '~/components/wrapper';
+import SiteMetaCustom from '~/components/site-meta-custom';
+import MainContent from '~/components/main-content';
+import Heading1 from '~/components/h1';
+import Rule from '~/components/rule';
+import Button from '~/components/button';
 
 export default function CareerPages({ page, preview }) {
   const { job } = page;
-  const { meta } = useContext(DefaultContext);
+  const { meta } = data;
 
   return (
     <>

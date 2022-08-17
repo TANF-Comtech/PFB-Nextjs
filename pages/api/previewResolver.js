@@ -1,5 +1,6 @@
 const Prismic = require('@prismicio/client');
-const linkResolver = require('../../lib/utils');
+
+const linkResolver = require('~/utils');
 
 exports.prismicPreview = async (req, res) => {
   const { token, documentId } = req.query;

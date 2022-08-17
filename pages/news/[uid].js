@@ -1,24 +1,23 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { RichText } from 'prismic-reactjs';
-import { htmlSerializer } from '../../lib/prismic/htmlSerializer';
 
-import { getAllNews, getSingleNewsPage } from '../../lib/queries/news';
-import { linkResolver } from '../../lib/utils';
-import { setDateSuffix } from '../../lib/utils/setDateSuffix';
+import { htmlSerializer } from '~/lib/prismic/htmlSerializer';
+import { getAllNews, getSingleNewsPage } from '~/lib/queries/news';
+import { linkResolver } from '~/utils';
+import { setDateSuffix } from '~/utils/setDateSuffix';
+import getMetadata from '~/utils/getMetadata';
 
-import useMetadata from '../../hooks/useMetadata';
+import SiteMetaCustom from '~/components/site-meta-custom';
+import Wrapper from '~/components/wrapper';
+import MainContent from '~/components/main-content';
+import Promo from '~/components/promo';
+import FallbackImage from '~/components/fallback-image';
 
-import Wrapper from '../../components/global/wrapper';
-import SiteMetaCustom from '../../components/meta/site-meta-custom';
-import MainContent from '../../components/global/main-content';
-import Promo from '../../components/slices/promo';
-import Donate from '../../components/global/donate';
-import FallbackImage from '../../components/content/fallback-image';
-
-import TakeActionPromo from '../../public/promo/take-action-banner.jpg';
-import logo from '../../public/PFB_Stacked_LOGO_512x512.jpg';
+import TakeActionPromo from '~/public/promo/take-action-banner.jpg';
+import logo from '~/public/PFB_Stacked_LOGO_512x512.jpg';
+import RedArrowWhiteBlock from '~/public/red-arrow-white-block.svg';
 
 const DateBox = styled.div`
   font-size: 20px;
@@ -94,9 +93,10 @@ const IntroWrapper = styled.div`
   }
 
   .image-caption {
-    font-style: italic;
-    font-size: 15px;
-    line-height: 15px;
+    display: block;
+    font-size: 14px;
+    font-style: normal;
+    line-height: 1.5;
   }
 
   .little-break {
@@ -120,6 +120,22 @@ const IntroWrapper = styled.div`
     height: 1px;
     margin: 6vh 0;
     width: 100%;
+  }
+
+  .yt-video-container {
+    position: relative; 
+    padding-bottom: 56.25%; 
+    padding-top: 30px; 
+    height: 0; 
+    overflow: hidden; 
+
+    iframe {
+      position: absolute; 
+      top: 0; 
+      left: 0; 
+      width: 100%; 
+      height: 100%;
+    }
   }
 `;
 
@@ -173,6 +189,79 @@ const Deck = styled.div`
   }
 `;
 
+const Container = styled.section`
+  a,
+  a:visited,
+  a:focus,
+  a:hover,
+  a:active {
+    text-decoration: none;
+  }
+`;
+
+const ColorContainer = styled.section`
+  align-items: center;
+  background-color: ${(props) => props.bgColor || props.theme.redAccent};
+  background-position: center center;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2vh 5vw;
+  text-align: center;
+
+  h1 {
+    color: white;
+    margin-bottom: 10px;
+  }
+
+  span {
+    color: white;
+    display: block;
+    font-family: ${(props) => props.theme.montserrat};
+    font-size: 24px;
+    font-weight: 300;
+    line-height: 30px;
+    margin-bottom: 25px;
+  }
+  @media screen and (min-width: 320px) {
+    span {
+      font-size: calc(24px + 4 * ((100vw - 320px) / 880));
+      line-height: calc(30px + 8 * ((100vw - 320px) / 880));
+    }
+  }
+  @media screen and (min-width: 1200px) {
+    span {
+      font-size: 28px;
+      line-height: 38px;
+    }
+  }
+`;
+
+const Arrow = styled.img`
+  display: block;
+  margin: 0 auto;
+  width: 46px;
+`;
+
+function Donate({ bgColor }) {
+  return (
+    <>
+      <Container>
+        <a href="https://www.classy.org/give/117371" rel="nofollow" target="_blank">
+          <ColorContainer bgColor={bgColor}>
+            <MainContent maxWidth="800px">
+              <h1>Donate Now</h1>
+              <span>Bring Better Biking to Your Community</span>
+              <Arrow src="/red-arrow-white-block.svg" />
+            </MainContent>
+          </ColorContainer>
+        </a>
+      </Container>
+    </>
+  );
+}
+
 export default function NewsPage({ fallback, page, preview }) {
   // Set up router
   const router = useRouter();
@@ -192,7 +281,7 @@ export default function NewsPage({ fallback, page, preview }) {
     theImage,
     theImageWidth,
     theImageHeight,
-  } = useMetadata(news);
+  } = getMetadata(news);
 
   // Set fallback index, one of six possible fallback images
   const [fi, setFi] = useState(Math.floor(Math.random(5)));
@@ -283,15 +372,13 @@ export default function NewsPage({ fallback, page, preview }) {
       />
       <Wrapper postPath="/news" postTitle="News" isWide="true">
         <MainContent maxWidth="700px">
-          {
-            theDateLongform !== null && (
-              <DateBox>
-                {`${theDateLongform.toLocaleString('en-us', { month: 'long' })}
+          {theDateLongform !== null && (
+            <DateBox>
+              {`${theDateLongform.toLocaleString('en-us', { month: 'long' })}
                 ${setDateSuffix(theDateLongform.toLocaleString('en-us', { day: 'numeric' }))},
                 ${theDateLongform.toLocaleString('en-us', { year: 'numeric' })}`}
-              </DateBox>
-            )
-          }
+            </DateBox>
+          )}
           {news.title && <h2>{news.title[0].text}</h2>}
           <p>By: {theByline}</p>
           {news.header_image ? (
@@ -360,7 +447,6 @@ export default function NewsPage({ fallback, page, preview }) {
             </BoxOfLinksContainer>
           )}
         </MainContent>
-
         <Promo
           bigWords="Take Action"
           path="/take-action"
