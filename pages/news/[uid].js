@@ -93,9 +93,10 @@ const IntroWrapper = styled.div`
   }
 
   .image-caption {
-    font-style: italic;
-    font-size: 15px;
-    line-height: 15px;
+    display: block;
+    font-size: 14px;
+    font-style: normal;
+    line-height: 1.5;
   }
 
   .little-break {
@@ -119,6 +120,22 @@ const IntroWrapper = styled.div`
     height: 1px;
     margin: 6vh 0;
     width: 100%;
+  }
+
+  .yt-video-container {
+    position: relative; 
+    padding-bottom: 56.25%; 
+    padding-top: 30px; 
+    height: 0; 
+    overflow: hidden; 
+
+    iframe {
+      position: absolute; 
+      top: 0; 
+      left: 0; 
+      width: 100%; 
+      height: 100%;
+    }
   }
 `;
 
