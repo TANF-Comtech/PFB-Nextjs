@@ -165,7 +165,9 @@ const Dropdown = ({
                     <ImageSquare
                       handler={dropdownHandler}
                       isNavItem={true}
-                      imageSquareLink={topic_item && `/topics/${topic_item.link._meta.uid}`}
+                      imageSquareLink={
+                        topic_item?.link?._meta?.uid && `/topics/${topic_item.link._meta.uid}`
+                      }
                       key={randomID(10000000)}
                       source1X={topic_item && topic_item.link.square_image?.mobile.url}
                       source2X={topic_item && topic_item.link.square_image?.url}
