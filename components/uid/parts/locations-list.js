@@ -8,10 +8,6 @@ import GridWide from '~/components/grid-wide';
 const ImageContainer = styled.div`
   align-items: center;
   background-image: url(${(props) => props.path1X});
-  background-image: image-set(
-    url(${(props) => props.path1X}) 1x,
-    url(${(props) => props.path2X}) 2x
-  );
   background-position: center center;
   background-size: cover;
   display: flex;

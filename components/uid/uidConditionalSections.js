@@ -1,12 +1,9 @@
 import React from 'react';
 
 import NewsList from '~/components/news-list';
-import WayfindingItem from '~/components/wayfinding-item';
-import MainContent from '~/components/main-content';
 import SecondaryCampaign from '~/components/secondary-campaign';
 import BasicList from '~/components/uid/parts/basic-list';
 import EventsList from '~/components/uid/parts/events-list';
-import GrantsPillars from '~/components/uid/parts/grants-pillars';
 import JoinList from '~/components/uid/parts/join-list';
 import LocationsList from '~/components/uid/parts/locations-list';
 import PolicyPillars from '~/components/uid/parts/policy-pillars';
@@ -64,11 +61,6 @@ export default function ConditionalSections({ landing_page, fallback, preview })
       {
         // JOIN
         landing_page._meta.uid === 'join' && <JoinList />
-      }
-
-      {
-        // GRANTS
-        // landing_page._meta.uid === "grants" && <GrantsPillars />
       }
 
       {

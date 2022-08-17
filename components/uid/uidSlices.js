@@ -12,7 +12,6 @@ import VisualGrid from '~/components/visual-grid';
 import MainContent from '~/components/main-content';
 import ActionItemGroup from '~/components/action-item-group';
 import Promo from '~/components/promo';
-import GrantsList from '~/components/uid/parts/grant-guidelines-list';
 import MissionPillars from '~/components/uid/parts/mission-pillars';
 import ReportsList from '~/components/uid/parts/reports-list';
 import ToolkitPillars from '~/components/uid/parts/toolkit-pillars';
@@ -43,11 +42,6 @@ export default function UidSlices({ landing_page }) {
       // ACTION ITEM SLICE
       if (slice.__typename === 'Landing_pageBodyAction_item') {
         return <ActionItemGroup key={randomID(10000000)} payload={slice.fields} />;
-      }
-
-      // ACCORDION SLICE
-      if (slice.__typename === 'Landing_pageBodyAccordion_list') {
-        return <GrantsList payload={slice.fields} />;
       }
 
       // MISSION SLICE
