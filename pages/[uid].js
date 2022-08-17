@@ -1,32 +1,32 @@
+import React from 'react';
 import { useRouter } from 'next/router';
 import { RichText } from 'prismic-reactjs';
-import CustomErrorPage from '../pages/404';
 
-import { getSingleLandingPage, getLandingPages } from '../lib/queries/landing-page';
-import { getAllNewsForLandingPage } from '../lib/queries/news';
-import { getLocations } from '../lib/queries/locations';
-import { getTopics } from '../lib/queries/topics';
-import { getRides } from '../lib/queries/rides';
-import { getTeamMembers, getCEO } from '../lib/queries/team';
-import { getAllCareers } from '../lib/queries/careers';
-import { getEventsByCategory } from '../lib/queries/events';
-import { getStats } from '../lib/queries/statistics';
+import CustomErrorPage from '~/pages/404';
 
-import Wrapper from '../components/global/wrapper';
-import Spinner from '../components/global/spinner';
+import { getSingleLandingPage, getLandingPages } from '~/lib/queries/landing-page';
+import { getAllNewsForLandingPage } from '~/lib/queries/news';
+import { getLocations } from '~/lib/queries/locations';
+import { getTopics } from '~/lib/queries/topics';
+import { getRides } from '~/lib/queries/rides';
+import { getTeamMembers, getCEO } from '~/lib/queries/team';
+import { getAllCareers } from '~/lib/queries/careers';
+import { getEventsByCategory } from '~/lib/queries/events';
+import { getStats } from '~/lib/queries/statistics';
+import { AlgoliaIndex } from '~/lib/algolia/algoliaClient';
+import { newsFormatter } from '~/lib/algolia/newsFormatter';
+import { topicFormatter } from '~/lib/algolia/topicFormatter';
+import { statsFormatter } from '~/lib/algolia/statsFormatter';
+import { locationFormatter } from '~/lib/algolia/locationFormatter';
 
-import { AlgoliaIndex } from '../lib/algolia/algoliaClient';
-import { newsFormatter } from '../lib/algolia/newsFormatter';
-import { topicFormatter } from '../lib/algolia/topicFormatter';
-import { statsFormatter } from '../lib/algolia/statsFormatter';
-import { locationFormatter } from '../lib/algolia/locationFormatter';
-
-import UidHeader from '../components/uid/uidHeaders';
-import UidMemberSlices from '../components/uid/uidMemberSlices';
-import UidSlices from '../components/uid/uidSlices';
-import UidIndividualComponents from '../components/uid/uidIndividualComponents';
-import ConditionalSections from '../components/uid/uidConditionalSections';
-import FallbackImage from '../components/content/fallback-image';
+import Wrapper from '~/components/wrapper';
+import Spinner from '~/components/spinner';
+import UidHeader from '~/components/uid/uidHeaders';
+import UidMemberSlices from '~/components/uid/uidMemberSlices';
+import UidSlices from '~/components/uid/uidSlices';
+import UidIndividualComponents from '~/components/uid/uidIndividualComponents';
+import ConditionalSections from '~/components/uid/uidConditionalSections';
+import FallbackImage from '~/components/fallback-image';
 
 /**
  * TheMonster()

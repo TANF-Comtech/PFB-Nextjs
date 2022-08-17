@@ -1,30 +1,28 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import Link from 'next/link';
 import { RichText, Date as ParseDate } from 'prismic-reactjs';
 import styled from 'styled-components';
 
-import { getTopics, getSingleTopicPage } from '../../lib/queries/topics';
-import { getEBikesPages } from '../../lib/queries/electric-bikes';
+import { getTopics, getSingleTopicPage } from '~/lib/queries/topics';
+import { getEBikesPages } from '~/lib/queries/electric-bikes';
+import { randomID, linkResolver } from '~/utils';
+import { setDateSuffix } from '~/utils/setDateSuffix';
+import { ebikeFormatter } from '~/lib/algolia/ebikeFormatter';
+import { AlgoliaIndex } from '~/lib/algolia/algoliaClient';
+import data from '~/data';
 
-import { randomID, linkResolver } from '../../lib/utils';
-import { setDateSuffix } from '../../lib/utils/setDateSuffix';
-import { ebikeFormatter } from '../../lib/algolia/ebikeFormatter';
-import { AlgoliaIndex } from '../../lib/algolia/algoliaClient';
-
-import DefaultContext from '../../context/default/default-context';
-import FallbackImage from '../../components/content/fallback-image';
-
-import Wrapper from '../../components/global/wrapper';
-import SiteMetaCustom from '../../components/meta/site-meta-custom';
-import HeaderImage from '../../components/global/header-image';
-import MainContent from '../../components/global/main-content';
-import ContentItem from '../../components/content/content-item';
-import Header1 from '../../components/primitives/h1';
-import SummaryBlock from '../../components/content/summary-block';
-import Accordion from '../../components/global/accordion';
-import Button from '../../components/primitives/button';
-import SecondaryTitleBanner from '../../components/content/secondary-title-banner';
-import WayfindingItem from '../../components/slices/wayfinding-item';
+import FallbackImage from '~/components/fallback-image';
+import Wrapper from '~/components/wrapper';
+import SiteMetaCustom from '~/components/site-meta-custom';
+import HeaderImage from '~/components/header-image';
+import MainContent from '~/components/main-content';
+import ContentItem from '~/components/content-item';
+import Header1 from '~/components/h1';
+import SummaryBlock from '~/components/summary-block';
+import Accordion from '~/components/accordion';
+import Button from '~/components/button';
+import SecondaryTitleBanner from '~/components/secondary-title-banner';
+import WayfindingItem from '~/components/wayfinding-item';
 
 const SpacedHeading = styled.h2`
   margin: 4vh 0;
@@ -34,7 +32,7 @@ const SpacedHeading = styled.h2`
 export default function TopicPage({ fallback, page, preview }) {
   // Destructure topic from main page payload and meta from global context
   const { topic } = page[0];
-  const { meta } = useContext(DefaultContext);
+  const { meta } = data;
   const pillars = []; // setup for pillar content
 
   return (

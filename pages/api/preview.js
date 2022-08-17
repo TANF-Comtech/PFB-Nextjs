@@ -1,5 +1,5 @@
-import { PrismicClient } from '../../lib/api';
-import { linkResolver } from '../../lib/utils';
+import { PrismicClient } from '~/lib/api';
+import { linkResolver } from '~/utils';
 
 /**
  * Preview()

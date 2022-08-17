@@ -4,19 +4,17 @@ import Router from 'next/router';
 import styled, { ThemeContext } from 'styled-components';
 import { Markup } from 'interweave';
 
-import AuthContext from '../context/auth/auth-context';
+import AuthContext from '~/context/auth/auth-context';
 
-import Wrapper from '../components/global/wrapper';
-import MainContent from '../components/global/main-content';
-import InputButton from '../components/primitives/input-button';
-import { BasicTextField } from '../components/primitives/text';
-import Spinner from '../components/global/spinner';
-import BigTitleBanner from '../components/content/big-title-banner';
-import SiteMetaCustom from '../components/meta/site-meta-custom';
-import Header1 from '../components/primitives/h1';
-import BgImage from '../components/primitives/bg-image';
+import Wrapper from '~/components/wrapper';
+import MainContent from '~/components/main-content';
+import Spinner from '~/components/spinner';
+import BigTitleBanner from '~/components/big-title-banner';
+import SiteMetaCustom from '~/components/site-meta-custom';
+import Header1 from '~/components/h1';
+import BgImage from '~/components/bg-image';
 
-import SigninBG from '../public/promo/signin-bg.jpg';
+import SigninBG from '~/public/promo/signin-bg.jpg';
 
 const LoginForm = styled.form`
   background-color: rgba(255, 255, 255, 0.85);
@@ -69,14 +67,54 @@ const LoginContainer = styled.div`
   }
 `;
 
+const TextField = styled.input.attrs({
+  type: 'text',
+})`
+  border: none;
+  color: white;
+  display: block;
+  font-family: ${(props) => props.theme.montserrat};
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: ${(props) => (props.marginBottom ? props.marginBottom : '1vh')};
+  min-width: ${(props) => (props.minWidth ? props.minWidth : '300px')};
+  padding: 10px 16px;
+
+  @media (min-width: ${(props) => props.theme.bm}) {
+    font-size: calc(14px + 4 * ((100vw - 320px) / 880));
+  }
+
+  @media (min-width: ${(props) => props.theme.lg}) {
+    font-size: 18px;
+  }
+`;
+
+const BasicTextField = ({ className, marginBottom, minWidth, placeholder, onChange }) => {
+  return (
+    <TextField
+      className={className}
+      marginBottom={marginBottom}
+      minWidth={minWidth}
+      placeholder={placeholder}
+      onChange={onChange}
+    />
+  );
+};
+
 const Input = styled(BasicTextField)`
   color: ${(props) => props.theme.black};
+  margin-bottom: 10px;
   width: 100%;
+
+  @media screen and (min-width: ${(props) => props.theme.sm}) {
+    margin: 0 10px 0 0;
+  }
 `;
 
 const Button = styled(InputButton)`
   margin-top: 10px;
   padding: 10px 20px;
+  whitespace: nowrap;
   width: 100%;
 
   @media screen and (min-width: ${(props) => props.theme.sm}) {
@@ -101,6 +139,133 @@ const Disclaimer = styled.p`
   line-height: 18px;
   margin-top: 4vh;
 `;
+
+const InputButtonContainer = styled.div`
+  display: block;
+  text-align: ${(props) => props.buttonPosition || 'left'};
+`;
+
+const InputButtonElement = styled.input`
+  background-color: ${(props) => props.buttonBg || 'rgba(255,255,255,1)'};
+  border: ${(props) => props.buttonBorder || `1px solid ${props.theme.black}`};
+  box-shadow: ${(props) => props.theme.buttonBoxShadow};
+  color: ${(props) => props.buttonColor || props.theme.black};
+  cursor: pointer;
+  display: inline-block;
+  font-family: ${(props) => props.theme.montserrat};
+  font-size: 14px;
+  font-weight: 700;
+  margin: 0;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  transform: translateY(0);
+  transition: all 0.25s ease;
+
+  &:hover {
+    background-color: ${(props) => props.buttonBgHover || props.theme.black};
+    color: ${(props) => props.buttonColorHover || 'white'};
+    text-decoration: none;
+    transform: translateY(-2px);
+  }
+
+  @media (min-width: ${(props) => props.theme.bm}) {
+    font-size: calc(14px + 4 * ((100vw - 320px) / 880));
+  }
+
+  @media (min-width: ${(props) => props.theme.lg}) {
+    font-size: 18px;
+  }
+`;
+
+/**
+ * <BasicButton>
+ *
+ * Simple button that optionally takes props to modify it
+ * The construction wraps two styled-components with a regular React component
+ * Then we pass the props from <BasicButton> down to <Container> and <Anchor> in this file
+ * <Container> controls button position <Button> controls button look and feel
+ * See how it works: https://styled-components.com/docs/basics#passed-props
+ *
+ * @param {string} buttonBg - override for button background
+ * @param {string} buttonBgHover - override for button background on hover
+ * @param {string} buttonBorder - override for button border
+ * @param {string} buttonColor - override for button color
+ * @param {string} buttonColorHover - override for button text color on hover
+ * @param {string} buttonPosition - uses { left | center | right } to move button container
+ * @param {string} buttonText - because <input> is a void element, we can't pass in text, must be a prop instead
+ * @param {string} className - helps styled-components extend, and obviously passes a class
+ * @param {string} margin - how much margin (default is 1vh on bottom)
+ * @param {string} minWidth - how wide should it go (default is 300px)
+ * @param {string} name - input name param, just passed down
+ *
+ * #################!!!!!!!!####################
+ * readOnly flag on component in place because no real data handling has been set up
+ * #################!!!!!!!!####################
+ */
+function InputButton({
+  buttonBg,
+  buttonBgHover,
+  buttonBorder,
+  buttonColor,
+  buttonColorHover,
+  buttonPosition,
+  buttonText,
+  className,
+  minWidth,
+  name,
+  onClick,
+}) {
+  return (
+    <>
+      <InputButtonContainer buttonPosition={buttonPosition}>
+        <InputButtonElement
+          buttonBg={buttonBg}
+          buttonBgHover={buttonBgHover}
+          buttonBorder={buttonBorder}
+          buttonColor={buttonColor}
+          buttonColorHover={buttonColorHover}
+          className={className}
+          minWidth={minWidth}
+          name={name}
+          value={buttonText}
+          readOnly
+          onClick={onClick}
+        />
+      </InputButtonContainer>
+    </>
+  );
+}
+
+const RedInput = styled(BasicTextField)`
+  background-color: ${(props) => props.theme.redAccent};
+  color: white;
+
+  /* Changing placeholder text remain surreal, even in 2020 */
+  ::-webkit-input-placeholder {
+    color: white;
+  }
+  ::-moz-placeholder {
+    color: white;
+  }
+  ::-ms-input-placeholder {
+    color: white;
+  }
+  ::placeholder {
+    color: white;
+  }
+`;
+
+const RedTextField = ({ className, marginBottom, placeholder, onChange }) => {
+  return (
+    <RedInput
+      className={className}
+      marginBottom={marginBottom}
+      placeholder={placeholder}
+      onChange={onChange}
+    />
+  );
+};
 
 function LoginPage() {
   const authContext = useContext(AuthContext);
@@ -209,6 +374,7 @@ function LoginPage() {
                         marginBottom="0"
                         minWidth="200px"
                         placeholder="Email Address"
+                        style={{ marginRight: '10px' }}
                       />
                       <Button
                         buttonBg={themeProps.blue}

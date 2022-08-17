@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
 import Link from 'next/link';
 import { loadStripe } from '@stripe/stripe-js';
-import Wrapper from '../components/global/wrapper';
 import styled, { ThemeContext } from 'styled-components';
 
-import SiteMetaCustom from '../components/meta/site-meta-custom';
-import MainContent from '../components/global/main-content';
+import SiteMetaCustom from '~/components/site-meta-custom';
+import MainContent from '~/components/main-content';
+import Wrapper from '~/components/wrapper';
 
 const RevInp = styled.input`
   min-width: 20vw;
@@ -14,6 +14,8 @@ const RevInp = styled.input`
   padding-right: 10px;
   text-align: right;
   font-family: monospace;
+  border: 1px solid black;
+  border-radius: 3px;
 `;
 
 const CalcWrapper = styled.span`
@@ -39,7 +41,9 @@ const InputWrapper = styled.div`
   justify-content: space-between;
 `;
 
-const CalcButton = styled.button`
+const PaymentButton = styled.button`
+  background-color: ${(props) => props.theme.blue};
+  color: #fff;
   font-family: ${(props) => props.theme.montserrat};
   font-size: 18px;
   font-weight: bold;
@@ -48,16 +52,6 @@ const CalcButton = styled.button`
   @media (max-width: ${(props) => props.theme.sm}) {
     margin-top: 15px;
   }
-`;
-
-const Checkout = styled.button`
-  font-family: ${(props) => props.theme.montserrat};
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 4vh;
-  min-height: fit-content;
-  padding: 10px 20px;
-  transition: 0.2 ease-in-out;
 `;
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY);
@@ -122,11 +116,11 @@ export default function Payments() {
         <h2>Corporate Members Dues Payment</h2>
         <p>Annual dues are calculated based on your company&apos;s annual sales revenue.</p>
         <ul>
-          <li>
+          <li style={{ listStyleType: 'disc' }}>
             Organizations with $1 million or more in US bike related annual sales will pay{' '}
             <strong>$1250 per $1M</strong>
           </li>
-          <li>
+          <li style={{ listStyleType: 'disc' }}>
             Organizations with less than $1 million in annual sales will pay{' '}
             <strong>$1000 for an annual membership</strong>.
           </li>
@@ -138,7 +132,7 @@ export default function Payments() {
             <RevInp placeholder="Annual Sales" value={revenue} onChange={handleRevenue} />
             <p style={{ margin: 0 }}>&nbsp;/&nbsp;&nbsp;$1,000,000 x 1250</p>
           </InputWrapper>
-          <CalcButton onClick={handleSubCalc}>CALCULATE</CalcButton>
+          <PaymentButton onClick={handleSubCalc}>CALCULATE</PaymentButton>
         </CalcWrapper>
         {memberDues && (
           <>
@@ -154,9 +148,14 @@ export default function Payments() {
         {memberDues <= 3000 && (
           <>
             <p>Your dues may be paid by clicking on the checkout button below.</p>
-            <Checkout type="button" role="link" onClick={handleClick}>
+            <PaymentButton 
+              type="button" 
+              role="link" 
+              onClick={handleClick}
+              style={{ marginBottom: '4vh' }}
+            >
               CHECKOUT
-            </Checkout>
+            </PaymentButton>
             <MainContent bgColor={themeProps.midnightBlue} contentPadding="6vh 4vw">
               <h2 style={{ color: 'white' }}>Why Your Dues Matter</h2>
               <p style={{ color: 'white' }}>

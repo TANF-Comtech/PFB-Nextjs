@@ -1,19 +1,18 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { RichText } from 'prismic-reactjs';
 
-import { getEBikesPages, getSingleEBikesPage } from '../../lib/queries/electric-bikes';
-import { linkResolver } from '../../lib/utils';
+import { getEBikesPages, getSingleEBikesPage } from '~/lib/queries/electric-bikes';
+import { linkResolver } from '~/utils';
+import data from '~/data';
 
-import DefaultContext from '../../context/default/default-context';
+import Wrapper from '~/components/wrapper';
+import SiteMetaCustom from '~/components/site-meta-custom';
+import MainContent from '~/components/main-content';
+import Header1 from '~/components/h1';
+import Promo from '~/components/promo';
 
-import Wrapper from '../../components/global/wrapper';
-import SiteMetaCustom from '../../components/meta/site-meta-custom';
-import MainContent from '../../components/global/main-content';
-import Header1 from '../../components/primitives/h1';
-import Promo from '../../components/slices/promo';
-
-import EBikesPromo from '../../public/promo/electric-bikes-shaded.jpg';
+import EBikesPromo from '~/public/promo/electric-bikes-shaded.jpg';
 
 const IntroWrapper = styled.div`
   margin: 3vh 0 1vh 0;
@@ -22,7 +21,7 @@ const IntroWrapper = styled.div`
 export default function EBikesPage({ page, preview }) {
   // Destructure page payload and meta from global context
   const { electric_bikes } = page;
-  const { meta } = useContext(DefaultContext);
+  const { meta } = data;
 
   return (
     <>

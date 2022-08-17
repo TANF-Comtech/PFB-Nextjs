@@ -1,17 +1,16 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 
-import { getEBikeLaws } from '../../lib/queries/electric-bikes';
+import { getEBikeLaws } from '~/lib/queries/electric-bikes';
+import data from '~/data';
 
-import DefaultContext from '../../context/default/default-context';
+import Wrapper from '~/components/wrapper';
+import SiteMetaCustom from '~/components/site-meta-custom';
+import MainContent from '~/components/main-content';
+import Promo from '~/components/promo';
+import Grid from '~/components/grid';
 
-import Wrapper from '../../components/global/wrapper';
-import SiteMetaCustom from '../../components/meta/site-meta-custom';
-import MainContent from '../../components/global/main-content';
-import Promo from '../../components/slices/promo';
-import Grid from '../../components/global/grid';
-
-import EBikesPromo from '../../public/promo/electric-bikes-shaded.jpg';
+import EBikesPromo from '~/public/promo/electric-bikes-shaded.jpg';
 
 const GridWrapper = styled.section`
   margin: 2vh 0;
@@ -53,7 +52,7 @@ const Arrow = styled.img`
 
 export default function EBikesLaws({ page, preview }) {
   // Destructure page payload and meta from global context
-  const { meta } = useContext(DefaultContext);
+  const { meta } = data;
 
   return (
     <>

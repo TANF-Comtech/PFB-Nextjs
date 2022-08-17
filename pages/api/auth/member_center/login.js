@@ -1,7 +1,8 @@
 import Cookies from 'cookies';
-import checkEmailInSalesforce from '../../../../lib/salesforce/checkEmailInSalesforce';
-import sendAuthCode from '../../../../lib/auth0/sendAuthCode';
-import loginAuth0 from '../../../../lib/auth0/loginAuth0';
+
+import checkEmailInSalesforce from '~/lib/salesforce/checkEmailInSalesforce';
+import sendAuthCode from '~/lib/auth0/sendAuthCode';
+import loginAuth0 from '~/lib/auth0/loginAuth0';
 
 const cookieLifeTimeHours = process.env.AUTH0_TOKEN_LIFETIME_HOURS;
 
@@ -42,7 +43,7 @@ const login = (req, res) => {
                 res.status(401).json({
                   status: false,
                   error:
-                    'We could verify your email address in our database. Try submitting it again. If this error persists, contact kerri@peopleforbikes.org and we will investigate further.',
+                    'We could not verify your email address in our database. Try submitting it again. If this error persists, contact kerri@peopleforbikes.org and we will investigate further.',
                 });
               });
           } else {
@@ -80,7 +81,7 @@ const login = (req, res) => {
           });
         });
     } else {
-      res.status(401).json({ status: false, error: 'Unauthorized' });
+      res.status(401).json({ status: false, error: 'Your email address is not authorized to use the Member Center. Contact kerri@peopleforbikes.org if you believe this is an error.' });
     }
   }
 };

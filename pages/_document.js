@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-page-custom-font */
 /* eslint-disable @next/next/next-script-for-ga */
-
+import React from 'react';
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 import Script from 'next/script';
 import { ServerStyleSheet } from 'styled-components';

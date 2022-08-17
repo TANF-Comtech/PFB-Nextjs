@@ -1,7 +1,8 @@
 import React from 'react';
-import { Grants } from '../content/grants';
-import TakeActionList from '../content/takeaction-list';
-import ColorBanner from '../global/color-banner';
+
+import ColorBanner from '~/components/color-banner';
+import { Grants } from '~/components/uid/parts/grants';
+import TakeActionList from '~/components/uid/parts/takeaction-list';
 
 export default function UidIndividualComponents({ landing_page }) {
   return (
