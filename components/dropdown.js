@@ -101,7 +101,7 @@ const TopicContainer = styled.div`
 
 const AnchorAlign = styled.a`
   align-items: center;
-  display: flex;
+  display: flex !important;
 
   svg {
     fill: #fff;
