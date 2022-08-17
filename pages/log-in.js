@@ -103,13 +103,19 @@ const BasicTextField = ({ className, marginBottom, minWidth, placeholder, onChan
 
 const Input = styled(BasicTextField)`
   color: ${(props) => props.theme.black};
+  margin-bottom: 10px;
   width: 100%;
+
+  @media screen and (min-width: ${(props) => props.theme.sm}) {
+    margin: 0 10px 0 0;
+  }
 `;
 
 const Button = styled(InputButton)`
   margin-top: 10px;
   padding: 10px 20px;
   whitespace: nowrap;
+  width: 100%;
 
   @media screen and (min-width: ${(props) => props.theme.sm}) {
     margin-left: 10px;
@@ -368,6 +374,7 @@ function LoginPage() {
                         marginBottom="0"
                         minWidth="200px"
                         placeholder="Email Address"
+                        style={{ marginRight: '10px' }}
                       />
                       <Button
                         buttonBg={themeProps.blue}

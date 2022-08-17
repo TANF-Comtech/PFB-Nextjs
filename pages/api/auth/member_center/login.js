@@ -43,7 +43,7 @@ const login = (req, res) => {
                 res.status(401).json({
                   status: false,
                   error:
-                    'We could verify your email address in our database. Try submitting it again. If this error persists, contact kerri@peopleforbikes.org and we will investigate further.',
+                    'We could not verify your email address in our database. Try submitting it again. If this error persists, contact kerri@peopleforbikes.org and we will investigate further.',
                 });
               });
           } else {
@@ -81,7 +81,7 @@ const login = (req, res) => {
           });
         });
     } else {
-      res.status(401).json({ status: false, error: 'Unauthorized' });
+      res.status(401).json({ status: false, error: 'Your email address is not authorized to use the Member Center. Contact kerri@peopleforbikes.org if you believe this is an error.' });
     }
   }
 };
