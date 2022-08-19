@@ -125,10 +125,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     };
 
     try {
-      const emailResponse = await sendMail();
-
-      // @TODO remove console.info for emailResponse
-      console.info('emailResponse:', emailResponse);
+      await sendMail();
 
       return res.status(200).json({ status: 'Application sent' });
     } catch (error) {

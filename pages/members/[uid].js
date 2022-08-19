@@ -392,7 +392,7 @@ export async function getServerSideProps({ req, res, params, preview = false, pr
     } else {
       return {
         redirect: {
-          destination: '/log-in',
+          destination: `/login?redirect=${params.uid}`,
           permanent: false,
         },
       };
@@ -400,7 +400,7 @@ export async function getServerSideProps({ req, res, params, preview = false, pr
   } else {
     return {
       redirect: {
-        destination: '/log-in',
+        destination: `/login?redirect=${params.uid}`,
         permanent: false,
       },
     };

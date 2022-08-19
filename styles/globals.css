@@ -4,5 +4,13 @@ body {
   @apply overflow-x-clip;
 }
 
+.form-input {
+  @apply !rounded-lg !px-8 !py-4 !text-base sm:!text-xl;
+}
+
+.form-textarea {
+  @apply !rounded-lg !p-8 !text-base sm:!text-xl;
+}
+
 @tailwind components;
 @tailwind utilities;
