@@ -1,5 +1,5 @@
 import React from 'react';
-import { RichText } from 'prismic-reactjs';
+import { PrismicRichText } from '@prismicio/react';
 
 import { randomID } from '~/utils';
 
@@ -18,8 +18,11 @@ const GrantsList = ({ payload }) => {
     <MainContent>
       {payload.map((grant) => {
         return (
-          <Accordion key={randomID(10000000)} title={RichText.asText(grant.accordion_heading)}>
-            <RichText render={grant.accordion_content} />
+          <Accordion
+            key={randomID(10000000)}
+            title={PrismicRichText.asText(grant.accordion_heading)}
+          >
+            <PrismicRichText field={grant.accordion_content} />
           </Accordion>
         );
       })}

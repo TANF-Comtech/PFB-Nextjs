@@ -1,6 +1,6 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import { RichText } from 'prismic-reactjs';
+import { PrismicRichText } from '@prismicio/react';
 
 import CustomErrorPage from '~/pages/404';
 
@@ -53,7 +53,7 @@ export default function TheMonster({ page, preview }) {
   const { landing_page } = page;
 
   return (
-    <Wrapper postTitle={RichText.asText(landing_page.title)} isWide={true}>
+    <Wrapper postTitle={PrismicRichText.asText(landing_page.title)} isWide={true}>
       <UidHeader landing_page={landing_page} />
       <ConditionalSections landing_page={landing_page} />
 

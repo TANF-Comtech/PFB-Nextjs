@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
-import { RichText } from 'prismic-reactjs';
+import { PrismicRichText } from '@prismicio/react';
 
 import { linkResolver } from '~/utils';
 
@@ -142,7 +142,7 @@ const PolicyItem = ({
         </Metadata>
         {text && (
           <Text>
-            <strong>Summary:</strong> <RichText render={text} />
+            <strong>Summary:</strong> <PrismicRichText field={text} />
           </Text>
         )}
         {status && (

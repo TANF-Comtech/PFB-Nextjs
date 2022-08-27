@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Date as ParseDate } from 'prismic-reactjs';
+import { asDate } from '@prismicio/helpers';
 
 import { getLocationsNoImages, getSingleLocationsPage } from '~/lib/queries/locations';
 import { randomID } from '~/utils';
@@ -95,8 +95,8 @@ export default function LocationPage({ fallback, page, preview }) {
               // Check for publication_date from individual news post
               // If not present, use publication date from Prismic CMS
               const newDate = newsItem.data.publication_date
-                ? new Date(ParseDate(newsItem.data.publication_date))
-                : new Date(ParseDate(newsItem.last_publication_date));
+                ? new Date(asDate(newsItem.data.publication_date))
+                : new Date(asDate(newsItem.last_publication_date));
               return (
                 <ContentItem
                   date={`${newDate.toLocaleString('en-us', { month: 'long' })}

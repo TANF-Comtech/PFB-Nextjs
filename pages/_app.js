@@ -73,16 +73,6 @@ const MyApp = ({ Component, pageProps, router }) => {
   // Instantiates Apollo client
   const apolloClient = useApollo(pageProps.initialApolloState);
 
-  // Advocacy Menu control
-
-  // Network of Sites Menu control
-
-  // Our Work Menu Control
-
-  // Search Menu controls
-
-  // Global look at height/width of page
-
   return (
     <ApolloProvider client={apolloClient}>
       <ThemeProvider theme={Variables}>

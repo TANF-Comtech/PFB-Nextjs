@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { RichText } from 'prismic-reactjs';
+import { PrismicRichText } from '@prismicio/react';
 import styled, { ThemeContext } from 'styled-components';
 
 import { getPrograms, getProgramPage } from '~/lib/queries/local-innovation';
@@ -895,7 +895,7 @@ export default function ProgramPage({ fallback, page, preview }) {
             if (slice.type === 'content_block') {
               return (
                 <MainContent contentPadding="4vh 4vw">
-                  <RichText render={slice.primary.main_content} />
+                  <PrismicRichText field={slice.primary.main_content} />
                 </MainContent>
               );
             }

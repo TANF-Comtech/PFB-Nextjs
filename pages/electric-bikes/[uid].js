@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
-import { RichText } from 'prismic-reactjs';
+import { PrismicRichText } from '@prismicio/react';
 
 import { getEBikesPages, getSingleEBikesPage } from '~/lib/queries/electric-bikes';
 import { linkResolver } from '~/utils';
@@ -60,7 +60,7 @@ export default function EBikesPage({ page, preview }) {
           )}
           {electric_bikes.main_content && (
             <IntroWrapper>
-              <RichText linkResolver={linkResolver} render={electric_bikes.main_content} />
+              <PrismicRichText linkResolver={linkResolver} field={electric_bikes.main_content} />
             </IntroWrapper>
           )}
         </MainContent>

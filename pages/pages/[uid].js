@@ -1,7 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
 import ErrorPage from 'next/error';
-import { RichText } from 'prismic-reactjs';
+import { PrismicRichText } from '@prismicio/react';
 
 import { getSingleBasicPage, getAllBasicPagesWithUID } from '~/lib/queries/basic-page';
 import { randomID } from '~/utils';
@@ -20,16 +20,16 @@ export default function BasicPage({ page, preview }) {
     <>
       {/* <Head>
         <title>
-          { RichText.asText(page.basic_page.title) } | PeopleForBikes
+          { PrismicRichText.asText(page.basic_page.title) } | PeopleForBikes
         </title>
       </Head>
-      <Wrapper postTitle={ RichText.asText(page.basic_page.title) }>
-        <RichText
+      <Wrapper postTitle={ PrismicRichText.asText(page.basic_page.title) }>
+        <PrismicRichText
           elements={{ heading1: Heading1 }}
-          render={ page.basic_page.title }
+          field={ page.basic_page.title }
         />
-        <RichText
-          render={ page.basic_page.main_content }
+        <PrismicRichText
+          field={ page.basic_page.main_content }
         />
         {page.basic_page.body && (
           <>
@@ -38,9 +38,9 @@ export default function BasicPage({ page, preview }) {
                 return (
                   <Accordion
                     key={ randomID(10000000) }
-                    title={RichText.asText(accordion.accordion_heading)}
+                    title={PrismicRichText.asText(accordion.accordion_heading)}
                   >
-                    {RichText.asText(accordion.accordion_content)}
+                    {PrismicRichText.asText(accordion.accordion_content)}
                   </Accordion>
                 )
               })

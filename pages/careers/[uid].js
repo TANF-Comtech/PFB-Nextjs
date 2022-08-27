@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { RichText } from 'prismic-reactjs';
+import { PrismicRichText } from '@prismicio/react';
 
 import { getAllCareers, getSingleCareer } from '~/lib/queries/careers';
 import data from '~/data';
@@ -29,7 +29,7 @@ export default function CareerPages({ page, preview }) {
         <MainContent>
           {job.title && <Heading1>{job.title[0].text}</Heading1>}
 
-          {job.posting && <RichText render={job.posting} />}
+          {job.posting && <PrismicRichText field={job.posting} />}
         </MainContent>
 
         <MainContent>

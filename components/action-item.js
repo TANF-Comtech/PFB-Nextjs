@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
-import { RichText } from 'prismic-reactjs';
+import { PrismicRichText } from '@prismicio/react';
 
 import { linkResolver } from '~/utils';
 
@@ -129,7 +129,7 @@ const ActionItem = ({ extendedText = null, icon, path, title, text }) => {
             <Title>{title}</Title>
           )}
           {extendedText !== null ? (
-            <RichText render={extendedText} linkResolver={linkResolver} />
+            <PrismicRichText field={extendedText} linkResolver={linkResolver} />
           ) : (
             <Text>{text}</Text>
           )}

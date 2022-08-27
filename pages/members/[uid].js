@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import styled, { ThemeContext } from 'styled-components';
-import { RichText, Date as ParseDate } from 'prismic-reactjs';
+import { PrismicRichText } from '@prismicio/react';
+import { asDate } from '@prismicio/helpers';
 import Link from 'next/link';
 import Cookies from 'cookies';
 
@@ -120,7 +121,7 @@ const ContentItemSimple = ({ path, title, text }) => {
             </a>
           </Link>
         )}
-        {text && <RichText render={text} />}
+        {text && <PrismicRichText field={text} />}
         {path && (
           <Button
             buttonBg={themeProps.darkGray}
@@ -195,7 +196,7 @@ export default function MembersPage({ page, preview }) {
           {/* MAIN BODY CONTENT */}
           {member_content.main_content && (
             <IntroWrapper>
-              <RichText render={member_content.main_content} linkResolver={linkResolver} />
+              <PrismicRichText field={member_content.main_content} linkResolver={linkResolver} />
             </IntroWrapper>
           )}
 
@@ -246,7 +247,7 @@ export default function MembersPage({ page, preview }) {
                   }
                   title={slice.primary.summary_title && slice.primary.summary_title}
                 >
-                  <RichText render={slice.primary.summary_area} linkResolver={linkResolver} />
+                  <PrismicRichText field={slice.primary.summary_area} linkResolver={linkResolver} />
                 </SummaryBlock>
               );
             }
@@ -264,7 +265,7 @@ export default function MembersPage({ page, preview }) {
                             <Link href={edition.pdf_item.url} passHref>
                               <a>
                                 <Text>
-                                  {new Date(ParseDate(edition.date)).toLocaleString('en-us', {
+                                  {new Date(asDate(edition.date)).toLocaleString('en-us', {
                                     month: 'long',
                                     year: 'numeric',
                                   })}

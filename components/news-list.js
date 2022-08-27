@@ -1,5 +1,5 @@
 import React from 'react';
-import { Date as ParseDate } from 'prismic-reactjs';
+import { asDate } from '@prismicio/helpers';
 
 import { setDateSuffix } from '~/utils/setDateSuffix';
 
@@ -24,9 +24,11 @@ const NewsList = ({ nodeName = 'news_item', payload }) => {
           // Date Processing - must use .replace() to avoid JS date bug!
           let theDateLongform = null;
           if (news[nodeName].publication_date) {
-            theDateLongform = new Date(news[nodeName].publication_date.replace(/-/g, '/'));
+            theDateLongform = new Date(asDate(news[nodeName].publication_date.replace(/-/g, '/')));
           } else {
-            theDateLongform = new Date(news[nodeName]._meta.lastPublicationDate.replace(/-/g, '/'));
+            theDateLongform = new Date(
+              asDate(news[nodeName]._meta.lastPublicationDate.replace(/-/g, '/')),
+            );
           }
 
           return (
