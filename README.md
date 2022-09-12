@@ -196,39 +196,6 @@ export async function getStaticPaths() {
 }
 ```
 
-### Component Level Data
-
-If you need to get data at the component level, it's best to use Apollo's [`useQuery`](https://www.apollographql.com/docs/react/api/react/hooks/#usequery) for that purpose. This actually fetches data client-side, and slips past Next's SSR mechanisms. A good use case for this is a global menu element or a search tool - something that appears on every page but has live data in it.
-
-How this works in practice is:
-
-- Set up your GraphQL query like you would elsewhere in the app
-- Import into a component, preferably in the `/components/global/` folder
-- Use Apollo's `useQuery` to fetch/process the query and store the data
-- Ingest data into components like any client-side React normally does
-
-Truncated example from `components/global/navbar.js` where the main menu dropdowns get created using this method:
-
-```js
-import { useQuery } from '@apollo/client';
-import { MENU_DATA } from '../../lib/apollo/menu-queries';
-
-function NavBar() {
-  const { data: advocacyData } = useQuery(MENU_DATA, {
-    variables: {
-      uid: 'advocacy-menu',
-      lang: 'en-us',
-    },
-  });
-
-  return (
-    <>
-      <Dropdown data={advocacyData} />
-    </>
-  );
-}
-```
-
 ### Routing
 
 You can also do [dynamic routing](https://nextjs.org/docs/routing/dynamic-routes) by wrapping the file name inside the `/pages/` folder in brackets (ie, `/pages/page/[uid].js`) and accessing Next's router. Next will automatically apply the template to all page params it finds in `getStaticPaths` and statically build those out. Next's routing is so good you mostly just don't have to think about it ;)

@@ -3,9 +3,9 @@ import styled, { ThemeContext } from 'styled-components';
 import useScrollPosition from '@react-hook/window-scroll';
 import Link from 'next/link';
 import Router from 'next/router';
-import { useQuery } from '@apollo/client';
 
-import { MENU_DATA } from '~/lib/apollo/menu-queries';
+import globalData from '~/data/global';
+
 import logoutRequest from '~/lib/auth/logoutRequest';
 import AuthContext from '~/context/auth/auth-context';
 import useOnClickOutside from '~/hooks/useOnClickOutside';
@@ -333,13 +333,7 @@ const GlobalBar = () => {
   // Auth context
   const authContext = useContext(AuthContext);
 
-  // Query for nav menu from Apollo
-  const { loading, error, data } = useQuery(MENU_DATA, {
-    variables: {
-      uid: 'global-network-menu',
-      lang: 'en-us',
-    },
-  });
+  const { globalSitesData } = globalData;
 
   // Search state
   const [search, setSearch] = useState(false);
@@ -426,10 +420,10 @@ const GlobalBar = () => {
         </BarGlobal>
       </MainContent>
       <Search searchState={search} handleSearch={handleSearch} />
-      {data !== undefined && (
+      {globalSitesData !== undefined && (
         <Dropdown
           activeWidth={windowSize.width}
-          data={data}
+          data={globalSitesData}
           dropdownState={globalSites}
           dropdownHandler={handleGlobalSites}
           dropdownRef={globalDropdownRef}
@@ -441,6 +435,8 @@ const GlobalBar = () => {
 };
 
 function NavBar() {
+  const { advocacyData, ourWorkData, ridesData } = globalData;
+
   // Import contexts for data usage
   const themeProps = useContext(ThemeContext);
   const authContext = useContext(AuthContext);
@@ -468,26 +464,6 @@ function NavBar() {
   useOnClickOutside(ourWorkRef, () => setOurWorkState(false));
   const ridesRef = useRef();
   useOnClickOutside(ridesRef, () => setRidesState(false));
-
-  // Query for nav menus from Apollo
-  const { data: advocacyData } = useQuery(MENU_DATA, {
-    variables: {
-      uid: 'advocacy-menu',
-      lang: 'en-us',
-    },
-  });
-  const { data: ourWorkData } = useQuery(MENU_DATA, {
-    variables: {
-      uid: 'our-work-menu',
-      lang: 'en-us',
-    },
-  });
-  const { data: ridesData } = useQuery(MENU_DATA, {
-    variables: {
-      uid: 'rides-menu',
-      lang: 'en-us',
-    },
-  });
 
   // Capture scroll position, so we can know when to fade out navbar
   const scrollY = useScrollPosition();

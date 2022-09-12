@@ -23,9 +23,6 @@ export default function MembersPage({ page, preview }) {
   const { statistic_page } = page;
   const { meta } = data;
 
-  // @TODO remove console.info
-  console.info('meta:', meta);
-
   return (
     <>
       <SiteMetaCustom

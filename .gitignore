@@ -33,5 +33,5 @@ yarn-error.log*
 localhost-key.pem
 localhost.pem
 
-# local scratchpad
-/.temp/
+# cached data
+global.json

@@ -1,9 +1,8 @@
 import React, { useState, useRef, useContext, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
 import Link from 'next/link';
-import { useQuery } from '@apollo/client';
 
-import { MENU_DATA } from '~/lib/apollo/menu-queries';
+import globalData from '~/data/global';
 import logoutRequest from '~/lib/auth/logoutRequest';
 import AuthContext from '~/context/auth/auth-context';
 
@@ -281,6 +280,8 @@ const NavAccordion = ({ title, children }) => {
  */
 
 const NavMenu = ({ menuState, handleMenu }) => {
+  const { advocacyData, ourWorkData, ridesData } = globalData;
+
   // Auth context
   const authContext = useContext(AuthContext);
 
@@ -300,26 +301,6 @@ const NavMenu = ({ menuState, handleMenu }) => {
       }
     });
   };
-
-  // Query for nav menus from Apollo
-  const { data: advocacyData } = useQuery(MENU_DATA, {
-    variables: {
-      uid: 'advocacy-menu',
-      lang: 'en-us',
-    },
-  });
-  const { data: ourWorkData } = useQuery(MENU_DATA, {
-    variables: {
-      uid: 'our-work-menu',
-      lang: 'en-us',
-    },
-  });
-  const { data: ridesData } = useQuery(MENU_DATA, {
-    variables: {
-      uid: 'rides-menu',
-      lang: 'en-us',
-    },
-  });
 
   // Locks the body while menu is open
   useEffect(() => {

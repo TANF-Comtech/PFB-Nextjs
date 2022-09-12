@@ -135,13 +135,13 @@ export default function TopicPage({ fallback, page, preview }) {
                   </MainContent>
                 ) : (
                   <MainContent>
-                    {page[1].length !== 0 ? (
+                    {page[1]?.length !== 0 ? (
                       <>
                         <SpacedHeading>
                           PeopleForBikes at Work on {topic.title[0].text}
                         </SpacedHeading>
                         <h3>News</h3>
-                        {page[1].map((newsItem) => {
+                        {page[1]?.map((newsItem) => {
                           // Check for publication_date from individual news post
                           // If not present, use publication date from Prismic CMS
                           const newDate = newsItem.data.publication_date
@@ -228,6 +228,7 @@ export async function getStaticProps({ params, preview = false, previewData }) {
   const pageData = await getSingleTopicPage(params.uid, previewData);
 
   const errorCode = pageData.ok ? false : pageData.statusCode;
+
   if (errorCode) {
     res.statusCode = errorCode;
   }

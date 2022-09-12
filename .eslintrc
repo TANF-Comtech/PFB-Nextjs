@@ -1,6 +1,7 @@
 {
   "extends": "next",
   "rules": {
+    "react/jsx-key": "warn",
     "react/jsx-no-target-blank": "off",
     "@next/next/no-img-element": "off"
   }

@@ -10,7 +10,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@apollo/client": "^3.1.0",
     "@headlessui/react": "^1.6.5",
     "@prismicio/client": "^6.6.4",
     "@prismicio/helpers": "^2.3.3",
@@ -55,6 +54,7 @@
     "eslint": "^8.22.0",
     "eslint-config-next": "^12.2.5",
     "formidable": "^2.0.1",
+    "fs-extra": "^10.1.0",
     "nodemailer": "^6.7.8",
     "postcss": "^8.4.16",
     "prettier": "^2.6.2",

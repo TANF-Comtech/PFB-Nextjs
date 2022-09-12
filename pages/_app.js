@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
 import { ThemeProvider } from 'styled-components';
-import { ApolloProvider } from '@apollo/client';
+import { PrismicProvider } from '@prismicio/react';
+import { PrismicPreview } from '@prismicio/next';
 
-import { useApollo } from '~/lib/apollo/apolloClient';
+import { REPOSITORY_NAME } from '~/lib/api';
 import { AuthProvider } from '~/context/auth/auth-context';
 
 import Variables from '~/components/styles/variables';
@@ -70,25 +71,24 @@ const ldJSONBasic = {
  * <Component> is a Next.js default that renders all components and provides props to them
  */
 const MyApp = ({ Component, pageProps, router }) => {
-  // Instantiates Apollo client
-  const apolloClient = useApollo(pageProps.initialApolloState);
-
   return (
-    <ApolloProvider client={apolloClient}>
-      <ThemeProvider theme={Variables}>
-        <AuthProvider>
-          <Head>
-            <script type="application/ld+json">{JSON.stringify(ldJSONBasic)}</script>
-          </Head>
-          <GlobalStyle />
-          <NavBar />
-          <PageTransition location={router.pathname}>
-            <Component {...pageProps} key={router.route} />
-          </PageTransition>
-          <Footer />
-        </AuthProvider>
-      </ThemeProvider>
-    </ApolloProvider>
+    <ThemeProvider theme={Variables}>
+      <AuthProvider>
+        <Head>
+          <script type="application/ld+json">{JSON.stringify(ldJSONBasic)}</script>
+        </Head>
+        <GlobalStyle />
+        <NavBar />
+        <PageTransition location={router.pathname}>
+          <PrismicProvider>
+            <PrismicPreview repositoryName={REPOSITORY_NAME}>
+              <Component {...pageProps} key={router.route} />
+            </PrismicPreview>
+          </PrismicProvider>
+        </PageTransition>
+        <Footer />
+      </AuthProvider>
+    </ThemeProvider>
   );
 };
 

@@ -158,7 +158,7 @@ export default function Homepage({ page }) {
 
 /* The return here sends the `page` prop back to the component above for rendering */
 export async function getStaticProps({ params, preview = false, previewData }) {
-  const data = await getNewHomepage();
+  const data = await getNewHomepage(previewData);
 
   return {
     props: {
