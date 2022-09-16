@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
+import Link from 'next/link';
 import { ThemeProvider } from 'styled-components';
 import { PrismicProvider } from '@prismicio/react';
 import { PrismicPreview } from '@prismicio/next';
 
-import { REPOSITORY } from '~/lib/api';
+import { REPOSITORY, linkResolver } from '~/lib/api';
 import { AuthProvider } from '~/context/auth/auth-context';
 
 import Variables from '~/components/styles/variables';
@@ -80,7 +81,14 @@ const MyApp = ({ Component, pageProps, router }) => {
         <GlobalStyle />
         <NavBar />
         <PageTransition location={router.pathname}>
-          <PrismicProvider>
+          <PrismicProvider
+            linkResolver={linkResolver}
+            internalLinkComponent={({ href, ...props }) => (
+              <Link href={href}>
+                <a {...props} />
+              </Link>
+            )}
+          >
             <PrismicPreview repositoryName={REPOSITORY}>
               <Component {...pageProps} key={router.route} />
             </PrismicPreview>
