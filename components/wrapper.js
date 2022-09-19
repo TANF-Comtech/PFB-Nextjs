@@ -9,6 +9,7 @@ import { linkResolver } from '~/utils';
 
 import Logo from '~/components/logo';
 import Button from '~/components/button';
+import { Login } from '~/components/login';
 
 // spacer constrains the layout on big screens but keeps it tight on mobile
 const MainContent = styled.main`
@@ -111,37 +112,35 @@ function Titlebar({ children, mainHeight }) {
   const scrollY = useScrollPosition(60);
 
   return (
-    <>
-      <Bar className={scrollY > 600 && scrollY < mainHeight - 300 ? 'isVisibleY' : 'isHiddenY'}>
-        <TitleBarContainer>
-          <Content>
-            <LeftContent>
-              <Link href="/">
-                <a>
-                  <Logo logoMargin="0" logoWidth="5vh" logoViewbox="60 0 150 132" />
-                </a>
-              </Link>
-              <Title>{children}</Title>
-            </LeftContent>
-            <Button
-              buttonBg="#D23823"
-              buttonBgHover="#D0021B"
-              buttonBorder="none"
-              buttonColor="white"
-              buttonColorHover="white"
-              buttonFontSize="18px"
-              buttonPadding="10px 20px"
-              buttonTextTransform="inherit"
-              href="/join"
-            >
-              Join Us
-            </Button>
-          </Content>
-        </TitleBarContainer>
-        {/* detecting where a user is on the page, divide by height of container - dynamic position */}
-        <ProgressBar width={(scrollY / (mainHeight - 300)) * 100} />
-      </Bar>
-    </>
+    <Bar className={scrollY > 600 && scrollY < mainHeight - 300 ? 'isVisibleY' : 'isHiddenY'}>
+      <TitleBarContainer>
+        <Content>
+          <LeftContent>
+            <Link href="/">
+              <a>
+                <Logo logoMargin="0" logoWidth="5vh" logoViewbox="60 0 150 132" />
+              </a>
+            </Link>
+            <Title>{children}</Title>
+          </LeftContent>
+          <Button
+            buttonBg="#D23823"
+            buttonBgHover="#D0021B"
+            buttonBorder="none"
+            buttonColor="white"
+            buttonColorHover="white"
+            buttonFontSize="18px"
+            buttonPadding="10px 20px"
+            buttonTextTransform="inherit"
+            href="/join"
+          >
+            Join Us
+          </Button>
+        </Content>
+      </TitleBarContainer>
+      {/* detecting where a user is on the page, divide by height of container - dynamic position */}
+      <ProgressBar width={(scrollY / (mainHeight - 300)) * 100} />
+    </Bar>
   );
 }
 
@@ -179,6 +178,7 @@ const Wrapper = ({ children, isWide, postPath, postTitle }) => {
       <MainContent ref={mainTarget} isWidePass={isWide}>
         {isWide ? <> {children} </> : <Container> {children} </Container>}
       </MainContent>
+      <Login />
     </>
   );
 };

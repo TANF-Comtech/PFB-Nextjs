@@ -1,13 +1,14 @@
 import React, { useState, useContext, useRef, useEffect } from 'react';
+import { useAtomValue, useSetAtom } from 'jotai';
 import styled, { ThemeContext } from 'styled-components';
 import useScrollPosition from '@react-hook/window-scroll';
 import Link from 'next/link';
 import Router from 'next/router';
 import { useQuery } from '@apollo/client';
 
+import { loginModalAtom } from '~/atoms';
 import { MENU_DATA } from '~/lib/apollo/menu-queries';
-import logoutRequest from '~/lib/auth/logoutRequest';
-import AuthContext from '~/context/auth/auth-context';
+import { loggedInAtom, useLogout } from '~/lib/auth';
 import useOnClickOutside from '~/hooks/useOnClickOutside';
 import useWindowSize from '~/hooks/useWindowSize';
 
@@ -330,8 +331,9 @@ const UnderlinedText = styled.span`
  *
  */
 const GlobalBar = () => {
-  // Auth context
-  const authContext = useContext(AuthContext);
+  // Auth state
+  const isLoggedIn = useAtomValue(loggedInAtom);
+  const setIsLoginModalOpen = useSetAtom(loginModalAtom);
 
   // Query for nav menu from Apollo
   const { loading, error, data } = useQuery(MENU_DATA, {
@@ -354,21 +356,7 @@ const GlobalBar = () => {
   };
 
   // Logout for authenticated users
-  const logout = () => {
-    logoutRequest().then((data) => {
-      if (data.status === true) {
-        authContext.updateAuthContext({
-          user: {
-            email: data?.email,
-            name: data?.name,
-            affiliation: data?.affiliation,
-          },
-          loggedIn: false,
-        });
-        Router.push('/');
-      }
-    });
-  };
+  const logout = useLogout();
 
   // Locks scrolling if you engage the search
   useEffect(() => {
@@ -402,12 +390,12 @@ const GlobalBar = () => {
               </Link>
             </MemberLink>
             <MemberLink>
-              {!authContext.loggedIn ? (
-                <Link href="/log-in">
+              {!isLoggedIn ? (
+                <button onClick={() => setIsLoginModalOpen(true)}>
                   <a>
                     <span>Login</span>
                   </a>
-                </Link>
+                </button>
               ) : (
                 <span
                   onClick={() => {
@@ -443,7 +431,7 @@ const GlobalBar = () => {
 function NavBar() {
   // Import contexts for data usage
   const themeProps = useContext(ThemeContext);
-  const authContext = useContext(AuthContext);
+  // const authContext = useContext(AuthContext);
 
   // State for each dropdown
   const [advocacyState, setAdvocacyState] = useState(false);

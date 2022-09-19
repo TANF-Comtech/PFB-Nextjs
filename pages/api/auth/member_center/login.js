@@ -6,16 +6,33 @@ import loginAuth0 from '~/lib/auth0/loginAuth0';
 
 const cookieLifeTimeHours = process.env.AUTH0_TOKEN_LIFETIME_HOURS;
 
+const getPhoneNumber = (rawPhone = '') => {
+  if (!rawPhone) return ``;
+
+  const trimmedPhone = rawPhone.replace(/-|\s/g, '').trim();
+
+  if (trimmedPhone.startsWith('+1')) {
+    return `${trimmedPhone}`;
+  } else if (trimmedPhone.startsWith('1')) {
+    return `+${trimmedPhone}`;
+  } else if (trimmedPhone.length === 10) {
+    return `+1${trimmedPhone}`;
+  } else {
+    return ``;
+  }
+};
+
 const login = (req, res) => {
   if (req.method === 'POST') {
     const email = req.body?.email;
+    const phone = getPhoneNumber(req.body?.phone);
     const code = req.body?.code;
 
     // if submitting email (step 1)
     if (code == null && email) {
       // Allow PFB and THOR emails to slip by Salesforce lookup check, just get Auth0 verification
       if (email.endsWith('@peopleforbikes.org') || email.endsWith('@thor-studio.com')) {
-        return sendAuthCode(email)
+        return sendAuthCode(email, phone)
           .then((auth0Data) => {
             //dont use auth0Data here
             res.status(200).json({ status: true });
@@ -34,7 +51,7 @@ const login = (req, res) => {
       else {
         return checkEmailInSalesforce(email).then((salesforceData) => {
           if (salesforceData.status) {
-            sendAuthCode(email)
+            sendAuthCode(email, phone)
               .then((auth0Data) => {
                 //dont use auth0Data here
                 res.status(200).json(salesforceData);
@@ -55,7 +72,7 @@ const login = (req, res) => {
 
     // if submitting code (step 2)
     else if (code && email) {
-      return loginAuth0(code, email)
+      return loginAuth0(code, email, phone)
         .then((data) => {
           if (data.id_token) {
             const cookies = new Cookies(req, res);
@@ -81,7 +98,13 @@ const login = (req, res) => {
           });
         });
     } else {
-      res.status(401).json({ status: false, error: 'Your email address is not authorized to use the Member Center. Contact kerri@peopleforbikes.org if you believe this is an error.' });
+      res
+        .status(401)
+        .json({
+          status: false,
+          error:
+            'Your email address is not authorized to use the Member Center. Contact kerri@peopleforbikes.org if you believe this is an error.',
+        });
     }
   }
 };

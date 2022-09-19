@@ -1,11 +1,12 @@
 import React, { useState, useRef, useContext, useEffect } from 'react';
+import { useAtomValue, useSetAtom } from 'jotai';
 import styled, { keyframes } from 'styled-components';
 import Link from 'next/link';
 import { useQuery } from '@apollo/client';
 
+import { loginModalAtom } from '~/atoms';
 import { MENU_DATA } from '~/lib/apollo/menu-queries';
-import logoutRequest from '~/lib/auth/logoutRequest';
-import AuthContext from '~/context/auth/auth-context';
+import { loggedInAtom, useLogout } from '~/lib/auth';
 
 import Logo from '~/components/logo';
 import LogoType from '~/components/logotype';
@@ -281,25 +282,12 @@ const NavAccordion = ({ title, children }) => {
  */
 
 const NavMenu = ({ menuState, handleMenu }) => {
-  // Auth context
-  const authContext = useContext(AuthContext);
+  // Auth state
+  const isLoggedIn = useAtomValue(loggedInAtom);
+  const setIsLoginModalOpen = useSetAtom(loginModalAtom);
 
   // Logout for authenticated users
-  const logout = () => {
-    logoutRequest().then((data) => {
-      if (data.status === true) {
-        authContext.updateAuthContext({
-          user: {
-            email: data?.email,
-            name: data?.name,
-            affiliation: data?.affiliation,
-          },
-          loggedIn: false,
-        });
-        Router.push('/');
-      }
-    });
-  };
+  const logout = useLogout();
 
   // Query for nav menus from Apollo
   const { data: advocacyData } = useQuery(MENU_DATA, {
@@ -413,12 +401,10 @@ const NavMenu = ({ menuState, handleMenu }) => {
                 <Link href="/members">
                   <a onClick={handleMenu}>Corporate Member Center</a>
                 </Link>
-                {!authContext.loggedIn ? (
-                  <Link href="/log-in">
-                    <a onClick={handleMenu}>
-                      <span>Login</span>
-                    </a>
-                  </Link>
+                {!isLoggedIn ? (
+                  <button onClick={() => setIsLoginModalOpen(true)}>
+                    <span>Login</span>
+                  </button>
                 ) : (
                   <span
                     onClick={() => {

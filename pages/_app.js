@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
+import { Provider as JotaiProvider } from 'jotai';
 import { ThemeProvider } from 'styled-components';
 import { ApolloProvider } from '@apollo/client';
 
+import { loginModalAtom } from '~/atoms';
 import { useApollo } from '~/lib/apollo/apolloClient';
-import { AuthProvider } from '~/context/auth/auth-context';
+import { AuthProvider } from '~/lib/auth';
 
 import Variables from '~/components/styles/variables';
 import GlobalStyle from '~/components/styles/global-css';
@@ -13,6 +15,14 @@ import Footer from '~/components/footer';
 import PageTransition from '~/components/transition';
 
 import '~/styles/globals.css';
+
+/**
+ * initialValues (variable)
+ *
+ * @param { array } initialValues - sets default values for Jotai atoms during SSR
+ */
+
+const initialValues = [[loginModalAtom, false]];
 
 /**
  * ldJSONBasic (variable)
@@ -84,21 +94,23 @@ const MyApp = ({ Component, pageProps, router }) => {
   // Global look at height/width of page
 
   return (
-    <ApolloProvider client={apolloClient}>
-      <ThemeProvider theme={Variables}>
-        <AuthProvider>
-          <Head>
-            <script type="application/ld+json">{JSON.stringify(ldJSONBasic)}</script>
-          </Head>
-          <GlobalStyle />
-          <NavBar />
-          <PageTransition location={router.pathname}>
-            <Component {...pageProps} key={router.route} />
-          </PageTransition>
-          <Footer />
-        </AuthProvider>
-      </ThemeProvider>
-    </ApolloProvider>
+    <JotaiProvider initialValues={initialValues}>
+      <AuthProvider>
+        <ApolloProvider client={apolloClient}>
+          <ThemeProvider theme={Variables}>
+            <Head>
+              <script type="application/ld+json">{JSON.stringify(ldJSONBasic)}</script>
+            </Head>
+            <GlobalStyle />
+            <NavBar />
+            <PageTransition location={router.pathname}>
+              <Component {...pageProps} key={router.route} />
+            </PageTransition>
+            <Footer />
+          </ThemeProvider>
+        </ApolloProvider>
+      </AuthProvider>
+    </JotaiProvider>
   );
 };
 
