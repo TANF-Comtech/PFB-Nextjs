@@ -1,7 +1,6 @@
 import React from 'react';
 import { PrismicRichText } from '@prismicio/react';
-
-import { randomID } from '~/utils';
+import * as prismicH from '@prismicio/helpers';
 
 import MainContent from '~/components/main-content';
 import Accordion from '~/components/accordion';
@@ -16,12 +15,9 @@ import Accordion from '~/components/accordion';
 const GrantsList = ({ payload }) => {
   return (
     <MainContent>
-      {payload.map((grant) => {
+      {payload.map((grant, index) => {
         return (
-          <Accordion
-            key={randomID(10000000)}
-            title={PrismicRichText.asText(grant.accordion_heading)}
-          >
+          <Accordion key={index} title={prismicH.asText(grant.accordion_heading)}>
             <PrismicRichText field={grant.accordion_content} />
           </Accordion>
         );
