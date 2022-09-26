@@ -390,7 +390,7 @@ const GrantApplication = () => {
     ],
   );
 
-  const isFormValid = name?.length > 5 && email?.length > 5;
+  const isFormValid = name?.length > 3 && email?.length > 5;
 
   return (
     <>
@@ -577,7 +577,7 @@ const GrantApplication = () => {
         >
           <div>
             <div className="font-bold">NAME OF PERSON SUBMITTING THE REQUEST</div>
-            {name?.length > 5 ? <div>{name}</div> : <Error>Missing field!</Error>}
+            {name?.length > 3 ? <div>{name}</div> : <Error>Missing field!</Error>}
           </div>
           <div>
             <div className="font-bold">TITLE OF PERSON SUBMITTING THE REQUEST</div>
