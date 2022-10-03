@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
-import { RichText } from 'prismic-reactjs';
+import { PrismicRichText } from '@prismicio/react';
 import Link from 'next/link';
 
 import { getReports, getSingleReportPage } from '~/lib/queries/reports';
@@ -116,7 +116,7 @@ export default function ReportPage({ page, preview }) {
             {report.summary && (
               <IntroWrapper>
                 <strong>Summary:</strong>
-                <RichText render={report.summary} linkResolver={linkResolver} />
+                <PrismicRichText field={report.summary} linkResolver={linkResolver} />
               </IntroWrapper>
             )}
             {report.pdf && (

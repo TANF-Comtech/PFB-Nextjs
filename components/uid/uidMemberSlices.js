@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { RichText } from 'prismic-reactjs';
+import { PrismicRichText } from '@prismicio/react';
 import { ThemeContext } from 'styled-components';
 
 import { linkResolver, randomID } from '~/utils';
@@ -30,7 +30,7 @@ export default function UidMemberSlices({ landing_page }) {
             maxWidth="800px"
             textColor="#fff"
           >
-            <RichText render={slice.primary.summary_area} linkResolver={linkResolver} />
+            <PrismicRichText field={slice.primary.summary_area} linkResolver={linkResolver} />
           </SummaryBlock>
         );
       }
@@ -62,7 +62,7 @@ export default function UidMemberSlices({ landing_page }) {
             textColor="#fff"
             title={slice.primary.summary_title}
           >
-            <RichText render={slice.primary.summary_area} linkResolver={linkResolver} />
+            <PrismicRichText field={slice.primary.summary_area} linkResolver={linkResolver} />
           </SummaryBlock>
         );
       }

@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import Link from 'next/link';
-import { RichText, Date as ParseDate } from 'prismic-reactjs';
+import { PrismicRichText } from '@prismicio/react';
+import { asDate } from '@prismicio/helpers';
 import styled from 'styled-components';
 
 import { getTopics, getSingleTopicPage } from '~/lib/queries/topics';
@@ -134,18 +135,18 @@ export default function TopicPage({ fallback, page, preview }) {
                   </MainContent>
                 ) : (
                   <MainContent>
-                    {page[1].length !== 0 ? (
+                    {page[1]?.length !== 0 ? (
                       <>
                         <SpacedHeading>
                           PeopleForBikes at Work on {topic.title[0].text}
                         </SpacedHeading>
                         <h3>News</h3>
-                        {page[1].map((newsItem) => {
+                        {page[1]?.map((newsItem) => {
                           // Check for publication_date from individual news post
                           // If not present, use publication date from Prismic CMS
                           const newDate = newsItem.data.publication_date
-                            ? new Date(ParseDate(newsItem.data.publication_date))
-                            : new Date(ParseDate(newsItem.last_publication_date));
+                            ? new Date(asDate(newsItem.data.publication_date))
+                            : new Date(asDate(newsItem.last_publication_date));
                           return (
                             <ContentItem
                               date={`${newDate.toLocaleString('en-us', {
@@ -194,8 +195,8 @@ export default function TopicPage({ fallback, page, preview }) {
                     slice.__typename === 'TopicBodyElectric_bikes_content' && (
                       <MainContent maxWidth="1000px" key={randomID(123647890)}>
                         {slice.primary && (
-                          <RichText
-                            render={slice.primary.main_content}
+                          <PrismicRichText
+                            field={slice.primary.main_content}
                             linkResolver={linkResolver}
                           />
                         )}
@@ -227,6 +228,7 @@ export async function getStaticProps({ params, preview = false, previewData }) {
   const pageData = await getSingleTopicPage(params.uid, previewData);
 
   const errorCode = pageData.ok ? false : pageData.statusCode;
+
   if (errorCode) {
     res.statusCode = errorCode;
   }

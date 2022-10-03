@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Date as ParseDate } from 'prismic-reactjs';
+import { asDate } from '@prismicio/helpers';
 
 import { getLocationsNoImages, getSingleLocationsPage } from '~/lib/queries/locations';
 import { randomID } from '~/utils';
@@ -82,7 +82,7 @@ export default function LocationPage({ fallback, page, preview }) {
         <MainContent>
           {
             // Only print this title if we've got enough content in News
-            page[1].length > 1 && (
+            page[1]?.length > 1 && (
               <>
                 <h2>PeopleForBikes Work in {locations.location[0].text}</h2>
                 <h3>News</h3>
@@ -95,8 +95,8 @@ export default function LocationPage({ fallback, page, preview }) {
               // Check for publication_date from individual news post
               // If not present, use publication date from Prismic CMS
               const newDate = newsItem.data.publication_date
-                ? new Date(ParseDate(newsItem.data.publication_date))
-                : new Date(ParseDate(newsItem.last_publication_date));
+                ? new Date(asDate(newsItem.data.publication_date))
+                : new Date(asDate(newsItem.last_publication_date));
               return (
                 <ContentItem
                   date={`${newDate.toLocaleString('en-us', { month: 'long' })}
@@ -104,7 +104,7 @@ export default function LocationPage({ fallback, page, preview }) {
                         ${newDate.getFullYear()}`}
                   key={newsItem.id}
                   image={
-                    Object.keys(newsItem.data.header_image).length !== 0 &&
+                    Object.keys(newsItem.data.header_image)?.length !== 0 &&
                     newsItem.data.header_image
                       ? newsItem.data.header_image
                       : fallback[Math.floor(Math.random() * 6)]

@@ -2,10 +2,9 @@ import React, { useState, useRef, useContext, useEffect } from 'react';
 import { useAtomValue, useSetAtom } from 'jotai';
 import styled, { keyframes } from 'styled-components';
 import Link from 'next/link';
-import { useQuery } from '@apollo/client';
 
+import globalData from '~/data/global'
 import { loginModalAtom } from '~/atoms';
-import { MENU_DATA } from '~/lib/apollo/menu-queries';
 import { loggedInAtom, useLogout } from '~/lib/auth';
 
 import Logo from '~/components/logo';
@@ -282,32 +281,14 @@ const NavAccordion = ({ title, children }) => {
  */
 
 const NavMenu = ({ menuState, handleMenu }) => {
+  const { advocacyData, ourWorkData, ridesData } = globalData;
+
   // Auth state
   const isLoggedIn = useAtomValue(loggedInAtom);
   const setIsLoginModalOpen = useSetAtom(loginModalAtom);
 
   // Logout for authenticated users
   const logout = useLogout();
-
-  // Query for nav menus from Apollo
-  const { data: advocacyData } = useQuery(MENU_DATA, {
-    variables: {
-      uid: 'advocacy-menu',
-      lang: 'en-us',
-    },
-  });
-  const { data: ourWorkData } = useQuery(MENU_DATA, {
-    variables: {
-      uid: 'our-work-menu',
-      lang: 'en-us',
-    },
-  });
-  const { data: ridesData } = useQuery(MENU_DATA, {
-    variables: {
-      uid: 'rides-menu',
-      lang: 'en-us',
-    },
-  });
 
   // Locks the body while menu is open
   useEffect(() => {

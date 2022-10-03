@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
-import { RichText } from 'prismic-reactjs';
+import { PrismicRichText } from '@prismicio/react';
 
 import { htmlSerializer } from '~/lib/prismic/htmlSerializer';
 import { getAllNews, getSingleNewsPage } from '~/lib/queries/news';
@@ -127,17 +127,17 @@ const IntroWrapper = styled.div`
   }
 
   .yt-video-container {
-    position: relative; 
-    padding-bottom: 56.25%; 
-    padding-top: 30px; 
-    height: 0; 
-    overflow: hidden; 
+    position: relative;
+    padding-bottom: 56.25%;
+    padding-top: 30px;
+    height: 0;
+    overflow: hidden;
 
     iframe {
-      position: absolute; 
-      top: 0; 
-      left: 0; 
-      width: 100%; 
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
       height: 100%;
     }
   }
@@ -406,10 +406,10 @@ export default function NewsPage({ fallback, page, preview }) {
           )}
           {news.main_content && (
             <IntroWrapper>
-              <RichText
-                render={news.main_content}
+              <PrismicRichText
+                field={news.main_content}
                 linkResolver={linkResolver}
-                htmlSerializer={htmlSerializer}
+                components={htmlSerializer}
               />
             </IntroWrapper>
           )}

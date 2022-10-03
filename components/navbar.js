@@ -3,11 +3,9 @@ import { useAtomValue, useSetAtom } from 'jotai';
 import styled, { ThemeContext } from 'styled-components';
 import useScrollPosition from '@react-hook/window-scroll';
 import Link from 'next/link';
-import Router from 'next/router';
-import { useQuery } from '@apollo/client';
 
+import globalData from '~/data/global'
 import { loginModalAtom } from '~/atoms';
-import { MENU_DATA } from '~/lib/apollo/menu-queries';
 import { loggedInAtom, useLogout } from '~/lib/auth';
 import useOnClickOutside from '~/hooks/useOnClickOutside';
 import useWindowSize from '~/hooks/useWindowSize';
@@ -334,14 +332,10 @@ const GlobalBar = () => {
   // Auth state
   const isLoggedIn = useAtomValue(loggedInAtom);
   const setIsLoginModalOpen = useSetAtom(loginModalAtom);
+  const { globalSitesData } = globalData
 
-  // Query for nav menu from Apollo
-  const { loading, error, data } = useQuery(MENU_DATA, {
-    variables: {
-      uid: 'global-network-menu',
-      lang: 'en-us',
-    },
-  });
+  // Logout for authenticated users
+  const logout = useLogout();
 
   // Search state
   const [search, setSearch] = useState(false);
@@ -354,9 +348,6 @@ const GlobalBar = () => {
   const handleGlobalSites = () => {
     setGlobalSites(!globalSites);
   };
-
-  // Logout for authenticated users
-  const logout = useLogout();
 
   // Locks scrolling if you engage the search
   useEffect(() => {
@@ -414,10 +405,10 @@ const GlobalBar = () => {
         </BarGlobal>
       </MainContent>
       <Search searchState={search} handleSearch={handleSearch} />
-      {data !== undefined && (
+      {globalSitesData !== undefined && (
         <Dropdown
           activeWidth={windowSize.width}
-          data={data}
+          data={globalSitesData}
           dropdownState={globalSites}
           dropdownHandler={handleGlobalSites}
           dropdownRef={globalDropdownRef}
@@ -429,6 +420,8 @@ const GlobalBar = () => {
 };
 
 function NavBar() {
+  const { advocacyData, ourWorkData, ridesData } = globalData;
+
   // Import contexts for data usage
   const themeProps = useContext(ThemeContext);
   // const authContext = useContext(AuthContext);
@@ -456,26 +449,6 @@ function NavBar() {
   useOnClickOutside(ourWorkRef, () => setOurWorkState(false));
   const ridesRef = useRef();
   useOnClickOutside(ridesRef, () => setRidesState(false));
-
-  // Query for nav menus from Apollo
-  const { data: advocacyData } = useQuery(MENU_DATA, {
-    variables: {
-      uid: 'advocacy-menu',
-      lang: 'en-us',
-    },
-  });
-  const { data: ourWorkData } = useQuery(MENU_DATA, {
-    variables: {
-      uid: 'our-work-menu',
-      lang: 'en-us',
-    },
-  });
-  const { data: ridesData } = useQuery(MENU_DATA, {
-    variables: {
-      uid: 'rides-menu',
-      lang: 'en-us',
-    },
-  });
 
   // Capture scroll position, so we can know when to fade out navbar
   const scrollY = useScrollPosition();

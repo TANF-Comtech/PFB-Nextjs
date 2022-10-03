@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import Link from 'next/link';
 import styled, { ThemeContext } from 'styled-components';
-import { RichText } from 'prismic-reactjs';
+import { PrismicRichText } from '@prismicio/react';
 
 import { linkResolver } from '~/utils';
 
@@ -70,7 +70,7 @@ const ContentItemSimple = ({ path, title, text }) => {
             </a>
           </Link>
         )}
-        {text && <RichText render={text} />}
+        {text && <PrismicRichText field={text} />}
         {path && (
           <Button
             buttonBg={themeProps.darkGray}

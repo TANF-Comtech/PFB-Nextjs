@@ -51,140 +51,140 @@ export const linkResolver = (link, linkWrapper = false, linkedText = 'Click here
   if (link.link_type === 'Document') {
     switch (link.type) {
       case 'action':
-        return `/take-action/${link.uid}`;
+        return `/take-action/${link?.uid}`;
       case 'campaign':
-        return `/campaign/${link.uid}`;
+        return `/campaign/${link?.uid}`;
       case 'electric_bikes':
-        return `/electric-bikes/${link.uid}`;
+        return `/electric-bikes/${link?.uid}`;
       case 'event':
-        return `/events/${link.uid}`;
+        return `/events/${link?.uid}`;
       case 'grant':
-        return `/grants/${link.uid}`;
+        return `/grants/${link?.uid}`;
       case 'job':
-        return `/careers/${link.uid}`;
+        return `/careers/${link?.uid}`;
       case 'landing_page':
-        return `/${link.uid}`;
+        return `/${link?.uid}`;
       case 'locations':
-        return `/locations/${link.uid}`;
+        return `/locations/${link?.uid}`;
       case 'member_content':
-        return `/members/${link.uid}`;
+        return `/members/${link?.uid}`;
       case 'news':
-        return `/news/${link.uid}`;
+        return `/news/${link?.uid}`;
       case 'policy':
-        return `/policy/${link.uid}`;
+        return `/policy/${link?.uid}`;
       case 'program':
-        return `/local-innovation/${link.uid}`;
+        return `/local-innovation/${link?.uid}`;
       case 'report':
-        return `/reports/${link.uid}`;
+        return `/reports/${link?.uid}`;
       case 'statistic_page':
-        return `/statistics/${link.uid}`;
+        return `/statistics/${link?.uid}`;
       case 'topic':
-        return `/topics/${link.uid}`;
+        return `/topics/${link?.uid}`;
     }
   }
 
   if (link._linkType === 'Link.document') {
     switch (link._meta.type) {
       case 'action':
-        return `/take-action/${link._meta.uid}`;
+        return `/take-action/${link._meta?.uid}`;
       case 'campaign':
-        return `/campaign/${link._meta.uid}`;
+        return `/campaign/${link._meta?.uid}`;
       case 'electric_bikes':
-        return `/electric-bikes/${link._meta.uid}`;
+        return `/electric-bikes/${link._meta?.uid}`;
       case 'event':
-        return `/events/${link._meta.uid}`;
+        return `/events/${link._meta?.uid}`;
       case 'grant':
-        return `/grants/${link._meta.uid}`;
+        return `/grants/${link._meta?.uid}`;
       case 'job':
-        return `/careers/${link._meta.uid}`;
+        return `/careers/${link._meta?.uid}`;
       case 'landing_page':
-        return `/${link._meta.uid}`;
+        return `/${link._meta?.uid}`;
       case 'locations':
-        return `/locations/${link._meta.uid}`;
+        return `/locations/${link._meta?.uid}`;
       case 'member_content':
-        return `/members/${link._meta.uid}`;
+        return `/members/${link._meta?.uid}`;
       case 'news':
-        return `/news/${link._meta.uid}`;
+        return `/news/${link._meta?.uid}`;
       case 'policy':
-        return `/policy/${link._meta.uid}`;
+        return `/policy/${link._meta?.uid}`;
       case 'program':
-        return `/local-innovation/${link._meta.uid}`;
+        return `/local-innovation/${link._meta?.uid}`;
       case 'report':
-        return `/reports/${link._meta.uid}`;
+        return `/reports/${link._meta?.uid}`;
       case 'statistic_page':
-        return `/statistics/${link._meta.uid}`;
+        return `/statistics/${link._meta?.uid}`;
       case 'topic':
-        return `/topics/${link._meta.uid}`;
+        return `/topics/${link._meta?.uid}`;
     }
   }
 
   if (link.__typename) {
     switch (link.__typename) {
       case 'Action':
-        return `/take-action/${link._meta.uid}`;
+        return `/take-action/${link._meta?.uid}`;
       case 'Campaign':
-        return `/campaigns/${link._meta.uid}`;
+        return `/campaigns/${link._meta?.uid}`;
       case 'Event':
-        return `/events/${link._meta.uid}`;
+        return `/events/${link._meta?.uid}`;
       case 'Electric Bikes':
-        return `/electric-bikes/${link._meta.uid}`;
+        return `/electric-bikes/${link._meta?.uid}`;
       case 'Grant':
-        return `/grants/${link._meta.uid}`;
+        return `/grants/${link._meta?.uid}`;
       case 'Job':
-        return `/careers/${link._meta.uid}`;
+        return `/careers/${link._meta?.uid}`;
       case 'Landing_page':
-        return `/${link._meta.uid}`;
+        return `/${link._meta?.uid}`;
       case 'Locations':
-        return `/locations/${link._meta.uid}`;
+        return `/locations/${link._meta?.uid}`;
       case 'Member_content':
-        return `/members/${link._meta.uid}`;
+        return `/members/${link._meta?.uid}`;
       case 'News':
-        return `/news/${link._meta.uid}`;
+        return `/news/${link._meta?.uid}`;
       case 'Policy':
-        return `/policy/${link._meta.uid}`;
+        return `/policy/${link._meta?.uid}`;
       case 'Program':
-        return `/local-innovation/${link._meta.uid}`;
+        return `/local-innovation/${link._meta?.uid}`;
       case 'Report':
-        return `/reports/${link._meta.uid}`;
+        return `/reports/${link._meta?.uid}`;
       case 'Statistic Page':
-        return `/statistics/${link._meta.uid}`;
+        return `/statistics/${link._meta?.uid}`;
       case 'Topic':
-        return `/topics/${link._meta.uid}`;
+        return `/topics/${link._meta?.uid}`;
     }
   }
 
   if (link.type) {
     switch (link.type) {
       case 'action':
-        return `/take-action/${link.uid}`;
+        return `/take-action/${link?.uid}`;
       case 'campaign':
-        return `/campaign/${link.uid}`;
+        return `/campaign/${link?.uid}`;
       case 'electric_bikes':
-        return `/electric-bikes/${link.uid}`;
+        return `/electric-bikes/${link?.uid}`;
       case 'event':
-        return `/events/${link.uid}`;
+        return `/events/${link?.uid}`;
       case 'grant':
-        return `/grants/${link.uid}`;
+        return `/grants/${link?.uid}`;
       case 'job':
-        return `/careers/${link.uid}`;
+        return `/careers/${link?.uid}`;
       case 'landing_page':
-        return `/${link.uid}`;
+        return `/${link?.uid}`;
       case 'locations':
-        return `/locations/${link.uid}`;
+        return `/locations/${link?.uid}`;
       case 'member_content':
-        return `/members/${link.uid}`;
+        return `/members/${link?.uid}`;
       case 'news':
-        return `/news/${link.uid}`;
+        return `/news/${link?.uid}`;
       case 'program':
-        return `/local-innovation/${link.uid}`;
+        return `/local-innovation/${link?.uid}`;
       case 'policy':
-        return `/policy/${link.uid}`;
+        return `/policy/${link?.uid}`;
       case 'report':
-        return `/reports/${link.uid}`;
+        return `/reports/${link?.uid}`;
       case 'statistic_page':
-        return `/statistics/${link.uid}`;
+        return `/statistics/${link?.uid}`;
       case 'topic':
-        return `/topics/${link.uid}`;
+        return `/topics/${link?.uid}`;
     }
   }
 };

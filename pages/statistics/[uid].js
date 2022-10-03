@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
-import { RichText } from 'prismic-reactjs';
+import { PrismicRichText } from '@prismicio/react';
 
 import { getStats, getSingleStatsPage } from '~/lib/queries/statistics';
 import { linkResolver } from '~/utils';
@@ -50,7 +50,7 @@ export default function MembersPage({ page, preview }) {
           {statistic_page.title && <Header1>{statistic_page.title[0].text} Statistics</Header1>}
           {statistic_page.main_content && (
             <IntroWrapper>
-              <RichText render={statistic_page.main_content} linkResolver={linkResolver} />
+              <PrismicRichText field={statistic_page.main_content} linkResolver={linkResolver} />
             </IntroWrapper>
           )}
         </MainContent>

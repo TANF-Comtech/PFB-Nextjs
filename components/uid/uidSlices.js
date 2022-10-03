@@ -1,9 +1,11 @@
 import React, { useContext } from 'react';
-import { RichText } from 'prismic-reactjs';
+import { PrismicRichText } from '@prismicio/react';
 import styled, { ThemeContext } from 'styled-components';
+import * as prismicH from '@prismicio/helpers';
 
 import { linkResolver, randomID } from '~/utils';
 
+import Accordion from '~/components/accordion';
 import Button from '~/components/button';
 import NumberedPillars from '~/components/numbered-pillars';
 import SecondaryCampaign from '~/components/secondary-campaign';
@@ -34,7 +36,7 @@ export default function UidSlices({ landing_page }) {
       if (slice.__typename === 'Landing_pageBodyContent_block') {
         return (
           <SummaryBlock key={randomID(10000000)}>
-            <RichText render={slice.primary.main_content} linkResolver={linkResolver} />
+            <PrismicRichText field={slice.primary.main_content} linkResolver={linkResolver} />
           </SummaryBlock>
         );
       }
@@ -195,6 +197,20 @@ export default function UidSlices({ landing_page }) {
               <hr />
             </MainContent>
             <VisualGrid payload={slice.fields} title={slice.primary.grid_title} />
+          </>
+        );
+      }
+
+      if (slice.__typename === 'Landing_pageBodyAccordion_list') {
+        return (
+          <>
+            <MainContent>
+              {slice.fields.map((item, index) => (
+                <Accordion key={index} title={prismicH.asText(item.accordion_heading)}>
+                  <PrismicRichText field={item.accordion_content} />
+                </Accordion>
+              ))}
+            </MainContent>
           </>
         );
       }

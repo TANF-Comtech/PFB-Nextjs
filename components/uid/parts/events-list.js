@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
-import { Date as ParseDate } from 'prismic-reactjs';
+import { asDate } from '@prismicio/helpers';
 
 import MainContent from '~/components/main-content';
 
@@ -135,7 +135,7 @@ const EventsList = ({ eventTitle, payload }) => {
       {eventTitle && <h2>{eventTitle}</h2>}
       {payload.map((event) => {
         // Get date
-        const newEventDate = new Date(ParseDate(event.node.date));
+        const newEventDate = asDate(ParseDate(event.node.date));
         return (
           <EventItem
             day={newEventDate.toLocaleString('en-us', { day: '2-digit' })}

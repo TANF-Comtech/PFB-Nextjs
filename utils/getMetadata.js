@@ -1,4 +1,4 @@
-import { Date as ParseDate } from 'prismic-reactjs';
+import * as prismicH from '@prismicio/helpers';
 
 import { linkResolver } from '~/utils';
 import data from '~/data';
@@ -15,17 +15,17 @@ import data from '~/data';
  * @returns { object } meta values
  */
 
-export default function getMetadata(dataObject) {
-  const { meta } = data;
+const meta = { ...data.meta };
 
-  const theTitle = getTitle(dataObject, meta);
-  const theByline = getByline(dataObject, meta);
-  const theDesc = getDesc(dataObject, meta);
-  const theKeywords = getKeywords(dataObject, meta);
-  const thePath = getPath(dataObject, meta);
-  const theDate = getDate(dataObject, meta);
-  const theDateModified = getDateModified(dataObject, meta);
-  const [theImage, theImageWidth, theImageHeight] = getImageData(dataObject, meta);
+export default function getMetadata(dataObject) {
+  const theTitle = getTitle(dataObject);
+  const theByline = getByline(dataObject);
+  const theDesc = getDesc(dataObject);
+  const theKeywords = getKeywords(dataObject);
+  const thePath = getPath(dataObject);
+  const theDate = getDate(dataObject);
+  const theDateModified = getDateModified(dataObject);
+  const [theImage, theImageWidth, theImageHeight] = getImageData(dataObject);
 
   return {
     theTitle,
@@ -41,7 +41,7 @@ export default function getMetadata(dataObject) {
   };
 }
 
-const getTitle = (dataObject, meta) => {
+const getTitle = (dataObject) => {
   if (dataObject.seo_title) {
     return `${dataObject.seo_title} | PeopleForBikes`;
   } else if (dataObject.title && dataObject._meta.uid !== 'new_homepage') {
@@ -51,7 +51,7 @@ const getTitle = (dataObject, meta) => {
   }
 };
 
-const getByline = (dataObject, meta) => {
+const getByline = (dataObject) => {
   if (dataObject.byline) {
     return dataObject.byline;
   } else {
@@ -59,7 +59,7 @@ const getByline = (dataObject, meta) => {
   }
 };
 
-const getDesc = (dataObject, meta) => {
+const getDesc = (dataObject) => {
   if (dataObject.seo_text) {
     return dataObject.seo_text;
   } else if (dataObject.main_content) {
@@ -73,7 +73,7 @@ const getDesc = (dataObject, meta) => {
   }
 };
 
-const getKeywords = (dataObject, meta) => {
+const getKeywords = (dataObject) => {
   if (dataObject.seo_keywords) {
     return dataObject.seo_keywords;
   } else {
@@ -81,7 +81,7 @@ const getKeywords = (dataObject, meta) => {
   }
 };
 
-const getPath = (dataObject, meta) => {
+const getPath = (dataObject) => {
   if (dataObject) {
     return `https://www.peopleforbikes.org${linkResolver(dataObject._meta)}`;
   } else {
@@ -89,23 +89,23 @@ const getPath = (dataObject, meta) => {
   }
 };
 
-const getDate = (dataObject, meta) => {
+const getDate = (dataObject) => {
   if (dataObject.publication_date) {
-    return new Date(ParseDate(dataObject.publication_date));
+    return new Date(prismicH.asDate(dataObject.publication_date));
   } else {
-    return new Date(ParseDate(dataObject._meta.lastPublicationDate));
+    return new Date(prismicH.asDate(dataObject._meta.lastPublicationDate));
   }
 };
 
-const getDateModified = (dataObject, meta) => {
+const getDateModified = (dataObject) => {
   if (dataObject._meta.lastPublicationDate) {
-    return new Date(ParseDate(dataObject._meta.lastPublicationDate));
+    return new Date(prismicH.asDate(dataObject._meta.lastPublicationDate));
   } else {
     return null;
   }
 };
 
-const getImageData = (dataObject, meta) => {
+const getImageData = (dataObject) => {
   if (dataObject.seo_image) {
     return [
       dataObject.seo_image.url,

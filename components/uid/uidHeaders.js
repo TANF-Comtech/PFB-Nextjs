@@ -1,5 +1,5 @@
 import React from 'react';
-import { RichText } from 'prismic-reactjs';
+import { PrismicRichText } from '@prismicio/react';
 
 import getMetadata from '~/utils/getMetadata';
 
@@ -53,7 +53,7 @@ export default function UidHeader({ landing_page }) {
             path={thePath}
           />
           <BigTitleBanner>
-            <RichText elements={{ heading1: Heading1 }} render={landing_page.title} />
+            <PrismicRichText elements={{ heading1: Heading1 }} field={landing_page.title} />
           </BigTitleBanner>
           {landing_page.summary && (
             <SummaryBlock>

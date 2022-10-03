@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { RichText } from 'prismic-reactjs';
+import { PrismicRichText } from '@prismicio/react';
 
 import { linkResolver } from '~/utils';
 
@@ -163,7 +163,7 @@ const TeamMember = ({
             {position && <Position>{position}</Position>}
             {description && (
               <ColorWrap textColor={textColor}>
-                <RichText render={description} />
+                <PrismicRichText field={description} />
               </ColorWrap>
             )}
             {path && <EmailButton href={linkResolver(path, true)}>Email Me</EmailButton>}

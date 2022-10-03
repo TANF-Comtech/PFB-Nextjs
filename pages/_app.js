@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React  from 'react';
 import Head from 'next/head';
-import { Provider as JotaiProvider } from 'jotai';
+import Link from 'next/link';
 import { ThemeProvider } from 'styled-components';
-import { ApolloProvider } from '@apollo/client';
+import { AuthProvider } from '~/lib/auth';
+import { Provider as JotaiProvider } from 'jotai';
+import { PrismicProvider } from '@prismicio/react';
+import { PrismicPreview } from '@prismicio/next';
 
 import { loginModalAtom } from '~/atoms';
-import { useApollo } from '~/lib/apollo/apolloClient';
-import { AuthProvider } from '~/lib/auth';
+import { REPOSITORY, linkResolver } from '~/lib/api';
 
 import Variables from '~/components/styles/variables';
 import GlobalStyle from '~/components/styles/global-css';
@@ -80,36 +82,32 @@ const ldJSONBasic = {
  * <Component> is a Next.js default that renders all components and provides props to them
  */
 const MyApp = ({ Component, pageProps, router }) => {
-  // Instantiates Apollo client
-  const apolloClient = useApollo(pageProps.initialApolloState);
-
-  // Advocacy Menu control
-
-  // Network of Sites Menu control
-
-  // Our Work Menu Control
-
-  // Search Menu controls
-
-  // Global look at height/width of page
-
   return (
     <JotaiProvider initialValues={initialValues}>
-      <AuthProvider>
-        <ApolloProvider client={apolloClient}>
-          <ThemeProvider theme={Variables}>
-            <Head>
-              <script type="application/ld+json">{JSON.stringify(ldJSONBasic)}</script>
-            </Head>
-            <GlobalStyle />
-            <NavBar />
-            <PageTransition location={router.pathname}>
+     <AuthProvider>
+      <ThemeProvider theme={Variables}>
+        <Head>
+          <script type="application/ld+json">{JSON.stringify(ldJSONBasic)}</script>
+        </Head>
+        <GlobalStyle />
+        <NavBar />
+        <PageTransition location={router.pathname}>
+          <PrismicProvider
+            linkResolver={linkResolver}
+            internalLinkComponent={({ href, ...props }) => (
+              <Link href={href}>
+                <a {...props} />
+              </Link>
+            )}
+          >
+            <PrismicPreview repositoryName={REPOSITORY}>
               <Component {...pageProps} key={router.route} />
-            </PageTransition>
-            <Footer />
-          </ThemeProvider>
-        </ApolloProvider>
-      </AuthProvider>
+            </PrismicPreview>
+          </PrismicProvider>
+        </PageTransition>
+        <Footer />
+      </ThemeProvider>
+     </AuthProvider>
     </JotaiProvider>
   );
 };

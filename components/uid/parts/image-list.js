@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { RichText } from 'prismic-reactjs';
+import { PrismicRichText } from '@prismicio/react';
 
 import { randomID } from '~/utils';
 
@@ -75,7 +75,7 @@ export default function ImageList({ payload = [] }) {
                 <TileImage alt={item.square_image?.alt} src={item.square_image?.url} />
                 <Container>
                   <Title>{item.item_title}</Title>
-                  <RichText render={item.description} />
+                  <PrismicRichText field={item.description} />
                 </Container>
               </Grid>
               {i < payload.length - 1 && <Rule key={randomID(34093849018)} padding="4vh 4vw" />}

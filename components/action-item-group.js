@@ -14,7 +14,7 @@ import ActionItem from '~/components/action-item';
 const ActionItemGroup = ({ payload }) => {
   return (
     <MainContent>
-      {payload.map((item, i) => {
+      {payload?.map((item, i) => {
         return (
           <ActionItem
             extendedText={item.extended_text}

@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Script from 'next/script';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
-import { RichText } from 'prismic-reactjs';
+import { PrismicRichText } from '@prismicio/react';
 
 import { getSingleActionPage } from '~/lib/queries/take-action';
 import data from '~/data';
@@ -211,7 +211,7 @@ export default function ActionForms({ page, preview }) {
         <MainContent>
           {action.title && <CenteredTitle>{action.title[0].text}</CenteredTitle>}
           {action.main_content && <BigPara>{action.main_content}</BigPara>}
-          {action.long_content && <RichText render={action.long_content} />}
+          {action.long_content && <PrismicRichText field={action.long_content} />}
           <FlexContainer>
             {action.image_selection && (
               <>
