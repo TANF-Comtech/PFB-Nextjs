@@ -11,6 +11,11 @@ const Background = styled.header`
     color: ${(props) => props.color || 'white'};
     text-transform: uppercase;
   }
+
+  li {
+    list-style-type: disc;
+    padding-left: 10px;
+  }
 `;
 
 /**

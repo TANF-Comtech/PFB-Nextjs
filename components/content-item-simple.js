@@ -36,6 +36,11 @@ const ContentContainer = styled.div`
   a:hover {
     text-decoration: none;
   }
+
+  li {
+    list-style-type: disc;
+    padding-left: 10px;
+  }
 `;
 
 const Title = styled.h3`

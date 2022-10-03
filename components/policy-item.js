@@ -48,6 +48,11 @@ const Text = styled.div`
   font-size: 18px;
   line-height: 24px;
   margin-bottom: 25px;
+
+  li {
+    list-style-type: disc;
+    padding-left: 10px;
+  }
 `;
 
 const Metadata = styled.div`

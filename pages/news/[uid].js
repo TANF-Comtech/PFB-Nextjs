@@ -89,7 +89,8 @@ const IntroWrapper = styled.div`
   }
 
   li {
-    list-item-style: disc;
+    list-style-type: disc;
+    padding-left: 10px;
   }
 
   .block-img {

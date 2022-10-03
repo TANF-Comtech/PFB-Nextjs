@@ -16,6 +16,11 @@ import ResearchPromo from '~/public/promo/promo-research.jpg';
 
 const IntroWrapper = styled.div`
   margin: 3vh 0 1vh 0;
+
+  li {
+    list-style-type: disc;
+    padding-left: 10px;
+  }
 `;
 
 export default function MembersPage({ page, preview }) {

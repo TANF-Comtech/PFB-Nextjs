@@ -4,7 +4,6 @@ import { ThemeContext } from 'styled-components';
 
 import { linkResolver, randomID } from '~/utils';
 
-import NumberedPillars from '~/components/numbered-pillars';
 import MainContent from '~/components/main-content';
 import SummaryBlock from '~/components/summary-block';
 import Promo from '~/components/promo';

@@ -58,6 +58,11 @@ const ContentContainer = styled.div`
     color: ${(props) => props.theme.red};
     text-decoration: none;
   }
+
+  li {
+    list-style-type: disc;
+    padding-left: 10px;
+  }
 `;
 
 const Title = styled.h2`

@@ -24,6 +24,11 @@ const Para = styled.div`
     margin-right: auto;
     max-width: ${(props) => props.maxWidth || '100%'};
   }
+
+  li {
+    list-style-type: disc;
+    padding-left: 10px;
+  }
 `;
 
 const Title = styled.h2`

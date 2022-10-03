@@ -10,6 +10,11 @@ const MainContainer = styled.section`
 const Sizer = styled.div`
   margin: 0 auto;
   max-width: ${(props) => props.maxWidth || props.theme.lg};
+
+  li {
+    list-style-type: disc;
+    padding-left: 10px;
+  }
 `;
 
 /**
