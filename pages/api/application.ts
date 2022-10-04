@@ -46,7 +46,7 @@ const uploadStream = (file) => {
 
 const getAttachments = (files: any) => {
   const attachments = [...Object.entries(files)].map((file: any) => {
-    const filename = `${file[1].newFilename}.${file[1].originalFilename.split('.')[1]}`;
+    const filename = `${file[1].newFilename}.${file[1].originalFilename.split('.').slice(-1)[0]}`;
     const contentType = `${file[1].mimetype}`;
     const path = `https://pfb-grants.s3.us-east-2.amazonaws.com/${filename}`;
 
@@ -64,7 +64,7 @@ const getLinks = (files: any) => {
   const links = [...Object.entries(files)].map(
     (file: any) =>
       `https://pfb-grants.s3.us-east-2.amazonaws.com/${file[1].newFilename}.${
-        file[1].originalFilename.split('.')[1]
+        file[1].originalFilename.split('.').slice(-1)[0]
       }`,
   );
 
@@ -101,7 +101,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       fields?.communityBenefits
     }\r\n\r\nDIVERSITY STATEMENT:\n${fields?.diversityStatement}\r\n\r\nEVALUATION:\n${
       fields?.evaluation
-    }\r\n\r\nATTACHMENTS:\n${links?.length ? links.map((link) => `${link}\n`) : 'No attachments'}`;
+    }\r\n\r\nATTACHMENTS:\n${
+      links?.length ? links.map((link) => `${link}\r\n`) : 'No attachments'
+    }`;
 
     // @TODO restore attachments
     // const attachments = getAttachments(files);
