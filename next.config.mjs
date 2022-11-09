@@ -405,6 +405,11 @@ const nextConfig = async (phase, { defaultConfig }) => {
           destination: '/take-action/add-my-city',
           permanent: true,
         },
+        {
+          source: '/donate',
+          destination: 'https://www.classy.org/give/434938/#!/donation/checkout?c_src=PFBweb',
+          permanent: false,
+        },
       ];
     },
   };
