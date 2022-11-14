@@ -34,11 +34,17 @@ export const randomID = (num) => {
  */
 
 export const linkResolver = (link, linkWrapper = false, linkedText = 'Click here to read more') => {
+  if (!link) {
+    console.log('Link is undefined!');
+
+    return '/404?source=undefined-link';
+  }
+
   // If the link wraps other elements & is a non next/link type, just return the path
   if (
-    link.__typename === '_ExternalLink' ||
-    link.__typename === '_FileLink' ||
-    link.__typename === '_ImageLink'
+    link?.__typename === '_ExternalLink' ||
+    link?.__typename === '_FileLink' ||
+    link?.__typename === '_ImageLink'
   ) {
     return `${link.url}`;
   }
@@ -48,8 +54,8 @@ export const linkResolver = (link, linkWrapper = false, linkedText = 'Click here
     return link;
   }
 
-  if (link.link_type === 'Document') {
-    switch (link.type) {
+  if (link?.link_type === 'Document') {
+    switch (link?.type) {
       case 'action':
         return `/take-action/${link?.uid}`;
       case 'campaign':
@@ -83,8 +89,8 @@ export const linkResolver = (link, linkWrapper = false, linkedText = 'Click here
     }
   }
 
-  if (link._linkType === 'Link.document') {
-    switch (link._meta.type) {
+  if (link?._linkType === 'Link.document') {
+    switch (link?._meta.type) {
       case 'action':
         return `/take-action/${link._meta?.uid}`;
       case 'campaign':
@@ -118,8 +124,8 @@ export const linkResolver = (link, linkWrapper = false, linkedText = 'Click here
     }
   }
 
-  if (link.__typename) {
-    switch (link.__typename) {
+  if (link?.__typename) {
+    switch (link?.__typename) {
       case 'Action':
         return `/take-action/${link._meta?.uid}`;
       case 'Campaign':
@@ -153,8 +159,8 @@ export const linkResolver = (link, linkWrapper = false, linkedText = 'Click here
     }
   }
 
-  if (link.type) {
-    switch (link.type) {
+  if (link?.type) {
+    switch (link?.type) {
       case 'action':
         return `/take-action/${link?.uid}`;
       case 'campaign':

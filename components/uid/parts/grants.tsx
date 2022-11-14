@@ -48,14 +48,14 @@ export const Grants = () => {
             mission — making biking better for everyone and getting more people on bikes more often.
           </p>
           <p className="text-base font-bold !leading-normal sm:text-3xl">
-            Thank you, and keep up your amazing work!
+            We will reopen our application process soon - check back for updates.
           </p>
-          <Button
+          {/* <Button
             label="Apply now"
             onClick={() => setIsApplicationModalOpen(true)}
             variant="darkGray"
             size="small"
-          />
+          /> */}
         </div>
       </div>
       <div className="bg-midnightBlue p-10 sm:p-20">

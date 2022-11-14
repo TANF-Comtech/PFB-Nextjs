@@ -105,7 +105,7 @@ export default function Homepage({ page }) {
             buttonColor="white"
             buttonBorder="none"
           >
-            Our Mission
+            Help Support Our Mission
           </Button>
         </HeaderImage>
       )}
