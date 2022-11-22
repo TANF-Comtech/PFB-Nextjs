@@ -137,7 +137,7 @@ const nextConfig = async (phase, { defaultConfig }) => {
       domains: ['*.peopleforbikes.org', 'localhost', 'images.prismic.io'],
     },
 
-    // Expeirmental features
+    // Experimental features
     experimental: {
       legacyBrowsers: true,
     },
