@@ -23,7 +23,7 @@ const transporter = nodemailer.createTransport({
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const date = new Date().toLocaleDateString('en-CA').replaceAll('/', '-');
-  const subject = `Owner's Manual purchase (${date}})`;
+  const subject = `Owner's Manual purchase (${date})`;
 
   const text = `An Owner's Manual has been purchased on ${date}!`;
 
