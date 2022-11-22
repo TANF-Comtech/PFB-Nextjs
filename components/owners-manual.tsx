@@ -132,8 +132,6 @@ const Step = () => {
       return <Payment />;
     case 'PENDING':
       return <Pending />;
-    case 'VERIFIED':
-      return <Verified />;
   }
 };
 
