@@ -108,7 +108,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     // @TODO restore attachments
     // const attachments = getAttachments(files);
 
-    const sendMail = async () => {
+    const sendApplication = async () => {
       try {
         const response = await transporter.sendMail({
           from: 'info@peopleforbikes.org',
@@ -126,8 +126,25 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       }
     };
 
+    const sendConfirmation = async () => {
+      try {
+        const response = await transporter.sendMail({
+          from: 'info@peopleforbikes.org',
+          replyTo: 'betsy@peopleforbikes.org',
+          to: fields?.email,
+          subject: `PeopleForBikes Community Grants Application received`,
+          text: `Your application has been submitted successfully to the PeopleForBikes Community Grants Program. Our panel will convene in November and we will notify you, whether you receive a grant or not, by early December. You may hear from us should we have any questions or if additional information is required. Please email betsy@peopleforbikes.org for any questions or concerns!`,
+        });
+
+        return response;
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
     try {
-      await sendMail();
+      await sendApplication();
+      await sendConfirmation();
 
       return res.status(200).json({ status: 'Application sent' });
     } catch (error) {

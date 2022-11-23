@@ -35,7 +35,7 @@ export const Grants = () => {
           />
         </div>
       </div>
-      <div className="p-10 sm:p-20">
+      <div id="application" className="p-10 sm:p-20">
         <div className="mx-auto max-w-screen-lg text-center text-darkestGray">
           <p className="text-base !leading-normal sm:text-3xl">
             PeopleForBikes simplified our grant process with just one annual cycle and no

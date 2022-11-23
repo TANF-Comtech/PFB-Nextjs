@@ -4,6 +4,7 @@ import NewsList from '~/components/news-list';
 import SecondaryCampaign from '~/components/secondary-campaign';
 import BasicList from '~/components/uid/parts/basic-list';
 import EventsList from '~/components/uid/parts/events-list';
+import GrantsPillars from '~/components/uid/parts/grants-pillars';
 import JoinList from '~/components/uid/parts/join-list';
 import LocationsList from '~/components/uid/parts/locations-list';
 import PolicyPillars from '~/components/uid/parts/policy-pillars';
@@ -15,6 +16,11 @@ import TopicsList from '~/components/uid/parts/topics-list';
 export default function ConditionalSections({ landing_page, fallback, preview }) {
   return (
     <>
+      {
+        // GRANTS
+        landing_page._meta.uid === 'grants' && <GrantsPillars />
+      }
+
       {
         // NEWS
         landing_page._meta.uid === 'news' && (

@@ -52,6 +52,7 @@ const Grid = styled.section`
 const HeroText = styled.h1`
   margin: 4vh 0;
   padding: 0;
+  max-width: 1200px;
   text-transform: uppercase;
 
   @media (min-width: ${(props) => props.theme.lg}) {
