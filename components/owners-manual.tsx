@@ -147,7 +147,8 @@ const Start = () => {
       <h2 className="font-dharma text-6xl sm:text-8xl">License the Owner’s Manual</h2>
       <p className="text-base !leading-relaxed sm:text-3xl">
         PeopleForBikes Owner’s Manual can be licensed by member companies for $2,000/year. If your
-        company is not a PeopleForBieks Member, please contact Ray Keener at ray@peopleforbikes.org.
+        company is not a PeopleForBikss Member, please contact Scarlet at
+        scarlet@peopleforbikes.org.
       </p>
       <div>
         <Button label="License the Owner’s Manual" size="large" onClick={handleStart} />
@@ -172,7 +173,7 @@ const SignLicenseAgreement = () => {
         <Progress step={1} />
         <div className="mt-5 text-base font-bold !leading-relaxed sm:text-3xl">STEP 1:</div>
         <p className="text-base !leading-relaxed sm:text-3xl">
-          Sign the Owner’s Manual Licenes Agreement
+          Sign the Owner’s Manual License Agreement
         </p>
         <div className="flex gap-8">
           <Button
