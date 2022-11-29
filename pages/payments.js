@@ -63,6 +63,7 @@ const removeNonNumericCharacters = (value) => value.replace(/[^0-9]/g, '');
 export default function Payments() {
   const themeProps = useContext(ThemeContext);
 
+  const [company, setCompany] = useState('');
   const [price, setPrice] = useState(1000);
   const [revenue, setRevenue] = useState('');
   const [memberDues, setMemberDues] = useState();
@@ -93,7 +94,7 @@ export default function Payments() {
       headers: {
         'content-type': 'application/json',
       },
-      body: JSON.stringify({ quantity: 1, amount: memberDues * 100 }),
+      body: JSON.stringify({ quantity: 1, amount: memberDues * 100, company: company || 'N/A' }),
     }).then((res) => res.json());
 
     //  When the customer clicks on the button, redirect them to checkout.
@@ -147,15 +148,26 @@ export default function Payments() {
         )}
         {memberDues <= 3000 && (
           <>
-            <p>Your dues may be paid by clicking on the checkout button below.</p>
-            <PaymentButton 
-              type="button" 
-              role="link" 
-              onClick={handleClick}
-              style={{ marginBottom: '4vh' }}
-            >
-              CHECKOUT
-            </PaymentButton>
+            <p>
+              Your dues may be paid by entering your company name and clicking on the checkout
+              button below.
+            </p>
+            <div className="mb-10 flex flex-col gap-5">
+              <div>
+                <div className="font-bold">Company</div>
+                <input
+                  value={company}
+                  placeholder="company name..."
+                  onChange={(event) => setCompany(event.currentTarget.value)}
+                  className="inline-block w-[15rem] rounded border p-1"
+                />
+              </div>
+              <div>
+                <PaymentButton type="button" role="link" onClick={handleClick}>
+                  CHECKOUT
+                </PaymentButton>
+              </div>
+            </div>
             <MainContent bgColor={themeProps.midnightBlue} contentPadding="6vh 4vw">
               <h2 style={{ color: 'white' }}>Why Your Dues Matter</h2>
               <p style={{ color: 'white' }}>
