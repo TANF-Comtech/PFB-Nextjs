@@ -4,13 +4,14 @@ import cx from 'classnames';
 import { Dialog, Transition } from '@headlessui/react';
 
 type ModalProps = {
+  className?: string;
   dark?: boolean;
   show: boolean;
   onClose: () => void;
   children: React.ReactNode;
 };
 
-export const Modal = ({ dark = false, show, onClose, children }: ModalProps) => {
+export const Modal = ({ className = '', dark = false, show, onClose, children }: ModalProps) => {
   return (
     <Transition appear show={show} as={Fragment}>
       <Dialog as="div" className="relative z-[1000]" onClose={onClose}>
@@ -36,11 +37,16 @@ export const Modal = ({ dark = false, show, onClose, children }: ModalProps) => 
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="relative w-full max-w-screen-lg transform overflow-hidden rounded-xl bg-white p-5 text-left shadow-xl transition-all sm:p-10 lg:p-20">
+              <Dialog.Panel
+                className={cx(
+                  'relative w-full max-w-screen-lg transform overflow-hidden rounded-xl bg-white p-5 text-left shadow-xl transition-all sm:p-10 lg:p-20',
+                  className,
+                )}
+              >
                 <button
                   onClick={onClose}
                   className={cx(
-                    'absolute top-0 right-0 p-5 text-2xl font-bold',
+                    'absolute top-0 right-0 z-100 p-5 text-2xl font-bold',
                     dark && 'text-white',
                   )}
                 >

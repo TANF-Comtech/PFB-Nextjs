@@ -137,6 +137,14 @@ const nextConfig = async (phase, { defaultConfig }) => {
       domains: ['*.peopleforbikes.org', 'localhost', 'images.prismic.io'],
     },
 
+    // Experimental features
+    experimental: {
+      legacyBrowsers: true,
+    },
+
+    // Disable source maps for production builds
+    productionBrowserSourceMaps: false,
+
     // Redirects
     async redirects() {
       return [

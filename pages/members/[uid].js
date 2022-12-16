@@ -4,7 +4,9 @@ import { PrismicRichText } from '@prismicio/react';
 import { asDate } from '@prismicio/helpers';
 import Link from 'next/link';
 import Cookies from 'cookies';
+import { useAtom } from 'jotai';
 
+import { ownersManualModalAtom } from '~/atoms';
 import { getSingleMemberPage } from '~/lib/queries/member-center';
 import { randomID, linkResolver } from '~/utils';
 import auth0ValidateToken from '~/lib/auth0/auth0ValidateToken';
@@ -23,6 +25,7 @@ import Grid from '~/components/grid';
 import WayfindingItem from '~/components/wayfinding-item';
 import NumberedPillars from '~/components/numbered-pillars';
 import VisualGrid from '~/components/visual-grid';
+import { OwnersManual } from '~/components/owners-manual';
 
 const IntroWrapper = styled.div`
   margin: 3vh 0 1vh 0;
@@ -355,6 +358,7 @@ export default function MembersPage({ page, preview }) {
             )}
           </>
         )}
+        <OwnersManual />
       </Wrapper>
     </>
   );

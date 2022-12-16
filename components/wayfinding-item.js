@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
+import { useSetAtom } from 'jotai';
 
+import { ownersManualModalAtom } from '~/atoms';
 import { linkResolver } from '~/utils';
 
 import BlueArrowWhiteBlock from '~/public/blue-arrow-white-block.svg';
@@ -75,6 +77,10 @@ const Text = styled.p`
  * @param { string } textColor - duh
  */
 const WayfindingItem = ({ bgColor, path, title, text, textColor }) => {
+  if (path._meta?.uid === 'owners-manual') {
+    return <OwnersManual bgColor={bgColor} title={title} text={text} textColor={textColor} />;
+  }
+
   return (
     <Container bgColor={bgColor}>
       {path.__typename === '_ExternalLink' ? (
@@ -105,3 +111,27 @@ const WayfindingItem = ({ bgColor, path, title, text, textColor }) => {
 };
 
 export default WayfindingItem;
+
+const OwnersManual = ({ bgColor, title, text, textColor }) => {
+  const setIsOwnersManualModalOpen = useSetAtom(ownersManualModalAtom);
+
+  const handleClick = useCallback(() => {
+    setIsOwnersManualModalOpen(true);
+  }, [setIsOwnersManualModalOpen]);
+
+  return (
+    <>
+      <Container bgColor={bgColor}>
+        <ContentContainer>
+          <button onClick={handleClick}>
+            <Title textColor={textColor}>{title}</Title>
+          </button>
+          <Text>{text}</Text>
+        </ContentContainer>
+        <button onClick={handleClick}>
+          <Icon src={BlueArrowWhiteBlock} alt="Blue Arrow" />
+        </button>
+      </Container>
+    </>
+  );
+};

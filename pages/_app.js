@@ -1,4 +1,4 @@
-import React  from 'react';
+import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { ThemeProvider } from 'styled-components';
@@ -7,7 +7,7 @@ import { Provider as JotaiProvider } from 'jotai';
 import { PrismicProvider } from '@prismicio/react';
 import { PrismicPreview } from '@prismicio/next';
 
-import { loginModalAtom } from '~/atoms';
+import { loginModalAtom, ownersManualModalAtom } from '~/atoms';
 import { REPOSITORY, linkResolver } from '~/lib/api';
 
 import Variables from '~/components/styles/variables';
@@ -24,7 +24,10 @@ import '~/styles/globals.css';
  * @param { array } initialValues - sets default values for Jotai atoms during SSR
  */
 
-const initialValues = [[loginModalAtom, false]];
+const initialValues = [
+  [loginModalAtom, false],
+  [ownersManualModalAtom, false],
+];
 
 /**
  * ldJSONBasic (variable)
@@ -84,30 +87,30 @@ const ldJSONBasic = {
 const MyApp = ({ Component, pageProps, router }) => {
   return (
     <JotaiProvider initialValues={initialValues}>
-     <AuthProvider>
-      <ThemeProvider theme={Variables}>
-        <Head>
-          <script type="application/ld+json">{JSON.stringify(ldJSONBasic)}</script>
-        </Head>
-        <GlobalStyle />
-        <NavBar />
-        <PageTransition location={router.pathname}>
-          <PrismicProvider
-            linkResolver={linkResolver}
-            internalLinkComponent={({ href, ...props }) => (
-              <Link href={href}>
-                <a {...props} />
-              </Link>
-            )}
-          >
-            <PrismicPreview repositoryName={REPOSITORY}>
-              <Component {...pageProps} key={router.route} />
-            </PrismicPreview>
-          </PrismicProvider>
-        </PageTransition>
-        <Footer />
-      </ThemeProvider>
-     </AuthProvider>
+      <AuthProvider>
+        <ThemeProvider theme={Variables}>
+          <Head>
+            <script type="application/ld+json">{JSON.stringify(ldJSONBasic)}</script>
+          </Head>
+          <GlobalStyle />
+          <NavBar />
+          <PageTransition location={router.pathname}>
+            <PrismicProvider
+              linkResolver={linkResolver}
+              internalLinkComponent={({ href, ...props }) => (
+                <Link href={href}>
+                  <a {...props} />
+                </Link>
+              )}
+            >
+              <PrismicPreview repositoryName={REPOSITORY}>
+                <Component {...pageProps} key={router.route} />
+              </PrismicPreview>
+            </PrismicProvider>
+          </PageTransition>
+          <Footer />
+        </ThemeProvider>
+      </AuthProvider>
     </JotaiProvider>
   );
 };
