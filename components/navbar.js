@@ -4,7 +4,7 @@ import styled, { ThemeContext } from 'styled-components';
 import useScrollPosition from '@react-hook/window-scroll';
 import Link from 'next/link';
 
-import globalData from '~/data/global'
+import globalData from '~/data/global';
 import { loginModalAtom } from '~/atoms';
 import { loggedInAtom, useLogout } from '~/lib/auth';
 import useOnClickOutside from '~/hooks/useOnClickOutside';
@@ -332,7 +332,7 @@ const GlobalBar = () => {
   // Auth state
   const isLoggedIn = useAtomValue(loggedInAtom);
   const setIsLoginModalOpen = useSetAtom(loginModalAtom);
-  const { globalSitesData } = globalData
+  const { globalSitesData } = globalData;
 
   // Logout for authenticated users
   const logout = useLogout();
@@ -461,6 +461,15 @@ function NavBar() {
 
   // Window dimensions
   const windowSize = useWindowSize();
+
+  // Automatically close dropdowns after scrolling
+  useEffect(() => {
+    if (scrollY >= 32) {
+      setAdvocacyState(false);
+      setOurWorkState(false);
+      setRidesState(false);
+    }
+  }, [scrollY]);
 
   return (
     <>

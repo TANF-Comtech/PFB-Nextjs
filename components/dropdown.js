@@ -13,7 +13,7 @@ const OuterContainer = styled.nav`
   }};
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
   opacity: ${(props) => (props.dropdownState === true ? '1' : '0')};
-  position: absolute;
+  position: fixed;
   left: 0;
   right: 0;
   top: ${(props) => {
