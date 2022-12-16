@@ -5,9 +5,10 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
 });
 
 const session = async (req, res) => {
-  const { quantity, amount } = req.body;
+  const { quantity, amount, company = 'N/A' } = req.body;
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ['card'],
+    payment_intent_data: { metadata: { company } },
     line_items: [
       {
         amount,
