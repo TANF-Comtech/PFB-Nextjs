@@ -12,170 +12,58 @@ import { Modal } from '~/components/modal';
 import WhiteArrow from '~/public/white-arrow-triangle.svg';
 
 export const Grants = () => {
-  const [isRecipientsModalOpen, setIsRecipientsModalOpen] = useState<boolean>(false);
-  const [isApplicationModalOpen, setIsApplicationModalOpen] = useState<boolean>(false);
+  const [isRecipientsModalOpen, setIsRecipientsModalOpen] = useState(false);
+  const [isApplicationModalOpen, setIsApplicationModalOpen] = useState(false);
 
   return (
     <>
       <div className="bg-midnightBlue p-10 sm:p-20">
         <div className="mx-auto max-w-screen-lg text-center text-lightestGray">
-          <p className="text-base leading-10 sm:text-3xl">
-            The PeopleForBikes Industry Community Grant Program provides funding for projects that
-            make bicycling better in communities across the U.S. Since 1999, PeopleForBikes has
-            awarded more than 400 grants to nonprofit organizations and local governments in all 50
-            states, the District of Columbia and Puerto Rico. Our investments total more than $3.5
-            million and have leveraged $775 million in public and private funding for bike-related
-            projects nationwide.
-          </p>
+          <p className="text-base leading-10 sm:text-3xl">{grantsRecipientsDescription}</p>
           <Button
-            label="View grant recipient list"
+            label={grantsRecipientsCta}
             onClick={() => setIsRecipientsModalOpen(true)}
             variant="blue"
             size="large"
           />
         </div>
       </div>
-      <div className="p-10 sm:p-20">
+      <div id="application" className="p-10 sm:p-20">
         <div className="mx-auto max-w-screen-lg text-center text-darkestGray">
-          <p className="text-base !leading-normal sm:text-3xl">
-            PeopleForBikes simplified our grant process with just one annual cycle and no
-            requirement for a Letter of Intent. To be considered, simply submit your application by
-            the annual application deadline on October 31. Grant requests will be reviewed in
-            November and awards will be presented in December.
-          </p>
-          <p className="text-base !leading-normal sm:text-3xl">
-            We look forward to continuing to support work that aligns with PeopleForBikes&rsquo;
-            mission — making biking better for everyone and getting more people on bikes more often.
-          </p>
-          <p className="text-base font-bold !leading-normal sm:text-3xl">
-            We will reopen our application process soon - check back for updates.
-          </p>
-          {/* <Button
-            label="Apply now"
-            onClick={() => setIsApplicationModalOpen(true)}
-            variant="darkGray"
-            size="small"
-          /> */}
+          <Paragraphs className="mb-4 text-base !leading-normal sm:text-3xl">
+            {grantApplicationDescription}
+          </Paragraphs>
+          {!ARE_GRANTS_OPEN ? (
+            <p className="text-base font-bold !leading-normal sm:text-3xl">
+              {grantsClosedDescription}
+            </p>
+          ) : (
+            <Button
+              label={grantsApplicationCta}
+              onClick={() => setIsApplicationModalOpen(true)}
+              variant="darkGray"
+              size="small"
+            />
+          )}
         </div>
       </div>
       <div className="bg-midnightBlue p-10 sm:p-20">
         <div className="mx-auto max-w-screen-lg text-center text-lightestGray">
-          <h2 className="font-dharma text-6xl sm:text-8xl">Grant Guidance</h2>
-          <p className="text-base leading-relaxed sm:text-3xl">
-            In addition to the PeopleForBikes Industry Community Grant Program, consider exploring
-            the following funding sources:
-          </p>
+          <h2 className="font-dharma text-6xl sm:text-8xl">{grantGuidanceTitle}</h2>
+          <Paragraphs className="text-base leading-relaxed sm:text-3xl">
+            {grantGuidanceDescription}
+          </Paragraphs>
         </div>
         <div className="mx-auto max-w-screen-lg divide-y divide-lightestGray text-lightestGray">
-          <GrantGuidanceSection
-            label="Grocery"
-            grantRecipients={[
-              ['Safeway', 'http://safewayfoundation.org/'],
-              ['Walmart', 'https://walmart.org/how-we-give/local-community-grants'],
-              [
-                'Target',
-                'https://corporate.target.com/corporate-responsibility/philanthropy/corporate-giving',
-              ],
-            ]}
-          >
-            <p>
-              Grocery or big box store chains often have $500 to $10,000 grants to invest in great
-              community projects. Some grant funders:
-            </p>
-          </GrantGuidanceSection>
-          <GrantGuidanceSection
-            label="Banks and Credit Unions"
-            grantRecipients={[
-              [
-                'Wells Fargo',
-                'https://www.wellsfargo.com/about/corporate-responsibility/community-giving/',
-              ],
-              [
-                'PNC Bank',
-                'https://www.pnc.com/en/about-pnc/corporate-responsibility/philanthropy/pnc-foundation.html',
-              ],
-            ]}
-          >
-            <p>
-              Ask your bank if they have a community grant program or otherwise support the
-              non-profits that use their services. Some grant funders:
-            </p>
-          </GrantGuidanceSection>
-          <GrantGuidanceSection
-            label="Healthcare"
-            grantRecipients={[
-              ['Local hospital foundations', null],
-              ['Anthem', 'https://www.anthemcorporateresponsibility.com/funding-options'],
-              ['Kaiser Permanente', 'check your state office for info on funding opportunities'],
-              [
-                'American Family Insurance grants',
-                'https://www.amfam.com/about/givingback/communityinvestment/community-grants',
-              ],
-            ]}
-          >
-            <p>
-              If your project supports health and well-being, consider exploring funding
-              opportunities that may be provided by healthcare organizations, insurers or providers.
-            </p>
-          </GrantGuidanceSection>
-          <GrantGuidanceSection
-            label="Bicycling Grant Programs"
-            grantRecipients={[
-              ['Quality Bicycle Products Community Grants', 'https://www.qbp.com/community-grant'],
-              ['Santa Cruz PayDirt Fund', 'https://www.santacruzbicycles.com/en-US/paydirt'],
-              ['Outride Fund', 'https://outridebike.org/outride-fund'],
-              ['Outride Riding For Focus program', 'https://outridebike.org/ridingforfocus'],
-              ['IMBA Dig In Grants', 'https://www.imba.com/digin'],
-              [
-                'IMBA Trail Accelerator grants',
-                'https://www.imba.com/trails-for-all/trail-accelerator-grants',
-              ],
-            ]}
-          >
-            <p>
-              Several bicycle companies and organizations provide grants in support of bike
-              projects. Here are a few grant funders:
-            </p>
-          </GrantGuidanceSection>
-          <GrantGuidanceSection label="Other">
-            <ul className="list-disc space-y-10">
-              <li>
-                Free online grant writing training:{' '}
-                <a
-                  href="https://www.uhccommunityandstate.com/content/uhccomstate/content/articles
-                /community-grants-program.html"
-                  target="_blank"
-                  rel="noopener"
-                  className="break-words"
-                >
-                  https://www.uhccommunityandstate.com/content/uhccomstate/content/articles
-                  /community-grants-program.html
-                </a>
-              </li>
-              <li>
-                Community foundation locator here:{' '}
-                <a
-                  href="https://www.cof.org/page/community-foundation-locator"
-                  target="_blank"
-                  rel="noopener"
-                  className="break-words"
-                >
-                  https://www.cof.org/page/community-foundation-locator
-                </a>
-              </li>
-              <li>
-                Here’s some guidance to get you started on writing a great grant:{' '}
-                <a
-                  href="https://blog.charityhowto.com/grant-writing-tips-for-nonprofit"
-                  target="_blank"
-                  rel="noopener"
-                  className="break-words"
-                >
-                  https://blog.charityhowto.com/grant-writing-tips-for-nonprofit
-                </a>
-              </li>
-            </ul>
-          </GrantGuidanceSection>
+          {grantGuidanceSections.map((section, index) => (
+            <GrantGuidanceSection
+              key={index}
+              label={section.label}
+              grantRecipients={section.recipients}
+            >
+              {section?.children ?? <Paragraphs>{section.description}</Paragraphs>}
+            </GrantGuidanceSection>
+          ))}
         </div>
       </div>
       <Modal show={isRecipientsModalOpen} onClose={() => setIsRecipientsModalOpen(false)} dark>
@@ -188,7 +76,7 @@ export const Grants = () => {
   );
 };
 
-const GrantGuidanceSection = ({ label, grantRecipients = [], children }) => {
+const GrantGuidanceSection = ({ label, description, grantRecipients = [], children }) => {
   return (
     <Disclosure as="div" className="py-10">
       {({ open }) => (
@@ -205,7 +93,7 @@ const GrantGuidanceSection = ({ label, grantRecipients = [], children }) => {
             <div className="flex-grow font-dharma text-5xl text-blue sm:text-7xl">{label}</div>
           </Disclosure.Button>
           <Disclosure.Panel>
-            <div>{children}</div>
+            <div>{description ?? children}</div>
             {grantRecipients.length > 0 && (
               <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
                 {grantRecipients.map(([title, urlOrLabel]) => {
@@ -269,12 +157,12 @@ const GrantRecipients = () => {
 };
 
 const GrantApplication = () => {
-  const [step, setStep] = useState<number>(1);
+  const [step, setStep] = useState < number > 1;
 
   // @TODO remove these 3 states if unused
-  const [hasSent, setHasSent] = useState<boolean>(false);
-  const [hasReceived, setHasReceived] = useState<boolean>(false);
-  const [error, setError] = useState<string | undefined>(undefined);
+  const [hasSent, setHasSent] = useState < boolean > false;
+  const [hasReceived, setHasReceived] = useState < boolean > false;
+  const [error, setError] = (useState < string) | (undefined > undefined);
 
   const [name, setName] = useLocalStorage('name', '');
   const [title, setTitle] = useLocalStorage('title', '');
@@ -288,7 +176,7 @@ const GrantApplication = () => {
   const [diversityStatement, setDiversityStatement] = useLocalStorage('diversityStatement', '');
   const [evaluation, setEvaluation] = useLocalStorage('evaluation', '');
 
-  const [attachments, setAttachments] = useState<Array<any>>([]);
+  const [attachments, setAttachments] = useState < Array < any >> [];
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop: (acceptedAttachments) => {
       setAttachments([...attachments, ...acceptedAttachments]);
@@ -650,15 +538,27 @@ const GrantApplication = () => {
   );
 };
 
-const Paragraphs = ({ children }) => {
-  return typeof children === 'string'
-    ? children.split('\n').map((line: string) => <p key={line}>{line}</p>)
-    : children;
+const Paragraphs = ({ className = '', children }) => {
+  return typeof children === 'string' ? (
+    children.split('\n').map((line, index) => (
+      <p key={index} className={className}>
+        {line}
+      </p>
+    ))
+  ) : (
+    <p className={className}>children</p>
+  );
 };
 
 const Error = ({ children }) => {
   return <div className="font-bold text-red">{children}</div>;
 };
+
+const ARE_GRANTS_OPEN = false;
+
+const grantsRecipientsDescription = `The PeopleForBikes Industry Community Grant Program provides funding for projects that make bicycling better in communities across the U.S. Since 1999, PeopleForBikes has awarded more than 400 grants to nonprofit organizations and local governments in all 50 states, the District of Columbia and Puerto Rico. Our investments total more than $3.5 million and have leveraged $775 million in public and private funding for bike-related projects nationwide.`;
+
+const grantsRecipientsCta = `View grant recipient list`;
 
 const grantRecipients = [
   'Active Transportation Alliance',
@@ -755,4 +655,114 @@ const grantRecipients = [
   'World Cycling Alliance',
   'Youth Bike Summit',
   'Youth Grants',
+];
+
+const grantApplicationDescription = `PeopleForBikes simplified our grant process with just one annual cycle and no requirement for a Letter of Intent. To be considered, simply submit your application by the annual application deadline on October 31. Grant requests will be reviewed in November and awards will be presented in December.\nWe look forward to continuing to support work that aligns with PeopleForBikes's mission — making biking better for everyone and getting more people on bikes more often.`;
+
+const grantsApplicationCta = `Apply now`;
+
+const grantsClosedDescription = `We will reopen our application process soon - check back for updates.`;
+
+const grantGuidanceTitle = `Grant Guidance`;
+
+const grantGuidanceDescription = `In addition to the PeopleForBikes Industry Community Grant Program, consider exploring the following funding sources:`;
+
+const grantGuidanceSections = [
+  {
+    label: `Grocery`,
+    description: `Grocery or big box store chains often have $500 to $10,000 grants to invest in great community projects. Some grant funders:`,
+    recipients: [
+      ['Safeway', 'http://safewayfoundation.org/'],
+      ['Walmart', 'https://walmart.org/how-we-give/local-community-grants'],
+      [
+        'Target',
+        'https://corporate.target.com/corporate-responsibility/philanthropy/corporate-giving',
+      ],
+    ],
+  },
+  {
+    label: `Banks and credit Unions`,
+    description: `Ask your bank if they have a community grant program or otherwise support the
+              non-profits that use their services. Some grant funders:`,
+    recipients: [
+      [
+        'Wells Fargo',
+        'https://www.wellsfargo.com/about/corporate-responsibility/community-giving/',
+      ],
+      [
+        'PNC Bank',
+        'https://www.pnc.com/en/about-pnc/corporate-responsibility/philanthropy/pnc-foundation.html',
+      ],
+    ],
+  },
+  {
+    label: `Healthcare`,
+    description: `If your project supports health and well-being, consider exploring funding opportunities that may be provided by healthcare organizations, insurers or providers`,
+    recipients: [
+      ['Local hospital foundations', null],
+      ['Anthem', 'https://www.anthemcorporateresponsibility.com/funding-options'],
+      ['Kaiser Permanente', 'check your state office for info on funding opportunities'],
+      [
+        'American Family Insurance grants',
+        'https://www.amfam.com/about/givingback/communityinvestment/community-grants',
+      ],
+    ],
+  },
+  {
+    label: `Bicycling Grant Programs`,
+    description: `Several bicycle companies and organizations provide grants in support of bike projects. Here are a few grant funders:`,
+    recipients: [
+      ['Quality Bicycle Products Community Grants', 'https://www.qbp.com/community-grant'],
+      ['Santa Cruz PayDirt Fund', 'https://www.santacruzbicycles.com/en-US/paydirt'],
+      ['Outride Fund', 'https://outridebike.org/outride-fund'],
+      ['Outride Riding For Focus program', 'https://outridebike.org/ridingforfocus'],
+      ['IMBA Dig In Grants', 'https://www.imba.com/digin'],
+      [
+        'IMBA Trail Accelerator grants',
+        'https://www.imba.com/trails-for-all/trail-accelerator-grants',
+      ],
+    ],
+  },
+  {
+    label: 'Other',
+    children: (
+      <ul className="list-disc space-y-10">
+        <li>
+          Free online grant writing training:{' '}
+          <a
+            href="https://www.uhccommunityandstate.com/content/uhccomstate/content/articles
+                /community-grants-program.html"
+            target="_blank"
+            rel="noopener"
+            className="break-words"
+          >
+            https://www.uhccommunityandstate.com/content/uhccomstate/content/articles
+            /community-grants-program.html
+          </a>
+        </li>
+        <li>
+          Community foundation locator here:{' '}
+          <a
+            href="https://www.cof.org/page/community-foundation-locator"
+            target="_blank"
+            rel="noopener"
+            className="break-words"
+          >
+            https://www.cof.org/page/community-foundation-locator
+          </a>
+        </li>
+        <li>
+          Here’s some guidance to get you started on writing a great grant:{' '}
+          <a
+            href="https://blog.charityhowto.com/grant-writing-tips-for-nonprofit"
+            target="_blank"
+            rel="noopener"
+            className="break-words"
+          >
+            https://blog.charityhowto.com/grant-writing-tips-for-nonprofit
+          </a>
+        </li>
+      </ul>
+    ),
+  },
 ];
