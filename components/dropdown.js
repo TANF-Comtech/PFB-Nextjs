@@ -194,7 +194,7 @@ const Dropdown = ({
           {hasTopics && (
             <ItemList hasTopics={hasTopics}>
               <li>
-                <AnchorAlign href="https://www.classy.org/give/117371" target="_blank">
+                <AnchorAlign href="https://www.classy.org/give/434938" target="_blank">
                   Donate
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
