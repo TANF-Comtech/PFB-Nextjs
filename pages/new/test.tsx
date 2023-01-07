@@ -9,22 +9,6 @@ import { Page } from '~/components/new/page';
 export default function TestPage() {
   return (
     <Page title="Test page">
-      <div className="relative mt-[3rem] flex h-[calc(100vh-3rem)] items-center justify-center bg-[#000000]">
-        <video
-          src="/new/Stocksy_comp_watermarked_4935063.mp4"
-          className="absolute inset-0 z-0 h-full w-full object-cover opacity-75"
-          playsInline
-          autoPlay
-          muted
-          loop
-        />
-        <div className="vignette absolute inset-0 z-10 h-full w-full" />
-        <div className="relative z-20 flex flex-col">
-          <h2 className="font-dharma text-[14rem] font-bold uppercase leading-none text-white/50">
-            Test page
-          </h2>
-        </div>
-      </div>
       <div className="flex h-[500vh] flex-col gap-64 bg-pure-black p-64">
         <div className="mx-auto block aspect-video w-[1024px] bg-pure-white">
           <Carousel id="testCarousel">
