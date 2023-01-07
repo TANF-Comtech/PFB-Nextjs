@@ -23,11 +23,11 @@ const NewsList = ({ nodeName = 'news_item', payload }) => {
         payload.map((news) => {
           // Date Processing - must use .replace() to avoid JS date bug!
           let theDateLongform = null;
-          if (news[nodeName].publication_date) {
-            theDateLongform = new Date(asDate(news[nodeName].publication_date.replace(/-/g, '/')));
+          if (news[nodeName]?.publication_date) {
+            theDateLongform = new Date(asDate(news[nodeName]?.publication_date.replace(/-/g, '/')));
           } else {
             theDateLongform = new Date(
-              asDate(news[nodeName]._meta.lastPublicationDate.replace(/-/g, '/')),
+              asDate(news[nodeName]?._meta?.lastPublicationDate?.replace(/-/g, '/')),
             );
           }
 
@@ -36,16 +36,17 @@ const NewsList = ({ nodeName = 'news_item', payload }) => {
               date={`${theDateLongform.toLocaleString('en-us', { month: 'long' })}
                      ${setDateSuffix(theDateLongform.toLocaleString('en-us', { day: 'numeric' }))},
                      ${theDateLongform.toLocaleString('en-us', { year: 'numeric' })}`}
-              deck={news[nodeName].deck}
-              key={news[nodeName]._meta.id}
-              image={news[nodeName].header_image ? news[nodeName].header_image : FallbackImage}
-              path={`/news/${news[nodeName]._meta.uid}`}
+              deck={news[nodeName]?.deck}
+              key={news[nodeName]?._meta.id}
+              image={news[nodeName]?.header_image ? news[nodeName].header_image : FallbackImage}
+              path={`/news/${news[nodeName]?._meta.uid}`}
               text={
-                news[nodeName].main_content && news[nodeName].main_content[0].type === 'paragraph'
-                  ? news[nodeName].main_content[0].text
+                news[nodeName]?.main_content &&
+                news[nodeName]?.main_content[0]?.type === 'paragraph'
+                  ? news[nodeName]?.main_content[0]?.text
                   : ''
               }
-              title={news[nodeName].title[0].text}
+              title={news[nodeName]?.title[0]?.text}
             />
           );
         })}
