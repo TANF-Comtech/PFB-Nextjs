@@ -145,7 +145,7 @@ const statsList = [
       ],
       _meta: {
         id: 'X9ty0xEAACQA5TqW',
-        uid: 'e-bikes',
+        uid: 'electric-bikes',
         type: 'statistic_page',
       },
     },
