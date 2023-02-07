@@ -57,8 +57,13 @@ const FilterMenu = styled(RefinementList)`
     }
   }
 
+  li[class='ais-RefinementList-item'] {
+    list-style-type: none !important;
+  }
+
   li[class='ais-RefinementList-item ais-RefinementList-item--selected'] {
     color: ${(props) => props.theme.blue};
+    list-style-type: none !important;
     text-decoration: underline !important;
   }
 
