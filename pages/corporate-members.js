@@ -203,7 +203,6 @@ export default function CorporateMembers() {
 
 export async function getStaticProps() {
   const memberData = await getCorporateMembers();
-  console.log(memberData)
 
   if (process.env.ALGOLIA_INDEXING_ENABLED === 'true') {
     const algoliaFormattedData = memberFormatter(memberData);
