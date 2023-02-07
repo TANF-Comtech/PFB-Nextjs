@@ -112,7 +112,7 @@ const HyperCompName = styled.a`
 function CoalitionMember({ hit }) {
   return (
     <>
-      <Box key={ hit.objectID }>
+      <Box>
         <Company>
           {!hit.Website && <CompName>{hit.Name}</CompName>}
           {hit.Website &&
@@ -153,7 +153,7 @@ export default function CorporateMembers() {
     return (
       <Grid>
         {hits.map((hit) => {
-          return <CoalitionMember key={hit.objectId} hit={hit} />;
+          return <CoalitionMember key={hit.objectID} hit={hit} />;
         })}
       </Grid>
     );
