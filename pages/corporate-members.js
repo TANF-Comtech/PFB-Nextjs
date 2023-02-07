@@ -94,7 +94,8 @@ const Company = styled.p`
   margin: 0;
 `;
 
-const CompName = styled.p`
+const CompName = styled.span`
+  display: block;
   font-weight: bold;
   margin-bottom: 0;
   padding: 0 3vw;
@@ -111,7 +112,7 @@ const HyperCompName = styled.a`
 function CoalitionMember({ hit }) {
   return (
     <>
-      <Box>
+      <Box key={ hit.objectID }>
         <Company>
           {!hit.Website && <CompName>{hit.Name}</CompName>}
           {hit.Website &&
@@ -202,6 +203,7 @@ export default function CorporateMembers() {
 
 export async function getStaticProps() {
   const memberData = await getCorporateMembers();
+  console.log(memberData)
 
   if (process.env.ALGOLIA_INDEXING_ENABLED === 'true') {
     const algoliaFormattedData = memberFormatter(memberData);
