@@ -206,7 +206,7 @@ export async function getStaticProps() {
 
   if (process.env.ALGOLIA_INDEXING_ENABLED === 'true') {
     const algoliaFormattedData = memberFormatter(memberData);
-    await AlgoliaIndex('PFB_COALITION_MEMBERS').saveObjects(algoliaFormattedData);
+    await AlgoliaIndex('PFB_COALITION_MEMBERS').replaceAllObjects(algoliaFormattedData);
   }
 
   return {
