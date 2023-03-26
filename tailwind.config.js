@@ -23,6 +23,7 @@ module.exports = {
       'pure-white': '#ffffff',
       'pure-black': '#000000',
       'darkest-blue': '#02273c',
+      'cardGray': '#eeeeee',
     },
     screens: {
       bm: '320px',

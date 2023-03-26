@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 type ButtonProps = React.ComponentPropsWithoutRef<'button'> & {
   label: string;
-  variant?: 'transparent' | 'blue' | 'red' | 'yellow';
+  variant?: 'transparent' | 'blue' | 'red' | 'yellow' | 'white';
   size?: 'normal' | 'small';
   to?: string;
 };
@@ -39,9 +39,11 @@ export const Button = ({
   return (
     <Element
       className={cx(
-        'inline-block cursor-pointer rounded-full  text-center font-bold uppercase  leading-none transition duration-300 hover:scale-105',
+        'inline-block cursor-pointer rounded-lg text-center font-bold uppercase leading-none transition duration-300 hover:scale-105',
         variant === 'transparent' && 'bg-transparent text-white hover:bg-blue',
         variant === 'blue' && 'bg-blue text-white',
+        variant === 'yellow' && 'bg-yellow text-black',
+        variant === 'white' && 'bg-white text-black',
         size === 'normal' && 'px-6 py-4 text-lg shadow-md',
         className,
       )}

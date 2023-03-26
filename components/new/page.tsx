@@ -7,6 +7,8 @@ import { atom, useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { useInView } from 'react-intersection-observer';
 import useScrollPosition from '@react-hook/window-scroll';
 
+import { Button } from '~/components/new/button';
+
 const searchOpenAtom = atom<boolean>(false);
 const searchQueryAtom = atom<string>('');
 const siteMapInViewAtom = atom<boolean>(false);
@@ -19,7 +21,6 @@ type PageProps = MetaProps & {
 };
 
 // @TODO the wrappers marked 'temporary' can be removed once the entire site has been upgraded
-
 export const Page = ({
   showBanner = true,
   showHeader = true,
@@ -39,8 +40,10 @@ export const Page = ({
             {showHeader && <Header />}
           </Fixed>
         )}
+
         <div className="temporary absolute left-0 top-0 z-[1000] min-h-screen w-full bg-white">
           {children}
+          <DonationBanner />
           {showFooter && <Footer />}
         </div>
       </div>
@@ -109,12 +112,11 @@ const Banner = () => {
     <div className="h-12 bg-darkest-blue px-4 text-white">
       <div className="mx-auto flex h-full max-w-screen-xl items-center justify-between text-sm font-bold uppercase leading-none">
         <div className="inline-flex items-center gap-2">
-          <div>Explore our network </div>
-          <i className="fa-solid fa-angle-down text-base text-yellow" />
+          <div>Explore our network of sites </div>
         </div>
         <div className="inline-flex items-center gap-3">
           <div>Corporate member center</div>
-          <span className="rounded-full bg-yellow px-2 py-0.5 text-black">enter</span>
+          <span className="rounded-lg bg-yellow p-2 text-black">enter</span>
         </div>
       </div>
     </div>
@@ -137,7 +139,7 @@ const Header = () => {
       )}
     >
       <div className="mx-auto flex h-24 max-w-screen-xl items-center justify-between">
-        <Logo showWordMark={hasScrolled} />
+        <Logo />
         <Navigation />
         <Search />
       </div>
@@ -147,13 +149,15 @@ const Header = () => {
 
 type LogoProps = React.ComponentPropsWithoutRef<'div'> & {
   invert?: boolean;
-  showWordMark: boolean;
+  showWordMark?: boolean;
 };
 
-const Logo = ({ className = '', invert, showWordMark, ...rest }: LogoProps) => {
+const Logo = ({ className = '', invert, showWordMark = false, ...rest }: LogoProps) => {
   return (
     <h1 className={cx('flex w-1/4 items-center gap-3', className)} {...rest}>
-      <img src="/new/pfb-logomark.png" className="block h-12 w-auto" alt="People for Bikes" />
+      <div className="rounded bg-white p-px">
+        <img src="/new/pfb-logomark.png" className="block h-12 w-auto" alt="People for Bikes" />
+      </div>
       <img
         src="/new/pfb-wordmark.png"
         className={cx(
@@ -170,26 +174,53 @@ const Logo = ({ className = '', invert, showWordMark, ...rest }: LogoProps) => {
 
 const NAVIGATION: Array<any> = [
   {
-    key: 'activism',
-    title: 'Activism',
-    links: [1, 2],
+    key: 'infrastructure',
+    title: 'Infrastructure',
   },
   {
-    key: 'work',
-    title: 'Work',
-    links: [1, 2],
+    key: 'policy',
+    title: 'Policy',
   },
   {
-    key: 'rides',
-    title: 'Rides',
-    links: [1, 2],
+    key: 'participation',
+    title: 'Participation',
   },
   {
     key: 'about',
     title: 'About',
-    links: [1, 2],
   },
-  { key: 'donate', title: 'Donate', links: [1] },
+  { key: 'donate', title: 'Donate' },
+];
+
+const EXTRA_NAVIGATION: Array<any> = [
+  {
+    key: 'mission',
+    title: 'Mission',
+  },
+  {
+    key: 'Team',
+    title: 'Team',
+  },
+  {
+    key: 'Board',
+    title: 'Board',
+  },
+  {
+    key: 'Careers',
+    title: 'Careers',
+  },
+  {
+    key: 'Privacy',
+    title: 'Privacy',
+  },
+  {
+    key: 'Join',
+    title: 'Join',
+  },
+  {
+    key: 'Members',
+    title: 'Members',
+  },
 ];
 
 const Navigation = () => {
@@ -198,24 +229,25 @@ const Navigation = () => {
 
   return (
     <nav className="relative flex w-1/2 justify-center">
-      <ul className="flex justify-center gap-8 text-xl font-bold">
+      <ul className="flex justify-center gap-8 font-dharma text-4xl">
         {NAVIGATION.map((item: any) => (
           <li key={item.key}>
-            <button className="relative inline-block whitespace-pre rounded-full px-3 py-2">
-              <div className="absolute inset-0.5 rounded-full transition duration-300 hover:bg-gray/25" />
-              {item.title}{' '}
-              {item.links.length > 1 && <i className="fa-solid fa-angle-down text-lg" />}
-              {item.key === 'donate' && (
-                <span className="absolute top-0 right-0 inline-flex h-4 w-4 items-center justify-center rounded-full bg-red">
-                  <i className="fa-solid fa-heart text-[0.625rem] text-white" />
-                </span>
-              )}
+            <button className="group/button relative inline-block cursor-pointer whitespace-pre px-4 pt-2 pb-1.5 leading-none">
+              <div
+                className={cx(
+                  'absolute inset-0 z-0 h-full w-full rounded-lg transition duration-700',
+                  item.key !== 'donate'
+                    ? 'bg-transparent group-hover/button:bg-lightestGray'
+                    : 'bg-yellow',
+                )}
+              />
+              <span className="relative z-10">{item.title}</span>
             </button>
           </li>
         ))}
       </ul>
       {isSearchOpen && (
-        <div className="absolute inset-0 z-10 flex h-8 w-full min-w-full flex-shrink-0 items-center justify-center rounded-full bg-lightestGray px-3">
+        <div className="absolute inset-0 z-10 flex h-full w-full min-w-full flex-shrink-0 items-center justify-center rounded-lg bg-lightestGray px-4">
           <input
             type="search"
             value={searchQuery}
@@ -233,13 +265,29 @@ const Search = () => {
   const [isSearchOpen, setIsSearchOpen] = useAtom(searchOpenAtom);
 
   return (
-    <div className="flex w-1/4 items-center justify-end gap-2 text-3xl">
+    <div className="flex w-1/4 items-center justify-end gap-2">
       <button
         onClick={() => setIsSearchOpen(!isSearchOpen)}
-        className="inline-flex w-6 cursor-pointer justify-center"
+        className="inline-flex w-6 cursor-pointer items-center justify-center gap-3"
       >
-        <i className={cx('fa-solid', isSearchOpen ? 'fa-close' : 'fa-magnifying-glass')} />
+        <span className="font-bold uppercase">Search</span>
+        <div className="-mb-1 w-5 flex-shrink-0">
+          <i
+            className={cx('fa-solid   text-xl', isSearchOpen ? 'fa-close' : 'fa-magnifying-glass')}
+          />
+        </div>
       </button>
+    </div>
+  );
+};
+
+const DonationBanner = () => {
+  return (
+    <div className="pointer-events-none fixed bottom-0 left-0 right-0 z-50 flex justify-center p-4">
+      <div className="pointer-events-auto flex items-center justify-between gap-4 rounded-lg border border-solid border-white/50 bg-darkest-blue p-4 text-white shadow-2xl">
+        <span className="font-dharma text-5xl">Your support of PeopleForBikes matters.</span>
+        <Button variant="yellow" label="Give today" />
+      </div>
     </div>
   );
 };
@@ -258,56 +306,61 @@ const Footer = () => {
 
   return (
     <div className="flex min-h-[calc(100vh-3rem)] snap-start">
-      <div className="w-1/3 bg-blue p-32 text-white">
-        <div
-          ref={ref}
-          className="block text-center font-dharma text-8xl font-bold uppercase text-darkest-blue"
-        >
-          Site map
-        </div>
-        <ul className="mt-8 flex flex-col items-center justify-center gap-6 text-2xl font-bold capitalize">
+      <div className="w-1/4 bg-darkest-blue p-16 text-white">
+        <ul ref={ref} className="flex flex-col gap-1.5 font-dharma text-4xl capitalize">
           {NAVIGATION.map((item: any) => (
             <li key={item.key}>
-              <button className="relative whitespace-pre">
-                {item.title}{' '}
-                {item.links.length > 1 && <i className="fa-solid fa-angle-down text-lg" />}
-                {item.key === 'donate' && (
-                  <span className="absolute top-0 right-0 inline-flex h-4 w-4 -translate-y-1/2 translate-x-1/2 items-center justify-center rounded-full bg-red">
-                    <i className="fa-solid fa-heart text-[0.625rem] text-white" />
-                  </span>
-                )}
+              <button
+                className={cx('relative whitespace-pre', item.key === 'donate' && 'text-yellow')}
+              >
+                {item.title}
               </button>
             </li>
           ))}
         </ul>
+        <ul ref={ref} className="mt-8 flex flex-col gap-1 font-dharma text-2xl capitalize">
+          {EXTRA_NAVIGATION.map((item: any) => (
+            <li key={item.key}>
+              <button className="relative whitespace-pre">{item.title}</button>
+            </li>
+          ))}
+        </ul>
         <hr className="my-8 block h-px w-full bg-white/25" />
-        <div className="flex flex-col items-center gap-3">
-          <a className="hover:text-white">info@peopleforbikes.org</a>
-          <a className="hover:text-white">(303) 449-4893</a>
+        <div className="flex flex-wrap gap-3">
+          <div className="flex aspect-square h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-white">
+            <i className="fa-brands fa-facebook-f text-2xl leading-none text-black" />
+          </div>
+          <div className="flex aspect-square h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-white">
+            <i className="fa-brands fa-instagram text-2xl leading-none text-black" />
+          </div>
+          <div className="flex aspect-square h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-white">
+            <i className="fa-brands fa-linkedin-in text-2xl leading-none text-black" />
+          </div>
+          <div className="flex aspect-square h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-white">
+            <i className="fa-brands fa-twitter text-2xl leading-none text-black" />
+          </div>
+          <div className="flex aspect-square h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-white">
+            <i className="fa-brands fa-youtube text-2xl leading-none text-black" />
+          </div>
         </div>
         <hr className="my-8 block h-px w-full bg-white/25" />
-        <div className="flex flex-wrap justify-center gap-3">
-          <div className="flex aspect-square h-16 w-16 flex-shrink-0 items-center justify-center rounded-full bg-black">
-            <i className="fa-brands fa-facebook-f text-2xl leading-none text-white" />
+        <div className="flex flex-col gap-3">
+          <div>
+            <a>info@peopleforbikes.org</a>
+            <br />
+            <a>(303) 449-4893</a>
           </div>
-          <div className="flex aspect-square h-16 w-16 flex-shrink-0 items-center justify-center rounded-full bg-black">
-            <i className="fa-brands fa-instagram text-2xl leading-none text-white" />
-          </div>
-          <div className="flex aspect-square h-16 w-16 flex-shrink-0 items-center justify-center rounded-full bg-black">
-            <i className="fa-brands fa-linkedin-in text-2xl leading-none text-white" />
-          </div>
-          <div className="flex aspect-square h-16 w-16 flex-shrink-0 items-center justify-center rounded-full bg-black">
-            <i className="fa-brands fa-twitter text-2xl leading-none text-white" />
-          </div>
-          <div className="flex aspect-square h-16 w-16 flex-shrink-0 items-center justify-center rounded-full bg-black">
-            <i className="fa-brands fa-youtube text-2xl leading-none text-white" />
+          <div>
+            P.O. Box 2349
+            <br />
+            Boulder, Co 80306
           </div>
         </div>
       </div>
-      <div className="w-2/3 bg-darkestGray p-32">
+      <div className="w-3/4 bg-darkestGray p-16">
         <Logo showWordMark invert />
-        <div className="mt-4 block font-dharma text-6xl font-medium text-white">
-          Let’s stay in touch. Sign up for our newsletter!
+        <div className="mt-8 block font-dharma text-5xl font-medium text-white">
+          Let’s stay in touch. Soin our newsletter list:
         </div>
         <div className="mt-8 block">
           <div className="flex aspect-video max-w-3xl items-center justify-center bg-gray/25">
