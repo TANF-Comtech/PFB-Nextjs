@@ -116,7 +116,7 @@ const Banner = () => {
         </div>
         <div className="inline-flex items-center gap-3">
           <div>Corporate member center</div>
-          <span className="rounded-lg bg-yellow p-2 text-black">enter</span>
+          <span className="rounded-lg bg-gold p-2 text-black">enter</span>
         </div>
       </div>
     </div>
@@ -238,7 +238,7 @@ const Navigation = () => {
                   'absolute inset-0 z-0 h-full w-full rounded-lg transition duration-700',
                   item.key !== 'donate'
                     ? 'bg-transparent group-hover/button:bg-lightestGray'
-                    : 'bg-yellow',
+                    : 'bg-gold',
                 )}
               />
               <span className="relative z-10">{item.title}</span>
@@ -285,7 +285,7 @@ const DonationBanner = () => {
   return (
     <div className="pointer-events-none fixed bottom-0 left-0 right-0 z-50 flex justify-center p-4">
       <div className="pointer-events-auto flex items-center justify-between gap-4 rounded-lg border border-solid border-white/50 bg-darkest-blue p-4 text-white shadow-2xl">
-        <Button variant="yellow" label="Give today" />
+        <Button variant="gold" label="Give today" />
         <span className="font-dharma text-5xl">Your support matters</span>
       </div>
     </div>
@@ -311,7 +311,7 @@ const Footer = () => {
           {NAVIGATION.map((item: any) => (
             <li key={item.key}>
               <button
-                className={cx('relative whitespace-pre', item.key === 'donate' && 'text-yellow')}
+                className={cx('relative whitespace-pre', item.key === 'donate' && 'text-gold')}
               >
                 {item.title}
               </button>

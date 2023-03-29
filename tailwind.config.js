@@ -24,6 +24,7 @@ module.exports = {
       'pure-black': '#000000',
       'darkest-blue': '#02273c',
       'cardGray': '#eeeeee',
+      'gold': '#ffba00',
     },
     screens: {
       bm: '320px',
