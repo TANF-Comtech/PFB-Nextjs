@@ -84,7 +84,13 @@ const Pillars = () => {
               to ride a bicycle.
             </div>
             <div className="mt-8 flex flex-col items-center justify-center">
-              <div className="flex aspect-square h-24 w-24 rounded-full bg-blue"></div>
+              <div className="relative flex aspect-square h-24 w-24 rounded-full bg-blue">
+                <img
+                  src="/new/crane.svg"
+                  className="absolute inset-0 -ml-24 -mt-16 inline-block h-64 w-64 object-cover"
+                  alt=""
+                />
+              </div>
               <h4 className="mt-4 block text-xl font-bold uppercase leading-none text-white">
                 Infrastructure
               </h4>
@@ -106,30 +112,33 @@ const Pillars = () => {
             featuredItems={[
               {
                 title: 'City Ratings',
-                image: 'PFB_0006_City_Ratings.png',
+                image: '1_CityRatings.png',
               },
               {
-                title: 'Community Grants',
-                image: 'PFB_0005_Community_Grants.png',
+                title: 'Bicycle Network Analysis',
+                image: '1_BNA.png',
               },
               {
-                title: 'City Ratings',
-                image: 'PFB_0006_City_Ratings.png',
+                title: 'Final Mile',
+                image: '1_FinalMile.png',
               },
               {
-                title: 'Community Grants',
-                image: 'PFB_0005_Community_Grants.png',
+                title: 'Transforming America',
+                image: '1_TransformingAmerica.png',
               },
             ]}
             items={[
               {
-                title: 'Lorem ipsum dolor sit amet',
+                title:
+                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus dignissim faucibus.',
               },
               {
-                title: 'Consectetur adipiscing elit',
+                title:
+                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus dignissim faucibus.',
               },
               {
-                title: 'Sed do eiusmod tempor incididun',
+                title:
+                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus dignissim faucibus.',
               },
             ]}
           />
@@ -138,31 +147,34 @@ const Pillars = () => {
             title="Policy"
             featuredItems={[
               {
-                title: 'Policy',
-                image: 'PFB_0004_Policy.png',
+                title: 'Electric Bikes',
+                image: '2_ElectricBicycles.png',
               },
               {
-                title: 'Research',
-                image: 'PFB_0003_Research.png',
+                title: 'Federal Funding',
+                image: '2_FederalFunding.png',
               },
               {
-                title: 'Policy',
-                image: 'PFB_0004_Policy.png',
+                title: 'VoteForBikes',
+                image: '2_VoteForBikes.png',
               },
               {
-                title: 'Research',
-                image: 'PFB_0003_Research.png',
+                title: 'Sustainability',
+                image: '2_Sustainabililty.png',
               },
             ]}
             items={[
               {
-                title: 'Lorem ipsum dolor sit amet',
+                title:
+                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus dignissim faucibus.',
               },
               {
-                title: 'Consectetur adipiscing elit',
+                title:
+                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus dignissim faucibus.',
               },
               {
-                title: 'Sed do eiusmod tempor incididun',
+                title:
+                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus dignissim faucibus.',
               },
             ]}
             alternate={true}
@@ -172,31 +184,34 @@ const Pillars = () => {
             title="Participation"
             featuredItems={[
               {
-                title: 'Ride Spot',
-                image: 'PFB_0002_Ride_Spot.png',
+                title: 'RideSpot',
+                image: '3_RideSpot.png',
               },
               {
-                title: 'Battery Recycling',
-                image: 'PFB_0001_Battery_Recycling.png',
+                title: 'One Ride At a Time',
+                image: '3_OneRide.png',
               },
               {
-                title: 'Ride Spot',
-                image: 'PFB_0002_Ride_Spot.png',
+                title: 'Keep Riding',
+                image: '3_KeepRiding.png',
               },
               {
-                title: 'Battery Recycling',
-                image: 'PFB_0001_Battery_Recycling.png',
+                title: 'Call2Recycle Electric Battery Recycling',
+                image: '3_Call2Recycle.png',
               },
             ]}
             items={[
               {
-                title: 'Lorem ipsum dolor sit amet',
+                title:
+                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus dignissim faucibus.',
               },
               {
-                title: 'Consectetur adipiscing elit',
+                title:
+                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus dignissim faucibus.',
               },
               {
-                title: 'Sed do eiusmod tempor incididun',
+                title:
+                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus dignissim faucibus.',
               },
             ]}
           />
@@ -258,7 +273,7 @@ const PillarCard = ({ number, total, title, image }) => {
           className="absolute inset-0 z-0 block h-full w-full object-cover transition duration-700 group-hover:scale-105"
           alt=""
         />
-        <div className="absolute inset-0 z-10 flex h-[200%] w-full translate-y-0 bg-gradient-to-b from-transparent via-pure-black/50 to-pure-black/100 transition duration-700 group-hover:-translate-y-1/2" />
+        <div className="absolute inset-0 z-10 flex h-[200%] w-full -translate-y-1/4 bg-gradient-to-b from-transparent via-pure-black/50 to-pure-black/100 transition duration-700 group-hover:-translate-y-1/2" />
         <div className="relative z-20 flex h-full flex-col gap-4 p-8 text-white">
           <div className="font-bold">
             {number}/{total}

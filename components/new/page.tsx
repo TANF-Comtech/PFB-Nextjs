@@ -285,8 +285,8 @@ const DonationBanner = () => {
   return (
     <div className="pointer-events-none fixed bottom-0 left-0 right-0 z-50 flex justify-center p-4">
       <div className="pointer-events-auto flex items-center justify-between gap-4 rounded-lg border border-solid border-white/50 bg-darkest-blue p-4 text-white shadow-2xl">
-        <span className="font-dharma text-5xl">Your support of PeopleForBikes matters.</span>
         <Button variant="yellow" label="Give today" />
+        <span className="font-dharma text-5xl">Your support matters</span>
       </div>
     </div>
   );
