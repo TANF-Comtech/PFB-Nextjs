@@ -313,7 +313,7 @@ const Pending = () => {
       <p className="text-center text-base !leading-relaxed sm:text-3xl">
         Thank you for your purchase. Your license is being processed. When approved our membership
         team will reach out to you with instructions for downloading the Owner’s Manual. Please
-        contact Kerri Salazar at kerri@peopleforbikes.org with any questions.
+        contact Scarlet Stinchcomb at scarlet@peopleforbikes.org with any questions.
       </p>
       <div className="flex justify-center gap-8">
         <Button
