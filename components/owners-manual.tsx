@@ -311,9 +311,7 @@ const Pending = () => {
     <div>
       <h2 className="text-center font-dharma text-6xl sm:text-8xl">Success!</h2>
       <p className="text-center text-base !leading-relaxed sm:text-3xl">
-        Thank you for your purchase. Your license is being processed. When approved our membership
-        team will reach out to you with instructions for downloading the Owner’s Manual. Please
-        contact Scarlet Stinchcomb at scarlet@peopleforbikes.org with any questions.
+        Thank you for your purchase. Your owner's manual payment will be auto renewed as an annual subscription ever year at this time. Your license is currently being processed. When approved our membership team will reach out to you with instructions for downloading the Owner’s Manual. Please contact Scarlet Stinchcomb at scarlet@peopleforbikes.org with any questions.
       </p>
       <div className="flex justify-center gap-8">
         <Button
