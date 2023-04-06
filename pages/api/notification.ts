@@ -25,14 +25,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const date = new Date().toLocaleDateString('en-CA').replaceAll('/', '-');
   const subject = `Owner's Manual purchase (${date})`;
 
-  const text = `An Owner's Manual has been purchased on ${date}!`;
+  const text = `An Owner's Manual has been purchased on ${date}! Please check Stripe to make sure the payment has been properly received.`;
 
   const sendMail = async () => {
     try {
       const response = await transporter.sendMail({
         from: 'info@peopleforbikes.org',
-        to: process.env.OWNERS_MANUAL_NOTIFICATION_TO_ADDRESS,
-        cc: process.env.OWNERS_MANUAL_NOTIFICATION_CC_ADDRESS,
+        to: 'kerri@peopleforbikes.org, rod@peopleforbikes.org, scarlet@peopleforbikes.org, ray@peopleforbikes.org',
         subject,
         text,
       });
