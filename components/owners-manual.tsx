@@ -258,7 +258,7 @@ const Payment = () => {
         <Progress step={3} />
         <div className="mt-5 text-base font-bold !leading-relaxed sm:text-3xl">STEP 3:</div>
         <p className="text-base !leading-relaxed sm:text-3xl">
-          Complete your licensing request by submitting your payment in the amount of $2,000 for the year. You will be redirected to Stripe to set up an autopay annual subscription for the Owner's Manual.
+          Complete your licensing request by submitting your payment in the amount of $2,000 for the year. You will be redirected to Stripe to set up an autopay annual subscription for the Owner&apos;s Manual.
         </p>
         <div className="flex gap-8">
           <Button
