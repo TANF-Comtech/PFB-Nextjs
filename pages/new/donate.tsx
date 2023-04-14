@@ -24,7 +24,7 @@ const Hero = () => {
   return (
     <div className="relative mt-[3rem] flex h-[calc(100vh-3rem)] items-center justify-center overflow-hidden bg-[#000000]">
       <img
-        src="/new/Stocksy_comp_watermarked_1310758.jpg"
+        src="/new/0_Giving_Hero.jpg"
         className="absolute inset-0 h-full w-full object-cover opacity-50"
         alt=""
         aria-hidden
