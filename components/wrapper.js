@@ -168,13 +168,13 @@ const Wrapper = ({ children, isWide, postPath, postTitle }) => {
 
   return (
     <>
-      {postPath && postTitle && (
+      {/* {postPath && postTitle && (
         <Titlebar mainHeight={Math.round(mainHeight)}>
           <Link href={postPath} passHref>
             <a>{postTitle}</a>
           </Link>
         </Titlebar>
-      )}
+      )} */}
       <MainContent ref={mainTarget} isWidePass={isWide}>
         {isWide ? <> {children} </> : <Container> {children} </Container>}
       </MainContent>

@@ -1,30 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
-  /* Box sizing rules */
-  *,
-  *::before,
-  *::after {
-    box-sizing: border-box;
-  }
-
-  /* Put CSS variables in here if you want to use them */
-  html {
-    --flow-space: 1em;
-  }
-
-  /* Set up body with font basics */
-  body {
-    font-family: 'Montserrat', Arial, Helvetica, sans-serif;
-    font-weight: 300;
-    font-size: 16px;
-    line-height: 1.5;
-    min-height: 100vh;
-    scroll-behavior: smooth;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
+.legacy-page {
 
   /* Remove default margin */
   body,
@@ -32,7 +9,7 @@ const GlobalStyle = createGlobalStyle`
   h2,
   h3,
   h4,
-  h5, 
+  h5,
   h6,
   p,
   ul,
@@ -55,7 +32,7 @@ const GlobalStyle = createGlobalStyle`
   .flow > * + * {
     margin-top: 1em;
     margin-top: var(--flow-space);
-  }  
+  }
 
   /* Override so a button link can get top and bottom margin */
   /* This will only effect direct descendants of .flow */
@@ -101,7 +78,7 @@ const GlobalStyle = createGlobalStyle`
       font-size: 120px;
       line-height: 110px;
     }
-  } 
+  }
 
   /* Responsive type - 47-70px with 1 line-height */
   h2, h2 b, h2 strong, h2 em, h2 i {
@@ -121,7 +98,7 @@ const GlobalStyle = createGlobalStyle`
       font-size: 70px;
       line-height: 70px;
     }
-  }   
+  }
 
   /* Responsive type - 24-36px with 1 line-height */
   h3, legend {
@@ -141,7 +118,7 @@ const GlobalStyle = createGlobalStyle`
       font-size: 32px;
       line-height: 32px;
     }
-  }  
+  }
 
   /* Responsive type - 24-36px with 1 line-height */
    h4 {
@@ -161,7 +138,7 @@ const GlobalStyle = createGlobalStyle`
       font-size: 26px;
       line-height: 26px;
     }
-  }  
+  }
 
 
 
@@ -169,7 +146,7 @@ const GlobalStyle = createGlobalStyle`
   /* ############## Copy ############## */
   /* ################################## */
 
-  /* Responsive type - 
+  /* Responsive type -
   /* Bigger (if want it): 17.5px-28px with 1.75 line-height (30.5-49px) */
   p, b, strong, em, i, span, label, a, a::visited, a::focus, a:active, a:hover {
     font-size: 18px;
@@ -189,7 +166,7 @@ const GlobalStyle = createGlobalStyle`
       font-size: 22px;
       line-height: 36px;
     }
-  }    
+  }
   b, strong {
     font-weight: 700;
   }
@@ -227,7 +204,7 @@ const GlobalStyle = createGlobalStyle`
       font-size: 22px;
       line-height: 36px;
     }
-  } 
+  }
 
   /* Set off blockquotes */
   blockquote {
@@ -267,7 +244,7 @@ const GlobalStyle = createGlobalStyle`
     height: auto;
     max-width: 100%;
   }
-  
+
 
   /* ################################### */
   /* ############## FORMS ############## */
@@ -415,7 +392,7 @@ const GlobalStyle = createGlobalStyle`
       &.switch {
         border-radius: 11px;
         width: 38px;
-        
+
         /* border-radius is the key part, because it's elongated */
         &:after {
           background: var(--ab, var(--border));
@@ -440,7 +417,7 @@ const GlobalStyle = createGlobalStyle`
           }
         }
       }
-    }    
+    }
   }
 
   /* ####################################### */
@@ -553,253 +530,7 @@ const GlobalStyle = createGlobalStyle`
     padding: 18px;
   }
 
-
-  /*! Flickity v2.1.2
-  https://flickity.metafizzy.co
-  ---------------------------------------------- */
-
-  .flickity-enabled {
-    margin: 25px 0;
-    position: relative;
-
-    @media (min-width: 480px) {
-      margin: 50px 0;
-    }
-  }
-
-  .flickity-enabled:focus {
-    outline: none;
-  }
-
-  .flickity-viewport {
-    overflow: hidden;
-    position: relative;
-    height: 100%;
-    /* @media screen and (min-width: 320px) {
-    margin-left: 2vw;
-  }
-  @media screen and (min-width: 768px) {
-    margin-right: 4vw;
-  }
-  @media screen and (min-width: 1000px) {
-    margin-left: 4vw;
-    margin-right: 6vw;
-  } */
-  }
-
-  .flickity-slider {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-  }
-
-  /* draggable */
-
-  .flickity-enabled.is-draggable {
-    -webkit-tap-highlight-color: transparent;
-    tap-highlight-color: transparent;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-  }
-
-  .flickity-enabled.is-draggable .flickity-viewport {
-    cursor: move;
-    cursor: -webkit-grab;
-    cursor: grab;
-  }
-
-  .flickity-enabled.is-draggable .flickity-viewport.is-pointer-down {
-    cursor: -webkit-grabbing;
-    cursor: grabbing;
-  }
-
-  /* ---- flickity-button ---- */
-
-  .flickity-button {
-    position: absolute;
-    background: hsla(0, 0%, 100%, 0.75);
-    border: none;
-    color: #333;
-  }
-
-  .flickity-button:hover {
-    background: rgba(17, 153, 255, .5);
-    cursor: pointer;
-  }
-
-  .flickity-button:focus {
-    outline: none;
-    box-shadow: 0 0 0 5px #3E9FDC;
-  }
-
-  .flickity-button:active {
-    opacity: 0.6;
-  }
-
-  .flickity-button:disabled {
-    opacity: 0.3;
-    cursor: auto;
-    /* prevent disabled button from capturing pointer up event. #716 */
-    pointer-events: none;
-  }
-
-  .flickity-button-icon {
-    fill: #333;
-  }
-
-  /* ---- previous/next buttons ---- */
-
-  .flickity-prev-next-button {
-    top: 50%;
-    width: 44px;
-    height: 44px;
-    border-radius: 1px;
-    /* vertically center */
-    transform: translateY(-50%);
-    background-color: #3E9FDC;
-  } 
-
-  .flickity-prev-next-button.previous {
-    left: 10px;
-  }
-  .flickity-prev-next-button.next {
-    right: 10px;
-  }
-  /* right to left */
-  .flickity-rtl .flickity-prev-next-button.previous {
-    left: auto;
-    right: 10px;
-  }
-  .flickity-rtl .flickity-prev-next-button.next {
-    right: auto;
-    left: 10px;
-  }
-
-  .flickity-prev-next-button .flickity-button-icon {
-    position: absolute;
-    left: 20%;
-    top: 20%;
-    width: 60%;
-    height: 60%;
-  }
-
-  /* -------arrow color -----*/
-.flickity-prev-next-button .arrow {
-  fill: white;
-}
-
-  /* ---- page dots ---- */
-
-  .flickity-page-dots {
-    /* If we want dots back, remove the display: none and uncomment the commented out code */
-    /* position: absolute;
-    width: 100%;
-    bottom: -65px;
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    text-align: center;
-    line-height: 1; */
-  }
-
-  @media (min-width: 480px) {
-    .flickity-page-dots {
-      bottom: -50px;
-    }
-  }
-
-  .flickity-rtl .flickity-page-dots {
-    direction: rtl;
-  }
-
-  .flickity-page-dots .dot {
-    display: inline-block;
-    width: 25px;
-    height: 25px;
-    margin: 5px;
-    background: #333;
-    border-radius: 50%;
-    opacity: 0.25;
-    cursor: pointer;
-    transition: 0.2s ease-in-out;
-  }
-
-  @media (min-width: 480px) {
-    .flickity-page-dots .dot {
-      margin: 0 10px;
-    }
-  }
-
-  .flickity-page-dots .dot.is-selected {
-    background: #D0021B;
-    opacity: 1;
-  }
-
-  /* SPARK FORM STYLING */
-  .spkactionform dd {
-    font-size: 14px;
-    padding-top: 0.3vh;
-  }
-
-  .spkactionform dd label {
-    font-size: 14px;
-    line-height: 1.5;
-  }
-
-  .spkactionform dt {
-    padding-top: 2vh;
-  }
-
-  .spkactionform input {
-    border: 1px solid #000;
-    padding: 5px 10px;
-  }
-
-  .spkactionform input[type="submit"] {
-    background-color: #D23823; 
-    border: none;
-    border-radius: 10px;
-    color: white;
-    cursor: pointer;
-    font-family: 'montserrat' sans-serif;
-    font-size: 18px;
-    font-weight: 700;
-    min-width: 100px;
-    margin-top: 25px;
-    padding: 10px 35px;
-    text-align: center;
-    text-decoration: none !important;
-    text-transform: uppercase;
-  }
-
-  .spkactionform .select2-arrow b {
-    background-position: 0px 4px !important;  
-  }
-
-  .spkactionform textarea {
-    font-size: 14px !important;
-    margin: 5px 0;
-    padding: 5px 10px;
-    width: 100%;
-    min-height: 20vh;
-  }
-
-  .spkactionform select {
-    background: url(data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0Ljk1IDEwIj48ZGVmcz48c3R5bGU+LmNscy0xe2ZpbGw6I2ZmZjt9LmNscy0ye2ZpbGw6IzQ0NDt9PC9zdHlsZT48L2RlZnM+PHRpdGxlPmFycm93czwvdGl0bGU+PHJlY3QgY2xhc3M9ImNscy0xIiB3aWR0aD0iNC45NSIgaGVpZ2h0PSIxMCIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtMiIgcG9pbnRzPSIxLjQxIDQuNjcgMi40OCAzLjE4IDMuNTQgNC42NyAxLjQxIDQuNjciLz48cG9seWdvbiBjbGFzcz0iY2xzLTIiIHBvaW50cz0iMy41NCA1LjMzIDIuNDggNi44MiAxLjQxIDUuMzMgMy41NCA1LjMzIi8+PC9zdmc+) no-repeat 95% 50%;
-    -moz-appearance: none; 
-    -webkit-appearance: none; 
-    appearance: none;
-    border: 1px solid #000;
-    border-radius: 0px;
-    padding: 5px 10px;
-  }
-
-  .spkactionform .select2-container .select2-choice {
-    height: 35px;
-  }
-
+  /* Select2 */
   .select2-container .select2-choice >.select2-chosen {
     font-size: 14px !important;
     height: 25px !important;
@@ -807,12 +538,12 @@ const GlobalStyle = createGlobalStyle`
 
   .select2-results li,
   .select2-results .select2-result-label,
-  .select2-results, 
-  .select2-no-results, 
-  .select2-searching, 
-  .select2-ajax-error, 
+  .select2-results,
+  .select2-no-results,
+  .select2-searching,
+  .select2-ajax-error,
   .select2-selection-limit,
-  .select2-result-selectable .select2-match, 
+  .select2-result-selectable .select2-match,
   .select2-result-unselectable .select2-match {
     font-size: 14px !important;
   }
@@ -820,6 +551,7 @@ const GlobalStyle = createGlobalStyle`
   /* Algolia Search */
   .ais-Breadcrumb-list,.ais-CurrentRefinements-list,.ais-HierarchicalMenu-list,.ais-Hits-list,.ais-InfiniteHits-list,.ais-InfiniteResults-list,.ais-Menu-list,.ais-NumericMenu-list,.ais-Pagination-list,.ais-RatingMenu-list,.ais-RefinementList-list,.ais-Results-list,.ais-ToggleRefinement-list{margin:0;padding:0;list-style:none}.ais-ClearRefinements-button,.ais-CurrentRefinements-delete,.ais-CurrentRefinements-reset,.ais-GeoSearch-redo,.ais-GeoSearch-reset,.ais-HierarchicalMenu-showMore,.ais-InfiniteHits-loadMore,.ais-InfiniteHits-loadPrevious,.ais-InfiniteResults-loadMore,.ais-Menu-showMore,.ais-RangeInput-submit,.ais-RefinementList-showMore,.ais-SearchBox-reset,.ais-SearchBox-submit,.ais-VoiceSearch-button{padding:0;overflow:visible;font:inherit;line-height:normal;color:inherit;background:none;border:0;cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.ais-ClearRefinements-button::-moz-focus-inner,.ais-CurrentRefinements-delete::-moz-focus-inner,.ais-CurrentRefinements-reset::-moz-focus-inner,.ais-GeoSearch-redo::-moz-focus-inner,.ais-GeoSearch-reset::-moz-focus-inner,.ais-HierarchicalMenu-showMore::-moz-focus-inner,.ais-InfiniteHits-loadMore::-moz-focus-inner,.ais-InfiniteHits-loadPrevious::-moz-focus-inner,.ais-InfiniteResults-loadMore::-moz-focus-inner,.ais-Menu-showMore::-moz-focus-inner,.ais-RangeInput-submit::-moz-focus-inner,.ais-RefinementList-showMore::-moz-focus-inner,.ais-SearchBox-reset::-moz-focus-inner,.ais-SearchBox-submit::-moz-focus-inner,.ais-VoiceSearch-button::-moz-focus-inner{padding:0;border:0}.ais-ClearRefinements-button[disabled],.ais-CurrentRefinements-delete[disabled],.ais-CurrentRefinements-reset[disabled],.ais-GeoSearch-redo[disabled],.ais-GeoSearch-reset[disabled],.ais-HierarchicalMenu-showMore[disabled],.ais-InfiniteHits-loadMore[disabled],.ais-InfiniteHits-loadPrevious[disabled],.ais-InfiniteResults-loadMore[disabled],.ais-Menu-showMore[disabled],.ais-RangeInput-submit[disabled],.ais-RefinementList-showMore[disabled],.ais-SearchBox-reset[disabled],.ais-SearchBox-submit[disabled],.ais-VoiceSearch-button[disabled]{cursor:default}.ais-Breadcrumb-item,.ais-Breadcrumb-list,.ais-Pagination-list,.ais-PoweredBy,.ais-RangeInput-form,.ais-RatingMenu-link{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.ais-GeoSearch,.ais-GeoSearch-map{height:100%}.ais-HierarchicalMenu-list .ais-HierarchicalMenu-list{margin-left:1em}.ais-PoweredBy-logo{display:block;height:1.2em;width:auto}.ais-RatingMenu-starIcon{display:block;width:20px;height:20px}.ais-SearchBox-input::-ms-clear,.ais-SearchBox-input::-ms-reveal{display:none;width:0;height:0}.ais-SearchBox-input::-webkit-search-cancel-button,.ais-SearchBox-input::-webkit-search-decoration,.ais-SearchBox-input::-webkit-search-results-button,.ais-SearchBox-input::-webkit-search-results-decoration{display:none}.ais-RangeSlider .rheostat{overflow:visible;margin-top:40px;margin-bottom:40px}.ais-RangeSlider .rheostat-background{height:6px;top:0;width:100%}.ais-RangeSlider .rheostat-handle{margin-left:-12px;top:-7px}.ais-RangeSlider .rheostat-background{position:relative;background-color:#fff;border:1px solid #aaa}.ais-RangeSlider .rheostat-progress{position:absolute;top:1px;height:4px;background-color:#333}.rheostat-handle{position:relative;z-index:1;width:20px;height:20px;background-color:#fff;border:1px solid #333;border-radius:50%;cursor:-webkit-grab;cursor:grab}.rheostat-marker{margin-left:-1px;position:absolute;width:1px;height:5px;background-color:#aaa}.rheostat-marker--large{height:9px}.rheostat-value{padding-top:15px}.rheostat-tooltip,.rheostat-value{margin-left:50%;position:absolute;text-align:center;-webkit-transform:translateX(-50%);transform:translateX(-50%)}.rheostat-tooltip{top:-22px}
 
+}
 `;
 
 export default GlobalStyle;

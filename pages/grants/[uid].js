@@ -1,6 +1,7 @@
 import data from '~/data';
 import { getGrants, getSingleGrantPage } from '~/lib/queries/grants';
 
+import { LegacyPage } from '~/components/legacy-page';
 import Wrapper from '~/components/wrapper';
 import SiteMetaCustom from '~/components/site-meta-custom';
 import MainContent from '~/components/main-content';
@@ -13,7 +14,7 @@ export default function PolicyPage({ page, preview }) {
   const { meta } = data;
 
   return (
-    <>
+    <LegacyPage>
       <SiteMetaCustom
         desc={
           grant.main_content ? `${grant.main_content[0].text.substring(0, 180)} ... ` : meta.desc
@@ -39,7 +40,7 @@ export default function PolicyPage({ page, preview }) {
           />
         </MainContent>
       </Wrapper>
-    </>
+    </LegacyPage>
   );
 }
 

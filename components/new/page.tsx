@@ -1,7 +1,9 @@
 import * as React from 'react';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import cx from 'classnames';
 import Head from 'next/head';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import Script from 'next/script';
 import { atom, useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { useInView } from 'react-intersection-observer';
@@ -17,14 +19,17 @@ type PageProps = MetaProps & {
   showBanner?: boolean;
   showHeader?: boolean;
   showFooter?: boolean;
+  hasHero?: boolean;
+  legacy?: boolean;
   children: React.ReactNode;
 };
 
-// @TODO the wrappers marked 'temporary' can be removed once the entire site has been upgraded
 export const Page = ({
   showBanner = true,
   showHeader = true,
   showFooter = true,
+  hasHero = false,
+  legacy = false,
   children,
   ...rest
 }: PageProps) => {
@@ -32,21 +37,16 @@ export const Page = ({
 
   return (
     <>
-      <Meta {...rest} />
-      <div className="reset temporary">
-        {showFixed && (
-          <Fixed>
-            {showBanner && <Banner />}
-            {showHeader && <Header />}
-          </Fixed>
-        )}
-
-        <div className="temporary absolute left-0 top-0 z-[1000] min-h-screen w-full bg-white">
-          {children}
-          <DonationBanner />
-          {showFooter && <Footer />}
-        </div>
-      </div>
+      {!legacy && <Meta {...rest} />}
+      {showFixed && (
+        <Fixed>
+          {showBanner && <Banner />}
+          {showHeader && <Header hasHero={hasHero} />}
+        </Fixed>
+      )}
+      {children}
+      <DonationBanner />
+      {showFooter && <Footer />}
       <Script src="https://kit.fontawesome.com/3f0052fea3.js" crossOrigin="anonymous" />
     </>
   );
@@ -104,7 +104,7 @@ type FixedProps = {
 };
 
 const Fixed = ({ children }: FixedProps) => {
-  return <div className="fixed left-0 top-0 right-0 z-[1010] flex w-full flex-col">{children}</div>;
+  return <div className="fixed left-0 right-0 top-0 z-[1010] flex w-full flex-col">{children}</div>;
 };
 
 const Banner = () => {
@@ -112,7 +112,7 @@ const Banner = () => {
     <div className="h-12 bg-darkest-blue px-4 text-white">
       <div className="mx-auto flex h-full max-w-screen-xl items-center justify-between text-sm font-bold uppercase leading-none">
         <div className="inline-flex items-center gap-2">
-          <div>Explore our network of sites </div>
+          <div>Explore our network of sites</div>
         </div>
         <div className="inline-flex items-center gap-3">
           <div>Corporate member center</div>
@@ -123,7 +123,7 @@ const Banner = () => {
   );
 };
 
-const Header = () => {
+const Header = ({ hasHero }) => {
   const scrollY = useScrollPosition();
   const hasScrolled = scrollY >= 32;
   const isSiteMapInView = useAtomValue(siteMapInViewAtom);
@@ -131,7 +131,7 @@ const Header = () => {
   return (
     <div
       className={cx(
-        hasScrolled
+        !hasHero || hasScrolled
           ? 'bg-white text-black shadow-xl'
           : 'bg-transparent text-white hover:bg-white hover:text-black hover:shadow-xl',
         'group relative items-center px-4 transition duration-700',
@@ -154,25 +154,29 @@ type LogoProps = React.ComponentPropsWithoutRef<'div'> & {
 
 const Logo = ({ className = '', invert, showWordMark = false, ...rest }: LogoProps) => {
   return (
-    <h1 className={cx('flex w-1/4 items-center gap-3', className)} {...rest}>
-      <div className="rounded bg-white p-px">
-        <img src="/new/pfb-logomark.png" className="block h-12 w-auto" alt="People for Bikes" />
-      </div>
-      <img
-        src="/new/pfb-wordmark.png"
-        className={cx(
-          showWordMark ? 'opacity-100' : 'opacity-0 group-hover:opacity-100',
-          'block h-12 w-auto transition duration-700',
-          invert && 'invert',
-        )}
-        alt="People for Bikes"
-      />
-      <span className="sr-only">People for Bikes</span>
+    <h1 className={cx('w-1/4 flex-shrink-0', className)} {...rest}>
+      <Link href="/">
+        <a className="flex items-center gap-3">
+          <div className="rounded bg-white p-px">
+            <img src="/new/pfb-logomark.png" className="block h-12 w-auto" alt="People for Bikes" />
+          </div>
+          <img
+            src="/new/pfb-wordmark.png"
+            className={cx(
+              showWordMark ? 'opacity-100' : 'opacity-0 group-hover:opacity-100',
+              'block h-12 w-auto transition duration-700',
+              invert && 'invert',
+            )}
+            alt="People for Bikes"
+          />
+          <span className="sr-only">People for Bikes</span>
+        </a>
+      </Link>
     </h1>
   );
 };
 
-const NAVIGATION: Array<any> = [
+const MAIN_NAVIGATION: Array<any> = [
   {
     key: 'infrastructure',
     title: 'Infrastructure',
@@ -230,9 +234,9 @@ const Navigation = () => {
   return (
     <nav className="relative flex w-1/2 justify-center">
       <ul className="flex justify-center gap-8 font-dharma text-4xl">
-        {NAVIGATION.map((item: any) => (
+        {MAIN_NAVIGATION.map((item: any) => (
           <li key={item.key}>
-            <button className="group/button relative inline-block cursor-pointer whitespace-pre px-4 pt-2 pb-1.5 leading-none">
+            <button className="group/button relative inline-block cursor-pointer whitespace-pre px-4 pb-1.5 pt-2 leading-none">
               <div
                 className={cx(
                   'absolute inset-0 z-0 h-full w-full rounded-lg transition duration-700',
@@ -252,7 +256,7 @@ const Navigation = () => {
             type="search"
             value={searchQuery}
             onChange={(event) => setSearchQuery(event.currentTarget.value)}
-            className="flex h-full w-full py-2 text-xl font-bold text-black focus:ring-0"
+            className="flex h-full w-full border-none bg-transparent py-2 text-xl font-bold text-black focus:ring-0"
             placeholder="Search here..."
           />
         </div>
@@ -265,7 +269,7 @@ const Search = () => {
   const [isSearchOpen, setIsSearchOpen] = useAtom(searchOpenAtom);
 
   return (
-    <div className="flex w-1/4 items-center justify-end gap-2">
+    <div className="flex w-1/4 flex-shrink-0 items-center justify-end gap-2">
       <button
         onClick={() => setIsSearchOpen(!isSearchOpen)}
         className="inline-flex w-6 cursor-pointer items-center justify-center gap-3"
@@ -305,10 +309,10 @@ const Footer = () => {
   }, [inView, setSiteMapInView]);
 
   return (
-    <div className="flex min-h-[calc(100vh-3rem)] snap-start">
+    <div className="relative z-[1020] flex min-h-[calc(100vh-3rem)] snap-start">
       <div className="w-1/4 bg-darkest-blue p-16 text-white">
         <ul ref={ref} className="flex flex-col gap-1.5 font-dharma text-4xl capitalize">
-          {NAVIGATION.map((item: any) => (
+          {MAIN_NAVIGATION.map((item: any) => (
             <li key={item.key}>
               <button
                 className={cx('relative whitespace-pre', item.key === 'donate' && 'text-gold')}
@@ -325,7 +329,7 @@ const Footer = () => {
             </li>
           ))}
         </ul>
-        <hr className="my-8 block h-px w-full bg-white/25" />
+        <hr className="my-8 h-px w-full bg-white/25" />
         <div className="flex flex-wrap gap-3">
           <div className="flex aspect-square h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-white">
             <i className="fa-brands fa-facebook-f text-2xl leading-none text-black" />
@@ -343,7 +347,7 @@ const Footer = () => {
             <i className="fa-brands fa-youtube text-2xl leading-none text-black" />
           </div>
         </div>
-        <hr className="my-8 block h-px w-full bg-white/25" />
+        <hr className="my-8 h-px w-full bg-white/25" />
         <div className="flex flex-col gap-3">
           <div>
             <a>info@peopleforbikes.org</a>
@@ -359,15 +363,36 @@ const Footer = () => {
       </div>
       <div className="w-3/4 bg-darkestGray p-16">
         <Logo showWordMark invert />
-        <div className="mt-8 block font-dharma text-5xl font-medium text-white">
-          Let’s stay in touch. Soin our newsletter list:
+        <div className="mt-8 font-dharma text-5xl font-medium text-white">
+          Let’s stay in touch. Join our newsletter list:
         </div>
-        <div className="mt-8 block">
-          <div className="flex aspect-video max-w-3xl items-center justify-center bg-gray/25">
-            <div className="text-xl font-bold text-white/25">ADD NEWSLETTER SIGNUP HERE</div>
-          </div>
+        <div className="mt-8">
+          <SignUpForm />
         </div>
       </div>
+    </div>
+  );
+};
+
+const SignUpForm = () => {
+  const router = useRouter();
+  const isFirstRenderOfSparkScript = useRef(true);
+
+  useEffect(() => {
+    if (isFirstRenderOfSparkScript.current) {
+      isFirstRenderOfSparkScript.current = false;
+    }
+  }, [router.pathname]);
+
+  return (
+    <div className="flex flex-col">
+      <div id="pfb-site-footer" className="spkactionform" />
+      {isFirstRenderOfSparkScript.current && (
+        <Script
+          src="https://action.peopleforbikes.org/assets/js/widget.js/?id=111276"
+          strategy="afterInteractive"
+        />
+      )}
     </div>
   );
 };

@@ -15,7 +15,7 @@ const Container = styled.section`
   a:focus,
   a:hover,
   a:active {
-    text-decoration: none;
+    text-decoration: none !important;
   }
 `;
 

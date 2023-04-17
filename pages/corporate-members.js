@@ -6,6 +6,7 @@ import { AlgoliaIndex, AlgoliaReactClient } from '~/lib/algolia/algoliaClient';
 import { memberFormatter } from '~/lib/algolia/memberFormatter';
 import getCorporateMembers from '~/lib/salesforce/getCorporateMembers';
 
+import { LegacyPage } from '~/components/legacy-page';
 import Wrapper from '~/components/wrapper';
 import Grid from '~/components/grid';
 import BigTitleBanner from '~/components/big-title-banner';
@@ -156,7 +157,7 @@ export default function CorporateMembers() {
   const CustomHits = connectHits(Hits);
 
   return (
-    <>
+    <LegacyPage>
       <SiteMetaCustom title="Corporate Members | PeopleForBikes" />
       <Wrapper isWide={true}>
         <BigTitleBanner>
@@ -191,7 +192,7 @@ export default function CorporateMembers() {
           Become a Corporate Member
         </Button>
       </Wrapper>
-    </>
+    </LegacyPage>
   );
 }
 

@@ -19,6 +19,7 @@ import { topicFormatter } from '~/lib/algolia/topicFormatter';
 import { statsFormatter } from '~/lib/algolia/statsFormatter';
 import { locationFormatter } from '~/lib/algolia/locationFormatter';
 
+import { LegacyPage } from '~/components/legacy-page';
 import Wrapper from '~/components/wrapper';
 import Spinner from '~/components/spinner';
 import UidHeader from '~/components/uid/uidHeaders';
@@ -53,18 +54,20 @@ export default function TheMonster({ page, preview }) {
   const { landing_page } = page;
 
   return (
-    <Wrapper postTitle={prismicH.asText(landing_page.title)} isWide={true}>
-      <UidHeader landing_page={landing_page} />
-      <ConditionalSections landing_page={landing_page} />
+    <LegacyPage>
+      <Wrapper postTitle={prismicH.asText(landing_page.title)} isWide={true}>
+        <UidHeader landing_page={landing_page} />
+        <ConditionalSections landing_page={landing_page} />
 
-      {landing_page._meta.uid === 'members' ? (
-        <UidMemberSlices landing_page={landing_page} />
-      ) : (
-        <UidSlices landing_page={landing_page} />
-      )}
+        {landing_page._meta.uid === 'members' ? (
+          <UidMemberSlices landing_page={landing_page} />
+        ) : (
+          <UidSlices landing_page={landing_page} />
+        )}
 
-      <UidIndividualComponents landing_page={landing_page} />
-    </Wrapper>
+        <UidIndividualComponents landing_page={landing_page} />
+      </Wrapper>
+    </LegacyPage>
   );
 }
 

@@ -7,6 +7,7 @@ import { getReports, getSingleReportPage } from '~/lib/queries/reports';
 import { linkResolver } from '~/utils';
 import data from '~/data';
 
+import { LegacyPage } from '~/components/legacy-page';
 import Wrapper from '~/components/wrapper';
 import SiteMetaCustom from '~/components/site-meta-custom';
 import MainContent from '~/components/main-content';
@@ -85,7 +86,7 @@ export default function ReportPage({ page, preview }) {
   const { meta } = data;
 
   return (
-    <>
+    <LegacyPage>
       <SiteMetaCustom
         desc={
           report.main_content ? `${report.main_content[0].text.substring(0, 180)} ... ` : meta.desc
@@ -213,7 +214,7 @@ export default function ReportPage({ page, preview }) {
           source={ResearchPromo}
         />
       </Wrapper>
-    </>
+    </LegacyPage>
   );
 }
 

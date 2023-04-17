@@ -1,8 +1,14 @@
 import * as React from 'react';
 
-export const ActionCard = ({ number, total, title, image }) => {
+export const ActionCard = ({
+  number,
+  total,
+  title,
+  description = `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ea, nesciunt eum quidem ullam facilis nobis asperiores laborum, enim accusantium officia similique doloribus.`,
+  image,
+}) => {
   return (
-    <li className="group snap-center">
+    <li className="group block snap-center list-none">
       <div className="relative flex aspect-[3/4] w-[20rem] items-center justify-center overflow-hidden">
         <img
           src={`/new/${image}`}
@@ -16,10 +22,7 @@ export const ActionCard = ({ number, total, title, image }) => {
           </div>
           <h4 className="font-dharma text-5xl font-bold leading-none">{title}</h4>
           <div className="opacity-0 transition duration-700 group-hover:opacity-100">
-            <div className="block text-sm">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ea, nesciunt eum quidem
-              ullam facilis nobis asperiores laborum, enim accusantium officia similique doloribus.
-            </div>
+            <div className="block text-sm">{description}</div>
           </div>
         </div>
       </div>

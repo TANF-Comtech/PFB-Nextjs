@@ -8,6 +8,7 @@ import { PrismicRichText } from '@prismicio/react';
 import { getSingleActionPage } from '~/lib/queries/take-action';
 import data from '~/data';
 
+import { LegacyPage } from '~/components/legacy-page';
 import Wrapper from '~/components/wrapper';
 import SiteMetaCustom from '~/components/site-meta-custom';
 import MainContent from '~/components/main-content';
@@ -198,7 +199,7 @@ export default function ActionForms({ page, preview }) {
   }, [router.pathname]);
 
   return (
-    <>
+    <LegacyPage>
       <SiteMetaCustom
         desc={action.main_content ? `${action.main_content.substring(0, 180)} ... ` : meta.desc}
         title={action.title ? `${action.title[0].text} | PeopleForBikes` : meta.title}
@@ -244,7 +245,7 @@ export default function ActionForms({ page, preview }) {
           source={ResearchPromo}
         />
       </Wrapper>
-    </>
+    </LegacyPage>
   );
 }
 

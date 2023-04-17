@@ -4,6 +4,7 @@ import { PrismicRichText } from '@prismicio/react';
 import { getAllCareers, getSingleCareer } from '~/lib/queries/careers';
 import data from '~/data';
 
+import { LegacyPage } from '~/components/legacy-page';
 import Wrapper from '~/components/wrapper';
 import SiteMetaCustom from '~/components/site-meta-custom';
 import MainContent from '~/components/main-content';
@@ -16,7 +17,7 @@ export default function CareerPages({ page, preview }) {
   const { meta } = data;
 
   return (
-    <>
+    <LegacyPage>
       <SiteMetaCustom
         desc={meta.desc}
         title={job.title ? `${job.title[0].text} | PeopleForBikes` : meta.title}
@@ -31,7 +32,6 @@ export default function CareerPages({ page, preview }) {
 
           {job.posting && <PrismicRichText field={job.posting} />}
         </MainContent>
-
         <MainContent>
           <Button
             buttonAlign="center"
@@ -49,7 +49,7 @@ export default function CareerPages({ page, preview }) {
           </Button>
         </MainContent>
       </Wrapper>
-    </>
+    </LegacyPage>
   );
 }
 

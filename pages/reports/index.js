@@ -7,6 +7,7 @@ import { linkResolver, randomID } from '~/utils';
 import { AlgoliaIndex } from '~/lib/algolia/algoliaClient';
 import { reportsFormatter } from '~/lib/algolia/reportsFormatter';
 
+import { LegacyPage } from '~/components/legacy-page';
 import Wrapper from '~/components/wrapper';
 import MainContent from '~/components/main-content';
 import Header1 from '~/components/h1';
@@ -49,62 +50,64 @@ export default function ReportsArchive({ page }) {
   years.pop(); // gets rid of last null
 
   return (
-    <Wrapper postPath="/research/" postTitle="Research" isWide={true}>
-      <MainContent maxWidth="1200px">
-        <Header1 key={randomID(5687502984)}>Reports Archive</Header1>
+    <LegacyPage>
+      <Wrapper postPath="/research/" postTitle="Research" isWide={true}>
+        <MainContent maxWidth="1200px">
+          <Header1 key={randomID(5687502984)}>Reports Archive</Header1>
 
-        {years &&
-          years.map((year) => {
-            return (
-              <ReportSection key={year}>
-                <ReportSectionHeader key={randomID(120981371398475)}>
-                  <h2>{year}</h2>
-                  <hr />
-                </ReportSectionHeader>
+          {years &&
+            years.map((year) => {
+              return (
+                <ReportSection key={year}>
+                  <ReportSectionHeader key={randomID(120981371398475)}>
+                    <h2>{year}</h2>
+                    <hr />
+                  </ReportSectionHeader>
 
-                {page.map((report) => {
-                  if (report.node.year === year) {
-                    return (
-                      <>
-                        {report.node.title && (
-                          <ReportListItem key={report.node._meta.id}>
-                            <Link href={linkResolver(report.node._meta)} passHref>
-                              <a>
-                                <strong>{report.node.title[0].text}</strong>
-                              </a>
-                            </Link>
-                            {report.node.summary && (
-                              <p>{`${report.node.summary[0].text.substring(0, 180)} ...`}</p>
-                            )}
-                            <Button
-                              buttonBg="#404040"
-                              buttonBgHover="rgb(216,216,216)"
-                              buttonColor="white"
-                              buttonMargin="0 0 20px 0"
-                              buttonPadding="10px 20px"
-                              buttonTextTransform="uppercase"
-                              href={linkResolver(report.node._meta)}
-                            >
-                              Read More
-                            </Button>
-                          </ReportListItem>
-                        )}
-                      </>
-                    );
-                  }
-                })}
-              </ReportSection>
-            );
-          })}
-      </MainContent>
+                  {page.map((report) => {
+                    if (report.node.year === year) {
+                      return (
+                        <>
+                          {report.node.title && (
+                            <ReportListItem key={report.node._meta.id}>
+                              <Link href={linkResolver(report.node._meta)} passHref>
+                                <a>
+                                  <strong>{report.node.title[0].text}</strong>
+                                </a>
+                              </Link>
+                              {report.node.summary && (
+                                <p>{`${report.node.summary[0].text.substring(0, 180)} ...`}</p>
+                              )}
+                              <Button
+                                buttonBg="#404040"
+                                buttonBgHover="rgb(216,216,216)"
+                                buttonColor="white"
+                                buttonMargin="0 0 20px 0"
+                                buttonPadding="10px 20px"
+                                buttonTextTransform="uppercase"
+                                href={linkResolver(report.node._meta)}
+                              >
+                                Read More
+                              </Button>
+                            </ReportListItem>
+                          )}
+                        </>
+                      );
+                    }
+                  })}
+                </ReportSection>
+              );
+            })}
+        </MainContent>
 
-      <Promo
-        bigWords="Research Library"
-        path="/research"
-        smallWords="Explore More Reports In Our"
-        source={ResearchPromo}
-      />
-    </Wrapper>
+        <Promo
+          bigWords="Research Library"
+          path="/research"
+          smallWords="Explore More Reports In Our"
+          source={ResearchPromo}
+        />
+      </Wrapper>
+    </LegacyPage>
   );
 }
 

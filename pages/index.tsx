@@ -4,20 +4,36 @@ import cx from 'classnames';
 import { Button } from '~/components/new/button';
 import { Page } from '~/components/new/page';
 import { ActionCard } from '~/components/new/card';
+import { Carousel } from '~/components/new/carousel';
+import { Slider } from '~/components/new/slider';
 
 const campaigns = [
   {
     title: 'RideSpot',
     description:
       'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Atque ratione necessitatibus similique doloremque ex mollitia minus eveniet, non laboriosam nulla. Animi expedita sapiente nulla et.',
-    ctaLabel: 'Visit app',
+    ctaLabel: 'Download app',
+    ctaLink: '',
+  },
+  {
+    title: 'Call2Recycle',
+    description:
+      'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Atque ratione necessitatibus similique doloremque ex mollitia minus eveniet, non laboriosam nulla. Animi expedita sapiente nulla et.',
+    ctaLabel: 'Visit site',
+    ctaLink: '',
+  },
+  {
+    title: 'VoteForBikes',
+    description:
+      'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Atque ratione necessitatibus similique doloremque ex mollitia minus eveniet, non laboriosam nulla. Animi expedita sapiente nulla et.',
+    ctaLabel: 'Visit site',
     ctaLink: '',
   },
 ];
 
 export default function NewHomePage() {
   return (
-    <Page title="New homepage">
+    <Page title="New homepage" hasHero>
       <Hero headline="Every rider. Every ride." campaigns={campaigns} />
       <Pillars />
       <Work />
@@ -49,11 +65,11 @@ const Hero = ({ headline, campaigns = [] }: HeroProps) => {
         </div>
       )}
       {campaigns.length > 0 && (
-        <div className="absolute left-0 bottom-0 right-0 z-30 flex w-full justify-center p-16">
+        <div className="absolute bottom-0 left-0 right-0 z-30 flex w-full justify-center p-16">
           <div className="relative mx-auto w-full max-w-screen-xl">
-            <div>
+            <Carousel>
               {campaigns.map((campaign) => (
-                <div key={campaign.title} className="flex w-full flex-col">
+                <div key={campaign.title} className="flex w-full flex-col px-24">
                   <div className="font-dharma text-9xl font-bold leading-none text-white">
                     {campaign.title}
                   </div>
@@ -63,7 +79,7 @@ const Hero = ({ headline, campaigns = [] }: HeroProps) => {
                   </div>
                 </div>
               ))}
-            </div>
+            </Carousel>
           </div>
         </div>
       )}
@@ -73,14 +89,14 @@ const Hero = ({ headline, campaigns = [] }: HeroProps) => {
 
 const Pillars = () => {
   return (
-    <div className="block">
+    <div>
       <div className="flex">
-        <div className="relative z-10 block w-1/4 flex-shrink-0 bg-darkest-blue px-16">
-          <div className="sticky top-[9rem] block py-16 text-center">
-            <h3 className="block font-dharma text-5xl font-bold uppercase leading-none text-white">
+        <div className="relative z-10 w-1/4 flex-shrink-0 bg-darkest-blue px-16">
+          <div className="sticky top-[9rem]  py-16 text-center">
+            <h3 className="font-dharma text-5xl font-bold uppercase leading-none text-white">
               Our 3 pillars
             </h3>
-            <div className="mt-4 block text-center text-lightestGray">
+            <div className="mt-4 text-center text-lightestGray">
               PeopleForBikes works in three key areas to make the U.S. the best place in the world
               to ride a bicycle.
             </div>
@@ -88,14 +104,14 @@ const Pillars = () => {
               <div className="relative flex aspect-square h-24 w-24 rounded-full bg-blue">
                 <img
                   src="/new/crane.svg"
-                  className="absolute inset-0 -ml-24 -mt-16 inline-block h-64 w-64 object-cover"
+                  className="absolute inset-0 -ml-6 -mt-16 inline-block h-64 w-64 object-cover"
                   alt=""
                 />
               </div>
-              <h4 className="mt-4 block text-xl font-bold uppercase leading-none text-white">
+              <h4 className="mt-4 text-xl font-bold uppercase leading-none text-white">
                 Infrastructure
               </h4>
-              <div className="mt-1 block max-w-xs text-center text-xs text-lightestGray">
+              <div className="mt-1 max-w-xs text-center text-xs text-lightestGray">
                 Accelerate the construction of safe, fun, and connected places to ride.
               </div>
             </div>
@@ -224,21 +240,22 @@ const Pillars = () => {
 
 const Pillar = ({ title, featuredItems = [], items = [], alternate = false }) => {
   return (
-    <div className={cx('relative block p-16', alternate && 'bg-cardGray')}>
-      <div className="block font-dharma text-5xl font-bold uppercase leading-none text-gray">
-        {title}
+    <div className={cx('relative p-16', alternate && 'bg-cardGray')}>
+      <div className="font-dharma text-5xl font-bold uppercase leading-none text-gray">{title}</div>
+      <div className="pb-16">
+        <Slider className="py-8">
+          {featuredItems.map((item, index) => (
+            <div key={item.key} className="px-4">
+              <ActionCard
+                number={index + 1}
+                total={featuredItems.length}
+                title={item.title}
+                image={item.image}
+              />
+            </div>
+          ))}
+        </Slider>
       </div>
-      <PillarGrid>
-        {featuredItems.map((item, index) => (
-          <ActionCard
-            key={item.key}
-            number={index + 1}
-            total={featuredItems.length}
-            title={item.title}
-            image={item.image}
-          />
-        ))}
-      </PillarGrid>
       <div className="relative flex flex-col gap-3 overflow-hidden">
         <div className="text-xl font-bold uppercase leading-none">Latest {title} news</div>
         <ul className="flex flex-col gap-1.5">
@@ -249,18 +266,6 @@ const Pillar = ({ title, featuredItems = [], items = [], alternate = false }) =>
           ))}
         </ul>
       </div>
-    </div>
-  );
-};
-
-type PillarGridProps = {
-  children: Array<React.ReactNode>;
-};
-
-const PillarGrid = ({ children }: PillarGridProps) => {
-  return (
-    <div className="relative flex w-full items-center">
-      <ul className="relative z-0 flex w-full items-center gap-8 py-8">{children}</ul>
     </div>
   );
 };
@@ -311,7 +316,7 @@ const News = () => {
 const NewsCard = () => {
   return (
     <div className="group flex w-full flex-col bg-lightestGray shadow-md">
-      <div className="block aspect-video overflow-hidden">
+      <div className="aspect-video overflow-hidden">
         <img
           src="/new/Stocksy_comp_watermarked_2285491.jpg"
           className="block aspect-video w-full object-cover transition duration-700 group-hover:scale-105"
