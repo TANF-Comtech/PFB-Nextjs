@@ -6,11 +6,16 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Script from 'next/script';
 import { atom, useAtom, useAtomValue, useSetAtom } from 'jotai';
+import { Popover } from '@headlessui/react';
 import { useInView } from 'react-intersection-observer';
 import useScrollPosition from '@react-hook/window-scroll';
 
 import { Button } from '~/components/new/button';
+import { ExternalLink } from './external-link';
 
+type ActiveTab = 'infrastructure' | 'policy' | 'participation' | 'about' | null;
+
+const activeTabAtom = atom<ActiveTab>(null);
 const searchOpenAtom = atom<boolean>(false);
 const searchQueryAtom = atom<string>('');
 const siteMapInViewAtom = atom<boolean>(false);
@@ -89,12 +94,12 @@ const Meta = (props: MetaProps) => {
       <meta name="twitter:description" content={desc} key="twtrdesc" />
       <meta name="twitter:image" content={imgSrc} key="twitterimg" />
       <link rel="canonical" href={path} key="canonical" />
-      {ldJSON && (
+      {ldJSON ? (
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: formatLinkedData(ldJSON) }}
         />
-      )}
+      ) : null}
     </Head>
   );
 };
@@ -109,10 +114,34 @@ const Fixed = ({ children }: FixedProps) => {
 
 const Banner = () => {
   return (
-    <div className="h-12 bg-darkest-blue px-4 text-white">
+    <div className="relative z-50 h-12 bg-darkest-blue px-4 text-white">
       <div className="mx-auto flex h-full max-w-screen-xl items-center justify-between text-sm font-bold uppercase leading-none">
         <div className="inline-flex items-center gap-2">
-          <div>Explore our network of sites</div>
+          <Popover className="relative uppercase">
+            <Popover.Button className="uppercase">Explore our network of sites</Popover.Button>
+            <Popover.Panel className="min-full absolute -left-4 z-50 mt-4 w-[320px] bg-darkest-blue p-4">
+              <div className="flex flex-col gap-4">
+                <ExternalLink href="https://www.peopleforbikes.org/" className="hover:underline">
+                  PeopleForBikes Main site
+                </ExternalLink>
+                <ExternalLink
+                  href="https://cityratings.peopleforbikes.org/"
+                  className="hover:underline"
+                >
+                  City Ratings
+                </ExternalLink>
+                <ExternalLink href="https://shift.peopleforbikes.org/" className="hover:underline">
+                  Shift'22 Conference
+                </ExternalLink>
+                <ExternalLink href="https://www.ridespot.org/" className="hover:underline">
+                  Ride Spot
+                </ExternalLink>
+                <Link href="https://www.peopleforbikes.org/campaigns" className="hover:underline">
+                  View more sites
+                </Link>
+              </div>
+            </Popover.Panel>
+          </Popover>
         </div>
         <div className="inline-flex items-center gap-3">
           <div>Corporate member center</div>
@@ -127,22 +156,27 @@ const Header = ({ hasHero }) => {
   const scrollY = useScrollPosition();
   const hasScrolled = scrollY >= 32;
   const isSiteMapInView = useAtomValue(siteMapInViewAtom);
+  const [activeTab, setActiveTab] = useAtom(activeTabAtom);
 
   return (
-    <div
-      className={cx(
-        !hasHero || hasScrolled
-          ? 'bg-white text-black shadow-xl'
-          : 'bg-transparent text-white hover:bg-white hover:text-black hover:shadow-xl',
-        'group relative items-center px-4 transition duration-700',
-        isSiteMapInView ? 'opacity-0' : 'opacity-100',
-      )}
-    >
-      <div className="mx-auto flex h-24 max-w-screen-xl items-center justify-between">
-        <Logo />
-        <Navigation />
-        <Search />
+    <div className="group relative" onMouseLeave={() => setActiveTab(null)}>
+      <div
+        className={cx(
+          !hasHero || hasScrolled
+            ? 'bg-white text-black shadow-xl'
+            : 'bg-transparent text-white group-hover:bg-white group-hover:text-black group-hover:shadow-xl',
+          'relative z-50 items-center px-4 transition duration-700',
+          activeTab && '!shadow-none',
+          isSiteMapInView ? 'opacity-0' : 'opacity-100',
+        )}
+      >
+        <div className="mx-auto flex h-24 max-w-screen-xl items-center justify-between">
+          <Logo />
+          <Navigation />
+          <Search />
+        </div>
       </div>
+      <MegaMenu />
     </div>
   );
 };
@@ -230,16 +264,21 @@ const EXTRA_NAVIGATION: Array<any> = [
 const Navigation = () => {
   const isSearchOpen = useAtomValue(searchOpenAtom);
   const [searchQuery, setSearchQuery] = useAtom(searchQueryAtom);
+  const [activeTab, setActiveTab] = useAtom(activeTabAtom);
 
   return (
     <nav className="relative flex w-1/2 justify-center">
       <ul className="flex justify-center gap-8 font-dharma text-4xl">
         {MAIN_NAVIGATION.map((item: any) => (
           <li key={item.key}>
-            <button className="group/button relative inline-block cursor-pointer whitespace-pre px-4 pb-1.5 pt-2 leading-none">
+            <button
+              onClick={() => setActiveTab(item.key)}
+              className="group/button relative inline-block cursor-pointer whitespace-pre px-4 pb-1.5 pt-2 leading-none"
+            >
               <div
                 className={cx(
                   'absolute inset-0 z-0 h-full w-full rounded-lg transition duration-700',
+                  activeTab === item.key && '!bg-lightestGray',
                   item.key !== 'donate'
                     ? 'bg-transparent group-hover/button:bg-lightestGray'
                     : 'bg-gold',
@@ -281,6 +320,21 @@ const Search = () => {
           />
         </div>
       </button>
+    </div>
+  );
+};
+
+const MegaMenu = () => {
+  const activeTab = useAtomValue(activeTabAtom);
+
+  return (
+    <div
+      className={cx(
+        'absolute bottom-0 left-0 right-0 z-40 flex h-48 items-center justify-center bg-white transition duration-700',
+        !activeTab ? 'translate-y-0 opacity-0' : 'translate-y-full opacity-100 shadow-xl',
+      )}
+    >
+      {activeTab && <span className="text-4xl font-bold uppercase">{activeTab} menu contents</span>}
     </div>
   );
 };

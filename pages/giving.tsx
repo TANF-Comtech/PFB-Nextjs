@@ -209,7 +209,13 @@ const Support = () => {
   );
 };
 
-const QUOTES = [
+type Quote = {
+  body: string;
+  author: string;
+  donorType: 'Corporate Donor' | 'Individual Donor';
+};
+
+const QUOTES: Array<Quote> = [
   {
     body: '“We instituted a simple program to help fund safe bike infrastructure by donating $1 for each helmet sold and matching that with a dollar-per-unit donation from each Trek retailer. It is a powerful multiplier.”',
     author: 'John Burke, President, Trek Bicycle',
@@ -252,7 +258,7 @@ const Quotes = () => {
   return (
     <div className="flex flex-col">
       <div className="relative mx-auto w-full max-w-6xl py-24">
-        <Carousel className="w-full py-24">
+        <Carousel className="my-24 w-full">
           {QUOTES.map((quote) => (
             <Quote key={quote.body} quote={quote} />
           ))}
@@ -262,9 +268,13 @@ const Quotes = () => {
   );
 };
 
-const Quote = ({ quote }) => {
+type QuoteProps = {
+  quote: Quote;
+};
+
+const Quote = ({ quote }: QuoteProps) => {
   return (
-    <div className="h-full w-full p-24">
+    <div className="aspect-video w-full p-24">
       <div className="flex h-full flex-col items-center justify-center gap-3">
         <div className="relative top-[5rem] font-dharma text-[20rem] leading-[0] text-blue">
           &ldquo;

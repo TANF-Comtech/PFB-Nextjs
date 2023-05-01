@@ -1,5 +1,8 @@
 import * as React from 'react';
+import { useEffect } from 'react';
 import cx from 'classnames';
+import { atom, useAtomValue, useSetAtom } from 'jotai';
+import { useInView } from 'react-intersection-observer';
 
 import { Button } from '~/components/new/button';
 import { Page } from '~/components/new/page';
@@ -87,7 +90,37 @@ const Hero = ({ headline, campaigns = [] }: HeroProps) => {
   );
 };
 
+type PillarType = 'infrastructure' | 'policy' | 'participation';
+
+const activePillarAtom = atom<PillarType>('infrastructure');
+
+type PillarData = {
+  image: string;
+  title: string;
+  description: string;
+};
+
+const pillars: Record<PillarType, PillarData> = {
+  infrastructure: {
+    image: '/new/crane.svg',
+    title: 'Infrastructure',
+    description: 'Accelerate the construction of safe, fun, and connected places to ride.',
+  },
+  policy: {
+    image: '/new/court.svg',
+    title: 'Policy',
+    description: 'Advance pro-bike and pro-bike business legislation.',
+  },
+  participation: {
+    image: '/new/cyclist.svg',
+    title: 'Participation',
+    description: 'Reduce barriers to access and introduce more people to the joys of bicycling.',
+  },
+};
+
 const Pillars = () => {
+  const activePillar = useAtomValue(activePillarAtom);
+
   return (
     <div>
       <div className="flex">
@@ -103,134 +136,164 @@ const Pillars = () => {
             <div className="mt-8 flex flex-col items-center justify-center">
               <div className="relative flex aspect-square h-24 w-24 rounded-full bg-blue">
                 <img
-                  src="/new/crane.svg"
-                  className="absolute inset-0 -ml-6 -mt-16 inline-block h-64 w-64 object-cover"
+                  src={pillars[activePillar].image}
+                  className="absolute inset-0 inline-block h-full w-full scale-[4]"
                   alt=""
                 />
               </div>
               <h4 className="mt-4 text-xl font-bold uppercase leading-none text-white">
-                Infrastructure
+                {pillars[activePillar].title}
               </h4>
-              <div className="mt-1 max-w-xs text-center text-xs text-lightestGray">
-                Accelerate the construction of safe, fun, and connected places to ride.
+              <div className="mt-1 h-6 max-w-[16rem] text-center text-xs text-lightestGray">
+                {pillars[activePillar].description}
               </div>
             </div>
             <div className="mt-8 flex w-full items-center justify-center gap-1">
-              <div className="flex aspect-square h-6 w-6 items-center justify-center rounded-full bg-blue"></div>
-              <div className="flex aspect-square h-6 w-6 items-center justify-center rounded-full bg-white"></div>
-              <div className="flex aspect-square h-6 w-6 items-center justify-center rounded-full bg-white"></div>
+              <div
+                className={cx(
+                  'flex aspect-square h-6 w-6 items-center justify-center rounded-full',
+                  activePillar === 'infrastructure' ? 'bg-blueAccent' : 'bg-white',
+                )}
+              />
+              <div
+                className={cx(
+                  'flex aspect-square h-6 w-6 items-center justify-center rounded-full',
+                  activePillar === 'policy' ? 'bg-blueAccent' : 'bg-white',
+                )}
+              />
+              <div
+                className={cx(
+                  'flex aspect-square h-6 w-6 items-center justify-center rounded-full',
+                  activePillar === 'participation' ? 'bg-blueAccent' : 'bg-white',
+                )}
+              />
             </div>
           </div>
         </div>
         <div className="relative z-0 flex w-3/4 flex-col">
           <Pillar
             key="infrastructure"
+            id="infrastructure"
             title="Infrastructure"
-            featuredItems={[
-              {
-                title: 'City Ratings',
-                image: '1_CityRatings.png',
-              },
-              {
-                title: 'Bicycle Network Analysis',
-                image: '1_BNA.png',
-              },
-              {
-                title: 'Final Mile',
-                image: '1_FinalMile.png',
-              },
-              {
-                title: 'Transforming America',
-                image: '1_TransformingAmerica.png',
-              },
-            ]}
-            items={[
-              {
-                title:
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus dignissim faucibus.',
-              },
-              {
-                title:
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus dignissim faucibus.',
-              },
-              {
-                title:
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus dignissim faucibus.',
-              },
-            ]}
+            featuredItems={
+              [
+                {
+                  title: 'City Ratings',
+                  image: '1_CityRatings.png',
+                },
+                {
+                  title: 'Bicycle Network Analysis',
+                  image: '1_BNA.png',
+                },
+                {
+                  title: 'Final Mile',
+                  image: '1_FinalMile.png',
+                },
+                {
+                  title: 'Transforming America',
+                  image: '1_TransformingAmerica.png',
+                },
+              ] as any
+            }
+            items={
+              [
+                {
+                  title:
+                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus dignissim faucibus.',
+                },
+                {
+                  title:
+                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus dignissim faucibus.',
+                },
+                {
+                  title:
+                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus dignissim faucibus.',
+                },
+              ] as any
+            }
           />
           <Pillar
             key="policy"
+            id="policy"
             title="Policy"
-            featuredItems={[
-              {
-                title: 'Electric Bikes',
-                image: '2_ElectricBicycles.png',
-              },
-              {
-                title: 'Federal Funding',
-                image: '2_FederalFunding.png',
-              },
-              {
-                title: 'VoteForBikes',
-                image: '2_VoteForBikes.png',
-              },
-              {
-                title: 'Sustainability',
-                image: '2_Sustainabililty.png',
-              },
-            ]}
-            items={[
-              {
-                title:
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus dignissim faucibus.',
-              },
-              {
-                title:
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus dignissim faucibus.',
-              },
-              {
-                title:
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus dignissim faucibus.',
-              },
-            ]}
+            featuredItems={
+              [
+                {
+                  title: 'Electric Bikes',
+                  image: '2_ElectricBicycles.png',
+                },
+                {
+                  title: 'Federal Funding',
+                  image: '2_FederalFunding.png',
+                },
+                {
+                  title: 'VoteForBikes',
+                  image: '2_VoteForBikes.png',
+                },
+                {
+                  title: 'Sustainability',
+                  image: '2_Sustainabililty.png',
+                },
+              ] as any
+            }
+            items={
+              [
+                {
+                  title:
+                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus dignissim faucibus.',
+                },
+                {
+                  title:
+                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus dignissim faucibus.',
+                },
+                {
+                  title:
+                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus dignissim faucibus.',
+                },
+              ] as any
+            }
             alternate={true}
           />
           <Pillar
             key="participation"
+            id="participation"
             title="Participation"
-            featuredItems={[
-              {
-                title: 'RideSpot',
-                image: '3_RideSpot.png',
-              },
-              {
-                title: 'One Ride At a Time',
-                image: '3_OneRide.png',
-              },
-              {
-                title: 'Keep Riding',
-                image: '3_KeepRiding.png',
-              },
-              {
-                title: 'Call2Recycle Electric Battery Recycling',
-                image: '3_Call2Recycle.png',
-              },
-            ]}
-            items={[
-              {
-                title:
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus dignissim faucibus.',
-              },
-              {
-                title:
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus dignissim faucibus.',
-              },
-              {
-                title:
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus dignissim faucibus.',
-              },
-            ]}
+            featuredItems={
+              [
+                {
+                  title: 'RideSpot',
+                  image: '3_RideSpot.png',
+                },
+                {
+                  title: 'One Ride At a Time',
+                  image: '3_OneRide.png',
+                },
+                {
+                  title: 'Keep Riding',
+                  image: '3_KeepRiding.png',
+                },
+                {
+                  title: 'Call2Recycle Electric Battery Recycling',
+                  image: '3_Call2Recycle.png',
+                },
+              ] as any
+            }
+            items={
+              [
+                {
+                  title:
+                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus dignissim faucibus.',
+                },
+                {
+                  title:
+                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus dignissim faucibus.',
+                },
+                {
+                  title:
+                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus dignissim faucibus.',
+                },
+              ] as any
+            }
           />
         </div>
       </div>
@@ -238,9 +301,22 @@ const Pillars = () => {
   );
 };
 
-const Pillar = ({ title, featuredItems = [], items = [], alternate = false }) => {
+const inViewOptions = {
+  threshold: 0.25,
+};
+
+const Pillar = ({ id, title, featuredItems = [], items = [], alternate = false }) => {
+  const { ref, inView } = useInView(inViewOptions);
+  const setActivePillar = useSetAtom(activePillarAtom);
+
+  useEffect(() => {
+    if (inView) {
+      setActivePillar(id);
+    }
+  }, [inView]); // eslint-disable-line react-hooks/exhaustive-deps
+
   return (
-    <div className={cx('relative p-16', alternate && 'bg-cardGray')}>
+    <div ref={ref} className={cx('relative min-h-screen p-16', alternate && 'bg-cardGray')}>
       <div className="font-dharma text-5xl font-bold uppercase leading-none text-gray">{title}</div>
       <div className="pb-16">
         <Slider className="py-8">
