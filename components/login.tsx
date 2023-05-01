@@ -154,7 +154,7 @@ const EmailLogin = () => {
         />
         <Button type="submit" size="small" label="Send" />
       </form>
-      <div className="absolute left-0 right-0 -bottom-10 mt-10 flex w-full translate-y-full justify-center">
+      <div className="absolute -bottom-10 left-0 right-0 mt-10 flex w-full translate-y-full justify-center">
         <Button
           variant="blue"
           size="small"
@@ -256,7 +256,7 @@ const EnterAccessCodeFromEmail = () => {
           <Body className="underline">Can&apos;t find the email? Get a code texted to you.</Body>
         </button>
       </div>
-      <div className="absolute left-0 right-0 -bottom-10 mt-10 flex w-full translate-y-full justify-center">
+      <div className="absolute -bottom-10 left-0 right-0 mt-10 flex w-full translate-y-full justify-center">
         <Button
           variant="blue"
           size="small"
@@ -329,7 +329,7 @@ const PhoneLogin = () => {
         />
         <Button type="submit" size="small" label="Send" />
       </form>
-      <div className="absolute left-0 right-0 -bottom-10 mt-10 flex w-full translate-y-full justify-center">
+      <div className="absolute -bottom-10 left-0 right-0 mt-10 flex w-full translate-y-full justify-center">
         <Button
           variant="blue"
           size="small"
@@ -434,7 +434,7 @@ const EnterAccessCodeFromSms = () => {
           <Body className="underline">Can&apos;t find the text? Get a code emailed to you.</Body>
         </button>
       </div>
-      <div className="absolute left-0 right-0 -bottom-10 mt-10 flex w-full translate-y-full justify-center">
+      <div className="absolute -bottom-10 left-0 right-0 mt-10 flex w-full translate-y-full justify-center">
         <Button
           variant="blue"
           size="small"
@@ -698,7 +698,9 @@ const Error = () => {
   );
 };
 
-const Headline = ({ className = '', children, ...rest }) => {
+type HeadlineProps = React.ComponentPropsWithoutRef<'h3'>;
+
+const Headline = ({ className = '', children, ...rest }: HeadlineProps) => {
   return (
     <h3 className={cx('text-center font-dharma text-6xl sm:text-8xl', className)} {...rest}>
       {children}
@@ -706,7 +708,9 @@ const Headline = ({ className = '', children, ...rest }) => {
   );
 };
 
-const Body = ({ className = '', children = null, ...rest }) => {
+type BodyProps = React.ComponentPropsWithoutRef<'div'>;
+
+const Body = ({ className = '', children, ...rest }: BodyProps) => {
   return (
     <div className={cx('mt-10 text-base !leading-normal sm:text-3xl', className)} {...rest}>
       {children}
@@ -714,7 +718,9 @@ const Body = ({ className = '', children = null, ...rest }) => {
   );
 };
 
-const Bold = ({ className = '', children, ...rest }) => {
+type BoldProps = React.ComponentPropsWithoutRef<'span'>;
+
+const Bold = ({ className = '', children, ...rest }: BoldProps) => {
   return (
     <span className={cx('text-base font-bold !leading-normal sm:text-3xl', className)} {...rest}>
       {children}

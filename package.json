@@ -58,7 +58,7 @@
     "nodemailer": "^6.9.1",
     "postcss": "^8.4.23",
     "prettier": "^2.8.8",
-    "prettier-plugin-tailwindcss": "^0.2.7",
+    "prettier-plugin-tailwindcss": "0.2.5",
     "svgo-loader": "^3.0.3",
     "tailwindcss": "^3.3.1",
     "typescript": "^5.0.4"

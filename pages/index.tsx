@@ -320,7 +320,7 @@ const Pillar = ({ id, title, featuredItems = [], items = [], alternate = false }
       <div className="font-dharma text-5xl font-bold uppercase leading-none text-gray">{title}</div>
       <div className="pb-16">
         <Slider className="py-8">
-          {featuredItems.map((item, index) => (
+          {featuredItems.map((item: any, index) => (
             <div key={item.key} className="px-4">
               <ActionCard
                 number={index + 1}
@@ -335,7 +335,7 @@ const Pillar = ({ id, title, featuredItems = [], items = [], alternate = false }
       <div className="relative flex flex-col gap-3 overflow-hidden">
         <div className="text-xl font-bold uppercase leading-none">Latest {title} news</div>
         <ul className="flex flex-col gap-1.5">
-          {items.map((item) => (
+          {items.map((item: any) => (
             <li key={item.title}>
               <span className="underline">{item.title}</span>
             </li>
