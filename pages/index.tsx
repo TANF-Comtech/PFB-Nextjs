@@ -38,8 +38,8 @@ export default function NewHomePage() {
   return (
     <Page title="New homepage" hasHero>
       <Hero headline="Every rider. Every ride." campaigns={campaigns} />
+      <Vision />
       <Pillars />
-      <Work />
       <News />
     </Page>
   );
@@ -54,7 +54,7 @@ const Hero = ({ headline, campaigns = [] }: HeroProps) => {
   return (
     <div className="relative z-60 mt-[3rem] flex h-[calc(100vh-3rem)] items-center justify-center overflow-hidden bg-[#000000]">
       <video
-        src="/new/PFB_Hero_v1.mp4"
+        src="/new/PFB_Hero_v2.mp4"
         className="absolute inset-0 z-0 h-full w-full object-cover opacity-75"
         playsInline
         autoPlay
@@ -102,17 +102,17 @@ type PillarData = {
 
 const pillars: Record<PillarType, PillarData> = {
   infrastructure: {
-    image: '/new/crane.svg',
+    image: '/new/crane.png',
     title: 'Infrastructure',
     description: 'Accelerate the construction of safe, fun, and connected places to ride.',
   },
   policy: {
-    image: '/new/court.svg',
+    image: '/new/court.png',
     title: 'Policy',
     description: 'Advance pro-bike and pro-bike business legislation.',
   },
   participation: {
-    image: '/new/cyclist.svg',
+    image: '/new/cyclist.png',
     title: 'Participation',
     description: 'Reduce barriers to access and introduce more people to the joys of bicycling.',
   },
@@ -137,7 +137,7 @@ const Pillars = () => {
               <div className="relative flex aspect-square h-24 w-24 rounded-full bg-blue">
                 <img
                   src={pillars[activePillar].image}
-                  className="absolute inset-0 inline-block h-full w-full scale-[4]"
+                  className="absolute inset-0 inline-block h-full w-full"
                   alt=""
                 />
               </div>
@@ -346,28 +346,25 @@ const Pillar = ({ id, title, featuredItems = [], items = [], alternate = false }
   );
 };
 
-const Work = () => {
+const Vision = () => {
   return (
-    <div className="relative flex h-[calc(100vh-9rem)] items-center justify-center overflow-hidden bg-pure-black">
-      <img
-        src="/new/Stocksy_comp_watermarked_1310758.jpg"
-        className="absolute inset-0 h-full w-full object-cover opacity-50"
-        alt=""
-        aria-hidden
-      />
-      <div className="vignette absolute inset-0 z-10 h-full w-full" />
+    <div className="relative flex h-[calc(100vh-9rem)] items-center justify-center overflow-hidden bg-gray">
+      <div className="absolute inset-0 p-16">
+        <div className="relative h-full w-full bg-pure-black">
+          <img
+            src="/new/Stocksy_comp_watermarked_1310758.jpg"
+            className="h-full w-full object-cover opacity-50"
+            alt=""
+            aria-hidden
+          />
+          <div className="vignette absolute inset-0 z-10 h-full w-full" />
+        </div>
+      </div>
       <div className="relative z-20 -mt-8 flex max-w-screen-lg flex-col items-center justify-center gap-4">
-        <div className="max-w-4xl text-center font-dharma text-8xl font-bold text-white">
+        <div className="max-w-6xl text-center font-dharma text-9xl font-bold text-white">
           We’re making the U.S. the best place to ride a bike in the world.
         </div>
-        <div className="max-w-3xl text-center text-lightestGray">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Impedit tempora unde nulla,
-          labore illum corrupti voluptatem! Voluptatum qui nulla, fugiat temporibus odio laboriosam
-          vitae reiciendis sint, consequuntur, veniam nesciunt dolores!
-        </div>
-        <div>
-          <Button label="View our work" />
-        </div>
+        <div></div>
       </div>
     </div>
   );
@@ -375,7 +372,7 @@ const Work = () => {
 
 const News = () => {
   return (
-    <div className="flex h-[calc(100vh-9rem)] snap-start items-center justify-center bg-pure-white">
+    <div className="flex h-[calc(100vh-9rem)] snap-start items-center justify-center bg-lightestGray/50">
       <div className="mx-auto flex max-w-screen-lg flex-col gap-16">
         <div className="text-center text-4xl font-bold uppercase leading-none">News</div>
         <div className="grid grid-cols-4 gap-8">

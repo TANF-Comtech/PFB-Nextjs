@@ -165,7 +165,7 @@ const Header = ({ hasHero }) => {
           !hasHero || hasScrolled
             ? 'bg-white text-black shadow-xl'
             : 'bg-transparent text-white group-hover:bg-white group-hover:text-black group-hover:shadow-xl',
-          'relative z-50 items-center px-4 transition duration-700',
+          'relative z-40 items-center px-4 transition duration-700',
           activeTab && '!shadow-none',
           isSiteMapInView ? 'opacity-0' : 'opacity-100',
         )}

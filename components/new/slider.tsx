@@ -29,4 +29,5 @@ const options = {
   prevNextButtons: true,
   pageDots: true,
   wrapAround: false,
+  cellAlign: 'left',
 };
