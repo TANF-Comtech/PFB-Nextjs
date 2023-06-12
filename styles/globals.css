@@ -11,6 +11,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+b {
+  @apply font-bold;
+}
+
 input[search] {
   @apply appearance-none;
 }
@@ -96,12 +100,18 @@ input[search] {
 
 @tailwind components;
 
-.vignette {
-  background-image: radial-gradient(transparent 50%, black);
-}
+@layer utilities {
+  .vignette {
+    background-image: radial-gradient(transparent 50%, black);
+  }
 
-.lighten-edges {
-  background-image: linear-gradient(to right, white, transparent 25%, transparent 75%, white);
+  .lighten-edges {
+    background-image: linear-gradient(to right, white, transparent 25%, transparent 75%, white);
+  }
+
+  .text-shadow {
+    text-shadow: 1px 1px 1px black;
+  }
 }
 
 @tailwind utilities;

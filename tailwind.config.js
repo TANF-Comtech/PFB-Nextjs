@@ -45,6 +45,15 @@ module.exports = {
           '0 13px 27px -5px rgba(50,50,93,.25), 0 8px 16px -8px rgba(0,0,0,.3), 0 -6px 16px -6px rgba(0,0,0,.025)',
         button: '0 4px 6px rgba(50,50,93,.11), 0 1px 3px rgba(0,0,0,.08)',
       },
+      height: {
+        panel: 'calc(100vh - 9rem)',
+      },
+      maxHeight: {
+        panel: 'calc(100vh - 9rem)',
+      },
+      minHeight: {
+        panel: 'calc(100vh - 9rem)',
+      },
       zIndex: {
         '-10': '-10',
         '60': '60',

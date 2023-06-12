@@ -1,12 +1,6 @@
 import * as React from 'react';
 
-export const ActionCard = ({
-  number,
-  total,
-  title,
-  description = `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ea, nesciunt eum quidem ullam facilis nobis asperiores laborum, enim accusantium officia similique doloribus.`,
-  image,
-}) => {
+export const ActionCard = ({ number, total, title, description, image }) => {
   return (
     <li className="group block snap-center list-none">
       <div className="relative flex aspect-[3/4] w-[20rem] items-center justify-center overflow-hidden">

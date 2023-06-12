@@ -14,7 +14,7 @@ type ModalProps = {
 export const Modal = ({ className = '', dark = false, show, onClose, children }: ModalProps) => {
   return (
     <Transition appear show={show} as={Fragment}>
-      <Dialog as="div" className="relative z-[1030]" onClose={onClose}>
+      <Dialog as="div" className="relative z-[1040]" onClose={onClose}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
