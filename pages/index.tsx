@@ -14,11 +14,11 @@ import { Carousel } from '~/components/new/carousel';
 import { Slider } from '~/components/new/slider';
 
 export default function NewHomePage({ page, preview }) {
-  const hpData = page.homepage_v3
+  const hpData = page.homepage_v3;
 
   return (
     <Page title="Home" hasHero>
-      <Hero data={ hpData.hero } />
+      <Hero data={hpData.hero} />
       <Vision />
       <Pillars />
       <News />
@@ -27,11 +27,11 @@ export default function NewHomePage({ page, preview }) {
 }
 
 const Hero = ({ data }) => {
-  console.log(data)
+  console.log(data);
   return (
     <div className="relative z-60 mt-[3rem] flex h-[calc(100vh-3rem)] items-center justify-center overflow-hidden bg-[#000000]">
       <video
-        src="/new/PFB_Hero_v2.mp4"
+        src="/new/PFB_HP_Hero.mp4"
         className="absolute inset-0 z-0 h-full w-full object-cover opacity-75"
         playsInline
         autoPlay
@@ -39,8 +39,8 @@ const Hero = ({ data }) => {
         loop
       />
       <div className="vignette absolute inset-0 z-10 h-full w-full" />
-      
-      { data.length > 0 && (
+
+      {data.length > 0 && (
         <div className="absolute bottom-0 left-0 right-0 z-30 flex w-full justify-center p-16">
           <div className="relative mx-auto w-full max-w-screen-xl">
             <Carousel>
@@ -53,9 +53,11 @@ const Hero = ({ data }) => {
                     {campaign.hero_dek}
                   </div>
                   <div className="mt-4">
-                    <Button 
-                      label="Visit Site" 
-                      to={ campaign.hero_link.__typename === "_ExternalLink" && campaign.hero_link.url }
+                    <Button
+                      label="Visit Site"
+                      to={
+                        campaign.hero_link.__typename === '_ExternalLink' && campaign.hero_link.url
+                      }
                     />
                   </div>
                 </div>

@@ -10,19 +10,18 @@ import { Popover } from '@headlessui/react';
 import { IntersectionOptions, useInView } from 'react-intersection-observer';
 import useScrollPosition from '@react-hook/window-scroll';
 
-import { loginModalAtom } from '~/atoms';
+import { searchModalAtom, loginModalAtom } from '~/atoms';
 import { Button } from '~/components/new/button';
 import { ExternalLink } from '~/components/new/external-link';
 import { Login } from '~/components/login';
 import useOnClickOutside from '~/hooks/useOnClickOutside';
 import { loggedInAtom, useLogout } from '~/lib/auth';
+import { Search } from '~/components/new/search';
 
 type Section = 'infrastructure' | 'policy' | 'participation' | 'about' | 'donate' | null;
 
 const activeTabAtom = atom<Section>(null);
 const activeSectionAtom = atom<Section>(null);
-const searchOpenAtom = atom<boolean>(false);
-const searchQueryAtom = atom<string>('');
 const siteMapInViewAtom = atom<boolean>(false);
 
 type PageProps = MetaProps & {
@@ -196,7 +195,7 @@ const Header = ({ hasHero }) => {
         <div className="mx-auto flex h-24 max-w-screen-xl items-center justify-between">
           <Logo />
           <Navigation />
-          <Search />
+          <SearchButton />
         </div>
       </div>
     </div>
@@ -233,8 +232,7 @@ const Logo = ({ className = '', invert, showWordMark = false, ...rest }: LogoPro
 };
 
 const Navigation = () => {
-  const isSearchOpen = useAtomValue(searchOpenAtom);
-  const [searchQuery, setSearchQuery] = useAtom(searchQueryAtom);
+  const isSearchOpen = useAtomValue(searchModalAtom);
   const [activeTab, setActiveTab] = useAtom(activeTabAtom);
 
   return (
@@ -263,23 +261,13 @@ const Navigation = () => {
           </li>
         ))}
       </ul>
-      {isSearchOpen && (
-        <div className="absolute inset-0 z-60 flex h-full w-full min-w-full flex-shrink-0 items-center justify-center rounded-lg bg-lightestGray px-4">
-          <input
-            type="search"
-            value={searchQuery}
-            onChange={(event) => setSearchQuery(event.currentTarget.value)}
-            className="flex h-full w-full border-none bg-transparent py-2 text-xl font-bold text-black focus:ring-0"
-            placeholder="Search here..."
-          />
-        </div>
-      )}
+      {isSearchOpen && <Search />}
     </nav>
   );
 };
 
-const Search = () => {
-  const [isSearchOpen, setIsSearchOpen] = useAtom(searchOpenAtom);
+const SearchButton = () => {
+  const [isSearchOpen, setIsSearchOpen] = useAtom(searchModalAtom);
   const setActiveTab = useSetAtom(activeTabAtom);
 
   return (
@@ -287,9 +275,12 @@ const Search = () => {
       <button
         onClick={() => {
           setActiveTab(null);
-          setIsSearchOpen(!isSearchOpen);
+          setIsSearchOpen(true);
         }}
-        className="inline-flex w-6 cursor-pointer items-center justify-center gap-3"
+        className={cx(
+          'inline-flex w-6 cursor-pointer items-center justify-center gap-3',
+          isSearchOpen && 'pointer-events-none',
+        )}
       >
         <span className="font-bold uppercase">Search</span>
         <div className="-mb-1 w-5 flex-shrink-0">
@@ -529,7 +520,7 @@ const DynamicLink = ({ href, children, ...rest }) => {
   }
 
   return (
-    <Link href={href}>
+    <Link href={`/${href}`}>
       <a {...rest}>{children}</a>
     </Link>
   );

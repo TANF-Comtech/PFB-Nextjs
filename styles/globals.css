@@ -98,6 +98,38 @@ input[search] {
   height: 35px;
 }
 
+.ais-RefinementList-list {
+  @apply mt-1 space-y-2;
+}
+
+.ais-RefinementList-label {
+  @apply flex items-center gap-1;
+}
+
+.ais-RefinementList-checkbox {
+  @apply rounded;
+}
+
+.ais-RefinementList-labelText {
+  @apply text-sm leading-none;
+}
+
+.ais-RefinementList-count {
+  @apply ml-auto text-xs;
+}
+
+.ais-RefinementList-count:before {
+  content: '(';
+}
+
+.ais-RefinementList-count:after {
+  content: ')';
+}
+
+.ais-RefinementList-showMore {
+  @apply mt-1 text-xs font-bold uppercase text-gray;
+}
+
 @tailwind components;
 
 @layer utilities {
