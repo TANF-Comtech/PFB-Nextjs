@@ -5,16 +5,20 @@ import { atom, useAtomValue, useSetAtom } from 'jotai';
 import { useInView } from 'react-intersection-observer';
 import type { IntersectionOptions } from 'react-intersection-observer';
 
+import { getHomepageV3 } from '~/lib/queries/homepage-v3';
+
 import { Button } from '~/components/new/button';
 import { Page } from '~/components/new/page';
 import { ActionCard } from '~/components/new/card';
 import { Carousel } from '~/components/new/carousel';
 import { Slider } from '~/components/new/slider';
 
-export default function NewHomePage() {
+export default function NewHomePage({ page, preview }) {
+  const hpData = page.homepage_v3
+
   return (
     <Page title="Home" hasHero>
-      <Hero />
+      <Hero data={ hpData.hero } />
       <Vision />
       <Pillars />
       <News />
@@ -22,7 +26,8 @@ export default function NewHomePage() {
   );
 }
 
-const Hero = () => {
+const Hero = ({ data }) => {
+  console.log(data)
   return (
     <div className="relative z-60 mt-[3rem] flex h-[calc(100vh-3rem)] items-center justify-center overflow-hidden bg-[#000000]">
       <video
@@ -34,27 +39,24 @@ const Hero = () => {
         loop
       />
       <div className="vignette absolute inset-0 z-10 h-full w-full" />
-      {HERO_CAMPAIGNS.length === 0 && (
-        <div className="relative z-20 flex flex-col">
-          <h2 className="font-dharma text-9xl font-bold leading-none text-white">
-            {HERO_HEADLINE}
-          </h2>
-        </div>
-      )}
-      {HERO_CAMPAIGNS.length > 0 && (
+      
+      { data.length > 0 && (
         <div className="absolute bottom-0 left-0 right-0 z-30 flex w-full justify-center p-16">
           <div className="relative mx-auto w-full max-w-screen-xl">
             <Carousel>
-              {HERO_CAMPAIGNS.map((campaign) => (
-                <div key={campaign.title} className="flex w-full flex-col px-24">
+              {data.map((campaign) => (
+                <div key={campaign.hero_title} className="flex w-full flex-col px-24">
                   <div className="font-dharma text-9xl font-bold leading-none text-white">
-                    {campaign.title}
+                    {campaign.hero_title}
                   </div>
                   <div className="text-shadow max-w-3xl text-xl text-white">
-                    {campaign.description}
+                    {campaign.hero_dek}
                   </div>
                   <div className="mt-4">
-                    <Button label={campaign.ctaLabel} />
+                    <Button 
+                      label="Visit Site" 
+                      to={ campaign.hero_link.__typename === "_ExternalLink" && campaign.hero_link.url }
+                    />
                   </div>
                 </div>
               ))}
@@ -239,38 +241,12 @@ const NewsCard = () => {
   );
 };
 
-const HERO_HEADLINE: string = `Every rider. Every ride.`;
-
 type Campaign = {
   title: string;
   description: string;
   ctaLabel: string;
   ctaLink: string;
 };
-
-const HERO_CAMPAIGNS: Array<Campaign> = [
-  {
-    title: 'Hungry for Batteries',
-    description:
-      'Don’t trash your electric bicycle battery! The bike industry came together as the first transportation industry to establish a united battery recycling solution to remove e-bike batteries from our waste streams. The new program, powered by Call2Recycle and endorsed by PeopleForBikes, has already recycled more than 36,000 pounds of batteries.',
-    ctaLabel: 'Visit site',
-    ctaLink: 'http://hungryforbatteries.org/',
-  },
-  {
-    title: 'Ride Spot',
-    description:
-      'Earn rewards just for riding your bike. Ride Spot is PeopleForBikes’ ride tracking and sharing platform to get more people biking more often. Join Challenges and discover joy on your bike today with Ride Spot.',
-    ctaLabel: 'Visit site',
-    ctaLink: 'http://ridespot.org/',
-  },
-  {
-    title: 'City Ratings',
-    description:
-      'Every year, PeopleForBikes rates more than 1,200 cities across the U.S. and internationally on the quality of their bike networks. On a scale of 0-100, we track cities’ scores and their progress over time. Find out how your city scores today.',
-    ctaLabel: 'Visit site',
-    ctaLink: 'http://cityratings.peopleforbikes.org/',
-  },
-];
 
 const VISION_HEADLINE: string = `Making the U.S. the Best Place to Ride a Bike`;
 
@@ -443,3 +419,21 @@ const PILLARS: Array<Pillar> = [
 const IN_VIEW_OPTIONS: IntersectionOptions = {
   threshold: 0.25,
 };
+
+export async function getStaticProps({ params, preview = false, previewData }) {
+  const pageData = await getHomepageV3();
+
+  if (!pageData) {
+    return {
+      notFound: true,
+    };
+  }
+
+  return {
+    props: {
+      preview,
+      page: pageData ?? null,
+    },
+    revalidate: 60,
+  };
+}
