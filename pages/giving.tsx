@@ -26,14 +26,14 @@ export default function DonatePage() {
 
 const Hero = () => {
   return (
-    <div className="relative z-60 mt-[3rem] flex h-[calc(100vh-3rem)] items-center justify-center overflow-hidden bg-[#000000]">
+    <div className="l:p-16 relative z-60 mt-[3rem] flex h-[calc(100vh-3rem)] items-center justify-center overflow-hidden bg-[#000000] p-8 sm:p-12">
       <img
         src="/new/0_Giving_Hero.jpg"
         className="absolute inset-0 h-full w-full object-cover opacity-50"
         alt=""
         aria-hidden
       />
-      <div className="relative z-10 max-w-5xl text-center font-dharma text-9xl font-bold text-pure-white">
+      <div className="relative z-10 max-w-5xl text-center font-dharma text-5xl font-bold text-pure-white sm:text-7xl xl:text-9xl">
         {HERO_HEADLINE}
       </div>
     </div>
@@ -42,8 +42,8 @@ const Hero = () => {
 
 const Giving = () => {
   return (
-    <div className="relative z-60 bg-darkest-blue p-24 text-white">
-      <div className="mx-auto flex max-w-6xl flex-col gap-6 text-3xl leading-normal">
+    <div className="relative z-60 bg-darkest-blue p-8 text-white sm:p-12 xl:p-24">
+      <div className="mx-auto flex max-w-6xl flex-col gap-6 text-base leading-normal sm:text-xl xl:text-3xl">
         <div className="font-bold leading-normal">{GIVING_HEADLINE}</div>
         <div className="leading-normal">{GIVING_BODY}</div>
       </div>
@@ -53,17 +53,17 @@ const Giving = () => {
 
 const Banner = () => {
   return (
-    <div className="relative z-60 flex justify-center gap-4 bg-blueAccent px-24 py-16 text-white">
+    <div className="relative z-60 flex items-center justify-center gap-4 bg-blueAccent p-8 text-white sm:p-12 xl:px-24 xl:py-16">
       <Button variant="gold" label={BANNER_LABEL} />
-      <span className="font-dharma text-5xl">{BANNER_CAPTION}</span>
+      <span className="hidden font-dharma sm:inline sm:text-4xl xl:text-5xl">{BANNER_CAPTION}</span>
     </div>
   );
 };
 
 const Impact = () => {
   return (
-    <div className="relative z-60 bg-white p-24">
-      <div className="mx-auto max-w-6xl space-y-24">
+    <div className="relative z-60 bg-white p-8 sm:p-12 xl:p-24">
+      <div className="mx-auto max-w-6xl space-y-8 sm:space-y-12 xl:space-y-24">
         <div className="text-center text-3xl">
           <span className="font-bold">Your Impact</span> at People for Bikes
         </div>
@@ -89,16 +89,18 @@ const Impact = () => {
 
 const Support = () => {
   return (
-    <div className="bg-darkest-blue p-24 text-white">
+    <div className="bg-darkest-blue p-8 text-white sm:p-12 xl:p-24">
       <div className="mx-auto flex max-w-6xl flex-col gap-6">
-        <div className="font-dharma text-6xl font-bold">{SUPPORT_HEADLINE}</div>
-        <div className="text-3xl leading-normal">{SUPPORT_BODY}</div>
+        <div className="text-center font-dharma text-3xl font-bold sm:text-4xl xl:text-left xl:text-6xl">
+          {SUPPORT_HEADLINE}
+        </div>
+        <div className="text-base leading-normal sm:text-xl xl:text-3xl">{SUPPORT_BODY}</div>
         <div className="mt-4 flex flex-col gap-8 divide-lightGray">
           {SUPPORT.map(({ label, contents }, index) => (
             <Disclosure key={index} label={label} contents={contents} />
           ))}
         </div>
-        <div className="text-xl font-bold leading-normal">{SUPPORT_DETAILS}</div>
+        <div className="text-base font-bold leading-normal sm:text-xl">{SUPPORT_DETAILS}</div>
       </div>
     </div>
   );
@@ -124,17 +126,19 @@ type QuoteProps = {
 
 const Quote = ({ quote }: QuoteProps) => {
   return (
-    <div className="aspect-video w-full p-24">
+    <div className="w-full p-8 sm:p-12 xl:aspect-video xl:p-24">
       <div className="flex h-full flex-col items-center justify-center gap-3">
         <div className="relative top-[5rem] font-dharma text-[20rem] leading-[0] text-blue">
           &ldquo;
         </div>
-        <div className="text-center font-dharma text-6xl">{quote.body}</div>
-        <div className="flex items-center gap-4 rounded-lg bg-blue px-4 py-2 text-white">
-          <div className="text-lg font-bold">{quote.author}</div>
-          <div className="text-lg font-bold uppercase text-yellow">{quote.donorType}</div>
+        <div className="text-center font-dharma text-3xl sm:text-4xl xl:text-6xl">{quote.body}</div>
+        <div className="flex flex-col items-center gap-2 rounded-lg bg-blue px-4 py-2 text-white sm:flex-row sm:gap-4">
+          <div className="text-base font-bold xl:text-lg">{quote.author}</div>
+          <div className="text-base font-bold uppercase text-yellow xl:text-lg">
+            {quote.donorType}
+          </div>
         </div>
-        <div className="relative -bottom-[8rem] font-dharma text-[20rem] leading-[0] text-blue">
+        <div className="relative -bottom-[8rem] hidden font-dharma text-[20rem] leading-[0] text-blue xl:block">
           &rdquo;
         </div>
       </div>
@@ -144,10 +148,12 @@ const Quote = ({ quote }: QuoteProps) => {
 
 const Methods = () => {
   return (
-    <div className="bg-darkest-blue p-24 text-white">
+    <div className="bg-darkest-blue p-8 text-white sm:p-12 xl:p-24">
       <div className="mx-auto flex max-w-6xl flex-col gap-6">
-        <div className="font-dharma text-6xl font-bold">{METHODS_HEADLINE}</div>
-        <div className="text-3xl leading-normal">{METHODS_BODY}</div>
+        <div className="text-center font-dharma text-3xl font-bold sm:text-4xl xl:text-left xl:text-6xl">
+          {METHODS_HEADLINE}
+        </div>
+        <div className="text-base leading-normal sm:text-xl xl:text-3xl">{METHODS_BODY}</div>
         <div className="mt-4 flex flex-col gap-8 divide-lightGray">
           {METHODS.map(({ label, contents }, index) => (
             <Disclosure key={index} label={label} contents={contents} />
@@ -160,10 +166,14 @@ const Methods = () => {
 
 const Maximize = () => {
   return (
-    <div className="bg-white p-24">
-      <div className="mx-auto flex flex-col items-center justify-center gap-24">
-        <div className="text-center font-dharma text-8xl font-bold">{MAXIMIZE_HEADLINE}</div>
-        <div className="max-w-6xl text-center text-3xl">{MAXIMIZE_BODY}</div>
+    <div className="bg-white p-8 sm:p-12 xl:p-24">
+      <div className="mx-auto flex flex-col items-center justify-center gap-8 sm:gap-12 xl:gap-24">
+        <div className="text-center font-dharma text-3xl font-bold sm:text-4xl xl:text-8xl">
+          {MAXIMIZE_HEADLINE}
+        </div>
+        <div className="max-w-6xl text-base sm:text-xl xl:text-center xl:text-3xl">
+          {MAXIMIZE_BODY}
+        </div>
         <div className="relative mx-auto w-full max-w-6xl">
           <Slider className="py-8">
             {MAXIMIZERS.map((item, index: number) => (

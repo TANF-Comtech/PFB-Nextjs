@@ -13,6 +13,8 @@ import { ActionCard } from '~/components/new/card';
 import { Carousel } from '~/components/new/carousel';
 import { Slider } from '~/components/new/slider';
 
+const isProduction = process.env.NODE_ENV === 'production';
+
 export default function NewHomePage({ page, preview }) {
   const hpData = page.homepage_v3;
 
@@ -27,29 +29,27 @@ export default function NewHomePage({ page, preview }) {
 }
 
 const Hero = ({ data }) => {
-  console.log(data);
   return (
     <div className="relative z-60 mt-[3rem] flex h-[calc(100vh-3rem)] items-center justify-center overflow-hidden bg-[#000000]">
       <video
         src="/new/PFB_HP_Hero.mp4"
         className="absolute inset-0 z-0 h-full w-full object-cover opacity-75"
         playsInline
-        autoPlay
+        autoPlay={isProduction}
         muted
         loop
       />
       <div className="vignette absolute inset-0 z-10 h-full w-full" />
-
       {data.length > 0 && (
-        <div className="absolute bottom-0 left-0 right-0 z-30 flex w-full justify-center p-16">
+        <div className="absolute bottom-0 left-0 right-0 z-30 flex w-full justify-center pb-8 sm:px-4 xl:p-16">
           <div className="relative mx-auto w-full max-w-screen-xl">
             <Carousel>
               {data.map((campaign) => (
-                <div key={campaign.hero_title} className="flex w-full flex-col px-24">
-                  <div className="font-dharma text-9xl font-bold leading-none text-white">
+                <div key={campaign.hero_title} className="flex w-full flex-col px-16 sm:px-24">
+                  <div className="font-dharma text-5xl font-bold leading-none text-white sm:text-7xl xl:text-9xl">
                     {campaign.hero_title}
                   </div>
-                  <div className="text-shadow max-w-3xl text-xl text-white">
+                  <div className="text-shadow max-w-3xl text-base text-white sm:text-lg xl:text-xl">
                     {campaign.hero_dek}
                   </div>
                   <div className="mt-4">
@@ -72,7 +72,7 @@ const Hero = ({ data }) => {
 
 const Vision = () => {
   return (
-    <div className="relative flex h-panel items-center justify-center overflow-hidden bg-gray">
+    <div className="relative flex h-panel items-center justify-center overflow-hidden bg-gray p-8 sm:p-12 xl:p-16">
       <div className="absolute inset-0 h-full w-full bg-pure-black">
         <img
           src="/new/Stocksy_comp_watermarked_1310758.jpg"
@@ -82,11 +82,11 @@ const Vision = () => {
         />
         <div className="vignette absolute inset-0 z-10 h-full w-full" />
       </div>
-      <div className="relative z-20 -mt-8 flex flex-col items-center justify-center gap-4">
-        <div className="max-w-5xl text-center font-dharma text-9xl font-bold text-white">
+      <div className="relative z-20 flex flex-col items-center justify-center gap-4 xl:-mt-8">
+        <div className="max-w-5xl text-center font-dharma text-5xl font-bold text-white sm:text-7xl xl:text-9xl">
           {VISION_HEADLINE}
         </div>
-        <div className="text-shadow mt-8 max-w-5xl text-center text-xl text-white">
+        <div className="text-shadow mt-8 max-w-5xl text-center text-base text-white sm:text-lg xl:text-xl">
           {VISION_BODY}
         </div>
       </div>
@@ -103,14 +103,14 @@ const Pillars = () => {
 
   return (
     <div>
-      <div className="flex">
-        <div className="relative z-10 w-1/4 flex-shrink-0 bg-darkest-blue px-16">
-          <div className="sticky top-[9rem]  py-16 text-center">
+      <div className="xl:flex">
+        <div className="relative z-10 flex-shrink-0 bg-darkest-blue px-4 sm:px-8 xl:w-1/4 xl:px-16">
+          <div className="sticky top-[9rem] py-16 text-center">
             <h3 className="font-dharma text-5xl font-bold uppercase leading-none text-white">
               {PILLARS_HEADLINE}
             </h3>
             <div className="mt-4 text-center text-lightestGray">{PILLARS_BODY}</div>
-            <div className="mt-8 flex flex-col items-center justify-center">
+            <div className="mt-8 hidden flex-col items-center justify-center xl:flex">
               <div className="relative flex aspect-square h-24 w-24 rounded-full bg-blue">
                 <img
                   src={ACTIVE_PILLAR.image}
@@ -125,7 +125,7 @@ const Pillars = () => {
                 {ACTIVE_PILLAR.description}
               </div>
             </div>
-            <div className="mt-8 flex w-full items-center justify-center gap-1">
+            <div className="mt-8 hidden w-full items-center justify-center gap-1 xl:flex">
               <div
                 className={cx(
                   'flex aspect-square h-6 w-6 items-center justify-center rounded-full',
@@ -147,7 +147,7 @@ const Pillars = () => {
             </div>
           </div>
         </div>
-        <div className="relative z-0 flex w-3/4 flex-col">
+        <div className="relative z-0 flex flex-col xl:w-3/4">
           {PILLARS.map((pillar: Pillar, index: number) => (
             <Pillar key={pillar.key} pillar={pillar} alternate={index % 2 !== 0} />
           ))}
@@ -173,8 +173,11 @@ const Pillar = ({ pillar, alternate }: PillarProps) => {
   }, [inView]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <div ref={ref} className={cx('relative min-h-panel p-16', alternate && 'bg-cardGray')}>
-      <div className="font-dharma text-5xl font-bold uppercase leading-none text-gray">
+    <div
+      ref={ref}
+      className={cx('relative p-8 sm:p-12 xl:min-h-panel xl:p-16', alternate && 'bg-cardGray')}
+    >
+      <div className="text-center font-dharma text-5xl font-bold uppercase leading-none text-gray xl:text-left">
         {pillar.title}
       </div>
       <div className="pb-16">
@@ -208,10 +211,12 @@ const Pillar = ({ pillar, alternate }: PillarProps) => {
 
 const News = () => {
   return (
-    <div className="flex h-panel snap-start items-center justify-center bg-lightestGray/50">
+    <div className="flex items-center justify-center bg-lightestGray/50 p-8 sm:p-12 xl:h-panel xl:p-16">
       <div className="mx-auto flex max-w-screen-lg flex-col gap-16">
-        <div className="text-center text-4xl font-bold uppercase leading-none">News</div>
-        <div className="grid grid-cols-4 gap-8">
+        <div className="text-center text-3xl font-bold uppercase leading-none sm:text-4xl">
+          News
+        </div>
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 xl:grid-cols-4">
           <NewsCard />
           <NewsCard />
           <NewsCard />
@@ -252,7 +257,7 @@ type Campaign = {
 
 const VISION_HEADLINE: string = `Making the U.S. the Best Place to Ride a Bike`;
 
-const VISION_BODY: string = `PeopleForBikes is making biking bettery for everyone by uniting millions of Americans, thousands of businesses, and hundreds of communities to make every bike ride safer, more accessible, and more fun. The PeopleForBikes Coalition has more than 325 supplier members and 1.4 million supporters in its grassroots network. When people ride bikes, great things happen.`;
+const VISION_BODY: string = `PeopleForBikes is making biking better for everyone by uniting millions of Americans, thousands of businesses, and hundreds of communities to make every bike ride safer, more accessible, and more fun. The PeopleForBikes Coalition has more than 325 supplier members and 1.4 million supporters in its grassroots network. When people ride bikes, great things happen.`;
 
 const PILLARS_HEADLINE: string = `Our 3 pillars`;
 

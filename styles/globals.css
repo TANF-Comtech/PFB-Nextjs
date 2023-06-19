@@ -111,11 +111,11 @@ input[search] {
 }
 
 .ais-RefinementList-labelText {
-  @apply text-sm leading-none;
+  @apply text-sm leading-none text-black;
 }
 
 .ais-RefinementList-count {
-  @apply ml-auto text-xs;
+  @apply ml-auto text-xs text-black;
 }
 
 .ais-RefinementList-count:before {

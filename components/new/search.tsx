@@ -2,16 +2,17 @@ import * as React from 'react';
 import { useCallback, useRef } from 'react';
 import Link from 'next/link';
 import { useAtom, useSetAtom } from 'jotai';
-import { Hits, InstantSearch, useInstantSearch, useSearchBox } from 'react-instantsearch-hooks-web';
+import { Hits, InstantSearch, useSearchBox } from 'react-instantsearch-hooks-web';
 import { RefinementList } from 'react-instantsearch-hooks-web';
 
-import { searchModalAtom, searchQueryAtom } from '~/atoms';
+import { searchAtom, queryAtom, mobileSearchAtom } from '~/atoms';
+import { Button } from '~/components/new/button';
 import { AlgoliaReactClient } from '~/lib/algolia/algoliaClient';
 import useOnClickOutside from '~/hooks/useOnClickOutside';
 
 export const Search = () => {
   const ref = useRef(null);
-  const setIsSearchOpen = useSetAtom(searchModalAtom);
+  const setIsSearchOpen = useSetAtom(searchAtom);
 
   useOnClickOutside(ref, () => {
     setIsSearchOpen(false);
@@ -19,7 +20,7 @@ export const Search = () => {
 
   return (
     <InstantSearch searchClient={AlgoliaReactClient} indexName="MAINSITE">
-      <div ref={ref}>
+      <div ref={ref} className="hidden xl:block">
         <div className="absolute inset-0 z-60 h-full w-full min-w-full flex-shrink-0">
           <CustomSearchBox />
         </div>
@@ -32,8 +33,31 @@ export const Search = () => {
   );
 };
 
+export const MobileSearch = () => {
+  const [isSearchOpen, setIsSearchOpen] = useAtom(mobileSearchAtom);
+
+  if (!isSearchOpen) return null;
+
+  return (
+    <InstantSearch searchClient={AlgoliaReactClient} indexName="MAINSITE">
+      <div className="fixed inset-0 z-[2001] flex flex-col gap-4 p-4 sm:gap-8 sm:p-8 xl:hidden">
+        <div>
+          <CustomSearchBox />
+        </div>
+        <div>
+          <CustomResults />
+        </div>
+        <div className="flex justify-center">
+          <Button label="Close" onClick={() => setIsSearchOpen(false)} variant="red" />
+        </div>
+      </div>
+      <CustomBackdrop />
+    </InstantSearch>
+  );
+};
+
 const CustomSearchBox = (props: any) => {
-  const [searchQuery, setSearchQuery] = useAtom(searchQueryAtom);
+  const [searchQuery, setSearchQuery] = useAtom(queryAtom);
 
   const { refine } = useSearchBox(props);
 
@@ -47,12 +71,12 @@ const CustomSearchBox = (props: any) => {
   );
 
   return (
-    <div className="h-full rounded-lg bg-white px-4">
+    <div className="h-full rounded-lg bg-white px-2 sm:px-4">
       <input
         type="search"
         value={searchQuery}
         onChange={onChange}
-        className="h-full w-full border-none bg-transparent py-2 text-xl font-bold text-black focus:ring-0"
+        className="h-full w-full border-none bg-transparent py-2 text-base font-bold text-black focus:ring-0 xl:text-xl"
         placeholder="What are you looking for?"
       />
     </div>
@@ -61,18 +85,18 @@ const CustomSearchBox = (props: any) => {
 
 const CustomResults = () => {
   return (
-    <div className="flex aspect-video w-full flex-shrink-0 overflow-y-scroll rounded-lg bg-lightestGray">
-      <div className="w-1/4 space-y-4 p-4 pr-2">
+    <div className="flex aspect-square w-full flex-shrink-0 overflow-y-scroll rounded-lg bg-lightestGray xl:aspect-video">
+      <div className="hidden w-1/4 space-y-4 p-4 pr-2 xl:block">
         <div>
-          <div className="text-sm font-bold uppercase">Topics</div>
+          <div className="text-sm font-bold uppercase text-black">Topics</div>
           <RefinementList attribute="topics" limit={5} showMore={true} />
         </div>
         <div>
-          <div className="text-sm font-bold uppercase">Locations</div>
+          <div className="text-sm font-bold uppercase text-black">Locations</div>
           <RefinementList attribute="locations" limit={5} showMore={true} />
         </div>
       </div>
-      <div className="w-3/4 p-4 pl-2">
+      <div className="py-4 sm:p-4 xl:w-3/4 xl:pl-2">
         <Hits hitComponent={CustomResult} />
       </div>
     </div>
@@ -86,7 +110,7 @@ const CustomResult = ({ hit }) => {
     <Link href={`/${href}`}>
       <a className="-mt-4 mb-4 block rounded-lg p-4 text-black transition duration-300 hover:bg-white">
         <div className="text-sm font-bold uppercase text-redAccent">{hit.type}</div>
-        <div className="line-clamp-1 font-dharma text-4xl font-medium">{hit.title}</div>
+        <div className="line-clamp-1 font-dharma text-3xl font-medium sm:text-4xl">{hit.title}</div>
         <div className="line-clamp-3 text-sm leading-snug text-black/80">{hit.content}</div>
       </a>
     </Link>
@@ -94,5 +118,7 @@ const CustomResult = ({ hit }) => {
 };
 
 const CustomBackdrop = () => {
-  return <div className="pointer-events-none fixed inset-0 z-50 h-full w-full bg-black/50" />;
+  return (
+    <div className="pointer-events-none fixed inset-0 z-[2000] h-full w-full bg-black/90 xl:z-50 xl:bg-black/50" />
+  );
 };

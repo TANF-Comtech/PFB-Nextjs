@@ -2,7 +2,7 @@ import * as React from 'react';
 
 export const ActionCard = ({ number, total, title, description, image }) => {
   return (
-    <li className="group block snap-center list-none">
+    <li className="group block list-none">
       <div className="relative flex aspect-[3/4] w-[20rem] items-center justify-center overflow-hidden">
         <img
           src={`/new/${image}`}

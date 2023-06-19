@@ -10,13 +10,13 @@ import { Popover } from '@headlessui/react';
 import { IntersectionOptions, useInView } from 'react-intersection-observer';
 import useScrollPosition from '@react-hook/window-scroll';
 
-import { searchModalAtom, loginModalAtom } from '~/atoms';
+import { searchAtom, loginModalAtom, mobileMenuAtom, mobileSearchAtom } from '~/atoms';
 import { Button } from '~/components/new/button';
 import { ExternalLink } from '~/components/new/external-link';
 import { Login } from '~/components/login';
 import useOnClickOutside from '~/hooks/useOnClickOutside';
 import { loggedInAtom, useLogout } from '~/lib/auth';
-import { Search } from '~/components/new/search';
+import { Search, MobileSearch } from '~/components/new/search';
 
 type Section = 'infrastructure' | 'policy' | 'participation' | 'about' | 'donate' | null;
 
@@ -59,6 +59,8 @@ export const Page = ({
       {showDonate && <DonationBanner />}
       {showFooter && <Footer />}
       <Login />
+      <MobileMenu />
+      <MobileSearch />
       <Script src="https://kit.fontawesome.com/3f0052fea3.js" crossOrigin="anonymous" />
     </>
   );
@@ -124,6 +126,7 @@ const Fixed = ({ children }: FixedProps) => {
 
 const Banner = () => {
   const isLoggedIn = useAtomValue(loggedInAtom);
+  const [isSearchOpen, setIsSearchOpen] = useAtom(mobileSearchAtom);
   const setIsLoginModalOpen = useSetAtom(loginModalAtom);
   const logout = useLogout();
 
@@ -132,7 +135,10 @@ const Banner = () => {
       <div className="mx-auto flex h-full max-w-screen-xl items-center justify-between text-sm font-bold uppercase leading-none">
         <div className="inline-flex items-center gap-2">
           <Popover className="relative uppercase">
-            <Popover.Button className="uppercase">Explore our network of sites</Popover.Button>
+            <Popover.Button className="uppercase">
+              <span className="sm:hidden">Network of sites</span>
+              <span className="hidden sm:inline">Explore our network of sites</span>
+            </Popover.Button>
             <Popover.Panel className="min-full absolute -left-4 z-50 mt-4 w-[320px] bg-darkest-blue p-4">
               <div className="flex flex-col gap-4">
                 {NETWORK.map((item) => (
@@ -144,8 +150,34 @@ const Banner = () => {
             </Popover.Panel>
           </Popover>
         </div>
-        <div className="inline-flex items-center gap-3">
-          <Link href="/members">Corporate member center</Link>
+        <div className="flex-shrink-0 xl:hidden">
+          <button
+            onClick={() => {
+              setIsSearchOpen(!isSearchOpen);
+            }}
+            className={cx(
+              'inline-flex cursor-pointer items-center justify-center gap-3',
+              isSearchOpen && 'pointer-events-none',
+            )}
+          >
+            <span className="font-bold uppercase">Search</span>
+            <div className="-mb-1 w-5 flex-shrink-0">
+              <i
+                className={cx(
+                  'fa-solid   text-xl',
+                  isSearchOpen ? 'fa-close' : 'fa-magnifying-glass',
+                )}
+              />
+            </div>
+          </button>
+        </div>
+        <div className="hidden items-center gap-3 xl:inline-flex">
+          <Link href="/members">
+            <a>
+              <span className="sm:hidden">Members</span>
+              <span className="hidden sm:inline">Corporate member center</span>
+            </a>
+          </Link>
           <span className="rounded-lg bg-gold p-2 text-black">
             {!isLoggedIn ? (
               <button onClick={() => setIsLoginModalOpen(true)}>
@@ -186,7 +218,7 @@ const Header = ({ hasHero }) => {
         className={cx(
           !hasHero || hasScrolled || activeTab !== null
             ? 'bg-white text-black shadow-xl'
-            : 'bg-transparent text-white group-hover:bg-white group-hover:text-black group-hover:shadow-xl',
+            : 'bg-white text-black shadow-xl group-hover:bg-white group-hover:text-black xl:bg-transparent xl:text-white xl:shadow-none xl:group-hover:shadow-xl',
           'relative z-60 items-center px-4 transition duration-700',
           activeTab && '!shadow-none',
           isSiteMapInView ? 'opacity-0' : 'opacity-100',
@@ -195,6 +227,7 @@ const Header = ({ hasHero }) => {
         <div className="mx-auto flex h-24 max-w-screen-xl items-center justify-between">
           <Logo />
           <Navigation />
+          <MenuButton />
           <SearchButton />
         </div>
       </div>
@@ -209,17 +242,17 @@ type LogoProps = React.ComponentPropsWithoutRef<'div'> & {
 
 const Logo = ({ className = '', invert, showWordMark = false, ...rest }: LogoProps) => {
   return (
-    <h1 className={cx('w-1/4 flex-shrink-0', className)} {...rest}>
+    <h1 className={cx('flex-shrink-0 sm:w-1/2 xl:w-1/4', className)} {...rest}>
       <Link href="/">
-        <a className="flex items-center gap-3">
-          <div className="rounded bg-white p-px">
+        <a className="flex flex-shrink-0 items-center gap-3">
+          <div className="flex-shrink-0 rounded bg-white p-px">
             <img src="/new/pfb-logomark.png" className="block h-12 w-auto" alt="People for Bikes" />
           </div>
           <img
             src="/new/pfb-wordmark.png"
             className={cx(
-              showWordMark ? 'opacity-100' : 'opacity-0 group-hover:opacity-100',
-              'block h-12 w-auto transition duration-700',
+              showWordMark ? 'opacity-100' : 'opacity-100 xl:opacity-0 xl:group-hover:opacity-100',
+              'block h-12 w-auto flex-shrink-0 transition duration-700',
               invert && 'invert',
             )}
             alt="People for Bikes"
@@ -232,11 +265,11 @@ const Logo = ({ className = '', invert, showWordMark = false, ...rest }: LogoPro
 };
 
 const Navigation = () => {
-  const isSearchOpen = useAtomValue(searchModalAtom);
+  const isSearchOpen = useAtomValue(searchAtom);
   const [activeTab, setActiveTab] = useAtom(activeTabAtom);
 
   return (
-    <nav className="relative flex w-1/2 justify-center">
+    <nav className="relative hidden justify-center xl:flex xl:w-1/2">
       <ul className="flex justify-center gap-8 font-dharma text-4xl">
         {NAVIGATION.map((item: any) => (
           <li key={item.key}>
@@ -266,26 +299,49 @@ const Navigation = () => {
   );
 };
 
+const MenuButton = () => {
+  const [isMenuOpen, setIsMenuOpen] = useAtom(mobileMenuAtom);
+
+  return (
+    <div className="flex-shrink-0 xl:hidden">
+      <button
+        onClick={() => {
+          setIsMenuOpen(!isMenuOpen);
+        }}
+        className={cx(
+          'inline-flex cursor-pointer items-center justify-center gap-3',
+          isMenuOpen && 'pointer-events-none',
+        )}
+      >
+        <span className="font-bold uppercase">Menu</span>
+        <div className="-mb-1 w-5 flex-shrink-0">
+          <i className={cx('fa-solid text-xl', isMenuOpen ? 'fa-close' : 'fa-bars')} />
+        </div>
+      </button>
+    </div>
+  );
+};
+
 const SearchButton = () => {
-  const [isSearchOpen, setIsSearchOpen] = useAtom(searchModalAtom);
+  const [isSearchOpen, setIsSearchOpen] = useAtom(searchAtom);
   const setActiveTab = useSetAtom(activeTabAtom);
 
   return (
-    <div className="flex w-1/4 flex-shrink-0 items-center justify-end gap-2">
+    <div className="hidden w-1/4 flex-shrink-0 items-center justify-end gap-2 xl:flex">
       <button
         onClick={() => {
           setActiveTab(null);
           setIsSearchOpen(true);
         }}
         className={cx(
-          'inline-flex w-6 cursor-pointer items-center justify-center gap-3',
+          'inline-flex cursor-pointer items-center justify-center gap-3',
           isSearchOpen && 'pointer-events-none',
         )}
       >
         <span className="font-bold uppercase">Search</span>
         <div className="-mb-1 w-5 flex-shrink-0">
           <i
-            className={cx('fa-solid   text-xl', isSearchOpen ? 'fa-close' : 'fa-magnifying-glass')}
+            className={cx('fa-solid text-xl', isSearchOpen ? 'fa-close' : 'fa-magnifying-glass')}
           />
         </div>
       </button>
@@ -360,13 +416,120 @@ const MegaMenu = () => {
   );
 };
 
+const MobileMenu = () => {
+  const [isMenuOpen, setIsMenuOpen] = useAtom(mobileMenuAtom);
+  const [activeSection, setActiveSection] = useAtom(activeSectionAtom);
+  const isLoggedIn = useAtomValue(loggedInAtom);
+  const setIsLoginModalOpen = useSetAtom(loginModalAtom);
+  const logout = useLogout();
+
+  return (
+    <div
+      className={cx(
+        'fixed inset-0 z-[3001] h-full w-full bg-darkest-blue p-8 text-white transition duration-700 sm:!left-auto sm:w-[36rem] sm:p-24 xl:hidden',
+        !isMenuOpen ? 'translate-x-full opacity-0' : 'translate-x-0 opacity-100',
+      )}
+    >
+      <Link href="/">
+        <a onClick={() => setIsMenuOpen(false)} className="flex flex-shrink-0 items-center gap-3">
+          <div className="flex-shrink-0 rounded bg-white p-px">
+            <img src="/new/pfb-logomark.png" className="block h-12 w-auto" alt="People for Bikes" />
+          </div>
+          <img
+            src="/new/pfb-wordmark.png"
+            className="block h-12 w-auto flex-shrink-0 invert"
+            alt="People for Bikes"
+          />
+          <span className="sr-only">People for Bikes</span>
+        </a>
+      </Link>
+      <ul className="mt-6 flex flex-col gap-6 sm:mt-12 sm:gap-12">
+        {NAVIGATION.map((item: any) => (
+          <li key={item.key}>
+            <button
+              onClick={() => {
+                const nextActiveSection = activeSection === item.key ? null : item.key;
+                setActiveSection(nextActiveSection);
+              }}
+              className={cx(
+                'relative inline-flex items-center gap-3 whitespace-pre',
+                item.key === 'donate' && 'text-gold',
+              )}
+            >
+              <span className="font-dharma text-5xl">{item.title}</span>
+              <span>
+                <i
+                  className={cx(
+                    'fa-solid fa-plus text-base leading-none text-white',
+                    item.key === activeSection && 'rotate-45',
+                  )}
+                />
+              </span>
+            </button>
+            {activeSection === item.key && (
+              <ul className="mt-2 space-y-2 pb-4 pl-4">
+                {NAVIGATION.find((section) => section.key === item.key)?.featuredItems.map(
+                  (item) => (
+                    <li key={item.title}>
+                      <DynamicLink href={item.link} onClick={() => setIsMenuOpen(false)}>
+                        {item.title}
+                      </DynamicLink>
+                    </li>
+                  ),
+                )}
+                {NAVIGATION.find((section) => section.key === item.key)?.items.map((item) => (
+                  <li key={item.title}>
+                    <DynamicLink href={item.link} onClick={() => setIsMenuOpen(false)}>
+                      {item.title}
+                    </DynamicLink>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </li>
+        ))}
+        <div className="inline-flex flex-col gap-3">
+          <Link href="/members">
+            <a>
+              <span className="font-bold uppercase">Corporate member center</span>
+            </a>
+          </Link>
+          <div>
+            <span className="rounded-lg bg-gold p-2 font-bold text-black">
+              {!isLoggedIn ? (
+                <button onClick={() => setIsLoginModalOpen(true)}>
+                  <span className="uppercase">Login</span>
+                </button>
+              ) : (
+                <span
+                  onClick={() => {
+                    logout();
+                  }}
+                  className="uppercase"
+                >
+                  Logout
+                </span>
+              )}
+            </span>
+          </div>
+        </div>
+      </ul>
+      <button onClick={() => setIsMenuOpen(false)} className="absolute right-0 top-0">
+        <i className="fa-solid fa-close p-6 text-xl" />
+      </button>
+    </div>
+  );
+};
+
 const DonationBanner = () => {
   return (
     <div className="pointer-events-none fixed bottom-0 left-0 right-0 z-50 flex justify-center p-4">
       <Link href="/giving">
         <a className="pointer-events-auto flex items-center justify-between gap-4 rounded-lg border border-solid border-white/50 bg-darkest-blue p-4 text-white shadow-2xl">
           <Button variant="gold" label="Give today" />
-          <span className="font-dharma text-5xl">Your support matters</span>
+          <span className="hidden font-dharma sm:inline sm:text-3xl xl:text-5xl">
+            Your support matters
+          </span>
         </a>
       </Link>
     </div>
@@ -383,8 +546,8 @@ const Footer = () => {
   }, [inView, setSiteMapInView]);
 
   return (
-    <div className="relative z-[1020] flex min-h-[calc(100vh-3rem)] snap-start">
-      <div className="w-1/4 bg-darkest-blue p-16 text-white">
+    <div className="relative z-[1020] sm:flex xl:min-h-[calc(100vh-3rem)]">
+      <div className="bg-darkest-blue p-8 text-white sm:w-1/2 sm:p-12 xl:w-1/4 xl:p-16">
         <ul ref={ref} className="flex flex-col gap-1.5">
           {NAVIGATION.map((item: any) => (
             <li key={item.key}>
@@ -474,10 +637,10 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="w-3/4 bg-darkestGray p-16">
-        <Logo showWordMark invert />
-        <div className="mt-8 font-dharma text-5xl font-medium text-white">
-          Let’s stay in touch. Join our newsletter list:
+      <div className="bg-white p-8 sm:w-1/2 sm:p-12 xl:w-3/4 xl:p-16">
+        <Logo showWordMark />
+        <div className="mt-8 font-dharma text-3xl font-medium text-black sm:text-4xl xl:text-5xl">
+          Let’s stay in touch. Join our newsletter:
         </div>
         <div className="mt-8">
           <SignUpForm />

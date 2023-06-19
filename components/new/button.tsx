@@ -42,6 +42,7 @@ export const Button = ({
         'inline-block cursor-pointer rounded-lg text-center font-bold uppercase leading-none transition duration-300 hover:scale-105',
         variant === 'transparent' && 'bg-transparent text-white hover:bg-blue',
         variant === 'blue' && 'bg-blue text-white',
+        variant === 'red' && 'bg-redAccent text-white',
         variant === 'gold' && 'bg-gold text-black',
         variant === 'white' && 'bg-white text-black',
         size === 'normal' && 'px-6 py-4 text-lg shadow-md',
