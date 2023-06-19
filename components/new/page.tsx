@@ -205,6 +205,7 @@ const Header = ({ hasHero }) => {
   const hasScrolled = scrollY >= 32;
   const isSiteMapInView = useAtomValue(siteMapInViewAtom);
   const [activeTab, setActiveTab] = useAtom(activeTabAtom);
+
   const ref = useRef(null!);
 
   useOnClickOutside(ref, () => {
@@ -423,8 +424,15 @@ const MobileMenu = () => {
   const setIsLoginModalOpen = useSetAtom(loginModalAtom);
   const logout = useLogout();
 
+  const ref = useRef(null!);
+
+  useOnClickOutside(ref, () => {
+    setIsMenuOpen(false);
+  });
+
   return (
     <div
+      ref={ref}
       className={cx(
         'fixed inset-0 z-[3001] h-full w-full bg-darkest-blue p-8 text-white transition duration-700 sm:!left-auto sm:w-[36rem] sm:p-24 xl:hidden',
         !isMenuOpen ? 'translate-x-full opacity-0' : 'translate-x-0 opacity-100',
@@ -490,14 +498,19 @@ const MobileMenu = () => {
         ))}
         <div className="inline-flex flex-col gap-3">
           <Link href="/members">
-            <a>
+            <a onClick={() => setIsMenuOpen(false)}>
               <span className="font-bold uppercase">Corporate member center</span>
             </a>
           </Link>
           <div>
             <span className="rounded-lg bg-gold p-2 font-bold text-black">
               {!isLoggedIn ? (
-                <button onClick={() => setIsLoginModalOpen(true)}>
+                <button
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    setIsLoginModalOpen(true);
+                  }}
+                >
                   <span className="uppercase">Login</span>
                 </button>
               ) : (
