@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { useEffect, useRef } from 'react';
+import { useEffect, useCallback, useRef } from 'react';
 import cx from 'classnames';
 import Head from 'next/head';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Script from 'next/script';
@@ -219,7 +220,7 @@ const Header = ({ hasHero }) => {
         className={cx(
           !hasHero || hasScrolled || activeTab !== null
             ? 'bg-white text-black shadow-xl'
-            : 'bg-white text-black shadow-xl group-hover:bg-white group-hover:text-black xl:bg-transparent xl:text-white xl:shadow-none xl:group-hover:shadow-xl',
+            : 'bg-white text-black shadow-xl group-hover:bg-white group-hover:text-black lg:bg-transparent lg:text-white lg:shadow-none lg:group-hover:shadow-xl',
           'relative z-60 items-center px-4 transition duration-700',
           activeTab && '!shadow-none',
           isSiteMapInView ? 'opacity-0' : 'opacity-100',
@@ -242,17 +243,23 @@ type LogoProps = React.ComponentPropsWithoutRef<'div'> & {
 };
 
 const Logo = ({ className = '', invert, showWordMark = false, ...rest }: LogoProps) => {
+  const setActiveTab = useSetAtom(activeTabAtom);
+
+  const handleCloseMenu = useCallback(() => {
+    setActiveTab(null);
+  }, [setActiveTab]);
+
   return (
-    <h1 className={cx('flex-shrink-0 sm:w-1/2 xl:w-1/4', className)} {...rest}>
+    <h1 className={cx('flex-shrink-0 sm:w-1/2 lg:w-1/4', className)} {...rest}>
       <Link href="/">
-        <a className="flex flex-shrink-0 items-center gap-3">
+        <a onClick={handleCloseMenu} className="flex flex-shrink-0 items-center gap-3">
           <div className="flex-shrink-0 rounded bg-white p-px">
             <img src="/new/pfb-logomark.png" className="block h-12 w-auto" alt="People for Bikes" />
           </div>
           <img
             src="/new/pfb-wordmark.png"
             className={cx(
-              showWordMark ? 'opacity-100' : 'opacity-100 xl:opacity-0 xl:group-hover:opacity-100',
+              showWordMark ? 'opacity-100' : 'opacity-100 lg:opacity-0 lg:group-hover:opacity-100',
               'block h-12 w-auto flex-shrink-0 transition duration-700',
               invert && 'invert',
             )}
@@ -270,7 +277,7 @@ const Navigation = () => {
   const [activeTab, setActiveTab] = useAtom(activeTabAtom);
 
   return (
-    <nav className="relative hidden justify-center xl:flex xl:w-1/2">
+    <nav className="relative hidden justify-center lg:flex lg:w-1/2">
       <ul className="flex justify-center gap-8 font-dharma text-4xl">
         {NAVIGATION.map((item: any) => (
           <li key={item.key}>
@@ -304,7 +311,7 @@ const MenuButton = () => {
   const [isMenuOpen, setIsMenuOpen] = useAtom(mobileMenuAtom);
 
   return (
-    <div className="flex-shrink-0 xl:hidden">
+    <div className="flex-shrink-0 lg:hidden">
       <button
         onClick={() => {
           setIsMenuOpen(!isMenuOpen);
@@ -328,7 +335,7 @@ const SearchButton = () => {
   const setActiveTab = useSetAtom(activeTabAtom);
 
   return (
-    <div className="hidden w-1/4 flex-shrink-0 items-center justify-end gap-2 xl:flex">
+    <div className="hidden w-1/4 flex-shrink-0 items-center justify-end gap-2 lg:flex">
       <button
         onClick={() => {
           setActiveTab(null);
@@ -355,6 +362,12 @@ const MegaMenu = () => {
 
   const ACTIVE_NAV = NAVIGATION.find((item) => item.key === activeTab) as NavigationEntry;
 
+  const setActiveTab = useSetAtom(activeTabAtom);
+
+  const handleCloseMenu = useCallback(() => {
+    setActiveTab(null);
+  }, [setActiveTab]);
+
   return (
     <div
       className={cx(
@@ -372,10 +385,12 @@ const MegaMenu = () => {
                 <DynamicLink
                   key={item.title}
                   href={item.link}
+                  onClick={handleCloseMenu}
                   className="relative flex aspect-video w-64 items-center justify-center bg-black"
                 >
-                  <img
+                  <Image
                     src={`/new/${item.image}`}
+                    layout="fill"
                     className="absolute inset-0 h-full w-full object-cover opacity-50"
                     alt=""
                     aria-hidden
@@ -388,11 +403,19 @@ const MegaMenu = () => {
             </div>
           )}
           {ACTIVE_NAV.items.length > 0 && (
-            <div className="grid grid-cols-2 items-center justify-center gap-6">
+            <div
+              className={cx(
+                'grid  items-center justify-center gap-6',
+                ACTIVE_NAV.featuredItems.length !== 0 || ACTIVE_NAV.items.length === 2
+                  ? 'grid-cols-2'
+                  : 'grid-cols-3',
+              )}
+            >
               {ACTIVE_NAV.items.map((item) => (
                 <div key={item.title}>
                   <DynamicLink
                     href={item.link}
+                    onClick={handleCloseMenu}
                     className="inline-block text-lg font-bold underline"
                   >
                     {item.title}
@@ -401,10 +424,10 @@ const MegaMenu = () => {
               ))}
               {activeTab !== 'donate' && (
                 <>
-                  <Link href="/giving">
+                  <Link href="/giving" onClick={handleCloseMenu}>
                     <a className="inline-block text-lg underline">Donate</a>
                   </Link>
-                  <Link href="/topics">
+                  <Link href="/topics" onClick={handleCloseMenu}>
                     <a className="inline-block text-lg underline">View More Topics</a>
                   </Link>
                 </>
@@ -430,16 +453,20 @@ const MobileMenu = () => {
     setIsMenuOpen(false);
   });
 
+  const handleCloseMenu = useCallback(() => {
+    setIsMenuOpen(false);
+  }, [setIsMenuOpen]);
+
   return (
     <div
       ref={ref}
       className={cx(
-        'fixed inset-0 z-[3001] h-full w-full bg-darkest-blue p-8 text-white transition duration-700 sm:!left-auto sm:w-[36rem] sm:p-24 xl:hidden',
+        'fixed inset-0 z-[3001] h-full w-full bg-darkest-blue p-8 text-white transition duration-700 sm:!left-auto sm:w-[36rem] sm:p-24 lg:hidden',
         !isMenuOpen ? 'translate-x-full opacity-0' : 'translate-x-0 opacity-100',
       )}
     >
       <Link href="/">
-        <a onClick={() => setIsMenuOpen(false)} className="flex flex-shrink-0 items-center gap-3">
+        <a onClick={handleCloseMenu} className="flex flex-shrink-0 items-center gap-3">
           <div className="flex-shrink-0 rounded bg-white p-px">
             <img src="/new/pfb-logomark.png" className="block h-12 w-auto" alt="People for Bikes" />
           </div>
@@ -479,7 +506,7 @@ const MobileMenu = () => {
                 {NAVIGATION.find((section) => section.key === item.key)?.featuredItems.map(
                   (item) => (
                     <li key={item.title}>
-                      <DynamicLink href={item.link} onClick={() => setIsMenuOpen(false)}>
+                      <DynamicLink href={item.link} onClick={handleCloseMenu}>
                         {item.title}
                       </DynamicLink>
                     </li>
@@ -487,7 +514,7 @@ const MobileMenu = () => {
                 )}
                 {NAVIGATION.find((section) => section.key === item.key)?.items.map((item) => (
                   <li key={item.title}>
-                    <DynamicLink href={item.link} onClick={() => setIsMenuOpen(false)}>
+                    <DynamicLink href={item.link} onClick={handleCloseMenu}>
                       {item.title}
                     </DynamicLink>
                   </li>
@@ -498,7 +525,7 @@ const MobileMenu = () => {
         ))}
         <div className="inline-flex flex-col gap-3">
           <Link href="/members">
-            <a onClick={() => setIsMenuOpen(false)}>
+            <a onClick={handleCloseMenu}>
               <span className="font-bold uppercase">Corporate member center</span>
             </a>
           </Link>
@@ -527,7 +554,7 @@ const MobileMenu = () => {
           </div>
         </div>
       </ul>
-      <button onClick={() => setIsMenuOpen(false)} className="absolute right-0 top-0">
+      <button onClick={handleCloseMenu} className="absolute right-0 top-0">
         <i className="fa-solid fa-close p-6 text-xl" />
       </button>
     </div>
@@ -745,12 +772,12 @@ const NAVIGATION: Array<NavigationEntry> = [
     title: 'Infrastructure',
     featuredItems: [
       {
-        image: '1_CityRatings.png',
+        image: 'City_Ratings.png',
         title: 'City Ratings',
         link: 'https://cityratings.peopleforbikes.org/',
       },
       {
-        image: '1_FinalMile.png',
+        image: 'Final_Mile.png',
         title: 'Final Mile',
         link: 'https://finalmile.peopleforbikes.org/',
       },
@@ -766,12 +793,12 @@ const NAVIGATION: Array<NavigationEntry> = [
     title: 'Policy',
     featuredItems: [
       {
-        image: '2_ElectricBicycles.png',
+        image: 'Electric_Bicycles.png',
         title: 'Electric Bicycles',
         link: 'topics/electric-bikes',
       },
       {
-        image: '2_ElectricBicycles.png',
+        image: 'Research.png',
         title: 'Research + Stats',
         link: 'research',
       },
@@ -788,12 +815,12 @@ const NAVIGATION: Array<NavigationEntry> = [
     title: 'Participation',
     featuredItems: [
       {
-        image: '3_RideSpot.png',
+        image: 'Ride_Spot.png',
         title: 'RideSpot',
         link: 'https://www.ridespot.org/',
       },
       {
-        image: '3_Call2Recycle.png',
+        image: 'Battery_Recycling.png',
         title: 'Hungry For Batteries',
         link: 'https://www.hungryforbatteries.org/',
       },
@@ -807,19 +834,16 @@ const NAVIGATION: Array<NavigationEntry> = [
   {
     key: 'about',
     title: 'About',
-    featuredItems: [
+    featuredItems: [],
+    items: [
       {
-        image: '1_TransformingAmerica.png',
         title: 'PeopleForBikes Team',
         link: 'team',
       },
       {
-        image: '1_TransformingAmerica.png',
         title: 'Board + Subcommittees',
         link: 'board',
       },
-    ],
-    items: [
       { title: 'Mission, Vision, Values', link: 'mission' },
       { title: 'Join PeopleForBikes', link: 'members' },
       { title: 'Careers', link: 'careers' },

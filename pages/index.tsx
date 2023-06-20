@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { useEffect } from 'react';
 import cx from 'classnames';
+import Image from 'next/image';
+import Link from 'next/link';
 import { atom, useAtomValue, useSetAtom } from 'jotai';
 import { useInView } from 'react-intersection-observer';
 import type { IntersectionOptions } from 'react-intersection-observer';
@@ -9,6 +11,7 @@ import { getHomepageV3 } from '~/lib/queries/homepage-v3';
 
 import { Button } from '~/components/new/button';
 import { Page } from '~/components/new/page';
+import { ExternalLink } from '~/components/new/external-link';
 import { ActionCard } from '~/components/new/card';
 import { Carousel } from '~/components/new/carousel';
 import { Slider } from '~/components/new/slider';
@@ -46,10 +49,10 @@ const Hero = ({ data }) => {
             <Carousel>
               {data.map((campaign) => (
                 <div key={campaign.hero_title} className="flex w-full flex-col px-16 sm:px-24">
-                  <div className="font-dharma text-5xl font-bold leading-none text-white sm:text-7xl xl:text-9xl">
+                  <div className="text-shadow font-dharma text-5xl font-bold leading-none text-white sm:text-7xl xl:text-9xl">
                     {campaign.hero_title}
                   </div>
-                  <div className="text-shadow max-w-3xl text-base text-white sm:text-lg xl:text-xl">
+                  <div className="text-shadow hidden max-w-3xl text-base text-white sm:text-lg lg:block xl:text-xl">
                     {campaign.hero_dek}
                   </div>
                   <div className="mt-4">
@@ -74,8 +77,9 @@ const Vision = () => {
   return (
     <div className="relative flex h-panel items-center justify-center overflow-hidden bg-gray p-8 sm:p-12 xl:p-16">
       <div className="absolute inset-0 h-full w-full bg-pure-black">
-        <img
-          src="/new/Stocksy_comp_watermarked_1310758.jpg"
+        <Image
+          src="/new/671472110_1600px.png"
+          layout="fill"
           className="h-full w-full object-cover opacity-50"
           alt=""
           aria-hidden
@@ -83,7 +87,7 @@ const Vision = () => {
         <div className="vignette absolute inset-0 z-10 h-full w-full" />
       </div>
       <div className="relative z-20 flex flex-col items-center justify-center gap-4 xl:-mt-8">
-        <div className="max-w-5xl text-center font-dharma text-5xl font-bold text-white sm:text-7xl xl:text-9xl">
+        <div className="text-shadow max-w-5xl text-center font-dharma text-5xl font-bold text-white sm:text-7xl xl:text-9xl">
           {VISION_HEADLINE}
         </div>
         <div className="text-shadow mt-8 max-w-5xl text-center text-base text-white sm:text-lg xl:text-xl">
@@ -184,13 +188,15 @@ const Pillar = ({ pillar, alternate }: PillarProps) => {
         <Slider className="py-8">
           {pillar.featuredItems.map((item: FeaturedItem, index: number) => (
             <div key={index} className="px-4">
-              <ActionCard
-                number={index + 1}
-                total={pillar.featuredItems.length}
-                title={item.title}
-                description={item.description ?? ''}
-                image={item.image}
-              />
+              <DynamicLink href={item.link}>
+                <ActionCard
+                  number={index + 1}
+                  total={pillar.featuredItems.length}
+                  title={item.title}
+                  description={item.description ?? ''}
+                  image={item.image}
+                />
+              </DynamicLink>
             </div>
           ))}
         </Slider>
@@ -217,31 +223,51 @@ const News = () => {
           News
         </div>
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 xl:grid-cols-4">
-          <NewsCard />
-          <NewsCard />
-          <NewsCard />
-          <NewsCard />
+          <NewsCard
+            image={'/new/Stocksy_comp_watermarked_2285491.jpg'}
+            date={'January 1, 1970'}
+            title={'Transforming Old Tires Into Bike Lane Barriers'}
+            link={'/news'}
+          />
+          <NewsCard
+            image={'/new/Stocksy_comp_watermarked_2285491.jpg'}
+            date={'January 1, 1970'}
+            title={'Transforming Old Tires Into Bike Lane Barriers'}
+            link={'/news'}
+          />
+          <NewsCard
+            image={'/new/Stocksy_comp_watermarked_2285491.jpg'}
+            date={'January 1, 1970'}
+            title={'Transforming Old Tires Into Bike Lane Barriers'}
+            link={'/news'}
+          />
+          <NewsCard
+            image={'/new/Stocksy_comp_watermarked_2285491.jpg'}
+            date={'January 1, 1970'}
+            title={'Transforming Old Tires Into Bike Lane Barriers'}
+            link={'/news'}
+          />
         </div>
       </div>
     </div>
   );
 };
 
-const NewsCard = () => {
+const NewsCard = ({ image, date, title, link }) => {
   return (
     <div className="group flex w-full flex-col bg-lightestGray shadow-md">
       <div className="aspect-video overflow-hidden">
         <img
-          src="/new/Stocksy_comp_watermarked_2285491.jpg"
+          src={image}
           className="block aspect-video w-full object-cover transition duration-700 group-hover:scale-105"
           alt=""
         />
       </div>
       <div className="flex flex-col p-8">
-        <div className="text-sm font-bold text-darkest-blue">January 1, 1970</div>
-        <div className="mt-2 text-lg">Transforming Old Tires Into Bike Lane Barriers</div>
+        <div className="text-sm font-bold text-darkest-blue">{date}</div>
+        <div className="mt-2 text-lg">{title}</div>
         <div className="mt-8">
-          <Button variant="white" label="Read" />
+          <Button to={link} variant="white" label="Read" />
         </div>
       </div>
     </div>
@@ -278,6 +304,7 @@ type FeaturedItem = {
   image: string;
   title: string;
   description: string;
+  link: string;
 };
 
 type NewsItem = {
@@ -296,21 +323,25 @@ const PILLARS: Array<Pillar> = [
         image: '1_CityRatings.png',
         title: 'City Ratings',
         description: `Every year, PeopleForBikes rates more than 1,200 cities across the U.S. and internationally on the quality of their bike networks. On a scale of 0-100, we track cities’ scores and how their progress over time. Find out how your city scores today.`,
+        link: `https://cityratings.peopleforbikes.org/`,
       },
       {
         image: '1_BNA.png',
         title: 'Bicycle Network Analysis',
         description: `The Bicycle Network Analysis (BNA) measures how easy it is to get around by bicycle in cities nationwide. It also includes a comprehensive inventory of U.S. bike infrastructure.`,
+        link: `https://bna.peopleforbikes.org/`,
       },
       {
         image: '1_FinalMile.png',
-        title: 'The Future of Mobility — Five Cities Paving the Way',
-        description: `Three years ago, PeopleForBikes set out to accelerate the construction of safe and complete bicycle networks in five U.S. cities. The Final Mile, a partnership between Wend Collective and PeopleForBikes, achieved that goal.`,
+        title: 'The Future of Mobility',
+        description: `Five Cities Paving the Way. Three years ago, PeopleForBikes set out to accelerate the construction of safe and complete bicycle networks in five U.S. cities. The Final Mile, a partnership between Wend Collective and PeopleForBikes, achieved that goal.`,
+        link: `https://finalmile.peopleforbikes.org/`,
       },
       {
         image: '1_TransformingAmerica.png',
         title: 'Transforming America',
         description: `PeopleForBikes is investing in communities across the country to create places for people of all ages and abilities to ride bikes. Join us in building 1,000 bike projects nationwide.`,
+        link: ``,
       },
     ],
     newsItems: [
@@ -341,21 +372,25 @@ const PILLARS: Array<Pillar> = [
         image: '2_ElectricBicycles.png',
         title: 'Electric Bikes',
         description: `More than 12 million electric bicycles (e-bikes) are expected to be sold between 2020 and 2030. To address the changing landscape of e-bikes across the country, PeopleForBikes helps cities, states, and federal legislators plan for, incentivize, and regulate the three classes of electric bicycles.`,
+        link: `topics/electric-bikes`,
       },
       {
         image: '2_FederalFunding.png',
         title: 'Federal Funding',
         description: `Billions of dollars of federal funding is set aside every year for state departments of transportation and city planners to fund local bicycle and pedestrian projects. Our team in Washington, D.C., lobbies for even more dollars for bicycling to build safe, fun, and connected bike networks across the U.S.`,
+        link: `grants`,
       },
       {
         image: '2_VoteForBikes.png',
         title: 'VoteForBikes',
         description: `PeopleForBikes tracks and advocates for local ballot measures across the country that benefit bicycling. From securing local funding to overturning bad bike bills to promoting park space and conservation efforts, VoteForBikes has secured billions of dollars for bikes over the last 10 years.`,
+        link: `voteforbikes`,
       },
       {
         image: '2_Sustainabililty.png',
         title: 'Sustainability',
         description: `Bicycles are being recognized as viable tools for policymakers to address sustainability goals. PeopleForBikes provides the necessary resources, incentives, and tools for leaders to position bikes as part of the solution to climate change.`,
+        link: `topics/sustainable-transportation`,
       },
     ],
     newsItems: [
@@ -386,21 +421,25 @@ const PILLARS: Array<Pillar> = [
         image: '3_RideSpot.png',
         title: 'RideSpot',
         description: `Earn rewards just for riding your bike. Ride Spot is PeopleForBikes’ ride tracking and sharing platform to get more people biking more often. Join Challenges and discover joy on your bike today with Ride Spot.`,
+        link: ``,
       },
       {
         image: '3_Call2Recycle.png',
         title: 'Hungry For Batteries',
         description: `The bike industry came together as the first transportation industry to establish a united battery recycling solution to remove e-bike batteries from our waste streams. The new program, powered by Call2Recycle and endorsed by PeopleForBikes, has already recycled more than 36,000 pounds of batteries.`,
+        link: `https://www.ridespot.org/`,
       },
       {
         image: '3_OneRide.png',
         title: 'One Ride At a Time',
         description: `If just 10% of the U.S. population replaced one car trip per day with a bike ride, carbon emissions from transportation would drop 10%. With nearly half of all car trips being less than three miles, that 10% goal is closer than we think. We’re challenging riders to get on their bikes for car replacement trips — one ride at a time. Join a Challenge today.`,
+        link: `https://oneride.peopleforbikes.org/`,
       },
       {
         image: '3_KeepRiding.png',
         title: 'Keep Riding',
-        description: `Need even more reasons to stay pedaling? Find maintenance tips and tricks, inspiring Ride Spot rides, monthly Challenges, and more through our Keep Riding campaign. `,
+        description: `Need even more reasons to stay pedaling? Find maintenance tips and tricks, inspiring Ride Spot rides, monthly Challenges, and more through our Keep Riding campaign.`,
+        link: `https://www.pfbkeepriding.org/`,
       },
     ],
     newsItems: [
@@ -422,6 +461,22 @@ const PILLARS: Array<Pillar> = [
     ],
   },
 ];
+
+const DynamicLink = ({ href, children, ...rest }) => {
+  if (href.startsWith('http')) {
+    return (
+      <ExternalLink href={href} {...rest}>
+        {children}
+      </ExternalLink>
+    );
+  }
+
+  return (
+    <Link href={`/${href}`}>
+      <a {...rest}>{children}</a>
+    </Link>
+  );
+};
 
 const IN_VIEW_OPTIONS: IntersectionOptions = {
   threshold: 0.25,

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import Image from 'next/image';
 
 import { Page } from '~/components/new/page';
 import { Button } from '~/components/new/button';
@@ -7,6 +8,7 @@ import { Carousel } from '~/components/new/carousel';
 import { Disclosure } from '~/components/new/disclosure';
 import { ExternalLink } from '~/components/new/external-link';
 import { Slider } from '~/components/new/slider';
+import { ClientOnly } from '~/components/new/client-only';
 
 export default function DonatePage() {
   return (
@@ -27,17 +29,18 @@ export default function DonatePage() {
 const Hero = () => {
   return (
     <div className="l:p-16 relative z-60 mt-[3rem] flex h-[calc(100vh-3rem)] items-center justify-center overflow-hidden bg-[#000000] p-8 sm:p-12">
-      <img
-        src="/new/0_Giving_Hero.jpg"
-        className="absolute inset-0 h-full w-full object-cover opacity-50"
-        alt=""
-        aria-hidden
-      />
+      <ClientOnly>
+        <RandomImage />
+      </ClientOnly>
       <div className="relative z-10 max-w-5xl text-center font-dharma text-5xl font-bold text-pure-white sm:text-7xl xl:text-9xl">
         {HERO_HEADLINE}
       </div>
     </div>
   );
+};
+
+const RandomImage = () => {
+  return HERO_IMAGES[Math.floor(Math.random() * HERO_IMAGES.length)];
 };
 
 const Giving = () => {
@@ -193,6 +196,30 @@ const Maximize = () => {
     </div>
   );
 };
+
+const HERO_IMAGES = [
+  <Image
+    src="/new/1372618750_1600px.png"
+    layout="fill"
+    className="absolute inset-0 h-full w-full object-cover opacity-50"
+    alt=""
+    aria-hidden
+  />,
+  <Image
+    src="/new/467971722_1600px.png"
+    layout="fill"
+    className="absolute inset-0 h-full w-full object-cover opacity-50"
+    alt=""
+    aria-hidden
+  />,
+  <Image
+    src="/new/1287250666_1600px.png"
+    layout="fill"
+    className="absolute inset-0 h-full w-full object-cover opacity-50"
+    alt=""
+    aria-hidden
+  />,
+];
 
 const HERO_HEADLINE: string = `Your Support of PeopleForBikes Matters`;
 

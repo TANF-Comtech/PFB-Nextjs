@@ -20,7 +20,7 @@ export const Search = () => {
 
   return (
     <InstantSearch searchClient={AlgoliaReactClient} indexName="MAINSITE">
-      <div ref={ref} className="hidden xl:block">
+      <div ref={ref} className="hidden lg:block">
         <div className="absolute inset-0 z-60 h-full w-full min-w-full flex-shrink-0">
           <CustomSearchBox />
         </div>
@@ -40,7 +40,7 @@ export const MobileSearch = () => {
 
   return (
     <InstantSearch searchClient={AlgoliaReactClient} indexName="MAINSITE">
-      <div className="fixed inset-0 z-[2001] flex flex-col gap-4 p-4 sm:gap-8 sm:p-8 xl:hidden">
+      <div className="fixed inset-0 z-[2001] flex flex-col gap-4 p-4 sm:gap-8 sm:p-8 lg:hidden">
         <div>
           <CustomSearchBox />
         </div>
@@ -76,7 +76,7 @@ const CustomSearchBox = (props: any) => {
         type="search"
         value={searchQuery}
         onChange={onChange}
-        className="h-full w-full border-none bg-transparent py-2 text-base font-bold text-black focus:ring-0 xl:text-xl"
+        className="h-full w-full border-none bg-transparent py-2 text-base font-bold text-black focus:ring-0 lg:text-xl"
         placeholder="What are you looking for?"
       />
     </div>
@@ -85,8 +85,8 @@ const CustomSearchBox = (props: any) => {
 
 const CustomResults = () => {
   return (
-    <div className="flex aspect-square w-full flex-shrink-0 overflow-y-scroll rounded-lg bg-lightestGray xl:aspect-video">
-      <div className="hidden w-1/4 space-y-4 p-4 pr-2 xl:block">
+    <div className="flex aspect-square w-full flex-shrink-0 overflow-y-scroll rounded-lg bg-lightestGray lg:aspect-video">
+      <div className="hidden w-1/4 space-y-4 p-4 pr-2 lg:block">
         <div>
           <div className="text-sm font-bold uppercase text-black">Topics</div>
           <RefinementList attribute="topics" limit={5} showMore={true} />
@@ -96,7 +96,7 @@ const CustomResults = () => {
           <RefinementList attribute="locations" limit={5} showMore={true} />
         </div>
       </div>
-      <div className="py-4 sm:p-4 xl:w-3/4 xl:pl-2">
+      <div className="py-4 sm:p-4 lg:w-3/4 lg:pl-2">
         <Hits hitComponent={CustomResult} />
       </div>
     </div>
@@ -104,10 +104,18 @@ const CustomResults = () => {
 };
 
 const CustomResult = ({ hit }) => {
+  const setIsSearchOpen = useSetAtom(searchAtom);
+  const setIsMobileSearchOpen = useSetAtom(mobileSearchAtom);
+
+  const handleCloseSearch = useCallback(() => {
+    setIsSearchOpen(false);
+    setIsMobileSearchOpen(false);
+  }, [setIsSearchOpen, setIsMobileSearchOpen]);
+
   const href = hit.path.split('https://www.peopleforbikes.org/')[1];
 
   return (
-    <Link href={`/${href}`}>
+    <Link href={`/${href}`} onClick={handleCloseSearch}>
       <a className="-mt-4 mb-4 block rounded-lg p-4 text-black transition duration-300 hover:bg-white">
         <div className="text-sm font-bold uppercase text-redAccent">{hit.type}</div>
         <div className="line-clamp-1 font-dharma text-3xl font-medium sm:text-4xl">{hit.title}</div>
@@ -119,6 +127,6 @@ const CustomResult = ({ hit }) => {
 
 const CustomBackdrop = () => {
   return (
-    <div className="pointer-events-none fixed inset-0 z-[2000] h-full w-full bg-black/90 xl:z-50 xl:bg-black/50" />
+    <div className="pointer-events-none fixed inset-0 z-[2000] h-full w-full bg-black/90 lg:z-50 lg:bg-black/50" />
   );
 };

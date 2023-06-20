@@ -44,6 +44,7 @@ const SecondaryTitleBanner = ({ mainText, secondaryText }) => {
     <MainContent maxWidth="1000px">
       <Container>
         <SecondaryText>{secondaryText}</SecondaryText>
+        {` `}
         <MainText>{mainText}</MainText>
       </Container>
     </MainContent>
