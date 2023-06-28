@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { loadStripe } from '@stripe/stripe-js';
 import styled, { ThemeContext } from 'styled-components';
 
+import { LegacyPage } from '~/components/legacy-page';
 import SiteMetaCustom from '~/components/site-meta-custom';
 import MainContent from '~/components/main-content';
 import Wrapper from '~/components/wrapper';
@@ -107,7 +108,7 @@ export default function Payments() {
   };
 
   return (
-    <>
+    <LegacyPage>
       <SiteMetaCustom
         desc="PeopleForBikes corporate dues payments can be accepted through this facility up to $3000/year. Click to learn more."
         title="Dues Payment | PeopleForBikes Corporate Member Center"
@@ -217,6 +218,6 @@ export default function Payments() {
           </>
         )}
       </Wrapper>
-    </>
+    </LegacyPage>
   );
 }

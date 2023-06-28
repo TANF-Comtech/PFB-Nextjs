@@ -6,6 +6,7 @@ import { getStats, getSingleStatsPage } from '~/lib/queries/statistics';
 import { linkResolver } from '~/utils';
 import data from '~/data';
 
+import { LegacyPage } from '~/components/legacy-page';
 import Wrapper from '~/components/wrapper';
 import SiteMetaCustom from '~/components/site-meta-custom';
 import MainContent from '~/components/main-content';
@@ -29,7 +30,7 @@ export default function MembersPage({ page, preview }) {
   const { meta } = data;
 
   return (
-    <>
+    <LegacyPage>
       <SiteMetaCustom
         desc={
           statistic_page.main_content
@@ -67,7 +68,7 @@ export default function MembersPage({ page, preview }) {
           source={ResearchPromo}
         />
       </Wrapper>
-    </>
+    </LegacyPage>
   );
 }
 

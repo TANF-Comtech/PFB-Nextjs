@@ -6,6 +6,7 @@ import { randomID } from '~/utils';
 import { setDateSuffix } from '~/utils/setDateSuffix';
 import data from '~/data';
 
+import { LegacyPage } from '~/components/legacy-page';
 import Wrapper from '~/components/wrapper';
 import SiteMetaCustom from '~/components/site-meta-custom';
 import HeaderImage from '~/components/header-image';
@@ -25,7 +26,7 @@ export default function LocationPage({ fallback, page, preview }) {
   const { meta, actionItems, rideSpotRides } = data;
 
   return (
-    <>
+    <LegacyPage>
       <SiteMetaCustom
         desc={locations.intro ? `${locations.intro[0].text.substring(0, 180)}... ` : meta.desc}
         title={locations.location ? `${locations.location[0].text} | PeopleForBikes` : meta.title}
@@ -121,7 +122,7 @@ export default function LocationPage({ fallback, page, preview }) {
             })}
         </MainContent>
       </Wrapper>
-    </>
+    </LegacyPage>
   );
 }
 

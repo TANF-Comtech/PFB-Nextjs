@@ -3,6 +3,7 @@ import Link from 'next/link';
 import styled from 'styled-components';
 import Image from 'next/image';
 
+import { LegacyPage } from '~/components/legacy-page';
 import SiteMetaCustom from '~/components/site-meta-custom';
 
 import BMXRider from '~/public/bmx-rider.png';
@@ -86,7 +87,7 @@ const Text = styled.h3`
 
 export default function CustomErrorPage() {
   return (
-    <>
+    <LegacyPage>
       <SiteMetaCustom title="404 - Page Not Found | PeopleForBikes" />
       <Container>
         <ImgContainer>
@@ -106,6 +107,6 @@ export default function CustomErrorPage() {
           </Text>
         </TextContainer>
       </Container>
-    </>
+    </LegacyPage>
   );
 }

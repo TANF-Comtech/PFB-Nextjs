@@ -12,6 +12,7 @@ import { randomID, linkResolver } from '~/utils';
 import auth0ValidateToken from '~/lib/auth0/auth0ValidateToken';
 import data from '~/data';
 
+import { LegacyPage } from '~/components/legacy-page';
 import Wrapper from '~/components/wrapper';
 import SiteMetaCustom from '~/components/site-meta-custom';
 import SecondaryTitleBanner from '~/components/secondary-title-banner';
@@ -149,7 +150,7 @@ export default function MembersPage({ page, preview }) {
   const themeProps = useContext(ThemeContext);
 
   return (
-    <>
+    <LegacyPage>
       <SiteMetaCustom
         desc={
           member_content.main_content
@@ -360,7 +361,7 @@ export default function MembersPage({ page, preview }) {
         )}
         <OwnersManual />
       </Wrapper>
-    </>
+    </LegacyPage>
   );
 }
 

@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { getEBikeLaws } from '~/lib/queries/electric-bikes';
 import data from '~/data';
 
+import { LegacyPage } from '~/components/legacy-page';
 import Wrapper from '~/components/wrapper';
 import SiteMetaCustom from '~/components/site-meta-custom';
 import MainContent from '~/components/main-content';
@@ -55,7 +56,7 @@ export default function EBikesLaws({ page, preview }) {
   const { meta } = data;
 
   return (
-    <>
+    <LegacyPage>
       <SiteMetaCustom
         desc={meta.desc}
         title="State by State Electric Bike Laws | PeopleForBikes"
@@ -100,7 +101,7 @@ export default function EBikesLaws({ page, preview }) {
           source={EBikesPromo}
         />
       </Wrapper>
-    </>
+    </LegacyPage>
   );
 }
 

@@ -6,8 +6,9 @@ import styled, { ThemeContext } from 'styled-components';
 
 import { getPrograms, getProgramPage } from '~/lib/queries/local-innovation';
 import { randomID, linkResolver } from '~/utils';
-
 import data from '~/data';
+
+import { LegacyPage } from '~/components/legacy-page';
 import FallbackImage from '~/components/fallback-image';
 import Wrapper from '~/components/wrapper';
 import SiteMetaCustom from '~/components/site-meta-custom';
@@ -858,7 +859,7 @@ export default function ProgramPage({ fallback, page, preview }) {
   const themeProps = useContext(ThemeContext);
 
   return (
-    <>
+    <LegacyPage>
       <SiteMetaCustom
         desc={program.intro ? `${program.intro.substring(0, 180)}... ` : meta.desc}
         title={program.title ? `${program.title[0].text} | PeopleForBikes` : meta.title}
@@ -1028,7 +1029,7 @@ export default function ProgramPage({ fallback, page, preview }) {
         {/* Custom content for `green-lane-project` node only */}
         {program._meta.uid === 'green-lane-project' && <GreenLaneProject />}
       </Wrapper>
-    </>
+    </LegacyPage>
   );
 }
 

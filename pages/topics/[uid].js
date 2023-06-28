@@ -12,6 +12,7 @@ import { ebikeFormatter } from '~/lib/algolia/ebikeFormatter';
 import { AlgoliaIndex } from '~/lib/algolia/algoliaClient';
 import data from '~/data';
 
+import { LegacyPage } from '~/components/legacy-page';
 import FallbackImage from '~/components/fallback-image';
 import Wrapper from '~/components/wrapper';
 import SiteMetaCustom from '~/components/site-meta-custom';
@@ -37,7 +38,7 @@ export default function TopicPage({ fallback, page, preview }) {
   const pillars = []; // setup for pillar content
 
   return (
-    <>
+    <LegacyPage>
       {
         // Sniff for pillars - set up as array or null
         topic.body
@@ -219,7 +220,7 @@ export default function TopicPage({ fallback, page, preview }) {
           )
         }
       </Wrapper>
-    </>
+    </LegacyPage>
   );
 }
 

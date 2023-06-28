@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 
 import { loginModalAtom } from '~/atoms';
 
+import { LegacyPage } from '~/components/legacy-page';
 import SiteMetaCustom from '~/components/site-meta-custom';
 import Wrapper from '~/components/wrapper';
 
@@ -14,8 +15,10 @@ export default function LoginPage() {
   }, [setIsLoginModalOpen]);
 
   return (
-    <Wrapper>
-      <SiteMetaCustom title="Login | PeopleForBikes" />
-    </Wrapper>
+    <LegacyPage>
+      <Wrapper>
+        <SiteMetaCustom title="Login | PeopleForBikes" />
+      </Wrapper>
+    </LegacyPage>
   );
 }

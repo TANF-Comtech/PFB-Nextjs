@@ -9,7 +9,6 @@ import { linkResolver } from '~/utils';
 
 import Logo from '~/components/logo';
 import Button from '~/components/button';
-import { Login } from '~/components/login';
 
 // spacer constrains the layout on big screens but keeps it tight on mobile
 const MainContent = styled.main`
@@ -168,17 +167,16 @@ const Wrapper = ({ children, isWide, postPath, postTitle }) => {
 
   return (
     <>
-      {postPath && postTitle && (
+      {/* {postPath && postTitle && (
         <Titlebar mainHeight={Math.round(mainHeight)}>
           <Link href={postPath} passHref>
             <a>{postTitle}</a>
           </Link>
         </Titlebar>
-      )}
+      )} */}
       <MainContent ref={mainTarget} isWidePass={isWide}>
         {isWide ? <> {children} </> : <Container> {children} </Container>}
       </MainContent>
-      <Login />
     </>
   );
 };

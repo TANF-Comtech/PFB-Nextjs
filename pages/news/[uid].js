@@ -9,6 +9,7 @@ import { linkResolver } from '~/utils';
 import { setDateSuffix } from '~/utils/setDateSuffix';
 import getMetadata from '~/utils/getMetadata';
 
+import { LegacyPage } from '~/components/legacy-page';
 import SiteMetaCustom from '~/components/site-meta-custom';
 import Wrapper from '~/components/wrapper';
 import MainContent from '~/components/main-content';
@@ -150,7 +151,7 @@ const BoxOfLinksContainer = styled.section`
 
 const BoxOfLinksTitle = styled.p`
   font-weight: 700;
-  margin: 0 5px;
+  margin: 0 5px !important;
 `;
 
 const BoxOfLinks = styled.section`
@@ -364,7 +365,7 @@ export default function NewsPage({ fallback, page, preview }) {
   };
 
   return (
-    <>
+    <LegacyPage>
       <SiteMetaCustom
         desc={theDesc}
         keywords={theKeywords}
@@ -421,7 +422,11 @@ export default function NewsPage({ fallback, page, preview }) {
                 {news.topics.map((topic) => {
                   if (topic.topic !== null) {
                     return (
-                      <a href={`/topics/${topic.topic._meta.uid}`} key={topic.topic._meta.id}>
+                      <a
+                        href={`/topics/${topic.topic._meta.uid}`}
+                        key={topic.topic._meta.id}
+                        className="!text-white"
+                      >
                         <strong>{topic.topic.title[0].text}</strong>
                       </a>
                     );
@@ -460,7 +465,7 @@ export default function NewsPage({ fallback, page, preview }) {
         />
         <Donate />
       </Wrapper>
-    </>
+    </LegacyPage>
   );
 }
 

@@ -6,6 +6,7 @@ import { getEBikesPages, getSingleEBikesPage } from '~/lib/queries/electric-bike
 import { linkResolver } from '~/utils';
 import data from '~/data';
 
+import { LegacyPage } from '~/components/legacy-page';
 import Wrapper from '~/components/wrapper';
 import SiteMetaCustom from '~/components/site-meta-custom';
 import MainContent from '~/components/main-content';
@@ -24,7 +25,7 @@ export default function EBikesPage({ page, preview }) {
   const { meta } = data;
 
   return (
-    <>
+    <LegacyPage>
       <SiteMetaCustom
         desc={
           electric_bikes.main_content
@@ -72,7 +73,7 @@ export default function EBikesPage({ page, preview }) {
           source={EBikesPromo}
         />
       </Wrapper>
-    </>
+    </LegacyPage>
   );
 }
 
