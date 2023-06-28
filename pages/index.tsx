@@ -9,6 +9,7 @@ import type { IntersectionOptions } from 'react-intersection-observer';
 
 import { getHomepageV3 } from '~/lib/queries/homepage-v3';
 import { dateFormatter } from '~/utils/dateFormatter'
+import { linkResolver } from '~/utils';
 
 import { Button } from '~/components/new/button';
 import { Page } from '~/components/new/page';
@@ -22,7 +23,13 @@ const isProduction = process.env.NODE_ENV === 'production';
 export default function NewHomePage({ page, preview }) {
   const hpData = page.homepage_v3;
 
-  console.log(hpData)
+  // Assign data into large pillars variable
+  PILLARS[0].featuredItems = hpData.infrastructure_pillar
+  PILLARS[0].newsItems = hpData.infrastructure_news
+  PILLARS[1].featuredItems = hpData.policy_pillar
+  PILLARS[1].newsItems = hpData.policy_news
+  PILLARS[2].featuredItems = hpData.participation_pillar
+  PILLARS[2].newsItems = hpData.participation_news
 
   return (
     <Page title="Home" hasHero>
@@ -190,17 +197,43 @@ const Pillar = ({ pillar, alternate }: PillarProps) => {
       </div>
       <div className="pb-16">
         <Slider className="py-8">
-          {pillar.featuredItems.map((item: FeaturedItem, index: number) => (
+          {pillar.featuredItems.map((item, index) => (
             <div key={index} className="px-4">
-              <DynamicLink href={item.link}>
-                <ActionCard
-                  number={index + 1}
-                  total={pillar.featuredItems.length}
-                  title={item.title}
-                  description={item.description ?? ''}
-                  image={item.image}
-                />
-              </DynamicLink>
+              <>
+                { pillar.key === 'infrastructure' &&
+                  <a href={linkResolver(item.infrastructure_link)} target="_blank">
+                    <ActionCard
+                      number={index + 1}
+                      total={pillar.featuredItems.length}
+                      title={item.infrastructure_title}
+                      description={item.infrastructure_dek ?? item.infrastructure_dek}
+                      image={item.infrastructure_image.url}
+                    />
+                  </a>                           
+                }
+                { pillar.key === 'policy' &&
+                  <a href={linkResolver(item.policy_link)}>
+                    <ActionCard
+                      number={index + 1}
+                      total={pillar.featuredItems.length}
+                      title={item.policy_title}
+                      description={item.policy_dek ?? item.policy_dek}
+                      image={item.policy_image.url}
+                    />
+                  </a>                           
+                }
+                { pillar.key === 'participation' &&
+                  <a href={linkResolver(item.participation_link)}>
+                    <ActionCard
+                      number={index + 1}
+                      total={pillar.featuredItems.length}
+                      title={item.participation_title}
+                      description={item.participation_dek ?? item.participation_dek}
+                      image={item.participation_image.url}
+                    />
+                  </a>                           
+                }
+              </>
             </div>
           ))}
         </Slider>
@@ -208,11 +241,71 @@ const Pillar = ({ pillar, alternate }: PillarProps) => {
       <div className="relative flex flex-col gap-3 overflow-hidden">
         <div className="text-xl font-bold uppercase leading-none">Latest {pillar.title} news</div>
         <ul className="flex flex-col gap-1.5">
-          {pillar.newsItems.map((item: NewsItem) => (
-            <li key={item.title}>
-              <span className="underline">{item.title}</span>
-            </li>
-          ))}
+          <>
+          { pillar.key === 'infrastructure' &&
+            pillar.newsItems.map( function(item: InfrastructureNewsItem) {
+              // Format the date
+              const cleanDate = dateFormatter(item.infrastructure_news_item.publication_date !== null ? 
+                item.infrastructure_news_item.publication_date : item.infrastructure_news_item._meta.lastPublicationDate )
+
+              return(
+                <li key={item.infrastructure_news_item._meta.id}>
+                  <span className="underline">
+                    <Link href={`/news/${item.infrastructure_news_item._meta.uid}`}>
+                      <a>
+                        {item.infrastructure_news_item.title[0].text}
+                      </a>
+                    </Link>
+                  </span>
+                  &nbsp;|&nbsp; 
+                  <span>{ `${cleanDate.month} ${cleanDate.day}, ${cleanDate.year}` }</span>
+                </li>                   
+              )
+            } 
+          )}
+          { pillar.key === 'policy' &&
+            pillar.newsItems.map( function(item: PolicyNewsItem) {
+              // Format the date
+              const cleanDate = dateFormatter(item.policy_news_item.publication_date !== null ? 
+                item.policy_news_item.publication_date : item.policy_news_item._meta.lastPublicationDate )
+
+              return(
+                <li key={item.policy_news_item._meta.id}>
+                  <span className="underline">
+                    <Link href={`/news/${item.policy_news_item._meta.uid}`}>
+                      <a>
+                        {item.policy_news_item.title[0].text}
+                      </a>
+                    </Link>
+                  </span>
+                  &nbsp;|&nbsp; 
+                  <span>{ `${cleanDate.month} ${cleanDate.day}, ${cleanDate.year}` }</span>
+                </li>                   
+              )
+            } 
+          )}
+          { pillar.key === 'participation' &&
+            pillar.newsItems.map( function(item: ParticipationNewsItem) {
+              // Format the date
+              const cleanDate = dateFormatter(item.participation_news_item.publication_date !== null ? 
+                item.participation_news_item.publication_date : item.participation_news_item._meta.lastPublicationDate )
+
+              return(
+                <li key={item.participation_news_item._meta.id}>
+                  <span className="underline">
+                    <Link href={`/news/${item.participation_news_item._meta.uid}`}>
+                      <a>
+                        {item.participation_news_item.title[0].text}
+                      </a>
+                    </Link>
+                  </span>
+                  &nbsp;|&nbsp; 
+                  <span>{ `${cleanDate.month} ${cleanDate.day}, ${cleanDate.year}` }</span>
+                </li>                   
+              )
+            } 
+          )}                    
+          </>
         </ul>
       </div>
     </div>
@@ -288,23 +381,74 @@ type Pillar = {
   image: string;
   title: string;
   description: string;
-  featuredItems: Array<FeaturedItem>;
-  newsItems: Array<NewsItem>;
+  featuredItems: Array<FeaturedItemInfrastructure> | Array<FeaturedItemPolicy> | Array<FeaturedItemParticipation>;
+  newsItems: [];
 };
 
 type PillarKey = 'infrastructure' | 'policy' | 'participation';
 
-type FeaturedItem = {
-  image: string;
-  title: string;
-  description: string;
-  link: string;
+type FeaturedItemInfrastructure = {
+  infrastructure_image: object;
+  infrastructure_title: string;
+  infrastructure_dek: string;
+  infrastructure_link: object;
 };
 
-type NewsItem = {
-  title: string;
-  link: string;
+type FeaturedItemPolicy = {
+  policy_image: object;
+  policy_title: string;
+  policy_dek: string;
+  policy_link: object;
 };
+
+
+type FeaturedItemParticipation = {
+  participation_image: object;
+  participation_title: string;
+  participation_dek: string;
+  participation_link: object;
+};
+
+interface Title {
+  text: string;
+  type: string;
+  spans: []
+}
+
+interface MetaObject {
+  id: string,
+  lastPublicationDate: string;
+  type: string;
+  uid: string;
+}
+
+interface InfrastructureNewsItem {
+  infrastructure_news_item: {
+    publication_date: string | null;
+    __typename: string;
+    _meta: MetaObject;
+    title: Title[];
+  };
+}
+
+interface PolicyNewsItem {
+  policy_news_item: {
+    publication_date: string | null;
+    __typename: string;
+    _meta: MetaObject;
+    title: Title[];
+  };
+}
+
+interface ParticipationNewsItem {
+  participation_news_item: {
+    publication_date: string | null;
+    __typename: string;
+    _meta: MetaObject;
+    title: Title[];
+  };
+}
+
 
 const PILLARS: Array<Pillar> = [
   {
@@ -312,165 +456,26 @@ const PILLARS: Array<Pillar> = [
     image: '/new/crane.png',
     title: 'Infrastructure',
     description: 'Accelerate the construction of safe, fun, and connected places to ride.',
-    featuredItems: [
-      {
-        image: '1_CityRatings.png',
-        title: 'City Ratings',
-        description: `Every year, PeopleForBikes rates more than 1,200 cities across the U.S. and internationally on the quality of their bike networks. On a scale of 0-100, we track cities’ scores and how their progress over time. Find out how your city scores today.`,
-        link: `https://cityratings.peopleforbikes.org/`,
-      },
-      {
-        image: '1_BNA.png',
-        title: 'Bicycle Network Analysis',
-        description: `The Bicycle Network Analysis (BNA) measures how easy it is to get around by bicycle in cities nationwide. It also includes a comprehensive inventory of U.S. bike infrastructure.`,
-        link: `https://bna.peopleforbikes.org/`,
-      },
-      {
-        image: '1_FinalMile.png',
-        title: 'The Future of Mobility',
-        description: `Five Cities Paving the Way. Three years ago, PeopleForBikes set out to accelerate the construction of safe and complete bicycle networks in five U.S. cities. The Final Mile, a partnership between Wend Collective and PeopleForBikes, achieved that goal.`,
-        link: `https://finalmile.peopleforbikes.org/`,
-      },
-      {
-        image: '1_TransformingAmerica.png',
-        title: 'Transforming America',
-        description: `PeopleForBikes is investing in communities across the country to create places for people of all ages and abilities to ride bikes. Join us in building 1,000 bike projects nationwide.`,
-        link: ``,
-      },
-    ],
-    newsItems: [
-      {
-        title:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus dignissim faucibus.',
-        link: '/news',
-      },
-      {
-        title:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus dignissim faucibus.',
-        link: '/news',
-      },
-      {
-        title:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus dignissim faucibus.',
-        link: '/news',
-      },
-    ],
+    featuredItems: [],
+    newsItems: [],
   },
   {
     key: 'policy',
     image: '/new/court.png',
     title: 'Policy',
     description: 'Advance pro-bike and pro-bike-business legislation. ',
-    featuredItems: [
-      {
-        image: '2_ElectricBicycles.png',
-        title: 'Electric Bikes',
-        description: `More than 12 million electric bicycles (e-bikes) are expected to be sold between 2020 and 2030. To address the changing landscape of e-bikes across the country, PeopleForBikes helps cities, states, and federal legislators plan for, incentivize, and regulate the three classes of electric bicycles.`,
-        link: `topics/electric-bikes`,
-      },
-      {
-        image: '2_FederalFunding.png',
-        title: 'Federal Funding',
-        description: `Billions of dollars of federal funding is set aside every year for state departments of transportation and city planners to fund local bicycle and pedestrian projects. Our team in Washington, D.C., lobbies for even more dollars for bicycling to build safe, fun, and connected bike networks across the U.S.`,
-        link: `grants`,
-      },
-      {
-        image: '2_VoteForBikes.png',
-        title: 'VoteForBikes',
-        description: `PeopleForBikes tracks and advocates for local ballot measures across the country that benefit bicycling. From securing local funding to overturning bad bike bills to promoting park space and conservation efforts, VoteForBikes has secured billions of dollars for bikes over the last 10 years.`,
-        link: `voteforbikes`,
-      },
-      {
-        image: '2_Sustainabililty.png',
-        title: 'Sustainability',
-        description: `Bicycles are being recognized as viable tools for policymakers to address sustainability goals. PeopleForBikes provides the necessary resources, incentives, and tools for leaders to position bikes as part of the solution to climate change.`,
-        link: `topics/sustainable-transportation`,
-      },
-    ],
-    newsItems: [
-      {
-        title:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus dignissim faucibus.',
-        link: '/news',
-      },
-      {
-        title:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus dignissim faucibus.',
-        link: '/news',
-      },
-      {
-        title:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus dignissim faucibus.',
-        link: '/news',
-      },
-    ],
+    featuredItems: [],
+    newsItems: [],
   },
   {
     key: 'participation',
     image: '/new/cyclist.png',
     title: 'Participation',
     description: 'Reduce barriers to access and welcome more people to the joys of bicycling.',
-    featuredItems: [
-      {
-        image: '3_RideSpot.png',
-        title: 'RideSpot',
-        description: `Earn rewards just for riding your bike. Ride Spot is PeopleForBikes’ ride tracking and sharing platform to get more people biking more often. Join Challenges and discover joy on your bike today with Ride Spot.`,
-        link: ``,
-      },
-      {
-        image: '3_Call2Recycle.png',
-        title: 'Hungry For Batteries',
-        description: `The bike industry came together as the first transportation industry to establish a united battery recycling solution to remove e-bike batteries from our waste streams. The new program, powered by Call2Recycle and endorsed by PeopleForBikes, has already recycled more than 36,000 pounds of batteries.`,
-        link: `https://www.ridespot.org/`,
-      },
-      {
-        image: '3_OneRide.png',
-        title: 'One Ride At a Time',
-        description: `If just 10% of the U.S. population replaced one car trip per day with a bike ride, carbon emissions from transportation would drop 10%. With nearly half of all car trips being less than three miles, that 10% goal is closer than we think. We’re challenging riders to get on their bikes for car replacement trips — one ride at a time. Join a Challenge today.`,
-        link: `https://oneride.peopleforbikes.org/`,
-      },
-      {
-        image: '3_KeepRiding.png',
-        title: 'Keep Riding',
-        description: `Need even more reasons to stay pedaling? Find maintenance tips and tricks, inspiring Ride Spot rides, monthly Challenges, and more through our Keep Riding campaign.`,
-        link: `https://www.pfbkeepriding.org/`,
-      },
-    ],
-    newsItems: [
-      {
-        title:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus dignissim faucibus.',
-        link: '/news',
-      },
-      {
-        title:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus dignissim faucibus.',
-        link: '/news',
-      },
-      {
-        title:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus dignissim faucibus.',
-        link: '/news',
-      },
-    ],
+    featuredItems: [],
+    newsItems: [],
   },
 ];
-
-const DynamicLink = ({ href, children, ...rest }) => {
-  if (href.startsWith('http')) {
-    return (
-      <ExternalLink href={href} {...rest}>
-        {children}
-      </ExternalLink>
-    );
-  }
-
-  return (
-    <Link href={`/${href}`}>
-      <a {...rest}>{children}</a>
-    </Link>
-  );
-};
 
 const IN_VIEW_OPTIONS: IntersectionOptions = {
   threshold: 0.25,

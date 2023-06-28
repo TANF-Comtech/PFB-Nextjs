@@ -6,7 +6,7 @@ export const ActionCard = ({ number, total, title, description, image }) => {
     <li className="group block list-none">
       <div className="relative flex aspect-[3/4] w-[20rem] items-center justify-center overflow-hidden">
         <Image
-          src={`/new/${image}`}
+          src={`${image}`}
           layout="fill"
           className="absolute inset-0 z-0 block h-full w-full object-cover transition duration-700 group-hover:scale-105"
           alt=""
