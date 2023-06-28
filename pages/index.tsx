@@ -8,6 +8,7 @@ import { useInView } from 'react-intersection-observer';
 import type { IntersectionOptions } from 'react-intersection-observer';
 
 import { getHomepageV3 } from '~/lib/queries/homepage-v3';
+import { dateFormatter } from '~/utils/dateFormatter'
 
 import { Button } from '~/components/new/button';
 import { Page } from '~/components/new/page';
@@ -21,17 +22,20 @@ const isProduction = process.env.NODE_ENV === 'production';
 export default function NewHomePage({ page, preview }) {
   const hpData = page.homepage_v3;
 
+  console.log(hpData)
+
   return (
     <Page title="Home" hasHero>
       <Hero data={hpData.hero} />
       <Vision />
       <Pillars />
-      <News />
+      <News data={hpData.news} />
     </Page>
   );
 }
 
 const Hero = ({ data }) => {
+
   return (
     <div className="relative z-60 mt-[3rem] flex h-[calc(100vh-3rem)] items-center justify-center overflow-hidden bg-[#000000]">
       <video
@@ -215,7 +219,7 @@ const Pillar = ({ pillar, alternate }: PillarProps) => {
   );
 };
 
-const News = () => {
+const News = ({data}) => {
   return (
     <div className="flex items-center justify-center bg-lightestGray/50 p-8 sm:p-12 xl:h-panel xl:p-16">
       <div className="mx-auto flex max-w-screen-lg flex-col gap-16">
@@ -223,44 +227,34 @@ const News = () => {
           News
         </div>
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 xl:grid-cols-4">
-          <NewsCard
-            image={'/new/Stocksy_comp_watermarked_2285491.jpg'}
-            date={'January 1, 1970'}
-            title={'Transforming Old Tires Into Bike Lane Barriers'}
-            link={'/news'}
-          />
-          <NewsCard
-            image={'/new/Stocksy_comp_watermarked_2285491.jpg'}
-            date={'January 1, 1970'}
-            title={'Transforming Old Tires Into Bike Lane Barriers'}
-            link={'/news'}
-          />
-          <NewsCard
-            image={'/new/Stocksy_comp_watermarked_2285491.jpg'}
-            date={'January 1, 1970'}
-            title={'Transforming Old Tires Into Bike Lane Barriers'}
-            link={'/news'}
-          />
-          <NewsCard
-            image={'/new/Stocksy_comp_watermarked_2285491.jpg'}
-            date={'January 1, 1970'}
-            title={'Transforming Old Tires Into Bike Lane Barriers'}
-            link={'/news'}
-          />
+          {data.map( (item, i) => {
+            // Date work
+            const dateFormatted = dateFormatter(item.news_item.publication_date !== null ? 
+              item.news_item.publication_date : item.news_item._meta.lastPublicationDate )
+            return(
+              <NewsCard
+                imgSrc={ item.news_item.header_image.url }
+                imgAlt={ item.news_item.header_image.alt }
+                date={ `${dateFormatted.month} ${dateFormatted.day}, ${dateFormatted.year}` }
+                title={ item.news_item.title[0].text }
+                link={ `/news/${item.news_item._meta.uid}` }
+              />
+            )
+          } )}
         </div>
       </div>
     </div>
   );
 };
 
-const NewsCard = ({ image, date, title, link }) => {
+const NewsCard = ({ imgSrc, imgAlt, date, title, link }) => {
   return (
     <div className="group flex w-full flex-col bg-lightestGray shadow-md">
       <div className="aspect-video overflow-hidden">
         <img
-          src={image}
+          src={imgSrc}
           className="block aspect-video w-full object-cover transition duration-700 group-hover:scale-105"
-          alt=""
+          alt={imgAlt !== null ? imgAlt : 'Biking oriented picture'}
         />
       </div>
       <div className="flex flex-col p-8">
