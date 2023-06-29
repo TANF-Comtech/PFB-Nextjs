@@ -151,7 +151,8 @@ const Banner = () => {
             </Popover.Panel>
           </Popover>
         </div>
-        <div className="flex-shrink-0 xl:hidden">
+
+        <div className="flex-shrink-0 lg:hidden">
           <button
             onClick={() => {
               setIsSearchOpen(!isSearchOpen);
@@ -172,7 +173,8 @@ const Banner = () => {
             </div>
           </button>
         </div>
-        <div className="hidden items-center gap-3 xl:inline-flex">
+
+        <div className="hidden items-center gap-3 lg:inline-flex">
           <Link href="/members">
             <a>
               <span className="sm:hidden">Members</span>
@@ -743,7 +745,7 @@ type NetworkEntry = {
 const NETWORK: Array<NetworkEntry> = [
   { title: 'PeopleForBikes Main site', link: 'https://www.peopleforbikes.org/' },
   { title: 'City Ratings', link: 'https://cityratings.peopleforbikes.org/' },
-  { title: 'Shift’22 Conference', link: 'https://shift.peopleforbikes.org/' },
+  { title: 'Shift’23 Conference', link: 'https://shift.peopleforbikes.org/' },
   { title: 'Ride Spot', link: 'https://www.ridespot.org/' },
   { title: 'View more sites', link: 'https://www.peopleforbikes.org/campaigns' },
 ];
