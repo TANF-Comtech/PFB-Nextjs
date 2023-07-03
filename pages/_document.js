@@ -65,7 +65,7 @@ export default class MyDocument extends Document {
           />
           <Script src="https://code.jquery.com/jquery-3.5.1.min.js" strategy="beforeInteractive" />
           <Script
-            src="https://www.google-analytics.com/analytics.js"
+            src="https://www.googletagmanager.com/gtag/js?id=G-SNV664KN9R"
             strategy="beforeInteractive"
           />
           <Script
@@ -73,9 +73,10 @@ export default class MyDocument extends Document {
             strategy="afterInteractive"
             dangerouslySetInnerHTML={{
               __html: `
-                  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-                  ga('create', 'UA-13226656-2', 'auto');
-                  ga('send', 'pageview');
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', 'G-SNV664KN9R');
                 `,
             }}
           />
