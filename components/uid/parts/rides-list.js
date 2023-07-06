@@ -54,7 +54,7 @@ const RidesList = ({ payload }) => {
         buttonTextTransform="uppercase"
         href="https://www.ridespot.org"
       >
-        See More Rides on Ridespot
+        See More Rides on Ride Spot
       </Button>
     </MainContent>
   );

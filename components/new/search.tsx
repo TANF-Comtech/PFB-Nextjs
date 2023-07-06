@@ -41,14 +41,14 @@ export const MobileSearch = () => {
   return (
     <InstantSearch searchClient={AlgoliaReactClient} indexName="MAINSITE">
       <div className="fixed inset-0 z-[2001] flex flex-col gap-4 p-4 sm:gap-8 sm:p-8 lg:hidden">
+        <div className="flex justify-center">
+          <Button label="Close" onClick={() => setIsSearchOpen(false)} variant="red" size="small" />
+        </div>
         <div>
           <CustomSearchBox />
         </div>
         <div>
           <CustomResults />
-        </div>
-        <div className="flex justify-center">
-          <Button label="Close" onClick={() => setIsSearchOpen(false)} variant="red" />
         </div>
       </div>
       <CustomBackdrop />
@@ -115,8 +115,11 @@ const CustomResult = ({ hit }) => {
   const href = hit.path.split('https://www.peopleforbikes.org/')[1];
 
   return (
-    <Link href={`/${href}`} onClick={handleCloseSearch}>
-      <a className="-mt-4 mb-4 block rounded-lg p-4 text-black transition duration-300 hover:bg-white">
+    <Link href={`/${href}`}>
+      <a
+        onClick={handleCloseSearch}
+        className="-mt-4 mb-4 block rounded-lg p-4 text-black transition duration-300 hover:bg-white"
+      >
         <div className="text-sm font-bold uppercase text-redAccent">{hit.type}</div>
         <div className="line-clamp-1 font-dharma text-3xl font-medium sm:text-4xl">{hit.title}</div>
         <div className="line-clamp-3 text-sm leading-snug text-black/80">{hit.content}</div>

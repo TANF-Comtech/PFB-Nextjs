@@ -55,6 +55,7 @@ export const Button = ({
         variant === 'gold' && 'bg-gold text-black',
         variant === 'white' && 'bg-white text-black',
         size === 'normal' && 'px-6 py-4 text-lg shadow-md',
+        size === 'small' && 'px-3 py-2 text-base shadow-md',
         className,
       )}
       {...props}

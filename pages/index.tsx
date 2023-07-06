@@ -8,12 +8,11 @@ import { useInView } from 'react-intersection-observer';
 import type { IntersectionOptions } from 'react-intersection-observer';
 
 import { getHomepageV3 } from '~/lib/queries/homepage-v3';
-import { dateFormatter } from '~/utils/dateFormatter'
+import { dateFormatter } from '~/utils/dateFormatter';
 import { linkResolver } from '~/utils';
 
 import { Button } from '~/components/new/button';
 import { Page } from '~/components/new/page';
-import { ExternalLink } from '~/components/new/external-link';
 import { ActionCard } from '~/components/new/card';
 import { Carousel } from '~/components/new/carousel';
 import { Slider } from '~/components/new/slider';
@@ -24,12 +23,12 @@ export default function NewHomePage({ page, preview }) {
   const hpData = page.homepage_v3;
 
   // Assign data into large pillars variable
-  PILLARS[0].featuredItems = hpData.infrastructure_pillar
-  PILLARS[0].newsItems = hpData.infrastructure_news
-  PILLARS[1].featuredItems = hpData.policy_pillar
-  PILLARS[1].newsItems = hpData.policy_news
-  PILLARS[2].featuredItems = hpData.participation_pillar
-  PILLARS[2].newsItems = hpData.participation_news
+  PILLARS[0].featuredItems = hpData.infrastructure_pillar;
+  PILLARS[0].newsItems = hpData.infrastructure_news;
+  PILLARS[1].featuredItems = hpData.policy_pillar;
+  PILLARS[1].newsItems = hpData.policy_news;
+  PILLARS[2].featuredItems = hpData.participation_pillar;
+  PILLARS[2].newsItems = hpData.participation_news;
 
   return (
     <Page title="Home" hasHero>
@@ -42,7 +41,6 @@ export default function NewHomePage({ page, preview }) {
 }
 
 const Hero = ({ data }) => {
-
   return (
     <div className="relative z-60 mt-[3rem] flex h-[calc(100vh-3rem)] items-center justify-center overflow-hidden bg-[#000000]">
       <video
@@ -200,39 +198,39 @@ const Pillar = ({ pillar, alternate }: PillarProps) => {
           {pillar.featuredItems.map((item, index) => (
             <div key={index} className="px-4">
               <>
-                { pillar.key === 'infrastructure' &&
+                {pillar.key === 'infrastructure' && (
                   <a href={linkResolver(item.infrastructure_link)} target="_blank">
                     <ActionCard
                       number={index + 1}
                       total={pillar.featuredItems.length}
                       title={item.infrastructure_title}
-                      description={item.infrastructure_dek ?? item.infrastructure_dek}
+                      description={item.infrastructure_dek}
                       image={item.infrastructure_image.url}
                     />
-                  </a>                           
-                }
-                { pillar.key === 'policy' &&
+                  </a>
+                )}
+                {pillar.key === 'policy' && (
                   <a href={linkResolver(item.policy_link)}>
                     <ActionCard
                       number={index + 1}
                       total={pillar.featuredItems.length}
                       title={item.policy_title}
-                      description={item.policy_dek ?? item.policy_dek}
+                      description={item.policy_dek}
                       image={item.policy_image.url}
                     />
-                  </a>                           
-                }
-                { pillar.key === 'participation' &&
+                  </a>
+                )}
+                {pillar.key === 'participation' && (
                   <a href={linkResolver(item.participation_link)}>
                     <ActionCard
                       number={index + 1}
                       total={pillar.featuredItems.length}
                       title={item.participation_title}
-                      description={item.participation_dek ?? item.participation_dek}
+                      description={item.participation_dek}
                       image={item.participation_image.url}
                     />
-                  </a>                           
-                }
+                  </a>
+                )}
               </>
             </div>
           ))}
@@ -242,69 +240,69 @@ const Pillar = ({ pillar, alternate }: PillarProps) => {
         <div className="text-xl font-bold uppercase leading-none">Latest {pillar.title} news</div>
         <ul className="flex flex-col gap-1.5">
           <>
-          { pillar.key === 'infrastructure' &&
-            pillar.newsItems.map( function(item: InfrastructureNewsItem) {
-              // Format the date
-              const cleanDate = dateFormatter(item.infrastructure_news_item.publication_date !== null ? 
-                item.infrastructure_news_item.publication_date : item.infrastructure_news_item._meta.lastPublicationDate )
+            {pillar.key === 'infrastructure' &&
+              pillar.newsItems.map((item: InfrastructureNewsItem) => {
+                // Format the date
+                const cleanDate = dateFormatter(
+                  item.infrastructure_news_item.publication_date !== null
+                    ? item.infrastructure_news_item.publication_date
+                    : item.infrastructure_news_item._meta.lastPublicationDate,
+                );
 
-              return(
-                <li key={item.infrastructure_news_item._meta.id}>
-                  <span className="underline">
-                    <Link href={`/news/${item.infrastructure_news_item._meta.uid}`}>
-                      <a>
-                        {item.infrastructure_news_item.title[0].text}
-                      </a>
-                    </Link>
-                  </span>
-                  &nbsp;|&nbsp; 
-                  <span>{ `${cleanDate.month} ${cleanDate.day}, ${cleanDate.year}` }</span>
-                </li>                   
-              )
-            } 
-          )}
-          { pillar.key === 'policy' &&
-            pillar.newsItems.map( function(item: PolicyNewsItem) {
-              // Format the date
-              const cleanDate = dateFormatter(item.policy_news_item.publication_date !== null ? 
-                item.policy_news_item.publication_date : item.policy_news_item._meta.lastPublicationDate )
+                return (
+                  <li key={item.infrastructure_news_item._meta.id}>
+                    <span className="underline">
+                      <Link href={`/news/${item.infrastructure_news_item._meta.uid}`}>
+                        <a>{item.infrastructure_news_item.title[0].text}</a>
+                      </Link>
+                    </span>
+                    &nbsp;|&nbsp;
+                    <span>{`${cleanDate.month} ${cleanDate.day}, ${cleanDate.year}`}</span>
+                  </li>
+                );
+              })}
+            {pillar.key === 'policy' &&
+              pillar.newsItems.map((item: PolicyNewsItem) => {
+                // Format the date
+                const cleanDate = dateFormatter(
+                  item.policy_news_item.publication_date !== null
+                    ? item.policy_news_item.publication_date
+                    : item.policy_news_item._meta.lastPublicationDate,
+                );
 
-              return(
-                <li key={item.policy_news_item._meta.id}>
-                  <span className="underline">
-                    <Link href={`/news/${item.policy_news_item._meta.uid}`}>
-                      <a>
-                        {item.policy_news_item.title[0].text}
-                      </a>
-                    </Link>
-                  </span>
-                  &nbsp;|&nbsp; 
-                  <span>{ `${cleanDate.month} ${cleanDate.day}, ${cleanDate.year}` }</span>
-                </li>                   
-              )
-            } 
-          )}
-          { pillar.key === 'participation' &&
-            pillar.newsItems.map( function(item: ParticipationNewsItem) {
-              // Format the date
-              const cleanDate = dateFormatter(item.participation_news_item.publication_date !== null ? 
-                item.participation_news_item.publication_date : item.participation_news_item._meta.lastPublicationDate )
+                return (
+                  <li key={item.policy_news_item._meta.id}>
+                    <span className="underline">
+                      <Link href={`/news/${item.policy_news_item._meta.uid}`}>
+                        <a>{item.policy_news_item.title[0].text}</a>
+                      </Link>
+                    </span>
+                    &nbsp;|&nbsp;
+                    <span>{`${cleanDate.month} ${cleanDate.day}, ${cleanDate.year}`}</span>
+                  </li>
+                );
+              })}
+            {pillar.key === 'participation' &&
+              pillar.newsItems.map((item: ParticipationNewsItem) => {
+                // Format the date
+                const cleanDate = dateFormatter(
+                  item.participation_news_item.publication_date !== null
+                    ? item.participation_news_item.publication_date
+                    : item.participation_news_item._meta.lastPublicationDate,
+                );
 
-              return(
-                <li key={item.participation_news_item._meta.id}>
-                  <span className="underline">
-                    <Link href={`/news/${item.participation_news_item._meta.uid}`}>
-                      <a>
-                        {item.participation_news_item.title[0].text}
-                      </a>
-                    </Link>
-                  </span>
-                  &nbsp;|&nbsp; 
-                  <span>{ `${cleanDate.month} ${cleanDate.day}, ${cleanDate.year}` }</span>
-                </li>                   
-              )
-            } 
-          )}                    
+                return (
+                  <li key={item.participation_news_item._meta.id}>
+                    <span className="underline">
+                      <Link href={`/news/${item.participation_news_item._meta.uid}`}>
+                        <a>{item.participation_news_item.title[0].text}</a>
+                      </Link>
+                    </span>
+                    &nbsp;|&nbsp;
+                    <span>{`${cleanDate.month} ${cleanDate.day}, ${cleanDate.year}`}</span>
+                  </li>
+                );
+              })}
           </>
         </ul>
       </div>
@@ -312,7 +310,7 @@ const Pillar = ({ pillar, alternate }: PillarProps) => {
   );
 };
 
-const News = ({data}) => {
+const News = ({ data }) => {
   return (
     <div className="flex items-center justify-center bg-lightestGray/50 p-8 sm:p-12 xl:h-panel xl:p-16">
       <div className="mx-auto flex max-w-screen-lg flex-col gap-16">
@@ -320,20 +318,24 @@ const News = ({data}) => {
           News
         </div>
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 xl:grid-cols-4">
-          {data.map( (item, i) => {
+          {data.map((item) => {
             // Date work
-            const dateFormatted = dateFormatter(item.news_item.publication_date !== null ? 
-              item.news_item.publication_date : item.news_item._meta.lastPublicationDate )
-            return(
+            const dateFormatted = dateFormatter(
+              item.news_item.publication_date !== null
+                ? item.news_item.publication_date
+                : item.news_item._meta.lastPublicationDate,
+            );
+
+            return (
               <NewsCard
-                imgSrc={ item.news_item.header_image.url }
-                imgAlt={ item.news_item.header_image.alt }
-                date={ `${dateFormatted.month} ${dateFormatted.day}, ${dateFormatted.year}` }
-                title={ item.news_item.title[0].text }
-                link={ `/news/${item.news_item._meta.uid}` }
+                imgSrc={item.news_item.header_image.url}
+                imgAlt={item.news_item.header_image.alt}
+                date={`${dateFormatted.month} ${dateFormatted.day}, ${dateFormatted.year}`}
+                title={item.news_item.title[0].text}
+                link={`/news/${item.news_item._meta.uid}`}
               />
-            )
-          } )}
+            );
+          })}
         </div>
       </div>
     </div>
@@ -361,13 +363,6 @@ const NewsCard = ({ imgSrc, imgAlt, date, title, link }) => {
   );
 };
 
-type Campaign = {
-  title: string;
-  description: string;
-  ctaLabel: string;
-  ctaLink: string;
-};
-
 const VISION_HEADLINE: string = `Making the U.S. the Best Place to Ride a Bike`;
 
 const VISION_BODY: string = `PeopleForBikes is making biking better for everyone by uniting millions of Americans, thousands of businesses, and hundreds of communities to make every bike ride safer, more accessible, and more fun. The PeopleForBikes Coalition has more than 325 supplier members and 1.4 million supporters in its grassroots network. When people ride bikes, great things happen.`;
@@ -381,7 +376,10 @@ type Pillar = {
   image: string;
   title: string;
   description: string;
-  featuredItems: Array<FeaturedItemInfrastructure> | Array<FeaturedItemPolicy> | Array<FeaturedItemParticipation>;
+  featuredItems:
+    | Array<FeaturedItemInfrastructure>
+    | Array<FeaturedItemPolicy>
+    | Array<FeaturedItemParticipation>;
   newsItems: [];
 };
 
@@ -401,7 +399,6 @@ type FeaturedItemPolicy = {
   policy_link: object;
 };
 
-
 type FeaturedItemParticipation = {
   participation_image: object;
   participation_title: string;
@@ -409,46 +406,45 @@ type FeaturedItemParticipation = {
   participation_link: object;
 };
 
-interface Title {
+type Title = {
   text: string;
   type: string;
-  spans: []
-}
+  spans: [];
+};
 
-interface MetaObject {
-  id: string,
+type MetaObject = {
+  id: string;
   lastPublicationDate: string;
   type: string;
   uid: string;
-}
+};
 
-interface InfrastructureNewsItem {
+type InfrastructureNewsItem = {
   infrastructure_news_item: {
     publication_date: string | null;
     __typename: string;
     _meta: MetaObject;
     title: Title[];
   };
-}
+};
 
-interface PolicyNewsItem {
+type PolicyNewsItem = {
   policy_news_item: {
     publication_date: string | null;
     __typename: string;
     _meta: MetaObject;
     title: Title[];
   };
-}
+};
 
-interface ParticipationNewsItem {
+type ParticipationNewsItem = {
   participation_news_item: {
     publication_date: string | null;
     __typename: string;
     _meta: MetaObject;
     title: Title[];
   };
-}
-
+};
 
 const PILLARS: Array<Pillar> = [
   {

@@ -397,7 +397,7 @@ const MegaMenu = () => {
                     alt=""
                     aria-hidden
                   />
-                  <div className="relative z-10 px-2 text-center text-lg font-bold uppercase underline">
+                  <div className="relative z-10 px-2 text-center text-lg font-bold hover:underline">
                     {item.title}
                   </div>
                 </DynamicLink>
@@ -407,7 +407,7 @@ const MegaMenu = () => {
           {ACTIVE_NAV.items.length > 0 && (
             <div
               className={cx(
-                'grid  items-center justify-center gap-6',
+                'grid items-center justify-center gap-6',
                 ACTIVE_NAV.featuredItems.length !== 0 || ACTIVE_NAV.items.length === 2
                   ? 'grid-cols-2'
                   : 'grid-cols-3',
@@ -418,21 +418,21 @@ const MegaMenu = () => {
                   <DynamicLink
                     href={item.link}
                     onClick={handleCloseMenu}
-                    className="inline-block text-lg font-bold underline"
+                    className="inline-block text-lg font-bold hover:underline"
                   >
                     {item.title}
                   </DynamicLink>
                 </div>
               ))}
               {activeTab !== 'donate' && (
-                <>
-                  <Link href="/giving" onClick={handleCloseMenu}>
-                    <a className="inline-block text-lg underline">Donate</a>
-                  </Link>
-                  <Link href="/topics" onClick={handleCloseMenu}>
-                    <a className="inline-block text-lg underline">View More Topics</a>
-                  </Link>
-                </>
+                <Link href="/giving">
+                  <a
+                    onClick={handleCloseMenu}
+                    className="inline-block text-lg font-bold text-yellow hover:underline"
+                  >
+                    Donate
+                  </a>
+                </Link>
               )}
             </div>
           )}
@@ -715,18 +715,25 @@ const SignUpForm = () => {
   );
 };
 
-const DynamicLink = ({ href, children, ...rest }) => {
+const DynamicLink = ({ href, className = '', children, ...rest }) => {
   if (href.startsWith('http')) {
     return (
-      <ExternalLink href={href} {...rest}>
-        {children}
+      <ExternalLink
+        href={href}
+        className={cx('inline-flex items-center gap-3', className)}
+        {...rest}
+      >
+        <span>{children}</span>
+        <i className="fa-solid fa-arrow-up-right-from-square text-[0.8em]" />
       </ExternalLink>
     );
   }
 
   return (
     <Link href={`/${href}`}>
-      <a {...rest}>{children}</a>
+      <a className={className} {...rest}>
+        {children}
+      </a>
     </Link>
   );
 };
@@ -818,7 +825,7 @@ const NAVIGATION: Array<NavigationEntry> = [
     featuredItems: [
       {
         image: 'Ride_Spot.png',
-        title: 'RideSpot',
+        title: 'Ride Spot',
         link: 'https://www.ridespot.org/',
       },
       {
