@@ -57,7 +57,11 @@ const Giving = () => {
 const Banner = () => {
   return (
     <div className="relative z-60 flex items-center justify-center gap-4 bg-blueAccent p-8 text-white sm:p-12 xl:px-24 xl:py-16">
-      <Button variant="gold" label={BANNER_LABEL} />
+      <Button
+        to="https://www.classy.org/give/117371#!/donation/checkout"
+        variant="gold"
+        label={BANNER_LABEL}
+      />
       <span className="hidden font-dharma sm:inline sm:text-4xl xl:text-5xl">{BANNER_CAPTION}</span>
     </div>
   );
@@ -234,27 +238,27 @@ const BANNER_CAPTION: string = `Your support matters`;
 const IMPACTS: Array<any> = [
   {
     title: 'Youth',
-    image: '1_Youth.png',
+    image: '/new/1_Youth.png',
     description: `PeopleForBikes’ support of Outride and the Youth Cycling Coalition helps introduce more young riders to the joys of bicycling by expanding opportunity and access, especially in historically underserved communities. `,
   },
   {
     title: 'Policy',
-    image: '2_Policy.png',
+    image: '/new/2_Policy.png',
     description: `Our VoteForBikes initiative supports dozens of pro-bike ballot measures in communities nationwide every year, with hundreds of millions of dollars approved for new or renewed funding for local trails and street safety improvements, connecting communities by opening and improving more great places to ride.`,
   },
   {
     title: 'Participation',
-    image: '3_Participation.png',
+    image: '/new/3_Participation.png',
     description: `39 total states have adopted PeopleForBikes’ model, three-class electric bicycle definitions, which define e-bikes similarly to traditional bikes, and we’ve worked in a dozen cities and states to introduce e-bike purchase incentive programs. This work helps expand access for more Americans to afford and safely ride electric bicycles in their communities.`,
   },
   {
     title: 'Infrastructure',
-    image: '4_Infrastructure.png',
+    image: '/new/4_Infrastructure.png',
     description: `Our Final Mile program, in partnership with the Wend Collective, accelerated the construction of complete mobility networks in five U.S. cities and built 300 miles of new bike infrastructure in record time, connecting communities and their residents like never before.`,
   },
   {
-    title: 'RideSpot',
-    image: '5_RideSpot.png',
+    title: 'Ride Spot',
+    image: '/new/5_RideSpot.png',
     description: `Our national Ride Spot Challenges inspire folks across the U.S. to explore their communities by bike, with more than 300,000 rides recorded in 2022 alone.`,
   },
 ];
@@ -565,22 +569,22 @@ const MAXIMIZE_BODY: string = `Giving to the PeopleForBikes Foundation is flexib
 const MAXIMIZERS: Array<any> = [
   {
     title: '1,000 Bike Projects Across America',
-    image: '6_1000_Places.png',
+    image: '/new/6_1000_Places.png',
     description: `We’re working to make biking safer by accelerating the construction of thousands of bike projects from coast to coast. Your support can help build protected bike lanes, off-street paths and trails, pump tracks, bike parks, and more right in your backyard.`,
   },
   {
     title: 'More Kids on Bikes',
-    image: '7_Kids.png',
+    image: '/new/7_Kids.png',
     description: `We believe biking should be accessible and fun for every kid across the U.S. By supporting our youth programming work, you’re helping grow the next generation of riders by getting more kids on bikes more often.`,
   },
   {
     title: 'Trails + Recreation',
-    image: '8_Trails.png',
+    image: '/new/8_Trails.png',
     description: `PeopleForBikes works to grow recreational riding opportunities nationwide. You can support our work preserving and expanding access for mountain biking, gravel riding, and long-distance trails to help more Americans experience the joys of biking in the great outdoors.`,
   },
   {
     title: 'Benefits for Biking',
-    image: '9_Benefits.png',
+    image: '/new/9_Benefits.png',
     description: `We encourage cities, states, and the federal government to provide incentives for biking like tax credits, purchase rebates, and more. Your support helps us get these benefits in place to make biking more accessible in your community.`,
   },
 ];
