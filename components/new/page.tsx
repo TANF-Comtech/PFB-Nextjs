@@ -425,14 +425,14 @@ const MegaMenu = () => {
                 </div>
               ))}
               {activeTab !== 'donate' && (
-                <Link href="/giving">
+                <DynamicLink href="https://www.classy.org/give/117371#!/donation/checkout">
                   <a
                     onClick={handleCloseMenu}
                     className="inline-block text-lg font-bold text-yellow hover:underline"
                   >
                     Donate
                   </a>
-                </Link>
+                </DynamicLink>
               )}
             </div>
           )}
@@ -863,8 +863,8 @@ const NAVIGATION: Array<NavigationEntry> = [
     title: 'Donate',
     featuredItems: [],
     items: [
-      { title: 'Donate Now', link: 'giving' },
-      { title: 'Learn More About Supporting Our Work', link: 'take-action' },
+      { title: 'Donate Now', link: 'https://www.classy.org/give/117371#!/donation/checkout' },
+      { title: 'Learn More About Supporting Our Work', link: '/giving' },
     ],
   },
 ];

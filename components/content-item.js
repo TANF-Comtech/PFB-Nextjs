@@ -36,30 +36,32 @@ const ContentContainer = styled.div`
   }
 `;
 
-const Title = styled.h4`
-  color: ${(props) => props.theme.red};
-  font-size: 40px;
-  line-height: 38px;
-  margin: 0;
+// @TODO switch to <h4> when converting to Tailwind
+const Title = styled.h5`
+  font-size: 24px !important;
+  font-weight: 700 !important;
+  margin-bottom: 0 !important;
+  color: ${(props) => props.theme.black} !important;
+  margin: 0 !important;
 `;
 
 const Text = styled.p`
-  font-size: 18px;
-  line-height: 24px;
-  margin-bottom: 25px;
+  font-size: 18px !important;
+  line-height: 24px !important;
+  margin-bottom: 25px !important;
 `;
 
 const Datestamp = styled.p`
-  font-size: 18px;
-  font-weight: 700;
-  margin-bottom: 0;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  margin-bottom: 0 !important;
 `;
 
 const Image = styled.img`
-  flex: 1 1 0px;
-  height: auto;
-  margin: 25px 0 0 0;
-  max-width: 100%;
+  flex: 1 1 0px !important;
+  height: auto !important;
+  margin: 25px 0 0 0 !important;
+  max-width: 100% !important;
 
   @media (min-width: ${(props) => props.theme.sm}) {
     margin: 25px 25px 25px 0;
@@ -87,16 +89,19 @@ const Image = styled.img`
 const ContentItem = ({ date, deck, image, path, title, text }) => {
   return (
     <Container>
-      {image.url ? (
-        <Image
-          alt={image.alt ? image.alt : 'Bike-oriented image'}
-          loading="lazy"
-          src={image['1x'] ? image['1x'].url : image.url}
-        />
-      ) : (
-        // Utilizes fallback image functionality
-        <Image alt={image.alt} loading="lazy" src={image.path} />
-      )}
+      <div className="mr-8 aspect-[4/3] w-1/3 overflow-hidden">
+        {image.url ? (
+          <Image
+            alt={image.alt ? image.alt : 'Bike-oriented image'}
+            loading="lazy"
+            src={image['1x'] ? image['1x'].url : image.url}
+            className="object-cover"
+          />
+        ) : (
+          // Utilizes fallback image functionality
+          <Image alt={image.alt} loading="lazy" src={image.path} className="object-cover" />
+        )}
+      </div>
       <ContentContainer>
         {!path ? (
           <Title>{title}</Title>

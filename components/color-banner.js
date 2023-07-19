@@ -81,7 +81,7 @@ const ColorBanner = ({
       <a href="https://www.classy.org/give/117371" rel="nofollow" target="_blank">
         <ColorContainer bgColor={bgColor}>
           <MainContent maxWidth="800px">
-            <h1>{bannerTitle}</h1>
+            <h1 className="!no-underline">{bannerTitle}</h1>
             <span>{bannerContent}</span>
             <Arrow src={RedArrowWhiteBlock} />
           </MainContent>

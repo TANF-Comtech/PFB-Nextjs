@@ -304,6 +304,12 @@ const Pillar = ({ pillar, alternate }: PillarProps) => {
                 );
               })}
           </>
+          <Link href="/news">
+            <a className="mt-4 inline-flex items-center gap-1.5 font-bold">
+              <span>See all news</span>
+              <i className="fa-solid fa-caret-right" />
+            </a>
+          </Link>
         </ul>
       </div>
     </div>
@@ -352,11 +358,18 @@ const NewsCard = ({ imgSrc, imgAlt, date, title, link }) => {
           alt={imgAlt !== null ? imgAlt : 'Biking oriented picture'}
         />
       </div>
-      <div className="flex flex-col p-8">
-        <div className="text-sm font-bold text-darkest-blue">{date}</div>
-        <div className="mt-2 text-lg">{title}</div>
-        <div className="mt-8">
-          <Button to={link} variant="white" label="Read" />
+      <div className="flex h-full flex-col justify-between p-8">
+        <div className="flex-grow">
+          <div className="text-sm font-bold text-darkest-blue">{date}</div>
+          <div className="mt-2 text-lg">{title}</div>
+        </div>
+        <div>
+          <Link href={link}>
+            <a className="mt-4 inline-flex items-center gap-1.5 font-bold">
+              <span>Read</span>
+              <i className="fa-solid fa-caret-right" />
+            </a>
+          </Link>
         </div>
       </div>
     </div>
