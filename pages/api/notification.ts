@@ -31,7 +31,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     try {
       const response = await transporter.sendMail({
         from: 'info@peopleforbikes.org',
-        to: 'kerri@peopleforbikes.org, rod@peopleforbikes.org, scarlet@peopleforbikes.org, ray@peopleforbikes.org',
+        to: 'kerri@peopleforbikes.org, rod@peopleforbikes.org, mimi@peopleforbikes.org, ray@peopleforbikes.org',
         subject,
         text,
       });

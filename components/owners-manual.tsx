@@ -146,7 +146,7 @@ const Start = () => {
     <div>
       <h2 className="font-dharma text-6xl sm:text-8xl">License the Owner’s Manual</h2>
       <p className="text-base !leading-relaxed sm:text-3xl">
-        PeopleForBikes Owner’s Manual can be licensed by member companies for $2,000/year. If your company is not a PeopleForBikes Member, please contact Scarlet at scarlet@peopleforbikes.org.
+        PeopleForBikes Owner’s Manual can be licensed by member companies for $2,000/year. If your company is not a PeopleForBikes Member, please contact Mimi at mimi@peopleforbikes.org.
       </p>
       <div>
         <Button label="License the Owner’s Manual" size="large" onClick={handleStart} />
@@ -308,7 +308,7 @@ const Pending = () => {
     <div>
       <h2 className="text-center font-dharma text-6xl sm:text-8xl">Success!</h2>
       <p className="text-center text-base !leading-relaxed sm:text-3xl">
-        Thank you for your purchase. Your owner&apos;s manual payment will be auto renewed as an annual subscription ever year at this time. Your license is currently being processed. When approved our membership team will reach out to you with instructions for downloading the Owner&apos;s Manual. Please contact Scarlet Stinchcomb at scarlet@peopleforbikes.org with any questions.
+        Thank you for your purchase. Your owner&apos;s manual payment will be auto renewed as an annual subscription ever year at this time. Your license is currently being processed. When approved our membership team will reach out to you with instructions for downloading the Owner&apos;s Manual. Please contact Mimi at mimi@peopleforbikes.org with any questions.
       </p>
       <div className="flex justify-center gap-8">
         <Button

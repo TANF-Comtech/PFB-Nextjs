@@ -42,7 +42,7 @@ const login = (req, res) => {
             res.status(401).json({
               status: false,
               error:
-                'Authentication service error. Please reach out to Scarlet at scarlet@peopleforbikes.org if this persists.',
+                'Authentication service error. Please reach out to Mimi at mimi@peopleforbikes.org if this persists.',
             });
           });
       }
@@ -60,7 +60,7 @@ const login = (req, res) => {
                 res.status(401).json({
                   status: false,
                   error:
-                    'We could not verify your email address in our database. Try submitting it again. If this error persists, contact scarlet@peopleforbikes.org and we will investigate further.',
+                    'We could not verify your email address in our database. Try submitting it again. If this error persists, contact mimi@peopleforbikes.org and we will investigate further.',
                 });
               });
           } else {
@@ -103,7 +103,7 @@ const login = (req, res) => {
         .json({
           status: false,
           error:
-            'Your email address is not authorized to use the Member Center. Contact scarlet@peopleforbikes.org if you believe this is an error.',
+            'Your email address is not authorized to use the Member Center. Contact mimi@peopleforbikes.org if you believe this is an error.',
         });
     }
   }
