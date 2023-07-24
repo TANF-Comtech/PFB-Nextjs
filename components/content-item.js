@@ -6,33 +6,33 @@ import FallbackImage from '~/components/fallback-image';
 import Button from '~/components/button';
 
 const Container = styled.section`
-  align-items: flex-start;
-  border-bottom: 1px solid rgb(216, 216, 216);
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 25px;
-  padding-bottom: 25px;
+  align-items: flex-start !important;
+  border-bottom: 1px solid rgb(216, 216, 216) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  margin-bottom: 25px !important;
+  padding-bottom: 25px !important;
 
   @media (min-width: ${(props) => props.theme.sm}) {
-    flex-direction: row;
+    flex-direction: row !important;
   }
 
   &:last-child {
-    border-bottom: none;
-    padding-bottom: 0;
+    border-bottom: none !important;
+    padding-bottom: 0 !important;
   }
 `;
 
 const ContentContainer = styled.div`
-  flex: 1 1 0px;
-  margin: 4vh 0;
+  flex: 1 1 0px !important;
+  margin: 4vh 0 !important;
 
   a,
   a:visited,
   a:active,
   a:focus,
   a:hover {
-    text-decoration: none;
+    text-decoration: none !important;
   }
 `;
 
@@ -64,12 +64,12 @@ const Image = styled.img`
   max-width: 100% !important;
 
   @media (min-width: ${(props) => props.theme.sm}) {
-    margin: 25px 25px 25px 0;
-    max-width: 300px;
+    margin: 25px 25px 25px 0 !important;
+    max-width: 300px !important;
   }
 
   @media (min-width: ${(props) => props.theme.md}) {
-    max-width: 500px;
+    max-width: 500px !important;
   }
 `;
 

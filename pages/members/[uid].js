@@ -29,75 +29,75 @@ import VisualGrid from '~/components/visual-grid';
 import { OwnersManual } from '~/components/owners-manual';
 
 const IntroWrapper = styled.div`
-  margin: 3vh 0 1vh 0;
+  margin: 3vh 0 1vh 0 !important;
 `;
 
 const Box = styled.div`
-  background-color: ${(props) => props.theme.blueBright};
-  min-height: 190px;
-  padding: 25px;
+  background-color: ${(props) => props.theme.blueBright} !important;
+  min-height: 190px !important;
+  padding: 25px !important;
 `;
 
 const Text = styled.h4`
-  color: white;
-  font-size: 36px;
-  font-weight: 300;
-  line-height: 36px;
-  margin: 0 0 10px 0;
-  text-align: center;
+  color: white !important;
+  font-size: 36px !important;
+  font-weight: 300 !important;
+  line-height: 36px !important;
+  margin: 0 0 10px 0 !important;
+  text-align: center !important;
 
   @media screen and (min-width: 320px) {
-    font-size: calc(36px + 8 * ((100vw - 320px) / 880));
-    line-height: calc(36px + 8 * ((100vw - 320px) / 880));
+    font-size: calc(36px + 8 * ((100vw - 320px) / 880)) !important;
+    line-height: calc(36px + 8 * ((100vw - 320px) / 880)) !important;
   }
   @media screen and (min-width: 1200px) {
-    font-size: 44px;
-    line-height: 44px;
+    font-size: 44px !important;
+    line-height: 44px !important;
   }
 `;
 
 const Arrow = styled.img`
-  display: block;
-  margin: 0 auto;
-  width: 46px;
+  display: block !important;
+  margin: 0 auto !important;
+  width: 46px !important;
 `;
 
 const Container = styled.section`
-  align-items: flex-start;
-  border-bottom: 1px solid rgb(216, 216, 216);
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 25px;
-  padding-bottom: 25px;
+  align-items: flex-start !important;
+  border-bottom: 1px solid rgb(216, 216, 216) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  margin-bottom: 25px !important;
+  padding-bottom: 25px !important;
 
   @media (min-width: ${(props) => props.theme.sm}) {
-    flex-direction: row;
+    flex-direction: row !important;
   }
 
   &:last-child {
-    border-bottom: none;
-    padding-bottom: 0;
+    border-bottom: none !important;
+    padding-bottom: 0 !important;
   }
 `;
 
 const ContentContainer = styled.div`
-  flex: 1 1 0px;
-  margin: 4vh 0;
+  flex: 1 1 0px !important;
+  margin: 4vh 0 !important;
 
   a,
   a:visited,
   a:active,
   a:focus,
   a:hover {
-    text-decoration: none;
+    text-decoration: none !important;
   }
 `;
 
 const Title = styled.h3`
-  color: ${(props) => props.theme.darkestGray};
-  font-size: 40px;
-  line-height: 50px;
-  margin: 0;
+  color: ${(props) => props.theme.darkestGray} !important;
+  font-size: 40px !important;
+  line-height: 50px !important;
+  margin: 0 !important;
 `;
 
 /**

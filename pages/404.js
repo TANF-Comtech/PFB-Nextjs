@@ -10,78 +10,78 @@ import BMXRider from '~/public/bmx-rider.png';
 import BMXRiderMobile from '~/public/bmx-rider-mobile.png';
 
 const Container = styled.section`
-  align-items: center;
-  background-color: ${(props) => props.theme.redAccent};
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  font-family: 'proxima-nova', Helvetica, Arial, sans-serif;
-  font-weight: 300;
-  height: 850px;
-  justify-content: center;
-  padding: 10vh 0 0 0;
-  margin-bottom: 25px;
-  width: 100%;
+  align-items: center !important;
+  background-color: ${(props) => props.theme.redAccent} !important;
+  color: #fff !important;
+  display: flex !important;
+  flex-direction: column !important;
+  font-family: 'proxima-nova', Helvetica, Arial, sans-serif !important;
+  font-weight: 300 !important;
+  height: 850px !important;
+  justify-content: center !important;
+  padding: 10vh 0 0 0 !important;
+  margin-bottom: 25px !important;
+  width: 100% !important;
 `;
 
 const ImgContainer = styled.div`
-  display: none;
+  display: none !important;
 
   @media (min-width: ${(props) => props.theme.xs}) {
-    display: block;
-    height: 290px;
-    position: relative;
-    top: 50px;
-    width: 346px;
-    z-index: ${(props) => props.theme.zIndex01};
+    display: block !important;
+    height: 290px !important;
+    position: relative !important;
+    top: 50px !important;
+    width: 346px !important;
+    z-index: ${(props) => props.theme.zIndex01} !important;
   }
 `;
 
 const ImgContainerMobile = styled.div`
-  display: none;
+  display: none !important;
 
   @media (max-width: ${(props) => props.theme.xs}) {
-    display: block;
-    height: 251px;
-    position: relative;
-    top: 50px;
-    width: 300px;
-    z-index: ${(props) => props.theme.zIndex01};
+    display: block !important;
+    height: 251px !important;
+    position: relative !important;
+    top: 50px !important;
+    width: 300px !important;
+    z-index: ${(props) => props.theme.zIndex01} !important;
   }
 `;
 
 const TextContainer = styled.div`
-  padding: 0 15px;
-  position: relative;
-  top: -20px;
+  padding: 0 15px !important;
+  position: relative !important;
+  top: -20px !important;
 
   @media (min-width: ${(props) => props.theme.xs}) {
-    top: -50px;
+    top: -50px !important;
   }
 `;
 
 const Title = styled.h1`
-  font-size: 250px;
-  font-weight: 700;
-  line-height: 0.8;
-  margin: 0;
-  text-align: center;
+  font-size: 250px !important;
+  font-weight: 700 !important;
+  line-height: 0.8 !important;
+  margin: 0 !important;
+  text-align: center !important;
 
   @media (min-width: ${(props) => props.theme.xs}) {
-    font-size: 380px;
+    font-size: 380px !important;
   }
 `;
 
 const Text = styled.h3`
-  line-height: 1.6;
-  text-align: center;
+  line-height: 1.6 !important;
+  text-align: center !important;
 
   a,
   a:visited,
   a:focus,
   a:hover {
-    color: #fff;
-    text-decoration: underline;
+    color: #fff !important;
+    text-decoration: underline !important;
   }
 `;
 

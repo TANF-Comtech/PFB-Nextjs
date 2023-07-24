@@ -1,5 +1,3 @@
-import { setDateSuffix } from '~/utils/setDateSuffix';
-
 /**
  * dateFormatter()
  *
@@ -22,7 +20,7 @@ export const dateFormatter = (ISOdate) => {
   return {
     unixTime: Date.parse(newDate),
     month: newDate.toLocaleString('en-us', { month: 'long' }),
-    day: setDateSuffix(newDate.getDate()),
+    day: newDate.getDate(),
     year: newDate.getFullYear(),
   };
 };

@@ -3,43 +3,43 @@ import styled from 'styled-components';
 import Link from 'next/link';
 
 const Container = styled.div`
-  display: flex;
-  margin: ${(props) => props.buttonMargin || '0'};
-  justify-content: ${(props) => props.buttonAlign || 'flex-start'};
+  display: flex !important;
+  margin: ${(props) => props.buttonMargin || '0'} !important;
+  justify-content: ${(props) => props.buttonAlign || 'flex-start'} !important;
 `;
 
 /* !important is needed to override when next/link applies global-css.js styles to anchors */
 /* This pattern allows the props we pass into our styled-component to override those styles */
 const Button = styled.a`
-  background-color: ${(props) => props.buttonBg || 'rgba(255,255,255,1)'};
-  border: ${(props) => props.buttonBorder || `1px solid ${props.theme.black}`};
-  border-radius: 10px;
-  box-shadow: ${(props) => props.theme.buttonBoxShadow};
+  background-color: ${(props) => props.buttonBg || 'rgba(255,255,255,1)'} !important;
+  border: ${(props) => props.buttonBorder || `1px solid ${props.theme.black}`} !important;
+  border-radius: 10px !important;
+  box-shadow: ${(props) => props.theme.buttonBoxShadow} !important;
   color: ${(props) => props.buttonColor || props.theme.black} !important;
-  cursor: pointer;
-  font-family: ${(props) => props.theme.montserrat};
-  font-size: ${(props) => props.buttonFontSize || '18px'};
-  font-weight: 700;
-  min-width: 100px;
-  margin: 0;
-  padding: ${(props) => props.buttonPadding || '10px 35px'};
-  text-align: center;
+  cursor: pointer !important;
+  font-family: ${(props) => props.theme.montserrat} !important;
+  font-size: ${(props) => props.buttonFontSize || '18px'} !important;
+  font-weight: 700 !important;
+  min-width: 100px !important;
+  margin: 0 !important;
+  padding: ${(props) => props.buttonPadding || '10px 35px'} !important;
+  text-align: center !important;
   text-decoration: none !important;
-  text-transform: ${(props) => props.buttonTextTransform || 'uppercase'};
-  transform: translateY(0);
-  transition: all 0.25s ease;
+  text-transform: ${(props) => props.buttonTextTransform || 'uppercase'} !important;
+  transform: translateY(0) !important;
+  transition: all 0.25s ease !important;
 
   &:hover,
   &::visited,
   &::focus,
   &:active {
-    background-color: ${(props) => props.buttonBgHover || props.theme.black};
+    background-color: ${(props) => props.buttonBgHover || props.theme.black} !important;
     color: ${(props) => props.buttonColorHover || 'white'} !important;
-    text-decoration: none;
+    text-decoration: none !important;
   }
 
   &:hover {
-    transform: translateY(-2px);
+    transform: translateY(-2px) !important;
   }
 `;
 

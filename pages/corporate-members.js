@@ -17,44 +17,44 @@ import SiteMetaCustom from '~/components/site-meta-custom';
 import Button from '~/components/button';
 
 const HitsAndFilters = styled.section`
-  align-items: flex-start;
-  display: flex;
-  flex-wrap: wrap;
-  margin: 0 0 10px 0;
+  align-items: flex-start !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  margin: 0 0 10px 0 !important;
 
   h3 {
-    font-size: 16px;
-    margin: 0;
-    text-transform: uppercase;
+    font-size: 16px !important;
+    margin: 0 !important;
+    text-transform: uppercase !important;
   }
 `;
 
 const FilterMenu = styled(RefinementList)`
-  color: ${(props) => props.theme.darkGray};
+  color: ${(props) => props.theme.darkGray} !important;
 
   ul {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 8px 0;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    margin: 8px 0 !important;
   }
 
   label {
-    align-items: center;
-    display: flex;
-    margin: 0;
+    align-items: center !important;
+    display: flex !important;
+    margin: 0 !important;
   }
 
   span {
-    color: ${(props) => props.theme.blue};
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: bold;
-    line-height: 1;
-    margin: 0 5px;
-    text-transform: uppercase;
+    color: ${(props) => props.theme.blue} !important;
+    cursor: pointer !important;
+    font-size: 14px !important;
+    font-weight: bold !important;
+    line-height: 1 !important;
+    margin: 0 5px !important;
+    text-transform: uppercase !important;
 
     &:hover {
-      text-decoration: underline;
+      text-decoration: underline !important;
     }
   }
 
@@ -63,50 +63,50 @@ const FilterMenu = styled(RefinementList)`
   }
 
   li[class='ais-RefinementList-item ais-RefinementList-item--selected'] {
-    color: ${(props) => props.theme.blue};
+    color: ${(props) => props.theme.blue} !important;
     list-style-type: none !important;
     text-decoration: underline !important;
   }
 
   // hides checkbox and count
   input[class='ais-RefinementList-checkbox'] {
-    display: none;
+    display: none !important;
   }
   span[class='ais-RefinementList-count'] {
-    display: none;
+    display: none !important;
   }
 `;
 
 const Box = styled.div`
-  width: 100%;
-  background-color: #d8d8d8;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 5vh 0;
+  width: 100% !important;
+  background-color: #d8d8d8 !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  padding: 5vh 0 !important;
 `;
 
 const Company = styled.p`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-transform: uppercase;
-  text-align: center;
-  margin: 0;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  text-transform: uppercase !important;
+  text-align: center !important;
+  margin: 0 !important;
 `;
 
 const CompName = styled.span`
-  display: block;
-  font-weight: bold;
-  margin-bottom: 0;
-  padding: 0 3vw;
+  display: block !important;
+  font-weight: bold !important;
+  margin-bottom: 0 !important;
+  padding: 0 3vw !important;
 `;
 
 const HyperCompName = styled.a`
-  font-weight: bold;
-  padding: 0 5vw;
+  font-weight: bold !important;
+  padding: 0 5vw !important;
   &:hover {
-    color: inherit;
+    color: inherit !important;
   }
 `;
 

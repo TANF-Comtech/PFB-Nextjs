@@ -5,27 +5,27 @@ import Link from 'next/link';
 import { randomID, linkResolver } from '~/utils';
 
 const ItemList = styled.ul`
-  list-style: none;
-  padding: 0;
-  margin: 0;
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
 
   li a,
   li a:focus,
   li a:visited {
-    background-color: none;
-    color: #fff;
-    padding: ${(props) => (props.isMobileMenu ? '8px 0' : '15px 20px')};
-    display: block;
-    font-family: ${(props) => props.theme.montserrat};
-    font-size: 16px;
-    font-weight: 700;
-    text-decoration: none;
-    text-transform: uppercase;
-    line-height: 1.2;
+    background-color: none !important;
+    color: #fff !important;
+    padding: ${(props) => (props.isMobileMenu ? '8px 0' : '15px 20px')} !important;
+    display: block !important;
+    font-family: ${(props) => props.theme.montserrat} !important;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    text-decoration: none !important;
+    text-transform: uppercase !important;
+    line-height: 1.2 !important;
   }
 
   li a:hover {
-    text-decoration: underline;
+    text-decoration: underline !important;
   }
 `;
 

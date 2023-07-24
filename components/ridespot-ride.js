@@ -6,101 +6,101 @@ import PinImg from '~/public/ridespot-pin.svg';
 import MapImg from '~/public/ridespot-map.svg';
 
 const RSRide = styled.a`
-  background-color: ${(props) => props.theme.midnightBlue};
-  border-radius: 0 0 15px 15px;
-  margin: 1vw;
-  text-decoration: none;
-  transform: translateX(0);
-  transition: 0.2s linear;
-  width: 94vw;
+  background-color: ${(props) => props.theme.midnightBlue} !important;
+  border-radius: 0 0 15px 15px !important;
+  margin: 1vw !important;
+  text-decoration: none !important;
+  transform: translateX(0) !important;
+  transition: 0.2s linear !important;
+  width: 94vw !important;
 
   &:hover,
   &:active,
   &:focus {
-    text-decoration: none;
+    text-decoration: none !important;
   }
 
   &:hover {
-    transform: translateY(-5px);
+    transform: translateY(-5px) !important;
   }
 
   @media (min-width: ${(props) => props.theme.xs}) {
-    width: 70%;
+    width: 70% !important;
   }
 
   @media (min-width: ${(props) => props.theme.sm}) {
-    width: 46%;
+    width: 46% !important;
   }
 
   @media (min-width: ${(props) => props.theme.md}) {
-    width: 30%;
+    width: 30% !important;
   }
 `;
 
 // Map
 const Map = styled.div`
-  align-items: center;
-  background-image: url(${MapImg});
-  background-position: center center;
-  background-size: cover;
-  display: flex;
-  height: 100px;
+  align-items: center !important;
+  background-image: url(${MapImg}) !important;
+  background-position: center center !important;
+  background-size: cover !important;
+  display: flex !important;
+  height: 100px !important;
 `;
 
 const Pin = styled.img`
-  margin-left: 25px;
-  width: 55px;
+  margin-left: 25px !important;
+  width: 55px !important;
 `;
 
 // Data
 const RSContent = styled.div`
-  align-items: center;
-  display: flex;
-  justify-content: space-between;
+  align-items: center !important;
+  display: flex !important;
+  justify-content: space-between !important;
 `;
 
 const RSData = styled.div`
-  flex-basis: calc(100% - 50px);
-  padding: 3vh 4vw;
-  max-width: 90%;
-  min-height: 25vh;
+  flex-basis: calc(100% - 50px) !important;
+  padding: 3vh 4vw !important;
+  max-width: 90% !important;
+  min-height: 25vh !important;
 
   @media (min-width: ${(props) => props.theme.sm}) {
-    padding: 3vh 2vw;
+    padding: 3vh 2vw !important;
   }
 `;
 
 const RSTitle = styled.h2`
-  color: #fff;
-  font-weight: 600;
-  font-size: 35px;
-  margin: 0 0 1vh 0; /* needed for override */
-  line-height: 32px;
+  color: #fff !important;
+  font-weight: 600 !important;
+  font-size: 35px !important;
+  margin: 0 0 1vh 0 !important; /* needed for override */
+  line-height: 32px !important;
 `;
 
 const RSDistance = styled.h3`
-  color: ${(props) => props.theme.yellow};
-  font-size: 20px;
-  font-weight: 600;
-  line-height: 24px;
-  margin: 0;
-  text-transform: uppercase;
+  color: ${(props) => props.theme.yellow} !important;
+  font-size: 20px !important;
+  font-weight: 600 !important;
+  line-height: 24px !important;
+  margin: 0 !important;
+  text-transform: uppercase !important;
 `;
 
 const RSInfo = styled.h3`
-  color: #fff;
-  font-size: 20px;
-  font-weight: 300;
-  line-height: 24px;
-  margin: 0;
+  color: #fff !important;
+  font-size: 20px !important;
+  font-weight: 300 !important;
+  line-height: 24px !important;
+  margin: 0 !important;
 `;
 
 const RSArrow = styled.img`
-  background-color: #fff;
-  display: block;
-  flex-shrink: 0;
-  padding: 10px;
-  width: 40px;
+  background-color: #fff !important;
+  display: block !important;
+  flex-shrink: 0 !important;
+  padding: 10px !important;
+  width: 40px !important;
 `;
 
 /**

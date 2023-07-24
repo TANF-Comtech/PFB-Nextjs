@@ -9,34 +9,34 @@ import MainContent from '~/components/main-content';
 
 const Container = styled.section`
   .embed-container {
-    position: relative;
-    padding-bottom: 80%;
-    height: 0;
-    max-width: 100%;
+    position: relative !important;
+    padding-bottom: 80% !important;
+    height: 0 !important;
+    max-width: 100% !important;
   }
 
   .embed-container iframe,
   .embed-container object,
   .embed-container iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
   }
 
   small {
-    position: absolute;
-    z-index: 40;
-    bottom: 0;
-    margin-bottom: -15px;
+    position: absolute !important;
+    z-index: 40 !important;
+    bottom: 0 !important;
+    margin-bottom: -15px !important;
   }
 `;
 
 const RedHeading = styled.h2`
-  color: ${(props) => props.theme.red};
-  font-weight: 700;
-  text-transform: uppercase;
+  color: ${(props) => props.theme.red} !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
 `;
 
 // API Key for the DoubleTheDonation Script

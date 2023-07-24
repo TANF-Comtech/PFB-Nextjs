@@ -18,82 +18,82 @@ import Logo from '~/components/logo';
 import LogoType from '~/components/logotype';
 
 const Bar = styled.section`
-  position: fixed;
-  left: 0;
-  top: 0;
-  right: 0;
-  min-height: 15vh;
-  transition: 0.5s all ${(props) => props.theme.cubicSmooth};
-  z-index: ${(props) => props.theme.zIndex02};
+  position: fixed !important;
+  left: 0 !important;
+  top: 0 !important;
+  right: 0 !important;
+  min-height: 15vh !important;
+  transition: 0.5s all ${(props) => props.theme.cubicSmooth} !important;
+  z-index: ${(props) => props.theme.zIndex02} !important;
 `;
 
 const MainNavContainer = styled.header`
-  align-items: center;
-  background-color: rgba(255, 255, 255, 0.98);
-  box-shadow: rgb(0 0 0 / 20%) 0px 2px 5px;
-  display: flex;
-  justify-content: space-between;
-  padding: 15px 20px;
+  align-items: center !important;
+  background-color: rgba(255, 255, 255, 0.98) !important;
+  box-shadow: rgb(0 0 0 / 20%) 0px 2px 5px !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  padding: 15px 20px !important;
 
   @media (min-width: 600px) {
-    padding: 1.5vh 4vw;
+    padding: 1.5vh 4vw !important;
   }
 `;
 
 const Container = styled.section`
-  align-items: center;
-  display: flex;
-  justify-content: space-between;
-  margin: 0 auto;
-  max-width: ${(props) => props.theme.lg};
-  width: 100%;
+  align-items: center !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  margin: 0 auto !important;
+  max-width: ${(props) => props.theme.lg} !important;
+  width: 100% !important;
 
   @media (min-width: ${(props) => props.theme.sm}) {
-    align-items: flex-start;
+    align-items: flex-start !important;
   }
 `;
 
 const RightContainer = styled.div`
-  align-items: center;
-  display: flex;
-  font-family: ${(props) => props.theme.dharma};
-  font-size: 45px;
-  justify-content: space-between;
+  align-items: center !important;
+  display: flex !important;
+  font-family: ${(props) => props.theme.dharma} !important;
+  font-size: 45px !important;
+  justify-content: space-between !important;
 
   span {
-    display: none;
+    display: none !important;
 
     @media (min-width: ${(props) => props.theme.sm}) {
-      display: inline;
-      font-size: 45px;
-      margin: 0;
-      padding: 0 20px;
-      vertical-align: middle;
+      display: inline !important;
+      font-size: 45px !important;
+      margin: 0 !important;
+      padding: 0 20px !important;
+      vertical-align: middle !important;
     }
   }
 `;
 
 const MenuTrigger = styled.div`
-  align-items: center;
-  color: ${(props) => props.theme.darkGray};
-  cursor: pointer;
-  display: none;
-  justify-content: space-between;
-  padding: 0;
-  transition: 0.2s ease-in-out;
+  align-items: center !important;
+  color: ${(props) => props.theme.darkGray} !important;
+  cursor: pointer !important;
+  display: none !important;
+  justify-content: space-between !important;
+  padding: 0 !important;
+  transition: 0.2s ease-in-out !important;
 
   @media (min-width: ${(props) => props.theme.sm}) {
-    display: flex;
+    display: flex !important;
   }
 
   &:after {
     color: ${(props) => props.theme.darkGray} !important;
-    /* content: ${(props) => (props.noSeparator === true ? '' : '|')};
-    padding: ${(props) => (props.noSeparator === true ? '0' : '0 7px')}; */
+    /* content: ${(props) => (props.noSeparator === true ? '' : '|')} !important;
+    padding: ${(props) => (props.noSeparator === true ? '0' : '0 7px')} !important; */
 
     @media (min-width: ${(props) => props.theme.xs}) {
-      content: ${(props) => (props.noSeparator === true ? '#' : '|')};
-      padding: ${(props) => (props.noSeparator === true ? '0' : '0 20px')};
+      content: ${(props) => (props.noSeparator === true ? '#' : '|')} !important;
+      padding: ${(props) => (props.noSeparator === true ? '0' : '0 20px')} !important;
     }
   }
 
@@ -103,154 +103,154 @@ const MenuTrigger = styled.div`
 `;
 
 const LogoContainer = styled.div`
-  align-items: flex-end;
-  display: flex;
+  align-items: flex-end !important;
+  display: flex !important;
 `;
 
 const LogoTypeVisibility = styled(LogoType)`
-  display: inline;
+  display: inline !important;
 `;
 
 const BlueButton = styled.div`
-  align-items: center;
-  background-color: ${(props) => props.theme.midnightBlue};
-  border-radius: 10px;
-  color: white;
-  cursor: pointer;
-  display: flex;
-  font-family: ${(props) => props.theme.montserrat};
-  font-size: 14px;
-  font-weight: 700;
-  justify-content: space-around;
-  margin: 0;
-  padding: 10px;
-  text-align: center;
-  text-transform: uppercase;
+  align-items: center !important;
+  background-color: ${(props) => props.theme.midnightBlue} !important;
+  border-radius: 10px !important;
+  color: white !important;
+  cursor: pointer !important;
+  display: flex !important;
+  font-family: ${(props) => props.theme.montserrat} !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  justify-content: space-around !important;
+  margin: 0 !important;
+  padding: 10px !important;
+  text-align: center !important;
+  text-transform: uppercase !important;
 
   @media (min-width: ${(props) => props.theme.xs}) {
-    font-size: 16px;
-    padding: 8px 12px;
+    font-size: 16px !important;
+    padding: 8px 12px !important;
   }
 
   @media (min-width: ${(props) => props.theme.sm}) {
-    display: none;
+    display: none !important;
   }
 
   p {
-    color: white;
-    display: none;
-    font-family: ${(props) => props.theme.montserrat};
-    font-size: 16px;
-    font-weight: 700;
-    margin: 0;
+    color: white !important;
+    display: none !important;
+    font-family: ${(props) => props.theme.montserrat} !important;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    margin: 0 !important;
 
     @media (min-width: ${(props) => props.theme.xs}) {
-      display: inline;
+      display: inline !important;
     }
   }
 `;
 
 const MenuButton = styled.svg`
-  cursor: pointer;
-  display: block;
-  fill: white;
-  height: 22px;
-  margin: 0;
-  width: 22px;
+  cursor: pointer !important;
+  display: block !important;
+  fill: white !important;
+  height: 22px !important;
+  margin: 0 !important;
+  width: 22px !important;
 
   @media (min-width: ${(props) => props.theme.xs}) {
-    margin: 0 0 0 8px;
+    margin: 0 0 0 8px !important;
   }
 `;
 
 const BarGlobal = styled.section`
-  display: flex;
-  justify-content: space-between;
+  display: flex !important;
+  justify-content: space-between !important;
 
   span {
-    font-size: 14px;
-    margin-bottom: 0;
+    font-size: 14px !important;
+    margin-bottom: 0 !important;
   }
 `;
 
 const NetworkControl = styled.div`
-  align-items: center;
-  cursor: pointer;
-  display: flex;
-  font-size: 14px;
-  font-weight: 700;
-  text-transform: uppercase;
+  align-items: center !important;
+  cursor: pointer !important;
+  display: flex !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
 
   &:after {
     @media (min-width: ${(props) => props.theme.sm}) {
-      content: '|';
-      padding: 0 10px;
+      content: '|' !important;
+      padding: 0 10px !important;
     }
   }
 `;
 
 const MemberLink = styled.div`
-  display: none;
+  display: none !important;
 
   @media (min-width: ${(props) => props.theme.sm}) {
-    display: inline;
+    display: inline !important;
 
     a,
     a:hover,
     a:focus,
     a:visited {
-      color: white;
-      cursor: pointer;
-      font-size: 14px;
-      font-weight: 700;
-      text-decoration: none;
-      text-transform: uppercase;
+      color: white !important;
+      cursor: pointer !important;
+      font-size: 14px !important;
+      font-weight: 700 !important;
+      text-decoration: none !important;
+      text-transform: uppercase !important;
     }
 
     span {
-      display: none;
+      display: none !important;
 
       @media (min-width: ${(props) => props.theme.sm}) {
-        border: 1px solid #fff;
+        border: 1px solid #fff !important;
         color: ${(props) => props.theme.yellow} !important;
-        cursor: pointer;
-        display: inline;
-        font-weight: 700;
-        margin-left: 5px;
-        padding: 2px 4px;
-        text-decoration: none;
-        text-transform: uppercase;
+        cursor: pointer !important;
+        display: inline !important;
+        font-weight: 700 !important;
+        margin-left: 5px !important;
+        padding: 2px 4px !important;
+        text-decoration: none !important;
+        text-transform: uppercase !important;
       }
     }
   }
 `;
 
 const SearchControl = styled.div`
-  align-items: center;
-  cursor: pointer;
-  display: flex;
-  font-size: 14px;
-  font-weight: 700;
-  text-transform: uppercase;
+  align-items: center !important;
+  cursor: pointer !important;
+  display: flex !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
 
   span {
-    margin-right: 8px;
+    margin-right: 8px !important;
   }
 `;
 
 const MobileHide = styled.span`
-  display: none;
+  display: none !important;
 
   @media (min-width: ${(props) => props.theme.sm}) {
-    display: inline;
+    display: inline !important;
   }
 `;
 
 const Watchglass = styled.svg`
-  cursor: pointer;
-  height: ${(props) => props.size};
-  fill: ${(props) => props.color};
-  width: ${(props) => props.size};
+  cursor: pointer !important;
+  height: ${(props) => props.size} !important;
+  fill: ${(props) => props.color} !important;
+  width: ${(props) => props.size} !important;
 `;
 
 /**
@@ -295,17 +295,20 @@ const SearchButton = ({ color = '#111', size = '32px' }) => {
  *
  */
 const FlexContainer = styled.section`
-  align-items: ${(props) => (props.alignItemsMobile ? props.alignItemsMobile : 'center')};
-  flex-direction: ${(props) => (props.flexDirectionMobile ? props.flexDirectionMobile : 'column')};
+  align-items: ${(props) =>
+    props.alignItemsMobile ? props.alignItemsMobile : 'center'} !important;
+  flex-direction: ${(props) =>
+    props.flexDirectionMobile ? props.flexDirectionMobile : 'column'} !important;
   justify-content: ${(props) =>
-    props.justifyContentMobile ? props.justifyContentMobile : 'center'};
-  display: flex;
-  margin: ${(props) => (props.margin ? props.margin : '0')};
+    props.justifyContentMobile ? props.justifyContentMobile : 'center'} !important;
+  display: flex !important;
+  margin: ${(props) => (props.margin ? props.margin : '0')} !important;
 
   @media (min-width: ${(props) => (props.breakpoint ? props.breakpoint : props.theme.sm)}) {
-    align-items: ${(props) => (props.alignItems ? props.alignItems : 'center')};
-    flex-direction: ${(props) => (props.flexDirection ? props.flexDirection : 'row')};
-    justify-content: ${(props) => (props.justifyContent ? props.justifyContent : 'space-between')};
+    align-items: ${(props) => (props.alignItems ? props.alignItems : 'center')} !important;
+    flex-direction: ${(props) => (props.flexDirection ? props.flexDirection : 'row')} !important;
+    justify-content: ${(props) =>
+      props.justifyContent ? props.justifyContent : 'space-between'} !important;
   }
 `;
 
@@ -315,7 +318,7 @@ const FlexContainer = styled.section`
  * If you can't get this, you're NGMI
  */
 const UnderlinedText = styled.span`
-  text-decoration: underline;
+  text-decoration: underline !important;
 `;
 
 /**

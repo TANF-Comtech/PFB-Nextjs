@@ -43,39 +43,39 @@ import FormImg25 from '~/public/form-images/PFB_Forms_25.jpg';
 import FormImg26 from '~/public/form-images/PFB_Forms_26.jpg';
 
 const CenteredTitle = styled.h2`
-  text-align: center;
-  margin: 0 auto 3vh auto;
-  max-width: 800px;
+  text-align: center !important;
+  margin: 0 auto 3vh auto !important;
+  max-width: 800px !important;
 `;
 
 const BigPara = styled.p`
-  margin: 3vh auto;
-  max-width: 800px;
-  text-align: center;
+  margin: 3vh auto !important;
+  max-width: 800px !important;
+  text-align: center !important;
 `;
 
 const FlexContainer = styled.section`
-  align-items: flex-start;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-bottom: 5vh;
+  align-items: flex-start !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  margin-bottom: 5vh !important;
 
   @media (min-width: ${(props) => props.theme.md}) {
-    flex-direction: row;
+    flex-direction: row !important;
   }
 `;
 
 const FormContainer = styled.div`
-  flex: 0 1 calc(100% - 450px);
-  min-height: 30vh;
+  flex: 0 1 calc(100% - 450px) !important;
+  min-height: 30vh !important;
 `;
 
 const ImageContainer = styled.div`
-  flex: 0 1 450px;
-  padding-right: 25px;
-  margin: 0 auto;
-  max-width: 450px;
+  flex: 0 1 450px !important;
+  padding-right: 25px !important;
+  margin: 0 auto !important;
+  max-width: 450px !important;
 `;
 
 export default function ActionForms({ page, preview }) {

@@ -237,7 +237,9 @@ const Pillar = ({ pillar, alternate }: PillarProps) => {
         </Slider>
       </div>
       <div className="relative flex flex-col gap-3 overflow-hidden">
-        <div className="text-xl font-bold uppercase leading-none">Latest {pillar.title} news</div>
+        <div className="text-xl font-bold uppercase leading-none">
+          Latest {pillar.title} stories
+        </div>
         <ul className="flex flex-col gap-1.5">
           <>
             {pillar.key === 'infrastructure' &&
@@ -306,7 +308,7 @@ const Pillar = ({ pillar, alternate }: PillarProps) => {
           </>
           <Link href="/news">
             <a className="mt-4 inline-flex items-center gap-1.5 font-bold">
-              <span>See all news</span>
+              <span>Read All Stories</span>
               <i className="fa-solid fa-caret-right" />
             </a>
           </Link>

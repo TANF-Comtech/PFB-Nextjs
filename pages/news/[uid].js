@@ -6,7 +6,6 @@ import { PrismicRichText } from '@prismicio/react';
 import { htmlSerializer } from '~/lib/prismic/htmlSerializer';
 import { getAllNews, getSingleNewsPage } from '~/lib/queries/news';
 import { linkResolver } from '~/utils';
-import { setDateSuffix } from '~/utils/setDateSuffix';
 import getMetadata from '~/utils/getMetadata';
 
 import { LegacyPage } from '~/components/legacy-page';
@@ -21,177 +20,177 @@ import logo from '~/public/PFB_Stacked_LOGO_512x512.jpg';
 import RedArrowWhiteBlock from '~/public/red-arrow-white-block.svg';
 
 const DateBox = styled.div`
-  font-size: 20px;
-  font-family: ${(props) => props.theme.montserrat};
-  font-weight: 700;
-  margin-bottom: 1vh;
+  font-size: 20px !important;
+  font-family: ${(props) => props.theme.montserrat} !important;
+  font-weight: 700 !important;
+  margin-bottom: 1vh !important;
 `;
 
 // Style overrides for news articles are in here
 const IntroWrapper = styled.div`
-  margin: 3vh 0 1vh 0;
+  margin: 3vh 0 1vh 0 !important;
 
   h2 {
-    font-size: 35px;
-    font-weight: 400;
-    line-height: 35px;
-    margin-bottom: 1.5vh;
+    font-size: 35px !important;
+    font-weight: 400 !important;
+    line-height: 35px !important;
+    margin-bottom: 1.5vh !important;
   }
   @media screen and (min-width: 320px) {
     h2 {
-      font-size: calc(35px + 15 * ((100vw - 320px) / 880));
-      line-height: calc(35px + 15 * ((100vw - 320px) / 880));
+      font-size: calc(35px + 15 * ((100vw - 320px) / 880)) !important;
+      line-height: calc(35px + 15 * ((100vw - 320px) / 880)) !important;
     }
   }
   @media screen and (min-width: 1200px) {
     h2 {
-      font-size: 50px;
-      line-height: 50px;
+      font-size: 50px !important;
+      line-height: 50px !important;
     }
   }
 
   h3 {
-    font-size: 25px;
-    font-weight: 700;
-    line-height: 25px;
-    margin-bottom: 1.5vh;
+    font-size: 25px !important;
+    font-weight: 700 !important;
+    line-height: 25px !important;
+    margin-bottom: 1.5vh !important;
   }
   @media screen and (min-width: 320px) {
     h3 {
-      font-size: calc(25px + 10 * ((100vw - 320px) / 880));
-      line-height: calc(25px + 10 * ((100vw - 320px) / 880));
+      font-size: calc(25px + 10 * ((100vw - 320px) / 880)) !important;
+      line-height: calc(25px + 10 * ((100vw - 320px) / 880)) !important;
     }
   }
   @media screen and (min-width: 1200px) {
     h3 {
-      font-size: 35px;
-      line-height: 35px;
+      font-size: 35px !important;
+      line-height: 35px !important;
     }
   }
 
   h4 {
     font-family: ${(props) => props.theme.montserrat};
-    font-size: 18px;
-    font-weight: 700;
-    line-height: 18px;
-    margin-bottom: 1.5vh;
+    font-size: 18px !important;
+    font-weight: 700 !important;
+    line-height: 18px !important;
+    margin-bottom: 1.5vh !important;
   }
   @media screen and (min-width: 320px) {
     h4 {
-      font-size: calc(18px + 10 * ((100vw - 320px) / 880));
-      line-height: calc(18px + 10 * ((100vw - 320px) / 880));
+      font-size: calc(18px + 10 * ((100vw - 320px) / 880)) !important;
+      line-height: calc(18px + 10 * ((100vw - 320px) / 880)) !important;
     }
   }
   @media screen and (min-width: 1200px) {
     h4 {
-      font-size: 28px;
-      line-height: 28px;
+      font-size: 28px !important;
+      line-height: 28px !important;
     }
   }
 
   li {
-    list-style-type: disc;
-    padding-left: 10px;
+    list-style-type: disc !important;
+    padding-left: 10px !important;
   }
 
   .block-img {
-    margin-bottom: 0;
+    margin-bottom: 0 !important;
   }
 
   .image-caption {
-    display: block;
-    font-size: 14px;
-    font-style: normal;
-    line-height: 1.5;
+    display: block !important;
+    font-size: 14px !important;
+    font-style: normal !important;
+    line-height: 1.5 !important;
   }
 
   .little-break {
-    display: block;
-    margin-bottom: 8vh;
+    display: block !important;
+    margin-bottom: 8vh !important;
   }
 
   .medium-break {
-    display: block;
-    margin-bottom: 12vh;
+    display: block !important;
+    margin-bottom: 12vh !important;
   }
 
   .big-break {
-    display: block;
-    margin-bottom: 16vh;
+    display: block !important;
+    margin-bottom: 16vh !important;
   }
 
   .horizontal-rule {
     background-color: ${(props) => props.theme.black};
-    display: block;
-    height: 1px;
-    margin: 6vh 0;
-    width: 100%;
+    display: block !important;
+    height: 1px !important;
+    margin: 6vh 0 !important;
+    width: 100% !important;
   }
 
   .yt-video-container {
-    position: relative;
-    padding-bottom: 56.25%;
-    padding-top: 30px;
-    height: 0;
-    overflow: hidden;
+    position: relative !important;
+    padding-bottom: 56.25% !important;
+    padding-top: 30px !important;
+    height: 0 !important;
+    overflow: hidden !important;
 
     iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      position: absolute !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
     }
   }
 `;
 
 const BoxOfLinksContainer = styled.section`
-  margin: 4vh 0;
+  margin: 4vh 0 !important;
 `;
 
 const BoxOfLinksTitle = styled.p`
-  font-weight: 700;
+  font-weight: 700 !important;
   margin: 0 5px !important;
 `;
 
 const BoxOfLinks = styled.section`
-  display: flex;
-  flex-wrap: wrap;
+  display: flex !important;
+  flex-wrap: wrap !important;
 
   a {
-    background-color: ${(props) => props.theme.blue};
-    color: #fff;
-    display: block;
-    padding: 5px 8px;
-    margin: 5px;
-    text-decoration: none;
-    transform: translateX(0);
-    transition: 0.2s ease-in-out;
+    background-color: ${(props) => props.theme.blue} !important;
+    color: #fff !important;
+    display: block !important;
+    padding: 5px 8px !important;
+    margin: 5px !important;
+    text-decoration: none !important;
+    transform: translateX(0) !important;
+    transition: 0.2s ease-in-out !important;
 
     &:hover {
-      transform: translateY(-2px);
+      transform: translateY(-2px) !important;
     }
   }
 `;
 
 const ImgContainer = styled.section`
-  display: block;
+  display: block !important;
 `;
 
 const Caption = styled.div`
-  font-size: 14px;
+  font-size: 14px !important;
 `;
 
 const Deck = styled.div`
-  border-bottom: 1px solid ${(props) => props.theme.darkGray};
-  border-top: 1px solid ${(props) => props.theme.darkGray};
-  font-weight: 300;
-  margin: 50px 0;
-  padding: 30px;
-  font-style: italic;
+  border-bottom: 1px solid ${(props) => props.theme.darkGray} !important;
+  border-top: 1px solid ${(props) => props.theme.darkGray} !important;
+  font-weight: 300 !important;
+  margin: 50px 0 !important;
+  padding: 30px !important;
+  font-style: italic !important;
 
   p {
-    margin: 0;
+    margin: 0 !important;
   }
 `;
 
@@ -201,53 +200,53 @@ const Container = styled.section`
   a:focus,
   a:hover,
   a:active {
-    text-decoration: none;
+    text-decoration: none !important;
   }
 `;
 
 const ColorContainer = styled.section`
-  align-items: center;
+  align-items: center !important;
   background-color: ${(props) => props.bgColor || props.theme.redAccent};
-  background-position: center center;
-  background-size: cover;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 2vh 5vw;
-  text-align: center;
+  background-position: center center !important;
+  background-size: cover !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  padding: 2vh 5vw !important;
+  text-align: center !important;
 
   h1 {
-    color: white;
-    margin-bottom: 10px;
+    color: white !important;
+    margin-bottom: 10px !important;
   }
 
   span {
-    color: white;
-    display: block;
+    color: white !important;
+    display: block !important;
     font-family: ${(props) => props.theme.montserrat};
-    font-size: 24px;
-    font-weight: 300;
-    line-height: 30px;
-    margin-bottom: 25px;
+    font-size: 24px !important;
+    font-weight: 300 !important;
+    line-height: 30px !important;
+    margin-bottom: 25px !important;
   }
   @media screen and (min-width: 320px) {
     span {
-      font-size: calc(24px + 4 * ((100vw - 320px) / 880));
-      line-height: calc(30px + 8 * ((100vw - 320px) / 880));
+      font-size: calc(24px + 4 * ((100vw - 320px) / 880)) !important;
+      line-height: calc(30px + 8 * ((100vw - 320px) / 880)) !important;
     }
   }
   @media screen and (min-width: 1200px) {
     span {
-      font-size: 28px;
-      line-height: 38px;
+      font-size: 28px !important;
+      line-height: 38px !important;
     }
   }
 `;
 
 const Arrow = styled.img`
-  display: block;
-  margin: 0 auto;
-  width: 46px;
+  display: block !important;
+  margin: 0 auto !important;
+  width: 46px !important;
 `;
 
 function Donate({ bgColor }) {
@@ -381,7 +380,7 @@ export default function NewsPage({ fallback, page, preview }) {
           {theDateLongform !== null && (
             <DateBox>
               {`${theDateLongform.toLocaleString('en-us', { month: 'long' })}
-                ${setDateSuffix(theDateLongform.toLocaleString('en-us', { day: 'numeric' }))},
+                ${theDateLongform.toLocaleString('en-us', { day: 'numeric' })},
                 ${theDateLongform.toLocaleString('en-us', { year: 'numeric' })}`}
             </DateBox>
           )}
@@ -447,6 +446,7 @@ export default function NewsPage({ fallback, page, preview }) {
                       <a
                         href={`/locations/${location.location._meta.uid}`}
                         key={location.location._meta.id}
+                        className="!text-white"
                       >
                         <strong>{location.location.location[0].text}</strong>
                       </a>

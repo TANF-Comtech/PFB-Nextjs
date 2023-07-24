@@ -6,36 +6,36 @@ import MainContent from '~/components/main-content';
 import GridWide from '~/components/grid-wide';
 
 const ImageContainer = styled.div`
-  align-items: center;
-  background-image: url(${(props) => props.path1X});
-  background-position: center center;
-  background-size: cover;
-  display: flex;
-  height: auto;
-  justify-content: center;
-  max-width: 100%;
-  min-height: 30vh;
-  transition: 0.2s ease;
-  transform: translateY(0);
+  align-items: center !important;
+  background-image: url(${(props) => props.path1X}) !important;
+  background-position: center center !important;
+  background-size: cover !important;
+  display: flex !important;
+  height: auto !important;
+  justify-content: center !important;
+  max-width: 100% !important;
+  min-height: 30vh !important;
+  transition: 0.2s ease !important;
+  transform: translateY(0) !important;
 `;
 
 const Title = styled.h2`
-  color: rgba(255, 255, 255, 0.9);
-  font-size: 50px;
-  font-weight: 700;
-  line-height: 40px;
-  padding: 2vh 2vw;
+  color: rgba(255, 255, 255, 0.9) !important;
+  font-size: 50px !important;
+  font-weight: 700 !important;
+  line-height: 40px !important;
+  padding: 2vh 2vw !important;
   text-decoration: none !important;
-  text-align: center;
-  text-transform: uppercase;
+  text-align: center !important;
+  text-transform: uppercase !important;
 
   @media screen and (min-width: 320px) {
-    font-size: calc(50px + 50 * ((100vw - 320px) / 880));
-    line-height: calc(40px + 50 * ((100vw - 320px) / 880));
+    font-size: calc(50px + 50 * ((100vw - 320px) / 880)) !important;
+    line-height: calc(40px + 50 * ((100vw - 320px) / 880)) !important;
   }
   @media screen and (min-width: 1200px) {
-    font-size: 100px;
-    line-height: 90px;
+    font-size: 100px !important;
+    line-height: 90px !important;
   }
 `;
 

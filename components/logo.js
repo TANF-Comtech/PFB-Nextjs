@@ -2,11 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 
 const LogoIcon = styled.svg`
-  cursor: pointer;
-  display: block;
-  height: ${(props) => props.logoWidth || '60px'};
-  margin: ${(props) => props.logoMargin || '0 auto'};
-  min-height: 50px;
+  cursor: pointer !important;
+  display: block !important;
+  height: ${(props) => props.logoWidth || '60px'} !important;
+  margin: ${(props) => props.logoMargin || '0 auto'} !important;
+  min-height: 50px !important;
 `;
 
 /**

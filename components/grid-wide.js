@@ -3,21 +3,21 @@ import styled from 'styled-components';
 
 // minmax makes the content respect the size of the columns
 const MainContainer = styled.section`
-  background-color: ${(props) => props.gridGapColor || 'transparent'};
-  display: grid;
-  grid-gap: ${(props) => props.gridGap || '2vw'};
-  grid-template-columns: repeat(1, minmax(0, 1fr));
+  background-color: ${(props) => props.gridGapColor || 'transparent'} !important;
+  display: grid !important;
+  grid-gap: ${(props) => props.gridGap || '2vw'} !important;
+  grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
 
   @media (min-width: ${(props) => props.theme.md}) {
     grid-template-columns: ${(props) =>
-      props.isOneItem ? 'repeat(1, minmax(0, 1fr))' : 'repeat(2, minmax(0, 1fr))'};
+      props.isOneItem ? 'repeat(1, minmax(0, 1fr))' : 'repeat(2, minmax(0, 1fr))'} !important;
   }
 
   a,
   a:focus,
   a:visited,
   a:hover {
-    text-decoration: none;
+    text-decoration: none !important;
   }
 `;
 

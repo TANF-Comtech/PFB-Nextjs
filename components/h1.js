@@ -2,12 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Heading = styled.h1`
-  margin: 4vh 0;
-  padding: 0;
-  text-transform: uppercase;
+  margin: 4vh 0 !important;
+  padding: 0 !important;
+  text-transform: uppercase !important;
 
   @media (min-width: ${(props) => props.theme.lg}) {
-    padding: 0;
+    padding: 0 !important;
   }
 `;
 

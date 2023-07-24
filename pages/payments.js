@@ -9,49 +9,49 @@ import MainContent from '~/components/main-content';
 import Wrapper from '~/components/wrapper';
 
 const RevInp = styled.input`
-  min-width: 20vw;
-  margin-right: 10px;
-  padding-left: 10px;
-  padding-right: 10px;
-  text-align: right;
-  font-family: monospace;
-  border: 1px solid black;
-  border-radius: 3px;
+  min-width: 20vw !important;
+  margin-right: 10px !important;
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+  text-align: right !important;
+  font-family: monospace !important;
+  border: 1px solid black !important;
+  border-radius: 3px !important;
 `;
 
 const CalcWrapper = styled.span`
-  align-items: center;
-  border-top: 0.5px solid gray;
-  border-bottom: 0.5px solid gray;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  padding: 5vh 0;
+  align-items: center !important;
+  border-top: 0.5px solid gray !important;
+  border-bottom: 0.5px solid gray !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  padding: 5vh 0 !important;
 
   @media (min-width: ${(props) => props.theme.sm}) {
-    align-items: center;
-    flex-direction: row;
-    justify-content: space-between;
+    align-items: center !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
   }
 `;
 
 const InputWrapper = styled.div`
-  align-items: center;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  align-items: center !important;
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: space-between !important;
 `;
 
 const PaymentButton = styled.button`
-  background-color: ${(props) => props.theme.blue};
-  color: #fff;
-  font-family: ${(props) => props.theme.montserrat};
-  font-size: 18px;
-  font-weight: bold;
-  padding: 10px 20px;
+  background-color: ${(props) => props.theme.blue} !important;
+  color: #fff !important;
+  font-family: ${(props) => props.theme.montserrat} !important;
+  font-size: 18px !important;
+  font-weight: bold !important;
+  padding: 10px 20px !important;
 
   @media (max-width: ${(props) => props.theme.sm}) {
-    margin-top: 15px;
+    margin-top: 15px !important;
   }
 `;
 

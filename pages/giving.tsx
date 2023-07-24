@@ -107,7 +107,7 @@ const Support = () => {
             <Disclosure key={index} label={label} contents={contents} />
           ))}
         </div>
-        <div className="text-base font-bold leading-normal sm:text-xl">{SUPPORT_DETAILS}</div>
+        <div className="text-base leading-normal sm:text-xl">{SUPPORT_DETAILS}</div>
       </div>
     </div>
   );

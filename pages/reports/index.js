@@ -17,20 +17,20 @@ import Button from '~/components/button';
 import ResearchPromo from '~/public/promo/promo-research.jpg';
 
 const ReportSection = styled.section`
-  margin: 5vh 0;
+  margin: 5vh 0 !important;
 `;
 
 const ReportSectionHeader = styled.header`
-  margin-bottom: 3vh;
+  margin-bottom: 3vh !important;
 `;
 
 const ReportListItem = styled.div`
-  border-bottom: 1px solid ${(props) => props.theme.lightestGray};
-  margin: 2.5vh 0 1.25vh 0;
-  padding-bottom: 1.75vh;
+  border-bottom: 1px solid ${(props) => props.theme.lightestGray} !important;
+  margin: 2.5vh 0 1.25vh 0 !important;
+  padding-bottom: 1.75vh !important;
 
   &:last-child {
-    border-bottom: none;
+    border-bottom: none !important;
   }
 `;
 

@@ -8,28 +8,28 @@ import GridWide from '~/components/grid-wide';
 import Button from '~/components/button';
 
 const Box = styled.div`
-  align-items: center;
-  background-color: #fff;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 50px 25px;
+  align-items: center !important;
+  background-color: #fff !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  padding: 50px 25px !important;
 `;
 
 const GridImage = styled.img`
-  max-width: 250px;
+  max-width: 250px !important;
 `;
 
 const SectionTitle = styled.h3`
-  font-size: 28px;
-  font-weight: 300;
-  line-height: 38px;
-  margin: 6vh auto;
-  text-align: center;
+  font-size: 28px !important;
+  font-weight: 300 !important;
+  line-height: 38px !important;
+  margin: 6vh auto !important;
+  text-align: center !important;
 `;
 
 const Para = styled.p`
-  margin: 4vh auto;
+  margin: 4vh auto !important;
 `;
 
 /**

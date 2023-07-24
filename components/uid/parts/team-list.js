@@ -7,109 +7,106 @@ import { linkResolver } from '~/utils';
 import MainContent from '~/components/main-content';
 
 const RedBlueBG = styled.section`
-  background-color: ${(props) => props.theme.midnightBlue};
+  background-color: ${(props) => props.theme.midnightBlue} !important;
 `;
 
 const GrayBG = styled.section`
-  background-color: ${(props) => props.theme.lightestGray};
+  background-color: ${(props) => props.theme.lightestGray} !important;
 
   iframe {
-    display: block;
-    height: 300px;
-    margin: 0 auto;
-    max-width: 900px;
-    padding: 25px;
-    width: 100%;
+    display: block !important;
+    height: 300px !important;
+    margin: 0 auto !important;
+    max-width: 900px !important;
+    padding: 25px !important;
+    width: 100% !important;
 
     @media (min-width: ${(props) => props.theme.xs}) {
-      height: 500px;
+      height: 500px !important;
     }
   }
 `;
 
 const Container = styled.section`
-  align-items: flex-start;
-  border-bottom: 1px solid rgb(216, 216, 216);
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 25px;
-  padding-bottom: 25px;
+  align-items: flex-start !important;
+  border-bottom: 1px solid rgb(216, 216, 216) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  margin-bottom: 25px !important;
+  padding-bottom: 25px !important;
 
   @media (min-width: ${(props) => props.theme.sm}) {
-    flex-direction: row;
+    flex-direction: row !important;
   }
 
   &:last-child {
-    border-bottom: none;
-    padding-bottom: 0;
+    border-bottom: none !important;
+    padding-bottom: 0 !important;
   }
 `;
 
 const ContentContainer = styled.div`
-  flex: 1 1 0px;
-  margin: 4vh 0;
+  flex: 1 1 0px !important;
+  margin: 4vh 0 !important;
 
   a,
   a:visited,
   a:active,
   a:focus,
   a:hover {
-    text-decoration: none;
+    text-decoration: none !important;
   }
 `;
 
 const ColorWrap = styled.div`
-  color: ${(props) => props.textColor};
-  margin: 0;
+  color: ${(props) => props.textColor} !important;
+  margin: 0 !important;
 `;
 
 const Title = styled.h2`
-  color: ${(props) => props.textColor};
-  margin: 0;
+  color: ${(props) => props.textColor} !important;
+  margin: 0 !important;
 `;
 
 const Position = styled.h3`
-  color: ${(props) => props.theme.blueBright};
-  margin: 5px 0 10px 0;
+  color: ${(props) => props.theme.blueBright} !important;
+  margin: 5px 0 10px 0 !important;
 `;
 
 const Description = styled.p`
-  font-size: 18px;
-  line-height: 24px;
-  margin-bottom: 25px;
+  font-size: 18px !important;
+  line-height: 24px !important;
+  margin-bottom: 25px !important;
 `;
 
 const Image = styled.img`
-  flex: 1 1 0px;
-  height: auto;
-  margin: 25px 0 0 0;
-  max-width: 200px;
+  flex: 1 1 0px !important;
+  height: auto !important;
+  margin: 25px 0 0 0 !important;
+  max-width: 200px !important;
 
   @media (min-width: ${(props) => props.theme.sm}) {
-    margin: 25px 25px 25px 0;
-  }
-
-  @media (min-width: ${(props) => props.theme.md}) {
+    margin: 25px 25px 25px 0 !important;
   }
 `;
 
 const EmailButton = styled.a`
-  background-color: ${(props) => props.theme.red};
-  border-radius: 10px;
-  box-shadow: ${(props) => props.theme.buttonBoxShadow};
+  background-color: ${(props) => props.theme.red} !important;
+  border-radius: 10px !important;
+  box-shadow: ${(props) => props.theme.buttonBoxShadow} !important;
   color: white !important;
-  cursor: pointer;
-  font-family: ${(props) => props.theme.montserrat};
-  font-size: 18px;
-  font-weight: 700;
-  min-width: 100px;
-  margin: 0;
-  padding: 10px 35px;
-  text-align: center;
+  cursor: pointer !important;
+  font-family: ${(props) => props.theme.montserrat} !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  min-width: 100px !important;
+  margin: 0 !important;
+  padding: 10px 35px !important;
+  text-align: center !important;
   text-decoration: none !important;
-  text-transform: uppercase;
-  transform: translateY(0);
-  transition: all 0.25s ease;
+  text-transform: uppercase !important;
+  transform: translateY(0) !important;
+  transition: all 0.25s ease !important;
 
   &:hover,
   &:visited,
@@ -117,11 +114,11 @@ const EmailButton = styled.a`
   &:active {
     background-color: ${(props) => props.theme.red};
     color: white !important;
-    text-decoration: none;
+    text-decoration: none !important;
   }
 
   &:hover {
-    transform: translateY(-2px);
+    transform: translateY(-2px) !important;
   }
 `;
 

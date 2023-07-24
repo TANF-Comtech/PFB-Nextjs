@@ -5,10 +5,10 @@ import styled from 'styled-components';
 import BgImage from '~/components/bg-image';
 
 const ForegroundImg = styled(Image)`
-  margin-bottom: 2vh;
-  max-height: 70vh;
-  object-fit: cover;
-  width: 100%;
+  margin-bottom: 2vh !important;
+  max-height: 70vh !important;
+  object-fit: cover !important;
+  width: 100% !important;
 `;
 
 /**

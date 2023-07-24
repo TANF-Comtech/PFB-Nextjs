@@ -7,22 +7,22 @@ import MainContent from '~/components/main-content';
 import Button from '~/components/button';
 
 const Para = styled.div`
-  margin: 20px 0;
-  text-align: ${(props) => (props.buttons ? 'center' : 'left')};
+  margin: 20px 0 !important;
+  text-align: ${(props) => (props.buttons ? 'center' : 'left')} !important;
 
   @media screen and (min-width: 320px) {
-    margin: calc(20px + 26 * ((100vw - 320px) / 880)) 0;
+    margin: calc(20px + 26 * ((100vw - 320px) / 880)) 0 !important;
   }
   @media screen and (min-width: 1200px) {
-    margin: 46px 0;
+    margin: 46px 0 !important;
   }
 
   p {
     font-size: ${(props) => props.fontSize && props.fontSize + ' !important'};
     line-height: ${(props) => props.lineHeight && props.lineHeight + ' !important'};
-    margin-left: auto;
-    margin-right: auto;
-    max-width: ${(props) => props.maxWidth || '100%'};
+    margin-left: auto !important;
+    margin-right: auto !important;
+    max-width: ${(props) => props.maxWidth || '100%'} !important;
   }
 
   li {
@@ -32,15 +32,15 @@ const Para = styled.div`
 `;
 
 const Title = styled.h2`
-  color: ${(props) => (props.textColor ? props.textColor : '#fff')};
-  margin: 4vh auto;
-  max-width: ${(props) => props.maxWidth || '100%'};
-  text-align: center;
-  text-transform: uppercase;
+  color: ${(props) => (props.textColor ? props.textColor : '#fff')} !important;
+  margin: 4vh auto !important;
+  max-width: ${(props) => props.maxWidth || '100%'} !important;
+  text-align: center !important;
+  text-transform: uppercase !important;
 `;
 
 const Buffer = styled.div`
-  margin-bottom: ${(props) => (props.marginBottom ? props.marginBottom : '0')};
+  margin-bottom: ${(props) => (props.marginBottom ? props.marginBottom : '0')} !important;
 `;
 
 /**

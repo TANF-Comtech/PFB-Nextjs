@@ -11,53 +11,53 @@ const Container = styled.section`
   a:focus,
   a:hover,
   a:active {
-    text-decoration: none;
+    text-decoration: none !important;
   }
 `;
 
 const ColorContainer = styled.section`
-  align-items: center;
-  background-color: ${(props) => props.bgColor || props.theme.redAccent};
-  background-position: center center;
-  background-size: cover;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 2vh 5vw;
-  text-align: center;
+  align-items: center !important;
+  background-color: ${(props) => props.bgColor || props.theme.redAccent} !important;
+  background-position: center center !important;
+  background-size: cover !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  padding: 2vh 5vw !important;
+  text-align: center !important;
 
   h1 {
-    color: white;
-    margin-bottom: 10px;
+    color: white !important;
+    margin-bottom: 10px !important;
   }
 
   span {
-    color: white;
-    display: block;
-    font-family: ${(props) => props.theme.montserrat};
-    font-size: 24px;
-    font-weight: 300;
-    line-height: 30px;
-    margin-bottom: 25px;
+    color: white !important;
+    display: block !important;
+    font-family: ${(props) => props.theme.montserrat} !important;
+    font-size: 24px !important;
+    font-weight: 300 !important;
+    line-height: 30px !important;
+    margin-bottom: 25px !important;
   }
   @media screen and (min-width: 320px) {
     span {
-      font-size: calc(24px + 4 * ((100vw - 320px) / 880));
-      line-height: calc(30px + 8 * ((100vw - 320px) / 880));
+      font-size: calc(24px + 4 * ((100vw - 320px) / 880)) !important;
+      line-height: calc(30px + 8 * ((100vw - 320px) / 880)) !important;
     }
   }
   @media screen and (min-width: 1200px) {
     span {
-      font-size: 28px;
-      line-height: 38px;
+      font-size: 28px !important;
+      line-height: 38px !important;
     }
   }
 `;
 
 const Arrow = styled.img`
-  display: block;
-  margin: 0 auto;
-  width: 46px;
+  display: block !important;
+  margin: 0 auto !important;
+  width: 46px !important;
 `;
 
 /**
@@ -81,8 +81,12 @@ const ColorBanner = ({
       <a href="https://www.classy.org/give/117371" rel="nofollow" target="_blank">
         <ColorContainer bgColor={bgColor}>
           <MainContent maxWidth="800px">
-            <h1 className="!no-underline">{bannerTitle}</h1>
-            <span>{bannerContent}</span>
+            <h1 className="!no-underline" style={{ textDecoration: 'none !important' }}>
+              {bannerTitle}
+            </h1>
+            <span className="!no-underline" style={{ textDecoration: 'none !important' }}>
+              {bannerContent}
+            </span>
             <Arrow src={RedArrowWhiteBlock} />
           </MainContent>
         </ColorContainer>

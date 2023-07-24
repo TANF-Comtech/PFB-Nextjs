@@ -4,17 +4,17 @@ import styled from 'styled-components';
 import MainContent from '~/components/main-content';
 
 const Background = styled.header`
-  background-color: ${(props) => props.bgColor || props.theme.midnightBlue};
-  color: ${(props) => props.color || 'white'};
+  background-color: ${(props) => props.bgColor || props.theme.midnightBlue} !important;
+  color: ${(props) => props.color || 'white'} !important;
 
   h1 {
-    color: ${(props) => props.color || 'white'};
-    text-transform: uppercase;
+    color: ${(props) => props.color || 'white'} !important;
+    text-transform: uppercase !important;
   }
 
   li {
-    list-style-type: disc;
-    padding-left: 10px;
+    list-style-type: disc !important;
+    padding-left: 10px !important;
   }
 `;
 

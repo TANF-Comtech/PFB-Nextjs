@@ -7,157 +7,157 @@ import { AlgoliaReactClient } from '~/lib/algolia/algoliaClient';
 import CustomSearchBox from '~/components/search-box';
 
 const SearchContainer = styled.nav`
-  background-color: ${(props) => props.theme.lightestGray};
-  bottom: calc(10vh + 50px);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  height: calc(80vh - 50px);
-  left: 8vw;
-  margin: 0 auto;
-  max-width: ${(props) => props.theme.lg};
-  overflow: auto;
-  padding: 25px;
-  position: fixed;
-  right: 8vw;
-  top: 10vh;
-  transition: 0.4s ease-in-out;
-  transform: ${(props) => (props.searchState ? 'translateY(0)' : 'translateY(-120%)')};
-  width: 84vw;
-  will-change: transform;
-  z-index: ${(props) => props.theme.zIndex05};
+  background-color: ${(props) => props.theme.lightestGray} !important;
+  bottom: calc(10vh + 50px) !important;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2) !important;
+  height: calc(80vh - 50px) !important;
+  left: 8vw !important;
+  margin: 0 auto !important;
+  max-width: ${(props) => props.theme.lg} !important;
+  overflow: auto !important;
+  padding: 25px !important;
+  position: fixed !important;
+  right: 8vw !important;
+  top: 10vh !important;
+  transition: 0.4s ease-in-out !important;
+  transform: ${(props) => (props.searchState ? 'translateY(0)' : 'translateY(-120%)')} !important;
+  width: 84vw !important;
+  will-change: transform !important;
+  z-index: ${(props) => props.theme.zIndex05} !important;
 `;
 
 const SearchOverlay = styled.section`
-  background-color: ${(props) => props.theme.black};
-  min-height: 100vh;
-  opacity: ${(props) => (props.searchState ? '0.8' : '0')};
-  transition: all 0.4s ease-in-out;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  visibility: ${(props) => (props.searchState ? 'visible' : 'hidden')};
-  z-index: ${(props) => props.theme.zIndex04};
+  background-color: ${(props) => props.theme.black} !important;
+  min-height: 100vh !important;
+  opacity: ${(props) => (props.searchState ? '0.8' : '0')} !important;
+  transition: all 0.4s ease-in-out !important;
+  position: fixed !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  visibility: ${(props) => (props.searchState ? 'visible' : 'hidden')} !important;
+  z-index: ${(props) => props.theme.zIndex04} !important;
 `;
 
 const MenuButtonCont = styled.section`
-  bottom: 10vh;
-  height: 50px;
-  left: 8vw;
-  margin: 0 auto;
-  max-width: ${(props) => props.theme.lg};
-  opacity: ${(props) => (props.searchState ? '1' : '0')};
-  overflow: auto;
-  position: fixed;
-  right: 8vw;
-  top: calc(90vh - 50px);
-  transition: 0.4s ease-in-out;
-  transform: ${(props) => (props.searchState ? 'translateY(0)' : 'translateY(200vh)')};
-  width: 84vw;
-  will-change: transform;
-  z-index: ${(props) => props.theme.zIndex05};
+  bottom: 10vh !important;
+  height: 50px !important;
+  left: 8vw !important;
+  margin: 0 auto !important;
+  max-width: ${(props) => props.theme.lg} !important;
+  opacity: ${(props) => (props.searchState ? '1' : '0')} !important;
+  overflow: auto !important;
+  position: fixed !important;
+  right: 8vw !important;
+  top: calc(90vh - 50px) !important;
+  transition: 0.4s ease-in-out !important;
+  transform: ${(props) => (props.searchState ? 'translateY(0)' : 'translateY(200vh)')} !important;
+  width: 84vw !important;
+  will-change: transform !important;
+  z-index: ${(props) => props.theme.zIndex05} !important;
 `;
 
 const MenuClose = styled.div`
-  background-color: ${(props) => props.theme.blue};
-  color: white;
-  cursor: pointer;
-  font-size: 18px;
-  font-weight: 700;
-  padding: 10px 0;
-  text-align: center;
-  text-transform: uppercase;
+  background-color: ${(props) => props.theme.blue} !important;
+  color: white !important;
+  cursor: pointer !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  padding: 10px 0 !important;
+  text-align: center !important;
+  text-transform: uppercase !important;
 `;
 
 const HitsAndFilters = styled.section`
-  align-items: flex-start;
-  display: flex;
+  align-items: flex-start !important;
+  display: flex !important;
 `;
 
 const AllFilters = styled.div`
-  display: none;
-  flex-basis: 0;
+  display: none !important;
+  flex-basis: 0 !important;
 
   @media (min-width: ${(props) => props.theme.sm}) {
-    display: block;
-    flex-basis: 200px;
+    display: block !important;
+    flex-basis: 200px !important;
   }
 
   h3 {
-    color: ${(props) => props.theme.black};
-    display: block;
-    font-size: 20px;
-    font-weight: bold;
-    margin: 0 0 8px 0;
-    text-transform: uppercase;
+    color: ${(props) => props.theme.black} !important;
+    display: block !important;
+    font-size: 20px !important;
+    font-weight: bold !important;
+    margin: 0 0 8px 0 !important;
+    text-transform: uppercase !important;
   }
 `;
 
 const FilterMenu = styled(RefinementList)`
-  color: ${(props) => props.theme.darkGray};
+  color: ${(props) => props.theme.darkGray} !important;
 
   label {
-    align-items: center;
-    display: flex;
-    margin: 0 0 10px 0;
+    align-items: center !important;
+    display: flex !important;
+    margin: 0 0 10px 0 !important;
   }
   span {
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: bold;
-    line-height: 1;
-    margin: 0 5px;
-    text-transform: uppercase;
+    cursor: pointer !important;
+    font-size: 14px !important;
+    font-weight: bold !important;
+    line-height: 1 !important;
+    margin: 0 5px !important;
+    text-transform: uppercase !important;
   }
   span[class='ais-RefinementList-count'] {
-    color: ${(props) => props.theme.gray};
+    color: ${(props) => props.theme.gray} !important;
   }
   span[class='ais-RefinementList-count']:before {
-    content: '(';
+    content: '(' !important;
   }
   span[class='ais-RefinementList-count']:after {
-    content: ')';
+    content: ')' !important;
   }
   .ais-RefinementList-showMore {
-    color: ${(props) => props.theme.gray};
-    font-family: ${(props) => props.theme.montserrat};
-    font-weight: bold;
-    margin-bottom: 30px;
-    text-transform: uppercase;
+    color: ${(props) => props.theme.gray} !important;
+    font-family: ${(props) => props.theme.montserrat} !important;
+    font-weight: bold !important;
+    margin-bottom: 30px !important;
+    text-transform: uppercase !important;
   }
 `;
 
 const AllHits = styled(Hits)`
-  flex-basis: 100%;
+  flex-basis: 100% !important;
 
   @media (min-width: ${(props) => props.theme.sm}) {
-    flex-basis: calc(100% - 225px);
-    margin-left: 25px;
+    flex-basis: calc(100% - 225px) !important;
+    margin-left: 25px !important;
   }
 `;
 
 const HitContainer = styled.div`
   span {
-    color: ${(props) => props.theme.red};
-    display: block;
-    font-family: ${(props) => props.theme.montserrat};
-    font-weight: bold;
-    margin-bottom: 0;
-    text-transform: uppercase;
+    color: ${(props) => props.theme.red} !important;
+    display: block !important;
+    font-family: ${(props) => props.theme.montserrat} !important;
+    font-weight: bold !important;
+    margin-bottom: 0 !important;
+    text-transform: uppercase !important;
   }
   h2 {
-    line-height: 42px;
+    line-height: 42px !important;
   }
   a,
   a:focus,
   a:visited,
   a:hover {
-    color: ${(props) => props.theme.black};
-    font-size: 42px;
+    color: ${(props) => props.theme.black} !important;
+    font-size: 42px !important;
   }
   p {
-    font-size: 18px;
-    line-height: 24px;
+    font-size: 18px !important;
+    line-height: 24px !important;
   }
 `;
 

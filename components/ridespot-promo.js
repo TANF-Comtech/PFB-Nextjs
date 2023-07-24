@@ -11,61 +11,61 @@ import RideSpotBg from '~/public/RidespotBg.jpg';
 import RideSpotLogo from '~/public/RideSpotRidesLogo.svg';
 
 const RSContainer = styled.section`
-  background-color: ${(props) => props.theme.lightestGray};
-  padding-bottom: 4vh;
+  background-color: ${(props) => props.theme.lightestGray} !important;
+  padding-bottom: 4vh !important;
 `;
 
 const RSHeaderContainer = styled.a`
-  display: block;
+  display: block !important;
 `;
 
 const RSTitle = styled.h2`
-  margin: 4vh 4vw;
-  text-align: center;
-  text-transform: uppercase;
+  margin: 4vh 4vw !important;
+  text-align: center !important;
+  text-transform: uppercase !important;
 `;
 
 // Rides
 const RSRidesContainer = styled.section`
-  display: grid;
-  grid-gap: 15px;
-  grid-template-columns: 1fr;
-  margin: 0 auto;
-  max-width: 1400px;
-  padding: 0 4vw;
+  display: grid !important;
+  grid-gap: 15px !important;
+  grid-template-columns: 1fr !important;
+  margin: 0 auto !important;
+  max-width: 1400px !important;
+  padding: 0 4vw !important;
 
   @media (min-width: ${(props) => props.theme.sm}) {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr !important;
   }
 
   @media (min-width: ${(props) => props.theme.lg}) {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
   }
 `;
 
 const RSCardContainer = styled.div`
-  margin: 1vh 1vw;
+  margin: 1vh 1vw !important;
 
   @media (max-width: ${(props) => props.theme.sm}) {
-    margin: 1vh auto;
-    max-width: 450px;
+    margin: 1vh auto !important;
+    max-width: 450px !important;
   }
 `;
 
 const RSCard = styled.img`
-  object-fit: cover;
+  object-fit: cover !important;
 `;
 
 const RSLink = styled.a`
-  text-decoration: none;
-  color: black;
-  margin: 0;
+  text-decoration: none !important;
+  color: black !important;
+  margin: 0 !important;
   &:hover,
   &:focus,
   &:active,
   &:visited {
-    text-decoration: none;
-    color: black;
+    text-decoration: none !important;
+    color: black !important;
   }
 `;
 

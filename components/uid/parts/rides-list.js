@@ -6,14 +6,14 @@ import RideSpotRide from '~/components/ridespot-ride';
 import Button from '~/components/button';
 
 const RSRidesContainer = styled.section`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin: 5vh auto;
-  max-width: 96vw;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  margin: 5vh auto !important;
+  max-width: 96vw !important;
 
   @media (min-width: ${(props) => props.theme.lg}) {
-    max-width: 81vw;
+    max-width: 81vw !important;
   }
 `;
 
@@ -26,6 +26,7 @@ const RSRidesContainer = styled.section`
  */
 const RidesList = ({ payload }) => {
   payload.splice(18, 2);
+
   return (
     <MainContent>
       <RSRidesContainer>

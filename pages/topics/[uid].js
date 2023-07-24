@@ -7,7 +7,6 @@ import styled from 'styled-components';
 import { getTopics, getSingleTopicPage } from '~/lib/queries/topics';
 import { getEBikesPages } from '~/lib/queries/electric-bikes';
 import { randomID, linkResolver } from '~/utils';
-import { setDateSuffix } from '~/utils/setDateSuffix';
 import { ebikeFormatter } from '~/lib/algolia/ebikeFormatter';
 import { AlgoliaIndex } from '~/lib/algolia/algoliaClient';
 import data from '~/data';
@@ -27,7 +26,7 @@ import SecondaryTitleBanner from '~/components/secondary-title-banner';
 import WayfindingItem from '~/components/wayfinding-item';
 
 const SpacedHeading = styled.h2`
-  margin: 4vh 0;
+  margin: 4vh 0 !important;
 `;
 
 /* You must reference the `topic` prop to get data from `getStaticProps` - check bottom of this file */
@@ -153,7 +152,7 @@ export default function TopicPage({ fallback, page, preview }) {
                               date={`${newDate.toLocaleString('en-us', {
                                 month: 'long',
                               })}
-                              ${setDateSuffix(newDate.getDate())},
+                              ${newDate.getDate()},
                               ${newDate.getFullYear()}`}
                               key={newsItem.id}
                               image={

@@ -19,9 +19,9 @@ import ReportsList from '~/components/uid/parts/reports-list';
 import ToolkitPillars from '~/components/uid/parts/toolkit-pillars';
 
 const RedHeading = styled.h2`
-  color: ${(props) => props.theme.red};
-  font-weight: 700;
-  text-transform: uppercase;
+  color: ${(props) => props.theme.red} !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
 `;
 
 export default function UidSlices({ landing_page }) {

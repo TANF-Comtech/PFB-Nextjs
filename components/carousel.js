@@ -7,78 +7,78 @@ import { linkResolver } from '~/utils';
 import WhiteArrow from '~/public/white-arrow.svg';
 
 const Slide = styled.section`
-  align-items: center;
-  background-image: url(${(props) => props.source});
-  background-position: center center;
-  background-size: cover;
-  display: flex;
-  flex-direction: column;
-  height: 40vh;
-  max-height: 600px;
-  justify-content: center;
-  margin: 0 200px;
-  padding: 25px;
-  width: 100vw;
+  align-items: center !important;
+  background-image: url(${(props) => props.source}) !important;
+  background-position: center center !important;
+  background-size: cover !important;
+  display: flex !important;
+  flex-direction: column !important;
+  height: 40vh !important;
+  max-height: 600px !important;
+  justify-content: center !important;
+  margin: 0 200px !important;
+  padding: 25px !important;
+  width: 100vw !important;
 
   @media screen and (min-width: 480px) {
-    height: 80vw;
+    height: 80vw !important;
   }
   @media screen and (min-width: 768px) {
-    height: 60vw;
+    height: 60vw !important;
   }
   @media screen and (min-width: 1000px) {
-    height: 40vw;
+    height: 40vw !important;
   }
   h2 {
-    color: rgba(${(props) => (props.headingRGBA ? props.headingRGBA : '255,255,255,1')});
-    font-size: 60px;
-    font-weight: 600;
-    line-height: 50px;
-    padding-bottom: 10px;
-    text-align: center;
-    text-transform: uppercase;
+    color: rgba(${(props) => (props.headingRGBA ? props.headingRGBA : '255,255,255,1')}) !important;
+    font-size: 60px !important;
+    font-weight: 600 !important;
+    line-height: 50px !important;
+    padding-bottom: 10px !important;
+    text-align: center !important;
+    text-transform: uppercase !important;
   }
   @media screen and (min-width: 320px) {
     h2 {
-      font-size: calc(60px + 60 * ((100vw - 320px) / 880));
-      line-height: calc(50px + 60 * ((100vw - 320px) / 880));
+      font-size: calc(60px + 60 * ((100vw - 320px) / 880)) !important;
+      line-height: calc(50px + 60 * ((100vw - 320px) / 880)) !important;
     }
   }
   @media screen and (min-width: 1200px) {
     h2 {
-      font-size: 120px;
-      line-height: 110px;
+      font-size: 120px !important;
+      line-height: 110px !important;
     }
   }
   span {
-    color: rgba(${(props) => (props.headingRGBA ? props.headingRGBA : '255,255,255,1')});
-    font-family: ${(props) => props.theme.dharma};
-    font-size: 30px;
-    font-weight: 600;
-    line-height: 25px;
-    letter-spacing: 1px;
-    padding-bottom: 3px;
-    margin: 0;
-    text-align: center;
-    text-transform: uppercase;
+    color: rgba(${(props) => (props.headingRGBA ? props.headingRGBA : '255,255,255,1')}) !important;
+    font-family: ${(props) => props.theme.dharma} !important;
+    font-size: 30px !important;
+    font-weight: 600 !important;
+    line-height: 25px !important;
+    letter-spacing: 1px !important;
+    padding-bottom: 3px !important;
+    margin: 0 !important;
+    text-align: center !important;
+    text-transform: uppercase !important;
   }
   @media screen and (min-width: 320px) {
     span {
-      font-size: calc(30px + 30 * ((100vw - 320px) / 880));
-      line-height: calc(25px + 25 * ((100vw - 320px) / 880));
+      font-size: calc(30px + 30 * ((100vw - 320px) / 880)) !important;
+      line-height: calc(25px + 25 * ((100vw - 320px) / 880)) !important;
     }
   }
   @media screen and (min-width: 1200px) {
     span {
-      font-size: 60px;
-      line-height: 50px;
+      font-size: 60px !important;
+      line-height: 50px !important;
     }
   }
 `;
 
 const SlideWrapper = styled.a`
-  margin: 0 46px;
-  text-align: center;
+  margin: 0 46px !important;
+  text-align: center !important;
   text-decoration: none !important;
   &:hover,
   &:visited,
@@ -86,26 +86,26 @@ const SlideWrapper = styled.a`
     text-decoration: none !important;
   }
   @media screen and (max-width: 350px) {
-    margin: 0;
+    margin: 0 !important;
   }
 `;
 
 const Arrow = styled.img`
-  display: block;
-  margin: 0 auto;
-  width: 46px;
+  display: block !important;
+  margin: 0 auto !important;
+  width: 46px !important;
 `;
 
 const Wrapper = styled.div`
-  margin-left: 5.5vw;
-  margin-right: 5.5vw;
+  margin-left: 5.5vw !important;
+  margin-right: 5.5vw !important;
 `;
 
 const BigText = styled.h2`
-  padding: 0 4vw;
+  padding: 0 4vw !important;
   font-size: 50px !important;
   line-height: 0.9 !important;
-  margin-bottom: 0;
+  margin-bottom: 0 !important;
 
   @media screen and (min-width: ${(props) => props.theme.xs}) {
     font-size: 80px !important;
