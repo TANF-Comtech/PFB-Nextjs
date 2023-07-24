@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/router';
 import Script from 'next/script';
 import styled from 'styled-components';
@@ -346,24 +346,21 @@ const SocialIcon = ({ source, text, url }) => {
  */
 function FooterSignUpForm() {
   const router = useRouter();
-  const isFirstRenderOfSparkScript = useRef(true);
+  const [key, setKey] = useState(Date.now());
 
   useEffect(() => {
-    if (isFirstRenderOfSparkScript.current) {
-      isFirstRenderOfSparkScript.current = false;
-    }
+    setKey(Date.now()); // Update key to force re-render of Script
   }, [router.pathname]);
 
   return (
     <>
       <FormContainer>
         <div id="pfb-site-footer" className="spkactionform" />
-        {isFirstRenderOfSparkScript.current && (
-          <Script
-            src="https://action.peopleforbikes.org/assets/js/widget.js/?id=111276"
-            strategy="afterInteractive"
-          />
-        )}
+        <Script
+          id={`signup-form-script-${key}`} // Unique ID per instance
+          src="https://action.peopleforbikes.org/assets/js/widget.js/?id=111276"
+          strategy="afterInteractive"
+        />
       </FormContainer>
     </>
   );

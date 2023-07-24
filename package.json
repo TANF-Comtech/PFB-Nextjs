@@ -37,7 +37,7 @@
     "react-flickity-component": "^3.6.3",
     "react-instantsearch-dom": "^6.39.1",
     "react-instantsearch-hooks-web": "^6.44.3",
-    "react-intersection-observer": "^9.4.3",
+    "react-intersection-observer": "^9.5.2",
     "react-is": "^17.0.0",
     "react-transition-group": "^4.4.5",
     "stripe": "^8.180.0",
