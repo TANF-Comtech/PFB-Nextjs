@@ -2,17 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 
 const MainContainer = styled.section`
-  padding: ${(props) => props.padding || '5px 0'};
+  padding: ${(props) => props.padding || '5px 0'} !important;
 `;
 
 const Sizer = styled.div`
-  background-color: ${(props) => props.bgColor || props.theme.lightestGray};
-  height: 1px;
-  margin: 0 auto;
-  max-width: ${(props) => props.maxWidthMobile || props.theme.lg};
+  background-color: ${(props) => props.bgColor || props.theme.lightestGray} !important;
+  height: 1px !important;
+  margin: 0 auto !important;
+  max-width: ${(props) => props.maxWidthMobile || props.theme.lg} !important;
 
   @media (min-width: ${(props) => props.theme.sm}) {
-    max-width: ${(props) => props.maxWidth || props.theme.lg};
+    max-width: ${(props) => props.maxWidth || props.theme.lg} !important;
   }
 `;
 

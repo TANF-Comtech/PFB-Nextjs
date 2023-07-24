@@ -12,66 +12,66 @@ import Button from '~/components/button';
 
 // spacer constrains the layout on big screens but keeps it tight on mobile
 const MainContent = styled.main`
-  padding: ${(props) => (props.isWidePass ? `20vh 0 4vh 0` : `20vh 4vw 4vh 4vw`)};
-  min-height: 80vh;
+  padding: ${(props) => (props.isWidePass ? `20vh 0 4vh 0` : `20vh 4vw 4vh 4vw`)} !important;
+  min-height: 80vh !important;
 `;
 
 const Container = styled.section`
-  margin: 2vh auto;
-  max-width: ${(props) => props.theme.lg};
+  margin: 2vh auto !important;
+  max-width: ${(props) => props.theme.lg} !important;
 `;
 
 const Bar = styled.section`
-  background-color: rgba(255, 255, 255, 0.98);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  padding: 0;
-  position: fixed;
-  left: 0;
-  top: 0;
-  right: 0;
-  transition: 0.5s all ${(props) => props.theme.cubicSmooth};
-  z-index: ${(props) => props.theme.zIndex02};
+  background-color: rgba(255, 255, 255, 0.98) !important;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2) !important;
+  padding: 0 !important;
+  position: fixed !important;
+  left: 0 !important;
+  top: 0 !important;
+  right: 0 !important;
+  transition: 0.5s all ${(props) => props.theme.cubicSmooth} !important;
+  z-index: ${(props) => props.theme.zIndex02} !important;
 `;
 
 const TitleBarContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  margin: 0 auto;
-  max-width: ${(props) => props.theme.lg};
-  padding: 0 4vw;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  margin: 0 auto !important;
+  max-width: ${(props) => props.theme.lg} !important;
+  padding: 0 4vw !important;
 
   @media screen and (min-width: 1250px) {
-    padding: 0;
+    padding: 0 !important;
   }
 `;
 
 const Content = styled.header`
-  align-items: center;
-  display: flex;
-  justify-content: space-between;
-  padding: 1vh 0;
-  // margin: 0 auto;
-  max-width: 1200px;
+  align-items: center !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  padding: 1vh 0 !important;
+  // margin: 0 auto!important;
+  max-width: 1200px !important;
 `;
 
 const LeftContent = styled.div`
-  align-items: center;
-  display: flex;
+  align-items: center !important;
+  display: flex !important;
 `;
 
 const Title = styled.h2`
-  margin: 0 0 0 10px;
-  font-size: 30px;
-  line-height: 30px;
+  margin: 0 0 0 10px !important;
+  font-size: 30px !important;
+  line-height: 30px !important;
 
   @media screen and (min-width: 320px) {
-    font-size: calc(30px + 8 * ((100vw - 320px) / 880));
-    line-height: calc(30px + 8 * ((100vw - 320px) / 880));
+    font-size: calc(30px + 8 * ((100vw - 320px) / 880)) !important;
+    line-height: calc(30px + 8 * ((100vw - 320px) / 880)) !important;
   }
   @media screen and (min-width: 1200px) {
-    font-size: 38px;
-    line-height: 38px;
+    font-size: 38px !important;
+    line-height: 38px !important;
   }
 
   a,
@@ -79,7 +79,7 @@ const Title = styled.h2`
   a:focus,
   a:active,
   a:hover {
-    color: ${(props) => props.theme.black};
+    color: ${(props) => props.theme.black} !important;
   }
 `;
 

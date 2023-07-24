@@ -10,20 +10,21 @@ import DropdownList from '~/components/dropdown-list';
 const OuterContainer = styled.nav`
   background-color: ${(props) => {
     return props.isCityRatingsMenu === true ? props.theme.gray : props.theme.midnightBlue;
-  }};
-  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
-  opacity: ${(props) => (props.dropdownState === true ? '1' : '0')};
-  position: fixed;
-  left: 0;
-  right: 0;
+  }} !important;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3) !important;
+  opacity: ${(props) => (props.dropdownState === true ? '1' : '0')} !important;
+  position: fixed !important;
+  left: 0 !important;
+  right: 0 !important;
   top: ${(props) => {
     return props.isGlobalMenu === true ? '5vh' : '22vh';
-  }};
-  transform: ${(props) => (props.dropdownState === true ? 'translateY(0)' : 'translateY(-20px)')};
-  transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
-  visibility: ${(props) => (props.dropdownState === true ? 'visible' : 'hidden')};
-  min-width: 300px;
-  z-index: ${(props) => props.theme.zIndex03};
+  }} !important;
+  transform: ${(props) =>
+    props.dropdownState === true ? 'translateY(0)' : 'translateY(-20px)'} !important;
+  transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s !important;
+  visibility: ${(props) => (props.dropdownState === true ? 'visible' : 'hidden')} !important;
+  min-width: 300px !important;
+  z-index: ${(props) => props.theme.zIndex03} !important;
 
   /* This is COMPLEX - heads up */
   /* We're checking for the Global Menu, if present we want the menu left */
@@ -36,58 +37,58 @@ const OuterContainer = styled.nav`
           ? (props.activeWidth - 1200) / 2 + 'px'
           : '2vw'
         : 'auto';
-    }};
-    margin: inherit;
+    }} !important;
+    margin: inherit !important;
     right: ${(props) => {
       return props.isGlobalMenu === true
         ? 'auto'
         : props.activeWidth > 1200
         ? (props.activeWidth - 1200) / 2 + 'px'
         : '2vw';
-    }};
+    }} !important;
     top: ${(props) => {
       return props.isGlobalMenu === true ? '5vh' : '18vh';
-    }};
+    }} !important;
   }
 `;
 
 const ItemList = styled.ul`
-  list-style: none;
-  padding: 0;
-  margin: 0;
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
 
   li {
-    background-color: ${(props) => (props.hasTopics ? props.theme.darkGray : 'none')};
+    background-color: ${(props) => (props.hasTopics ? props.theme.darkGray : 'none')} !important;
   }
 
   li:first-child {
-    background-color: ${(props) => (props.hasTopics ? props.theme.blue : 'none')};
+    background-color: ${(props) => (props.hasTopics ? props.theme.blue : 'none')} !important;
   }
 
   li a,
   li a:focus,
   li a:visited {
-    background-color: none;
-    color: #fff;
-    padding: 15px 20px;
-    display: block;
-    font-size: 16px;
-    font-weight: 700;
-    text-decoration: none;
-    text-transform: uppercase;
-    line-height: 1.2;
+    background-color: none !important;
+    color: #fff !important;
+    padding: 15px 20px !important;
+    display: block !important;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    text-decoration: none !important;
+    text-transform: uppercase !important;
+    line-height: 1.2 !important;
   }
 
   li a:hover {
-    text-decoration: underline;
+    text-decoration: underline !important;
   }
 `;
 
 const InnerContainer = styled.div`
-  display: grid;
-  grid-gap: 20px;
-  grid-template-columns: ${(props) => (props.hasTopics ? '1fr 190px' : '1fr')};
-  padding: 20px;
+  display: grid !important;
+  grid-gap: 20px !important;
+  grid-template-columns: ${(props) => (props.hasTopics ? '1fr 190px' : '1fr')} !important;
+  padding: 20px !important;
 `;
 
 const TopicContainer = styled.div`
@@ -95,19 +96,19 @@ const TopicContainer = styled.div`
   a:visited,
   a:focus,
   a:hover {
-    text-decoration: none;
+    text-decoration: none !important;
   }
 `;
 
 const AnchorAlign = styled.a`
-  align-items: center;
+  align-items: center !important;
   display: flex !important;
 
   svg {
-    fill: #fff;
-    margin-left: 12px;
-    width: 12px;
-    transition: 0.2s ease-in-out;
+    fill: #fff !important;
+    margin-left: 12px !important;
+    width: 12px !important;
+    transition: 0.2s ease-in-out !important;
   }
 `;
 

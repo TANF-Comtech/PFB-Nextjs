@@ -16,11 +16,11 @@ import Promo from '~/components/promo';
 import ResearchPromo from '~/public/promo/promo-research.jpg';
 
 const IntroWrapper = styled.div`
-  margin: 3vh 0 1vh 0;
+  margin: 3vh 0 1vh 0 !important;
 
   li {
-    list-style-type: disc;
-    padding-left: 10px;
+    list-style-type: disc !important;
+    padding-left: 10px !important;
   }
 `;
 

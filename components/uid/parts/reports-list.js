@@ -5,20 +5,20 @@ import styled from 'styled-components';
 import MainContent from '~/components/main-content';
 
 const ReportListItem = styled.div`
-  border-bottom: 1px solid ${(props) => props.theme.lightestGray};
-  margin: 2.5vh 0 1.25vh 0;
-  padding-bottom: 1.75vh;
+  border-bottom: 1px solid ${(props) => props.theme.lightestGray} !important;
+  margin: 2.5vh 0 1.25vh 0 !important;
+  padding-bottom: 1.75vh !important;
 
   &:last-child {
-    border-bottom: none;
+    border-bottom: none !important;
   }
 `;
 
 const PageHeading = styled.h2`
-  color: ${(props) => props.theme.red};
-  font-weight: 700;
-  margin-top: 5vh;
-  text-transform: uppercase;
+  color: ${(props) => props.theme.red} !important;
+  font-weight: 700 !important;
+  margin-top: 5vh !important;
+  text-transform: uppercase !important;
 `;
 
 /**

@@ -6,62 +6,62 @@ import MainContent from '~/components/main-content';
 import WayfindingItem from '~/components/wayfinding-item';
 
 const DeepBlue = styled.section`
-  background-color: ${(props) => props.theme.midnightBlue};
-  color: #fff;
-  margin-bottom: 2vh;
-  padding: 4vh 0;
+  background-color: ${(props) => props.theme.midnightBlue} !important;
+  color: #fff !important;
+  margin-bottom: 2vh !important;
+  padding: 4vh 0 !important;
 `;
 
 const SectionTitle = styled.h2`
-  color: #fff;
-  margin-bottom: 4vh;
+  color: #fff !important;
+  margin-bottom: 4vh !important;
 `;
 
 const Title = styled.h3`
-  color: ${(props) => props.theme.blueBright};
-  font-family: ${(props) => props.theme.dharma};
-  font-size: 40px;
-  font-weight: 300px;
-  line-height: 40px;
-  margin-bottom: 0;
-  text-transform: uppercase;
+  color: ${(props) => props.theme.blueBright} !important;
+  font-family: ${(props) => props.theme.dharma} !important;
+  font-size: 40px !important;
+  font-weight: 300px !important;
+  line-height: 40px !important;
+  margin-bottom: 0 !important;
+  text-transform: uppercase !important;
 
   @media screen and (min-width: 320px) {
-    font-size: calc(40x + 20 * ((100vw - 320px) / 880));
-    line-height: calc(40px + 20 * ((100vw - 320px) / 880));
+    font-size: calc(40x + 20 * ((100vw - 320px) / 880)) !important;
+    line-height: calc(40px + 20 * ((100vw - 320px) / 880)) !important;
   }
   @media screen and (min-width: 1200px) {
-    font-size: 50px;
-    line-height: 50px;
+    font-size: 50px !important;
+    line-height: 50px !important;
   }
 
   span {
-    color: white;
-    font-size: 40px;
+    color: white !important;
+    font-size: 40px !important;
 
     @media screen and (min-width: 320px) {
-      font-size: calc(40x + 20 * ((100vw - 320px) / 880));
-      line-height: calc(40px + 20 * ((100vw - 320px) / 880));
+      font-size: calc(40x + 20 * ((100vw - 320px) / 880)) !important;
+      line-height: calc(40px + 20 * ((100vw - 320px) / 880)) !important;
     }
     @media screen and (min-width: 1200px) {
-      font-size: 50px;
-      line-height: 50px;
+      font-size: 50px !important;
+      line-height: 50px !important;
     }
   }
 `;
 
 const Text = styled.p`
-  color: white;
-  margin-bottom: 0;
+  color: white !important;
+  margin-bottom: 0 !important;
 `;
 
 const Item = styled.div`
-  border-bottom: 1px solid ${(props) => props.theme.lightGray};
-  margin-bottom: 2vh;
-  padding-bottom: 2vh;
+  border-bottom: 1px solid ${(props) => props.theme.lightGray} !important;
+  margin-bottom: 2vh !important;
+  padding-bottom: 2vh !important;
 
   &:last-child {
-    border-bottom: none;
+    border-bottom: none !important;
   }
 `;
 

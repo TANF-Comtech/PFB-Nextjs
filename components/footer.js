@@ -15,59 +15,59 @@ import twitter from '~/public/socials/twitter.svg';
 import yt from '~/public/socials/yt.svg';
 
 const Bar = styled.footer`
-  background-color: ${(props) => props.theme.darkestGray};
-  color: white;
-  padding: 2vh 0 6vh 0;
+  background-color: ${(props) => props.theme.darkestGray} !important;
+  color: white !important;
+  padding: 2vh 0 6vh 0 !important;
 
   @media screen and (min-width: 768px) {
-    padding: 0 4vw;
+    padding: 0 4vw !important;
   }
 `;
 
 const Container = styled.section`
-  align-items: stretch;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  margin: 0 auto;
-  max-width: ${(props) => props.theme.lg};
+  align-items: stretch !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  margin: 0 auto !important;
+  max-width: ${(props) => props.theme.lg} !important;
 
   @media screen and (min-width: 768px) {
-    flex-direction: row;
+    flex-direction: row !important;
   }
 `;
 
 const StripeMenu = styled.div`
-  background-color: ${(props) => props.theme.redAccent};
-  min-width: 250px;
-  padding: 6vh 0;
+  background-color: ${(props) => props.theme.redAccent} !important;
+  min-width: 250px !important;
+  padding: 6vh 0 !important;
 
   @media screen and (min-width: 320px) {
-    min-width: calc(250px + 100 * ((100vw - 320px) / 880));
+    min-width: calc(250px + 100 * ((100vw - 320px) / 880)) !important;
   }
   @media screen and (min-width: 768px) {
-    min-height: 70vh;
+    min-height: 70vh !important;
   }
   @media screen and (min-width: 1200px) {
-    min-width: 350px;
+    min-width: 350px !important;
   }
 `;
 
 const MenuContainer = styled.ul`
-  align-items: center;
-  color: white;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  font-family: ${(props) => props.theme.dharma};
-  justify-content: center;
-  list-style: none;
-  margin: 0vh 4vw 2vh 4vw;
+  align-items: center !important;
+  color: white !important;
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  font-family: ${(props) => props.theme.dharma} !important;
+  justify-content: center !important;
+  list-style: none !important;
+  margin: 0vh 4vw 2vh 4vw !important;
 
   @media (min-width: 768px) {
-    align-items: flex-start;
-    flex-direction: column;
-    justify-content: flex-start;
+    align-items: flex-start !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
   }
 
   li a,
@@ -75,87 +75,87 @@ const MenuContainer = styled.ul`
   li a:focus,
   li a:active,
   li a:hover {
-    color: white;
-    display: block;
-    font-size: 36px;
-    margin: 0 8px;
-    padding: 8px 0;
-    text-decoration: none;
-    transition: ${(props) => props.theme.basicAnimation};
-    transform: translateY(0);
+    color: white !important;
+    display: block !important;
+    font-size: 36px !important;
+    margin: 0 8px !important;
+    padding: 8px 0 !important;
+    text-decoration: none !important;
+    transition: ${(props) => props.theme.basicAnimation} !important;
+    transform: translateY(0) !important;
 
     @media (min-width: ${(props) => props.theme.bm}) {
-      font-size: calc(36px + 20 * ((100vw - 320px) / 880));
+      font-size: calc(36px + 20 * ((100vw - 320px) / 880)) !important;
     }
     @media (min-width: 768px) {
-      margin: inherit;
+      margin: inherit !important;
     }
     @media (min-width: ${(props) => props.theme.lg}) {
-      font-size: 56px;
+      font-size: 56px !important;
     }
   }
 `;
 
 const SocialContainer = styled.section`
-  display: grid;
-  grid-gap: 5px;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  margin: 2vh auto;
-  max-width: 210px;
+  display: grid !important;
+  grid-gap: 5px !important;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr !important;
+  margin: 2vh auto !important;
+  max-width: 210px !important;
 
   @media screen and (min-width: 320px) {
-    max-width: calc(230px + 57 * ((100vw - 320px) / 880));
+    max-width: calc(230px + 57 * ((100vw - 320px) / 880)) !important;
   }
   @media (min-width: 768px) {
-    grid-template-columns: 1fr 1fr 1fr;
-    margin: 2vh 3.5vw 2vh 3.5vw;
-    max-width: calc(150px + 30 * ((100vw - 320px) / 880));
+    grid-template-columns: 1fr 1fr 1fr !important;
+    margin: 2vh 3.5vw 2vh 3.5vw !important;
+    max-width: calc(150px + 30 * ((100vw - 320px) / 880)) !important;
   }
   @media screen and (min-width: 1200px) {
-    max-width: 180px;
+    max-width: 180px !important;
   }
 `;
 
 const SignUpContainer = styled.div`
-  display: flex;
-  flex-basis: 100%; /* Stretch the signup all the way across the screen */
-  flex-direction: column;
-  justify-content: flex-start;
-  margin: 5vh 4vw;
+  display: flex !important;
+  flex-basis: 100% !important; /* Stretch the signup all the way across the screen */
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  margin: 5vh 4vw !important;
 
   h2 {
-    font-size: 36px;
+    font-size: 36px !important;
   }
   @media screen and (min-width: 320px) {
     h2 {
-      font-size: calc(36px + 20 * ((100vw - 320px) / 880));
-      line-height: calc(36px + 20 * ((100vw - 320px) / 880));
+      font-size: calc(36px + 20 * ((100vw - 320px) / 880)) !important;
+      line-height: calc(36px + 20 * ((100vw - 320px) / 880)) !important;
     }
   }
   @media screen and (min-width: 1200px) {
     h2 {
-      font-size: 56px;
+      font-size: 56px !important;
     }
   }
 `;
 
 const SignUpFooter = styled.footer`
-  align-items: flex-end;
-  display: flex;
-  padding-bottom: 2vh;
+  align-items: flex-end !important;
+  display: flex !important;
+  padding-bottom: 2vh !important;
 `;
 
 const ContactBox = styled.p`
-  color: white;
-  font-size: 18px;
-  font-weight: 500;
-  line-height: 1.5;
-  margin: 2vh 4vw;
-  text-align: center;
+  color: white !important;
+  font-size: 18px !important;
+  font-weight: 500 !important;
+  line-height: 1.5 !important;
+  margin: 2vh 4vw !important;
+  text-align: center !important;
 
   @media (min-width: 768px) {
-    margin: 2vh 4vw;
-    text-align: left;
+    margin: 2vh 4vw !important;
+    text-align: left !important;
   }
 
   a,
@@ -163,149 +163,149 @@ const ContactBox = styled.p`
   a:focus,
   a:active,
   a:hover {
-    color: white;
-    font-family: ${(props) => props.theme.montserrat};
-    font-size: 18px;
-    text-decoration: none;
+    color: white !important;
+    font-family: ${(props) => props.theme.montserrat} !important;
+    font-size: 18px !important;
+    text-decoration: none !important;
   }
 `;
 
 const FormContainer = styled.section`
-  display: flex;
-  flex-direction: column;
-  margin: 2vh 0;
-  padding: 0;
+  display: flex !important;
+  flex-direction: column !important;
+  margin: 2vh 0 !important;
+  padding: 0 !important;
 
   @media (min-width: ${(props) => props.theme.lg}) {
-    padding: 0;
+    padding: 0 !important;
   }
 
   dt {
-    display: none;
+    display: none !important;
   }
 
   label[for='cf-privacy-terms7104'],
   label[for='cf-general-consent1667'] {
-    display: inline;
+    display: inline !important;
   }
 
   input[type='text'],
   input[type='email'],
   select {
-    background-color: ${(props) => props.theme.redAccent};
-    color: white;
+    background-color: ${(props) => props.theme.redAccent} !important;
+    color: white !important;
 
     /* Changing placeholder text remain surreal, even in 2020 */
     ::-webkit-input-placeholder {
-      color: white;
+      color: white !important;
     }
     ::-moz-placeholder {
-      color: white;
+      color: white !important;
     }
     ::-ms-input-placeholder {
-      color: white;
+      color: white !important;
     }
     ::placeholder {
-      color: white;
+      color: white !important;
     }
-    border: none;
-    display: block;
-    font-family: ${(props) => props.theme.montserrat};
-    font-size: 14px;
-    font-weight: 700;
-    margin-bottom: 1vh;
-    min-width: 300px;
-    padding: 10px 16px;
-    text-transform: capitalize;
+    border: none !important;
+    display: block !important;
+    font-family: ${(props) => props.theme.montserrat} !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    margin-bottom: 1vh !important;
+    min-width: 300px !important;
+    padding: 10px 16px !important;
+    text-transform: capitalize !important;
 
     @media (min-width: ${(props) => props.theme.bm}) {
-      font-size: calc(14px + 4 * ((100vw - 320px) / 880));
+      font-size: calc(14px + 4 * ((100vw - 320px) / 880)) !important;
     }
 
     @media (min-width: ${(props) => props.theme.lg}) {
-      font-size: 18px;
+      font-size: 18px !important;
     }
   }
 
   select {
-    width: 95%;
+    width: 95% !important;
   }
 
   input[type='submit'] {
-    background-color: transparent;
-    border: 1px solid white;
-    border-radius: 0px;
-    color: white;
-    cursor: pointer;
-    display: inline-block;
-    font-family: ${(props) => props.theme.montserrat};
-    font-size: 14px;
-    font-weight: 700;
-    min-width: 200px;
-    margin: 2vh 0 0 0;
-    padding: 10px 35px;
-    text-align: center;
-    text-decoration: none;
-    text-transform: uppercase;
-    transform: translateY(0);
-    transition: all 0.25s ease;
+    background-color: transparent !important;
+    border: 1px solid white !important;
+    border-radius: 0px !important;
+    color: white !important;
+    cursor: pointer !important;
+    display: inline-block !important;
+    font-family: ${(props) => props.theme.montserrat} !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    min-width: 200px !important;
+    margin: 2vh 0 0 0 !important;
+    padding: 10px 35px !important;
+    text-align: center !important;
+    text-decoration: none !important;
+    text-transform: uppercase !important;
+    transform: translateY(0) !important;
+    transition: all 0.25s ease !important;
 
     &:hover {
-      background-color: white;
-      color: ${(props) => props.theme.black};
-      text-decoration: none;
-      transform: translateY(-2px);
+      background-color: white !important;
+      color: ${(props) => props.theme.black} !important;
+      text-decoration: none !important;
+      transform: translateY(-2px) !important;
     }
 
     @media (min-width: ${(props) => props.theme.bm}) {
-      font-size: calc(14px + 4 * ((100vw - 320px) / 880));
-      padding: 10px calc(35px + 15 * ((100vw - 320px) / 880));
+      font-size: calc(14px + 4 * ((100vw - 320px) / 880)) !important;
+      padding: 10px calc(35px + 15 * ((100vw - 320px) / 880)) !important;
     }
 
     @media (min-width: ${(props) => props.theme.lg}) {
-      font-size: 18px;
-      padding: 10px 60px;
+      font-size: 18px !important;
+      padding: 10px 60px !important;
     }
   }
 `;
 
 const IconContainer = styled.div`
-  align-items: center;
-  background-color: ${(props) => props.theme.black};
-  border-radius: 19px;
-  display: flex;
-  height: 38px;
-  justify-content: center;
-  transition: ${(props) => props.theme.basicAnimation};
-  width: 38px;
+  align-items: center !important;
+  background-color: ${(props) => props.theme.black} !important;
+  border-radius: 19px !important;
+  display: flex !important;
+  height: 38px !important;
+  justify-content: center !important;
+  transition: ${(props) => props.theme.basicAnimation} !important;
+  width: 38px !important;
 
   &:hover {
-    background-color: ${(props) => props.theme.darkGray};
+    background-color: ${(props) => props.theme.darkGray} !important;
   }
 
   @media screen and (min-width: 320px) {
-    border-radius: calc(19px + 11 * ((100vw - 320px) / 880));
-    height: calc(38px + 22 * ((100vw - 320px) / 880));
-    width: calc(38px + 22 * ((100vw - 320px) / 880));
+    border-radius: calc(19px + 11 * ((100vw - 320px) / 880)) !important;
+    height: calc(38px + 22 * ((100vw - 320px) / 880)) !important;
+    width: calc(38px + 22 * ((100vw - 320px) / 880)) !important;
   }
   @media screen and (min-width: 1200px) {
-    border-radius: 30px;
-    height: 60px;
-    width: 60px;
+    border-radius: 30px !important;
+    height: 60px !important;
+    width: 60px !important;
   }
 `;
 
 const Icon = styled.img`
-  height: 19px;
-  width: 19px;
+  height: 19px !important;
+  width: 19px !important;
 
   @media screen and (min-width: 320px) {
-    height: calc(19px + 11 * ((100vw - 320px) / 880));
-    width: calc(19px + 11 * ((100vw - 320px) / 880));
+    height: calc(19px + 11 * ((100vw - 320px) / 880)) !important;
+    width: calc(19px + 11 * ((100vw - 320px) / 880)) !important;
   }
   @media screen and (min-width: 1200px) {
-    height: 30px;
-    width: 30px;
+    height: 30px !important;
+    width: 30px !important;
   }
 `;
 

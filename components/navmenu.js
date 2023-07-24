@@ -3,7 +3,7 @@ import { useAtomValue, useSetAtom } from 'jotai';
 import styled, { keyframes } from 'styled-components';
 import Link from 'next/link';
 
-import globalData from '~/data/global'
+import globalData from '~/data/global';
 import { loginModalAtom } from '~/atoms';
 import { loggedInAtom, useLogout } from '~/lib/auth';
 
@@ -14,101 +14,101 @@ import DropdownList from '~/components/dropdown-list';
 import controlIcon from '~/public/thin-x.svg';
 
 const NavContainer = styled.nav`
-  background-color: ${(props) => props.theme.midnightBlue};
-  bottom: 0;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  color: #fff;
-  max-width: ${(props) => props.theme.xs};
-  min-width: 320px;
-  min-height: 100vh;
-  overflow: auto;
-  position: fixed;
-  right: 0;
-  top: 0;
-  transition: 0.4s ease-in-out;
-  transform: ${(props) => (props.menuState ? 'translateX(0)' : 'translateX(100%)')};
-  will-change: transform;
-  z-index: ${(props) => props.theme.zIndex05};
+  background-color: ${(props) => props.theme.midnightBlue} !important;
+  bottom: 0 !important;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2) !important;
+  color: #fff !important;
+  max-width: ${(props) => props.theme.xs} !important;
+  min-width: 320px !important;
+  min-height: 100vh !important;
+  overflow: auto !important;
+  position: fixed !important;
+  right: 0 !important;
+  top: 0 !important;
+  transition: 0.4s ease-in-out !important;
+  transform: ${(props) => (props.menuState ? 'translateX(0)' : 'translateX(100%)')} !important;
+  will-change: transform !important;
+  z-index: ${(props) => props.theme.zIndex05} !important;
 `;
 
 const NavOverlay = styled.section`
-  background-color: ${(props) => props.theme.black};
-  min-height: 100vh;
-  opacity: ${(props) => (props.menuState ? '0.8' : '0')};
-  transition: all 0.4s ease-in-out;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  visibility: ${(props) => (props.menuState ? 'visible' : 'hidden')};
-  z-index: ${(props) => props.theme.zIndex04};
+  background-color: ${(props) => props.theme.black} !important;
+  min-height: 100vh !important;
+  opacity: ${(props) => (props.menuState ? '0.8' : '0')} !important;
+  transition: all 0.4s ease-in-out !important;
+  position: fixed !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  visibility: ${(props) => (props.menuState ? 'visible' : 'hidden')} !important;
+  z-index: ${(props) => props.theme.zIndex04} !important;
 `;
 
 const fadeIn = keyframes`
   0% {
-    opacity: 0;
+    opacity: 0 !important;
   }
   100% {
-    opacity: 1;
+    opacity: 1 !important;
   }
 `;
 
 const MenuHeader = styled(Link)`
-  align-items: center;
-  display: flex;
-  justify-content: space-between;
+  align-items: center !important;
+  display: flex !important;
+  justify-content: space-between !important;
 
   a,
   a:focus,
   a:visited,
   a:hover {
-    color: black;
-    text-decoration: none;
+    color: black !important;
+    text-decoration: none !important;
   }
 `;
 
 const LogoContainer = styled.section`
-  align-items: flex-end;
-  animation: ${fadeIn} 0.75s ease forwards;
-  animation-delay: 0.4s;
-  display: flex;
-  opacity: 0;
-  padding: 25px 25px 0 25px;
+  align-items: flex-end !important;
+  animation: ${fadeIn} 0.75s ease forwards !important;
+  animation-delay: 0.4s !important;
+  display: flex !important;
+  opacity: 0 !important;
+  padding: 25px 25px 0 25px !important;
 `;
 
 const MainNav = styled.ul`
-  animation: ${fadeIn} 0.75s ease forwards;
-  animation-delay: 0.6s;
-  list-style: none;
-  margin: 0;
-  opacity: 0;
-  padding: 25px;
+  animation: ${fadeIn} 0.75s ease forwards !important;
+  animation-delay: 0.6s !important;
+  list-style: none !important;
+  margin: 0 !important;
+  opacity: 0 !important;
+  padding: 25px !important;
 
   a,
   a:visited,
   a:focus,
   a:active {
-    color: #fff;
-    text-decoration: none;
-    transition: 0.2s ease-in-out;
+    color: #fff !important;
+    text-decoration: none !important;
+    transition: 0.2s ease-in-out !important;
   }
   a:hover {
-    text-decoration: none;
+    text-decoration: none !important;
   }
 `;
 
 const MainNavItem = styled.li`
-  cursor: pointer;
-  font-size: 46px;
-  font-family: ${(props) => props.theme.dharma};
-  font-weight: 300;
-  line-height: 42px;
-  padding: 1vh 0;
+  cursor: pointer !important;
+  font-size: 46px !important;
+  font-family: ${(props) => props.theme.dharma} !important;
+  font-weight: 300 !important;
+  line-height: 42px !important;
+  padding: 1vh 0 !important;
 `;
 
 const AnchorAlign = styled.a`
-  align-items: center;
+  align-items: center !important;
   display: flex !important;
 
   span {
@@ -117,115 +117,115 @@ const AnchorAlign = styled.a`
   }
 
   svg {
-    fill: #fff;
-    margin-left: 12px;
-    width: 12px;
+    fill: #fff !important;
+    margin-left: 12px !important;
+    width: 12px !important;
     display: inline !important;
-    transition: 0.2s ease-in-out;
+    transition: 0.2s ease-in-out !important;
 
     &:hover {
-      fill: ${(props) => props.theme.red};
+      fill: ${(props) => props.theme.red} !important;
     }
   }
 `;
 
 const ItemList = styled.ul`
-  animation: ${fadeIn} 0.75s ease forwards;
-  animation-delay: 0.8s;
-  list-style: none;
-  margin: 0;
-  opacity: 0;
-  padding: 0;
+  animation: ${fadeIn} 0.75s ease forwards !important;
+  animation-delay: 0.8s !important;
+  list-style: none !important;
+  margin: 0 !important;
+  opacity: 0 !important;
+  padding: 0 !important;
 
   li a,
   li a:focus,
   li a:visited {
-    background-color: ${(props) => props.theme.blue};
-    color: #fff;
-    padding: 15px 20px;
-    display: block;
-    font-size: 16px;
-    font-weight: 700;
-    text-decoration: none;
-    text-transform: uppercase;
-    line-height: 1.2;
+    background-color: ${(props) => props.theme.blue} !important;
+    color: #fff !important;
+    padding: 15px 20px !important;
+    display: block !important;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    text-decoration: none !important;
+    text-transform: uppercase !important;
+    line-height: 1.2 !important;
   }
 
   li a:hover {
-    text-decoration: underline;
+    text-decoration: underline !important;
   }
 `;
 
 const MemberLi = styled.li`
-  align-items: center;
-  background-color: ${(props) => props.theme.darkGray};
-  display: flex;
-  justify-content: flex-start;
+  align-items: center !important;
+  background-color: ${(props) => props.theme.darkGray} !important;
+  display: flex !important;
+  justify-content: flex-start !important;
 
   a,
   a:focus,
   a:visited {
     background-color: ${(props) => props.theme.darkGray} !important;
-    color: #fff;
-    padding: 15px 20px;
-    font-size: 16px;
-    font-weight: 700;
-    text-decoration: none;
-    text-transform: uppercase;
-    line-height: 1.2;
+    color: #fff !important;
+    padding: 15px 20px !important;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    text-decoration: none !important;
+    text-transform: uppercase !important;
+    line-height: 1.2 !important;
 
     &:hover {
-      text-decoration: underline;
+      text-decoration: underline !important;
     }
   }
 
   span {
-    border: 1px solid #fff;
+    border: 1px solid #fff !important;
     color: ${(props) => props.theme.yellow} !important;
-    cursor: pointer;
-    display: inline;
-    font-size: 14px;
-    font-weight: 700;
-    margin: 0 0 0 5px;
-    padding: 2px 4px;
+    cursor: pointer !important;
+    display: inline !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    margin: 0 0 0 5px !important;
+    padding: 2px 4px !important;
     text-decoration: none !important;
-    text-transform: uppercase;
+    text-transform: uppercase !important;
   }
 `;
 
 const AccordionWrapper = styled.div`
-  align-items: center;
-  cursor: pointer;
-  display: flex;
-  height: auto;
-  justify-content: space-between;
-  transition: 0.5s ease-in-out;
+  align-items: center !important;
+  cursor: pointer !important;
+  display: flex !important;
+  height: auto !important;
+  justify-content: space-between !important;
+  transition: 0.5s ease-in-out !important;
 `;
 
 const InternalWrapper = styled.div`
-  max-height: ${(props) => (props.open ? 'auto' : '0')};
-  opacity: ${(props) => (props.open ? '1' : '0')};
-  overflow: hidden;
-  transition: all 1s cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  max-height: ${(props) => (props.open ? 'auto' : '0')} !important;
+  opacity: ${(props) => (props.open ? '1' : '0')} !important;
+  overflow: hidden !important;
+  transition: all 1s cubic-bezier(0.4, 0, 0.2, 1) 0ms !important;
 `;
 
 const ArrowButton = styled.img`
-  border: none;
-  height: min-content;
-  margin: none;
-  transition: all 0.25s ease-in-out;
-  transform: ${(props) => (props.open ? 'rotate(180deg)' : 'rotate(45deg)')};
-  transform-origin: 40% 40%;
+  border: none !important;
+  height: min-content !important;
+  margin: none !important;
+  transition: all 0.25s ease-in-out !important;
+  transform: ${(props) => (props.open ? 'rotate(180deg)' : 'rotate(45deg)')} !important;
+  transform-origin: 40% 40% !important;
 `;
 
 const Title = styled.h2`
-  cursor: pointer;
-  font-size: 46px;
-  font-family: ${(props) => props.theme.dharma};
-  font-weight: 300;
-  line-height: 42px;
-  margin: 0;
-  padding: 1vh 0;
+  cursor: pointer !important;
+  font-size: 46px !important;
+  font-family: ${(props) => props.theme.dharma} !important;
+  font-weight: 300 !important;
+  line-height: 42px !important;
+  margin: 0 !important;
+  padding: 1vh 0 !important;
 `;
 
 /**

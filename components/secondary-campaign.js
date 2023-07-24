@@ -9,17 +9,17 @@ import Rule from '~/components/rule';
 import BlueArrow from '~/public/pfb-blue-arrow-right.svg';
 
 const Tile = styled.div`
-  display: flex;
-  background-image: url(${(props) => props.source});
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: contain;
-  flex-direction: column;
-  justify-content: flex-end;
-  height: 0;
-  margin: 5px;
-  padding-top: 50%;
-  width: 100%;
+  display: flex !important;
+  background-image: url(${(props) => props.source}) !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  background-size: contain !important;
+  flex-direction: column !important;
+  justify-content: flex-end !important;
+  height: 0 !important;
+  margin: 5px !important;
+  padding-top: 50% !important;
+  width: 100% !important;
 `;
 
 const SCLink = styled.a`
@@ -27,45 +27,45 @@ const SCLink = styled.a`
 `;
 
 const SCTitleContainer = styled.div`
-  background-color: rgba(26, 26, 26, 0.5);
-  max-height: 75px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+  background-color: rgba(26, 26, 26, 0.5) !important;
+  max-height: 75px !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
 `;
 
 const SCTitle = styled.h3`
-  color: white;
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 1.1;
-  margin: 0 20px;
-  text-transform: uppercase;
+  color: white !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  line-height: 1.1 !important;
+  margin: 0 20px !important;
+  text-transform: uppercase !important;
 `;
 
 const Arrow = styled.img`
-  width: 50px;
+  width: 50px !important;
 
   @media (min-width: ${(props) => props.theme.md}) {
-    width: 60px;
+    width: 60px !important;
   }
 `;
 
 const Description = styled.p`
-  align-items: center;
-  display: flex;
-  font-size: 18px;
-  margin-left: 10px;
+  align-items: center !important;
+  display: flex !important;
+  font-size: 18px !important;
+  margin-left: 10px !important;
 `;
 
 const Grid = styled.section`
-  display: grid;
-  grid-gap: 15px;
-  grid-template-columns: 1fr;
-  margin: 0 4vw;
+  display: grid !important;
+  grid-gap: 15px !important;
+  grid-template-columns: 1fr !important;
+  margin: 0 4vw !important;
 
   @media (min-width: ${(props) => props.theme.sm}) {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr !important;
   }
 `;
 

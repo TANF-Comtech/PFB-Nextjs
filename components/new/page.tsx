@@ -18,6 +18,8 @@ import { Login } from '~/components/login';
 import useOnClickOutside from '~/hooks/useOnClickOutside';
 import { loggedInAtom, useLogout } from '~/lib/auth';
 import { Search, MobileSearch } from '~/components/new/search';
+import { useLocalStorage } from '~/hooks/useLocalStorage';
+import { ClientOnly } from './client-only';
 
 type Section = 'infrastructure' | 'policy' | 'participation' | 'about' | 'donate' | null;
 
@@ -262,7 +264,7 @@ const Logo = ({ className = '', invert, showWordMark = false, ...rest }: LogoPro
             src="/new/pfb-wordmark.png"
             className={cx(
               showWordMark ? 'opacity-100' : 'opacity-100 lg:opacity-0 lg:group-hover:opacity-100',
-              'block h-12 w-auto flex-shrink-0 transition duration-700',
+              'relative -bottom-2.5 block h-12 w-auto flex-shrink-0 transition duration-700',
               invert && 'invert',
             )}
             alt="People for Bikes"
@@ -281,8 +283,16 @@ const Navigation = () => {
   return (
     <nav className="relative hidden justify-center lg:flex lg:w-1/2">
       <ul className="flex justify-center gap-8 font-dharma text-4xl">
-        {NAVIGATION.map((item: any) => (
-          <li key={item.key}>
+        <li className="order-2">
+          <Link href="/news">
+            <a className="group/button relative inline-block cursor-pointer whitespace-pre px-4 pb-1.5 pt-2 leading-none">
+              <div className="absolute inset-0 z-0 h-full w-full rounded-lg bg-transparent transition duration-700 group-hover/button:bg-lightestGray" />
+              <span className="relative z-10">Stories</span>
+            </a>
+          </Link>
+        </li>
+        {NAVIGATION.map((item: any, index: number) => (
+          <li key={item.key} className={cx(index < 3 ? 'order-1' : 'order-3')}>
             <button
               onClick={() => {
                 const nextActiveTab = activeTab === item.key ? null : item.key;
@@ -481,8 +491,21 @@ const MobileMenu = () => {
         </a>
       </Link>
       <ul className="mt-6 flex flex-col gap-6 sm:mt-12 sm:gap-12">
-        {NAVIGATION.map((item: any) => (
-          <li key={item.key}>
+        <li className="order-2">
+          <Link href="/news">
+            <a
+              onClick={handleCloseMenu}
+              className="relative inline-flex items-center gap-3 whitespace-pre"
+            >
+              <span className="font-dharma text-5xl">Stories</span>
+              <span>
+                <i className="fa-solid fa-plus text-base leading-none text-white" />
+              </span>
+            </a>
+          </Link>
+        </li>
+        {NAVIGATION.map((item: any, index: number) => (
+          <li key={item.key} className={cx(index < 3 ? 'order-1' : 'order-3')}>
             <button
               onClick={() => {
                 const nextActiveSection = activeSection === item.key ? null : item.key;
@@ -564,17 +587,31 @@ const MobileMenu = () => {
 };
 
 const DonationBanner = () => {
+  const [hasDismissed, setHasDismissed] = useLocalStorage('dismissedDonationBanner', false);
+
+  if (hasDismissed) return null;
+
   return (
-    <div className="pointer-events-none fixed bottom-0 left-0 right-0 z-50 flex justify-center p-4">
-      <Link href="/giving">
-        <a className="pointer-events-auto flex items-center justify-between gap-4 rounded-lg border border-solid border-white/50 bg-darkest-blue p-4 text-white shadow-2xl">
-          <Button variant="gold" label="Give today" />
-          <span className="hidden font-dharma sm:inline sm:text-3xl xl:text-5xl">
-            Your support matters
-          </span>
-        </a>
-      </Link>
-    </div>
+    <ClientOnly>
+      <div className="pointer-events-none fixed bottom-0 left-0 right-0 z-50 flex justify-center p-4">
+        <div className="pointer-events-auto relative flex items-center justify-between gap-4 rounded-lg border border-solid border-white/50 bg-darkest-blue p-4 pr-8 shadow-2xl">
+          <Link href="/giving">
+            <a className="inline-flex items-center justify-center gap-4 text-white">
+              <Button variant="gold" label="Give today" />
+              <span className="hidden font-dharma sm:inline sm:text-3xl xl:text-5xl">
+                Your support matters
+              </span>
+            </a>
+          </Link>
+          <button
+            onClick={() => setHasDismissed(true)}
+            className="absolute right-0 top-0 z-60 p-2 pr-3 text-lg font-bold text-white/50"
+          >
+            X
+          </button>
+        </div>
+      </div>
+    </ClientOnly>
   );
 };
 
@@ -591,8 +628,18 @@ const Footer = () => {
     <div className="relative z-[1020] sm:flex xl:min-h-[calc(100vh-3rem)]">
       <div className="bg-darkest-blue p-8 text-white sm:w-1/2 sm:p-12 xl:w-1/4 xl:p-16">
         <ul ref={ref} className="flex flex-col gap-1.5">
-          {NAVIGATION.map((item: any) => (
-            <li key={item.key}>
+          <li className="order-2">
+            <Link href="/news">
+              <a className="relative inline-flex items-center gap-3 whitespace-pre font-bold uppercase">
+                <span>Stories</span>
+                <span>
+                  <i className="fa-solid fa-caret-right text-base leading-none text-white" />
+                </span>
+              </a>
+            </Link>
+          </li>
+          {NAVIGATION.map((item: any, index: number) => (
+            <li key={item.key} className={cx(index < 3 ? 'order-1' : 'order-3')}>
               <button
                 onClick={() => {
                   const nextActiveSection = activeSection === item.key ? null : item.key;
@@ -627,6 +674,13 @@ const Footer = () => {
                       <DynamicLink href={item.link}>{item.title}</DynamicLink>
                     </li>
                   ))}
+                  {item.key === 'about' && (
+                    <li>
+                      <Link href="privacy">
+                        <a>Privacy</a>
+                      </Link>
+                    </li>
+                  )}
                 </ul>
               )}
             </li>
@@ -816,7 +870,7 @@ const NAVIGATION: Array<NavigationEntry> = [
       { title: 'Policy', link: 'policy' },
       { title: 'VoteForBikes', link: 'voteforbikes' },
       { title: 'Sustainability', link: 'topics/sustainable-transportation' },
-      { title: 'Action Alerts', link: 'action-alerts' },
+      { title: 'Action Alerts', link: 'take-action' },
     ],
   },
   {
@@ -837,7 +891,7 @@ const NAVIGATION: Array<NavigationEntry> = [
     items: [
       { title: 'Keep Riding', link: 'https://www.pfbkeepriding.org/' },
       { title: 'One Ride at a Time', link: 'https://oneride.peopleforbikes.org/' },
-      { title: 'Action Alerts', link: 'action-alerts' },
+      { title: 'Action Alerts', link: 'take-action' },
     ],
   },
   {

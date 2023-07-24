@@ -3,7 +3,6 @@ import { asDate } from '@prismicio/helpers';
 
 import { getLocationsNoImages, getSingleLocationsPage } from '~/lib/queries/locations';
 import { randomID } from '~/utils';
-import { setDateSuffix } from '~/utils/setDateSuffix';
 import data from '~/data';
 
 import { LegacyPage } from '~/components/legacy-page';
@@ -101,7 +100,7 @@ export default function LocationPage({ fallback, page, preview }) {
               return (
                 <ContentItem
                   date={`${newDate.toLocaleString('en-us', { month: 'long' })}
-                        ${setDateSuffix(newDate.getDate())},
+                        ${newDate.getDate()},
                         ${newDate.getFullYear()}`}
                   key={newsItem.id}
                   image={

@@ -11,21 +11,21 @@ import GrantsBG from '~/public/take-action/grants.jpg';
 import WhiteArrow from '~/public/white-arrow.svg';
 
 const Container = styled.section`
-  padding-bottom: 10vh;
+  padding-bottom: 10vh !important;
 
   a,
   a:visited,
   a:active,
   a:focus,
   a:hover {
-    text-decoration: none;
+    text-decoration: none !important;
   }
 `;
 
 const Arrow = styled.img`
-  display: block;
-  margin: 15px auto;
-  width: 46px;
+  display: block !important;
+  margin: 15px auto !important;
+  width: 46px !important;
 `;
 
 /**

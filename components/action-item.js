@@ -22,66 +22,66 @@ import TruckIcon from '~/public/icons/truck.svg';
 import DEIIcon from '~/public/icons/circles.svg';
 
 const Container = styled.section`
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: 0 0 4vh 0;
-  text-decoration: none;
+  align-items: center !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  margin: 0 0 4vh 0 !important;
+  text-decoration: none !important;
 
   @media (min-width: ${(props) => props.theme.sm}) {
-    align-items: flex-start;
-    flex-direction: row;
-    justify-content: flex-start;
+    align-items: flex-start !important;
+    flex-direction: row !important;
+    justify-content: flex-start !important;
   }
 
   &:hover {
-    text-decoration: none;
+    text-decoration: none !important;
   }
 `;
 
 const Icon = styled.img`
-  flex-basis: 50px;
+  flex-basis: 50px !important;
 `;
 
 const ContentContainer = styled.div`
-  margin: 2vh 0 0 0;
+  margin: 2vh 0 0 0 !important;
 
   @media (min-width: ${(props) => props.theme.sm}) {
-    margin: 0 0 0 2vw;
+    margin: 0 0 0 2vw !important;
   }
 
   a,
   a:focus,
   a:hover,
   a:visited {
-    color: ${(props) => props.theme.red};
-    text-decoration: none;
+    color: ${(props) => props.theme.red} !important;
+    text-decoration: none !important;
   }
 
   li {
-    list-style-type: disc;
-    padding-left: 10px;
+    list-style-type: disc !important;
+    padding-left: 10px !important;
   }
 `;
 
 const Title = styled.h2`
-  color: ${(props) => props.theme.red};
-  font-weight: 700;
-  margin-bottom: 1vh;
-  text-align: center;
+  color: ${(props) => props.theme.red} !important;
+  font-weight: 700 !important;
+  margin-bottom: 1vh !important;
+  text-align: center !important;
 
   @media (min-width: ${(props) => props.theme.sm}) {
-    text-align: left;
+    text-align: left !important;
   }
 `;
 
 const Text = styled.p`
-  margin-bottom: 0;
-  text-align: center;
+  margin-bottom: 0 !important;
+  text-align: center !important;
 
   @media (min-width: ${(props) => props.theme.sm}) {
-    text-align: left;
+    text-align: left !important;
   }
 `;
 

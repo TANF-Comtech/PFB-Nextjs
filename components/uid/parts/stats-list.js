@@ -8,47 +8,47 @@ import Grid from '~/components/grid';
 import WhiteArrow from '~/public/white-arrow.svg';
 
 const GridWrapper = styled.section`
-  margin: 2vh 0;
+  margin: 2vh 0 !important;
 `;
 
 const Box = styled.div`
-  align-items: center;
-  background-color: ${(props) => props.theme.midnightBlue};
-  display: flex;
-  justify-content: center;
-  min-height: 190px;
-  padding: 25px;
+  align-items: center !important;
+  background-color: ${(props) => props.theme.midnightBlue} !important;
+  display: flex !important;
+  justify-content: center !important;
+  min-height: 190px !important;
+  padding: 25px !important;
 `;
 
 const Text = styled.h4`
-  color: ${(props) => props.theme.blueBright};
-  font-size: 36px;
-  font-weight: 700;
-  line-height: 36px;
-  margin: 0 0 10px 0;
-  text-align: center;
-  text-transform: uppercase;
+  color: ${(props) => props.theme.blueBright} !important;
+  font-size: 36px !important;
+  font-weight: 700 !important;
+  line-height: 36px !important;
+  margin: 0 0 10px 0 !important;
+  text-align: center !important;
+  text-transform: uppercase !important;
   @media screen and (min-width: 320px) {
-    font-size: calc(36px + 8 * ((100vw - 320px) / 880));
-    line-height: calc(36px + 8 * ((100vw - 320px) / 880));
+    font-size: calc(36px + 8 * ((100vw - 320px) / 880)) !important;
+    line-height: calc(36px + 8 * ((100vw - 320px) / 880)) !important;
   }
   @media screen and (min-width: 1200px) {
-    font-size: 44px;
-    line-height: 44px;
+    font-size: 44px !important;
+    line-height: 44px !important;
   }
 `;
 
 const Arrow = styled.img`
-  display: block;
-  margin: 0 auto;
-  width: 46px;
+  display: block !important;
+  margin: 0 auto !important;
+  width: 46px !important;
 `;
 
 const PageHeading = styled.h2`
-  color: ${(props) => props.theme.red};
-  font-weight: 700;
-  margin-top: 5vh;
-  text-transform: uppercase;
+  color: ${(props) => props.theme.red} !important;
+  font-weight: 700 !important;
+  margin-top: 5vh !important;
+  text-transform: uppercase !important;
 `;
 
 /* So...the landing page query is so large, we've overloaded it */

@@ -1,8 +1,6 @@
 import React from 'react';
 import { asDate } from '@prismicio/helpers';
 
-import { setDateSuffix } from '~/utils/setDateSuffix';
-
 import MainContent from '~/components/main-content';
 import ContentItem from '~/components/content-item';
 import FallbackImage from '~/components/fallback-image';
@@ -34,7 +32,7 @@ const NewsList = ({ nodeName = 'news_item', payload }) => {
           return (
             <ContentItem
               date={`${theDateLongform.toLocaleString('en-us', { month: 'long' })}
-                     ${setDateSuffix(theDateLongform.toLocaleString('en-us', { day: 'numeric' }))},
+                     ${theDateLongform.toLocaleString('en-us', { day: 'numeric' })},
                      ${theDateLongform.toLocaleString('en-us', { year: 'numeric' })}`}
               deck={news[nodeName]?.deck}
               key={news[nodeName]?._meta.id}

@@ -20,53 +20,53 @@ const Container = styled.section`
 `;
 
 const PromoTextContainer = styled.div`
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 50vh;
-  margin-bottom: 25px;
-  padding: 0 5vw;
-  text-align: center;
-  width: 100vw;
+  align-items: center !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  height: 50vh !important;
+  margin-bottom: 25px !important;
+  padding: 0 5vw !important;
+  text-align: center !important;
+  width: 100vw !important;
 
   @media screen and (min-width: ${(props) => props.theme.sm}) {
-    height: 70vh;
+    height: 70vh !important;
   }
 
   h1 {
-    color: rgba(${(props) => (props.headingRGBA ? props.headingRGBA : '255,255,255,1')});
-    text-transform: uppercase;
+    color: rgba(${(props) => (props.headingRGBA ? props.headingRGBA : '255,255,255,1')}) !important;
+    text-transform: uppercase !important;
   }
 
   span {
-    color: rgba(${(props) => (props.headingRGBA ? props.headingRGBA : '255,255,255,1')});
-    font-family: ${(props) => props.theme.dharma};
-    font-size: 40px;
-    font-weight: 600;
-    line-height: 40px;
-    letter-spacing: 1px;
-    margin: 0;
-    text-transform: uppercase;
+    color: rgba(${(props) => (props.headingRGBA ? props.headingRGBA : '255,255,255,1')}) !important;
+    font-family: ${(props) => props.theme.dharma} !important;
+    font-size: 40px !important;
+    font-weight: 600 !important;
+    line-height: 40px !important;
+    letter-spacing: 1px !important;
+    margin: 0 !important;
+    text-transform: uppercase !important;
   }
   @media screen and (min-width: 320px) {
     span {
-      font-size: calc(40px + 20 * ((100vw - 320px) / 880));
-      line-height: calc(40px + 20 * ((100vw - 320px) / 880));
+      font-size: calc(40px + 20 * ((100vw - 320px) / 880)) !important;
+      line-height: calc(40px + 20 * ((100vw - 320px) / 880)) !important;
     }
   }
   @media screen and (min-width: 1200px) {
     span {
-      font-size: 60px;
-      line-height: 60px;
+      font-size: 60px !important;
+      line-height: 60px !important;
     }
   }
 `;
 
 const Arrow = styled.img`
-  display: block;
-  margin: 10px auto;
-  width: 46px;
+  display: block !important;
+  margin: 10px auto !important;
+  width: 46px !important;
 `;
 
 /**

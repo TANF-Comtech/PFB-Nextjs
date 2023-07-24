@@ -2,23 +2,23 @@ import React from 'react';
 import styled from 'styled-components';
 
 const MainContainer = styled.section`
-  display: grid;
-  grid-gap: ${(props) => props.gridGap || '2vw'};
-  grid-template-columns: 1fr;
+  display: grid !important;
+  grid-gap: ${(props) => props.gridGap || '2vw'} !important;
+  grid-template-columns: 1fr !important;
 
   @media (min-width: ${(props) => props.theme.sm}) {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr !important;
   }
 
   @media (min-width: ${(props) => props.theme.lg}) {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr !important;
   }
 
   a,
   a:focus,
   a:visited,
   a:hover {
-    text-decoration: none;
+    text-decoration: none !important;
   }
 `;
 

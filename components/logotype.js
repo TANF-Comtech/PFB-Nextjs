@@ -2,27 +2,27 @@ import React from 'react';
 import styled from 'styled-components';
 
 const LogoLetters = styled.svg`
-  cursor: pointer;
-  display: block;
-  margin: ${(props) => props.logoMargin};
-  padding: 1vh 0 0 0;
-  width: ${(props) => props.logoTypeWidth || '120px'};
+  cursor: pointer !important;
+  display: block !important;
+  margin: ${(props) => props.logoMargin} !important;
+  padding: 1vh 0 0 0 !important;
+  width: ${(props) => props.logoTypeWidth || '120px'} !important;
 `;
 
 const PeoplePath = styled.path`
-  fill: ${(props) => props.fillPeople || '#464645'};
+  fill: ${(props) => props.fillPeople || '#464645'} !important;
 `;
 
 const ForPath = styled.path`
-  fill: ${(props) => props.fillFor || '#828382'};
+  fill: ${(props) => props.fillFor || '#828382'} !important;
 `;
 
 const BikesPath = styled.path`
-  fill: ${(props) => props.fillBikes || '#464645'};
+  fill: ${(props) => props.fillBikes || '#464645'} !important;
 `;
 
 const BikesPoly = styled.polyline`
-  fill: ${(props) => props.fillBikes || '#464645'};
+  fill: ${(props) => props.fillBikes || '#464645'} !important;
 `;
 
 function LogoType({

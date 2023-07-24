@@ -4,27 +4,27 @@ import styled from 'styled-components';
 import MainContent from '~/components/main-content';
 
 const Container = styled.section`
-  padding: 2vh 0 4vh 0;
+  padding: 2vh 0 4vh 0 !important;
 
   @media (min-width: ${(props) => props.theme.lg}) {
-    padding: 2vh 0 4vh 0;
+    padding: 2vh 0 4vh 0 !important;
   }
 `;
 
 const MainText = styled.h1`
-  color: ${(props) => props.theme.red};
-  display: inline;
-  font-weight: 700;
-  margin: 0 0 0 0;
-  text-transform: none;
+  color: ${(props) => props.theme.red} !important;
+  display: inline !important;
+  font-weight: 700 !important;
+  margin: 0 0 0 0 !important;
+  text-transform: none !important;
 `;
 
 const SecondaryText = styled.h1`
-  color: ${(props) => props.theme.darkGray};
-  display: inline;
-  font-weight: 300;
-  margin: 0 12px 0 0;
-  text-transform: none;
+  color: ${(props) => props.theme.darkGray} !important;
+  display: inline !important;
+  font-weight: 300 !important;
+  margin: 0 12px 0 0 !important;
+  text-transform: none !important;
 `;
 
 /**
@@ -43,8 +43,10 @@ const SecondaryTitleBanner = ({ mainText, secondaryText }) => {
   return (
     <MainContent maxWidth="1000px">
       <Container>
-        <SecondaryText>{secondaryText}</SecondaryText>
-        {` `}
+        <SecondaryText>
+          {secondaryText}
+          {` `}
+        </SecondaryText>
         <MainText>{mainText}</MainText>
       </Container>
     </MainContent>

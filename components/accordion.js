@@ -5,57 +5,60 @@ import RedArrow from '~/public/red-arrow-triangle.svg';
 import WhiteArrow from '~/public/white-arrow-triangle.svg';
 
 const AccordionWrapper = styled.div`
-  align-items: center;
-  background-color: ${(props) => (props.darkMode === true ? props.theme.midnightBlue : '#fff')};
-  border-top: ${(props) => (props.darkMode === true ? '1px solid #fff' : '1px solid #222')};
-  cursor: pointer;
-  display: flex;
-  height: auto;
-  padding: ${(props) => (props.smallMode === true ? '3vh 0' : '4vh 0')};
-  transition: 0.5s ease-in-out;
+  align-items: center !important;
+  background-color: ${(props) =>
+    props.darkMode === true ? props.theme.midnightBlue : '#fff'} !important;
+  border-top: ${(props) =>
+    props.darkMode === true ? '1px solid #fff' : '1px solid #222'} !important;
+  cursor: pointer !important;
+  display: flex !important;
+  height: auto !important;
+  padding: ${(props) => (props.smallMode === true ? '3vh 0' : '4vh 0')} !important;
+  transition: 0.5s ease-in-out !important;
 
   &:first-child {
-    border-top: none;
+    border-top: none !important;
   }
 `;
 
 const InternalWrapper = styled.div`
-  max-height: ${(props) => (props.open ? 'auto' : '0')};
-  opacity: ${(props) => (props.open ? '1' : '0')};
-  overflow: hidden;
-  transition: all 1s cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  max-height: ${(props) => (props.open ? 'auto' : '0')} !important;
+  opacity: ${(props) => (props.open ? '1' : '0')} !important;
+  overflow: hidden !important;
+  transition: all 1s cubic-bezier(0.4, 0, 0.2, 1) 0ms !important;
 `;
 
 const ArrowButton = styled.img`
-  border: none;
-  height: min-content;
-  margin: none;
-  transition: all 0.25s ease-in-out;
-  transform: ${(props) => (props.open ? 'rotate(90deg)' : 'rotate(0deg)')};
-  transform-origin: 40% 40%;
-  width: ${(props) => (props.smallMode === true ? '10px' : '17px')};
+  border: none !important;
+  height: min-content !important;
+  margin: none !important;
+  transition: all 0.25s ease-in-out !important;
+  transform: ${(props) => (props.open ? 'rotate(90deg)' : 'rotate(0deg)')} !important;
+  transform-origin: 40% 40% !important;
+  width: ${(props) => (props.smallMode === true ? '10px' : '17px')} !important;
 `;
 
 const Title = styled.h2`
-  color: ${(props) => (props.darkMode === true ? props.theme.blueBright : props.theme.black)};
+  color: ${(props) =>
+    props.darkMode === true ? props.theme.blueBright : props.theme.black} !important;
   font-family: ${(props) =>
-    props.smallMode === true ? props.theme.montserrat : props.theme.dharma};
-  font-size: ${(props) => (props.smallMode === true ? '18px' : '40px')};
-  font-weight: ${(props) => (props.smallMode === true ? '700' : '400')};
-  line-height: ${(props) => (props.smallMode === true ? '18px' : '40px')};
-  margin: 0;
-  padding-left: 20px;
-  text-transform: ${(props) => (props.smallMode === true ? 'uppercase' : 'inherit')};
+    props.smallMode === true ? props.theme.montserrat : props.theme.dharma} !important;
+  font-size: ${(props) => (props.smallMode === true ? '18px' : '40px')} !important;
+  font-weight: ${(props) => (props.smallMode === true ? '700' : '400')} !important;
+  line-height: ${(props) => (props.smallMode === true ? '18px' : '40px')} !important;
+  margin: 0 !important;
+  padding-left: 20px !important;
+  text-transform: ${(props) => (props.smallMode === true ? 'uppercase' : 'inherit')} !important;
 
   @media screen and (min-width: 320px) {
     font-size: ${(props) =>
-      props.smallMode === true ? '20px' : 'calc(40px + 15 * ((100vw - 320px) / 880))'};
+      props.smallMode === true ? '20px' : 'calc(40px + 15 * ((100vw - 320px) / 880))'} !important;
     line-height: ${(props) =>
-      props.smallMode === true ? '20px' : 'calc(40px + 15 * ((100vw - 320px) / 880))'};
+      props.smallMode === true ? '20px' : 'calc(40px + 15 * ((100vw - 320px) / 880))'} !important;
   }
   @media screen and (min-width: 1200px) {
-    font-size: ${(props) => (props.smallMode === true ? '22px' : '55px')};
-    line-height: ${(props) => (props.smallMode === true ? '22px' : '55px')};
+    font-size: ${(props) => (props.smallMode === true ? '22px' : '55px')} !important;
+    line-height: ${(props) => (props.smallMode === true ? '22px' : '55px')} !important;
   }
 `;
 

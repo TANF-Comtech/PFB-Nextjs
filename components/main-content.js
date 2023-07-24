@@ -2,18 +2,18 @@ import React from 'react';
 import styled from 'styled-components';
 
 const MainContainer = styled.section`
-  background-color: ${(props) => props.bgColor || 'transparent'};
-  color: ${(props) => props.textColor || 'black'};
-  padding: ${(props) => props.contentPadding || '2vh 4vw'};
+  background-color: ${(props) => props.bgColor || 'transparent'} !important;
+  color: ${(props) => props.textColor || 'black'} !important;
+  padding: ${(props) => props.contentPadding || '2vh 4vw'} !important;
 `;
 
 const Sizer = styled.div`
-  margin: 0 auto;
-  max-width: ${(props) => props.maxWidth || props.theme.lg};
+  margin: 0 auto !important;
+  max-width: ${(props) => props.maxWidth || props.theme.lg} !important;
 
   li {
-    list-style-type: disc;
-    padding-left: 10px;
+    list-style-type: disc !important;
+    padding-left: 10px !important;
   }
 `;
 

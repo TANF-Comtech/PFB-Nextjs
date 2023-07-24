@@ -14,39 +14,39 @@ import { SearchBox } from 'react-instantsearch-dom';
 
 const CustomSearchBox = styled(SearchBox)`
   form {
-    position: relative;
+    position: relative !important;
   }
 
   input[type='search'] {
-    border: 1px solid ${(props) => props.theme.lightGray};
-    border-radius: 0;
-    font-family: ${(props) => props.theme.dharma};
-    font-size: 48px;
-    font-weight: 400;
-    line-height: 50px;
-    margin-bottom: 2vh;
-    padding: 1vh 60px 1vh 15px;
-    width: '100%';
+    border: 1px solid ${(props) => props.theme.lightGray} !important;
+    border-radius: 0 !important;
+    font-family: ${(props) => props.theme.dharma} !important;
+    font-size: 48px !important;
+    font-weight: 400 !important;
+    line-height: 50px !important;
+    margin-bottom: 2vh !important;
+    padding: 1vh 60px 1vh 15px !important;
+    width: '100%' !important;
 
     @media (min-width: ${(props) => props.theme.sm}) {
-      width: ${(props) => props.width || '100%'};
+      width: ${(props) => props.width || '100%'} !important;
     }
   }
 
   button[type='submit'] {
-    display: none;
+    display: none !important;
   }
 
   button[type='reset'] {
-    position: absolute;
-    right: 25px;
-    top: 25px;
+    position: absolute !important;
+    right: 25px !important;
+    top: 25px !important;
   }
 
   svg[class='ais-SearchBox-resetIcon'] {
-    height: 20px;
-    transform: scale(0.75);
-    width: 20px;
+    height: 20px !important;
+    transform: scale(0.75) !important;
+    width: 20px !important;
   }
 `;
 

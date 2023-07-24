@@ -7,100 +7,100 @@ import { linkResolver } from '~/utils';
 import Button from '~/components/button';
 
 const Container = styled.section`
-  align-items: flex-start;
-  border-bottom: 1px solid rgb(216, 216, 216);
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 25px;
-  padding-bottom: 25px;
+  align-items: flex-start !important;
+  border-bottom: 1px solid rgb(216, 216, 216) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  margin-bottom: 25px !important;
+  padding-bottom: 25px !important;
 
   @media (min-width: ${(props) => props.theme.sm}) {
-    flex-direction: row;
+    flex-direction: row !important;
   }
 
   &:last-child {
-    border-bottom: none;
-    padding-bottom: 0;
+    border-bottom: none !important;
+    padding-bottom: 0 !important;
   }
 `;
 
 const ContentContainer = styled.div`
-  flex: 1 1 0px;
-  margin: 4vh 0;
+  flex: 1 1 0px !important;
+  margin: 4vh 0 !important;
 
   a,
   a:visited,
   a:active,
   a:focus,
   a:hover {
-    color: #333;
-    text-decoration: none;
+    color: #333 !important;
+    text-decoration: none !important;
   }
 
   a:hover {
-    color: ${(props) => props.theme.redAccent};
+    color: ${(props) => props.theme.redAccent} !important;
   }
 `;
 
 const Text = styled.div`
-  font-size: 18px;
-  line-height: 24px;
-  margin-bottom: 25px;
+  font-size: 18px !important;
+  line-height: 24px !important;
+  margin-bottom: 25px !important;
 `;
 
 const Metadata = styled.div`
-  align-items: flex-start;
-  display: flex;
-  flex-direction: column;
+  align-items: flex-start !important;
+  display: flex !important;
+  flex-direction: column !important;
 
   @media (min-width: ${(props) => props.theme.sm}) {
-    align-items: center;
-    flex-direction: row;
+    align-items: center !important;
+    flex-direction: row !important;
   }
 `;
 
 const MetaText = styled.h3`
-  font-size: 22px;
-  font-weight: 700;
-  line-height: 1.2;
-  margin: 0 0 2vh 0;
+  font-size: 22px !important;
+  font-weight: 700 !important;
+  line-height: 1.2 !important;
+  margin: 0 0 2vh 0 !important;
 
   &:after {
     @media (min-width: ${(props) => props.theme.sm}) {
-      content: '|';
-      padding: 0 10px;
+      content: '|' !important;
+      padding: 0 10px !important;
     }
   }
 
   &:last-child:after {
     @media (min-width: ${(props) => props.theme.sm}) {
-      content: '';
-      padding: 0;
+      content: '' !important;
+      padding: 0 !important;
     }
   }
 `;
 
 const MetaItem = styled.div`
-  margin-bottom: 2vh;
+  margin-bottom: 2vh !important;
 
   a,
   a:visited,
   a:focus,
   a:active {
     color: ${(props) => props.theme.blueAccent} !important;
-    font-size: 22px;
-    font-weight: 700;
+    font-size: 22px !important;
+    font-weight: 700 !important;
     text-decoration: underline !important;
   }
 
   &:after {
-    content: '|';
-    padding: 0 10px;
+    content: '|' !important;
+    padding: 0 10px !important;
   }
 
   &:last-child:after {
-    content: '';
-    padding: 0;
+    content: '' !important;
+    padding: 0 !important;
   }
 `;
 

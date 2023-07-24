@@ -10,92 +10,93 @@ import SuppliersBG from '~/public/join/suppliers.jpg';
 import WhiteArrow from '~/public/white-arrow.svg';
 
 const SectionTitle = styled.h2`
-  color: #333;
-  font-weight: 700;
-  text-align: center;
-  text-transform: uppercase;
-  margin: 4vh;
+  color: #333 !important;
+  font-weight: 700 !important;
+  text-align: center !important;
+  text-transform: uppercase !important;
+  margin: 4vh !important;
 `;
 
 const Subtext = styled.span`
-  color: white;
-  display: block;
-  font-family: ${(props) => props.theme.dharma};
-  font-size: 40px;
-  font-weight: 600;
-  line-height: 30px;
-  letter-spacing: 1px;
-  margin: 1vh;
-  padding: 10px;
-  text-transform: uppercase;
+  color: white !important;
+  display: block !important;
+  font-family: ${(props) => props.theme.dharma} !important;
+  font-size: 40px !important;
+  font-weight: 600 !important;
+  line-height: 30px !important;
+  letter-spacing: 1px !important;
+  margin: 1vh !important;
+  padding: 10px !important;
+  text-transform: uppercase !important;
 
   @media screen and (min-width: 320px) {
-    font-size: calc(40px + 20 * ((100vw - 320px) / 880));
-    line-height: calc(30px + 20 * ((100vw - 320px) / 880));
+    font-size: calc(40px + 20 * ((100vw - 320px) / 880)) !important;
+    line-height: calc(30px + 20 * ((100vw - 320px) / 880)) !important;
   }
   @media screen and (min-width: 1200px) {
-    font-size: 60px;
-    line-height: 50px;
+    font-size: 60px !important;
+    line-height: 50px !important;
   }
 `;
 
 const BoxContainer = styled.section`
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  transform: translateY(-100px);
-  position: relative;
-  z-index: 2;
+  align-items: center !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  transform: translateY(-100px) !important;
+  position: relative !important;
+  z-index: 2 !important;
 
   a,
   a:visited,
   a:focus,
   a:active,
   a:hover {
-    text-decoration: none;
+    text-decoration: none !important;
   }
 
   @media (min-width: ${(props) => props.theme.sm}) {
-    flex-direction: row;
-    transform: translateY(-120px);
+    flex-direction: row !important;
+    transform: translateY(-120px) !important;
   }
 `;
 
 const Box = styled.div`
-  align-items: center;
-  background-color: ${(props) => (props.bgColor ? props.bgColor : props.theme.redAccent)};
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: 7.5px;
-  min-height: 190px;
-  padding: 25px;
-  width: 300px;
+  align-items: center !important;
+  background-color: ${(props) =>
+    props.bgColor ? props.bgColor : props.theme.redAccent} !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  margin: 7.5px !important;
+  min-height: 190px !important;
+  padding: 25px !important;
+  width: 300px !important;
 `;
 
 const Text = styled.h4`
-  color: white;
-  font-size: 36px;
-  font-weight: 300;
-  line-height: 36px;
-  margin: 0 0 1vh 0;
-  text-align: center;
+  color: white !important;
+  font-size: 36px !important;
+  font-weight: 300 !important;
+  line-height: 36px !important;
+  margin: 0 0 1vh 0 !important;
+  text-align: center !important;
 
   @media screen and (min-width: 320px) {
-    font-size: calc(36px + 8 * ((100vw - 320px) / 880));
-    line-height: calc(36px + 8 * ((100vw - 320px) / 880));
+    font-size: calc(36px + 8 * ((100vw - 320px) / 880)) !important;
+    line-height: calc(36px + 8 * ((100vw - 320px) / 880)) !important;
   }
   @media screen and (min-width: 1200px) {
-    font-size: 44px;
-    line-height: 44px;
+    font-size: 44px !important;
+    line-height: 44px !important;
   }
 `;
 
 const Arrow = styled.img`
-  display: block;
-  margin: 0 auto;
-  width: 46px;
+  display: block !important;
+  margin: 0 auto !important;
+  width: 46px !important;
 `;
 
 /**

@@ -16,7 +16,7 @@ import Promo from '~/components/promo';
 import EBikesPromo from '~/public/promo/electric-bikes-shaded.jpg';
 
 const IntroWrapper = styled.div`
-  margin: 3vh 0 1vh 0;
+  margin: 3vh 0 1vh 0 !important;
 `;
 
 export default function EBikesPage({ page, preview }) {

@@ -6,85 +6,85 @@ import { asDate } from '@prismicio/helpers';
 import MainContent from '~/components/main-content';
 
 const DateBlock = styled.div`
-  align-items: center;
-  background-color: ${(props) => props.theme.blueBright};
-  display: flex;
-  flex-direction: column;
-  font-family: ${(props) => props.theme.dharma};
-  font-weight: 700;
-  justify-content: center;
-  padding: 15px 40px;
-  min-width: 180px;
+  align-items: center !important;
+  background-color: ${(props) => props.theme.blueBright} !important;
+  display: flex !important;
+  flex-direction: column !important;
+  font-family: ${(props) => props.theme.dharma} !important;
+  font-weight: 700 !important;
+  justify-content: center !important;
+  padding: 15px 40px !important;
+  min-width: 180px !important;
 
   @media screen and (min-width: ${(props) => props.theme.sm}) {
-    margin-right: 25px;
+    margin-right: 25px !important;
   }
 `;
 
 const Month = styled.span`
-  color: black;
-  display: block;
-  font-size: 48px;
-  margin: 0;
-  text-transform: uppercase;
+  color: black !important;
+  display: block !important;
+  font-size: 48px !important;
+  margin: 0 !important;
+  text-transform: uppercase !important;
 `;
 const Day = styled.span`
-  color: white;
-  display: block;
-  font-size: 120px;
-  line-height: 100px;
-  margin: 0;
+  color: white !important;
+  display: block !important;
+  font-size: 120px !important;
+  line-height: 100px !important;
+  margin: 0 !important;
 `;
 const Year = styled.span`
-  color: black;
-  display: block;
-  font-size: 36px;
-  margin: 0;
-  text-transform: uppercase;
+  color: black !important;
+  display: block !important;
+  font-size: 36px !important;
+  margin: 0 !important;
+  text-transform: uppercase !important;
 `;
 
 const Container = styled.section`
-  align-items: center;
-  border-bottom: 1px solid rgb(216, 216, 216);
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 25px;
-  padding-bottom: 25px;
+  align-items: center !important;
+  border-bottom: 1px solid rgb(216, 216, 216) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  margin-bottom: 25px !important;
+  padding-bottom: 25px !important;
 
   @media (min-width: ${(props) => props.theme.sm}) {
-    flex-direction: row;
+    flex-direction: row !important;
   }
 
   &:last-child {
-    border-bottom: none;
-    padding-bottom: 0;
+    border-bottom: none !important;
+    padding-bottom: 0 !important;
   }
 `;
 
 const ContentContainer = styled.div`
-  flex: 1 1 0px;
-  margin: 0;
+  flex: 1 1 0px !important;
+  margin: 0 !important;
 
   a,
   a:visited,
   a:active,
   a:focus,
   a:hover {
-    text-decoration: none;
+    text-decoration: none !important;
   }
 `;
 
 const Title = styled.h4`
-  color: black;
-  font-size: 40px;
-  line-height: 38px;
-  margin-bottom: 8px;
+  color: black !important;
+  font-size: 40px !important;
+  line-height: 38px !important;
+  margin-bottom: 8px !important;
 `;
 
 const Text = styled.p`
-  font-size: 18px;
-  line-height: 28px;
-  margin-bottom: 0;
+  font-size: 18px !important;
+  line-height: 28px !important;
+  margin-bottom: 0 !important;
 `;
 
 /**

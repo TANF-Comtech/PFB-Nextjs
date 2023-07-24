@@ -35,86 +35,86 @@ import SF from '~/public/cities/sf.jpg';
 import WashingtonDC from '~/public/cities/dc.jpg';
 
 const RedHeading = styled.h2`
-  color: ${(props) => props.theme.red};
-  font-weight: 700;
-  text-transform: uppercase;
+  color: ${(props) => props.theme.red} !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
 `;
 
 const BlueBox = styled.div`
-  align-items: center;
-  background-color: ${(props) => props.theme.blueBright};
-  display: flex;
-  justify-content: center;
-  margin-top: 4vh;
-  width: 180px;
+  align-items: center !important;
+  background-color: ${(props) => props.theme.blueBright} !important;
+  display: flex !important;
+  justify-content: center !important;
+  margin-top: 4vh !important;
+  width: 180px !important;
 `;
 
 const ArchiveTitle = styled.h2`
-  font-size: 48px;
-  margin: 0;
-  padding: 0 10px;
-  text-transform: uppercase;
+  font-size: 48px !important;
+  margin: 0 !important;
+  padding: 0 10px !important;
+  text-transform: uppercase !important;
 `;
 
 const GridBox = styled.div`
-  align-items: center;
-  background-color: ${(props) => props.theme.lightestGray};
-  display: flex;
-  justify-content: center;
-  padding: 30px 40px;
-  text-align: center;
+  align-items: center !important;
+  background-color: ${(props) => props.theme.lightestGray} !important;
+  display: flex !important;
+  justify-content: center !important;
+  padding: 30px 40px !important;
+  text-align: center !important;
 
   a,
   a:active,
   a:focus,
   a:hover {
-    font-weight: 700;
+    font-weight: 700 !important;
     text-decoration: underline !important;
   }
 `;
 
 const VideoFrame = styled.div`
-  position: relative;
-  padding-bottom: 56.25%; /* 16:9 */
-  height: 0;
-  margin-bottom: 4vh;
+  position: relative !important;
+  padding-bottom: 56.25% !important; /* 16:9 */
+  height: 0 !important;
+  margin-bottom: 4vh !important;
 
   iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
   }
 `;
 
 const BlueHeading = styled.h2`
-  color: ${(props) => props.theme.blueBright};
+  color: ${(props) => props.theme.blueBright} !important;
 `;
 
 const Container = styled.section`
   .embed-container {
-    position: relative;
-    padding-bottom: 80%;
-    height: 0;
-    max-width: 100%;
+    position: relative !important;
+    padding-bottom: 80% !important;
+    height: 0 !important;
+    max-width: 100% !important;
   }
 
   .embed-container iframe,
   .embed-container object,
   .embed-container iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
   }
 
   small {
-    position: absolute;
-    z-index: 40;
-    bottom: 0;
-    margin-bottom: -15px;
+    position: absolute !important;
+    z-index: 40 !important;
+    bottom: 0 !important;
+    margin-bottom: -15px !important;
   }
 `;
 

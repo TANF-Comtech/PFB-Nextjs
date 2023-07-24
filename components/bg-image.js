@@ -3,52 +3,52 @@ import Image from 'next/image';
 import styled from 'styled-components';
 
 const Container = styled.section`
-  align-items: ${(props) => props.alignItems};
-  display: flex;
-  height: ${(props) => props.height};
-  justify-content: ${(props) => props.justifyContent};
-  margin: ${(props) => props.margin};
-  position: relative;
-  width: ${(props) => props.width};
+  align-items: ${(props) => props.alignItems} !important;
+  display: flex !important;
+  height: ${(props) => props.height} !important;
+  justify-content: ${(props) => props.justifyContent} !important;
+  margin: ${(props) => props.margin} !important;
+  position: relative !important;
+  width: ${(props) => props.width} !important;
 
   @media screen and (min-width: ${(props) => props.theme.sm}) {
-    height: ${(props) => props.heightTablet};
+    height: ${(props) => props.heightTablet} !important;
   }
 
   @media screen and (min-width: ${(props) => props.theme.lg}) {
-    height: ${(props) => props.heightDesktop};
+    height: ${(props) => props.heightDesktop} !important;
   }
 `;
 
 const InnerContainer = styled.div`
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 100%;
-  width: 100%;
-  z-index: ${(props) => props.theme.zIndex01};
+  align-items: center !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  height: 100% !important;
+  width: 100% !important;
+  z-index: ${(props) => props.theme.zIndex01} !important;
 
   span {
-    color: rgba(${(props) => (props.headingRGBA ? props.headingRGBA : '255,255,255,1')});
-    font-family: ${(props) => props.theme.dharma};
-    font-size: 40px;
-    font-weight: 600;
-    line-height: 30px;
-    letter-spacing: 1px;
-    margin: 0;
-    text-transform: uppercase;
+    color: rgba(${(props) => (props.headingRGBA ? props.headingRGBA : '255,255,255,1')}) !important;
+    font-family: ${(props) => props.theme.dharma} !important;
+    font-size: 40px !important;
+    font-weight: 600 !important;
+    line-height: 30px !important;
+    letter-spacing: 1px !important;
+    margin: 0 !important;
+    text-transform: uppercase !important;
   }
   @media screen and (min-width: 320px) {
     span {
-      font-size: calc(40px + 20 * ((100vw - 320px) / 880));
-      line-height: calc(30px + 20 * ((100vw - 320px) / 880));
+      font-size: calc(40px + 20 * ((100vw - 320px) / 880)) !important;
+      line-height: calc(30px + 20 * ((100vw - 320px) / 880)) !important;
     }
   }
   @media screen and (min-width: 1200px) {
     span {
-      font-size: 60px;
-      line-height: 50px;
+      font-size: 60px !important;
+      line-height: 50px !important;
     }
   }
 

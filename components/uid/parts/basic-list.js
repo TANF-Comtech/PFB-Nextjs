@@ -6,14 +6,14 @@ import MainContent from '~/components/main-content';
 import Rule from '~/components/rule';
 
 const ListItem = styled.h3`
-  border-bottom: 1px solid ${(props) => props.theme.lightestGray};
-  color: ${(props) => props.textColor};
-  margin-bottom: 2vh;
-  padding-bottom: 2vh;
+  border-bottom: 1px solid ${(props) => props.theme.lightestGray} !important;
+  color: ${(props) => props.textColor} !important;
+  margin-bottom: 2vh !important;
+  padding-bottom: 2vh !important;
   text-decoration: none !important;
 
   &:last-child {
-    border-bottom: none;
+    border-bottom: none !important;
   }
 `;
 

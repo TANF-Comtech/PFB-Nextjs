@@ -7,39 +7,39 @@ import BgImage from '~/components/bg-image';
 import ArrowIcon from '~/public/red-arrow.svg';
 
 const ImageContentContainer = styled.div`
-  align-items: center;
-  display: flex;
-  height: 100%;
-  justify-content: ${(props) => (props.isNavItem === true ? 'center' : 'space-between')};
+  align-items: center !important;
+  display: flex !important;
+  height: 100% !important;
+  justify-content: ${(props) => (props.isNavItem === true ? 'center' : 'space-between')} !important;
 `;
 
 const Title = styled.h2`
-  background-color: rgba(208, 2, 27, 0.9);
-  color: #fff;
-  font-size: 40px;
-  line-height: 36px;
-  margin: 0 20px 0 0;
-  padding: 10px 20px;
+  background-color: rgba(208, 2, 27, 0.9) !important;
+  color: #fff !important;
+  font-size: 40px !important;
+  line-height: 36px !important;
+  margin: 0 20px 0 0 !important;
+  padding: 10px 20px !important;
   text-decoration: none !important;
-  width: calc(100% - 60px);
+  width: calc(100% - 60px) !important;
 `;
 
 const NavTitle = styled.h3`
-  color: #fff;
-  font-size: 12px;
-  line-height: 18px;
-  margin: 0;
-  text-align: center;
+  color: #fff !important;
+  font-size: 12px !important;
+  line-height: 18px !important;
+  margin: 0 !important;
+  text-align: center !important;
   text-decoration: none !important;
-  text-transform: uppercase;
+  text-transform: uppercase !important;
 `;
 
 const Arrow = styled.img`
-  background-color: #fff;
-  display: ${(props) => (props.isNavItem === true ? 'none' : 'block')};
-  flex-shrink: 0;
-  padding: 10px;
-  width: 40px;
+  background-color: #fff !important;
+  display: ${(props) => (props.isNavItem === true ? 'none' : 'block')} !important;
+  flex-shrink: 0 !important;
+  padding: 10px !important;
+  width: 40px !important;
 `;
 
 /**
