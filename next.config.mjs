@@ -413,6 +413,11 @@ const nextConfig = async (phase, { defaultConfig }) => {
           destination: 'https://www.classy.org/give/117371/',
           permanent: false,
         },
+        {
+          source: '/reports',
+          destination: '/research',
+          permanent: false,
+        },
       ];
     },
   };
