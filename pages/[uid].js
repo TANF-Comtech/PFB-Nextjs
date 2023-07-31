@@ -178,7 +178,10 @@ export async function getStaticPaths() {
   const allPages = await getLandingPages();
 
   return {
-    paths: allPages?.map(({ node }) => `/${node._meta.uid}`) || [],
+    paths:
+      allPages
+        .filter(({ node }) => node._meta.uid !== 'research')
+        ?.map(({ node }) => `/${node._meta.uid}`) || [],
     fallback: false,
   };
 }
