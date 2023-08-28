@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 
 import { LegacyPage } from '~/components/legacy-page';
 import SiteMetaCustom from '~/components/site-meta-custom';
@@ -102,7 +102,7 @@ export default function CustomErrorPage() {
             You took a wrong turn.
             <br />
             <Link href="/" passHref>
-              <a>Click here to jump back in.</a>
+              Click here to jump back in.
             </Link>
           </Text>
         </TextContainer>

@@ -51,8 +51,8 @@ const DropdownList = ({ data, handler, isMobileMenu }) => {
                   {menu_item.text}
                 </a>
               ) : (
-                <Link href={linkResolver(menu_item.link._meta)}>
-                  <a onClick={handler}>{menu_item.text}</a>
+                <Link href={linkResolver(menu_item.link._meta)} onClick={handler}>
+                  {menu_item.text}
                 </Link>
               )}
             </li>

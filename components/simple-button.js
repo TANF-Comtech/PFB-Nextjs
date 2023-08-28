@@ -1,21 +1,7 @@
-import * as React from 'react';
+import React from 'react';
 import cx from 'classnames';
 
-type ButtonProps = {
-  label: string;
-  type?: 'button' | 'submit';
-  onClick?: () => void;
-  variant?: 'blue' | 'lightGray' | 'darkGray';
-  size?: 'large' | 'small';
-};
-
-export const Button = ({
-  label,
-  type = 'button',
-  onClick,
-  variant = 'blue',
-  size = 'large',
-}: ButtonProps) => {
+export const Button = ({ label, type = 'button', onClick, variant = 'blue', size = 'large' }) => {
   return (
     <button
       type={type}

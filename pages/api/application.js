@@ -2,7 +2,6 @@ import * as AWS from 'aws-sdk';
 import * as nodemailer from 'nodemailer';
 import formidable from 'formidable';
 import { PassThrough } from 'node:stream';
-import type { NextApiRequest, NextApiResponse } from 'next';
 
 AWS.config.update({
   accessKeyId: process.env.AWS_SES_S3_ACCESS_KEY,
@@ -44,8 +43,8 @@ const uploadStream = (file) => {
   return pass;
 };
 
-const getAttachments = (files: any) => {
-  const attachments = [...Object.entries(files)].map((file: any) => {
+const getAttachments = (files) => {
+  const attachments = [...Object.entries(files)].map((file) => {
     const filename = `${file[1].newFilename}.${file[1].originalFilename.split('.').slice(-1)[0]}`;
     const contentType = `${file[1].mimetype}`;
     const path = `https://pfb-grants.s3.us-east-2.amazonaws.com/${filename}`;
@@ -60,9 +59,9 @@ const getAttachments = (files: any) => {
   return attachments;
 };
 
-const getLinks = (files: any) => {
+const getLinks = (files) => {
   const links = [...Object.entries(files)].map(
-    (file: any) =>
+    (file) =>
       `https://pfb-grants.s3.us-east-2.amazonaws.com/${file[1].newFilename}.${
         file[1].originalFilename.split('.').slice(-1)[0]
       }`,
@@ -71,9 +70,9 @@ const getLinks = (files: any) => {
   return links;
 };
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(req, res) {
   const form = new formidable.IncomingForm({
-    fileWriteStreamHandler: uploadStream as any,
+    fileWriteStreamHandler: uploadStream,
   });
 
   form.parse(req, async (error, fields, files) => {
@@ -112,7 +111,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       try {
         const response = await transporter.sendMail({
           from: 'info@peopleforbikes.org',
-          replyTo: fields.email as string,
+          replyTo: fields.email,
           to: process.env.GRANTS_APPLICATION_TO_ADDRESS,
           subject,
           text,

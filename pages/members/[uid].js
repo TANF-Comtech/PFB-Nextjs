@@ -120,9 +120,7 @@ const ContentItemSimple = ({ path, title, text }) => {
           <Title>{title}</Title>
         ) : (
           <Link href={linkResolver(path)}>
-            <a>
-              <Title>{title}</Title>
-            </a>
+            <Title>{title}</Title>
           </Link>
         )}
         {text && <PrismicRichText field={text} />}
@@ -267,15 +265,13 @@ export default function MembersPage({ page, preview }) {
                         <Box key={edition.date}>
                           {edition.pdf_item && (
                             <Link href={edition.pdf_item.url} passHref>
-                              <a>
-                                <Text>
-                                  {new Date(asDate(edition.date)).toLocaleString('en-us', {
-                                    month: 'long',
-                                    year: 'numeric',
-                                  })}
-                                </Text>
-                                <Arrow src="/white-arrow.svg" />
-                              </a>
+                              <Text>
+                                {new Date(asDate(edition.date)).toLocaleString('en-us', {
+                                  month: 'long',
+                                  year: 'numeric',
+                                })}
+                              </Text>
+                              <Arrow src="/white-arrow.svg" />
                             </Link>
                           )}
                         </Box>

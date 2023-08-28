@@ -126,9 +126,7 @@ const ActionItem = ({ extendedText = null, icon, path, title, text }) => {
         <ContentContainer>
           {path ? (
             <Link href={linkResolver(path)} passHref>
-              <a>
-                <Title>{title}</Title>
-              </a>
+              <Title>{title}</Title>
             </Link>
           ) : (
             <Title>{title}</Title>

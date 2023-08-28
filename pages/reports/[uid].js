@@ -124,10 +124,8 @@ export default function ReportPage({ page, preview }) {
               <>
                 <strong>Full Report (Download):</strong>
                 <p>
-                  <Link href={report.pdf.url} passHref>
-                    <a target="_blank" rel="noopener">
-                      <strong>Download PDF</strong>
-                    </a>
+                  <Link href={report.pdf.url} passHref target="_blank" rel="noopener">
+                    <strong>Download PDF</strong>
                   </Link>
                 </p>
               </>
@@ -137,9 +135,7 @@ export default function ReportPage({ page, preview }) {
                 <strong>Full Report (Link):</strong>
                 <p>
                   <Link href={linkResolver(report.link)} passHref>
-                    <a>
-                      <strong>Link to Report</strong>
-                    </a>
+                    <strong>Link to Report</strong>
                   </Link>
                 </p>
               </>

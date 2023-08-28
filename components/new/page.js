@@ -1,8 +1,7 @@
-import * as React from 'react';
-import { useEffect, useCallback, useRef } from 'react';
+import React, { useEffect, useCallback, useRef } from 'react';
 import cx from 'classnames';
 import Head from 'next/head';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Script from 'next/script';
@@ -21,21 +20,9 @@ import { Search, MobileSearch } from '~/components/new/search';
 import { useLocalStorage } from '~/hooks/useLocalStorage';
 import { ClientOnly } from './client-only';
 
-type Section = 'infrastructure' | 'policy' | 'participation' | 'about' | 'donate' | null;
-
-const activeTabAtom = atom<Section>(null);
-const activeSectionAtom = atom<Section>(null);
-const siteMapInViewAtom = atom<boolean>(false);
-
-type PageProps = MetaProps & {
-  showBanner?: boolean;
-  showHeader?: boolean;
-  showFooter?: boolean;
-  showDonate?: boolean;
-  hasHero?: boolean;
-  legacy?: boolean;
-  children: React.ReactNode;
-};
+const activeTabAtom = atom(null);
+const activeSectionAtom = atom(null);
+const siteMapInViewAtom = atom(false);
 
 export const Page = ({
   showBanner = true,
@@ -46,8 +33,8 @@ export const Page = ({
   legacy = false,
   children,
   ...rest
-}: PageProps) => {
-  const showFixed: boolean = showBanner || showHeader;
+}) => {
+  const showFixed = showBanner || showHeader;
 
   return (
     <>
@@ -69,18 +56,7 @@ export const Page = ({
   );
 };
 
-type MetaProps = {
-  title?: string;
-  desc?: string;
-  keywords?: string;
-  path?: string;
-  imgSrc?: string;
-  imgWidth?: string;
-  imgHeight?: string;
-  ldJSON?: unknown;
-};
-
-const Meta = (props: MetaProps) => {
+const Meta = (props) => {
   const { title, desc, keywords, path, imgSrc, imgWidth, imgHeight, ldJSON } = props;
 
   const renderedTitle =
@@ -119,11 +95,7 @@ const Meta = (props: MetaProps) => {
   );
 };
 
-type FixedProps = {
-  children: React.ReactNode;
-};
-
-const Fixed = ({ children }: FixedProps) => {
+const Fixed = ({ children }) => {
   return <div className="fixed left-0 right-0 top-0 z-[1010] flex w-full flex-col">{children}</div>;
 };
 
@@ -178,10 +150,8 @@ const Banner = () => {
 
         <div className="hidden items-center gap-3 lg:inline-flex">
           <Link href="/members">
-            <a>
-              <span className="sm:hidden">Members</span>
-              <span className="hidden sm:inline">Corporate member center</span>
-            </a>
+            <span className="sm:hidden">Members</span>
+            <span className="hidden sm:inline">Corporate member center</span>
           </Link>
           <span className="rounded-lg bg-gold p-2 text-black">
             {!isLoggedIn ? (
@@ -211,7 +181,7 @@ const Header = ({ hasHero }) => {
   const isSiteMapInView = useAtomValue(siteMapInViewAtom);
   const [activeTab, setActiveTab] = useAtom(activeTabAtom);
 
-  const ref = useRef(null!);
+  const ref = useRef(null);
 
   useOnClickOutside(ref, () => {
     setActiveTab(null);
@@ -241,12 +211,7 @@ const Header = ({ hasHero }) => {
   );
 };
 
-type LogoProps = React.ComponentPropsWithoutRef<'div'> & {
-  invert?: boolean;
-  showWordMark?: boolean;
-};
-
-const Logo = ({ className = '', invert, showWordMark = false, ...rest }: LogoProps) => {
+const Logo = ({ className = '', invert, showWordMark = false, ...rest }) => {
   const setActiveTab = useSetAtom(activeTabAtom);
 
   const handleCloseMenu = useCallback(() => {
@@ -255,22 +220,20 @@ const Logo = ({ className = '', invert, showWordMark = false, ...rest }: LogoPro
 
   return (
     <h1 className={cx('flex-shrink-0 sm:w-1/2 lg:w-1/4', className)} {...rest}>
-      <Link href="/">
-        <a onClick={handleCloseMenu} className="flex flex-shrink-0 items-center gap-3">
-          <div className="flex-shrink-0 rounded bg-white p-px">
-            <img src="/new/pfb-logomark.png" className="block h-12 w-auto" alt="People for Bikes" />
-          </div>
-          <img
-            src="/new/pfb-wordmark.png"
-            className={cx(
-              showWordMark ? 'opacity-100' : 'opacity-100 lg:opacity-0 lg:group-hover:opacity-100',
-              'relative -bottom-2.5 block h-12 w-auto flex-shrink-0 transition duration-700',
-              invert && 'invert',
-            )}
-            alt="People for Bikes"
-          />
-          <span className="sr-only">People for Bikes</span>
-        </a>
+      <Link href="/" onClick={handleCloseMenu} className="flex flex-shrink-0 items-center gap-3">
+        <div className="flex-shrink-0 rounded bg-white p-px">
+          <img src="/new/pfb-logomark.png" className="block h-12 w-auto" alt="People for Bikes" />
+        </div>
+        <img
+          src="/new/pfb-wordmark.png"
+          className={cx(
+            showWordMark ? 'opacity-100' : 'opacity-100 lg:opacity-0 lg:group-hover:opacity-100',
+            'relative -bottom-2.5 block h-12 w-auto flex-shrink-0 transition duration-700',
+            invert && 'invert',
+          )}
+          alt="People for Bikes"
+        />
+        <span className="sr-only">People for Bikes</span>
       </Link>
     </h1>
   );
@@ -284,14 +247,15 @@ const Navigation = () => {
     <nav className="relative hidden justify-center lg:flex lg:w-1/2">
       <ul className="flex justify-center gap-8 font-dharma text-4xl">
         <li className="order-2">
-          <Link href="/news">
-            <a className="group/button relative inline-block cursor-pointer whitespace-pre px-4 pb-1.5 pt-2 leading-none">
-              <div className="absolute inset-0 z-0 h-full w-full rounded-lg bg-transparent transition duration-700 group-hover/button:bg-lightestGray" />
-              <span className="relative z-10">Stories</span>
-            </a>
+          <Link
+            href="/news"
+            className="group/button relative inline-block cursor-pointer whitespace-pre px-4 pb-1.5 pt-2 leading-none"
+          >
+            <div className="absolute inset-0 z-0 h-full w-full rounded-lg bg-transparent transition duration-700 group-hover/button:bg-lightestGray" />
+            <span className="relative z-10">Stories</span>
           </Link>
         </li>
-        {NAVIGATION.map((item: any, index: number) => (
+        {NAVIGATION.map((item, index) => (
           <li key={item.key} className={cx(index < 3 ? 'order-1' : 'order-3')}>
             <button
               onClick={() => {
@@ -372,7 +336,7 @@ const SearchButton = () => {
 const MegaMenu = () => {
   const activeTab = useAtomValue(activeTabAtom);
 
-  const ACTIVE_NAV = NAVIGATION.find((item) => item.key === activeTab) as NavigationEntry;
+  const ACTIVE_NAV = NAVIGATION.find((item) => item.key === activeTab);
 
   const setActiveTab = useSetAtom(activeTabAtom);
 
@@ -459,7 +423,7 @@ const MobileMenu = () => {
   const setIsLoginModalOpen = useSetAtom(loginModalAtom);
   const logout = useLogout();
 
-  const ref = useRef(null!);
+  const ref = useRef(null);
 
   useOnClickOutside(ref, () => {
     setIsMenuOpen(false);
@@ -477,34 +441,31 @@ const MobileMenu = () => {
         !isMenuOpen ? 'translate-x-full opacity-0' : 'translate-x-0 opacity-100',
       )}
     >
-      <Link href="/">
-        <a onClick={handleCloseMenu} className="flex flex-shrink-0 items-center gap-3">
-          <div className="flex-shrink-0 rounded bg-white p-px">
-            <img src="/new/pfb-logomark.png" className="block h-12 w-auto" alt="People for Bikes" />
-          </div>
-          <img
-            src="/new/pfb-wordmark.png"
-            className="block h-12 w-auto flex-shrink-0 invert"
-            alt="People for Bikes"
-          />
-          <span className="sr-only">People for Bikes</span>
-        </a>
+      <Link href="/" onClick={handleCloseMenu} className="flex flex-shrink-0 items-center gap-3">
+        <div className="flex-shrink-0 rounded bg-white p-px">
+          <img src="/new/pfb-logomark.png" className="block h-12 w-auto" alt="People for Bikes" />
+        </div>
+        <img
+          src="/new/pfb-wordmark.png"
+          className="block h-12 w-auto flex-shrink-0 invert"
+          alt="People for Bikes"
+        />
+        <span className="sr-only">People for Bikes</span>
       </Link>
       <ul className="mt-6 flex flex-col gap-6 sm:mt-12 sm:gap-12">
         <li className="order-2">
-          <Link href="/news">
-            <a
-              onClick={handleCloseMenu}
-              className="relative inline-flex items-center gap-3 whitespace-pre"
-            >
-              <span className="font-dharma text-5xl">Stories</span>
-              <span>
-                <i className="fa-solid fa-plus text-base leading-none text-white" />
-              </span>
-            </a>
+          <Link
+            href="/news"
+            onClick={handleCloseMenu}
+            className="relative inline-flex items-center gap-3 whitespace-pre"
+          >
+            <span className="font-dharma text-5xl">Stories</span>
+            <span>
+              <i className="fa-solid fa-plus text-base leading-none text-white" />
+            </span>
           </Link>
         </li>
-        {NAVIGATION.map((item: any, index: number) => (
+        {NAVIGATION.map((item, index) => (
           <li key={item.key} className={cx(index < 3 ? 'order-1' : 'order-3')}>
             <button
               onClick={() => {
@@ -549,10 +510,8 @@ const MobileMenu = () => {
           </li>
         ))}
         <div className="inline-flex flex-col gap-3">
-          <Link href="/members">
-            <a onClick={handleCloseMenu}>
-              <span className="font-bold uppercase">Corporate member center</span>
-            </a>
+          <Link href="/members" onClick={handleCloseMenu}>
+            <span className="font-bold uppercase">Corporate member center</span>
           </Link>
           <div>
             <span className="rounded-lg bg-gold p-2 font-bold text-black">
@@ -595,13 +554,11 @@ const DonationBanner = () => {
     <ClientOnly>
       <div className="pointer-events-none fixed bottom-0 left-0 right-0 z-50 flex justify-center p-4">
         <div className="pointer-events-auto relative flex items-center justify-between gap-4 rounded-lg border border-solid border-white/50 bg-darkest-blue p-4 pr-8 shadow-2xl">
-          <Link href="/giving">
-            <a className="inline-flex items-center justify-center gap-4 text-white">
-              <Button variant="gold" label="Give today" />
-              <span className="hidden font-dharma sm:inline sm:text-3xl xl:text-5xl">
-                Your support matters
-              </span>
-            </a>
+          <Link href="/giving" className="inline-flex items-center justify-center gap-4 text-white">
+            <Button variant="gold" label="Give today" />
+            <span className="hidden font-dharma sm:inline sm:text-3xl xl:text-5xl">
+              Your support matters
+            </span>
           </Link>
           <button
             onClick={() => setHasDismissed(true)}
@@ -629,16 +586,17 @@ const Footer = () => {
       <div className="bg-darkest-blue p-8 text-white sm:w-1/2 sm:p-12 xl:w-1/4 xl:p-16">
         <ul ref={ref} className="flex flex-col gap-1.5">
           <li className="order-2">
-            <Link href="/news">
-              <a className="relative inline-flex items-center gap-3 whitespace-pre font-bold uppercase">
-                <span>Stories</span>
-                <span>
-                  <i className="fa-solid fa-caret-right text-base leading-none text-white" />
-                </span>
-              </a>
+            <Link
+              href="/news"
+              className="relative inline-flex items-center gap-3 whitespace-pre font-bold uppercase"
+            >
+              <span>Stories</span>
+              <span>
+                <i className="fa-solid fa-caret-right text-base leading-none text-white" />
+              </span>
             </Link>
           </li>
-          {NAVIGATION.map((item: any, index: number) => (
+          {NAVIGATION.map((item, index) => (
             <li key={item.key} className={cx(index < 3 ? 'order-1' : 'order-3')}>
               <button
                 onClick={() => {
@@ -676,9 +634,7 @@ const Footer = () => {
                   ))}
                   {item.key === 'about' && (
                     <li>
-                      <Link href="privacy">
-                        <a>Privacy</a>
-                      </Link>
+                      <Link href="privacy">Privacy</Link>
                     </li>
                   )}
                 </ul>
@@ -784,26 +740,19 @@ const DynamicLink = ({ href, className = '', children, ...rest }) => {
   }
 
   return (
-    <Link href={`/${href}`}>
-      <a className={className} {...rest}>
-        {children}
-      </a>
+    <Link href={`/${href}`} className={className} {...rest}>
+      {children}
     </Link>
   );
 };
 
-const formatLinkedData = (value: unknown): string => {
+const formatLinkedData = (value) => {
   const formattedValue = JSON.stringify(value, null, 2);
 
   return formattedValue;
 };
 
-type NetworkEntry = {
-  title: string;
-  link: string;
-};
-
-const NETWORK: Array<NetworkEntry> = [
+const NETWORK = [
   { title: 'PeopleForBikes Main site', link: 'https://www.peopleforbikes.org/' },
   { title: 'City Ratings', link: 'https://cityratings.peopleforbikes.org/' },
   { title: 'Shift’23 Conference', link: 'https://shift.peopleforbikes.org/' },
@@ -811,25 +760,7 @@ const NETWORK: Array<NetworkEntry> = [
   { title: 'View more sites', link: 'https://www.peopleforbikes.org/campaigns' },
 ];
 
-type NavigationEntry = {
-  key: string;
-  title: string;
-  featuredItems: Array<FeaturedItem>;
-  items: Array<Item>;
-};
-
-type FeaturedItem = {
-  image: string;
-  title: string;
-  link: string;
-};
-
-type Item = {
-  title: string;
-  link: string;
-};
-
-const NAVIGATION: Array<NavigationEntry> = [
+const NAVIGATION = [
   {
     key: 'infrastructure',
     title: 'Infrastructure',
@@ -923,6 +854,6 @@ const NAVIGATION: Array<NavigationEntry> = [
   },
 ];
 
-const IN_VIEW_OPTIONS: IntersectionOptions = {
+const IN_VIEW_OPTIONS = {
   threshold: 0,
 };

@@ -137,9 +137,7 @@ const GrantsItem = ({
           <h2>{title}</h2>
         ) : (
           <Link href={path}>
-            <a>
-              <h2>{title}</h2>
-            </a>
+            <h2>{title}</h2>
           </Link>
         )}
         <Metadata>
@@ -171,7 +169,7 @@ const GrantsItem = ({
           {supportingDoc && (
             <MetaItem>
               <Link href={linkResolver(supportingDoc)} passHref>
-                <a>Learn More About This Grantee Organization</a>
+                Learn More About This Grantee Organization
               </Link>
             </MetaItem>
           )}

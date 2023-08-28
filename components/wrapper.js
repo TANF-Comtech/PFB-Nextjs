@@ -116,9 +116,7 @@ function Titlebar({ children, mainHeight }) {
         <Content>
           <LeftContent>
             <Link href="/">
-              <a>
-                <Logo logoMargin="0" logoWidth="5vh" logoViewbox="60 0 150 132" />
-              </a>
+              <Logo logoMargin="0" logoWidth="5vh" logoViewbox="60 0 150 132" />
             </Link>
             <Title>{children}</Title>
           </LeftContent>
@@ -170,7 +168,7 @@ const Wrapper = ({ children, isWide, postPath, postTitle }) => {
       {/* {postPath && postTitle && (
         <Titlebar mainHeight={Math.round(mainHeight)}>
           <Link href={postPath} passHref>
-            <a>{postTitle}</a>
+            {postTitle}
           </Link>
         </Titlebar>
       )} */}

@@ -42,11 +42,7 @@ const App = ({ Component, pageProps, router }) => {
           <PageTransition location={router.pathname}>
             <PrismicProvider
               linkResolver={linkResolver}
-              internalLinkComponent={({ href, ...props }) => (
-                <Link href={href}>
-                  <a {...props} />
-                </Link>
-              )}
+              internalLinkComponent={({ href, ...props }) => <Link href={href} {...props} />}
             >
               <PrismicPreview repositoryName={REPOSITORY}>
                 <Component {...pageProps} key={router.route} />

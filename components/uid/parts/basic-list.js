@@ -36,9 +36,7 @@ const BasicList = ({ payload, textColor = '#333', title }) => {
           return (
             <>
               <Link href={`/careers/${job.node._meta.uid}`} key={job.node._meta.id}>
-                <a>
-                  <ListItem textColor={textColor}>{job.node.title[0].text}</ListItem>
-                </a>
+                <ListItem textColor={textColor}>{job.node.title[0].text}</ListItem>
               </Link>
             </>
           );

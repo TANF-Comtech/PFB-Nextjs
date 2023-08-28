@@ -70,9 +70,7 @@ const ContentItemSimple = ({ path, title, text }) => {
           <Title>{title}</Title>
         ) : (
           <Link href={linkResolver(path)}>
-            <a>
-              <Title>{title}</Title>
-            </a>
+            <Title>{title}</Title>
           </Link>
         )}
         {text && <PrismicRichText field={text} />}

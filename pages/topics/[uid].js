@@ -97,21 +97,21 @@ export default function TopicPage({ fallback, page, preview }) {
                             {pillar.news_item_1 && (
                               <li>
                                 <Link href={`/news/${pillar.news_item_1._meta.uid}`} passHref>
-                                  <a>{pillar.news_item_1.title[0].text}</a>
+                                  {pillar.news_item_1.title[0].text}
                                 </Link>
                               </li>
                             )}
                             {pillar.news_item_2 && (
                               <li>
                                 <Link href={`/news/${pillar.news_item_2._meta.uid}`} passHref>
-                                  <a>{pillar.news_item_2.title[0].text}</a>
+                                  {pillar.news_item_2.title[0].text}
                                 </Link>
                               </li>
                             )}
                             {pillar.news_item_3 && (
                               <li>
                                 <Link href={`/news/${pillar.news_item_3._meta.uid}`} passHref>
-                                  <a>{pillar.news_item_3.title[0].text}</a>
+                                  {pillar.news_item_3.title[0].text}
                                 </Link>
                               </li>
                             )}

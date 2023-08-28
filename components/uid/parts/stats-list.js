@@ -202,10 +202,8 @@ const StatsList = ({ payload }) => {
             return (
               <Box key={stat.node._meta.id}>
                 <Link href={`/statistics/${stat.node._meta.uid}`}>
-                  <a>
-                    <Text>{`${stat.node.title[0].text} Statistics`}</Text>
-                    <Arrow src={WhiteArrow} />
-                  </a>
+                  <Text>{`${stat.node.title[0].text} Statistics`}</Text>
+                  <Arrow src={WhiteArrow} />
                 </Link>
               </Box>
             );

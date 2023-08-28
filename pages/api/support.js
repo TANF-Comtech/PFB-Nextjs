@@ -1,6 +1,5 @@
 import * as AWS from 'aws-sdk';
 import * as nodemailer from 'nodemailer';
-import type { NextApiRequest, NextApiResponse } from 'next';
 
 AWS.config.update({
   accessKeyId: process.env.AWS_SES_S3_ACCESS_KEY,
@@ -21,17 +20,25 @@ const transporter = nodemailer.createTransport({
   sendingRate: 1,
 });
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const date = new Date().toLocaleDateString('en-CA').replaceAll('/', '-');
-  const subject = `Owner's Manual purchase (${date})`;
+export default async function handler(req, res) {
+  if (!req.body?.name || !req.body?.organization || !req.body?.email || !req.body?.message) {
+    return res.status(400).json({ status: 'Invalid application' });
+  }
 
-  const text = `An Owner's Manual has been purchased on ${date}! Please check Stripe to make sure the payment has been properly received.`;
+  const subject = `Support request from ${req.body?.name} on behalf of ${req.body?.organization}`;
+
+  const text = `NAME:\n${req.body?.name}
+\r\n\r\nORGANIZATION:\n${req.body?.organization}
+\r\n\r\nEMAIL:\n${req.body?.email}
+\r\n\r\nMESSAGE:\n${req.body?.message}
+`;
 
   const sendMail = async () => {
     try {
       const response = await transporter.sendMail({
         from: 'info@peopleforbikes.org',
-        to: 'kerri@peopleforbikes.org, rod@peopleforbikes.org, mimi@peopleforbikes.org, ray@peopleforbikes.org',
+        replyTo: req.body.email,
+        to: process.env.SUPPORT_REQUEST_TO_ADDRESS,
         subject,
         text,
       });
@@ -45,8 +52,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   try {
     await sendMail();
 
-    return res.status(200).json({ status: 'Notification sent' });
+    return res.status(200).json({ status: 'Support request sent' });
   } catch (error) {
-    return res.status(500).json({ status: 'Notification not sent' });
+    return res.status(500).json({ status: 'Support request not sent' });
   }
 }

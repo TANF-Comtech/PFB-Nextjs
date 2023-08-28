@@ -10,7 +10,7 @@ const Container = styled.div`
 
 /* !important is needed to override when next/link applies global-css.js styles to anchors */
 /* This pattern allows the props we pass into our styled-component to override those styles */
-const Button = styled.a`
+const Button = styled.div`
   background-color: ${(props) => props.buttonBg || 'rgba(255,255,255,1)'} !important;
   border: ${(props) => props.buttonBorder || `1px solid ${props.theme.black}`} !important;
   border-radius: 10px !important;
@@ -26,21 +26,6 @@ const Button = styled.a`
   text-align: center !important;
   text-decoration: none !important;
   text-transform: ${(props) => props.buttonTextTransform || 'uppercase'} !important;
-  transform: translateY(0) !important;
-  transition: all 0.25s ease !important;
-
-  &:hover,
-  &::visited,
-  &::focus,
-  &:active {
-    background-color: ${(props) => props.buttonBgHover || props.theme.black} !important;
-    color: ${(props) => props.buttonColorHover || 'white'} !important;
-    text-decoration: none !important;
-  }
-
-  &:hover {
-    transform: translateY(-2px) !important;
-  }
 `;
 
 /**

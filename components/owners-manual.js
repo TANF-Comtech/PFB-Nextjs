@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import cx from 'classnames';
 import { atom, useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
@@ -13,20 +12,12 @@ import Spinner from '~/components/spinner';
 
 const DOCUSIGN_POWERFORM_URL =
   'https://na4.docusign.net/Member/PowerFormSigning.aspx?PowerFormId=87f16f4b-5c3b-4f0f-8c9a-bb0491e48e73&env=na4&acct=3bffb2a0-aa54-4f2e-80e8-7a09da3587b1&v=2';
-  
+
 const STRIPE_PAYMENT_LINK_URL = 'https://buy.stripe.com/fZeg1W3XnebN93y289';
 
-type Step =
-  | 'ACKNOWLEDGE_REQUIREMENTS'
-  | 'START'
-  | 'SIGN_LICENSE_AGREEMENT'
-  | 'UPLOAD_CERTIFICATE_OF_INSURANCE'
-  | 'PAYMENT'
-  | 'PENDING';
-
-const loadingAtom = atom<boolean>(false);
-const stepAtom = atomWithStorage<Step>('ownersManualStep', 'ACKNOWLEDGE_REQUIREMENTS');
-const notificationAtom = atomWithStorage<boolean>('ownersManualNotification', false);
+const loadingAtom = atom(false);
+const stepAtom = atomWithStorage('ownersManualStep', 'ACKNOWLEDGE_REQUIREMENTS');
+const notificationAtom = atomWithStorage('ownersManualNotification', false);
 
 export const OwnersManual = () => {
   const [isOwnersManualModalOpen, setIsOwnersManualModalOpen] = useAtom(ownersManualModalAtom);
@@ -58,7 +49,7 @@ const Debug = () => {
   if (process.env.NODE_ENV !== 'development') return null;
 
   return (
-    <div className="absolute top-0 left-0 z-[1000] inline-flex gap-8 p-4 !text-xs">
+    <div className="absolute left-0 top-0 z-[1000] inline-flex gap-8 p-4 !text-xs">
       <div className="inline-flex items-center gap-4">
         <button onClick={() => setStep('ACKNOWLEDGE_REQUIREMENTS')}>[requirements]</button>
         <button onClick={() => setStep('START')}>[start]</button>
@@ -146,7 +137,8 @@ const Start = () => {
     <div>
       <h2 className="font-dharma text-6xl sm:text-8xl">License the Owner’s Manual</h2>
       <p className="text-base !leading-relaxed sm:text-3xl">
-        PeopleForBikes Owner’s Manual can be licensed by member companies for $2,000/year. If your company is not a PeopleForBikes Member, please contact Mimi at mimi@peopleforbikes.org.
+        PeopleForBikes Owner’s Manual can be licensed by member companies for $2,000/year. If your
+        company is not a PeopleForBikes Member, please contact Mimi at mimi@peopleforbikes.org.
       </p>
       <div>
         <Button label="License the Owner’s Manual" size="large" onClick={handleStart} />
@@ -203,10 +195,10 @@ const UploadCertificateOfInsurance = () => {
   const { FileInput, openFileDialog, uploadToS3 } = useS3Upload();
 
   const handleFileChange = useCallback(
-    async (file: any) => {
+    async (file) => {
       setIsUploaded(true);
       const { url } = await uploadToS3(file);
-      setImageUrl(url as any);
+      setImageUrl(url);
       setHasClickedUpload(true);
     },
     [uploadToS3],
@@ -258,7 +250,9 @@ const Payment = () => {
         <Progress step={3} />
         <div className="mt-5 text-base font-bold !leading-relaxed sm:text-3xl">STEP 3:</div>
         <p className="text-base !leading-relaxed sm:text-3xl">
-          Complete your licensing request by submitting your payment in the amount of $2,000 for the year. You will be redirected to Stripe to set up an autopay annual subscription for the Owner&apos;s Manual.
+          Complete your licensing request by submitting your payment in the amount of $2,000 for the
+          year. You will be redirected to Stripe to set up an autopay annual subscription for the
+          Owner&apos;s Manual.
         </p>
         <div className="flex gap-8">
           <Button
@@ -308,7 +302,10 @@ const Pending = () => {
     <div>
       <h2 className="text-center font-dharma text-6xl sm:text-8xl">Success!</h2>
       <p className="text-center text-base !leading-relaxed sm:text-3xl">
-        Thank you for your purchase. Your owner&apos;s manual payment will be auto renewed as an annual subscription ever year at this time. Your license is currently being processed. When approved our membership team will reach out to you with instructions for downloading the Owner&apos;s Manual. Please contact Mimi at mimi@peopleforbikes.org with any questions.
+        Thank you for your purchase. Your owner&apos;s manual payment will be auto renewed as an
+        annual subscription ever year at this time. Your license is currently being processed. When
+        approved our membership team will reach out to you with instructions for downloading the
+        Owner&apos;s Manual. Please contact Mimi at mimi@peopleforbikes.org with any questions.
       </p>
       <div className="flex justify-center gap-8">
         <Button

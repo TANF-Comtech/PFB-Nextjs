@@ -4,7 +4,8 @@
     "paths": {
       "~/*": ["*"]
     },
-    "checkJs": true
+    "checkJs": true,
+    "removeComments": true
   },
   "include": ["**/*.js", "**/*.jsx"],
   "exclude": ["node_modules", "public"]

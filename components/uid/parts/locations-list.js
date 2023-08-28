@@ -52,11 +52,9 @@ const Title = styled.h2`
 const ImageTextOverlay = ({ imageLink, source1X, source2X, title }) => {
   return (
     <Link href={imageLink} passHref>
-      <a>
-        <ImageContainer path1X={source1X} path2X={source2X}>
-          <Title>{title}</Title>
-        </ImageContainer>
-      </a>
+      <ImageContainer path1X={source1X} path2X={source2X}>
+        <Title>{title}</Title>
+      </ImageContainer>
     </Link>
   );
 };
