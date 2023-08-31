@@ -374,39 +374,25 @@ function Footer() {
           <StripeMenu>
             <MenuContainer>
               <li>
-                <Link href="/mission">
-                  <a>Mission</a>
-                </Link>
+                <Link href="/mission">Mission</Link>
               </li>
               <li>
-                <Link href="/team">
-                  <a>Team</a>
-                </Link>
+                <Link href="/team">Team</Link>
               </li>
               <li>
-                <Link href="/board">
-                  <a>Board</a>
-                </Link>
+                <Link href="/board">Board</Link>
               </li>
               <li>
-                <Link href="/careers">
-                  <a>Careers</a>
-                </Link>
+                <Link href="/careers">Careers</Link>
               </li>
               <li>
-                <Link href="/privacy">
-                  <a>Privacy</a>
-                </Link>
+                <Link href="/privacy">Privacy</Link>
               </li>
               <li>
-                <Link href="/join">
-                  <a>Join</a>
-                </Link>
+                <Link href="/join">Join</Link>
               </li>
               <li>
-                <Link href="/members">
-                  <a>Members</a>
-                </Link>
+                <Link href="/members">Members</Link>
               </li>
             </MenuContainer>
             <Rule bgColor="#fff" maxWidth="250px" maxWidthMobile="700px" padding="5px 4vw" />

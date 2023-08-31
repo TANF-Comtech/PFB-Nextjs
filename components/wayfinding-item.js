@@ -93,18 +93,13 @@ const WayfindingItem = ({ bgColor, path, title, text, textColor }) => {
       ) : (
         <ContentContainer>
           <Link href={linkResolver(path)} passHref>
-            <a>
-              <Title textColor={textColor}>{title}</Title>
-            </a>
+            <Title textColor={textColor}>{title}</Title>
           </Link>
           <Text>{text}</Text>
         </ContentContainer>
       )}
-
       <Link href={linkResolver(path)} passHref>
-        <a>
-          <Icon src={BlueArrowWhiteBlock} alt="Blue Arrow" />
-        </a>
+        <Icon src={BlueArrowWhiteBlock} alt="Blue Arrow" />
       </Link>
     </Container>
   );

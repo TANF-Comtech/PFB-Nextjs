@@ -69,12 +69,10 @@ export default function TakeActionList() {
       </Container>
       <Container>
         <Link href="/grants" passHref>
-          <a>
-            <HeaderImage source={GrantsBG}>
-              <h1>Community Grants</h1>
-              <Arrow src={WhiteArrow} />
-            </HeaderImage>
-          </a>
+          <HeaderImage source={GrantsBG}>
+            <h1>Community Grants</h1>
+            <Arrow src={WhiteArrow} />
+          </HeaderImage>
         </Link>
         <SummaryBlock bgColor="#002C40" textColor="#fff">
           <p>

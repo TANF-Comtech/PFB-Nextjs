@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import cx from 'classnames';
 import { Disclosure } from '@headlessui/react';
 import { useDropzone } from 'react-dropzone';
@@ -157,12 +156,12 @@ const GrantRecipients = () => {
 };
 
 const GrantApplication = () => {
-  const [step, setStep] = useState < number > 1;
+  const [step, setStep] = useState(1);
 
   // @TODO remove these 3 states if unused
-  const [hasSent, setHasSent] = useState < boolean > false;
-  const [hasReceived, setHasReceived] = useState < boolean > false;
-  const [error, setError] = (useState < string) | (undefined > undefined);
+  const [hasSent, setHasSent] = useState(false);
+  const [hasReceived, setHasReceived] = useState(false);
+  const [error, setError] = useState(undefined);
 
   const [name, setName] = useLocalStorage('name', '');
   const [title, setTitle] = useLocalStorage('title', '');
@@ -176,7 +175,7 @@ const GrantApplication = () => {
   const [diversityStatement, setDiversityStatement] = useLocalStorage('diversityStatement', '');
   const [evaluation, setEvaluation] = useLocalStorage('evaluation', '');
 
-  const [attachments, setAttachments] = useState < Array < any >> [];
+  const [attachments, setAttachments] = useState([]);
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop: (acceptedAttachments) => {
       setAttachments([...attachments, ...acceptedAttachments]);
@@ -275,6 +274,10 @@ const GrantApplication = () => {
       evaluation,
       attachments,
       handleReset,
+      setError,
+      setHasReceived,
+      setHasSent,
+      setStep,
     ],
   );
 

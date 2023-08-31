@@ -1,13 +1,8 @@
-import * as React from 'react';
+import React from 'react';
 import cx from 'classnames';
 import Flickity from 'react-flickity-component';
 
-type SliderProps = {
-  className?: string;
-  children: React.ReactNode;
-};
-
-export const Slider = ({ className = '', children }: SliderProps) => {
+export const Slider = ({ className = '', children }) => {
   return (
     <Flickity
       className={cx('slider', className)}

@@ -56,23 +56,21 @@ const Arrow = styled.img`
  */
 const ImageSquare = ({ handler, imageSquareLink, isNavItem, source1X, source2X, title }) => {
   return (
-    <Link href={imageSquareLink} passHref>
-      <a onClick={handler && handler}>
-        <BgImage
-          height={isNavItem === true ? '150px' : '450px'}
-          heightTablet={isNavItem === true ? '150px' : '450px'}
-          heightDesktop={isNavItem === true ? '150px' : '450px'}
-          imgsrc={source1X}
-          margin={isNavItem === true ? '0 20px 2vh 20px' : '0'}
-          quality={isNavItem === true ? 80 : 95}
-          width={isNavItem === true ? '150px' : '100%'}
-        >
-          <ImageContentContainer isNavItem={isNavItem}>
-            {isNavItem === true ? <NavTitle>{title}</NavTitle> : <Title>{title}</Title>}
-            <Arrow isNavItem={isNavItem} src={ArrowIcon} />
-          </ImageContentContainer>
-        </BgImage>
-      </a>
+    <Link href={imageSquareLink} passHref onClick={handler && handler}>
+      <BgImage
+        height={isNavItem === true ? '150px' : '450px'}
+        heightTablet={isNavItem === true ? '150px' : '450px'}
+        heightDesktop={isNavItem === true ? '150px' : '450px'}
+        imgsrc={source1X}
+        margin={isNavItem === true ? '0 20px 2vh 20px' : '0'}
+        quality={isNavItem === true ? 80 : 95}
+        width={isNavItem === true ? '150px' : '100%'}
+      >
+        <ImageContentContainer isNavItem={isNavItem}>
+          {isNavItem === true ? <NavTitle>{title}</NavTitle> : <Title>{title}</Title>}
+          <Arrow isNavItem={isNavItem} src={ArrowIcon} />
+        </ImageContentContainer>
+      </BgImage>
     </Link>
   );
 };

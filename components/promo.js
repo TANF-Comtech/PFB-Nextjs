@@ -103,15 +103,13 @@ const Promo = ({
             </a>
           ) : (
             <Link href={linkResolver(path)} passHref>
-              <a>
-                <BgImage imgsrc={source}>
-                  <PromoTextContainer headingRGBA={headingRGBA}>
-                    <span>{smallWords}</span>
-                    <h1>{bigWords}</h1>
-                    <Arrow src={WhiteArrow} />
-                  </PromoTextContainer>
-                </BgImage>
-              </a>
+              <BgImage imgsrc={source}>
+                <PromoTextContainer headingRGBA={headingRGBA}>
+                  <span>{smallWords}</span>
+                  <h1>{bigWords}</h1>
+                  <Arrow src={WhiteArrow} />
+                </PromoTextContainer>
+              </BgImage>
             </Link>
           )}
         </>

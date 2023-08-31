@@ -379,16 +379,12 @@ const GlobalBar = () => {
               </span>
             </NetworkControl>
             <MemberLink>
-              <Link href="/members">
-                <a>Corporate Member Center</a>
-              </Link>
+              <Link href="/members">Corporate Member Center</Link>
             </MemberLink>
             <MemberLink>
               {!isLoggedIn ? (
                 <button onClick={() => setIsLoginModalOpen(true)}>
-                  <a>
-                    <span>Login</span>
-                  </a>
+                  <span>Login</span>
                 </button>
               ) : (
                 <span
@@ -481,18 +477,16 @@ function NavBar() {
         <MainNavContainer>
           <Container>
             <Link href="/">
-              <a>
-                <LogoContainer>
-                  <Logo logoMargin="0" logoWidth="60px" logoViewbox="65 -12 160 150" />
-                  <LogoTypeVisibility
-                    fillPeople={themeProps.darkGray}
-                    fillFor={themeProps.gray}
-                    fillBikes={themeProps.darkGray}
-                    logoMargin="0"
-                    logoTypeWidth="170px"
-                  />
-                </LogoContainer>
-              </a>
+              <LogoContainer>
+                <Logo logoMargin="0" logoWidth="60px" logoViewbox="65 -12 160 150" />
+                <LogoTypeVisibility
+                  fillPeople={themeProps.darkGray}
+                  fillFor={themeProps.gray}
+                  fillBikes={themeProps.darkGray}
+                  logoMargin="0"
+                  logoTypeWidth="170px"
+                />
+              </LogoContainer>
             </Link>
             <RightContainer>
               <MenuTrigger onClick={() => setAdvocacyState(true)}>Advocacy</MenuTrigger>

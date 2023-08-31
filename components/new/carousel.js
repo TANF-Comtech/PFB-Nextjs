@@ -1,15 +1,10 @@
-import * as React from 'react';
+import React from 'react';
 import cx from 'classnames';
 import Flickity from 'react-flickity-component';
 
 import { ClientOnly } from '~/components/new/client-only';
 
-type CarouselProps = {
-  className?: string;
-  children: React.ReactNode;
-};
-
-export const Carousel = ({ className = '', children }: CarouselProps) => {
+export const Carousel = ({ className = '', children }) => {
   return (
     <ClientOnly>
       <Flickity

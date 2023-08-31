@@ -38,9 +38,7 @@ const ReportsList = ({ payload }) => {
           <>
             <ReportListItem key={report.reports._meta.id}>
               <Link href={`/reports/${report.reports._meta.uid}`} passHref>
-                <a>
-                  <strong>{report.reports.title[0].text}</strong>
-                </a>
+                <strong>{report.reports.title[0].text}</strong>
               </Link>
               {report.reports.summary && (
                 <p>{`${report.reports.summary[0].text.substring(0, 180)} ...`}</p>
