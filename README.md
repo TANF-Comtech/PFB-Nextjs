@@ -2,15 +2,15 @@ PeopleForBikes site is a [Next.js](https://nextjs.org/) project using [Tailwind]
 
 ## Getting Started
 
-If you haven't run this project before, we're using `yarn` and Node `v16.x`. To get started, make sure your running right version of Node and then run `yarn` and install dependencies:
+If you haven't run this project before, we're using `yarn` and Node `v18.x`. To get started, make sure your running right version of Node and then run `yarn` and install dependencies:
 
 ```bash
-node -v # should show v16.x.x, recommend using nvm
+node -v # should show v18.x.x, we recommend using nvm
 yarn install # should output a bunch of install scripts, ignore warnings
 yarn dev # starts the dev server
 ```
 
-Open [http://localhost:3001](http://localhost:3001) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 ### Tooling
 
@@ -62,7 +62,7 @@ You can get around this issue by using `local-ssl-proxy`. This utility proxies t
 
 #### From your CLI, confirm you are using:
 
-- the correct version of Node for this project (`v16.x` as of 2022-06) and that
+- the correct version of Node for this project (`v18.x` as of 2023-09) and that
 - you have [Homebrew](https://brew.sh/) installed.
 - you are in this application's folder on your local machine (should be `pfb-nextjs`)
 
