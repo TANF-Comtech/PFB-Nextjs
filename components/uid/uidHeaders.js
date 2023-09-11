@@ -32,6 +32,7 @@ export default function UidHeader({ landing_page }) {
           <SecondaryTitleBanner
             secondaryText={landing_page.secondary_text}
             mainText={landing_page.main_text}
+            path={landing_page._meta.uid}
           />
           {landing_page.header_image && <HeaderImage srcSet={landing_page.header_image} />}
           {landing_page.summary && (

@@ -36,18 +36,31 @@ const SecondaryText = styled.h1`
  * @param { string } mainText - main text
  * @param { string } secondaryColor - secondary text color (default: darkest gray)
  * @param { string } secondaryText - secondary text
+ * @param { string } path - which page uid this relates to
  *
  */
 
-const SecondaryTitleBanner = ({ mainText, secondaryText }) => {
+const SecondaryTitleBanner = ({ mainText, secondaryText, path }) => {
   return (
     <MainContent maxWidth="1000px">
       <Container>
-        <SecondaryText>
-          {secondaryText}
-          {` `}
-        </SecondaryText>
-        <MainText>{mainText}</MainText>
+        { path === 'grants' ? 
+          <>
+            <MainText>{mainText}{` `}</MainText>          
+            <SecondaryText>
+              {secondaryText}
+            </SecondaryText>
+            
+          </> :
+          <>
+            <SecondaryText>
+              {secondaryText}
+              {` `}
+            </SecondaryText>
+            <MainText>{mainText}</MainText>
+          </>
+        }
+        
       </Container>
     </MainContent>
   );
