@@ -67,7 +67,7 @@ export default function OwnersManual({ page, preview }) {
             buttonBorder="#00A2DF"
             buttonColor="#fff"
             buttonMargin="15px 0"
-            href="mailto:kerri@peopleforbikes.org,rod@peopleforbikes.org?subject=Interested%20in%20Purchasing%20the%20PeopleForBikes%20Owner's%20Manual&body=PeopleForBikes%20Member%20Team%3A%0D%0A%0D%0AOur%20organization%20would%20like%20to%20express%20our%20interest%20in%20purchasing%20the%20PeopleForBikes%20Owner's%20Manual.%0D%0A%0D%0AWe%20look%20forward%20to%20discussing%20our%20options%20with%20you%2C%0D%0A"
+            href="mailto:ray@peopleforbikes.org,rod@peopleforbikes.org?subject=Interested%20in%20Purchasing%20the%20PeopleForBikes%20Owner's%20Manual&body=PeopleForBikes%20Member%20Team%3A%0D%0A%0D%0AOur%20organization%20would%20like%20to%20express%20our%20interest%20in%20purchasing%20the%20PeopleForBikes%20Owner's%20Manual.%0D%0A%0D%0AWe%20look%20forward%20to%20discussing%20our%20options%20with%20you%2C%0D%0A"
           >
             Non-Members: License the Owner's Manual
           </Button>
@@ -78,7 +78,7 @@ export default function OwnersManual({ page, preview }) {
             buttonBorder="#00A2DF"
             buttonColor="#fff"
             buttonMargin="15px 0 60px 0"
-            href="mailto:kerri@peopleforbikes.org,rod@peopleforbikes.org?subject=Interested%20in%20Becoming%20a%20PeopleForBikes%20Member%20Organization&body=PeopleForBikes%20Member%20Team%3A%0D%0A%0D%0AOur%20organization%20would%20like%20to%20express%20our%20interest%20in%20becoming%20a%20member%20of%20PeopleForBikes.%0D%0A%0D%0AWe%20look%20forward%20to%20discussing%20our%20options%20with%20you%2C%0D%0A"
+            href="mailto:mimi@peopleforbikes.org,rod@peopleforbikes.org?subject=Interested%20in%20Becoming%20a%20PeopleForBikes%20Member%20Organization&body=PeopleForBikes%20Member%20Team%3A%0D%0A%0D%0AOur%20organization%20would%20like%20to%20express%20our%20interest%20in%20becoming%20a%20member%20of%20PeopleForBikes.%0D%0A%0D%0AWe%20look%20forward%20to%20discussing%20our%20options%20with%20you%2C%0D%0A"
           >
             Become a Member
           </Button>
