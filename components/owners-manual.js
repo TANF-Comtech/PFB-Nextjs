@@ -13,7 +13,7 @@ import Spinner from '~/components/spinner';
 const DOCUSIGN_POWERFORM_URL =
   'https://na4.docusign.net/Member/PowerFormSigning.aspx?PowerFormId=87f16f4b-5c3b-4f0f-8c9a-bb0491e48e73&env=na4&acct=3bffb2a0-aa54-4f2e-80e8-7a09da3587b1&v=2';
 
-const STRIPE_PAYMENT_LINK_URL = 'https://buy.stripe.com/fZeg1W3XnebN93y289';
+const STRIPE_PAYMENT_LINK_URL = 'https://buy.stripe.com/9AQ2b6gK9aZB3JedR0';
 
 const loadingAtom = atom(false);
 const stepAtom = atomWithStorage('ownersManualStep', 'ACKNOWLEDGE_REQUIREMENTS');
@@ -137,7 +137,7 @@ const Start = () => {
     <div>
       <h2 className="font-dharma text-6xl sm:text-8xl">License the Owner’s Manual</h2>
       <p className="text-base !leading-relaxed sm:text-3xl">
-        PeopleForBikes Owner’s Manual can be licensed by member companies for $2,000/year. If your
+        PeopleForBikes Owner’s Manual can be licensed by member companies for $4,000/year. If your
         company is not a PeopleForBikes Member, please contact Mimi at mimi@peopleforbikes.org.
       </p>
       <div>
@@ -250,7 +250,7 @@ const Payment = () => {
         <Progress step={3} />
         <div className="mt-5 text-base font-bold !leading-relaxed sm:text-3xl">STEP 3:</div>
         <p className="text-base !leading-relaxed sm:text-3xl">
-          Complete your licensing request by submitting your payment in the amount of $2,000 for the
+          Complete your licensing request by submitting your payment in the amount of $4,000 for the
           year. You will be redirected to Stripe to set up an autopay annual subscription for the
           Owner&apos;s Manual.
         </p>
