@@ -30,6 +30,7 @@ export const Grants = () => {
             <Link
               href="https://docs.google.com/forms/d/e/1FAIpQLSf-O5IP6Jj0YQhb1Y7I6eBl73R5vQNmWhJX2XdksdxUyuXhLQ/viewform"
               class="text-white inline-block cursor-pointer rounded-lg text-center font-bold uppercase leading-none transition duration-300 hover:scale-105 bg-blue text-white px-6 py-4 text-lg shadow-md"
+              target="_blank"
             >
               <span style={{ color: '#ffffff !important' }}>{grantsApplicationCta}</span>
             </Link>
