@@ -160,11 +160,17 @@ const SignLicenseAgreement = () => {
     <>
       <div>
         <Progress step={1} />
-        <div className="mt-5 text-base font-bold !leading-relaxed sm:text-3xl">STEP 1:</div>
-        <p className="text-base !leading-relaxed sm:text-3xl">
-          Sign the Owner’s Manual License Agreement
+        <div className="mt-5 text-base !leading-relaxed sm:text-3xl mb-5">
+          <span className='font-bold'>STEP 1:</span> Sign the Owner’s Manual License Agreement 
+        </div>
+        
+        <p className="text-base !leading-relaxed sm:text-xl mb-5">
+          The License Agreement has been pre-signed by PeopleForBikes' President Jenn Dice and requires your signature. We have loaded the document into Docusign, where you will add your organization and its address, as well as a signatory from your organization. After signing, you will receive the countersigned copy via email. Please contact <a href="mailto:mimi@peopleforbikes.org?subject=Owner's%20Manual%20License%20Agreement%20Questions" className="underline text-blue-600">Mimi</a> with any questions.
         </p>
-        <div className="flex gap-8">
+        <p className="text-base !leading-relaxed sm:text-xl mb-5">
+          The 'Sign Now' button below will open a new tab with the agreement. Please complete it and come back to this tab when you are through to complete the purchase.
+        </p>        
+        <div className="flex gap-8 mb-5">
           <Button
             onClick={handleClickSign}
             label="Sign now"
@@ -180,6 +186,7 @@ const SignLicenseAgreement = () => {
             />
           )}
         </div>
+        
       </div>
     </>
   );
@@ -212,11 +219,17 @@ const UploadCertificateOfInsurance = () => {
   return (
     <div>
       <Progress step={2} />
-      <div className="mt-5 text-base font-bold !leading-relaxed sm:text-3xl">STEP 2:</div>
-      <p className="text-base !leading-relaxed sm:text-3xl">
-        Upload Certificate of Insurance from a product liability insurance company with
-        PeopleForBikes listed as additional insured
+      <div className="mt-5 text-base !leading-relaxed sm:text-3xl mb-5">
+        <span className='font-bold'>STEP 2:</span> Upload Certificate of Insurance 
+      </div>
+      <p className="text-base !leading-relaxed sm:text-xl mb-5">
+        You need to upload a valid Certificate of Insurance from a product liability insurance company. This certificate needs to show PeopleForBikes listed as additional insured party. 
       </p>
+      <p className="text-base !leading-relaxed sm:text-xl mb-5">
+        If you have questions about insurance, please reach out to <a className="underline text-blue-600" href="mailto:mimi@peopleforbikes.org?subject=Owner's%20Manual%20Certificate%20of%20Insurance%20Question">Mimi</a> for support.
+      </p>
+      
+
       <FileInput onChange={handleFileChange} />
       {imageUrl && <img src={imageUrl} alt="" className="mb-8 max-w-xs" />}
       <div className="flex gap-8">
@@ -247,11 +260,14 @@ const Payment = () => {
     <>
       <div>
         <Progress step={3} />
-        <div className="mt-5 text-base font-bold !leading-relaxed sm:text-3xl">STEP 3:</div>
-        <p className="text-base !leading-relaxed sm:text-3xl">
-          Complete your licensing request by submitting your payment in the amount of $4,000 for the
-          year. You will be redirected to Stripe to set up an autopay annual subscription for the
-          Owner&apos;s Manual.
+        <div className="mt-5 text-base !leading-relaxed sm:text-3xl mb-5">
+          <span className='font-bold'>STEP 3:</span> Set Up Recurring Payment  
+        </div>
+        <p className="text-base !leading-relaxed sm:text-xl mb-5">
+          Complete the Owner's Manual Licensing process by submitting adding your credit card and billing information into our payment processing partner, Stripe. This will charge your card $4,000 now and this payment will reoccur every year on this date. If you have questions about the payment, please reach out to <a className="underline text-blue-600" href="mailto:mimi@peopleforbikes.org?subject=Owner's%20Manual%20Payment%20Questions">Mimi</a> with questions.
+        </p>
+        <p className="text-base !leading-relaxed sm:text-xl mb-5">
+          Clicking the 'Pay Now' button below will open another tab in your browser that contains the payment form for Stripe. Complete the information on that page to initiate your Owner's Manual subscription. Come back to this screen when your payment has completed.
         </p>
         <div className="flex gap-8">
           <Button
@@ -299,12 +315,9 @@ const Pending = () => {
 
   return (
     <div>
-      <h2 className="text-center font-dharma text-6xl sm:text-8xl">Success!</h2>
-      <p className="text-center text-base !leading-relaxed sm:text-3xl">
-        Thank you for your purchase. Your owner&apos;s manual payment will be auto renewed as an
-        annual subscription ever year at this time. Your license is currently being processed. When
-        approved our membership team will reach out to you with instructions for downloading the
-        Owner&apos;s Manual. Please contact Mimi at mimi@peopleforbikes.org with any questions.
+      <h2 className="text-center font-dharma text-6xl sm:text-8xl mb-5">Success!</h2>
+      <p className="text-base !leading-relaxed sm:text-xl mb-10">
+        Thank you for your purchase. Your license is currently being processed. When approved, our membership team will reach out to you with instructions for downloading the Owner&apos;s Manual. Please contact <a href="mailto:mimi@peopleforbikes.org?subject=Owner's%20Manual%20Processing%20Questions" className="underline text-blue-600">Mimi</a> with any questions.
       </p>
       <div className="flex justify-center gap-8">
         <Button
@@ -328,7 +341,7 @@ const Progress = ({ step }) => {
       <li
         onClick={() => setStep('SIGN_LICENSE_AGREEMENT')}
         className={cx(
-          'relative inline-flex h-20 w-20 items-center justify-center rounded-full',
+          'relative inline-flex h-20 w-20 items-center justify-center rounded-full cursor-pointer',
           step === 1 ? 'bg-blue' : 'bg-mediumGray',
         )}
       >
@@ -337,7 +350,7 @@ const Progress = ({ step }) => {
       <li
         onClick={() => setStep('UPLOAD_CERTIFICATE_OF_INSURANCE')}
         className={cx(
-          'relative inline-flex h-20 w-20 items-center justify-center rounded-full',
+          'relative inline-flex h-20 w-20 items-center justify-center rounded-full cursor-pointer',
           step === 2 ? 'bg-blue' : 'bg-mediumGray',
         )}
       >
@@ -346,7 +359,7 @@ const Progress = ({ step }) => {
       <li
         onClick={() => setStep('PAYMENT')}
         className={cx(
-          'relative inline-flex h-20 w-20 items-center justify-center rounded-full',
+          'relative inline-flex h-20 w-20 items-center justify-center rounded-full cursor-pointer',
           step === 3 ? 'bg-blue' : 'bg-mediumGray',
         )}
       >
