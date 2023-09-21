@@ -75,20 +75,15 @@ const Notice = () => {
 
   return (
     <div className="absolute inset-0 flex h-full w-full items-center justify-center p-10">
-      <div className="mx-auto w-full max-w-2xl bg-darkestGray p-10 text-center text-white">
+      <div className="mx-auto w-full max-w-2xl bg-darkestGray p-10 text-white">
         <div className="text-xl font-bold">In order to complete this process you will need:</div>
         <div className="mt-5 text-lg">
-          1) Certificate of Insurance from a product liability insurance company with PeopleForBikes
-          listed as additional insured
+          1) <span className='font-bold'>Certificate of Insurance</span> from a product liability insurance company with PeopleForBikes
+          listed as additional insured party
         </div>
-        <div className="mt-2 text-lg">2) A form of payment</div>
+        <div className="mt-2 text-lg">2) A <span className='font-bold'>valid credit card</span> (We can accept checks and direct deposits but you will have to do this process manually. Contact <a href="mailto:mimi@peopleforbikes.org?subject=Owner's%20Manual%20-%20Payment%20By%20Check%20Questions" className='underline'>Mimi</a> for further guidance.)</div>
         <div className="mt-5 flex justify-center">
-          <button
-            onClick={handleAcknowledgeRequirements}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white text-2xl font-bold text-white"
-          >
-            X
-          </button>
+          <Button label="Acknowledge Before Proceeding" size="large" onClick={handleAcknowledgeRequirements} />
         </div>
       </div>
     </div>
@@ -134,10 +129,13 @@ const Start = () => {
 
   return (
     <div>
-      <h2 className="font-dharma text-6xl sm:text-8xl">License the Owner’s Manual</h2>
-      <p className="text-base !leading-relaxed sm:text-3xl">
-        PeopleForBikes Owner’s Manual can be licensed by member companies for $4,000/year. If your
-        company is not a PeopleForBikes Member, please contact Mimi at mimi@peopleforbikes.org.
+      <h2 className="font-dharma text-6xl sm:text-8xl mb-5">License the Owner’s Manual</h2>
+      <p className="text-base !leading-relaxed sm:text-xl mb-5">
+        PeopleForBikes Owner’s Manual can be licensed by member companies for <span className='font-bold'>$4,000/year</span>. If your
+        company is not a PeopleForBikes Member, the cost is <span className='font-bold'>$8,000/year</span> for non-member licenses. 
+      </p>
+      <p className="text-base !leading-relaxed sm:text-xl mb-5">
+        If your company is not a member and would like to join PeopleForBikes before licensing the Owner's Manual, please contact <a href="mailto:mimi@peopleforbikes.org?subject=Owner's%20Manual%20-%20Becoming%20a%20Member" className='underline'>Mimi</a> to learn how to join.
       </p>
       <div>
         <Button label="License the Owner’s Manual" size="large" onClick={handleStart} />
