@@ -139,7 +139,6 @@ const nextConfig = async (phase, { defaultConfig }) => {
 
     // Experimental features
     experimental: {
-      legacyBrowsers: true,
       swcPlugins: [['@swc-jotai/react-refresh', {}]],
     },
 

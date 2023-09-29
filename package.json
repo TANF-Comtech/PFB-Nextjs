@@ -28,7 +28,7 @@
     "jotai": "^2.4.0",
     "jsforce": "^1.11.1",
     "jsonwebtoken": "^8.5.1",
-    "next": "^13.4.19",
+    "next": "^13.5.3",
     "next-s3-upload": "^0.3.1",
     "num-words": "^1.2.3",
     "react": "^18.2.0",
