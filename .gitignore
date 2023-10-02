@@ -36,3 +36,6 @@ localhost.pem
 
 # cached data
 global.json
+
+# for nextjs https implementation
+certificates
