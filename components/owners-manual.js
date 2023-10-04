@@ -262,7 +262,7 @@ const Payment = () => {
           <span className='font-bold'>STEP 3:</span> Set Up Recurring Payment  
         </div>
         <p className="text-base !leading-relaxed sm:text-xl mb-5">
-          Complete the Owner's Manual Licensing process by submitting adding your credit card and billing information into our payment processing partner, Stripe. This will charge your card $4,000 now and this payment will reoccur every year on this date. If you have questions about the payment, please reach out to <a className="underline text-blue-600" href="mailto:mimi@peopleforbikes.org?subject=Owner's%20Manual%20Payment%20Questions">Mimi</a> with questions.
+          Complete the Owner's Manual Licensing process by submitting your credit card and billing information into our payment processing partner, Stripe. This will charge your card $4,000 now and this payment will reoccur every year on this date. If you have questions about the payment, please reach out to <a className="underline text-blue-600" href="mailto:mimi@peopleforbikes.org?subject=Owner's%20Manual%20Payment%20Questions">Mimi</a> with questions.
         </p>
         <p className="text-base !leading-relaxed sm:text-xl mb-5">
           Clicking the 'Pay Now' button below will open another tab in your browser that contains the payment form for Stripe. Complete the information on that page to initiate your Owner's Manual subscription. Come back to this screen when your payment has completed.
