@@ -1,9 +1,7 @@
-import * as React from 'react';
-import { useCallback, useRef } from 'react';
+import React, { useCallback, useRef } from 'react';
 import Link from 'next/link';
 import { useAtom, useSetAtom } from 'jotai';
-import { Hits, InstantSearch, useSearchBox } from 'react-instantsearch-hooks-web';
-import { RefinementList } from 'react-instantsearch-hooks-web';
+import { Hits, InstantSearch, useSearchBox, RefinementList } from 'react-instantsearch';
 
 import { searchAtom, queryAtom, mobileSearchAtom } from '~/atoms';
 import { Button } from '~/components/new/button';
@@ -56,7 +54,7 @@ export const MobileSearch = () => {
   );
 };
 
-const CustomSearchBox = (props: any) => {
+const CustomSearchBox = (props) => {
   const [searchQuery, setSearchQuery] = useAtom(queryAtom);
 
   const { refine } = useSearchBox(props);
@@ -115,15 +113,14 @@ const CustomResult = ({ hit }) => {
   const href = hit.path.split('https://www.peopleforbikes.org/')[1];
 
   return (
-    <Link href={`/${href}`}>
-      <a
-        onClick={handleCloseSearch}
-        className="-mt-4 mb-4 block rounded-lg p-4 text-black transition duration-300 hover:bg-white"
-      >
-        <div className="text-sm font-bold uppercase text-redAccent">{hit.type}</div>
-        <div className="line-clamp-1 font-dharma text-3xl font-medium sm:text-4xl">{hit.title}</div>
-        <div className="line-clamp-3 text-sm leading-snug text-black/80">{hit.content}</div>
-      </a>
+    <Link
+      href={`/${href}`}
+      onClick={handleCloseSearch}
+      className="-mt-4 mb-4 block rounded-lg p-4 text-black transition duration-300 hover:bg-white"
+    >
+      <div className="text-sm font-bold uppercase text-redAccent">{hit.type}</div>
+      <div className="line-clamp-1 font-dharma text-3xl font-medium sm:text-4xl">{hit.title}</div>
+      <div className="line-clamp-3 text-sm leading-snug text-black/80">{hit.content}</div>
     </Link>
   );
 };

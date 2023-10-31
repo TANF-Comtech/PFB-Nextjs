@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef } from 'react';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import Script from 'next/script';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
@@ -46,12 +46,6 @@ const CenteredTitle = styled.h2`
   text-align: center !important;
   margin: 0 auto 3vh auto !important;
   max-width: 800px !important;
-`;
-
-const BigPara = styled.p`
-  margin: 3vh auto !important;
-  max-width: 800px !important;
-  text-align: center !important;
 `;
 
 const FlexContainer = styled.section`
@@ -211,7 +205,11 @@ export default function ActionForms({ page, preview }) {
       <Wrapper postPath="/take-action" postTitle="Take Action" isWide="true">
         <MainContent>
           {action.title && <CenteredTitle>{action.title[0].text}</CenteredTitle>}
-          {action.main_content && <BigPara>{action.main_content}</BigPara>}
+          {action.main_content && (
+            <div className="mx-auto mb-12 mt-6 max-w-[800px] border-b border-t border-gray/50 py-6 text-center text-xl font-bold text-blue">
+              {action.main_content}
+            </div>
+          )}
           {action.long_content && <PrismicRichText field={action.long_content} />}
           <FlexContainer>
             {action.image_selection && (

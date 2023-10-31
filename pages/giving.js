@@ -1,5 +1,5 @@
-import * as React from 'react';
-import Image from 'next/image';
+import React from 'react';
+import Image from 'next/legacy/image';
 
 import { Page } from '~/components/new/page';
 import { Button } from '~/components/new/button';
@@ -76,7 +76,7 @@ const Impact = () => {
         </div>
         <div className="relative mx-auto w-full max-w-6xl">
           <Slider className="py-8">
-            {IMPACTS.map((item, index: number) => (
+            {IMPACTS.map((item, index) => (
               <div key={index} className="px-4">
                 <ActionCard
                   number={index + 1}
@@ -127,11 +127,7 @@ const Quotes = () => {
   );
 };
 
-type QuoteProps = {
-  quote: Quote;
-};
-
-const Quote = ({ quote }: QuoteProps) => {
+const Quote = ({ quote }) => {
   return (
     <div className="w-full p-8 sm:p-12 xl:aspect-video xl:p-24">
       <div className="flex h-full flex-col items-center justify-center gap-3">
@@ -183,7 +179,7 @@ const Maximize = () => {
         </div>
         <div className="relative mx-auto w-full max-w-6xl">
           <Slider className="py-8">
-            {MAXIMIZERS.map((item, index: number) => (
+            {MAXIMIZERS.map((item, index) => (
               <div key={index} className="px-4">
                 <ActionCard
                   number={index + 1}
@@ -225,17 +221,17 @@ const HERO_IMAGES = [
   />,
 ];
 
-const HERO_HEADLINE: string = `Your Support of PeopleForBikes Matters`;
+const HERO_HEADLINE = `Your Support of PeopleForBikes Matters`;
 
-const GIVING_HEADLINE: string = `At PeopleForBikes, we know that bikes make life great. Our goal is to make the U.S. the best place in the world to ride a bike. With your help, we can make that vision a reality.`;
+const GIVING_HEADLINE = `At PeopleForBikes, we know that bikes make life great. Our goal is to make the U.S. the best place in the world to ride a bike. With your help, we can make that vision a reality.`;
 
-const GIVING_BODY: string = `Since 1999, thanks to your support, PeopleForBikes has worked in hundreds of communities nationwide to get more people on bikes more often and make biking better for everyone. Our more than 1.4 million supporters from across the U.S. help us secure billions in federal funding for more and better bike infrastructure and key programs like City Ratings and the Final Mile help build better bike networks right in your backyard. Since 1999, through our industry community grants program, we’ve donated more than $3.6 million and leveraged $775 million in funding for local bike projects, advocacy organizations, and education programs.`;
+const GIVING_BODY = `Since 1999, thanks to your support, PeopleForBikes has worked in hundreds of communities nationwide to get more people on bikes more often and make biking better for everyone. Our more than 1.4 million supporters from across the U.S. help us secure billions in federal funding for more and better bike infrastructure and key programs like City Ratings and the Final Mile help build better bike networks right in your backyard. Since 1999, through our industry community grants program, we’ve donated more than $3.6 million and leveraged $775 million in funding for local bike projects, advocacy organizations, and education programs.`;
 
-const BANNER_LABEL: string = `Give today`;
+const BANNER_LABEL = `Give today`;
 
-const BANNER_CAPTION: string = `Your support matters`;
+const BANNER_CAPTION = `Your support matters`;
 
-const IMPACTS: Array<any> = [
+const IMPACTS = [
   {
     title: 'Youth',
     image: '/new/1_Youth.png',
@@ -263,11 +259,11 @@ const IMPACTS: Array<any> = [
   },
 ];
 
-const SUPPORT_HEADLINE: string = `Above + Beyond Corporate Support`;
+const SUPPORT_HEADLINE = `Above + Beyond Corporate Support`;
 
-const SUPPORT_BODY: string = `PeopleForBikes works with more than 325 bike industry companies to help advance our work across our three key pillars: infrastructure, policy, and participation. Endemic and non-endemic corporate partners can support our work in the following ways.`;
+const SUPPORT_BODY = `PeopleForBikes works with more than 325 bike industry companies to help advance our work across our three key pillars: infrastructure, policy, and participation. Endemic and non-endemic corporate partners can support our work in the following ways.`;
 
-const SUPPORT: Array<any> = [
+const SUPPORT = [
   {
     label: 'Employee Purchase Program',
     contents: (
@@ -336,15 +332,9 @@ const SUPPORT: Array<any> = [
   },
 ];
 
-const SUPPORT_DETAILS: string = `Learn more about these programs and get involved by contacting Rod Judd (rod@peopleforbikes.org) or Kerri Salazar (kerri@peopleforbikes.org).`;
+const SUPPORT_DETAILS = `Learn more about these programs and get involved by contacting Rod Judd (rod@peopleforbikes.org) or Kerri Salazar (kerri@peopleforbikes.org).`;
 
-type Quote = {
-  body: string;
-  author: string;
-  donorType: 'Corporate Donor' | 'Individual Donor';
-};
-
-const QUOTES: Array<Quote> = [
+const QUOTES = [
   {
     body: '“We instituted a simple program to help fund safe bike infrastructure by donating $1 for each helmet sold and matching that with a dollar-per-unit donation from each Trek retailer. It is a powerful multiplier.”',
     author: 'John Burke, President, Trek Bicycle',
@@ -383,11 +373,11 @@ const QUOTES: Array<Quote> = [
   },
 ];
 
-const METHODS_HEADLINE: string = `Ways to Give`;
+const METHODS_HEADLINE = `Ways to Give`;
 
-const METHODS_BODY: string = `PeopleForBikes makes it easy to give.`;
+const METHODS_BODY = `PeopleForBikes makes it easy to give.`;
 
-const METHODS: Array<any> = [
+const METHODS = [
   {
     label: 'Online (credit card, ACH, Venmo, PayPal)',
     contents: (
@@ -493,43 +483,59 @@ const METHODS: Array<any> = [
     contents: (
       <div className="flex flex-col gap-6">
         <div>
+          <br />
           <b>Financial Whistle Blower Policy</b>
           <br />
+          <br />
           PeopleForBikes is committed to operating in furtherance of its tax-exempt purposes and in
-          compliance with all applicable laws, rules, and regulations, including those concerning
+          compliance with all applicable laws, rules and regulations, including those concerning
           accounting and auditing, and prohibits fraudulent practices by any of its board members,
-          officers, employees, or volunteers. This policy outlines a procedure for employees to
-          report actions that an employee reasonably believes violates a law or regulation or that
-          constitutes fraudulent accounting or other practices. This policy applies to any matter
+          officers, employees, or volunteers.  This policy outlines a procedure for employees to
+          report actions that an employee reasonably believes violates a law, or regulation or that
+          constitutes fraudulent accounting or other practices.  This policy applies to any matter
           which is related to PeopleForBikes business and does not relate to private acts of an
-          individual not connected to the business of PeopleForBikes. If an employee has a
-          reasonable belief that an employee or PeopleForBikes has engaged in any action that
-          violates any applicable law or regulation, including those concerning accounting and
-          auditing, or constitutes a fraudulent practice, the employee is expected to immediately
-          report such information to Jenn Dice, president and CEO (jenn@peopleforbikes.org). If the
-          employee does not feel comfortable reporting the information to the president, the
-          employee is expected to report the information to Matt Moore, general and policy counsel
-          (matt@peopleforbikes.org).
+          individual not connected to the business of PeopleForBikes. 
           <br />
           <br />
-          All reports will be followed up promptly with an investigation conducted. In conducting
+          If an employee has a reasonable belief that an employee or PeopleForBikes has engaged in
+          any action that violates any applicable law, or regulation, including those concerning
+          accounting and auditing, or constitutes a fraudulent practice, the employee is expected to
+          immediately report such information to{' '}
+          <a
+            href="mailto:jenn@peopleforbikes.org?subject=Financial%20Whistle%20Blower%20Violation"
+            style={{ textDecoration: 'underline' }}
+          >
+            Jenn Dice, President and CEO
+          </a>
+          .  If the employee does not feel comfortable reporting the information to the Executive
+          Director, the employee is expected to report the information to{' '}
+          <a
+            href="mailto:matt@peopleforbikes.org?subject=Financial%20Whistle%20Blower%20Violation"
+            style={{ textDecoration: 'underline' }}
+          >
+            Matt Moore, General and Policy Counsel
+          </a>
+          .
+          <br />
+          <br />
+          All reports will be followed up promptly, and an investigation conducted.  In conducting
           its investigations, PeopleForBikes will strive to keep the identity of the complaining
-          individual as confidential as possible while conducting an adequate review and
-          investigation.
+          individual as confidential as possible, while conducting an adequate review and
+          investigation. 
           <br />
           <br />
           PeopleForBikes will not retaliate against an employee in the terms and conditions of
-          employment because that employee: (a) reports to a supervisor, to policy counsel, to the
-          president, the board of directors, or to a federal, state, or local agency what the
-          employee believes in good faith to be a violation of the law; (b) participates in good
-          faith in any resulting investigation or proceeding; or (c) exercises their rights under
+          employment because that employee:  (a) reports to a supervisor, to policy counsel, to the
+          executive director, the Board of Directors or to a federal, state or local agency what the
+          employee believes in good faith to be a violation of the law; or (b) participates in good
+          faith in any resulting investigation or proceeding, or (c) exercises their rights under
           any state or federal law(s) or regulation(s) to pursue a claim or take legal action to
           protect the employee’s rights.
           <br />
           <br />
           PeopleForBikes may take disciplinary action (up to and including termination) against an
           employee who in management’s assessment has engaged in retaliatory conduct in violation of
-          this policy.
+          this policy. 
           <br />
           <br />
           In addition, PeopleForBikes will not, with the intent to retaliate, take any action
@@ -538,35 +544,67 @@ const METHODS: Array<any> = [
           its employees of a violation of any applicable law or regulation.
           <br />
           <br />
-          Supervisors will be trained on this policy and PeopleForBikes’ prohibition against
+          Supervisors will be trained on this policy and PeopleForBikes prohibition against
           retaliation in accordance with this policy.
         </div>
         <div>
           <b>Reports for PeopleForBikes Foundation - 501(c)(3)</b>
           <br />
-          PeopleForBikes Foundation Audited Financials 2017 and 2018
           <br />
-          PeopleForBikes Foundation Audited Financials 2018 and 2019
+          <a
+            style={{ textDecoration: 'underline' }}
+            href="https://prismic-io.s3.amazonaws.com/peopleforbikes/05b71822-1b7c-42fb-a319-14fbac0ee3bf_PFB+Foundation+Audited+Financial+Statements_+2018.pdf"
+            target="_blank"
+          >
+            PeopleForBikes Foundation Audited Financials 2017 and 2018
+          </a>
           <br />
-          PeopleForBikes Foundation Audited Financials 2019 and 2020
+          <a
+            style={{ textDecoration: 'underline' }}
+            href="https://prismic-io.s3.amazonaws.com/peopleforbikes/79d72015-4a17-4518-8401-8b896c233e37_PFB+Foundation+Audited+Financial+Statements_+2019.pdf"
+            target="_blank"
+          >
+            PeopleForBikes Foundation Audited Financials 2018 and 2019
+          </a>
           <br />
-          PeopleForBikes Foundation Audited Financials 2020 and 2021
+          <a
+            style={{ textDecoration: 'underline' }}
+            href="https://prismic-io.s3.amazonaws.com/peopleforbikes/d41c0842-6e06-4cb9-b8f6-b1b4c51be1ad_PFB+Foundation+audited+Financial+Statements_+2020.pdf"
+            target="_blank"
+          >
+            PeopleForBikes Foundation Audited Financials 2019 and 2020
+          </a>
+          <br />
+          <a
+            style={{ textDecoration: 'underline' }}
+            href="https://prismic-io.s3.amazonaws.com/peopleforbikes/914ceddc-ec09-4158-a2d6-f07f692fb9d7_PFB+Foundation+Audited+Finacial+Statements+2021.pdf"
+            target="_blank"
+          >
+            PeopleForBikes Foundation Audited Financials 2020 and 2021
+          </a>
         </div>
         <div>
           <b>Reports for PeopleForBikes Coalition - 501(c)(4)</b>
           <br />
-          PeopleForBikes Coalition Audited Financials 2020 and 2021
+          <br />
+          <a
+            style={{ textDecoration: 'underline' }}
+            href="https://prismic-io.s3.amazonaws.com/peopleforbikes/ad1de379-1589-4517-873e-3ecdd1d3bdb0_PFB+Coalition+Audited+Financial+Statements+2020+and+2021.pdf"
+            target="_blank"
+          >
+            PeopleForBikes Coalition Audited Financials 2020 and 2021
+          </a>
         </div>
       </div>
     ),
   },
 ];
 
-const MAXIMIZE_HEADLINE: string = `Maximize Your Support`;
+const MAXIMIZE_HEADLINE = `Maximize Your Support`;
 
-const MAXIMIZE_BODY: string = `Giving to the PeopleForBikes Foundation is flexible — you can donate to one of our many programs, or choose to make a donation that best meets the Foundation’s area of greatest need. Here are some of the different areas you can support by giving to PeopleForBikes:`;
+const MAXIMIZE_BODY = `Giving to the PeopleForBikes Foundation is flexible — you can donate to one of our many programs, or choose to make a donation that best meets the Foundation’s area of greatest need. Here are some of the different areas you can support by giving to PeopleForBikes:`;
 
-const MAXIMIZERS: Array<any> = [
+const MAXIMIZERS = [
   {
     title: '1,000 Bike Projects Across America',
     image: '/new/6_1000_Places.png',

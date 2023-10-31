@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { useCallback } from 'react';
+import React, { useCallback } from 'react';
 import cx from 'classnames';
 import { useRouter } from 'next/router';
 import { atom, useAtom, useAtomValue, useSetAtom } from 'jotai';
@@ -11,28 +10,15 @@ import { Modal } from '~/components/modal';
 import { Button } from '~/components/simple-button';
 import Spinner from '~/components/spinner';
 
-type Step =
-  | 'EMAIL_LOGIN'
-  | 'ENTER_ACCESS_CODE_FROM_EMAIL'
-  | 'PHONE_LOGIN'
-  | 'ENTER_ACCESS_CODE_FROM_SMS'
-  | 'MEMBER_LOOKUP'
-  | 'MEMBER_LOOKUP_SUCCESS'
-  | 'MEMBER_LOOKUP_FAILURE'
-  | 'TROUBLE_LOGGING_IN'
-  | 'REQUEST_SUPPORT'
-  | 'REQUEST_SUPPORT_SUCCESS'
-  | 'ERROR';
-
-const loadingAtom = atom<boolean>(false);
-const stepAtom = atom<Step>('EMAIL_LOGIN');
-const emailAtom = atom<string>('');
-const phoneAtom = atom<string>('');
-const accessCodeAtom = atom<string>('');
-const nameAtom = atom<string>('');
-const organizationAtom = atom<string>('');
-const messageAtom = atom<string>('');
-const errorAtom = atom<string>('');
+const loadingAtom = atom(false);
+const stepAtom = atom('EMAIL_LOGIN');
+const emailAtom = atom('');
+const phoneAtom = atom('');
+const accessCodeAtom = atom('');
+const nameAtom = atom('');
+const organizationAtom = atom('');
+const messageAtom = atom('');
+const errorAtom = atom('');
 
 export const Login = () => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useAtom(loginModalAtom);
@@ -102,7 +88,7 @@ const EmailLogin = () => {
   const setError = useSetAtom(errorAtom);
 
   const handleEmailAccessCode = useCallback(
-    async (event: React.FormEvent<HTMLFormElement>) => {
+    async (event) => {
       event.preventDefault();
       setIsLoading(true);
 
@@ -179,7 +165,7 @@ const EnterAccessCodeFromEmail = () => {
   const router = useRouter();
 
   const handleValidateAccessCode = useCallback(
-    async (event: React.FormEvent<HTMLFormElement>) => {
+    async (event) => {
       event.preventDefault();
       setIsLoading(true);
 
@@ -277,7 +263,7 @@ const PhoneLogin = () => {
   const setError = useSetAtom(errorAtom);
 
   const handleTextAccessCode = useCallback(
-    async (event: React.FormEvent<HTMLFormElement>) => {
+    async (event) => {
       event.preventDefault();
       setIsLoading(true);
 
@@ -355,7 +341,7 @@ const EnterAccessCodeFromSms = () => {
   const router = useRouter();
 
   const handleValidateAccessCode = useCallback(
-    async (event: React.FormEvent<HTMLFormElement>) => {
+    async (event) => {
       event.preventDefault();
 
       setIsLoading(true);
@@ -451,7 +437,7 @@ const MemberLookup = () => {
   const setStep = useSetAtom(stepAtom);
 
   const handleValidateEmail = useCallback(
-    (event: React.FormEvent<HTMLFormElement>) => {
+    (event) => {
       event.preventDefault();
 
       const isEmailFound = false;
@@ -586,7 +572,7 @@ const RequestSupport = () => {
   const setStep = useSetAtom(stepAtom);
 
   const handleSubmitForm = useCallback(
-    async (event: React.FormEvent<HTMLFormElement>) => {
+    async (event) => {
       event.preventDefault();
 
       const formData = {
@@ -698,9 +684,7 @@ const Error = () => {
   );
 };
 
-type HeadlineProps = React.ComponentPropsWithoutRef<'h3'>;
-
-const Headline = ({ className = '', children, ...rest }: HeadlineProps) => {
+const Headline = ({ className = '', children, ...rest }) => {
   return (
     <h3 className={cx('text-center font-dharma text-6xl sm:text-8xl', className)} {...rest}>
       {children}
@@ -708,9 +692,7 @@ const Headline = ({ className = '', children, ...rest }: HeadlineProps) => {
   );
 };
 
-type BodyProps = React.ComponentPropsWithoutRef<'div'>;
-
-const Body = ({ className = '', children, ...rest }: BodyProps) => {
+const Body = ({ className = '', children, ...rest }) => {
   return (
     <div className={cx('mt-10 text-base !leading-normal sm:text-3xl', className)} {...rest}>
       {children}
@@ -718,9 +700,7 @@ const Body = ({ className = '', children, ...rest }: BodyProps) => {
   );
 };
 
-type BoldProps = React.ComponentPropsWithoutRef<'span'>;
-
-const Bold = ({ className = '', children, ...rest }: BoldProps) => {
+const Bold = ({ className = '', children, ...rest }) => {
   return (
     <span className={cx('text-base font-bold !leading-normal sm:text-3xl', className)} {...rest}>
       {children}

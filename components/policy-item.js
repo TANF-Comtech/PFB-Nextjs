@@ -134,9 +134,7 @@ const PolicyItem = ({
           <Header1>{title}</Header1>
         ) : (
           <Link href={path}>
-            <a>
-              <h2>{title}</h2>
-            </a>
+            <h2>{title}</h2>
           </Link>
         )}
         <Metadata>
@@ -167,7 +165,7 @@ const PolicyItem = ({
           {supportingDoc && (
             <MetaItem>
               <Link href={linkResolver(supportingDoc)} passHref>
-                <a>Supporting Documentation</a>
+                Supporting Documentation
               </Link>
             </MetaItem>
           )}

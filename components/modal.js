@@ -1,17 +1,8 @@
-import * as React from 'react';
-import { Fragment } from 'react';
+import React, { Fragment } from 'react';
 import cx from 'classnames';
 import { Dialog, Transition } from '@headlessui/react';
 
-type ModalProps = {
-  className?: string;
-  dark?: boolean;
-  show: boolean;
-  onClose: () => void;
-  children: React.ReactNode;
-};
-
-export const Modal = ({ className = '', dark = false, show, onClose, children }: ModalProps) => {
+export const Modal = ({ className = '', dark = false, show, onClose, children }) => {
   return (
     <Transition appear show={show} as={Fragment}>
       <Dialog as="div" className="relative z-[1040]" onClose={onClose}>

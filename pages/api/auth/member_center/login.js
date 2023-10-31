@@ -31,7 +31,7 @@ const login = (req, res) => {
     // if submitting email (step 1)
     if (code == null && email) {
       // Allow PFB and THOR emails to slip by Salesforce lookup check, just get Auth0 verification
-      if (email.endsWith('@peopleforbikes.org') || email.endsWith('@thor-studio.com')) {
+      if (email.endsWith('@peopleforbikes.org') || email.endsWith('@thor-studio.com') || email.endsWith('@bpamericas.com')) {
         return sendAuthCode(email, phone)
           .then((auth0Data) => {
             //dont use auth0Data here

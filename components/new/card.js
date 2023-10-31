@@ -1,5 +1,5 @@
-import * as React from 'react';
-import Image from 'next/image';
+import React from 'react';
+import Image from 'next/legacy/image';
 
 export const ActionCard = ({ number, total, title, description, image }) => {
   return (

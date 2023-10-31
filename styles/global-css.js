@@ -229,8 +229,6 @@ const GlobalStyle = createGlobalStyle`
 
   a, a:visited, a:focus, a:active, a:hover {
     color: ${(props) => props.theme.blue};
-    text-decoration: underline;
-    transition: 0.2s ease-in-out;
   }
 
   /* #################################### */

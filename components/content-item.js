@@ -107,9 +107,7 @@ const ContentItem = ({ date, deck, image, path, title, text }) => {
           <Title>{title}</Title>
         ) : (
           <Link href={path}>
-            <a>
-              <Title>{title}</Title>
-            </a>
+            <Title>{title}</Title>
           </Link>
         )}
         {date && <Datestamp>{date}</Datestamp>}

@@ -379,8 +379,8 @@ const NavMenu = ({ menuState, handleMenu }) => {
                 </AnchorAlign>
               </li>
               <MemberLi>
-                <Link href="/members">
-                  <a onClick={handleMenu}>Corporate Member Center</a>
+                <Link href="/members" onClick={handleMenu}>
+                  Corporate Member Center
                 </Link>
                 {!isLoggedIn ? (
                   <button onClick={() => setIsLoginModalOpen(true)}>

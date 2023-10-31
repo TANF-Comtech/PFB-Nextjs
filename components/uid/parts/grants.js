@@ -1,8 +1,8 @@
-import * as React from 'react';
-import { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import cx from 'classnames';
 import { Disclosure } from '@headlessui/react';
 import { useDropzone } from 'react-dropzone';
+import Link from 'next/link'
 
 import { useLocalStorage } from '~/hooks/useLocalStorage';
 
@@ -17,19 +17,8 @@ export const Grants = () => {
 
   return (
     <>
-      <div className="bg-midnightBlue p-10 sm:p-20">
-        <div className="mx-auto max-w-screen-lg text-center text-lightestGray">
-          <p className="text-base leading-10 sm:text-3xl">{grantsRecipientsDescription}</p>
-          <Button
-            label={grantsRecipientsCta}
-            onClick={() => setIsRecipientsModalOpen(true)}
-            variant="blue"
-            size="large"
-          />
-        </div>
-      </div>
       <div id="application" className="p-10 sm:p-20">
-        <div className="mx-auto max-w-screen-lg text-center text-darkestGray">
+        <div className="mx-auto max-w-screen-md text-center text-darkestGray">
           <Paragraphs className="mb-4 text-base !leading-normal sm:text-3xl">
             {grantApplicationDescription}
           </Paragraphs>
@@ -38,15 +27,23 @@ export const Grants = () => {
               {grantsClosedDescription}
             </p>
           ) : (
-            <Button
-              label={grantsApplicationCta}
-              onClick={() => setIsApplicationModalOpen(true)}
-              variant="darkGray"
-              size="small"
-            />
+            <Link
+              href="https://docs.google.com/forms/d/e/1FAIpQLSf-O5IP6Jj0YQhb1Y7I6eBl73R5vQNmWhJX2XdksdxUyuXhLQ/viewform"
+              class="text-white inline-block cursor-pointer rounded-lg text-center font-bold uppercase leading-none transition duration-300 hover:scale-105 bg-blue text-white px-6 py-4 text-lg shadow-md"
+              target="_blank"
+            >
+              <span style={{ color: '#ffffff !important' }}>{grantsApplicationCta}</span>
+            </Link>
+            // // 2022 onsite application process
+            // <Button
+            //   label={grantsApplicationCta}
+            //   onClick={() => setIsApplicationModalOpen(true)}
+            //   variant="darkGray"
+            //   size="small"
+            // />
           )}
         </div>
-      </div>
+      </div>    
       <div className="bg-midnightBlue p-10 sm:p-20">
         <div className="mx-auto max-w-screen-lg text-center text-lightestGray">
           <h2 className="font-dharma text-6xl sm:text-8xl">{grantGuidanceTitle}</h2>
@@ -66,6 +63,17 @@ export const Grants = () => {
           ))}
         </div>
       </div>
+      <div className="p-10 sm:p-20">
+        <div className="mx-auto max-w-screen-lg text-center">
+          <p className="text-base leading-10 sm:text-3xl">{grantsRecipientsDescription}</p>
+          <Button
+            label={grantsRecipientsCta}
+            onClick={() => setIsRecipientsModalOpen(true)}
+            variant="blue"
+            size="large"
+          />
+        </div>
+      </div>      
       <Modal show={isRecipientsModalOpen} onClose={() => setIsRecipientsModalOpen(false)} dark>
         <GrantRecipients />
       </Modal>
@@ -157,12 +165,12 @@ const GrantRecipients = () => {
 };
 
 const GrantApplication = () => {
-  const [step, setStep] = useState < number > 1;
+  const [step, setStep] = useState(1);
 
   // @TODO remove these 3 states if unused
-  const [hasSent, setHasSent] = useState < boolean > false;
-  const [hasReceived, setHasReceived] = useState < boolean > false;
-  const [error, setError] = (useState < string) | (undefined > undefined);
+  const [hasSent, setHasSent] = useState(false);
+  const [hasReceived, setHasReceived] = useState(false);
+  const [error, setError] = useState(undefined);
 
   const [name, setName] = useLocalStorage('name', '');
   const [title, setTitle] = useLocalStorage('title', '');
@@ -176,7 +184,7 @@ const GrantApplication = () => {
   const [diversityStatement, setDiversityStatement] = useLocalStorage('diversityStatement', '');
   const [evaluation, setEvaluation] = useLocalStorage('evaluation', '');
 
-  const [attachments, setAttachments] = useState < Array < any >> [];
+  const [attachments, setAttachments] = useState([]);
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop: (acceptedAttachments) => {
       setAttachments([...attachments, ...acceptedAttachments]);
@@ -275,6 +283,10 @@ const GrantApplication = () => {
       evaluation,
       attachments,
       handleReset,
+      setError,
+      setHasReceived,
+      setHasSent,
+      setStep,
     ],
   );
 
@@ -554,7 +566,7 @@ const Error = ({ children }) => {
   return <div className="font-bold text-red">{children}</div>;
 };
 
-const ARE_GRANTS_OPEN = false;
+const ARE_GRANTS_OPEN = true;
 
 const grantsRecipientsDescription = `The PeopleForBikes Industry Community Grant Program provides funding for projects that make bicycling better in communities across the U.S. Since 1999, PeopleForBikes has awarded more than 400 grants to nonprofit organizations and local governments in all 50 states, the District of Columbia and Puerto Rico. Our investments total more than $3.5 million and have leveraged $775 million in public and private funding for bike-related projects nationwide.`;
 
@@ -657,7 +669,7 @@ const grantRecipients = [
   'Youth Grants',
 ];
 
-const grantApplicationDescription = `PeopleForBikes simplified our grant process with just one annual cycle and no requirement for a Letter of Intent. To be considered, simply submit your application by the annual application deadline on October 31. Grant requests will be reviewed in November and awards will be presented in December.\nWe look forward to continuing to support work that aligns with PeopleForBikes's mission — making biking better for everyone and getting more people on bikes more often.`;
+const grantApplicationDescription = `The next round of PeopleForBikes’ Industry Community Grant Program opens on September 11, 2023. Applicants can submit a Letter of Interest through a form on this website until October 20, 2023, at 11:59 p.m. PT.\n Applicants will be notified of the status of their application by November 1, 2023. Finalists will be invited by email to submit a full application. Awards will be announced in early December.`;
 
 const grantsApplicationCta = `Apply now`;
 

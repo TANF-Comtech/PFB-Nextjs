@@ -178,14 +178,13 @@ const Dropdown = ({
                 })}
                 <ItemList>
                   <li>
-                    <Link href="/topics">
-                      <a
-                        onClick={dropdownHandler}
-                        dangerouslySetInnerHTML={{
-                          __html: 'More Topics &raquo;',
-                        }}
-                      />
-                    </Link>
+                    <Link
+                      href="/topics"
+                      onClick={dropdownHandler}
+                      dangerouslySetInnerHTML={{
+                        __html: 'More Topics &raquo;',
+                      }}
+                    />
                   </li>
                 </ItemList>
               </TopicContainer>

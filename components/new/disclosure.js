@@ -1,24 +1,14 @@
-import * as React from 'react';
-import { useMemo } from 'react';
+import React, { useMemo } from 'react';
 import cx from 'classnames';
 import { Disclosure as Element } from '@headlessui/react';
 
 const { Button, Panel } = Element;
 
-type DisclosureProps = React.ComponentPropsWithoutRef<'div'> & {
-  label: string;
-  contents: string | string[] | React.ReactNode;
-};
-
-type RenderProps = {
-  open: boolean;
-};
-
-export const Disclosure = ({ label, contents, ...rest }: DisclosureProps) => {
-  const newContents: React.ReactNode = useMemo(() => {
+export const Disclosure = ({ label, contents, ...rest }) => {
+  const newContents = useMemo(() => {
     return Array.isArray(contents) ? (
       <ul className="ml-6 mt-4 list-disc space-y-6">
-        {contents.map((line: string, index: number) => (
+        {contents.map((line, index) => (
           <li key={index}>{line}</li>
         ))}
       </ul>
@@ -29,7 +19,7 @@ export const Disclosure = ({ label, contents, ...rest }: DisclosureProps) => {
 
   return (
     <Element as="div" {...rest}>
-      {({ open }: RenderProps) => (
+      {({ open }) => (
         <>
           <Button className="flex items-center gap-4 py-2 text-left text-blue">
             <i

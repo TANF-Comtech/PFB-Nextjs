@@ -112,9 +112,7 @@ const EventItem = ({ day, month, year, path, title, text }) => {
         {!path ? (
           title && <Title>{title}</Title>
         ) : (
-          <Link href={path}>
-            <a>{title && <Title>{title}</Title>}</a>
-          </Link>
+          <Link href={path}>{title && <Title>{title}</Title>}</Link>
         )}
       </ContentContainer>
     </Container>

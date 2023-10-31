@@ -148,12 +148,10 @@ export default function JoinList() {
       </HeaderImage>
       <BoxContainer>
         <Link href="/members" passHref>
-          <a>
-            <Box bgColor="#D0021B">
-              <Text>Learn More About Membership</Text>
-              <Arrow src={WhiteArrow} />
-            </Box>
-          </a>
+          <Box bgColor="#D0021B">
+            <Text>Learn More About Membership</Text>
+            <Arrow src={WhiteArrow} />
+          </Box>
         </Link>
       </BoxContainer>
     </>

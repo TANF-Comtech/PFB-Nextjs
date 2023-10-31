@@ -71,9 +71,7 @@ export default function ReportsArchive({ page }) {
                           {report.node.title && (
                             <ReportListItem key={report.node._meta.id}>
                               <Link href={linkResolver(report.node._meta)} passHref>
-                                <a>
-                                  <strong>{report.node.title[0].text}</strong>
-                                </a>
+                                <strong>{report.node.title[0].text}</strong>
                               </Link>
                               {report.node.summary && (
                                 <p>{`${report.node.summary[0].text.substring(0, 180)} ...`}</p>

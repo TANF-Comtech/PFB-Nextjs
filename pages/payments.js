@@ -180,9 +180,7 @@ export default function Payments() {
                 strategically investing in a bigger, brighter future for bicycling.
               </p>
               <h3>
-                <Link href="/mission">
-                  <a>Learn More About Our Mission</a>
-                </Link>
+                <Link href="/mission">Learn More About Our Mission</Link>
               </h3>
             </MainContent>
           </>
@@ -210,9 +208,7 @@ export default function Payments() {
                 strategically investing in a bigger, brighter future for bicycling.
               </p>
               <h3>
-                <Link href="/mission">
-                  <a>Learn More About Our Mission</a>
-                </Link>
+                <Link href="/mission">Learn More About Our Mission</Link>
               </h3>
             </MainContent>
           </>
