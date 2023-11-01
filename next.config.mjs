@@ -413,6 +413,13 @@ const nextConfig = async (phase, { defaultConfig }) => {
           destination: 'https://www.classy.org/give/117371/',
           permanent: false,
         },
+        {
+          source: '/hungryforbatteries',
+          destination: 'https://www.dropbox.com/sh/d3s936xi5ebfxf5/AAB5g5bnuZ5pwiXJie8Tje_7a?dl=0',
+          permanent: true,
+        },
+
+        
       ];
     },
   };
