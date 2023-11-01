@@ -415,7 +415,7 @@ const nextConfig = async (phase, { defaultConfig }) => {
         },
         {
           source: '/hungryforbatteries',
-          destination: 'https://www.dropbox.com/sh/d3s936xi5ebfxf5/AAB5g5bnuZ5pwiXJie8Tje_7a?dl=0',
+          destination: 'https://www.dropbox.com/sh/oleecpco4efphwk/AACivPJGhMzllaCBqYji3qx0a?dl=0',
           permanent: true,
         },
 
