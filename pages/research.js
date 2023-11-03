@@ -3,20 +3,24 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Hits, InstantSearch, useSearchBox } from 'react-instantsearch-hooks-web';
 import { RefinementList } from 'react-instantsearch-hooks-web';
+import { PrismicRichText } from '@prismicio/react';
 
 import { AlgoliaIndex, AlgoliaReactClient } from '~/lib/algolia/algoliaClient';
-import { getReports } from '~/lib/queries/reports';
+import { getReports, getResearchLandingPage } from '~/lib/queries/reports';
 import { contentConcat } from '~/utils/contentConcat';
 import { linkResolver } from '~/utils';
 
 import { Page } from '~/components/new/page';
 import { Button } from '~/components/new/button';
 
-export default function ResearchPage({ latestReport }) {
+export default function ResearchPage({ featuredReport, latestReport, researchLandingPageContent }) {
+  
   return (
     <Page title="Research" showDonate={false}>
       <Intro />
-      <Announcement latestReport={latestReport} />
+      { featuredReport !== null &&
+        <Announcement featuredReport={featuredReport} />
+      } 
       <Reports />
       <Donate />
     </Page>
@@ -24,17 +28,28 @@ export default function ResearchPage({ latestReport }) {
 }
 
 export async function getStaticProps() {
+  // Report List
   const rawReports = await getReports();
   const formattedReports = formatReports(rawReports);
 
+  // Research page content
+  const researchLandingPageContent = await getResearchLandingPage()
+  const featuredReport = researchLandingPageContent.research_landing_page.featured_report
+
+  // Push latest reports over to Algolia to be indexed
   if (process.env.ALGOLIA_INDEXING_ENABLED === 'true') {
     await AlgoliaIndex('PFB_RESEARCH').saveObjects(formattedReports);
   }
 
+  // Sort reports by date
   const latestReport = formattedReports.sort((a, b) => a.date < b.date)[0];
 
   return {
-    props: { latestReport },
+    props: { 
+      featuredReport,
+      researchLandingPageContent,
+      latestReport 
+    },
     revalidate: 60,
   };
 }
@@ -70,9 +85,10 @@ const Intro = () => {
     <div className="relative z-0 mt-36 flex w-full items-center justify-center py-24">
       <Image
         src="/new/Research.png"
-        layout="fill"
-        alt=""
+        fill={ true }
+        alt="Abstract image of Bicyclist with graphs overlaid"
         className="absolute inset-0 z-0 block h-full w-full object-cover object-[center_20%]"
+        priority
       />
       <div className="relative z-10 text-center font-dharma text-9xl font-bold text-white">
         Research
@@ -81,16 +97,28 @@ const Intro = () => {
   );
 };
 
-const Announcement = ({ latestReport }) => {
+const Announcement = ({ featuredReport }) => {
+  console.log(Array.isArray(featuredReport.report_tags))
   return (
     <div className="mx-auto max-w-7xl p-8 pb-0 md:p-16">
+      <div className="text-sm font-bold uppercase text-redAccent">Featured Research</div>
       <div className="font-dharma text-5xl">
-        <span className="font-bold uppercase text-blue">Latest:</span>{' '}
-        <span>{latestReport.title}</span>
+        <span>{featuredReport.title[0].text}</span>
       </div>
-      <div className="mt-2 line-clamp-3 leading-normal text-black/80">{latestReport.summary}</div>
+      { Array.isArray(featuredReport.report_tags) === true &&
+        <div className="flex flex-wrap gap-2 mt-2 mb-2">
+          { featuredReport.report_tags.map((topic) => (
+            <span className="rounded bg-lightestGray px-1 py-0.5 text-xs font-bold uppercase">
+              {topic.tag.tag_name}
+            </span>
+          ))}
+        </div>   
+      }
+      <div className="mt-2 line-clamp-3 leading-normal text-black/80">
+        <PrismicRichText field={featuredReport.summary} />
+      </div>
       <div className="mt-4">
-        <Button to={latestReport.path} label="View the resource" size="small" />
+        <Button to={linkResolver(featuredReport._meta)} label="View the resource" size="small" />
       </div>
     </div>
   );
@@ -168,8 +196,11 @@ const CustomResult = ({ hit }) => {
       <div className="text-sm font-bold uppercase text-redAccent">{hit.type}</div>
       <div className="line-clamp-1 font-dharma text-3xl font-medium sm:text-4xl">{hit.title}</div>
       <div className="flex flex-wrap gap-2">
-        {hit.topics.map((topic) => (
-          <span className="rounded bg-lightestGray px-1 py-0.5 text-xs font-bold uppercase">
+        {hit.topics.map((topic, i) => (
+          <span 
+            className="rounded bg-lightestGray px-1 py-0.5 text-xs font-bold uppercase"
+            key={ i }
+          >
             {topic}
           </span>
         ))}
