@@ -13,8 +13,7 @@ import { linkResolver } from '~/utils';
 import { Page } from '~/components/new/page';
 import { Button } from '~/components/new/button';
 
-export default function ResearchPage({ featuredReport, reportsByYear, researchPageIntro }) {
-  console.log(reportsByYear)
+export default function ResearchPage({ featuredReport, researchPageIntro }) {
   
   return (
     <Page title="Research" showDonate={false}>
@@ -51,7 +50,6 @@ export async function getStaticProps() {
   return {
     props: { 
       featuredReport,
-      reportsByYear,
       researchPageIntro      
     },
     revalidate: 60,
