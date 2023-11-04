@@ -13,13 +13,17 @@ import { linkResolver } from '~/utils';
 import { Page } from '~/components/new/page';
 import { Button } from '~/components/new/button';
 
-export default function ResearchPage({ featuredReport, latestReport, researchLandingPageContent }) {
+export default function ResearchPage({ featuredReport, reportsByYear, researchPageIntro }) {
+  console.log(reportsByYear)
   
   return (
     <Page title="Research" showDonate={false}>
       <Intro />
       { featuredReport !== null &&
-        <Announcement featuredReport={featuredReport} />
+        <Announcement 
+          featuredReport={featuredReport} 
+          researchPageIntro={researchPageIntro}
+        />
       } 
       <Reports />
       <Donate />
@@ -28,27 +32,27 @@ export default function ResearchPage({ featuredReport, latestReport, researchLan
 }
 
 export async function getStaticProps() {
-  // Report List
-  const rawReports = await getReports();
-  const formattedReports = formatReports(rawReports);
+  
+  // Report formatting
+  const rawReports = await getReports(); // fetch
+  const formattedReports = formatReports(rawReports); // process
+  const reportsByYear = formattedReports.sort((a, b) => a.year < b.year); // reorder (descending by year)
+
+  // Push latest reports over to Algolia to be indexed
+  if (process.env.ALGOLIA_INDEXING_ENABLED === 'true') {
+    await AlgoliaIndex('PFB_RESEARCH').saveObjects(reportsByYear);
+  }
 
   // Research page content
   const researchLandingPageContent = await getResearchLandingPage()
   const featuredReport = researchLandingPageContent.research_landing_page.featured_report
-
-  // Push latest reports over to Algolia to be indexed
-  if (process.env.ALGOLIA_INDEXING_ENABLED === 'true') {
-    await AlgoliaIndex('PFB_RESEARCH').saveObjects(formattedReports);
-  }
-
-  // Sort reports by date
-  const latestReport = formattedReports.sort((a, b) => a.date < b.date)[0];
+  const researchPageIntro = researchLandingPageContent.research_landing_page.intro
 
   return {
     props: { 
       featuredReport,
-      researchLandingPageContent,
-      latestReport 
+      reportsByYear,
+      researchPageIntro      
     },
     revalidate: 60,
   };
@@ -63,16 +67,24 @@ const formatReports = (payload) => {
         objectID: item.node._meta.id,
         title: `${item.node.title[0].text}`,
         summary: item.node.summary ? contentConcat(item.node.summary) : null,
-        type: 'Report',
+        type:    
+          item.node.report_type && item.node.report_type[0].type.type !== null
+            ? item.node.report_type
+                .map((item) => (item.type !== null ? item.type.type : null))
+                .filter(Boolean)
+            : ['Report'],
         year: item.node.year,
         date: item.node.exact_date,
         topics:
-          item.node.topics.length > 0 && item.node.topics[0].title !== null
-            ? item.node.topics
-                .map((single) => (single.topic !== null ? single.topic.title[0].text : null))
+          item.node.report_tags.length > 0 && item.node.report_tags[0].tag.tag_name !== null
+            ? item.node.report_tags
+                .map((item) => (item.tag !== null ? item.tag.tag_name : null))
                 .filter(Boolean)
-            : [],
+            : [null],
         path: `https://www.peopleforbikes.org${linkResolver(item.node._meta) ?? ''}`,
+        pfbSupported: item.node.pfb_supported,
+        externalLink: item.node.link ? linkResolver(item.node.link) : null,
+        authors: item.node.authors ? item.node.authors : null
       });
     });
   }
@@ -97,18 +109,28 @@ const Intro = () => {
   );
 };
 
-const Announcement = ({ featuredReport }) => {
-  console.log(Array.isArray(featuredReport.report_tags))
+const Announcement = ({ featuredReport, researchPageIntro }) => {
   return (
-    <div className="mx-auto max-w-7xl p-8 pb-0 md:p-16">
+    <>
+    <div className="relative z-60 bg-darkest-blue p-8 text-white sm:p-12 xl:p-16">
+      <div className="mx-auto flex max-w-6xl flex-col gap-6 text-base leading-normal sm:text-xl xl:text-2xl">
+        <div className="leading-normal">
+          <PrismicRichText field={researchPageIntro} />
+        </div>
+      </div>
+    </div>
+    <div className="mx-auto max-w-screen-xl p-8 pb-0 md:p-16">
       <div className="text-sm font-bold uppercase text-redAccent">Featured Research</div>
       <div className="font-dharma text-5xl">
-        <span>{featuredReport.title[0].text}</span>
+        <span>{featuredReport.title[0].text} ({featuredReport.year})</span>
       </div>
       { Array.isArray(featuredReport.report_tags) === true &&
         <div className="flex flex-wrap gap-2 mt-2 mb-2">
-          { featuredReport.report_tags.map((topic) => (
-            <span className="rounded bg-lightestGray px-1 py-0.5 text-xs font-bold uppercase">
+          { featuredReport.report_tags.map((topic, i) => (
+            <span 
+              className="rounded bg-lightestGray px-1 py-0.5 text-xs font-bold uppercase"
+              key={ i }
+            >
               {topic.tag.tag_name}
             </span>
           ))}
@@ -121,13 +143,15 @@ const Announcement = ({ featuredReport }) => {
         <Button to={linkResolver(featuredReport._meta)} label="View the resource" size="small" />
       </div>
     </div>
+    </>
   );
 };
+
 
 const Reports = () => {
   return (
     <InstantSearch searchClient={AlgoliaReactClient} indexName="PFB_RESEARCH">
-      <div className="relative mx-auto max-w-7xl space-y-8 p-8 sm:flex sm:space-y-0 md:p-16">
+      <div className="relative mx-auto max-w-screen-xl space-y-8 p-8 sm:flex sm:space-y-0 md:p-16">
         <div className="overflow-y-auto rounded-lg bg-darkest-blue p-8 text-white sm:sticky sm:top-44 sm:h-[calc(100vh-13rem)] sm:w-1/3 md:p-12">
           <CustomSearchBox />
           <CustomFilters />
@@ -161,7 +185,7 @@ const CustomSearchBox = (props) => {
         value={searchQuery}
         onChange={onChange}
         className="h-full w-full border-none bg-transparent py-2 text-base font-bold text-black focus:ring-0 lg:text-xl"
-        placeholder="Keyword search..."
+        placeholder="Keyword Search"
       />
     </div>
   );
@@ -171,20 +195,16 @@ const CustomFilters = () => {
   return (
     <div className="dark mt-8 space-y-8">
       <div>
-        <div className="text-sm font-bold uppercase text-white">Type</div>
-        <RefinementList attribute="type" />
-      </div>
-      <div>
-        <div className="text-sm font-bold uppercase text-white">Year</div>
-        <RefinementList attribute="year" limit={5} showMore={true} />
-      </div>
-      <div>
         <div className="text-sm font-bold uppercase text-white">Topic</div>
-        <RefinementList attribute="topics" limit={5} showMore={true} />
+        <RefinementList attribute="topics" operator="and" limit="100" />
+      </div>
+      <div>
+        <div className="text-sm font-bold uppercase text-white">Type</div>
+        <RefinementList attribute="type" operator="and" />
       </div>
     </div>
   );
-};
+}; 
 
 const CustomResults = () => {
   return <Hits hitComponent={CustomResult} />;
@@ -193,21 +213,65 @@ const CustomResults = () => {
 const CustomResult = ({ hit }) => {
   return (
     <div className="mb-12 block text-black">
-      <div className="text-sm font-bold uppercase text-redAccent">{hit.type}</div>
-      <div className="line-clamp-1 font-dharma text-3xl font-medium sm:text-4xl">{hit.title}</div>
-      <div className="flex flex-wrap gap-2">
-        {hit.topics.map((topic, i) => (
-          <span 
-            className="rounded bg-lightestGray px-1 py-0.5 text-xs font-bold uppercase"
-            key={ i }
-          >
-            {topic}
-          </span>
-        ))}
+      <div className="text-sm font-bold uppercase text-redAccent">
+        { hit.pfbSupported === true && 
+          <span>★ PFB Supported </span>
+        }  
       </div>
-      <div className="mt-2 line-clamp-3 leading-normal text-black/80">{hit.summary}</div>
+      <div className="line-clamp-1 font-dharma text-3xl font-medium sm:text-4xl mb-2">
+        {hit.title}
+      </div>
+      { hit.topics &&
+        <div className="flex flex-wrap gap-2">
+          <span class="font-bold">Topic(s):&nbsp;</span> 
+          {hit.topics.map((topic, i) => (
+            <span 
+              className="rounded bg-lightestGray px-1 py-1 text-xs font-bold uppercase"
+              key={ i }
+            >
+              {topic}
+            </span>
+          ))}
+        </div>
+      }
+      {hit.type &&
+        <div className="flex flex-wrap gap-2 mt-2">
+          <span class="font-bold">Type(s):&nbsp;</span> 
+          {hit.type.map((type, i) => (
+            <span 
+              className="rounded bg-lightestGray px-1 py-1 text-xs font-bold uppercase"
+              key={ i }
+            >
+              {type}
+            </span>
+          ))}
+        </div>
+      }
+      {hit.authors &&
+        <div className="mt-2 line-clamp-3 leading-normal text-black/80">
+          <span class="font-bold">Author(s):&nbsp;</span> 
+          {hit.authors}
+        </div>
+      }
+      {hit.year &&
+        <div className="mt-2 line-clamp-3 leading-normal text-black/80">
+          <span class="font-bold">Year:&nbsp;</span> 
+          {hit.year}
+        </div>   
+      }
+      {hit.summary &&
+        <div className="mt-2 line-clamp-3 leading-normal text-black/80">
+          <span class="font-bold">Summary:&nbsp;</span> 
+          {hit.summary}
+        </div>
+      }
+
       <div className="mt-4">
-        <Button to={hit.path} label="View the resource" size="small" />
+        { hit.externalLink ? (
+          <Button to={hit.externalLink} label="Visit the website" size="small" />
+        ) : (
+          <Button to={hit.path} label="View the report" size="small" />
+        ) }
       </div>
     </div>
   );
