@@ -683,7 +683,7 @@ const Footer = () => {
             <a href="tel:13034494893">(303) 449-4893</a>
           </div>
           <div>
-            P.O. Box 2349
+            P.O. Box 2359
             <br />
             Boulder, CO 80306
           </div>
@@ -734,7 +734,7 @@ const DynamicLink = ({ href, className = '', children, ...rest }) => {
         {...rest}
       >
         <span>{children}</span>
-        <i className="fa-solid fa-arrow-up-right-from-square text-[0.8em]" />
+        <i className="fa-solid fa-arrow-up-right-from-square text-[0.8em] pr-2" />
       </ExternalLink>
     );
   }
@@ -766,20 +766,22 @@ const NAVIGATION = [
     title: 'Infrastructure',
     featuredItems: [
       {
+        image: 'Final_Mile.png',
+        title: 'Great Bicycle Infrastructure Project',
+        link: 'https://infrastructure.peopleforbikes.org/',
+      },      
+      {
         image: 'City_Ratings.png',
         title: 'City Ratings',
         link: 'https://cityratings.peopleforbikes.org/',
       },
-      {
-        image: 'Final_Mile.png',
-        title: 'Final Mile',
-        link: 'https://finalmile.peopleforbikes.org/',
-      },
+
     ],
     items: [
       { title: 'Local Innovation', link: 'local-innovation' },
       { title: 'Bicycle Network Analysis', link: 'https://bna.peopleforbikes.org/' },
       { title: 'Grants', link: 'grants' },
+      { title: 'Final Mile', link: 'https://finalmile.peopleforbikes.org/' },
     ],
   },
   {
