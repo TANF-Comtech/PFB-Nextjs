@@ -1,6 +1,5 @@
 import React, { useState, useCallback } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 import { Hits, InstantSearch, useSearchBox } from 'react-instantsearch-hooks-web';
 import { RefinementList } from 'react-instantsearch-hooks-web';
 import { PrismicRichText } from '@prismicio/react';
@@ -13,8 +12,11 @@ import { linkResolver } from '~/utils';
 import { Page } from '~/components/new/page';
 import { Button } from '~/components/new/button';
 
-export default function ResearchPage({ featuredReport, researchPageIntro }) {
-  
+export default function ResearchPage({ 
+  featuredReport,
+  researchPageIntro 
+}) {
+
   return (
     <Page title="Research" showDonate={false}>
       <Intro />
@@ -37,8 +39,6 @@ export async function getStaticProps() {
   const formattedReports = formatReports(rawReports); // process
   const reportsByYear = formattedReports.sort((a, b) => a.year < b.year); // reorder (descending by year)
 
-  console.log(reportsByYear)
-
   // Push latest reports over to Algolia to be indexed
   if (process.env.ALGOLIA_INDEXING_ENABLED === 'true') {
     await AlgoliaIndex('PFB_RESEARCH').saveObjects(reportsByYear);
@@ -52,6 +52,7 @@ export async function getStaticProps() {
   return {
     props: { 
       featuredReport,
+      rawReports,
       researchPageIntro      
     },
     revalidate: 60,
@@ -67,12 +68,12 @@ const formatReports = (payload) => {
         objectID: item.node._meta.id,
         title: `${item.node.title[0].text}`,
         summary: item.node.summary ? contentConcat(item.node.summary) : null,
-        // type:    
-        //   item.node.report_type && item.node.report_type[0].type.type !== null
-        //     ? item.node.report_type
-        //         .map((item) => (item.type !== null ? item.type.type : null))
-        //         .filter(Boolean)
-        //     : ['Report'],
+        type:    
+          item.node.report_type !== null && item.node.report_type[0].type !== null
+            ? item.node.report_type
+                .map((item) => (item.type !== null ? item.type.type : null))
+                .filter(Boolean)
+            : ['Report'],
         year: item.node.year,
         date: item.node.exact_date,
         topics:
@@ -126,9 +127,10 @@ const Announcement = ({ featuredReport, researchPageIntro }) => {
       </div>
       { Array.isArray(featuredReport.report_tags) === true &&
         <div className="flex flex-wrap gap-2 mt-2 mb-2">
+          <span className="font-bold">Topic(s):&nbsp;</span> 
           { featuredReport.report_tags.map((topic, i) => (
             <span 
-              className="rounded bg-lightestGray px-1 py-0.5 text-xs font-bold uppercase"
+              className="rounded bg-lightestGray px-1 py-1 text-xs font-bold uppercase"
               key={ i }
             >
               {topic.tag.tag_name}
@@ -136,12 +138,52 @@ const Announcement = ({ featuredReport, researchPageIntro }) => {
           ))}
         </div>   
       }
-      <div className="mt-2 line-clamp-3 leading-normal text-black/80">
-        <PrismicRichText field={featuredReport.summary} />
+      <div className="flex flex-wrap gap-2 mt-2">
+        <span className="font-bold">Type(s):&nbsp;</span> 
+        { featuredReport.report_type.length >= 1 ? 
+          featuredReport.report_type.map((type, i) => (
+            <span 
+            className="rounded bg-lightestGray px-1 py-1 text-xs font-bold uppercase"
+            key={ i }
+          >
+            { type.type.type }
+          </span>
+        )) : (
+          <span 
+            className="rounded bg-lightestGray px-1 py-1 text-xs font-bold uppercase"
+          >
+            Report
+          </span>
+        )}
       </div>
+      
+      {featuredReport.authors &&
+        <div className="mt-2 line-clamp-3 leading-normal text-black/80">
+          <span className="font-bold">Author(s):&nbsp;</span> 
+          {featuredReport.authors}
+        </div>
+      }
+      {featuredReport.year &&
+        <div className="mt-2 line-clamp-3 leading-normal text-black/80">
+          <span className="font-bold">Year:&nbsp;</span> 
+          {featuredReport.year}
+        </div>   
+      }
+
+      { featuredReport.summary && 
+        <div className="mt-2 line-clamp-3 leading-normal text-black/80">
+          <PrismicRichText field={featuredReport.summary} />
+        </div>      
+      }
+
       <div className="mt-4">
-        <Button to={linkResolver(featuredReport._meta)} label="View the resource" size="small" />
+        { featuredReport.externalLink ? (
+          <Button to={featuredReport.externalLink} label="Visit the website" size="small" />
+        ) : (
+          <Button to={linkResolver(featuredReport._meta)} label="View the report" size="small" />
+        ) }
       </div>
+
     </div>
     </>
   );
@@ -265,7 +307,6 @@ const CustomResult = ({ hit }) => {
           {hit.summary}
         </div>
       }
-
       <div className="mt-4">
         { hit.externalLink ? (
           <Button to={hit.externalLink} label="Visit the website" size="small" />
