@@ -37,6 +37,8 @@ export async function getStaticProps() {
   const formattedReports = formatReports(rawReports); // process
   const reportsByYear = formattedReports.sort((a, b) => a.year < b.year); // reorder (descending by year)
 
+  console.log(reportsByYear)
+
   // Push latest reports over to Algolia to be indexed
   if (process.env.ALGOLIA_INDEXING_ENABLED === 'true') {
     await AlgoliaIndex('PFB_RESEARCH').saveObjects(reportsByYear);
@@ -221,7 +223,7 @@ const CustomResult = ({ hit }) => {
       </div>
       { hit.topics &&
         <div className="flex flex-wrap gap-2">
-          <span class="font-bold">Topic(s):&nbsp;</span> 
+          <span className="font-bold">Topic(s):&nbsp;</span> 
           {hit.topics.map((topic, i) => (
             <span 
               className="rounded bg-lightestGray px-1 py-1 text-xs font-bold uppercase"
@@ -234,7 +236,7 @@ const CustomResult = ({ hit }) => {
       }
       {hit.type &&
         <div className="flex flex-wrap gap-2 mt-2">
-          <span class="font-bold">Type(s):&nbsp;</span> 
+          <span className="font-bold">Type(s):&nbsp;</span> 
           {hit.type.map((type, i) => (
             <span 
               className="rounded bg-lightestGray px-1 py-1 text-xs font-bold uppercase"
@@ -247,19 +249,19 @@ const CustomResult = ({ hit }) => {
       }
       {hit.authors &&
         <div className="mt-2 line-clamp-3 leading-normal text-black/80">
-          <span class="font-bold">Author(s):&nbsp;</span> 
+          <span className="font-bold">Author(s):&nbsp;</span> 
           {hit.authors}
         </div>
       }
       {hit.year &&
         <div className="mt-2 line-clamp-3 leading-normal text-black/80">
-          <span class="font-bold">Year:&nbsp;</span> 
+          <span className="font-bold">Year:&nbsp;</span> 
           {hit.year}
         </div>   
       }
       {hit.summary &&
         <div className="mt-2 line-clamp-3 leading-normal text-black/80">
-          <span class="font-bold">Summary:&nbsp;</span> 
+          <span className="font-bold">Summary:&nbsp;</span> 
           {hit.summary}
         </div>
       }
