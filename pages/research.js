@@ -65,12 +65,12 @@ const formatReports = (payload) => {
         objectID: item.node._meta.id,
         title: `${item.node.title[0].text}`,
         summary: item.node.summary ? contentConcat(item.node.summary) : null,
-        type:    
-          item.node.report_type && item.node.report_type[0].type.type !== null
-            ? item.node.report_type
-                .map((item) => (item.type !== null ? item.type.type : null))
-                .filter(Boolean)
-            : ['Report'],
+        // type:    
+        //   item.node.report_type && item.node.report_type[0].type.type !== null
+        //     ? item.node.report_type
+        //         .map((item) => (item.type !== null ? item.type.type : null))
+        //         .filter(Boolean)
+        //     : ['Report'],
         year: item.node.year,
         date: item.node.exact_date,
         topics:
@@ -94,7 +94,7 @@ const Intro = () => {
   return (
     <div className="relative z-0 mt-36 flex w-full items-center justify-center py-24">
       <Image
-        src="/new/Research.png"
+        src="/new/Research-abstract.jpg"
         fill={ true }
         alt="Abstract image of Bicyclist with graphs overlaid"
         className="absolute inset-0 z-0 block h-full w-full object-cover object-[center_20%]"
