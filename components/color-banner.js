@@ -78,7 +78,7 @@ const ColorBanner = ({
 }) => {
   return (
     <Container>
-      <a href="https://www.classy.org/give/117371" rel="nofollow" target="_blank">
+      <a href="https://www.classy.org/campaign/give-the-gift-of-better-biking/c532765" rel="nofollow" target="_blank">
         <ColorContainer bgColor={bgColor}>
           <MainContent maxWidth="800px">
             <h1 className="!no-underline" style={{ textDecoration: 'none !important' }}>

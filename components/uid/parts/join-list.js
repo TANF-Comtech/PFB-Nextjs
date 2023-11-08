@@ -121,7 +121,7 @@ export default function JoinList() {
             <Arrow src={WhiteArrow} />
           </Box>
         </a>
-        <a href="https://www.classy.org/give/117371" rel="nofollow" target="_blank">
+        <a href="https://www.classy.org/campaign/give-the-gift-of-better-biking/c532765" rel="nofollow" target="_blank">
           <Box bgColor="#D0021B">
             <Text>Donate Now</Text>
             <Arrow src={WhiteArrow} />

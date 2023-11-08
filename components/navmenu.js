@@ -340,7 +340,7 @@ const NavMenu = ({ menuState, handleMenu }) => {
             <ItemList>
               <li>
                 <AnchorAlign
-                  href="https://www.classy.org/give/117371"
+                  href="https://www.classy.org/campaign/give-the-gift-of-better-biking/c532765"
                   onClick={handleMenu}
                   target="_blank"
                 >
