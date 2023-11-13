@@ -87,6 +87,18 @@ input[search] {
   @apply mt-1 text-xs font-bold uppercase text-gray;
 }
 
+.dark .ais-RefinementList-labelText {
+  @apply !text-white;
+}
+
+.dark .ais-RefinementList-count {
+  @apply !text-white;
+}
+
+.dark .ais-RefinementList-showMore {
+  @apply !text-lightestGray;
+}
+
 /* Flickity v2.3.0 */
 /* https://flickity.metafizzy.co */
 

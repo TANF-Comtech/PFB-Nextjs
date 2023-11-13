@@ -418,8 +418,11 @@ const nextConfig = async (phase, { defaultConfig }) => {
           destination: 'https://www.dropbox.com/sh/oleecpco4efphwk/AACivPJGhMzllaCBqYji3qx0a?dl=0',
           permanent: true,
         },
-
-        
+        {
+          source: '/reports',
+          destination: '/research',
+          permanent: true,
+        },
       ];
     },
   };
