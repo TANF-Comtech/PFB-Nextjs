@@ -127,7 +127,7 @@ const Announcement = ({ featuredReport, researchPageIntro }) => {
       </div>
       { Array.isArray(featuredReport.report_tags) === true &&
         <div className="flex flex-wrap gap-2 mt-2 mb-2">
-          <span className="font-bold">Topic(s):&nbsp;</span> 
+          <span className="font-bold">Topic:&nbsp;</span> 
           { featuredReport.report_tags.map((topic, i) => (
             <span 
               className="rounded bg-lightestGray px-1 py-1 text-xs font-bold uppercase"
@@ -139,7 +139,7 @@ const Announcement = ({ featuredReport, researchPageIntro }) => {
         </div>   
       }
       <div className="flex flex-wrap gap-2 mt-2">
-        <span className="font-bold">Type(s):&nbsp;</span> 
+        <span className="font-bold">Type:&nbsp;</span> 
         { featuredReport.report_type.length >= 1 ? 
           featuredReport.report_type.map((type, i) => (
             <span 
@@ -159,7 +159,7 @@ const Announcement = ({ featuredReport, researchPageIntro }) => {
       
       {featuredReport.authors &&
         <div className="mt-2 line-clamp-3 leading-normal text-black/80">
-          <span className="font-bold">Author(s):&nbsp;</span> 
+          <span className="font-bold">Author:&nbsp;</span> 
           {featuredReport.authors}
         </div>
       }
@@ -178,9 +178,9 @@ const Announcement = ({ featuredReport, researchPageIntro }) => {
 
       <div className="mt-4">
         { featuredReport.externalLink ? (
-          <Button to={featuredReport.externalLink} label="Visit the website" size="small" />
+          <Button to={featuredReport.externalLink} label="View Resource" size="small" />
         ) : (
-          <Button to={linkResolver(featuredReport._meta)} label="View the report" size="small" />
+          <Button to={linkResolver(featuredReport._meta)} label="View Resource" size="small" />
         ) }
       </div>
 
@@ -257,7 +257,7 @@ const CustomResult = ({ hit }) => {
     <div className="mb-12 block text-black">
       <div className="text-sm font-bold uppercase text-redAccent">
         { hit.pfbSupported === true && 
-          <span>★ PFB Supported </span>
+          <span>★ PeopleForBikes Supported </span>
         }  
       </div>
       <div className="line-clamp-1 font-dharma text-3xl font-medium sm:text-4xl mb-2">
@@ -265,7 +265,7 @@ const CustomResult = ({ hit }) => {
       </div>
       { hit.topics &&
         <div className="flex flex-wrap gap-2">
-          <span className="font-bold">Topic(s):&nbsp;</span> 
+          <span className="font-bold">Topic:&nbsp;</span> 
           {hit.topics.map((topic, i) => (
             <span 
               className="rounded bg-lightestGray px-1 py-1 text-xs font-bold uppercase"
@@ -278,7 +278,7 @@ const CustomResult = ({ hit }) => {
       }
       {hit.type &&
         <div className="flex flex-wrap gap-2 mt-2">
-          <span className="font-bold">Type(s):&nbsp;</span> 
+          <span className="font-bold">Type:&nbsp;</span> 
           {hit.type.map((type, i) => (
             <span 
               className="rounded bg-lightestGray px-1 py-1 text-xs font-bold uppercase"
@@ -291,7 +291,7 @@ const CustomResult = ({ hit }) => {
       }
       {hit.authors &&
         <div className="mt-2 line-clamp-3 leading-normal text-black/80">
-          <span className="font-bold">Author(s):&nbsp;</span> 
+          <span className="font-bold">Author:&nbsp;</span> 
           {hit.authors}
         </div>
       }
@@ -309,9 +309,9 @@ const CustomResult = ({ hit }) => {
       }
       <div className="mt-4">
         { hit.externalLink ? (
-          <Button to={hit.externalLink} label="Visit the website" size="small" />
+          <Button to={hit.externalLink} label="View Resource" size="small" />
         ) : (
-          <Button to={hit.path} label="View the report" size="small" />
+          <Button to={hit.path} label="View Resource" size="small" />
         ) }
       </div>
     </div>
