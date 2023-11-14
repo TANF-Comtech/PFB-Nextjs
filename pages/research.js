@@ -82,7 +82,7 @@ const formatReports = (payload) => {
                 .map((item) => (item.tag !== null ? item.tag.tag_name : null))
                 .filter(Boolean)
             : [null],
-        path: `https://www.peopleforbikes.org${linkResolver(item.node._meta) ?? ''}`,
+        path: `/${linkResolver(item.node._meta) ?? ''}`,
         pfbSupported: item.node.pfb_supported,
         externalLink: item.node.link ? linkResolver(item.node.link) : null,
         authors: item.node.authors ? item.node.authors : null
@@ -255,7 +255,7 @@ const CustomResults = () => {
 const CustomResult = ({ hit }) => {
   return (
     <div className="mb-12 block text-black">
-      <div className="text-sm font-bold uppercase text-redAccent">
+      <div className="text-sm font-bold text-redAccent">
         { hit.pfbSupported === true && 
           <span>★ PeopleForBikes Supported </span>
         }  

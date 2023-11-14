@@ -2,20 +2,19 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { PrismicRichText } from '@prismicio/react';
 import Link from 'next/link';
+import GlobalStyle from '~/styles/global-css';
 
+import { htmlSerializer } from '~/lib/prismic/htmlSerializer';
 import { getReports, getSingleReportPage } from '~/lib/queries/reports';
 import { linkResolver } from '~/utils';
 import data from '~/data';
 
-import { LegacyPage } from '~/components/legacy-page';
-import Wrapper from '~/components/wrapper';
-import SiteMetaCustom from '~/components/site-meta-custom';
-import MainContent from '~/components/main-content';
-import Header1 from '~/components/h1';
 import Promo from '~/components/promo';
 import Grid from '~/components/grid';
 
-import ResearchPromo from '~/public/promo/promo-research.jpg';
+import { Page } from '~/components/new/page';
+
+import ResearchPromo from '~/public/new/Research_Promo.jpg';
 
 const Box = styled.div`
   align-items: center !important;
@@ -85,132 +84,131 @@ export default function ReportPage({ page, preview }) {
   const { report } = page;
   const { meta } = data;
 
-  return (
-    <LegacyPage>
-      <SiteMetaCustom
-        desc={
-          report.main_content ? `${report.main_content[0].text.substring(0, 180)} ... ` : meta.desc
-        }
-        title={report.title ? `${report.title[0].text} | PeopleForBikes` : meta.title}
-        imgHeight={meta.imgHeight}
-        imgSrc={meta.imgSrc}
-        imgWidth={meta.imgWidth}
-        path={report ? `https://www.peopleforbikes.org/reports/${report._meta.uid}` : meta.path}
-      />
-      <Wrapper postPath="/reports" postTitle="Reports" isWide="true">
-        <MainContent>
-          <Header1>Report</Header1>
-          <hr />
+  console.log(report)
 
-          <ReportContainer>
-            {report.title && (
-              <>
-                <h2>{report.title[0].text}</h2>
-              </>
-            )}
-            {report.year && (
-              <>
-                <strong>Publication Year:</strong>
-                <p>{report.year}</p>
-              </>
-            )}
-            {report.summary && (
-              <IntroWrapper>
-                <strong>Summary:</strong>
-                <PrismicRichText field={report.summary} linkResolver={linkResolver} />
-              </IntroWrapper>
-            )}
-            {report.pdf && (
-              <>
-                <strong>Full Report (Download):</strong>
-                <p>
-                  <Link href={report.pdf.url} passHref target="_blank" rel="noopener">
-                    <strong>Download PDF</strong>
-                  </Link>
-                </p>
-              </>
-            )}
-            {report.link && (
-              <>
-                <strong>Full Report (Link):</strong>
-                <p>
-                  <Link href={linkResolver(report.link)} passHref>
-                    <strong>Link to Report</strong>
-                  </Link>
-                </p>
-              </>
-            )}
-            {report.body &&
-              report.body.map((slice) => {
-                return (
-                  slice.__typename === 'ReportBodyMultiPage_report' && (
-                    <>
-                      <p>
-                        <strong>Supplemental Files:</strong>
-                      </p>
-                      <GridWrapper>
-                        <Grid>
-                          {slice.fields.map((doc) => {
-                            return (
-                              <Box key={doc.pdf_doc.size}>
-                                <a href={doc.pdf_doc.url} target="_blank" rel="noopener">
-                                  <Text>{doc.link_name}</Text>
-                                  <Arrow src="/white-arrow.svg" />
-                                </a>
-                              </Box>
-                            );
-                          })}
-                        </Grid>
-                      </GridWrapper>
-                    </>
-                  )
-                );
-              })}
-            {report.topics.length > 1 && (
-              <>
-                {report.topics[0].topic !== null && <strong>Related Topics:</strong>}
-                <ParagraphOfLinks>
-                  {report.topics.map((topic) => {
-                    if (topic.topic !== null) {
-                      return (
-                        <a href={`/topics/${topic.topic._meta.uid}`} key={topic.topic._meta.id}>
-                          <strong>{topic.topic.title[0].text}</strong>
-                        </a>
-                      );
-                    }
-                  })}
-                </ParagraphOfLinks>
-              </>
-            )}
-            {report.locations.length > 1 && (
-              <>
-                {report.locations[0].location !== null && <strong>Related Locations:</strong>}
-                <ParagraphOfLinks>
-                  {report.locations.map((location) => {
-                    if (location.location !== null) {
-                      return (
-                        <a
-                          href={`/locations/${location.location._meta.uid}`}
-                          key={location.location._meta.id}
-                        >
-                          <strong>{location.location.location[0].text}</strong>
-                        </a>
-                      );
-                    }
-                  })}
-                </ParagraphOfLinks>
-              </>
-            )}
-          </ReportContainer>
-        </MainContent>
-        <Promo
-          bigWords="Research Library"
-          path="/research"
-          smallWords="Explore More Reports In Our"
-          source={ResearchPromo}
-        />
-      </Wrapper>
-    </LegacyPage>
+  return (
+    <>
+    <GlobalStyle />
+    <Page 
+      title={report.title ? `${report.title[0].text} | PeopleForBikes` : meta.title} 
+      showDonate={false}
+    >
+      <div className="mx-auto max-w-screen-xl p-8 pb-0 mt-36 md:p-16">
+        <h1 className="font-dharma text-7xl font-bold">Report</h1>
+        <hr className="mt-5" />
+        <ReportContainer>
+          { report.title && (
+            <>
+              <h2 className='font-dharma text-5xl mb-5'>{report.title[0].text}</h2>
+            </>
+          )}
+          { report.report_tags &&
+            <div className="flex flex-wrap gap-2">
+              <span className="font-bold text-black/80">Topic:&nbsp;</span> 
+              { report.report_tags.map((tag, i) => (
+                <span 
+                  className="rounded bg-lightestGray px-1 py-1 text-xs font-bold uppercase"
+                  key={ i }
+                >
+                  {tag.tag.tag_name}
+                </span>
+              ))}
+            </div>
+          }
+          { report.report_type &&
+            <div className="flex flex-wrap gap-2 mt-2">
+              <span className="font-bold text-black/80">Type:&nbsp;</span> 
+              { report.report_type.map((type, i) => (
+                <span 
+                  className="rounded bg-lightestGray px-1 py-1 text-xs font-bold uppercase"
+                  key={ i }
+                >
+                  {type.type.type}
+                </span>
+              ))}
+            </div>
+          }
+          { report.authors &&
+            <div className="mt-2 line-clamp-3 leading-normal text-black/80">
+              <span className="font-bold text-black/80">Author:&nbsp;</span> 
+              { report.authors }
+            </div>
+          }
+          { report.year &&
+            <div className="mt-2 line-clamp-3 leading-normal text-black/80">
+              <span className="font-bold text-black/80">Year:&nbsp;</span> 
+              { report.year }
+            </div>   
+            
+          }
+          {report.summary && (
+            <>
+            <span className="font-bold block text-black/80 mt-2">Summary:&nbsp;</span> 
+            <div className="mt-2 leading-normal text-black/80 legacy-page">
+              <PrismicRichText 
+                field={report.summary} 
+                linkResolver={linkResolver} 
+                components={ htmlSerializer }
+              />
+            </div> 
+            </>
+          )}
+          {report.pdf && (
+            <div className='legacy-page'>
+              <strong>Full Report (Download):</strong>
+              <p>
+                <Link href={report.pdf.url} passHref target="_blank" rel="noopener">
+                  <strong>Download PDF</strong>
+                </Link>
+              </p>
+            </div>
+          )}
+          {report.link && (
+            <div className='legacy-page'>
+              <strong>Full Report (Link):</strong>
+              <p>
+                <Link href={linkResolver(report.link)} passHref>
+                  <strong>Link to Report</strong>
+                </Link>
+              </p>
+            </div>
+          )}
+          {report.body &&
+            report.body.map((slice) => {
+              return (
+                slice.__typename === 'ReportBodyMultiPage_report' && (
+                  <div class="legacy-page">
+                    <p>
+                      <strong>Supplemental Files:</strong>
+                    </p>
+                    <GridWrapper>
+                      <Grid>
+                        {slice.fields.map((doc) => {
+                          return (
+                            <Box key={doc.pdf_doc.size}>
+                              <a href={doc.pdf_doc.url} target="_blank" rel="noopener">
+                                <Text>{doc.link_name}</Text>
+                                <Arrow src="/white-arrow.svg" />
+                              </a>
+                            </Box>
+                          );
+                        })}
+                      </Grid>
+                    </GridWrapper>
+                  </div>
+                )
+              );
+            })}
+        </ReportContainer>        
+      </div>
+      <Promo
+        bigWords=""
+        path="/research"
+        smallWords="Explore More Reports"
+        source={ResearchPromo}
+      />    
+    </Page>
+    </>
   );
 }
 
