@@ -84,8 +84,6 @@ export default function ReportPage({ page, preview }) {
   const { report } = page;
   const { meta } = data;
 
-  console.log(report)
-
   return (
     <>
     <GlobalStyle />
