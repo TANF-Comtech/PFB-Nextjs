@@ -100,29 +100,39 @@ export default function ReportPage({ page, preview }) {
               <h2 className='font-dharma text-5xl mb-5'>{report.title[0].text}</h2>
             </>
           )}
-          { report.report_tags &&
+          { report.report_tags !== null &&
             <div className="flex flex-wrap gap-2">
               <span className="font-bold text-black/80">Topic:&nbsp;</span> 
               { report.report_tags.map((tag, i) => (
+                tag.tag && 
                 <span 
                   className="rounded bg-lightestGray px-1 py-1 text-xs font-bold uppercase"
                   key={ i }
                 >
-                  {tag.tag.tag_name}
+                  { tag.tag.tag_name }
                 </span>
               ))}
             </div>
           }
-          { report.report_type &&
+          { report.report_type !== null &&
             <div className="flex flex-wrap gap-2 mt-2">
               <span className="font-bold text-black/80">Type:&nbsp;</span> 
               { report.report_type.map((type, i) => (
-                <span 
-                  className="rounded bg-lightestGray px-1 py-1 text-xs font-bold uppercase"
-                  key={ i }
-                >
-                  {type.type.type}
-                </span>
+                type.type !== null ? (
+                  <span 
+                    className="rounded bg-lightestGray px-1 py-1 text-xs font-bold uppercase"
+                    key={ i }
+                  >
+                    { type.type.type}
+                  </span>
+                ) : (
+                  <span 
+                    className="rounded bg-lightestGray px-1 py-1 text-xs font-bold uppercase"
+                    key={ i }
+                  >
+                    Report
+                  </span>
+                )
               ))}
             </div>
           }

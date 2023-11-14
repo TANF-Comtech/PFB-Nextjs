@@ -36,7 +36,7 @@ export default function OwnersManual({ page, preview }) {
     );
   }
 
-  console.log(omData)
+  // console.log(omData)
 
   return (
     <LegacyPage>
