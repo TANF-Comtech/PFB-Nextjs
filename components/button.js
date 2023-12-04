@@ -48,6 +48,8 @@ const Button = styled.div`
  * @param {string} buttonPadding - override for button text padding settings (default: 10px 35px)
  * @param {string} buttonTextTransform - changes casing of button text (default: uppercase)
  * @param {string} className - allows styled-components to extend this component
+ * @param {string} href - where does the button link?
+ * @param {string} newTab - boolean for opening a new tab
  */
 function BasicButton({
   buttonAlign,
@@ -63,10 +65,11 @@ function BasicButton({
   children,
   className,
   href,
+  newTab,
 }) {
   return (
     <Container buttonAlign={buttonAlign} buttonMargin={buttonMargin}>
-      <Link href={href} passHref>
+      <Link href={href} passHref target={newTab === true ? '_blank' : ''}>
         <Button
           buttonBg={buttonBg}
           buttonBgHover={buttonBgHover}
