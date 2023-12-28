@@ -4,6 +4,7 @@ import { getOwnersManual } from '~/lib/queries/owners-manual';
 import * as prismicH from '@prismicio/helpers';
 import { PrismicRichText } from '@prismicio/react';
 import { atom, useAtom, useAtomValue, useSetAtom } from 'jotai';
+import { atomWithStorage } from 'jotai/utils';
 
 import { AlgoliaIndex, AlgoliaReactClient } from '~/lib/algolia/algoliaClient';
 import { memberFormatter } from '~/lib/algolia/memberFormatter';
@@ -11,7 +12,7 @@ import getCorporateMembers from '~/lib/salesforce/getCorporateMembers';
 import { linkResolver } from '~/utils';
 import { ThemeContext } from 'styled-components';
 
-import { ownersManualModalAtom } from '~/atoms';
+import { ownersManualModalAtom, corporateMembersAtom } from '~/atoms';
 
 import { LegacyPage } from '~/components/legacy-page';
 import SiteMetaCustom from '~/components/site-meta-custom';
@@ -30,6 +31,17 @@ export default function OwnersManualPage({ corporateMembers, page, preview }) {
   const themeProps = useContext(ThemeContext);
   const router = useRouter();
   const omData = page.owners_manual;
+
+  // assigns data to corporateMemberAtom, cleans them for react-select value/label syntax
+  const [corporateMembersData, setCorporateMembersData] = useAtom(corporateMembersAtom);
+  useEffect(() => {
+    const cleanedCorporateMembersData = corporateMembers.map((item) => ({
+      value: item.Id,
+      label: item.Published_Name__c,
+    }));
+    cleanedCorporateMembersData.unshift({ value: null, label: 'Find Your Organization' });
+    setCorporateMembersData(cleanedCorporateMembersData);
+  }, [corporateMembers]);
 
   // pulls in modal atom, sets modal behavior on initial load
   const [isOwnersManualModalOpen, setIsOwnersManualModalOpen] = useAtom(ownersManualModalAtom);
@@ -106,7 +118,7 @@ export default function OwnersManualPage({ corporateMembers, page, preview }) {
         onClose={handleClose}
         className="aspect-video overflow-y-scroll"
       >
-        <OwnersManual memberData={corporateMembers} />
+        <OwnersManual />
       </Modal>
     </LegacyPage>
   );

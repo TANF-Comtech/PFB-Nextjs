@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import cx from 'classnames';
 import { atom, useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
 import { useS3Upload } from 'next-s3-upload';
+import Select from 'react-select';
 
-import { ownersManualModalAtom } from '~/atoms';
+import { ownersManualModalAtom, corporateMembersAtom } from '~/atoms';
 
 import { Button } from '~/components/simple-button';
 import Spinner from '~/components/spinner';
@@ -17,12 +18,19 @@ const loadingAtom = atom(false);
 const stepAtom = atomWithStorage('ownersManualStep', 'ACKNOWLEDGE_REQUIREMENTS');
 const notificationAtom = atomWithStorage('ownersManualNotification', false);
 
-export const OwnersManual = (memberData) => {
+// Data Storage for each step in the OM process (with Jotai atoms)
+const purchaserMemberAtom = atomWithStorage('ownersManualPurchaserMember', null);
+const purchaserNonMemberAtom = atomWithStorage('ownersManualPurchaserNonMember', null);
+const agreementAtom = atomWithStorage('ownersManualAgreement', {});
+const insuranceAtom = atomWithStorage('ownersManualInsurance', {});
+const purchaseAtom = atomWithStorage('ownersManualPurchase', {});
+
+export const OwnersManual = () => {
   return (
     <>
       <Debug />
       <Notice />
-      <Step memberData={memberData} />
+      <Step />
       <LoadingSpinner />
     </>
   );
@@ -30,6 +38,7 @@ export const OwnersManual = (memberData) => {
 
 const Debug = () => {
   const [step, setStep] = useAtom(stepAtom);
+  const [purchaserMemberData, setPurchaserMemberData] = useAtom(purchaserMemberAtom);
 
   if (process.env.NODE_ENV !== 'development') return null;
 
@@ -60,7 +69,7 @@ const Notice = () => {
   if (step !== 'ACKNOWLEDGE_REQUIREMENTS') return null;
 
   return (
-    <div className="absolute inset-0 flex h-full w-full items-center justify-center p-10">
+    <div className="absolute inset-0 z-10 flex h-full w-full items-center justify-center p-10">
       <div className="mx-auto w-full max-w-2xl bg-darkestGray p-10 text-white">
         <div className="text-xl font-bold">In order to complete this process you will need:</div>
         <div className="mt-5 text-lg">
@@ -120,24 +129,68 @@ const Step = () => {
   }
 };
 
+// Styles for react-select
+const selectStyles = {
+  control: (provided, state) => ({
+    ...provided,
+    borderRadius: 0,
+    fontWeight: 700,
+    margin: '0 20px 10px 0',
+    padding: '10px',
+    textTransform: 'uppercase',
+    minWidth: '250px',
+  }),
+};
+
 const Start = () => {
   const setStep = useSetAtom(stepAtom);
+  const [corporateMembersData] = useAtom(corporateMembersAtom);
+  const corporateOption = useRef(null);
 
-  const handleStart = useCallback(() => {
+  const [purchaserMemberData, setPurchaserMemberData] = useAtom(purchaserMemberAtom);
+
+  const handleMemberStart = useCallback(() => {
     setStep('SIGN_LICENSE_AGREEMENT');
   }, [setStep]);
 
+  const handleNonMemberStart = useCallback(() => {
+    setStep('SIGN_LICENSE_AGREEMENT');
+  }, [setStep]);
+
+  const handleSelectReset = () => {
+    setPurchaserMemberData(corporateMembersData[0]);
+  };
+
   return (
     <div>
-      <h2 className="mb-5 font-dharma text-6xl sm:text-8xl">License the Owner’s Manual</h2>
+      <Progress step={1} />
+      <div className="mb-5 mt-5 text-base !leading-relaxed sm:text-3xl">
+        <span className="font-bold">STEP 1:</span> Member Determination
+      </div>
       <p className="mb-5 text-base !leading-relaxed sm:text-xl">
-        PeopleForBikes Owner’s Manual can be licensed by member companies for{' '}
-        <span className="font-bold">$4,000/year</span>. If your company is not a PeopleForBikes
-        Member, the cost is <span className="font-bold">$8,000/year</span> for non-member licenses.
+        See if your organization is a PeopleForBikes member with this{' '}
+        <span className="font-bold">lookup tool</span> (look through the dropdown list or start
+        typing the name of your organization into this input field):
       </p>
+      <Select
+        aria-label="Find Your Organization"
+        value={purchaserMemberData}
+        onChange={(event) => setPurchaserMemberData(event)}
+        options={corporateMembersData}
+        ref={corporateOption}
+        styles={selectStyles}
+      />
+      <p
+        className="sm:text-md mb-5 text-base !leading-relaxed underline"
+        onClick={handleSelectReset}
+      >
+        Reset the lookup field
+      </p>
+
       <p className="mb-5 text-base !leading-relaxed sm:text-xl">
-        If your company is not a member and would like to join PeopleForBikes before licensing the
-        Owner's Manual, please contact{' '}
+        If your company is{' '}
+        <span className="font-bold">not a member and would like to join PeopleForBikes</span> before
+        licensing the Owner's Manual, please contact{' '}
         <a
           href="mailto:mimi@peopleforbikes.org?subject=Owner's%20Manual%20-%20Becoming%20a%20Member"
           className="underline"
@@ -147,7 +200,12 @@ const Start = () => {
         to learn how to join.
       </p>
       <div>
-        <Button label="License the Owner’s Manual" size="large" onClick={handleStart} />
+        {purchaserMemberData.value !== null ? (
+          <Button label="Continue as Member" size="small" onClick={handleMemberStart} />
+        ) : (
+          <>TK</>
+          // <Button label="Continue as a Guest" size="small" onClick={handleNonMemberStart} />
+        )}
       </div>
     </div>
   );
@@ -166,9 +224,9 @@ const SignLicenseAgreement = () => {
   return (
     <>
       <div>
-        <Progress step={1} />
+        <Progress step={2} />
         <div className="mb-5 mt-5 text-base !leading-relaxed sm:text-3xl">
-          <span className="font-bold">STEP 1:</span> Sign the Owner’s Manual License Agreement
+          <span className="font-bold">STEP 2:</span> Sign the Owner’s Manual License Agreement
         </div>
 
         <p className="mb-5 text-base !leading-relaxed sm:text-xl">
@@ -235,9 +293,9 @@ const UploadCertificateOfInsurance = () => {
 
   return (
     <div>
-      <Progress step={2} />
+      <Progress step={3} />
       <div className="mb-5 mt-5 text-base !leading-relaxed sm:text-3xl">
-        <span className="font-bold">STEP 2:</span> Upload Certificate of Insurance
+        <span className="font-bold">STEP 3:</span> Upload Certificate of Insurance
       </div>
       <p className="mb-5 text-base !leading-relaxed sm:text-xl">
         You need to upload a valid Certificate of Insurance from a product liability insurance
@@ -283,9 +341,9 @@ const Payment = () => {
   return (
     <>
       <div>
-        <Progress step={3} />
+        <Progress step={4} />
         <div className="mb-5 mt-5 text-base !leading-relaxed sm:text-3xl">
-          <span className="font-bold">STEP 3:</span> Set Up Recurring Payment
+          <span className="font-bold">STEP 4:</span> Set Up Recurring Payment
         </div>
         <p className="mb-5 text-base !leading-relaxed sm:text-xl">
           Complete the Owner's Manual Licensing process by submitting your credit card and billing
@@ -384,7 +442,7 @@ const Progress = ({ step }) => {
     <ol className="relative !m-0 inline-flex items-center gap-20 overflow-hidden font-bold text-white">
       <hr className="absolute left-0 right-0 h-0.5 bg-mediumGray" />
       <li
-        onClick={() => setStep('SIGN_LICENSE_AGREEMENT')}
+        onClick={() => setStep('START')}
         className={cx(
           'relative inline-flex h-20 w-20 cursor-pointer items-center justify-center rounded-full',
           step === 1 ? 'bg-blue' : 'bg-mediumGray',
@@ -393,7 +451,7 @@ const Progress = ({ step }) => {
         1
       </li>
       <li
-        onClick={() => setStep('UPLOAD_CERTIFICATE_OF_INSURANCE')}
+        onClick={() => setStep('SIGN_LICENSE_AGREEMENT')}
         className={cx(
           'relative inline-flex h-20 w-20 cursor-pointer items-center justify-center rounded-full',
           step === 2 ? 'bg-blue' : 'bg-mediumGray',
@@ -402,13 +460,22 @@ const Progress = ({ step }) => {
         2
       </li>
       <li
-        onClick={() => setStep('PAYMENT')}
+        onClick={() => setStep('UPLOAD_CERTIFICATE_OF_INSURANCE')}
         className={cx(
           'relative inline-flex h-20 w-20 cursor-pointer items-center justify-center rounded-full',
           step === 3 ? 'bg-blue' : 'bg-mediumGray',
         )}
       >
         3
+      </li>
+      <li
+        onClick={() => setStep('PAYMENT')}
+        className={cx(
+          'relative inline-flex h-20 w-20 cursor-pointer items-center justify-center rounded-full',
+          step === 4 ? 'bg-blue' : 'bg-mediumGray',
+        )}
+      >
+        4
       </li>
     </ol>
   );
