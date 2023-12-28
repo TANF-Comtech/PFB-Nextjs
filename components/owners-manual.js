@@ -20,7 +20,10 @@ const stepAtom = atomWithStorage('ownersManualStep', 'ACKNOWLEDGE_REQUIREMENTS')
 const notificationAtom = atomWithStorage('ownersManualNotification', false);
 
 // Data Storage for each step in the OM process (with Jotai atoms)
-const purchaserMemberAtom = atomWithStorage('ownersManualPurchaserMember', null);
+const purchaserMemberAtom = atomWithStorage('ownersManualPurchaserMember', {
+  value: null,
+  label: null,
+});
 const contactInfoAtom = atomWithStorage('ownersManualContactInfo', {
   email: '',
   name: '',
