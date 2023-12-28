@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { useForm } from 'react-hook-form';
 import cx from 'classnames';
 import { atom, useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
@@ -20,7 +21,11 @@ const notificationAtom = atomWithStorage('ownersManualNotification', false);
 
 // Data Storage for each step in the OM process (with Jotai atoms)
 const purchaserMemberAtom = atomWithStorage('ownersManualPurchaserMember', null);
-const purchaserNonMemberAtom = atomWithStorage('ownersManualPurchaserNonMember', null);
+const contactInfoAtom = atomWithStorage('ownersManualContactInfo', {
+  email: '',
+  name: '',
+  phone: '',
+});
 const agreementAtom = atomWithStorage('ownersManualAgreement', {});
 const insuranceAtom = atomWithStorage('ownersManualInsurance', {});
 const purchaseAtom = atomWithStorage('ownersManualPurchase', {});
@@ -36,9 +41,9 @@ export const OwnersManual = () => {
   );
 };
 
+// DEBUGGING HEADER
 const Debug = () => {
   const [step, setStep] = useAtom(stepAtom);
-  const [purchaserMemberData, setPurchaserMemberData] = useAtom(purchaserMemberAtom);
 
   if (process.env.NODE_ENV !== 'development') return null;
 
@@ -47,6 +52,7 @@ const Debug = () => {
       <div className="inline-flex items-center gap-4">
         <button onClick={() => setStep('ACKNOWLEDGE_REQUIREMENTS')}>[requirements]</button>
         <button onClick={() => setStep('START')}>[start]</button>
+        <button onClick={() => setStep('CONTACT_INFORMATION')}>[contact info]</button>
         <button onClick={() => setStep('SIGN_LICENSE_AGREEMENT')}>[sign agreement]</button>
         <button onClick={() => setStep('UPLOAD_CERTIFICATE_OF_INSURANCE')}>
           [upload certificate]
@@ -59,6 +65,7 @@ const Debug = () => {
   );
 };
 
+// STEP 0 - POPUP FOR DOCS
 const Notice = () => {
   const [step, setStep] = useAtom(stepAtom);
 
@@ -111,6 +118,7 @@ const LoadingSpinner = () => {
   );
 };
 
+// STEPS FOR THE PROCESS
 const Step = () => {
   const step = useAtomValue(stepAtom);
 
@@ -118,6 +126,8 @@ const Step = () => {
     case 'ACKNOWLEDGE_REQUIREMENTS':
     case 'START':
       return <Start />;
+    case 'CONTACT_INFORMATION':
+      return <ContactInformation />;
     case 'SIGN_LICENSE_AGREEMENT':
       return <SignLicenseAgreement />;
     case 'UPLOAD_CERTIFICATE_OF_INSURANCE':
@@ -142,6 +152,7 @@ const selectStyles = {
   }),
 };
 
+// STEP 1 - MEMBER CHECK
 const Start = () => {
   const setStep = useSetAtom(stepAtom);
   const [corporateMembersData] = useAtom(corporateMembersAtom);
@@ -149,12 +160,8 @@ const Start = () => {
 
   const [purchaserMemberData, setPurchaserMemberData] = useAtom(purchaserMemberAtom);
 
-  const handleMemberStart = useCallback(() => {
-    setStep('SIGN_LICENSE_AGREEMENT');
-  }, [setStep]);
-
-  const handleNonMemberStart = useCallback(() => {
-    setStep('SIGN_LICENSE_AGREEMENT');
+  const handleStart = useCallback(() => {
+    setStep('CONTACT_INFORMATION');
   }, [setStep]);
 
   const handleSelectReset = () => {
@@ -163,7 +170,7 @@ const Start = () => {
 
   return (
     <div>
-      <Progress step={1} />
+      <Progress step={10} />
       <div className="mb-5 mt-5 text-base !leading-relaxed sm:text-3xl">
         <span className="font-bold">STEP 1:</span> Member Determination
       </div>
@@ -181,7 +188,7 @@ const Start = () => {
         styles={selectStyles}
       />
       <p
-        className="sm:text-md mb-5 text-base !leading-relaxed underline"
+        className="sm:text-md mb-5 cursor-pointer text-base !leading-relaxed underline"
         onClick={handleSelectReset}
       >
         Reset the lookup field
@@ -201,16 +208,109 @@ const Start = () => {
       </p>
       <div>
         {purchaserMemberData.value !== null ? (
-          <Button label="Continue as Member" size="small" onClick={handleMemberStart} />
+          <Button
+            label="Continue at Member Rate of $4,000/year"
+            size="small"
+            onClick={handleStart}
+          />
         ) : (
-          <>TK</>
-          // <Button label="Continue as a Guest" size="small" onClick={handleNonMemberStart} />
+          <Button
+            label="Continue at the Non-Member Rate of $8,000/year"
+            size="small"
+            onClick={handleStart}
+          />
         )}
       </div>
     </div>
   );
 };
 
+// STEP 2 - CONTACT INFO
+const ContactInformation = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setValue,
+  } = useForm({ defaultValues: contactInfo });
+  const [contactInfo, setContactInfo] = useAtom(contactInfoAtom);
+  const [isSaving, setIsSaving] = useState(false);
+  const setStep = useSetAtom(stepAtom);
+
+  const onSubmit = (data) => {
+    setIsSaving(true);
+
+    setContactInfo(data);
+
+    setTimeout(() => {
+      setIsSaving(false);
+      setStep('SIGN_LICENSE_AGREEMENT');
+    }, 2000);
+  };
+
+  // This looks back at the defaultValues array, which is connected to contactInfo
+  // This is defined in the shape of the atomStorage at the top of this file (see contactInfoAtom)
+  // This is confusing like everything else in programming
+  useEffect(() => {
+    Object.entries(contactInfo).forEach(([key, value]) => {
+      setValue(key, value);
+    });
+  }, [contactInfo, setValue]);
+
+  return (
+    <div>
+      <Progress step={20} />
+      <div className="mb-5 mt-5 text-base !leading-relaxed sm:text-3xl">
+        <span className="font-bold">STEP 2:</span> Contact Information
+      </div>
+      <p className="mb-5 text-base !leading-relaxed sm:text-xl">
+        PeopleForBikes will{' '}
+        <span className="font-bold">manually confirm details from this process with you</span> in
+        the near future. Provide your contact information below:
+      </p>
+      <div className="flex flex-col">
+        <label htmlFor="name">
+          <span className="font-bold">First and Last Name </span>
+          {errors.name && <span className="font-bold text-red">(Name is required)</span>}
+        </label>
+        <input
+          {...register('name', { required: true })}
+          placeholder="Name"
+          className="mb-5 block"
+        />
+
+        <label htmlFor="name">
+          <span className="font-bold">Email</span>{' '}
+          {errors.email && <span className="font-bold text-red">(Email is required!)</span>}
+        </label>
+        <input
+          {...register('email', { required: true })}
+          placeholder="Email"
+          className="mb-5 block"
+        />
+
+        <label htmlFor="name">
+          <span className="font-bold">Phone Number, include country code if outside US </span>
+          {errors.phone && <span className="font-bold text-red">(Phone number is required!)</span>}
+        </label>
+        <input
+          {...register('phone', { required: true })}
+          placeholder="Phone Number"
+          className="mb-5 block"
+        />
+
+        <div
+          onClick={handleSubmit(onSubmit)}
+          className="w-[100%] max-w-[450px] cursor-pointer rounded-lg bg-blue px-8 py-4 text-base font-bold uppercase text-white sm:text-xl"
+        >
+          {isSaving ? 'Saving...' : 'Save Information and Proceed'}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// STEP 3 - AGREEMENT FOR LEGAL COMPLIANCE (DOCUSIGN)
 const SignLicenseAgreement = () => {
   const [hasClickedSign, setHasClickedSign] = useState(false);
   const setStep = useSetAtom(stepAtom);
@@ -224,9 +324,9 @@ const SignLicenseAgreement = () => {
   return (
     <>
       <div>
-        <Progress step={2} />
+        <Progress step={30} />
         <div className="mb-5 mt-5 text-base !leading-relaxed sm:text-3xl">
-          <span className="font-bold">STEP 2:</span> Sign the Owner’s Manual License Agreement
+          <span className="font-bold">STEP 3:</span> Sign the Owner’s Manual License Agreement
         </div>
 
         <p className="mb-5 text-base !leading-relaxed sm:text-xl">
@@ -267,6 +367,7 @@ const SignLicenseAgreement = () => {
   );
 };
 
+// STEP 4 - INSURANCE DOC (AWS)
 const UploadCertificateOfInsurance = () => {
   const [hasClickedUpload, setHasClickedUpload] = useState(false);
   const setStep = useSetAtom(stepAtom);
@@ -293,9 +394,9 @@ const UploadCertificateOfInsurance = () => {
 
   return (
     <div>
-      <Progress step={3} />
+      <Progress step={40} />
       <div className="mb-5 mt-5 text-base !leading-relaxed sm:text-3xl">
-        <span className="font-bold">STEP 3:</span> Upload Certificate of Insurance
+        <span className="font-bold">STEP 4:</span> Upload Certificate of Insurance
       </div>
       <p className="mb-5 text-base !leading-relaxed sm:text-xl">
         You need to upload a valid Certificate of Insurance from a product liability insurance
@@ -328,6 +429,7 @@ const UploadCertificateOfInsurance = () => {
   );
 };
 
+// STEP 5 - PAYMENT IN STRIPE
 const Payment = () => {
   const [hasClickedPay, setHasClickedPay] = useState(false);
   const setStep = useSetAtom(stepAtom);
@@ -341,9 +443,9 @@ const Payment = () => {
   return (
     <>
       <div>
-        <Progress step={4} />
+        <Progress step={50} />
         <div className="mb-5 mt-5 text-base !leading-relaxed sm:text-3xl">
-          <span className="font-bold">STEP 4:</span> Set Up Recurring Payment
+          <span className="font-bold">STEP 5:</span> Set Up Recurring Payment
         </div>
         <p className="mb-5 text-base !leading-relaxed sm:text-xl">
           Complete the Owner's Manual Licensing process by submitting your credit card and billing
@@ -379,6 +481,7 @@ const Payment = () => {
   );
 };
 
+// STEP 6 (sort of) - CONFIRMATION
 const Pending = () => {
   const [hasSentNotification, setHasSentNotification] = useAtom(notificationAtom);
   const setStep = useSetAtom(stepAtom);
@@ -435,6 +538,7 @@ const Pending = () => {
   );
 };
 
+// PROGRESS INDICATORS
 const Progress = ({ step }) => {
   const setStep = useSetAtom(stepAtom);
 
@@ -445,37 +549,46 @@ const Progress = ({ step }) => {
         onClick={() => setStep('START')}
         className={cx(
           'relative inline-flex h-20 w-20 cursor-pointer items-center justify-center rounded-full',
-          step === 1 ? 'bg-blue' : 'bg-mediumGray',
+          step === 10 ? 'bg-blue' : 'bg-mediumGray',
         )}
       >
         1
       </li>
       <li
-        onClick={() => setStep('SIGN_LICENSE_AGREEMENT')}
+        onClick={() => setStep('CONTACT_INFORMATION')}
         className={cx(
           'relative inline-flex h-20 w-20 cursor-pointer items-center justify-center rounded-full',
-          step === 2 ? 'bg-blue' : 'bg-mediumGray',
+          step === 20 ? 'bg-blue' : 'bg-mediumGray',
         )}
       >
         2
       </li>
       <li
-        onClick={() => setStep('UPLOAD_CERTIFICATE_OF_INSURANCE')}
+        onClick={() => setStep('SIGN_LICENSE_AGREEMENT')}
         className={cx(
           'relative inline-flex h-20 w-20 cursor-pointer items-center justify-center rounded-full',
-          step === 3 ? 'bg-blue' : 'bg-mediumGray',
+          step === 30 ? 'bg-blue' : 'bg-mediumGray',
         )}
       >
         3
       </li>
       <li
-        onClick={() => setStep('PAYMENT')}
+        onClick={() => setStep('UPLOAD_CERTIFICATE_OF_INSURANCE')}
         className={cx(
           'relative inline-flex h-20 w-20 cursor-pointer items-center justify-center rounded-full',
-          step === 4 ? 'bg-blue' : 'bg-mediumGray',
+          step === 40 ? 'bg-blue' : 'bg-mediumGray',
         )}
       >
         4
+      </li>
+      <li
+        onClick={() => setStep('PAYMENT')}
+        className={cx(
+          'relative inline-flex h-20 w-20 cursor-pointer items-center justify-center rounded-full',
+          step === 50 ? 'bg-blue' : 'bg-mediumGray',
+        )}
+      >
+        5
       </li>
     </ol>
   );
