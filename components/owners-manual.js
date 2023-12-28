@@ -6,7 +6,6 @@ import { useS3Upload } from 'next-s3-upload';
 
 import { ownersManualModalAtom } from '~/atoms';
 
-import { Modal } from '~/components/modal';
 import { Button } from '~/components/simple-button';
 import Spinner from '~/components/spinner';
 
@@ -19,26 +18,13 @@ const stepAtom = atomWithStorage('ownersManualStep', 'ACKNOWLEDGE_REQUIREMENTS')
 const notificationAtom = atomWithStorage('ownersManualNotification', false);
 
 export const OwnersManual = (memberData) => {
-  const [isOwnersManualModalOpen, setIsOwnersManualModalOpen] = useAtom(ownersManualModalAtom);
-
-  // @TODO
-  // add logic to ensure step is synchronized with Salesforce during first render
-
-  const handleClose = useCallback(() => {
-    setIsOwnersManualModalOpen(false);
-  }, [setIsOwnersManualModalOpen]);
-
   return (
-    <Modal
-      show={isOwnersManualModalOpen}
-      onClose={handleClose}
-      className="aspect-video overflow-y-scroll"
-    >
+    <>
       <Debug />
       <Notice />
       <Step memberData={memberData} />
       <LoadingSpinner />
-    </Modal>
+    </>
   );
 };
 
