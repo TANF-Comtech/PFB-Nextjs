@@ -1,9 +1,10 @@
-import React, { useContext } from 'react';
+import React, { useContext, useCallback, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { getOwnersManual } from '~/lib/queries/owners-manual';
 import * as prismicH from '@prismicio/helpers';
 import { PrismicRichText } from '@prismicio/react';
 import { atom, useAtom, useAtomValue, useSetAtom } from 'jotai';
+import { atomWithStorage } from 'jotai/utils';
 
 import { AlgoliaIndex, AlgoliaReactClient } from '~/lib/algolia/algoliaClient';
 import { memberFormatter } from '~/lib/algolia/memberFormatter';
@@ -11,7 +12,7 @@ import getCorporateMembers from '~/lib/salesforce/getCorporateMembers';
 import { linkResolver } from '~/utils';
 import { ThemeContext } from 'styled-components';
 
-import { ownersManualModalAtom } from '~/atoms';
+import { ownersManualModalAtom, corporateMembersAtom } from '~/atoms';
 
 import { LegacyPage } from '~/components/legacy-page';
 import SiteMetaCustom from '~/components/site-meta-custom';
@@ -22,14 +23,37 @@ import Spinner from '~/components/spinner';
 import CustomErrorPage from '~/pages/404';
 import NumberedPillars from '~/components/numbered-pillars';
 import HeaderImage from '~/components/header-image';
-import Button from '~/components/button';
+import { Button } from '~/components/simple-button';
+import { Modal } from '~/components/modal';
 import { OwnersManual } from '~/components/owners-manual';
 
 export default function OwnersManualPage({ corporateMembers, page, preview }) {
   const themeProps = useContext(ThemeContext);
   const router = useRouter();
   const omData = page.owners_manual;
+
+  // assigns data to corporateMemberAtom, cleans them for react-select value/label syntax
+  const [corporateMembersData, setCorporateMembersData] = useAtom(corporateMembersAtom);
+  useEffect(() => {
+    const cleanedCorporateMembersData = corporateMembers.map((item) => ({
+      value: item.Id,
+      label: item.Published_Name__c,
+    }));
+    cleanedCorporateMembersData.unshift({ value: null, label: 'Find Your Organization' });
+    setCorporateMembersData(cleanedCorporateMembersData);
+  }, [corporateMembers]);
+
+  // pulls in modal atom, sets modal behavior on initial load
   const [isOwnersManualModalOpen, setIsOwnersManualModalOpen] = useAtom(ownersManualModalAtom);
+
+  const handleOpen = useCallback(() => {
+    setIsOwnersManualModalOpen(true);
+  }, [setIsOwnersManualModalOpen]);
+
+  // handleClose is for the OM sequence
+  const handleClose = useCallback(() => {
+    setIsOwnersManualModalOpen(false);
+  }, [setIsOwnersManualModalOpen]);
 
   // If page hasn't arrived yet, show loader
   if (router.isFallback) {
@@ -45,8 +69,6 @@ export default function OwnersManualPage({ corporateMembers, page, preview }) {
     );
   }
 
-  console.log(corporateMembers);
-
   return (
     <LegacyPage>
       <Wrapper postTitle={prismicH.asText(omData.title)} isWide={true}>
@@ -54,27 +76,18 @@ export default function OwnersManualPage({ corporateMembers, page, preview }) {
         <SecondaryTitleBanner secondaryText="PeopleForBikes Bicycle" mainText="Owner's Manual" />
         {omData.hero && <HeaderImage srcSet={omData.hero} />}
         <MainContent bgColor={themeProps.midnightBlue} textColor="#fff">
-          <Button
-            buttonAlign="center"
-            buttonBg="#00A2DF"
-            buttonBorder="#00A2DF"
-            buttonColor="#fff"
-            buttonMargin="15px 0 30px 0"
-            href="https://pfb-main-site-assets.s3.amazonaws.com/peopleforbikes_ebike_owners_manual_v1_sample.pdf"
-            newTab={true}
-          >
-            Preview the Owner's Manual
-          </Button>
-          <Button
-            buttonAlign="center"
-            buttonBg="#00A2DF"
-            buttonBorder="#00A2DF"
-            buttonColor="#fff"
-            buttonMargin="15px 0"
-            href=""
-          >
-            Purchase the Owner's Manual
-          </Button>
+          <div className="flex flex-col items-center p-5 sm:flex-row sm:justify-evenly">
+            <a
+              className="block pb-5 font-bold sm:pb-0 sm:pr-2"
+              href="https://pfb-main-site-assets.s3.amazonaws.com/peopleforbikes_ebike_owners_manual_v1_sample.pdf"
+              target="_blank"
+            >
+              <Button label="Preview the Owner's Manual" size="large" />
+            </a>
+            <div className="block font-bold">
+              <Button label="Purchase the Owner's Manual" size="large" onClick={handleOpen} />
+            </div>
+          </div>
         </MainContent>
         <MainContent contentPadding="6vh 2vw 2vh 2vw">
           {omData.main_text && (
@@ -85,16 +98,11 @@ export default function OwnersManualPage({ corporateMembers, page, preview }) {
           {omData.price_section_nonmember_title && <h3>{omData.price_section_nonmember_title}</h3>}
         </MainContent>
         <MainContent contentPadding="2vh 2vw 6vh 2vw">
-          <Button
-            buttonAlign="center"
-            buttonBg="#00A2DF"
-            buttonBorder="#00A2DF"
-            buttonColor="#fff"
-            buttonMargin="15px 0"
-            href=""
-          >
-            Purchase the Owner's Manual
-          </Button>
+          <div className="flex flex-col items-center p-5 sm:flex-row sm:justify-evenly">
+            <div className="block font-bold">
+              <Button label="Purchase the Owner's Manual" size="large" onClick={handleOpen} />
+            </div>
+          </div>
         </MainContent>
         <NumberedPillars
           numbersWanted={false}
@@ -105,7 +113,13 @@ export default function OwnersManualPage({ corporateMembers, page, preview }) {
           {omData.disclaimer && <p style={{ fontWeight: '700' }}>{omData.disclaimer}</p>}
         </MainContent>
       </Wrapper>
-      <OwnersManual memberData={corporateMembers} />
+      <Modal
+        show={isOwnersManualModalOpen}
+        onClose={handleClose}
+        className="aspect-video overflow-y-scroll"
+      >
+        <OwnersManual />
+      </Modal>
     </LegacyPage>
   );
 }
