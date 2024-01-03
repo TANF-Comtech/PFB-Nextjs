@@ -1,0 +1,24 @@
+import Cookies from 'cookies';
+
+import updateOwnersManualData from '~/lib/salesforce/updateOwnersManualData';
+
+const updateData = (req, res) => {
+  let sfParams = {}
+  if (req.body.type === 'customer.subscription.created') {
+    sfParams['OM_Stripe_Subscription_ID__c'] = `https://dashboard.stripe.com/subscriptions/${req.body.data.object.subscription}`
+    sfParams['OM_Payment_Received__c'] = true;
+    const today = new Date();
+    const oneYearFromToday = new Date(today.setFullYear(today.getFullYear() + 1));
+    sfParams['OM_Expiration_Date__c'] = oneYearFromToday.toISOString();
+  } else if (req.body.event === 'recipient-completed') {
+    sfParams['OM_Agreement_Doc__c'] = req.body.data.envelopeId;
+    sfParams['OM_License_Agreement_Signed__c'] = true;
+  } else if (JSON.parse(req.body) && JSON.parse(req.body).awsUrl) {
+    sfParams['OM_Insurance_Cert_Received__c'] = true;
+    sfParams['OM_Insurance_Doc__c'] = JSON.parse(req.body).awsUrl;
+  }
+  updateOwnersManualData(sfParams)
+  res.status(200).json({ message: 'Resquest Successful!' })
+};
+
+export default updateData;

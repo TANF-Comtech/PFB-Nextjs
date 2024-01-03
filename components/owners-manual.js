@@ -5,15 +5,21 @@ import { atom, useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
 import { useS3Upload } from 'next-s3-upload';
 import Select from 'react-select';
+// import updateOwnersManualData from '~/lib/salesforce/updateOwnersManualData';
+// import checkEmailInSalesforce from '~/lib/salesforce/checkEmailInSalesforce';
+
 
 import { ownersManualModalAtom, corporateMembersAtom } from '~/atoms';
 
 import { Button } from '~/components/simple-button';
 import Spinner from '~/components/spinner';
 
+// const DOCUSIGN_POWERFORM_URL =
+//   'https://na4.docusign.net/Member/PowerFormSigning.aspx?PowerFormId=7622cce8-6228-438b-a47f-8be66fd846b3&env=na4&acct=3bffb2a0-aa54-4f2e-80e8-7a09da3587b1&v=2';
 const DOCUSIGN_POWERFORM_URL =
-  'https://na4.docusign.net/Member/PowerFormSigning.aspx?PowerFormId=7622cce8-6228-438b-a47f-8be66fd846b3&env=na4&acct=3bffb2a0-aa54-4f2e-80e8-7a09da3587b1&v=2';
-const STRIPE_PAYMENT_LINK_URL = 'https://buy.stripe.com/9AQ2b6gK9aZB3JedR0';
+  'https://demo.docusign.net/Member/PowerFormSigning.aspx?PowerFormId=00947782-84ab-4e28-9f94-91863bcef751&env=demo&acct=1bc6ecc2-8ac0-488d-a145-0bc9b033854f&v=2';
+const STRIPE_PAYMENT_LINK_URL = 'https://buy.stripe.com/test_8wM9Dm85z9NFfVm3cc';
+// const STRIPE_PAYMENT_LINK_URL = 'https://buy.stripe.com/9AQ2b6gK9aZB3JedR0';
 
 const loadingAtom = atom(false);
 const stepAtom = atomWithStorage('ownersManualStep', 'ACKNOWLEDGE_REQUIREMENTS');
@@ -33,7 +39,7 @@ const agreementAtom = atomWithStorage('ownersManualAgreement', {});
 const insuranceAtom = atomWithStorage('ownersManualInsurance', {});
 const purchaseAtom = atomWithStorage('ownersManualPurchase', {});
 
-export const OwnersManual = () => {
+export const OwnersManual = () => {  
   return (
     <>
       <Debug />
@@ -157,6 +163,7 @@ const selectStyles = {
 
 // STEP 1 - MEMBER CHECK
 const Start = () => {
+
   const setStep = useSetAtom(stepAtom);
   const [corporateMembersData] = useAtom(corporateMembersAtom);
   const corporateOption = useRef(null);
@@ -317,7 +324,7 @@ const ContactInformation = () => {
 const SignLicenseAgreement = () => {
   const [hasClickedSign, setHasClickedSign] = useState(false);
   const setStep = useSetAtom(stepAtom);
-  const handleClickSign = useCallback(() => {
+  const handleClickSign = useCallback(() => {    
     window.open(DOCUSIGN_POWERFORM_URL);
     setTimeout(() => {
       setHasClickedSign(true);
@@ -382,7 +389,11 @@ const UploadCertificateOfInsurance = () => {
   const handleFileChange = useCallback(
     async (file) => {
       setIsUploaded(true);
-      const { url } = await uploadToS3(file);
+      const { url } = await uploadToS3(file);      
+      const response = await fetch('/api/salesforce-update', {
+        method: 'POST',
+        body: JSON.stringify({ awsUrl: url })
+      });            
       setImageUrl(url);
       setHasClickedUpload(true);
     },
