@@ -172,9 +172,13 @@ const Start = () => {
 
   const handleStart = useCallback(() => {
     setStep('CONTACT_INFORMATION');
+    console.log('in handle start')
+    console.log(purchaserMemberData)
   }, [setStep]);
 
   const handleSelectReset = () => {
+    console.log('corporateMembersData')
+    console.log(corporateMembersData)
     setPurchaserMemberData(corporateMembersData[0]);
   };
 
@@ -324,8 +328,12 @@ const ContactInformation = () => {
 const SignLicenseAgreement = () => {
   const [hasClickedSign, setHasClickedSign] = useState(false);
   const setStep = useSetAtom(stepAtom);
-  const handleClickSign = useCallback(() => {    
-    window.open(DOCUSIGN_POWERFORM_URL);
+  const handleClickSign = useCallback(() => {        
+  const purchaserSfId = JSON.parse(localStorage.ownersManualPurchaserMember).value
+  const finalURL = `${DOCUSIGN_POWERFORM_URL}&orgId=${purchaserSfId}`;
+  console.log(finalURL);
+  
+  window.open(finalURL);
     setTimeout(() => {
       setHasClickedSign(true);
     }, 1000);
