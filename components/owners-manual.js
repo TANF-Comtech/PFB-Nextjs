@@ -18,7 +18,8 @@ import Spinner from '~/components/spinner';
 //   'https://na4.docusign.net/Member/PowerFormSigning.aspx?PowerFormId=7622cce8-6228-438b-a47f-8be66fd846b3&env=na4&acct=3bffb2a0-aa54-4f2e-80e8-7a09da3587b1&v=2';
 const DOCUSIGN_POWERFORM_URL =
   'https://demo.docusign.net/Member/PowerFormSigning.aspx?PowerFormId=00947782-84ab-4e28-9f94-91863bcef751&env=demo&acct=1bc6ecc2-8ac0-488d-a145-0bc9b033854f&v=2';
-const STRIPE_PAYMENT_LINK_URL = 'https://buy.stripe.com/test_8wM9Dm85z9NFfVm3cc';
+// const STRIPE_PAYMENT_LINK_URL = 'https://buy.stripe.com/test_8wM9Dm85z9NFfVm3cc';
+const STRIPE_PAYMENT_LINK_URL = 'https://localhost:3000/api/stripe-payment-redirect';
 // const STRIPE_PAYMENT_LINK_URL = 'https://buy.stripe.com/9AQ2b6gK9aZB3JedR0';
 
 const loadingAtom = atom(false);
@@ -398,9 +399,10 @@ const UploadCertificateOfInsurance = () => {
     async (file) => {
       setIsUploaded(true);
       const { url } = await uploadToS3(file);      
+      const purchaserSfId = JSON.parse(localStorage.ownersManualPurchaserMember).value
       const response = await fetch('/api/salesforce-update', {
         method: 'POST',
-        body: JSON.stringify({ awsUrl: url })
+        body: JSON.stringify({ awsUrl: url, Id: purchaserSfId })
       });            
       setImageUrl(url);
       setHasClickedUpload(true);
@@ -455,8 +457,9 @@ const UploadCertificateOfInsurance = () => {
 const Payment = () => {
   const [hasClickedPay, setHasClickedPay] = useState(false);
   const setStep = useSetAtom(stepAtom);
+  const purchaserSfId = JSON.parse(localStorage.ownersManualPurchaserMember).value
   const handleClickPay = useCallback(() => {
-    window.open(STRIPE_PAYMENT_LINK_URL);
+    window.open(STRIPE_PAYMENT_LINK_URL + `?orgId=${purchaserSfId}`);
     setTimeout(() => {
       setHasClickedPay(true);
     }, 1000);
