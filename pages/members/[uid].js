@@ -4,9 +4,7 @@ import { PrismicRichText } from '@prismicio/react';
 import { asDate } from '@prismicio/helpers';
 import Link from 'next/link';
 import Cookies from 'cookies';
-import { useAtom } from 'jotai';
 
-import { ownersManualModalAtom } from '~/atoms';
 import { getSingleMemberPage } from '~/lib/queries/member-center';
 import { randomID, linkResolver } from '~/utils';
 import auth0ValidateToken from '~/lib/auth0/auth0ValidateToken';
@@ -26,7 +24,6 @@ import Grid from '~/components/grid';
 import WayfindingItem from '~/components/wayfinding-item';
 import NumberedPillars from '~/components/numbered-pillars';
 import VisualGrid from '~/components/visual-grid';
-import { OwnersManual } from '~/components/owners-manual';
 
 const IntroWrapper = styled.div`
   margin: 3vh 0 1vh 0 !important;
@@ -172,57 +169,64 @@ export default function MembersPage({ page, preview }) {
       <Wrapper postPath="/members/member-home" postTitle="Member Center" isWide="true">
         {
           <>
-          {/* HEADER - either bold red text + header image OR */}
-          {/* big blue stripe with text */}
-          { member_content.main_text && member_content.secondary_text ? (
-            <>
-              <SecondaryTitleBanner
-                mainText={member_content.secondary_text}
-                secondaryText={member_content.main_text}
-              />
-              {member_content.header_image && (
-                <HeaderImage source={member_content.header_image.url} />
-              )}
-            </>
-          ) : (
-            <>
-              {member_content.title && (
-                <BigTitleBanner>
-                  <Header1>{member_content.title[0].text}</Header1>
-                </BigTitleBanner>
-              )}
-            </>
-          )}
+            {/* HEADER - either bold red text + header image OR */}
+            {/* big blue stripe with text */}
+            {/* MEMBER HOME page is custom overrides due to client requests - check it out! */}
+            {member_content.main_text && member_content.secondary_text ? (
+              <>
+                <SecondaryTitleBanner
+                  mainText={member_content.secondary_text}
+                  secondaryText={member_content.main_text}
+                />
+                {member_content.header_image && member_content._meta.uid !== 'member-home' && (
+                  <HeaderImage source={member_content.header_image.url} />
+                )}
+              </>
+            ) : (
+              <>
+                {member_content.title && (
+                  <BigTitleBanner>
+                    <Header1>{member_content.title[0].text}</Header1>
+                  </BigTitleBanner>
+                )}
+              </>
+            )}
 
-          {/* SUMMARY BLOCK - IF BEFORE MAIN CONTENT */}
-          {/* We have to check the `summary_block_after_main_content` key in the slice */}
-          {/* If set to FALSE, it means the summary block shows up BEFORE the main content */}
-          { member_content.body &&
-            member_content.body.map((slice) => {
-  
-              // SUMMARY BLOCK
-              if (slice.type === 'summary_block' && slice.primary.summary_block_after_main_content === false) {
-                return (
-                  <SummaryBlock
-                    bgColor={
-                      member_content._meta.uid === 'owners-manual' ? '#fff' : themeProps.midnightBlue
-                    }
-                    buttons={ slice.fields.length > 0 && slice.fields}
-                    key={randomID(10000000)}
-                    fontSize="28px"
-                    lineHeight="42px"
-                    maxWidth="800px"
-                    textColor={
-                      member_content._meta.uid === 'owners-manual' ? themeProps.black : '#fff'
-                    }
-                    title={slice.primary.summary_title && slice.primary.summary_title}
-                  >
-                    <PrismicRichText field={slice.primary.summary_area} linkResolver={linkResolver} />
-                  </SummaryBlock>
-                );
-              }
-            })
-          }
+            {/* SUMMARY BLOCK - IF BEFORE MAIN CONTENT */}
+            {/* We have to check the `summary_block_after_main_content` key in the slice */}
+            {/* If set to FALSE, it means the summary block shows up BEFORE the main content */}
+            {member_content.body &&
+              member_content.body.map((slice) => {
+                // SUMMARY BLOCK
+                if (
+                  slice.type === 'summary_block' &&
+                  slice.primary.summary_block_after_main_content === false
+                ) {
+                  return (
+                    <SummaryBlock
+                      bgColor={
+                        member_content._meta.uid === 'owners-manual'
+                          ? '#fff'
+                          : themeProps.midnightBlue
+                      }
+                      buttons={slice.fields.length > 0 && slice.fields}
+                      key={randomID(10000000)}
+                      fontSize="28px"
+                      lineHeight="42px"
+                      maxWidth="800px"
+                      textColor={
+                        member_content._meta.uid === 'owners-manual' ? themeProps.black : '#fff'
+                      }
+                      title={slice.primary.summary_title && slice.primary.summary_title}
+                    >
+                      <PrismicRichText
+                        field={slice.primary.summary_area}
+                        linkResolver={linkResolver}
+                      />
+                    </SummaryBlock>
+                  );
+                }
+              })}
           </>
         }
 
@@ -264,11 +268,13 @@ export default function MembersPage({ page, preview }) {
         {/* SLICES */}
         {member_content.body &&
           member_content.body.map((slice) => {
-
             // SUMMARY BLOCK
             // We have to check the `summary_block_after_main_content` key in the slice
             // If set to TRUE, it means the summary block shows up AFTER the main content
-            if (slice.type === 'summary_block' && slice.primary.summary_block_after_main_content === true) {
+            if (
+              slice.type === 'summary_block' &&
+              slice.primary.summary_block_after_main_content === true
+            ) {
               return (
                 <SummaryBlock
                   bgColor={
@@ -326,14 +332,11 @@ export default function MembersPage({ page, preview }) {
                       // @TODO add valid key prop from field
                       // eslint-disable-next-line react/jsx-key
                       <WayfindingItem
-                        bgColor={
-                          ((i === 2 || i === 5 || i === 8 || i === 11) && themeProps.darkGray) ||
-                          ((i === 1 || i === 4 || i === 7 || i === 10) && themeProps.blue) ||
-                          themeProps.midnightBlue
-                        }
+                        bgColor={themeProps.midnightblue}
                         path={item.item_link}
                         text={item.item_description}
                         title={item.item_name}
+                        key={i}
                       />
                     );
                   })}
@@ -371,50 +374,57 @@ export default function MembersPage({ page, preview }) {
 
             // EMBED
             if (slice.type === 'embed') {
-
-              return(
+              return (
                 <>
-                <MainContent>
-                  <hr />
-                </MainContent>
-                
-                <MainContent 
-                  bgColor={ slice.primary.dark_background === true ? themeProps.midnightBlue : '#fff' }
-                  maxWidth="1200px"
-                >
-                  { slice.primary.embed_intro && 
-                    <div className={ slice.primary.dark_background === true ? 'text-center gray-50' : 'text-center gray-950' }>
-                      <PrismicRichText 
-                        field={slice.primary.embed_intro} 
-                        linkResolver={linkResolver} 
-                      />
-                    </div>
-                  }
-                  { slice.primary.embed_link && 
-                    <div
-                      dangerouslySetInnerHTML={{
-                        __html: slice.primary.embed_link 
-                    }}></div>
-                  }
-                  { slice.primary.embed_button_text &&
-                    slice.primary.embed_button_link && 
-                    <Button
-                      buttonAlign="center"
-                      buttonBg="#4D4D4F"
-                      buttonBorder="none"
-                      buttonColor="white"
-                      buttonFontSize="18px"
-                      buttonMargin="60px 0"
-                      buttonPadding="10px 30px"
-                      buttonTextTransform="uppercase"
-                      href={ linkResolver(slice.primary.embed_button_link) }
-                    >
-                      { slice.primary.embed_button_text }
-                    </Button>
-                  }
-                </MainContent>
+                  <MainContent>
+                    <hr />
+                  </MainContent>
+
+                  <MainContent
+                    bgColor={
+                      slice.primary.dark_background === true ? themeProps.midnightBlue : '#fff'
+                    }
+                    maxWidth="1200px"
+                  >
+                    {slice.primary.embed_intro && (
+                      <div
+                        className={
+                          slice.primary.dark_background === true
+                            ? 'gray-50 text-center'
+                            : 'gray-950 text-center'
+                        }
+                      >
+                        <PrismicRichText
+                          field={slice.primary.embed_intro}
+                          linkResolver={linkResolver}
+                        />
+                      </div>
+                    )}
+                    {slice.primary.embed_link && (
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: slice.primary.embed_link,
+                        }}
+                      ></div>
+                    )}
+                    {slice.primary.embed_button_text && slice.primary.embed_button_link && (
+                      <Button
+                        buttonAlign="center"
+                        buttonBg="#4D4D4F"
+                        buttonBorder="none"
+                        buttonColor="white"
+                        buttonFontSize="18px"
+                        buttonMargin="60px 0"
+                        buttonPadding="10px 30px"
+                        buttonTextTransform="uppercase"
+                        href={linkResolver(slice.primary.embed_button_link)}
+                      >
+                        {slice.primary.embed_button_text}
+                      </Button>
+                    )}
+                  </MainContent>
                 </>
-              )
+              );
             }
           })}
 
@@ -438,7 +448,6 @@ export default function MembersPage({ page, preview }) {
             )}
           </>
         )}
-        <OwnersManual />
       </Wrapper>
     </LegacyPage>
   );

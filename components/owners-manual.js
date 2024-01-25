@@ -5,18 +5,14 @@ import { atom, useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
 import { useS3Upload } from 'next-s3-upload';
 import Select from 'react-select';
-// import updateOwnersManualData from '~/lib/salesforce/updateOwnersManualData';
-// import checkEmailInSalesforce from '~/lib/salesforce/checkEmailInSalesforce';
 
 import { ownersManualModalAtom, corporateMembersAtom } from '~/atoms';
 
 import { Button } from '~/components/simple-button';
 import Spinner from '~/components/spinner';
 
-// const DOCUSIGN_POWERFORM_URL =
-//   'https://na4.docusign.net/Member/PowerFormSigning.aspx?PowerFormId=7622cce8-6228-438b-a47f-8be66fd846b3&env=na4&acct=3bffb2a0-aa54-4f2e-80e8-7a09da3587b1&v=2';
 const DOCUSIGN_POWERFORM_URL =
-  'https://demo.docusign.net/Member/PowerFormSigning.aspx?PowerFormId=00947782-84ab-4e28-9f94-91863bcef751&env=demo&acct=1bc6ecc2-8ac0-488d-a145-0bc9b033854f&v=2';
+  'https://na4.docusign.net/Member/PowerFormSigning.aspx?PowerFormId=7622cce8-6228-438b-a47f-8be66fd846b3&env=na4&acct=3bffb2a0-aa54-4f2e-80e8-7a09da3587b1&v=2';
 const STRIPE_MEMBER_PAYMENT_LINK_URL = 'https://buy.stripe.com/00gaHCfG55Fh93ycNc';
 const STRIPE_NONMEMBER_PAYMENT_LINK_URL = 'https://buy.stripe.com/3cs2b62TjaZB0x2bJ9';
 

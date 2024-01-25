@@ -76,6 +76,8 @@ export const linkResolver = (link, linkWrapper = false, linkedText = 'Click here
         return `/members/${link?.uid}`;
       case 'news':
         return `/news/${link?.uid}`;
+      case 'owners_manual':
+        return `/${link?.uid}`;
       case 'policy':
         return `/policy/${link?.uid}`;
       case 'program':
@@ -111,6 +113,8 @@ export const linkResolver = (link, linkWrapper = false, linkedText = 'Click here
         return `/members/${link._meta?.uid}`;
       case 'news':
         return `/news/${link._meta?.uid}`;
+      case 'owners_manual':
+        return `/${link?.uid}`;
       case 'policy':
         return `/policy/${link._meta?.uid}`;
       case 'program':
@@ -146,6 +150,8 @@ export const linkResolver = (link, linkWrapper = false, linkedText = 'Click here
         return `/members/${link._meta?.uid}`;
       case 'News':
         return `/news/${link._meta?.uid}`;
+      case 'Owners_manual':
+        return `/${link?.uid}`;
       case 'Policy':
         return `/policy/${link._meta?.uid}`;
       case 'Program':
@@ -181,6 +187,8 @@ export const linkResolver = (link, linkWrapper = false, linkedText = 'Click here
         return `/members/${link?.uid}`;
       case 'news':
         return `/news/${link?.uid}`;
+      case 'owners_manual':
+        return `/${link?.uid}`;
       case 'program':
         return `/local-innovation/${link?.uid}`;
       case 'policy':

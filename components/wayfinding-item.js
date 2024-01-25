@@ -1,12 +1,7 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
-import { useSetAtom } from 'jotai';
-
-import { ownersManualModalAtom } from '~/atoms';
 import { linkResolver } from '~/utils';
-
-import BlueArrowWhiteBlock from '~/public/blue-arrow-white-block.svg';
 
 const Container = styled.section`
   align-items: center !important;
@@ -28,10 +23,6 @@ const Container = styled.section`
   &:hover {
     text-decoration: none !important;
   }
-`;
-
-const Icon = styled.img`
-  flex-basis: 50px !important;
 `;
 
 const ContentContainer = styled.div`
@@ -77,56 +68,45 @@ const Text = styled.p`
  * @param { string } textColor - duh
  */
 const WayfindingItem = ({ bgColor, path, title, text, textColor }) => {
-  if (path._meta?.uid === 'owners-manual') {
-    return <OwnersManual bgColor={bgColor} title={title} text={text} textColor={textColor} />;
+  let item;
+
+  switch (path.__typename) {
+    case '_ExternalLink':
+      item = (
+        <>
+          <a href={linkResolver(path)}>
+            <Title textColor="#fff">{title}</Title>
+          </a>
+          <Text>{text}</Text>
+        </>
+      );
+      break;
+    case 'Owners_manual':
+      item = (
+        <>
+          <Link href="/owners-manual">
+            <Title textColor="#fff">{title}</Title>
+          </Link>
+          <Text>{text}</Text>
+        </>
+      );
+      break;
+    default:
+      item = (
+        <>
+          <Link href={linkResolver(path)}>
+            <Title textColor="#fff">{title}</Title>
+          </Link>
+          <Text>{text}</Text>
+        </>
+      );
   }
 
   return (
     <Container bgColor={bgColor}>
-      {path.__typename === '_ExternalLink' ? (
-        <ContentContainer>
-          <a href={linkResolver(path)}>
-            <Title textColor={textColor}>{title}</Title>
-          </a>
-          <Text>{text}</Text>
-        </ContentContainer>
-      ) : (
-        <ContentContainer>
-          <Link href={linkResolver(path)} passHref>
-            <Title textColor={textColor}>{title}</Title>
-          </Link>
-          <Text>{text}</Text>
-        </ContentContainer>
-      )}
-      <Link href={linkResolver(path)} passHref>
-        <Icon src={BlueArrowWhiteBlock} alt="Blue Arrow" />
-      </Link>
+      <ContentContainer>{item}</ContentContainer>
     </Container>
   );
 };
 
 export default WayfindingItem;
-
-const OwnersManual = ({ bgColor, title, text, textColor }) => {
-  const setIsOwnersManualModalOpen = useSetAtom(ownersManualModalAtom);
-
-  const handleClick = useCallback(() => {
-    setIsOwnersManualModalOpen(true);
-  }, [setIsOwnersManualModalOpen]);
-
-  return (
-    <>
-      <Container bgColor={bgColor}>
-        <ContentContainer>
-          <button onClick={handleClick}>
-            <Title textColor={textColor}>{title}</Title>
-          </button>
-          <Text>{text}</Text>
-        </ContentContainer>
-        <button onClick={handleClick}>
-          <Icon src={BlueArrowWhiteBlock} alt="Blue Arrow" />
-        </button>
-      </Container>
-    </>
-  );
-};
