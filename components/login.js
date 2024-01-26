@@ -39,7 +39,7 @@ export const Login = () => {
   );
 };
 
-const LoadingSpinner = () => {
+export const LoadingSpinner = () => {
   const isLoading = useAtomValue(loadingAtom);
 
   if (!isLoading) return null;
@@ -51,7 +51,7 @@ const LoadingSpinner = () => {
   );
 };
 
-const Step = () => {
+export const Step = () => {
   const step = useAtomValue(stepAtom);
 
   switch (step) {
@@ -80,7 +80,7 @@ const Step = () => {
   }
 };
 
-const EmailLogin = () => {
+export const EmailLogin = () => {
   const [email, setEmail] = useAtom(emailAtom);
   const setIsLoading = useSetAtom(loadingAtom);
   const setStep = useSetAtom(stepAtom);
@@ -122,7 +122,7 @@ const EmailLogin = () => {
   return (
     <div>
       <Headline>Corporate Member Log-in</Headline>
-      <Body>
+      <Body className="text-center">
         If you are employed by a coalition member company, enter your company email to be sent an
         access code to sign in.
       </Body>
@@ -140,19 +140,16 @@ const EmailLogin = () => {
         />
         <Button type="submit" size="small" label="Send" />
       </form>
-      <div className="absolute -bottom-10 left-0 right-0 mt-10 flex w-full translate-y-full justify-center">
-        <Button
-          variant="blue"
-          size="small"
-          label="Aren't Sure If You're a Member?"
-          onClick={handleMemberLookup}
-        />
+      <div className="flex w-full justify-center">
+        <button onClick={handleMemberLookup}>
+          <Body className="text-center underline">Aren't Sure If You're a Member?</Body>
+        </button>
       </div>
     </div>
   );
 };
 
-const EnterAccessCodeFromEmail = () => {
+export const EnterAccessCodeFromEmail = () => {
   const setIsLoginModalOpen = useSetAtom(loginModalAtom);
   const email = useAtomValue(emailAtom);
   const [accessCode, setAccessCode] = useAtom(accessCodeAtom);
@@ -254,7 +251,7 @@ const EnterAccessCodeFromEmail = () => {
   );
 };
 
-const PhoneLogin = () => {
+export const PhoneLogin = () => {
   const email = useAtomValue(emailAtom);
   const [phone, setPhone] = useAtom(phoneAtom);
   const setIsLoading = useSetAtom(loadingAtom);
@@ -327,7 +324,7 @@ const PhoneLogin = () => {
   );
 };
 
-const EnterAccessCodeFromSms = () => {
+export const EnterAccessCodeFromSms = () => {
   const setIsLoginModalOpen = useSetAtom(loginModalAtom);
   const email = useAtomValue(emailAtom);
   const phone = useAtomValue(phoneAtom);
@@ -432,7 +429,7 @@ const EnterAccessCodeFromSms = () => {
   );
 };
 
-const MemberLookup = () => {
+export const MemberLookup = () => {
   const [email, setEmail] = useAtom(emailAtom);
   const setStep = useSetAtom(stepAtom);
 
@@ -487,7 +484,7 @@ const MemberLookupSuccess = () => {
   );
 };
 
-const MemberLookupFailure = () => {
+export const MemberLookupFailure = () => {
   const setStep = useSetAtom(stepAtom);
 
   const handleRequestSupport = useCallback(() => {
@@ -525,7 +522,7 @@ const MemberLookupFailure = () => {
   );
 };
 
-const TroubleLoggingIn = () => {
+export const TroubleLoggingIn = () => {
   const setStep = useSetAtom(stepAtom);
 
   const handleRequestSupport = useCallback(() => {
@@ -564,7 +561,7 @@ const TroubleLoggingIn = () => {
   );
 };
 
-const RequestSupport = () => {
+export const RequestSupport = () => {
   const [name, setName] = useAtom(nameAtom);
   const [organization, setOrganization] = useAtom(organizationAtom);
   const [email, setEmail] = useAtom(emailAtom);
@@ -647,7 +644,7 @@ const RequestSupport = () => {
   );
 };
 
-const RequestSupportSuccess = () => {
+export const RequestSupportSuccess = () => {
   return (
     <div>
       <Headline>Thanks!</Headline>
@@ -656,7 +653,7 @@ const RequestSupportSuccess = () => {
   );
 };
 
-const Error = () => {
+export const Error = () => {
   const error = useAtomValue(errorAtom);
   const setStep = useSetAtom(stepAtom);
 
@@ -684,7 +681,7 @@ const Error = () => {
   );
 };
 
-const Headline = ({ className = '', children, ...rest }) => {
+export const Headline = ({ className = '', children, ...rest }) => {
   return (
     <h3 className={cx('text-center font-dharma text-6xl sm:text-8xl', className)} {...rest}>
       {children}
@@ -692,7 +689,7 @@ const Headline = ({ className = '', children, ...rest }) => {
   );
 };
 
-const Body = ({ className = '', children, ...rest }) => {
+export const Body = ({ className = '', children, ...rest }) => {
   return (
     <div className={cx('mt-10 text-base !leading-normal sm:text-3xl', className)} {...rest}>
       {children}
@@ -700,7 +697,7 @@ const Body = ({ className = '', children, ...rest }) => {
   );
 };
 
-const Bold = ({ className = '', children, ...rest }) => {
+export const Bold = ({ className = '', children, ...rest }) => {
   return (
     <span className={cx('text-base font-bold !leading-normal sm:text-3xl', className)} {...rest}>
       {children}

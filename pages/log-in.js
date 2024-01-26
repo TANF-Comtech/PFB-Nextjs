@@ -1,24 +1,15 @@
-import { useSetAtom } from 'jotai';
-import React, { useEffect } from 'react';
-
-import { loginModalAtom } from '~/atoms';
-
-import { LegacyPage } from '~/components/legacy-page';
+import { Step, LoadingSpinner } from '~/components/login';
+import { Page } from '~/components/new/page';
 import SiteMetaCustom from '~/components/site-meta-custom';
-import Wrapper from '~/components/wrapper';
 
 export default function LoginPage() {
-  const setIsLoginModalOpen = useSetAtom(loginModalAtom);
-
-  useEffect(() => {
-    setIsLoginModalOpen(true);
-  }, [setIsLoginModalOpen]);
-
   return (
-    <LegacyPage>
-      <Wrapper>
-        <SiteMetaCustom title="Login | PeopleForBikes" />
-      </Wrapper>
-    </LegacyPage>
+    <Page>
+      <SiteMetaCustom title="Log Into the PeopleForBikes Member Center" />
+      <div className="mx-auto mt-[45%] min-h-[100vh] max-w-[800px] px-10 md:mt-[25%]">
+        <LoadingSpinner />
+        <Step />
+      </div>
+    </Page>
   );
 }
