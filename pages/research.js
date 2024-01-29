@@ -12,20 +12,13 @@ import { linkResolver } from '~/utils';
 import { Page } from '~/components/new/page';
 import { Button } from '~/components/new/button';
 
-export default function ResearchPage({ 
-  featuredReport,
-  researchPageIntro 
-}) {
-
+export default function ResearchPage({ featuredReport, researchPageIntro }) {
   return (
     <Page title="Research" showDonate={false}>
       <Intro />
-      { featuredReport !== null &&
-        <Announcement 
-          featuredReport={featuredReport} 
-          researchPageIntro={researchPageIntro}
-        />
-      } 
+      {featuredReport !== null && (
+        <Announcement featuredReport={featuredReport} researchPageIntro={researchPageIntro} />
+      )}
       <Reports />
       <Donate />
     </Page>
@@ -33,7 +26,6 @@ export default function ResearchPage({
 }
 
 export async function getStaticProps() {
-  
   // Report formatting
   const rawReports = await getReports(); // fetch
   const formattedReports = formatReports(rawReports); // process
@@ -45,15 +37,15 @@ export async function getStaticProps() {
   }
 
   // Research page content
-  const researchLandingPageContent = await getResearchLandingPage()
-  const featuredReport = researchLandingPageContent.research_landing_page.featured_report
-  const researchPageIntro = researchLandingPageContent.research_landing_page.intro
+  const researchLandingPageContent = await getResearchLandingPage();
+  const featuredReport = researchLandingPageContent.research_landing_page.featured_report;
+  const researchPageIntro = researchLandingPageContent.research_landing_page.intro;
 
   return {
-    props: { 
+    props: {
       featuredReport,
       rawReports,
-      researchPageIntro      
+      researchPageIntro,
     },
     revalidate: 60,
   };
@@ -68,7 +60,7 @@ const formatReports = (payload) => {
         objectID: item.node._meta.id,
         title: `${item.node.title[0].text}`,
         summary: item.node.summary ? contentConcat(item.node.summary) : null,
-        type:    
+        type:
           item.node.report_type !== null && item.node.report_type[0].type !== null
             ? item.node.report_type
                 .map((item) => (item.type !== null ? item.type.type : null))
@@ -85,7 +77,7 @@ const formatReports = (payload) => {
         path: `/${linkResolver(item.node._meta) ?? ''}`,
         pfbSupported: item.node.pfb_supported,
         externalLink: item.node.link ? linkResolver(item.node.link) : null,
-        authors: item.node.authors ? item.node.authors : null
+        authors: item.node.authors ? item.node.authors : null,
       });
     });
   }
@@ -98,7 +90,7 @@ const Intro = () => {
     <div className="relative z-0 mt-36 flex w-full items-center justify-center py-24">
       <Image
         src="/new/Research-abstract.jpg"
-        fill={ true }
+        fill={true}
         alt="Abstract image of Bicyclist with graphs overlaid"
         className="absolute inset-0 z-0 block h-full w-full object-cover object-[center_20%]"
         priority
@@ -113,82 +105,83 @@ const Intro = () => {
 const Announcement = ({ featuredReport, researchPageIntro }) => {
   return (
     <>
-    <div className="relative z-60 bg-darkest-blue p-8 text-white sm:p-12 xl:p-16">
-      <div className="mx-auto flex max-w-6xl flex-col gap-6 text-base leading-normal sm:text-xl xl:text-2xl">
-        <div className="leading-normal">
-          <PrismicRichText field={researchPageIntro} />
+      <div className="relative z-60 bg-darkest-blue p-8 text-white sm:p-12 xl:p-16">
+        <div className="mx-auto flex max-w-6xl flex-col gap-6 text-base leading-normal sm:text-xl xl:text-2xl">
+          <div className="leading-normal">
+            <PrismicRichText field={researchPageIntro} />
+          </div>
         </div>
       </div>
-    </div>
-    <div className="mx-auto max-w-screen-xl p-8 pb-0 md:p-16">
-      <div className="text-sm font-bold uppercase text-redAccent">Featured Research</div>
-      <div className="font-dharma text-5xl">
-        <span>{featuredReport.title[0].text} ({featuredReport.year})</span>
-      </div>
-      { Array.isArray(featuredReport.report_tags) === true &&
-        <div className="flex flex-wrap gap-2 mt-2 mb-2">
-          <span className="font-bold">Topic:&nbsp;</span> 
-          { featuredReport.report_tags.map((topic, i) => (
-            <span 
-              className="rounded bg-lightestGray px-1 py-1 text-xs font-bold uppercase"
-              key={ i }
-            >
-              {topic.tag.tag_name}
-            </span>
-          ))}
-        </div>   
-      }
-      <div className="flex flex-wrap gap-2 mt-2">
-        <span className="font-bold">Type:&nbsp;</span> 
-        { featuredReport.report_type.length >= 1 ? 
-          featuredReport.report_type.map((type, i) => (
-            <span 
-            className="rounded bg-lightestGray px-1 py-1 text-xs font-bold uppercase"
-            key={ i }
-          >
-            { type.type.type }
+      <div className="mx-auto max-w-screen-xl p-8 pb-0 md:p-16">
+        <div className="text-sm font-bold uppercase text-redAccent">Featured Research</div>
+        <div className="font-dharma text-5xl">
+          <span>
+            {featuredReport.title[0].text} ({featuredReport.year})
           </span>
-        )) : (
-          <span 
-            className="rounded bg-lightestGray px-1 py-1 text-xs font-bold uppercase"
-          >
-            Report
-          </span>
+        </div>
+        {Array.isArray(featuredReport.report_tags) === true && (
+          <div className="mb-2 mt-2 flex flex-wrap gap-2">
+            <span className="font-bold">Topic:&nbsp;</span>
+            {featuredReport.report_tags.map((topic, i) => {
+              topic.tag !== null && (
+                <span
+                  className="rounded bg-lightestGray px-1 py-1 text-xs font-bold uppercase"
+                  key={i}
+                >
+                  {topic.tag.tag_name}
+                </span>
+              );
+            })}
+          </div>
         )}
-      </div>
-      
-      {featuredReport.authors &&
-        <div className="mt-2 line-clamp-3 leading-normal text-black/80">
-          <span className="font-bold">Author:&nbsp;</span> 
-          {featuredReport.authors}
+        <div className="mt-2 flex flex-wrap gap-2">
+          <span className="font-bold">Type:&nbsp;</span>
+          {featuredReport.report_type.length >= 1 ? (
+            featuredReport.report_type.map((type, i) => (
+              <span
+                className="rounded bg-lightestGray px-1 py-1 text-xs font-bold uppercase"
+                key={i}
+              >
+                {type.type.type}
+              </span>
+            ))
+          ) : (
+            <span className="rounded bg-lightestGray px-1 py-1 text-xs font-bold uppercase">
+              Report
+            </span>
+          )}
         </div>
-      }
-      {featuredReport.year &&
-        <div className="mt-2 line-clamp-3 leading-normal text-black/80">
-          <span className="font-bold">Year:&nbsp;</span> 
-          {featuredReport.year}
-        </div>   
-      }
 
-      { featuredReport.summary && 
-        <div className="mt-2 line-clamp-3 leading-normal text-black/80">
-          <PrismicRichText field={featuredReport.summary} />
-        </div>      
-      }
+        {featuredReport.authors && (
+          <div className="mt-2 line-clamp-3 leading-normal text-black/80">
+            <span className="font-bold">Author:&nbsp;</span>
+            {featuredReport.authors}
+          </div>
+        )}
+        {featuredReport.year && (
+          <div className="mt-2 line-clamp-3 leading-normal text-black/80">
+            <span className="font-bold">Year:&nbsp;</span>
+            {featuredReport.year}
+          </div>
+        )}
 
-      <div className="mt-4">
-        { featuredReport.externalLink ? (
-          <Button to={featuredReport.externalLink} label="View Resource" size="small" />
-        ) : (
-          <Button to={linkResolver(featuredReport._meta)} label="View Resource" size="small" />
-        ) }
+        {featuredReport.summary && (
+          <div className="mt-2 line-clamp-3 leading-normal text-black/80">
+            <PrismicRichText field={featuredReport.summary} />
+          </div>
+        )}
+
+        <div className="mt-4">
+          {featuredReport.externalLink ? (
+            <Button to={featuredReport.externalLink} label="View Resource" size="small" />
+          ) : (
+            <Button to={linkResolver(featuredReport._meta)} label="View Resource" size="small" />
+          )}
+        </div>
       </div>
-
-    </div>
     </>
   );
 };
-
 
 const Reports = () => {
   return (
@@ -246,7 +239,7 @@ const CustomFilters = () => {
       </div>
     </div>
   );
-}; 
+};
 
 const CustomResults = () => {
   return <Hits hitComponent={CustomResult} />;
@@ -256,63 +249,55 @@ const CustomResult = ({ hit }) => {
   return (
     <div className="mb-12 block text-black">
       <div className="text-sm font-bold text-redAccent">
-        { hit.pfbSupported === true && 
-          <span>★ PeopleForBikes Supported </span>
-        }  
+        {hit.pfbSupported === true && <span>★ PeopleForBikes Supported </span>}
       </div>
-      <div className="line-clamp-1 font-dharma text-3xl font-medium sm:text-4xl mb-2">
+      <div className="mb-2 line-clamp-1 font-dharma text-3xl font-medium sm:text-4xl">
         {hit.title}
       </div>
-      { hit.topics &&
+      {hit.topics && (
         <div className="flex flex-wrap gap-2">
-          <span className="font-bold">Topic:&nbsp;</span> 
+          <span className="font-bold">Topic:&nbsp;</span>
           {hit.topics.map((topic, i) => (
-            <span 
-              className="rounded bg-lightestGray px-1 py-1 text-xs font-bold uppercase"
-              key={ i }
-            >
+            <span className="rounded bg-lightestGray px-1 py-1 text-xs font-bold uppercase" key={i}>
               {topic}
             </span>
           ))}
         </div>
-      }
-      {hit.type &&
-        <div className="flex flex-wrap gap-2 mt-2">
-          <span className="font-bold">Type:&nbsp;</span> 
+      )}
+      {hit.type && (
+        <div className="mt-2 flex flex-wrap gap-2">
+          <span className="font-bold">Type:&nbsp;</span>
           {hit.type.map((type, i) => (
-            <span 
-              className="rounded bg-lightestGray px-1 py-1 text-xs font-bold uppercase"
-              key={ i }
-            >
+            <span className="rounded bg-lightestGray px-1 py-1 text-xs font-bold uppercase" key={i}>
               {type}
             </span>
           ))}
         </div>
-      }
-      {hit.authors &&
+      )}
+      {hit.authors && (
         <div className="mt-2 line-clamp-3 leading-normal text-black/80">
-          <span className="font-bold">Author:&nbsp;</span> 
+          <span className="font-bold">Author:&nbsp;</span>
           {hit.authors}
         </div>
-      }
-      {hit.year &&
+      )}
+      {hit.year && (
         <div className="mt-2 line-clamp-3 leading-normal text-black/80">
-          <span className="font-bold">Year:&nbsp;</span> 
+          <span className="font-bold">Year:&nbsp;</span>
           {hit.year}
-        </div>   
-      }
-      {hit.summary &&
+        </div>
+      )}
+      {hit.summary && (
         <div className="mt-2 line-clamp-3 leading-normal text-black/80">
-          <span className="font-bold">Summary:&nbsp;</span> 
+          <span className="font-bold">Summary:&nbsp;</span>
           {hit.summary}
         </div>
-      }
+      )}
       <div className="mt-4">
-        { hit.externalLink ? (
+        {hit.externalLink ? (
           <Button to={hit.externalLink} label="View Resource" size="small" />
         ) : (
           <Button to={hit.path} label="View Resource" size="small" />
-        ) }
+        )}
       </div>
     </div>
   );
