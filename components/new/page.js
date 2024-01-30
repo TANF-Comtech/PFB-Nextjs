@@ -734,7 +734,7 @@ const DynamicLink = ({ href, className = '', children, ...rest }) => {
         {...rest}
       >
         <span>{children}</span>
-        <i className="fa-solid fa-arrow-up-right-from-square text-[0.8em] pr-2" />
+        <i className="fa-solid fa-arrow-up-right-from-square pr-2 text-[0.8em]" />
       </ExternalLink>
     );
   }
@@ -769,13 +769,12 @@ const NAVIGATION = [
         image: 'Final_Mile.png',
         title: 'Great Bicycle Infrastructure Project',
         link: 'https://infrastructure.peopleforbikes.org/',
-      },      
+      },
       {
         image: 'City_Ratings.png',
         title: 'City Ratings',
         link: 'https://cityratings.peopleforbikes.org/',
       },
-
     ],
     items: [
       { title: 'Local Innovation', link: 'local-innovation' },
@@ -801,7 +800,7 @@ const NAVIGATION = [
     ],
     items: [
       { title: 'Policy', link: 'policy' },
-      { title: 'VoteForBikes', link: 'voteforbikes' },
+      { title: 'VoteForBikes', link: '2024-voteforbikes' },
       { title: 'Sustainability', link: 'topics/sustainable-transportation' },
       { title: 'Action Alerts', link: 'take-action' },
     ],
@@ -850,7 +849,10 @@ const NAVIGATION = [
     title: 'Donate',
     featuredItems: [],
     items: [
-      { title: 'Donate Now', link: 'https://www.classy.org/campaign/give-the-gift-of-better-biking/c532765#!/donation/checkout' },
+      {
+        title: 'Donate Now',
+        link: 'https://www.classy.org/campaign/give-the-gift-of-better-biking/c532765#!/donation/checkout',
+      },
       { title: 'Learn More About Supporting Our Work', link: '/giving' },
     ],
   },
