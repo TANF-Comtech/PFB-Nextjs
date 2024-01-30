@@ -423,6 +423,11 @@ const nextConfig = async (phase, { defaultConfig }) => {
           destination: '/research',
           permanent: true,
         },
+        {
+          source: '/bike-industry-webinars',
+          destination: '/log-in?redirect=/2024-webinar-schedule',
+          permanent: true,
+        },
       ];
     },
   };
