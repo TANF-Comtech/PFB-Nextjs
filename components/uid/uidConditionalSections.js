@@ -8,7 +8,6 @@ import GrantsPillars from '~/components/uid/parts/grants-pillars';
 import JoinList from '~/components/uid/parts/join-list';
 import LocationsList from '~/components/uid/parts/locations-list';
 import PolicyPillars from '~/components/uid/parts/policy-pillars';
-import RidesList from '~/components/uid/parts/rides-list';
 import StatsList from '~/components/uid/parts/stats-list';
 import TeamList from '~/components/uid/parts/team-list';
 import TopicsList from '~/components/uid/parts/topics-list';
@@ -36,11 +35,6 @@ export default function ConditionalSections({ landing_page, fallback, preview })
       {
         // TOPICS
         landing_page._meta.uid === 'topics' && <TopicsList payload={landing_page.data} />
-      }
-
-      {
-        // RIDES
-        landing_page._meta.uid === 'rides' && <RidesList payload={landing_page.data} />
       }
 
       {
