@@ -11,7 +11,6 @@ import SiteMetaCustom from '~/components/site-meta-custom';
 import HeaderImage from '~/components/header-image';
 import MainContent from '~/components/main-content';
 import ContentItem from '~/components/content-item';
-import RideSpotPromo from '~/components/ridespot-promo';
 import ActionItemGroup from '~/components/action-item-group';
 import FallbackImage from '~/components/fallback-image';
 
@@ -64,18 +63,6 @@ export default function LocationPage({ fallback, page, preview }) {
               return <ActionItemGroup key={randomID(10000000)} payload={slice.fields} />;
             } else {
               return <ActionItemGroup key={randomID(10000000)} payload={actionItems} />;
-            }
-          })}
-        {locations.body &&
-          locations.body.map((slice) => {
-            if (slice.type === 'ridespot_promo') {
-              return (
-                <RideSpotPromo isLocal="true" key={randomID(10000000)} payload={slice.primary} />
-              );
-            } else {
-              return (
-                <RideSpotPromo isLocal="false" key={randomID(10000000)} payload={rideSpotRides} />
-              );
             }
           })}
 
