@@ -755,8 +755,7 @@ const formatLinkedData = (value) => {
 const NETWORK = [
   { title: 'PeopleForBikes Main site', link: 'https://www.peopleforbikes.org/' },
   { title: 'City Ratings', link: 'https://cityratings.peopleforbikes.org/' },
-  { title: 'Shift’23 Conference', link: 'https://shift.peopleforbikes.org/' },
-  { title: 'Ride Spot', link: 'https://www.ridespot.org/' },
+  { title: 'Shift Conference', link: 'https://shift.peopleforbikes.org/' },
   { title: 'View more sites', link: 'https://www.peopleforbikes.org/campaigns' },
 ];
 
@@ -811,8 +810,8 @@ const NAVIGATION = [
     featuredItems: [
       {
         image: 'Ride_Spot.png',
-        title: 'Ride Spot',
-        link: 'https://www.ridespot.org/',
+        title: 'One Ride at a Time',
+        link: 'https://oneride.peopleforbikes.org/',
       },
       {
         image: 'Battery_Recycling.png',
@@ -820,11 +819,7 @@ const NAVIGATION = [
         link: 'https://www.hungryforbatteries.org/',
       },
     ],
-    items: [
-      { title: 'Keep Riding', link: 'https://www.pfbkeepriding.org/' },
-      { title: 'One Ride at a Time', link: 'https://oneride.peopleforbikes.org/' },
-      { title: 'Action Alerts', link: 'take-action' },
-    ],
+    items: [{ title: 'Action Alerts', link: 'take-action' }],
   },
   {
     key: 'about',
