@@ -33,7 +33,7 @@ export async function getStaticProps() {
 
   // Push latest reports over to Algolia to be indexed
   if (process.env.ALGOLIA_INDEXING_ENABLED === 'true') {
-    await AlgoliaIndex('PFB_RESEARCH').saveObjects(reportsByYear);
+    await AlgoliaIndex('PFB_RESEARCH').replaceAllObjects(reportsByYear);
   }
 
   // Research page content
@@ -74,7 +74,7 @@ const formatReports = (payload) => {
                 .map((item) => (item.tag !== null ? item.tag.tag_name : null))
                 .filter(Boolean)
             : [null],
-        path: `/${linkResolver(item.node._meta) ?? ''}`,
+        path: `${linkResolver(item.node._meta) ?? ''}`,
         pfbSupported: item.node.pfb_supported,
         externalLink: item.node.link ? linkResolver(item.node.link) : null,
         authors: item.node.authors ? item.node.authors : null,
