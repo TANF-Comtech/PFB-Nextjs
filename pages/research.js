@@ -123,13 +123,15 @@ const Announcement = ({ featuredReport, researchPageIntro }) => {
           <div className="mb-2 mt-2 flex flex-wrap gap-2">
             <span className="font-bold">Topic:&nbsp;</span>
             {featuredReport.report_tags.map((topic, i) => {
-              topic.tag !== null && (
-                <span
-                  className="rounded bg-lightestGray px-1 py-1 text-xs font-bold uppercase"
-                  key={i}
-                >
-                  {topic.tag.tag_name}
-                </span>
+              return (
+                topic.tag !== null && (
+                  <span
+                    className="rounded bg-lightestGray px-1 py-1 text-xs font-bold uppercase"
+                    key={i}
+                  >
+                    {topic.tag.tag_name}
+                  </span>
+                )
               );
             })}
           </div>
