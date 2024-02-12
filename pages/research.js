@@ -77,6 +77,9 @@ const formatReports = (payload) => {
         path: `${linkResolver(item.node._meta) ?? ''}`,
         pfbSupported: item.node.pfb_supported,
         externalLink: item.node.link ? linkResolver(item.node.link) : null,
+        resourceLink: item.node.resource_center_link
+          ? linkResolver(item.node.resource_center_link)
+          : null,
         authors: item.node.authors ? item.node.authors : null,
       });
     });
@@ -295,14 +298,53 @@ const CustomResult = ({ hit }) => {
         </div>
       )}
       <div className="mt-4">
-        {hit.externalLink ? (
-          <Button to={hit.externalLink} label="View Resource" size="small" />
-        ) : (
-          <Button to={hit.path} label="View Resource" size="small" />
-        )}
+        <ResourceButton hit={hit} />
       </div>
     </div>
   );
+};
+
+const ResourceButton = ({ hit }) => {
+  const isMemberResource =
+    hit.externalLink && hit.externalLink.startsWith('https://www.peopleforbikes.org/members');
+  const isExternalResource = hit.externalLink && !isMemberResource;
+  const isInternalResource = hit.path;
+
+  console.log(hit.title === 'PAC Single Sport Reports' && console.log(hit));
+
+  if (isMemberResource) {
+    return (
+      <>
+        <div className="inline-block cursor-pointer rounded-lg bg-blue px-3 py-2 text-center text-base font-bold uppercase leading-none text-white shadow-md transition duration-300 hover:scale-105">
+          <a href={hit.externalLink} target="_blank" rel="noopener noreferrer">
+            Member Access
+          </a>
+        </div>
+        {hit.resourceLink && (
+          <div className="ml-2 inline-block cursor-pointer rounded-lg bg-blue px-3 py-2 text-center text-base font-bold uppercase leading-none text-white shadow-md transition duration-300 hover:scale-105">
+            <a href={hit.resourceLink} target="_blank" rel="noopener noreferrer">
+              Purchase Resource
+            </a>
+            <i className="fa-solid fa-arrow-up-right-from-square pl-2" />
+          </div>
+        )}
+      </>
+    );
+  } else if (isExternalResource) {
+    return (
+      <div className="inline-block cursor-pointer rounded-lg bg-blue px-3 py-2 text-center text-base font-bold uppercase leading-none text-white shadow-md transition duration-300 hover:scale-105">
+        <a href={hit.externalLink} target="_blank" rel="noopener noreferrer">
+          View Resource
+        </a>
+        <i className="fa-solid fa-arrow-up-right-from-square pl-2" />
+      </div>
+    );
+  } else if (isInternalResource) {
+    return <Button to={hit.path} label="View Resource" size="small" />;
+  } else {
+    // Fallback or default rendering if needed
+    return null;
+  }
 };
 
 const Donate = () => {
