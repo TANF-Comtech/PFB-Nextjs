@@ -201,7 +201,6 @@ const Header = ({ hasHero }) => {
             : 'bg-white text-black shadow-xl group-hover:bg-white group-hover:text-black lg:shadow-none lg:group-hover:shadow-xl',
           'relative z-60 items-center px-4 transition duration-700',
           activeTab && '!shadow-none',
-          isSiteMapInView ? 'opacity-0' : 'opacity-100',
         )}
       >
         <div className="mx-auto flex h-24 max-w-screen-xl items-center justify-between">
