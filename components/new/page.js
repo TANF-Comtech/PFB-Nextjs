@@ -45,7 +45,7 @@ export const Page = ({
           {showHeader && <Header hasHero={hasHero} />}
         </Fixed>
       )}
-      {children}
+      <Spacer>{children}</Spacer>
       {showDonate && <DonationBanner />}
       {showFooter && <Footer />}
       <Login />
@@ -54,6 +54,10 @@ export const Page = ({
       <Script src="https://kit.fontawesome.com/3f0052fea3.js" crossOrigin="anonymous" />
     </>
   );
+};
+
+const Spacer = ({ children }) => {
+  return <div class="min-h-[750px]">{children}</div>;
 };
 
 const Meta = (props) => {
@@ -194,7 +198,7 @@ const Header = ({ hasHero }) => {
         className={cx(
           !hasHero || hasScrolled || activeTab !== null
             ? 'bg-white text-black shadow-xl'
-            : 'bg-white text-black shadow-xl group-hover:bg-white group-hover:text-black lg:bg-transparent lg:text-white lg:shadow-none lg:group-hover:shadow-xl',
+            : 'bg-white text-black shadow-xl group-hover:bg-white group-hover:text-black lg:shadow-none lg:group-hover:shadow-xl',
           'relative z-60 items-center px-4 transition duration-700',
           activeTab && '!shadow-none',
           isSiteMapInView ? 'opacity-0' : 'opacity-100',
