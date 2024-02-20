@@ -182,7 +182,6 @@ const Banner = () => {
 const Header = ({ hasHero }) => {
   const scrollY = useScrollPosition();
   const hasScrolled = scrollY >= 32;
-  const isSiteMapInView = useAtomValue(siteMapInViewAtom);
   const [activeTab, setActiveTab] = useAtom(activeTabAtom);
 
   const ref = useRef(null);
