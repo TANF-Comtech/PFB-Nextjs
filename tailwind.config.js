@@ -64,5 +64,16 @@ module.exports = {
       },
     },
   },
-  plugins: [require('@tailwindcss/forms')],
+  plugins: [
+    require('@tailwindcss/forms'),
+    function ({ addComponents }) {
+      const newComponents = {
+        '.pfb-gradient': {
+          background: `radial-gradient(circle 800px at 95% 80%, rgba(68, 158, 217, 1), rgba(5, 15, 50, 0.583)),
+                            radial-gradient( circle 400px at 5% 100%, rgba(207, 56, 42, 0.65), rgba(37, 6, 6, 0.5));`,
+        },
+      };
+      addComponents(newComponents);
+    },
+  ],
 };

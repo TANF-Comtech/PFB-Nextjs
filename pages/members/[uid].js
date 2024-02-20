@@ -486,7 +486,7 @@ export async function getServerSideProps({ req, res, params, preview = false, pr
     } else {
       return {
         redirect: {
-          destination: `/login?redirect=${params.uid}`,
+          destination: `/log-in?redirect=${params.uid}`,
           permanent: false,
         },
       };
@@ -494,7 +494,7 @@ export async function getServerSideProps({ req, res, params, preview = false, pr
   } else {
     return {
       redirect: {
-        destination: `/login?redirect=${params.uid}`,
+        destination: `/log-in?redirect=${params.uid}`,
         permanent: false,
       },
     };
