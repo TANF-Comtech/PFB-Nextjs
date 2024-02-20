@@ -115,28 +115,13 @@ export default function JoinList() {
         <Subtext>Advocate for Better Biking</Subtext>
       </HeaderImage>
       <BoxContainer>
-        <a href="https://ridespot.org/register" rel="nofollow" target="_blank">
-          <Box bgColor="#D0021B">
-            <Text>Join Ride Spot</Text>
-            <Arrow src={WhiteArrow} />
-          </Box>
-        </a>
-        <a href="https://www.classy.org/campaign/give-the-gift-of-better-biking/c532765" rel="nofollow" target="_blank">
+        <a
+          href="https://www.classy.org/campaign/give-the-gift-of-better-biking/c532765"
+          rel="nofollow"
+          target="_blank"
+        >
           <Box bgColor="#D0021B">
             <Text>Donate Now</Text>
-            <Arrow src={WhiteArrow} />
-          </Box>
-        </a>
-      </BoxContainer>
-
-      <HeaderImage source={RetailersBG}>
-        <h1>Retailers</h1>
-        <Subtext>Connect With Riders in Your Area</Subtext>
-      </HeaderImage>
-      <BoxContainer>
-        <a href="https://ridespot.org/register" rel="nofollow" target="_blank">
-          <Box bgColor="#D0021B">
-            <Text>Join Ride Spot Premium</Text>
             <Arrow src={WhiteArrow} />
           </Box>
         </a>

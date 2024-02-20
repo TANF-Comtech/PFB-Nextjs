@@ -236,12 +236,6 @@ export default function ActionForms({ page, preview }) {
             </FormContainer>
           </FlexContainer>
         </MainContent>
-        <Promo
-          bigWords="Ride Spot"
-          path="/rides"
-          smallWords="Find Your Next Ride With"
-          source={ResearchPromo}
-        />
       </Wrapper>
     </LegacyPage>
   );
