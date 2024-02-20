@@ -41,20 +41,23 @@ const TabSection = () => {
     <Tabs className="mx-auto my-10 max-w-6xl px-5 text-base leading-[36px] sm:px-10 sm:text-xl">
       <TabList className="bg-gray-100 flex justify-center space-x-4 p-4">
         <Tab
-          className="text-gray-700 border-1 border-light-gray bg-orange-300 rounded px-4 py-2"
-          selectedClassName="font-bold border-1 rounded border-light-gray"
+          className="rounded px-4 py-2 focus:outline-none"
+          selectedClassName="font-bold rounded focus:outline-none"
+          style={{ color: 'white', backgroundColor: '#3E9FDC' }}
         >
           Ridership Trends
         </Tab>
         <Tab
-          className="text-gray-700 hover:text-blue-600 px-4 py-2 focus:outline-none"
-          selectedClassName="font-bold border-1 border-blue-600"
+          className="rounded bg-blue px-4 py-2 focus:outline-none"
+          selectedClassName="font-bold rounded focus:outline-none"
+          style={{ color: 'white', backgroundColor: '#3E9FDC' }}
         >
           Retail Sales
         </Tab>
         <Tab
-          className="text-gray-700 hover:text-blue-600 px-4 py-2 focus:outline-none"
-          selectedClassName="font-bold border-1 border-blue-600"
+          className="rounded bg-blue px-4 py-2 focus:outline-none"
+          selectedClassName="font-bold rounded focus:outline-none"
+          style={{ color: 'white', backgroundColor: '#3E9FDC' }}
         >
           Consumer Insights
         </Tab>
