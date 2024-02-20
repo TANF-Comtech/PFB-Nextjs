@@ -1,5 +1,8 @@
 import { Page } from '~/components/new/page';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import Cookies from 'cookies';
+
+import auth0ValidateToken from '~/lib/auth0/auth0ValidateToken';
 
 export default function BIH() {
   return (
@@ -41,33 +44,32 @@ const TabSection = () => {
     <Tabs className="mx-auto my-10 max-w-6xl px-5 text-base leading-[36px] sm:px-10 sm:text-xl">
       <TabList className="bg-gray-100 flex justify-center space-x-4 p-4">
         <Tab
-          className="rounded px-4 py-2 focus:outline-none"
-          selectedClassName="font-bold rounded focus:outline-none"
-          style={{ color: 'white', backgroundColor: '#3E9FDC' }}
-        >
-          Ridership Trends
-        </Tab>
-        <Tab
-          className="rounded bg-blue px-4 py-2 focus:outline-none"
-          selectedClassName="font-bold rounded focus:outline-none"
-          style={{ color: 'white', backgroundColor: '#3E9FDC' }}
+          className="bg-light-gray cursor-pointer rounded border border-solid border-gray/50 px-8 py-4 text-center font-bold uppercase text-black focus:outline-none"
+          selectedClassName="text-center rounded cursor-pointer bg-blue px-8 py-4 font-bold uppercase text-white focus:outline-none"
         >
           Retail Sales
         </Tab>
         <Tab
-          className="rounded bg-blue px-4 py-2 focus:outline-none"
-          selectedClassName="font-bold rounded focus:outline-none"
-          style={{ color: 'white', backgroundColor: '#3E9FDC' }}
+          className="bg-light-gray cursor-pointer rounded border border-solid border-gray/50 px-8 py-4 text-center font-bold uppercase text-black focus:outline-none"
+          selectedClassName="text-center rounded cursor-pointer bg-blue px-8 py-4 font-bold uppercase text-white focus:outline-none"
+        >
+          Ridership Trends
+        </Tab>
+        <Tab
+          className="bg-light-gray cursor-pointer rounded border border-solid border-gray/50 px-8 py-4 text-center font-bold uppercase text-black focus:outline-none"
+          selectedClassName="text-center rounded cursor-pointer bg-blue px-8 py-4 font-bold uppercase text-white focus:outline-none"
         >
           Consumer Insights
         </Tab>
       </TabList>
+      <div className="h-[1px] bg-blue px-8" style={{ marginTop: 25 }} />
       <TabPanel className="p-4">
         <div className="aspect-w-16 aspect-h-32 mx-auto max-w-6xl">
           <iframe
+            className="max-w-6xl"
             width="1100"
-            height="2020"
-            src="https://lookerstudio.google.com/embed/reporting/7f05171f-9a01-4a69-9db4-4b6ae6cc659b/page/p_40qpv2u8dd"
+            height="6790"
+            src="https://lookerstudio.google.com/embed/reporting/f3afc5fc-b89a-4e09-8069-889b3ca5dffe/page/p_vvin4n28dd"
             frameborder="0"
             style={{ border: 0 }}
             allowfullscreen
@@ -78,10 +80,9 @@ const TabSection = () => {
       <TabPanel className="p-4">
         <div className="aspect-w-16 aspect-h-32 mx-auto max-w-6xl">
           <iframe
-            className="max-w-6xl"
             width="1100"
-            height="6790"
-            src="https://lookerstudio.google.com/embed/reporting/f3afc5fc-b89a-4e09-8069-889b3ca5dffe/page/p_vvin4n28dd"
+            height="2020"
+            src="https://lookerstudio.google.com/embed/reporting/7f05171f-9a01-4a69-9db4-4b6ae6cc659b/page/p_40qpv2u8dd"
             frameborder="0"
             style={{ border: 0 }}
             allowfullscreen
@@ -105,3 +106,34 @@ const TabSection = () => {
     </Tabs>
   );
 };
+
+export async function getServerSideProps({ req, res }) {
+  const cookies = new Cookies(req, res);
+  const token = cookies.get('auth-token');
+
+  if (token) {
+    const data = await auth0ValidateToken(token);
+
+    if (data.loggedIn) {
+      return {
+        props: {
+          pageViewable: true,
+        },
+      };
+    } else {
+      return {
+        redirect: {
+          destination: `/log-in?redirect=business-intelligence-hub`,
+          permanent: false,
+        },
+      };
+    }
+  } else {
+    return {
+      redirect: {
+        destination: `/log-in?redirect=business-intelligence-hub`,
+        permanent: false,
+      },
+    };
+  }
+}
