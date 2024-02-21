@@ -57,7 +57,7 @@ export const Page = ({
 };
 
 const Spacer = ({ children }) => {
-  return <div class="min-h-[750px]">{children}</div>;
+  return <div className="min-h-[750px]">{children}</div>;
 };
 
 const Meta = (props) => {
