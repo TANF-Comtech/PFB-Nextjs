@@ -26,12 +26,16 @@ const TextHero = () => {
         </div>
       </div>
       <div className="mx-auto my-10 max-w-6xl px-5 text-base leading-[36px] sm:px-10 sm:text-xl">
-        The Business Intelligence Hub provides a comprehensive and timely package of data
-        representing the current state of the bike business and bicycling participation in the U.S.
-        If you have feedback or questions, please reach out to our Deputy Director of Research
-        Patrick Hogan at{' '}
-        <a className="text-blue" href="mailto:patrick@peopleforbikes.org">
-          patrick@peopleforbikes.org
+        The Business Intelligence Hub provides a comprehensive look at the state of bicycling and is
+        available exclusively to PeopleForBikes members. With near real-time data, the dashboard
+        provides insights on what's happening across different regions and bicycling categories. If
+        you have any questions about the Business Intelligence Hub or how to best use it, please
+        reach out to{' '}
+        <a
+          className="text-blue"
+          href="mailto:mimi@peopleforbikes.org?subject=Question%20About%20the%20Business%20Intelligence%20Hub"
+        >
+          mimi@peopleforbikes.org
         </a>
         .
       </div>
