@@ -10,12 +10,13 @@ module.exports = {
       'gray': '#a0a0a0',
       'mediumGray': 'rgb(216,216,216)',
       'lightGray': '#8A8A8D',
-      'lightestGray': 'rgb(230,230,230)',
+      'lightestGray': 'rgb(242,242,242)',
       'red': '#D23823',
       'redAccent': '#D0021B',
       'blue': '#3E9FDC',
       'blueAccent': '#2076ac',
       'midnightBlue': '#002C40',
+      'darkBlue': '#176297',
       'blueBright': '#00A2DF',
       'yellow': '#FFDC00',
       // new colors for v9
@@ -71,6 +72,9 @@ module.exports = {
         '.pfb-gradient': {
           background: `radial-gradient(circle 800px at 95% 80%, rgba(68, 158, 217, 1), rgba(5, 15, 50, 0.583)),
                             radial-gradient( circle 400px at 5% 100%, rgba(207, 56, 42, 0.65), rgba(37, 6, 6, 0.5));`,
+        },
+        '.prismic-rich-text': {
+          display: `inherit`,
         },
       };
       addComponents(newComponents);
