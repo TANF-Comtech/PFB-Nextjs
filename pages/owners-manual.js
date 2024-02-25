@@ -72,7 +72,7 @@ export default function OwnersManualPage({ corporateMembers, page, preview }) {
       <Page title="Owner's Manual" hasHero showDonate={false} className="min-h-[100vh]">
         <TextHero omData={omData} />
         <PurchaseOptions handleOpen={handleOpen} omData={omData} themeProps={themeProps} />
-        <InformationSection omData={omData} />
+        <InformationSection handleOpen={handleOpen} omData={omData} />
       </Page>
       <Modal
         show={isOwnersManualModalOpen}
@@ -162,37 +162,56 @@ const PurchaseOptions = ({ handleOpen, omData, themeProps }) => {
   );
 };
 
-const InformationSection = ({ omData }) => {
+const InformationSection = ({ handleOpen, omData }) => {
   return (
-    <>
-      <div className="bg-lightestGray">
-        <div className="mx-auto max-w-[1000px] px-8 pt-10">
-          <div className="mx-auto mb-[15px] h-[2px] max-w-[940px] max-[960px]:mx-8 sm:bg-blue"></div>
-          <h2 className="text-darkBlue relative m-0 mx-auto flex -translate-y-[40px] justify-center font-montserrat text-[30px] font-semibold uppercase leading-[45px] xs:tracking-[2px] sm:-translate-y-[45px] sm:text-[40px] sm:leading-[60px]">
-            <span className="block bg-lightestGray sm:px-4">Owner's Manual Benefits</span>
-          </h2>
-          <div className="flex flex-col items-start justify-around md:flex-row md:items-center">
-            <div className="md:w-[40%]">{omData.hero && <HeaderImage srcSet={omData.hero} />}</div>
-            <ul className="md:w-[60%]">
-              {omData.owners_manual_benefits.map((item) => {
-                return (
-                  <li className="mb-7 border-b border-lightGray pb-7 last:border-0">
-                    <span className="block font-bold">{item.pillar_title}</span>
-                    <span className="block">{item.pillar_content}</span>
-                  </li>
-                );
-              })}
-            </ul>
+    <div className="bg-lightestGray">
+      <div className="mx-auto max-w-[1000px] px-8 pt-10">
+        <div className="mx-auto mb-[15px] h-[2px] max-w-[940px] max-[960px]:mx-8 sm:bg-blue"></div>
+        <h2 className="text-darkBlue relative m-0 mx-auto flex -translate-y-[40px] justify-center font-montserrat text-[30px] font-semibold uppercase leading-[45px] xs:tracking-[2px] sm:-translate-y-[45px] sm:text-[40px] sm:leading-[60px]">
+          <span className="block bg-lightestGray sm:px-4">Owner's Manual Benefits</span>
+        </h2>
+        <div className="flex flex-col items-start justify-around md:flex-row md:items-center">
+          <div className="md:w-[40%]">{omData.hero && <HeaderImage srcSet={omData.hero} />}</div>
+          <ul className="md:w-[60%]">
+            {omData.owners_manual_benefits.map((item) => {
+              return (
+                <li className="mb-7 border-b border-lightGray pb-7 last:border-0">
+                  <span className="block font-bold">{item.pillar_title}</span>
+                  <span className="block">{item.pillar_content}</span>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      </div>
+      <div className="mx-auto h-[2px] max-w-[940px] bg-blue max-[960px]:mx-8"></div>
+      <div className="mx-auto max-w-[1000px] px-8 py-10">
+        <div className="flex flex-col items-start justify-around md:flex-row md:items-center">
+          <div
+            className="mb-2 inline-block cursor-pointer rounded bg-blue px-8 py-4 text-center text-[20px] font-bold uppercase leading-[26px] text-white focus:outline-none xs:mr-5 md:w-[50%]"
+            onClick={handleOpen}
+          >
+            Purchase the Owner's Manual
+          </div>
+          <div className="md:w-[50%]">
+            {omData.price_section_member_title && (
+              <h3 className="text- mb-2 mt-0 text-[20px] leading-[32px]">
+                {omData.price_section_member_title}
+              </h3>
+            )}
+            {omData.price_section_nonmember_title && (
+              <h3 className="text- mb-2 mt-0 text-[20px] leading-[32px]">
+                {omData.price_section_nonmember_title}
+              </h3>
+            )}
           </div>
         </div>
       </div>
-      <div className="bg-lightestGray">
-        <div className="mx-auto max-w-[1000px] px-8 pb-10">
-          <div className="mx-auto mb-10 h-[1px] max-w-[940px] bg-lightGray"></div>
-          {omData.disclaimer && <p>{omData.disclaimer}</p>}
-        </div>
+      <div className="mx-auto max-w-[1000px] px-8 pb-10">
+        <div className="mx-auto mb-10 h-[2px] max-w-[940px] bg-blue"></div>
+        {omData.disclaimer && <p>{omData.disclaimer}</p>}
       </div>
-    </>
+    </div>
   );
 };
 
