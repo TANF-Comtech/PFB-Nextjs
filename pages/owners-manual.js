@@ -14,11 +14,9 @@ import { ThemeContext } from 'styled-components';
 
 import { ownersManualModalAtom, corporateMembersAtom } from '~/atoms';
 
-import { LegacyPage } from '~/components/legacy-page';
-import SiteMetaCustom from '~/components/site-meta-custom';
-import Wrapper from '~/components/wrapper';
+import { Page } from '~/components/new/page';
+
 import MainContent from '~/components/main-content';
-import SecondaryTitleBanner from '~/components/secondary-title-banner';
 import Spinner from '~/components/spinner';
 import CustomErrorPage from '~/pages/404';
 import NumberedPillars from '~/components/numbered-pillars';
@@ -70,49 +68,12 @@ export default function OwnersManualPage({ corporateMembers, page, preview }) {
   }
 
   return (
-    <LegacyPage>
-      <Wrapper postTitle={prismicH.asText(omData.title)} isWide={true}>
-        <SiteMetaCustom title="Owner's Manual | PeopleForBikes" />
-        <SecondaryTitleBanner secondaryText="PeopleForBikes Bicycle" mainText="Owner's Manual" />
-        {omData.hero && <HeaderImage srcSet={omData.hero} />}
-        <MainContent bgColor={themeProps.midnightBlue} textColor="#fff">
-          <div className="flex flex-col items-center p-5 sm:flex-row sm:justify-evenly">
-            <a
-              className="block pb-5 font-bold sm:pb-0 sm:pr-2"
-              href="https://pfb-main-site-assets.s3.amazonaws.com/peopleforbikes_ebike_owners_manual_v1_sample.pdf"
-              target="_blank"
-            >
-              <Button label="Preview the Owner's Manual" size="large" />
-            </a>
-            <div className="block font-bold">
-              <Button label="Purchase the Owner's Manual" size="large" onClick={handleOpen} />
-            </div>
-          </div>
-        </MainContent>
-        <MainContent contentPadding="6vh 2vw 2vh 2vw">
-          {omData.main_text && (
-            <PrismicRichText field={omData.main_text} linkResolver={linkResolver} />
-          )}
-          {omData.price_section_title && <h2>{omData.price_section_title}</h2>}
-          {omData.price_section_member_title && <h3>{omData.price_section_member_title}</h3>}
-          {omData.price_section_nonmember_title && <h3>{omData.price_section_nonmember_title}</h3>}
-        </MainContent>
-        <MainContent contentPadding="2vh 2vw 6vh 2vw">
-          <div className="flex flex-col items-center p-5 sm:flex-row sm:justify-evenly">
-            <div className="block font-bold">
-              <Button label="Purchase the Owner's Manual" size="large" onClick={handleOpen} />
-            </div>
-          </div>
-        </MainContent>
-        <NumberedPillars
-          numbersWanted={false}
-          payload={omData.owners_manual_benefits}
-          title="Owner's Manual Benefits"
-        />
-        <MainContent>
-          {omData.disclaimer && <p style={{ fontWeight: '700' }}>{omData.disclaimer}</p>}
-        </MainContent>
-      </Wrapper>
+    <>
+      <Page title="Owner's Manual" hasHero showDonate={false} className="min-h-[100vh]">
+        <TextHero omData={omData} />
+        <PurchaseOptions handleOpen={handleOpen} omData={omData} themeProps={themeProps} />
+        <InformationSection handleOpen={handleOpen} omData={omData} />
+      </Page>
       <Modal
         show={isOwnersManualModalOpen}
         onClose={handleClose}
@@ -120,9 +81,139 @@ export default function OwnersManualPage({ corporateMembers, page, preview }) {
       >
         <OwnersManual />
       </Modal>
-    </LegacyPage>
+    </>
   );
 }
+
+// Radial Gradient with thin text overlay
+const TextHero = ({ omData }) => {
+  return (
+    <>
+      <div className="pfb-gradient h-100vh mt-36 flex min-h-[200px] flex-col items-center justify-center px-5 sm:px-10">
+        <div className="m-0 text-center font-dharma text-[50px] uppercase leading-[60px] text-white xs:tracking-[2px] sm:text-[70px] sm:leading-[90px]">
+          Bicycle Owner's Manual
+        </div>
+        <div className="text-center font-montserrat text-[18px] font-[700] uppercase text-white xs:tracking-[2px] sm:text-[22px]">
+          <span className="text-yellow">Now Featuring</span> E-Bike Content
+        </div>
+      </div>
+      {omData.price_section_title && (
+        <div className="mx-auto my-10 max-w-6xl px-5 text-base leading-[36px] sm:px-10 sm:text-xl">
+          {omData.price_section_title}
+        </div>
+      )}
+    </>
+  );
+};
+
+const PurchaseOptions = ({ handleOpen, omData, themeProps }) => {
+  return (
+    <>
+      <div className="bg-lightestGray">
+        {omData.main_text && (
+          <>
+            <div className="mx-auto max-w-[1000px] px-8 py-10">
+              <div className="prismic-rich-text">
+                <PrismicRichText
+                  field={omData.main_text}
+                  linkResolver={linkResolver}
+                  className="prismic-rich-text"
+                />
+              </div>
+            </div>
+            <div className="mx-auto max-w-[1000px] px-8 pb-10">
+              <div className="block">
+                <a
+                  className="mb-2 inline-block cursor-pointer rounded border border-solid border-gray/50 bg-white px-8 py-4 text-center text-[20px] uppercase leading-[26px] text-black focus:outline-none"
+                  href="https://pfb-main-site-assets.s3.amazonaws.com/peopleforbikes_ebike_owners_manual_v1_sample.pdf"
+                  target="_blank"
+                >
+                  Preview the Owner's Manual
+                </a>
+              </div>
+            </div>
+          </>
+        )}
+        <div className="mx-auto h-[2px] max-w-[940px] bg-blue max-[960px]:mx-8"></div>
+        <div className="mx-auto max-w-[1000px] px-8 py-10">
+          <div className="flex flex-col items-start justify-around md:flex-row md:items-center">
+            <div
+              className="mb-2 inline-block cursor-pointer rounded bg-blue px-8 py-4 text-center text-[20px] font-bold uppercase leading-[26px] text-white focus:outline-none xs:mr-5 md:w-[50%]"
+              onClick={handleOpen}
+            >
+              Purchase the Owner's Manual
+            </div>
+            <div className="md:w-[50%]">
+              {omData.price_section_member_title && (
+                <h3 className="text- mb-2 mt-0 text-[20px] leading-[32px]">
+                  {omData.price_section_member_title}
+                </h3>
+              )}
+              {omData.price_section_nonmember_title && (
+                <h3 className="text- mb-2 mt-0 text-[20px] leading-[32px]">
+                  {omData.price_section_nonmember_title}
+                </h3>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+const InformationSection = ({ handleOpen, omData }) => {
+  return (
+    <div className="bg-lightestGray">
+      <div className="mx-auto max-w-[1000px] px-8 pt-10">
+        <div className="mx-auto mb-[15px] h-[2px] max-w-[940px] max-[960px]:mx-8 sm:bg-blue"></div>
+        <h2 className="text-darkBlue relative m-0 mx-auto flex -translate-y-[40px] justify-center font-montserrat text-[30px] font-semibold uppercase leading-[45px] xs:tracking-[2px] sm:-translate-y-[45px] sm:text-[40px] sm:leading-[60px]">
+          <span className="block bg-lightestGray sm:px-4">Owner's Manual Benefits</span>
+        </h2>
+        <div className="flex flex-col items-start justify-around md:flex-row md:items-center">
+          <div className="md:w-[40%]">{omData.hero && <HeaderImage srcSet={omData.hero} />}</div>
+          <ul className="md:w-[60%]">
+            {omData.owners_manual_benefits.map((item) => {
+              return (
+                <li className="mb-7 border-b border-lightGray pb-7 last:border-0">
+                  <span className="block font-bold">{item.pillar_title}</span>
+                  <span className="block">{item.pillar_content}</span>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      </div>
+      <div className="mx-auto h-[2px] max-w-[940px] bg-blue max-[960px]:mx-8"></div>
+      <div className="mx-auto max-w-[1000px] px-8 py-10">
+        <div className="flex flex-col items-start justify-around md:flex-row md:items-center">
+          <div
+            className="mb-2 inline-block cursor-pointer rounded bg-blue px-8 py-4 text-center text-[20px] font-bold uppercase leading-[26px] text-white focus:outline-none xs:mr-5 md:w-[50%]"
+            onClick={handleOpen}
+          >
+            Purchase the Owner's Manual
+          </div>
+          <div className="md:w-[50%]">
+            {omData.price_section_member_title && (
+              <h3 className="text- mb-2 mt-0 text-[20px] leading-[32px]">
+                {omData.price_section_member_title}
+              </h3>
+            )}
+            {omData.price_section_nonmember_title && (
+              <h3 className="text- mb-2 mt-0 text-[20px] leading-[32px]">
+                {omData.price_section_nonmember_title}
+              </h3>
+            )}
+          </div>
+        </div>
+      </div>
+      <div className="mx-auto max-w-[1000px] px-8 pb-10">
+        <div className="mx-auto mb-10 h-[2px] max-w-[940px] bg-blue"></div>
+        {omData.disclaimer && <p>{omData.disclaimer}</p>}
+      </div>
+    </div>
+  );
+};
 
 export async function getStaticProps({ params, preview = true, previewData }) {
   const pageData = await getOwnersManual();
