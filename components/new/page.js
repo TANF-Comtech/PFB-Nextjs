@@ -401,7 +401,7 @@ const MegaMenu = () => {
                 </div>
               ))}
               {activeTab !== 'donate' && (
-                <DynamicLink href="https://www.classy.org/campaign/give-the-gift-of-better-biking/c532765#!/donation/checkout">
+                <DynamicLink href="https://www.classy.org/give/117371/#!/donation/checkout">
                   <a
                     onClick={handleCloseMenu}
                     className="inline-block text-lg font-bold text-yellow hover:underline"
@@ -848,7 +848,7 @@ const NAVIGATION = [
     items: [
       {
         title: 'Donate Now',
-        link: 'https://www.classy.org/campaign/give-the-gift-of-better-biking/c532765#!/donation/checkout',
+        link: 'https://www.classy.org/give/117371/#!/donation/checkout',
       },
       { title: 'Learn More About Supporting Our Work', link: '/giving' },
     ],

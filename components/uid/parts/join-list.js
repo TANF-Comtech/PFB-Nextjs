@@ -116,7 +116,7 @@ export default function JoinList() {
       </HeaderImage>
       <BoxContainer>
         <a
-          href="https://www.classy.org/campaign/give-the-gift-of-better-biking/c532765"
+          href="https://www.classy.org/give/117371/#!/donation/checkout"
           rel="nofollow"
           target="_blank"
         >

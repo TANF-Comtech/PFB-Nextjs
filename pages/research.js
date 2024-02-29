@@ -351,7 +351,7 @@ const Donate = () => {
   return (
     <div className="relative z-60 flex items-center justify-center gap-4 bg-blueAccent p-8 text-white sm:p-12 xl:px-24 xl:py-16">
       <Button
-        to="https://www.classy.org/give/117371#!/donation/checkout"
+        to="https://www.classy.org/give/117371/#!/donation/checkout"
         variant="gold"
         label={DONATE_LABEL}
       />

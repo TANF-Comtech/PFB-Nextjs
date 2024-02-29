@@ -21,7 +21,10 @@ const OuterContainer = styled.nav`
   }} !important;
   transform: ${(props) =>
     props.dropdownState === true ? 'translateY(0)' : 'translateY(-20px)'} !important;
-  transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s !important;
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease,
+    visibility 0.4s !important;
   visibility: ${(props) => (props.dropdownState === true ? 'visible' : 'hidden')} !important;
   min-width: 300px !important;
   z-index: ${(props) => props.theme.zIndex03} !important;
@@ -194,7 +197,10 @@ const Dropdown = ({
           {hasTopics && (
             <ItemList hasTopics={hasTopics}>
               <li>
-                <AnchorAlign href="https://www.classy.org/campaign/give-the-gift-of-better-biking/c532765" target="_blank">
+                <AnchorAlign
+                  href="https://www.classy.org/give/117371/#!/donation/checkout"
+                  target="_blank"
+                >
                   Donate
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

@@ -253,7 +253,11 @@ function Donate({ bgColor }) {
   return (
     <>
       <Container>
-        <a href="https://www.classy.org/campaign/give-the-gift-of-better-biking/c532765" rel="nofollow" target="_blank">
+        <a
+          href="https://www.classy.org/give/117371/#!/donation/checkout"
+          rel="nofollow"
+          target="_blank"
+        >
           <ColorContainer bgColor={bgColor}>
             <MainContent maxWidth="800px">
               <h1>Donate Now</h1>

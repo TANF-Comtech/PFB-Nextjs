@@ -410,7 +410,7 @@ const nextConfig = async (phase, { defaultConfig }) => {
         },
         {
           source: '/donate',
-          destination: 'https://www.classy.org/campaign/give-the-gift-of-better-biking/c532765/',
+          destination: 'https://www.classy.org/give/117371/#!/donation/checkout',
           permanent: false,
         },
         {
