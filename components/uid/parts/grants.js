@@ -2,7 +2,7 @@ import React, { useState, useRef, useCallback } from 'react';
 import cx from 'classnames';
 import { Disclosure } from '@headlessui/react';
 import { useDropzone } from 'react-dropzone';
-import Link from 'next/link'
+import Link from 'next/link';
 
 import { useLocalStorage } from '~/hooks/useLocalStorage';
 
@@ -28,8 +28,8 @@ export const Grants = () => {
             </p>
           ) : (
             <Link
-              href="https://docs.google.com/forms/d/e/1FAIpQLSf-O5IP6Jj0YQhb1Y7I6eBl73R5vQNmWhJX2XdksdxUyuXhLQ/viewform"
-              class="text-white inline-block cursor-pointer rounded-lg text-center font-bold uppercase leading-none transition duration-300 hover:scale-105 bg-blue text-white px-6 py-4 text-lg shadow-md"
+              href="/TANF"
+              class="inline-block cursor-pointer rounded-lg bg-blue px-6 py-4 text-center text-lg font-bold uppercase leading-none text-white text-white shadow-md transition duration-300 hover:scale-105"
               target="_blank"
             >
               <span style={{ color: '#ffffff !important' }}>{grantsApplicationCta}</span>
@@ -43,7 +43,7 @@ export const Grants = () => {
             // />
           )}
         </div>
-      </div>    
+      </div>
       <div className="bg-midnightBlue p-10 sm:p-20">
         <div className="mx-auto max-w-screen-lg text-center text-lightestGray">
           <h2 className="font-dharma text-6xl sm:text-8xl">{grantGuidanceTitle}</h2>
@@ -73,7 +73,7 @@ export const Grants = () => {
             size="large"
           />
         </div>
-      </div>      
+      </div>
       <Modal show={isRecipientsModalOpen} onClose={() => setIsRecipientsModalOpen(false)} dark>
         <GrantRecipients />
       </Modal>
