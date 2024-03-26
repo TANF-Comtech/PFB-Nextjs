@@ -47,7 +47,8 @@
     "react-tabs": "^6.0.2",
     "react-transition-group": "^4.4.5",
     "stripe": "^8.180.0",
-    "styled-components": "^5.3.10"
+    "styled-components": "^5.3.10",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@swc-jotai/react-refresh": "^0.1.0",

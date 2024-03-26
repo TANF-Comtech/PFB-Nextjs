@@ -28,7 +28,7 @@ export const Grants = () => {
             </p>
           ) : (
             <Link
-              href="/TANF"
+              href="/TANF/TANF"
               class="inline-block cursor-pointer rounded-lg bg-blue px-6 py-4 text-center text-lg font-bold uppercase leading-none text-white text-white shadow-md transition duration-300 hover:scale-105"
               target="_blank"
             >
