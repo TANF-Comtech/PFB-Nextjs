@@ -34,6 +34,21 @@ export default function FileUpload({}) {
     reader.readAsBinaryString(file);
   };
 
+  const UploadLabel = styled.label`
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    background-color: #f8f8f8;
+    color: #333;
+    border-radius: 4px;
+  `;
+
+  const FileInput = styled.input.attrs({
+    type: 'file',
+  })`
+    display: none;
+  `;
   console.log('Json Data ', jsonData);
 
   return (
@@ -41,7 +56,10 @@ export default function FileUpload({}) {
       <Wrapper postTitle="Grants" isWide={true}>
         <MainContent maxWidth="1200px">
           <CenteredContainer>
-            <input type="file" onChange={handleFileUpload} />
+            <UploadLabel>
+              Upload File
+              <FileInput type="file" onChange={handleFileUpload} />
+            </UploadLabel>
           </CenteredContainer>
         </MainContent>
       </Wrapper>
