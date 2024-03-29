@@ -82,6 +82,23 @@ export default function index({}) {
               }}
             >
               <InputContainer>
+                <FieldLabel for={'request_amount'}>Request Amount</FieldLabel>
+                <AppInput
+                  type={'number'}
+                  placeholder={'Request Amount'}
+                  id={'request_amount'}
+                  required={true}
+                  onChange={(e) =>
+                    setApplicationData((prevState) => {
+                      return {
+                        ...prevState,
+                        request_amount: e.target.value,
+                      };
+                    })
+                  }
+                />
+              </InputContainer>
+              <InputContainer>
                 <FieldLabel for={'org_name'}>Organization Name</FieldLabel>
                 <AppInput
                   type={'text'}
