@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { LegacyPage } from '~/components/legacy-page';
 import Wrapper from '~/components/wrapper';
-import Button from '~/components/button';
+import Heading1 from '~/components/h1';
 import MainContent from '~/components/main-content';
 import styled from 'styled-components';
 import * as XLSX from 'xlsx';
+import { handleSubmit } from '../api/grant-application';
 
 const CenteredContainer = styled.div`
   display: flex;
@@ -15,6 +16,7 @@ const CenteredContainer = styled.div`
 
 export default function FileUpload({}) {
   const [jsonData, setJsonData] = useState(null);
+  const [selectedFile, setSelectedFile] = useState(null);
 
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
@@ -32,6 +34,8 @@ export default function FileUpload({}) {
     };
 
     reader.readAsBinaryString(file);
+
+    setSelectedFile(e.target.files[0].name);
   };
 
   const UploadLabel = styled.label`
@@ -48,6 +52,14 @@ export default function FileUpload({}) {
     type: 'file',
   })`
     display: none;
+  `;
+
+  const HeaderContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
   `;
 
   const SubmitBtn = styled.div`
@@ -68,33 +80,19 @@ export default function FileUpload({}) {
     text-transform: ${(props) => props.buttonTextTransform || 'uppercase'} !important;
   `;
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      const response = await fetch('https://localhost:8080/api/grant_applications', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(jsonData),
-      });
-
-      if (response.ok) {
-        console.log('Data submitted successfully');
-        // You may redirect the user or show a success message here
-      } else {
-        console.error('Failed to submit data');
-      }
-    } catch (error) {
-      console.error('Error submitting data:', error);
-    }
-  };
-
   return (
     <LegacyPage>
       <Wrapper postTitle="Grants" isWide={true}>
         <MainContent maxWidth="1200px">
+          <HeaderContainer>
+            <Heading1>Upload Your Grant Application</Heading1>
+            <p>
+              In order to apply for a grant, please download the Excel template and fill out the
+              relevant fields. Do <strong>NOT</strong> alter the first row's columns, otherwise you
+              risk your application(s) being improperly processed. Once uploaded, please click the{' '}
+              <strong>Submit</strong> button.
+            </p>
+          </HeaderContainer>
           <CenteredContainer>
             <UploadLabel>
               Upload File
@@ -102,7 +100,10 @@ export default function FileUpload({}) {
             </UploadLabel>
           </CenteredContainer>
           <CenteredContainer>
-            <SubmitBtn type="submit" onClick={handleSubmit}>
+            <p>{selectedFile}</p>
+          </CenteredContainer>
+          <CenteredContainer>
+            <SubmitBtn type="submit" onClick={(e) => handleSubmit(e, jsonData)}>
               Submit
             </SubmitBtn>
           </CenteredContainer>
