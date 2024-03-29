@@ -49,7 +49,47 @@ export default function FileUpload({}) {
   })`
     display: none;
   `;
-  console.log('Json Data ', jsonData);
+
+  const SubmitBtn = styled.div`
+    background-color: ${(props) => props.buttonBg || 'rgba(255,255,255,1)'} !important;
+    border: ${(props) => props.buttonBorder || `1px solid ${props.theme.black}`} !important;
+    border-radius: 10px !important;
+    box-shadow: ${(props) => props.theme.buttonBoxShadow} !important;
+    color: ${(props) => props.buttonColor || props.theme.black} !important;
+    cursor: pointer !important;
+    font-family: ${(props) => props.theme.montserrat} !important;
+    font-size: ${(props) => props.buttonFontSize || '18px'} !important;
+    font-weight: 700 !important;
+    min-width: 100px !important;
+    margin: 0 !important;
+    padding: ${(props) => props.buttonPadding || '10px 35px'} !important;
+    text-align: center !important;
+    text-decoration: none !important;
+    text-transform: ${(props) => props.buttonTextTransform || 'uppercase'} !important;
+  `;
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch('https://localhost:8080/api/grant_applications', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(jsonData),
+      });
+
+      if (response.ok) {
+        console.log('Data submitted successfully');
+        // You may redirect the user or show a success message here
+      } else {
+        console.error('Failed to submit data');
+      }
+    } catch (error) {
+      console.error('Error submitting data:', error);
+    }
+  };
 
   return (
     <LegacyPage>
@@ -60,6 +100,11 @@ export default function FileUpload({}) {
               Upload File
               <FileInput type="file" onChange={handleFileUpload} />
             </UploadLabel>
+          </CenteredContainer>
+          <CenteredContainer>
+            <SubmitBtn type="submit" onClick={handleSubmit}>
+              Submit
+            </SubmitBtn>
           </CenteredContainer>
         </MainContent>
       </Wrapper>
