@@ -4,12 +4,22 @@ import Wrapper from '~/components/wrapper';
 import MainContent from '~/components/main-content';
 import styled from 'styled-components';
 import { handleSubmit } from '../api/grant-application';
+import Heading1 from '~/components/h1';
+
+const HeaderContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+`;
 
 const CenteredContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
+  flex-direction: column;
 `;
 
 const InputContainer = styled.div`
@@ -75,6 +85,13 @@ export default function index({}) {
       <Wrapper postTitle="Grants" isWide={true}>
         <MainContent maxWidth="1200px">
           <CenteredContainer>
+            <HeaderContainer>
+              <Heading1>Grant Application Form</Heading1>
+              <p>
+                In order to apply for a grant, fill out the following fields and submit when
+                finished.
+              </p>
+            </HeaderContainer>
             <form
               onSubmit={(e) => {
                 console.log('application data', applicationData);
