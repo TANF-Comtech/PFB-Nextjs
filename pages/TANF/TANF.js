@@ -122,6 +122,7 @@ export default function index({}) {
           </CenteredContainer>
           <CenteredContainer>
             <TemplateBtn onClick={downloadExcelTemplate}>Download Template</TemplateBtn>
+            <Button href={'/TANF/application-data'}>Application Data</Button>
           </CenteredContainer>
         </MainContent>
       </Wrapper>

@@ -290,7 +290,7 @@ export default function index({}) {
                 <SubmitBtn
                   type="submit"
                   value="Submit Application"
-                  onClick={console.log('application data', applicationData)}
+                  onClick={(e) => handleSubmit(e, jsonData)}
                 />
               </CenteredContainer>
             </form>
